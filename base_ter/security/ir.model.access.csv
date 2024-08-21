@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ter_parcel_rule_group_ter_user,ter.parcel.rule.group.ter.user,base_ter.model_ter_parcel,base_ter.group_ter_user,1,0,0,0
+ter_parcel_rule_group_ter_manager,ter.parcel.rule.group.ter.manager,base_ter.model_ter_parcel,base_ter.group_ter_manager,1,1,1,1
+res_region_rule_group_ter_user,res.region.rule.group.ter.user,base_adi.model_res_region,base_ter.group_ter_user,1,0,0,0
+res_region_rule_group_ter_director,res.region.rule.group.ter.director,base_adi.model_res_region,base_ter.group_ter_director,1,1,1,1
+res_province_rule_group_ter_user,res.province.rule.group.ter.user,base_adi.model_res_province,base_ter.group_ter_user,1,0,0,0
+res_province_rule_group_ter_director,res.province.rule.group.ter.director,base_adi.model_res_province,base_ter.group_ter_director,1,1,1,1
+res_municipality_rule_group_ter_user,res.municipality.rule.group.ter.user,base_adi.model_res_municipality,base_ter.group_ter_user,1,0,0,0
+res_municipality_rule_group_ter_manager,res.municipality.rule.group.ter.manager,base_adi.model_res_municipality,base_ter.group_ter_manager,1,1,1,1
+res_place_rule_group_ter_user,res.place.rule.group.ter.user,base_adi.model_res_place,base_ter.group_ter_user,1,0,0,0
+res_place_rule_group_ter_manager,res.place.rule.group.ter.manager,base_adi.model_res_place,base_ter.group_ter_manager,1,1,1,1

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.base</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Territory"
+                     string="Territory" data-key="base_ter">
+                    <h2>General</h2>
+                    <div class="row mt16 o_settings_container" name="general_settings">
+                        <div id="div_area_unit_is_ha"
+                            class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="area_unit_is_ha"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="area_unit_is_ha"/>
+                                <div class="text-muted">
+                                    If checked, the area unit will be the ha;
+                                    else, you can choose another unit of area
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_area_unit_name"
+                             class="col-12 col-lg-6 o_setting_box"
+                             attrs="{'invisible': [('area_unit_is_ha', '=', True)]}">
+                            <div class="o_setting_right_pane">
+                                <label for="area_unit_name"/>
+                                <div class="text-muted">
+                                    If the area unit is not the ha, name of
+                                    the alternative area unit
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="area_unit_name"
+                                         style="width:90px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_area_unit_value_in_ha"
+                             class="col-12 col-lg-6 o_setting_box"
+                             attrs="{'invisible': [('area_unit_is_ha', '=', True)]}">
+                            <div class="o_setting_right_pane">
+                                <label for="area_unit_value_in_ha"/>
+                                <div class="text-muted">
+                                    Equivalence, in ha, of the chosen area unit
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="area_unit_value_in_ha"
+                                         style="width:90px"/>
+                                        <span class="oe_inline"> ha</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Warnings</h2>
+                    <div class="row mt16 o_settings_container" name="warning_settings">
+                        <div id="div_warning_diff_areas"
+                             class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="warning_diff_areas"/>
+                                <div class="text-muted">
+                                    Percentage (of the official area of a
+                                    parcel) designated as the maximum allowable
+                                    threshold for the difference between this
+                                    official area and the GIS area (if zero,
+                                    no warning will be displayed)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="warning_diff_areas"
+                                         style="width:90px"/>
+                                        <span class="oe_inline"> %</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Aerial Images</h2>
+                    <div class="row mt16 o_settings_container" name="aerial_settings">
+                        <div id="div_aerial_image_wmsbase_url"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="aerial_image_wmsbase_url"/>
+                                <div class="text-muted">
+                                    URL of the WMS service used to obtain the
+                                    base image of the parcels and other GIS
+                                    elements
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="aerial_image_wmsbase_url"
+                                         style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_aerial_image_wmsbase_layers"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="aerial_image_wmsbase_layers"/>
+                                <div class="text-muted">
+                                    WMS service layers used to obtain the
+                                    base image of the parcels and other GIS
+                                    elements
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="aerial_image_wmsbase_layers"
+                                         style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_aerial_image_wmsvec_url"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="aerial_image_wmsvec_url"/>
+                                <div class="text-muted">
+                                    URL of the WMS service used to obtain the
+                                    vectorial image of the parcels
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="aerial_image_wmsvec_url"
+                                         style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_aerial_image_wmsvec_parcel_name"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="aerial_image_wmsvec_parcel_name"/>
+                                <div class="text-muted">
+                                    WMS service layer used to obtain the
+                                    images of the parcels (vectorial elements)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="aerial_image_wmsvec_parcel_name"
+                                         style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_aerial_image_wmsvec_parcel_filter"
+                            class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="aerial_image_wmsvec_parcel_filter"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="aerial_image_wmsvec_parcel_filter"/>
+                                <div class="text-muted">
+                                    If checked, only the central parcel will be
+                                    displayed; otherwise, all parcels will be
+                                    displayed
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_aerial_image_wmsvec_property_name"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="aerial_image_wmsvec_property_name"/>
+                                <div class="text-muted">
+                                    WMS service layer used to obtain the
+                                    images of the properties (vectorial elements)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="aerial_image_wmsvec_property_name"
+                                         style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_aerial_image_wmsvec_property_filter"
+                            class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="aerial_image_wmsvec_property_filter"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="aerial_image_wmsvec_property_filter"/>
+                                <div class="text-muted">
+                                    If checked, only the central property will be
+                                    displayed; otherwise, all properties will be
+                                    displayed
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_aerial_image_height"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="aerial_image_height"/>
+                                <div class="text-muted">
+                                    Height, in pixels, of images captured from
+                                    WMS services (the width will be calculated
+                                    automatically, to preserve the original
+                                    proportions)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="aerial_image_height"
+                                         style="width:90px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_aerial_image_zoom"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="aerial_image_zoom"/>
+                                <div class="text-muted">
+                                    Possible zoom to apply to images obtained
+                                    from WMS services; if it is 1, then no zoom
+                                    is applied; if it is greater than 1, then
+                                    there is an outward zoom; if it is less
+                                    than 1, then there is an outward zoom
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="aerial_image_zoom"
+                                         style="width:90px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>GIS Viewer</h2>
+                    <div class="row mt16 o_settings_container" name="gisviewer_settings">
+                        <div id="div_gis_viewer_url"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gis_viewer_url"/>
+                                <div class="text-muted">
+                                    URL of the integrated GIS viewer
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="gis_viewer_url"
+                                         style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_gis_viewer_username"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gis_viewer_username"/>
+                                <div class="text-muted">
+                                    Name of the technical user
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="gis_viewer_username"
+                                         style="width:90px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_gis_viewer_password"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gis_viewer_password"/>
+                                <div class="text-muted">
+                                    Password of the technical user
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="gis_viewer_password"
+                                         style="width:90px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_gis_viewer_cipherkey"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gis_viewer_cipherkey"/>
+                                <div class="text-muted">
+                                    Key used for symmetric encryption of the
+                                    GIS viewer URL
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="gis_viewer_cipherkey"
+                                         style="width:90px"
+                                         password="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_gis_viewer_shpcreation_program"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gis_viewer_shpcreation_program"/>
+                                <div class="text-muted">
+                                    Program for creating SHP files for OGC
+                                    services; if none, OGC services will
+                                    connect directly to PostgreSQL
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="gis_viewer_shpcreation_program"
+                                         style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_gis_viewer_epsg"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gis_viewer_epsg"/>
+                                <div class="text-muted">
+                                    Spatial reference of the layers
+                                    stored in the database
+                                    (If changed, layers will be automatically
+                                    reprojected)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <span class="oe_inline">EPSG:</span>
+                                        <field name="gis_viewer_epsg"
+                                         style="width:90px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_gis_viewer_previs_additional_args"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gis_viewer_previs_additional_args"/>
+                                <div class="text-muted">
+                                    For the integrated preview, arguments
+                                    to add to the GIS viewer URL
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="gis_viewer_previs_additional_args"
+                                         style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_gis_viewer_previs_height"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gis_viewer_previs_height"/>
+                                <div class="text-muted">
+                                    For the integrated preview, height, in
+                                    pixels, of the frame
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="gis_viewer_previs_height"
+                                         style="width:90px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_gis_viewer_previs_width_percentage"
+                             class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="gis_viewer_previs_width_percentage"/>
+                                <div class="text-muted">
+                                    For integrated preview, frame width, in
+                                    percentage of total available
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="gis_viewer_previs_width_percentage"
+                                         style="width:90px"/>
+                                        <span class="oe_inline"> %</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">
+            {'module' : 'base_ter', }
+        </field>
+    </record>
+
+    <menuitem id="res_config_settings_menu"
+              parent="menu_configuration"
+              action="res_config_settings_action"
+              sequence="10"
+              groups="base_ter.group_ter_director"/>
+
+</odoo>

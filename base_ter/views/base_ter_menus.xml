@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_census"
+              name="Census"
+              sequence="-100"
+              web_icon="base_ter,static/description/icon.png"
+              groups="base_ter.group_ter_user"/>
+
+    <menuitem id="menu_territory"
+              name="Territory"
+              sequence="20"
+              parent="menu_census"/>
+
+    <menuitem id="menu_configuration"
+              name="Configuration"
+              sequence="900"
+              parent="menu_census"/>
+
+    <menuitem id="menu_configuration_localization"
+              name="Localization"
+              sequence="30"
+              parent="menu_configuration"/>
+
+    <menuitem id="res_region_menu"
+              parent="menu_configuration_localization"
+              action="base_adi.res_region_action"
+              sequence="10"/>
+
+    <menuitem id="res_province_menu"
+              parent="menu_configuration_localization"
+              action="base_adi.res_province_action"
+              sequence="20"/>
+
+    <menuitem id="res_municipality_menu"
+              parent="menu_configuration_localization"
+              action="base_adi.res_municipality_action"
+              sequence="30"/>
+
+    <menuitem id="res_place_menu"
+              parent="menu_configuration_localization"
+              action="base_adi.res_place_action"
+              sequence="40"/>
+
+</odoo>
