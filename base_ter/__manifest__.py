@@ -13,6 +13,7 @@
         'mail',
         'contacts',
         'base_gen',
+        'base_gis',
         'base_adi',
     ],
     "data": [

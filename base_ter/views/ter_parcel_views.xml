@@ -70,8 +70,18 @@
                                            widget="image"
                                            options="{'preview_image': 'aerial_image_medium', 'zoom': true, 'zoom_delay': 500}"
                                            style="border-color:#696969;border-width:1px;border-style:solid"/>
+<!--                                    <field name="aerial_image_calculated"-->
+<!--                                           widget="image"-->
+<!--                                           style="border-color:#696969;border-width:1px;border-style:solid"/>-->
                                 </div>
                             </div>
+<!--                            &lt;!&ndash; Provisional &ndash;&gt;-->
+<!--                            <field name="mapped_to_polygon"/>-->
+<!--                            <field name="geom_ewkt"/>-->
+<!--                            <field name="oriented_envelope_ewkt"/>-->
+<!--                            <field name="area_gis"/>-->
+<!--                            <field name="perimeter_gis"/>-->
+<!--                            <field name="centroid_ewkt"/>-->
                         </group>
                     </group>
                     <notebook name="slave_data_notebook" colspan="4">
@@ -108,6 +118,13 @@
         <field name="arch" type="xml">
             <search string="Search parcels">
                 <field name="alphanum_code"/>
+                <field name="mapped_to_polygon" invisible="1"/>
+                <filter string="With GIS link: Yes"
+                        name="mapped_to_polygon_yes"
+                        domain="[('mapped_to_polygon', '=', True)]"/>
+                <filter string="With GIS link: No"
+                        name="mapped_to_polygon_no"
+                        domain="[('mapped_to_polygon', '=', False)]"/>
             </search>
         </field>
     </record>
