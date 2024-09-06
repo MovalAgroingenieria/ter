@@ -3,13 +3,14 @@
 
 import base64
 
-from odoo import fields, models
+from odoo import fields, models, api, _
 
 
 class TerParcel(models.Model):
     _name = 'ter.parcel'
     _description = 'Parcel'
-    _inherit = ['simple.model', 'polygon.model', 'common.image', 'mail.thread']
+    _inherit = ['simple.model', 'polygon.model', 'common.image',
+                'common.log', 'mail.thread']
 
     # Static variables inherited from "simple.model"
     _set_num_code = False
@@ -133,7 +134,7 @@ class TerParcel(models.Model):
             if record.aerial_image:
                 aerial_image_shown = record.aerial_image
             else:
-                if ogc_data_ok:
+                if ogc_data_ok and record.mapped_to_polygon:
                     if not ogc_vec_layer:
                         aerial_image_shown = record.get_aerial_image(
                             wms=aerial_image_wmsbase_url,
@@ -166,7 +167,20 @@ class TerParcel(models.Model):
                                     aerial_image_raw.getvalue())
                     if aerial_image_shown:
                         record.aerial_image = aerial_image_shown
+                    else:
+                        record.register_in_log(_('Error getting aerial image '
+                                                 '(is the WMS url correct?)'),
+                                               message_type='WARNING')
             record.aerial_image_shown = aerial_image_shown
+
+    def reset_aerial_image(self):
+        for record in self:
+            record.aerial_image = None
+
+    @api.model
+    def action_reset_all_aerial_images(self):
+        parcels = self.search([])
+        parcels.reset_aerial_image()
 
     def action_gis_viewer(self):
         self.ensure_one()
