@@ -36,6 +36,10 @@ class TerParcel(models.Model):
     # Default value for the zoom of captured aerial images
     _aerial_image_zoom = 1.2
 
+    # Area fields with unit of measure name, and "ha" name.
+    _area_fields = [('area_official', _('Official Area'))]
+    _ha_name = _('ha')
+
     alphanum_code = fields.Char(
         string='Parcel Code',
         required=True,)
@@ -57,11 +61,11 @@ class TerParcel(models.Model):
         index=True,
         ondelete='restrict',)
 
-    aerial_image_calculated = fields.Image(
-        string='Aerial Image (512 x  512)',
-        max_width=512,
-        max_height=512,
-        compute='_compute_aerial_image_calculated',)
+    # aerial_image_calculated = fields.Image(
+    #     string='Aerial Image (512 x  512)',
+    #     max_width=512,
+    #     max_height=512,
+    #     compute='_compute_aerial_image_calculated',)
 
     aerial_image = fields.Image(
         string='Aerial Image',
@@ -92,14 +96,32 @@ class TerParcel(models.Model):
         string='Aerial Image (zoom)',
         related='aerial_image_shown',)
 
-    def _compute_aerial_image_calculated(self):
-        wms = self.env['ir.config_parameter'].sudo().get_param(
-            'base_ter.aerial_image_wmsvec_url')
-        layers = self.env['ir.config_parameter'].sudo().get_param(
-            'base_ter.aerial_image_wmsvec_parcel_name')
-        for record in self:
-            record.aerial_image_calculated = record.get_aerial_image(
-                wms=wms, layers=layers, format='png', zoom=2, filter=True)
+    area_official = fields.Float(
+        string='Official Area',
+        digits=(32, 4),
+        default=0,
+        required=True,
+        index=True,)
+
+    area_official_m2 = fields.Integer(
+        string='Official Area (m²)',
+        compute='_compute_area_official_m2',)
+
+    diff_areas_threshold_exceeded = fields.Boolean(
+        string='Threshold exceeded (difference between official and GIS areas)',
+        compute='_compute_diff_areas_threshold_exceeded',)
+
+    active = fields.Boolean(
+        default=True,)
+
+    # def _compute_aerial_image_calculated(self):
+    #     wms = self.env['ir.config_parameter'].sudo().get_param(
+    #         'base_ter.aerial_image_wmsvec_url')
+    #     layers = self.env['ir.config_parameter'].sudo().get_param(
+    #         'base_ter.aerial_image_wmsvec_parcel_name')
+    #     for record in self:
+    #         record.aerial_image_calculated = record.get_aerial_image(
+    #             wms=wms, layers=layers, format='png', zoom=2, filter=True)
 
     def _compute_aerial_image_shown(self):
         config = self.env['ir.config_parameter'].sudo()
@@ -173,9 +195,70 @@ class TerParcel(models.Model):
                                                message_type='WARNING')
             record.aerial_image_shown = aerial_image_shown
 
+    def _compute_area_official_m2(self):
+        config = self.env['ir.config_parameter'].sudo()
+        area_unit_is_ha = config.get_param(
+            'base_ter.area_unit_is_ha', False)
+        factor = 10000
+        if not area_unit_is_ha:
+            area_unit_value_in_ha = float(config.get_param(
+                'base_ter.area_unit_value_in_ha', 0))
+            if area_unit_value_in_ha > 0 and area_unit_value_in_ha != 1:
+                factor = area_unit_value_in_ha * 10000
+        for record in self:
+            record.area_official_m2 = round(record.area_official * factor)
+
+    def _compute_diff_areas_threshold_exceeded(self):
+        config = self.env['ir.config_parameter'].sudo()
+        warning_diff_areas = int(config.get_param(
+            'base_ter.warning_diff_areas', 0))
+        for record in self:
+            diff_areas_threshold_exceeded = False
+            if (warning_diff_areas > 0 and record.area_official > 0 and
+               record.mapped_to_polygon):
+                area_gis = record.area_gis
+                area_official = record.area_official_m2
+                diff_areas = abs(area_official - area_gis)
+                threshold = int(round(area_official * (warning_diff_areas / 100)))
+                if diff_areas > threshold:
+                    diff_areas_threshold_exceeded = True
+            record.diff_areas_threshold_exceeded = diff_areas_threshold_exceeded
+
+    @api.model
+    def _get_view(self, view_id=None, view_type='form', **options):
+        arch, view = super()._get_view(view_id, view_type, **options)
+        if view_type in ['form', 'tree']:
+            area_fields = self._add_area_fields()
+            if area_fields:
+                tmp_dict = {elem[0]: elem for elem in area_fields}
+                area_fields = list(tmp_dict.values())
+                measure_name = self._ha_name
+                config = self.env['ir.config_parameter'].sudo()
+                area_unit_is_ha = config.get_param(
+                    'base_ter.area_unit_is_ha', False)
+                area_unit_name = config.get_param(
+                    'base_ter.area_unit_name', '')
+                area_unit_value_in_ha = float(config.get_param(
+                    'base_ter.area_unit_value_in_ha', 0))
+                if (not area_unit_is_ha
+                   and area_unit_name != measure_name
+                   and area_unit_value_in_ha > 0
+                   and area_unit_value_in_ha != 1):
+                    measure_name = area_unit_name
+                for area_field in area_fields:
+                    field_name = area_field[0]
+                    label_name = area_field[1]
+                    for node in arch.xpath("//field[@name='%s']" % field_name):
+                        self.with_context(lang=self.env.user.lang)
+                        initial_label = _(label_name)
+                        final_label = initial_label + ' (' + measure_name + ')'
+                        node.set('string', final_label)
+        return arch, view
+
     def reset_aerial_image(self):
         for record in self:
             record.aerial_image = None
+            record._compute_aerial_image_shown()
 
     @api.model
     def action_reset_all_aerial_images(self):
@@ -186,3 +269,16 @@ class TerParcel(models.Model):
         self.ensure_one()
         # TODO
         print('action_gis_viewer')
+
+    def action_gis_preview(self):
+        self.ensure_one()
+        # TODO
+        print('action_gis_preview')
+
+    @api.model
+    def _add_area_fields(self):
+        # Hook: new area fields to add suffix (name of unit of measure)
+        area_fields = self._area_fields
+        # Example:
+        # area_fields.append(('area_gis', _('GIS Area')))
+        return area_fields

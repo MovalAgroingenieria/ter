@@ -6,6 +6,9 @@
         <field name="model">ter.parcel</field>
         <field name="arch" type="xml">
             <form string="Parcels" duplicate="0">
+                <field name="active" invisible="1"/>
+                <field name="diff_areas_threshold_exceeded" invisible="1"/>
+                <field name="mapped_to_polygon" invisible="1"/>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_gis_viewer"
@@ -15,6 +18,14 @@
                             <span>GIS Viewer</span>
                         </button>
                     </div>
+                    <widget name="web_ribbon" title="Archived"
+                            bg_color="bg-dark"
+                            attrs="{'invisible':
+                                    [('active', '=', True)]}"/>
+                    <widget name="web_ribbon" title="Check areas!"
+                            bg_color="bg-danger"
+                            attrs="{'invisible':
+                                    ['|', ('active', '=', False), ('diff_areas_threshold_exceeded', '=', False)]}"/>
                     <group name="master_data">
                         <group name="master_data_left">
                             <div class="oe_title mb24" colspan="2">
@@ -37,6 +48,7 @@
                             <field name="place_id" string="Place"
                                    options="{'no_quick_create':True,
                                              'no_create_edit': True}"/>
+                            <field name="area_official"/>
                         </group>
                         <group name="master_data_right">
                             <div name="section_aerial_img_title" colspan="2">
@@ -47,23 +59,6 @@
                             </div>
                             <div name="section_aerial_img_content" colspan="2"
                                  class="text-center">
-
-<!--                                <div name="div_aerial_image_read_only"-->
-<!--                                     style="display:inline-block;"-->
-<!--                                     class="oe_read_only">-->
-<!--                                    <field name="image_1920"-->
-<!--                                           widget="image"-->
-<!--                                           options="{'preview_image': 'aerial_image_medium', 'zoom': true, 'zoom_delay': 500}"-->
-<!--                                           style="border-color:#696969;border-width:1px;border-style:solid"/>-->
-<!--                                </div>-->
-<!--                                <div name="div_aerial_image_edit_only"-->
-<!--                                     style="display:inline-block;"-->
-<!--                                     class="oe_edit_only">-->
-<!--                                    <field name="aerial_image"-->
-<!--                                           widget="image"-->
-<!--                                           options="{'preview_image': 'aerial_image_medium'}"-->
-<!--                                           style="border-color:#696969;border-width:1px;border-style:solid"/>-->
-<!--                                </div>-->
                                 <div name="div_aerial_image"
                                      style="display:inline-block;">
                                     <field name="image_1920"
@@ -74,14 +69,22 @@
 <!--                                           widget="image"-->
 <!--                                           style="border-color:#696969;border-width:1px;border-style:solid"/>-->
                                 </div>
+                                <div name="button_gis_preview" style="margin-top: 6px;">
+                                    <button name="action_gis_preview"
+                                            type="object" string="GIS Preview"
+                                            class="oe_highlight"
+                                            attrs="{'invisible': [('mapped_to_polygon', '=', False)]}"/>
+                                </div>
                             </div>
-<!--                            &lt;!&ndash; Provisional &ndash;&gt;-->
-<!--                            <field name="mapped_to_polygon"/>-->
-<!--                            <field name="geom_ewkt"/>-->
-<!--                            <field name="oriented_envelope_ewkt"/>-->
-<!--                            <field name="area_gis"/>-->
-<!--                            <field name="perimeter_gis"/>-->
-<!--                            <field name="centroid_ewkt"/>-->
+                            <div name="section_areas" colspan="2"
+                                 style="margin-top:10px">
+                                <span class="font-weight-bold">
+                                AREAS (m²)
+                                </span>
+                                <hr colspan="2"/>
+                            </div>
+                            <field name="area_official_m2" string="Official"/>
+                            <field name="area_gis" string="GIS"/>
                         </group>
                     </group>
                     <notebook name="slave_data_notebook" colspan="4">
@@ -108,6 +111,7 @@
                 <field name="alphanum_code" string="Code"
                        class="text-center"/>
                 <field name="partner_id" string="Manager"/>
+                <field name="area_official"/>
             </tree>
         </field>
     </record>
@@ -125,6 +129,10 @@
                 <filter string="With GIS link: No"
                         name="mapped_to_polygon_no"
                         domain="[('mapped_to_polygon', '=', False)]"/>
+                <separator/>
+                <filter name="inactive"
+                        string="Archived"
+                        domain="[('active', '=', False)]"/>
             </search>
         </field>
     </record>
@@ -156,7 +164,7 @@
               sequence="10"/>
 
     <record id="ter_parcel_reset_aerial_image_serveraction" model="ir.actions.server">
-        <field name="name">Reset aerial image</field>
+        <field name="name">Refresh aerial image</field>
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="model_ter_parcel"/>
         <field name="binding_model_id" ref="model_ter_parcel"/>
@@ -167,7 +175,7 @@
     </record>
 
     <record id="ter_parcel_reset_all_aerial_images_serveraction" model="ir.actions.server">
-        <field name="name">Reset all aerial images</field>
+        <field name="name">Aerial images (global)</field>
         <field name="model_id" ref="model_ter_parcel"/>
         <field name="state">code</field>
         <field name="code">
