@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wizard_set_parcel_code_view_form" model="ir.ui.view">
+        <field name="name">Wizard to set a parcel code</field>
+        <field name="model">wizard.set.parcel.code</field>
+        <field name="arch" type="xml">
+            <form string="Data of the parcel">
+                <script>
+                    $(document).ready(function(){
+                        $('.modal-dialog').css({'width': '300px'});
+                    });
+                </script>
+                <div style="text-align:center">
+                    <h4 class="mb-3">Please, update the parcel code</h4>
+                </div>
+                <group name="group_parcel_code_data">
+                    <field name="parcel_code" colspan="2" nolabel="1"
+                           string="Parcel Code"
+                           required="True"/>
+                </group>
+                <footer>
+                    <button name="set_parcel_code"
+                            type="object"
+                            string="Apply"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-default"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

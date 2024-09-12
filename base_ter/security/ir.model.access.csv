@@ -9,3 +9,9 @@ res_municipality_rule_group_ter_user,res.municipality.rule.group.ter.user,base_a
 res_municipality_rule_group_ter_manager,res.municipality.rule.group.ter.manager,base_adi.model_res_municipality,base_ter.group_ter_manager,1,1,1,1
 res_place_rule_group_ter_user,res.place.rule.group.ter.user,base_adi.model_res_place,base_ter.group_ter_user,1,0,0,0
 res_place_rule_group_ter_manager,res.place.rule.group.ter.manager,base_adi.model_res_place,base_ter.group_ter_manager,1,1,1,1
+ter_property_rule_group_ter_user,ter.property.rule.group.ter.user,base_ter.model_ter_property,base_ter.group_ter_user,1,0,0,0
+ter_property_rule_group_ter_manager,ter.property.rule.group.ter.manager,base_ter.model_ter_property,base_ter.group_ter_manager,1,1,1,1
+ter_parceltag_rule_group_ter_user,ter.parceltag.rule.group.ter.user,base_ter.model_ter_parceltag,base_ter.group_ter_user,1,0,0,0
+ter_parceltag_rule_group_ter_manager,ter.parceltag.rule.group.ter.manager,base_ter.model_ter_parceltag,base_ter.group_ter_manager,1,1,1,1
+access_wizard_set_parcel_code_user,wre.wizard.set.parcel.code.user,base_ter.model_wizard_set_parcel_code,base_ter.group_ter_user,1,0,0,0
+access_wizard_set_parcel_code_manager,wre.wizard.set.parcel.code.manager,base_ter.model_wizard_set_parcel_code,base_ter.group_ter_manager,1,1,1,1

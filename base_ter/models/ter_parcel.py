@@ -3,7 +3,7 @@
 
 import base64
 
-from odoo import fields, models, api, _
+from odoo import fields, models, api, exceptions, _
 
 
 class TerParcel(models.Model):
@@ -11,6 +11,9 @@ class TerParcel(models.Model):
     _description = 'Parcel'
     _inherit = ['simple.model', 'polygon.model', 'common.image',
                 'common.log', 'mail.thread']
+
+    # Size of the "official_code" field in the model.
+    MAX_SIZE_OFFICIAL_CODE = 50
 
     # Static variables inherited from "simple.model"
     _set_num_code = False
@@ -36,6 +39,9 @@ class TerParcel(models.Model):
     # Default value for the zoom of captured aerial images
     _aerial_image_zoom = 1.2
 
+    # Should aerial images be square?
+    _force_square_shape = True
+
     # Area fields with unit of measure name, and "ha" name.
     _area_fields = [('area_official', _('Official Area'))]
     _ha_name = _('ha')
@@ -43,10 +49,6 @@ class TerParcel(models.Model):
     alphanum_code = fields.Char(
         string='Parcel Code',
         required=True,)
-
-    partner_id = fields.Many2one(
-        string='Parcel Manager',
-        comodel_name='res.partner',)
 
     municipality_id = fields.Many2one(
         string='Municipality',
@@ -58,6 +60,37 @@ class TerParcel(models.Model):
     place_id = fields.Many2one(
         string='Place',
         comodel_name='res.place',
+        index=True,
+        ondelete='restrict',)
+
+    area_official = fields.Float(
+        string='Official Area',
+        digits=(32, 4),
+        default=0,
+        required=True,
+        index=True,)
+
+    area_official_m2 = fields.Integer(
+        string='Official Area (m²)',
+        compute='_compute_area_official_m2',)
+
+    diff_areas_threshold_exceeded = fields.Boolean(
+        string='Threshold exceeded (difference between official and GIS areas)',
+        compute='_compute_diff_areas_threshold_exceeded',)
+
+    official_code = fields.Char(
+        string='Official Code',
+        size=MAX_SIZE_OFFICIAL_CODE,
+        index=True,)
+
+    partner_id = fields.Many2one(
+        string='Parcel Manager',
+        comodel_name='res.partner',
+        index=True,)
+
+    property_id = fields.Many2one(
+        string='Property',
+        comodel_name='ter.property',
         index=True,
         ondelete='restrict',)
 
@@ -92,27 +125,84 @@ class TerParcel(models.Model):
         max_height=_aerial_image_size_big,
         compute='_compute_aerial_image_shown',)
 
+    aerial_image_shown_256 = fields.Image(
+        string='Aerial Image (medium size, non-persistent)',
+        max_width=_aerial_image_size_medium,
+        max_height=_aerial_image_size_medium,
+        related='aerial_image_shown',)
+
     image_1920 = fields.Image(
         string='Aerial Image (zoom)',
         related='aerial_image_shown',)
 
-    area_official = fields.Float(
-        string='Official Area',
-        digits=(32, 4),
-        default=0,
-        required=True,
-        index=True,)
+    tag_id = fields.Many2many(
+        string='Tags',
+        comodel_name='ter.parceltag',
+        relation='ter_parcel_parceltag_rel',
+        column1='parcel_id', column2='parceltag_id')
 
-    area_official_m2 = fields.Integer(
-        string='Official Area (m²)',
-        compute='_compute_area_official_m2',)
+    province_id = fields.Many2one(
+        string='Province',
+        comodel_name='res.province',
+        store=True,
+        index=True,
+        compute='_compute_province_id',)
 
-    diff_areas_threshold_exceeded = fields.Boolean(
-        string='Threshold exceeded (difference between official and GIS areas)',
-        compute='_compute_diff_areas_threshold_exceeded',)
+    region_id = fields.Many2one(
+        string='Region',
+        comodel_name='res.region',
+        store=True,
+        index=True,
+        compute='_compute_region_id',)
+
+    area_unit_name = fields.Char(
+        string='Area unit name',
+        compute='_compute_area_unit_name',)
+
+    property_data = fields.Char(
+        string='Property Data',
+        compute='_compute_property_data',)
+
+    address_data = fields.Char(
+        string='Address Data',
+        compute='_compute_address_data',)
 
     active = fields.Boolean(
         default=True,)
+
+    _sql_constraints = [
+        ('area_official_ok', 'CHECK (area_official >= 0)',
+         'Incorrect value for "Official Area".'),
+    ]
+
+    def _compute_area_official_m2(self):
+        config = self.env['ir.config_parameter'].sudo()
+        area_unit_is_ha = config.get_param(
+            'base_ter.area_unit_is_ha', False)
+        factor = 10000
+        if not area_unit_is_ha:
+            area_unit_value_in_ha = float(config.get_param(
+                'base_ter.area_unit_value_in_ha', 0))
+            if area_unit_value_in_ha > 0 and area_unit_value_in_ha != 1:
+                factor = area_unit_value_in_ha * 10000
+        for record in self:
+            record.area_official_m2 = round(record.area_official * factor)
+
+    def _compute_diff_areas_threshold_exceeded(self):
+        config = self.env['ir.config_parameter'].sudo()
+        warning_diff_areas = int(config.get_param(
+            'base_ter.warning_diff_areas', 0))
+        for record in self:
+            diff_areas_threshold_exceeded = False
+            if (warning_diff_areas > 0 and record.area_official > 0 and
+               record.mapped_to_polygon):
+                area_gis = record.area_gis
+                area_official = record.area_official_m2
+                diff_areas = abs(area_official - area_gis)
+                threshold = int(round(area_official * (warning_diff_areas / 100)))
+                if diff_areas > threshold:
+                    diff_areas_threshold_exceeded = True
+            record.diff_areas_threshold_exceeded = diff_areas_threshold_exceeded
 
     # def _compute_aerial_image_calculated(self):
     #     wms = self.env['ir.config_parameter'].sudo().get_param(
@@ -163,7 +253,8 @@ class TerParcel(models.Model):
                             layers=aerial_image_wmsbase_layers,
                             image_height=aerial_image_height,
                             format='png',
-                            zoom=aerial_image_zoom)
+                            zoom=aerial_image_zoom,
+                            force_square_shape=self._force_square_shape,)
                     else:
                         aerial_image_base_raw = record.get_aerial_image(
                             wms=aerial_image_wmsbase_url,
@@ -172,7 +263,8 @@ class TerParcel(models.Model):
                             format='png',
                             zoom=aerial_image_zoom,
                             get_raw=True,
-                            filter=False)
+                            filter=False,
+                            force_square_shape=self._force_square_shape,)
                         aerial_image_vec_raw = record.get_aerial_image(
                             wms=aerial_image_wmsvec_url,
                             layers=aerial_image_wmsvec_parcel_name,
@@ -180,7 +272,8 @@ class TerParcel(models.Model):
                             format='png',
                             zoom=aerial_image_zoom,
                             get_raw=True,
-                            filter=aerial_image_wmsvec_parcel_filter)
+                            filter=aerial_image_wmsvec_parcel_filter,
+                            force_square_shape=self._force_square_shape,)
                         if aerial_image_base_raw and aerial_image_vec_raw:
                             aerial_image_raw = self.merge_img(
                                 aerial_image_base_raw, aerial_image_vec_raw)
@@ -195,34 +288,67 @@ class TerParcel(models.Model):
                                                message_type='WARNING')
             record.aerial_image_shown = aerial_image_shown
 
-    def _compute_area_official_m2(self):
+    @api.depends('municipality_id', 'municipality_id.province_id')
+    def _compute_province_id(self):
+        for record in self:
+            province_id = None
+            if record.municipality_id and record.municipality_id.province_id:
+                province_id = record.municipality_id.province_id
+            record.province_id = province_id
+
+    @api.depends('province_id', 'province_id.region_id')
+    def _compute_region_id(self):
+        for record in self:
+            region_id = None
+            if record.province_id and record.province_id.region_id:
+                region_id = record.province_id.region_id
+            record.region_id = region_id
+
+    def _compute_area_unit_name(self):
+        area_unit_name = _('ha')
         config = self.env['ir.config_parameter'].sudo()
         area_unit_is_ha = config.get_param(
             'base_ter.area_unit_is_ha', False)
-        factor = 10000
         if not area_unit_is_ha:
-            area_unit_value_in_ha = float(config.get_param(
-                'base_ter.area_unit_value_in_ha', 0))
-            if area_unit_value_in_ha > 0 and area_unit_value_in_ha != 1:
-                factor = area_unit_value_in_ha * 10000
+            area_unit_name = config.get_param(
+                'base_ter.area_unit_name', '')
         for record in self:
-            record.area_official_m2 = round(record.area_official * factor)
+            record.area_unit_name = area_unit_name
 
-    def _compute_diff_areas_threshold_exceeded(self):
-        config = self.env['ir.config_parameter'].sudo()
-        warning_diff_areas = int(config.get_param(
-            'base_ter.warning_diff_areas', 0))
+    def _compute_property_data(self):
         for record in self:
-            diff_areas_threshold_exceeded = False
-            if (warning_diff_areas > 0 and record.area_official > 0 and
-               record.mapped_to_polygon):
-                area_gis = record.area_gis
-                area_official = record.area_official_m2
-                diff_areas = abs(area_official - area_gis)
-                threshold = int(round(area_official * (warning_diff_areas / 100)))
-                if diff_areas > threshold:
-                    diff_areas_threshold_exceeded = True
-            record.diff_areas_threshold_exceeded = diff_areas_threshold_exceeded
+            property_data = _('not assigned')
+            if record.property_id:
+                property_data = record.property_id.name
+            record.property_data = property_data
+
+    def _compute_address_data(self):
+        for record in self:
+            address_data = record.municipality_id.name + \
+                ' (' + record.municipality_id.province_id.name + ')'
+            if (record.place_id and
+               record.place_id.name.lower() !=
+               record.municipality_id.name.lower()):
+                address_data = record.place_id.name + ' - ' + address_data
+            record.address_data = address_data
+
+    @api.constrains('municipality_id', 'place_id')
+    def _check_place_id(self):
+        for record in self:
+            if (record.municipality_id and record.place_id and
+               record.place_id.municipality_id != record.municipality_id):
+                raise exceptions.ValidationError(_('The place is not in the '
+                                                   'municipality.'))
+
+    @api.constrains('partner_id', 'property_id')
+    def _check_property_id(self):
+        for record in self:
+            if (record.partner_id and record.property_id and
+               record.property_id.partner_id and
+               record.partner_id != record.property_id.partner_id):
+                raise exceptions.ValidationError(
+                    _('The parcel manager and the property manager must '
+                      'be the same person.'))
 
     @api.model
     def _get_view(self, view_id=None, view_type='form', **options):
@@ -282,3 +408,17 @@ class TerParcel(models.Model):
         # Example:
         # area_fields.append(('area_gis', _('GIS Area')))
         return area_fields
+
+    def action_set_parcel_code(self):
+        self.ensure_one()
+        act_window = {
+            'type': 'ir.actions.act_window',
+            'name': _('Parcel') + ' : ' + self.alphanum_code,
+            'res_model': 'wizard.set.parcel.code',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'src_model': 'ter.parcel',
+            },
+        }
+        return act_window

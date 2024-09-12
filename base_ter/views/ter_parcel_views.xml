@@ -6,11 +6,19 @@
         <field name="model">ter.parcel</field>
         <field name="arch" type="xml">
             <form string="Parcels" duplicate="0">
+                <field name="id" invisible="1"/>
                 <field name="active" invisible="1"/>
                 <field name="diff_areas_threshold_exceeded" invisible="1"/>
                 <field name="mapped_to_polygon" invisible="1"/>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
+                        <button name="action_set_parcel_code"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-retweet"
+                                groups="base_ter.group_ter_manager">
+                            <span>Change code</span>
+                        </button>
                         <button name="action_gis_viewer"
                                 type="object"
                                 class="oe_stat_button"
@@ -28,37 +36,46 @@
                                     ['|', ('active', '=', False), ('diff_areas_threshold_exceeded', '=', False)]}"/>
                     <group name="master_data">
                         <group name="master_data_left">
-                            <div class="oe_title mb24" colspan="2">
+                            <div class="oe_title" colspan="2">
                                 <h1>
                                     <field name="alphanum_code" string="Code"
-                                           placeholder="(parcel code)"/>
+                                           placeholder="(parcel code)"
+                                           attrs="{'readonly': [('id', '&gt;', 0)]}"/>
                                 </h1>
                                 <field name="partner_id"
                                        placeholder="(parcel manager)"/>
                             </div>
-                            <div name="section_basic_data" colspan="2">
-                                <span class="font-weight-bold">
-                                BASIC DATA
-                                </span>
-                                <hr colspan="2"/>
+                            <div name="section_basic_data" colspan="2"
+                                 class="text-center mt-3 mb-4">
+                                <p style="width:100%" class="border p-2 fw-bold">BASIC DATA</p>
                             </div>
                             <field name="municipality_id" string="Municipality"
                                    options="{'no_quick_create':True,
                                              'no_create_edit': True}"/>
-                            <field name="place_id" string="Place"
-                                   options="{'no_quick_create':True,
-                                             'no_create_edit': True}"/>
+                            <field name="official_code" string="Reference"/>
                             <field name="area_official"/>
+                            <field name="place_id" string="Place"
+                                   attrs="{'readonly': [('municipality_id', '=', False)]}"
+                                   domain="[('municipality_id', '=', municipality_id)]"
+                                   context="{'default_municipality_id': municipality_id}"
+                                   options="{'no_quick_create':True}"/>
+                            <field name="property_id" string="Property"
+                                   domain="[('partner_id', '=', partner_id)]"
+                                   context="{'default_partner_id': partner_id}"
+                                   options="{'no_quick_create':True}"/>
+                            <field name="tag_id" widget="many2many_tags"
+                                   options="{'color_field': 'color',
+                                             'no_quick_create': True,
+                                             'no_create_edit': True}"
+                                   placeholder="Tags..."/>
                         </group>
                         <group name="master_data_right">
-                            <div name="section_aerial_img_title" colspan="2">
-                                <span class="font-weight-bold">
-                                AERIAL IMAGE
-                                </span>
-                                <hr colspan="2"/>
+                            <div name="section_aerial_img_title" colspan="2"
+                                 class="text-center mb-4">
+                                <p style="width:100%" class="border p-2 fw-bold">AERIAL IMAGE AND GIS DATA</p>
                             </div>
                             <div name="section_aerial_img_content" colspan="2"
-                                 class="text-center">
+                                 class="text-center mb-4">
                                 <div name="div_aerial_image"
                                      style="display:inline-block;">
                                     <field name="image_1920"
@@ -76,19 +93,14 @@
                                             attrs="{'invisible': [('mapped_to_polygon', '=', False)]}"/>
                                 </div>
                             </div>
-                            <div name="section_areas" colspan="2"
-                                 style="margin-top:10px">
-                                <span class="font-weight-bold">
-                                AREAS (m²)
-                                </span>
-                                <hr colspan="2"/>
-                            </div>
-                            <field name="area_official_m2" string="Official"/>
-                            <field name="area_gis" string="GIS"/>
+                            <field name="area_official_m2" string="Official Area (m²)"/>
+                            <field name="area_gis" string="GIS Area (m²)"/>
+                            <field name="perimeter_gis" string="GIS Perimeter (m)"/>
+                            <field name="bounding_box_str" string="Frame"/>
                         </group>
                     </group>
                     <notebook name="slave_data_notebook" colspan="4">
-                        <page name="page_notes" string="Notes">
+                        <page name="page_notes" string="Internal Notes">
                             <field name="notes"/>
                         </page>
                     </notebook>
@@ -112,6 +124,8 @@
                        class="text-center"/>
                 <field name="partner_id" string="Manager"/>
                 <field name="area_official"/>
+                <field name="official_code" string="Reference"
+                       class="text-center"/>
             </tree>
         </field>
     </record>
@@ -121,8 +135,20 @@
         <field name="model">ter.parcel</field>
         <field name="arch" type="xml">
             <search string="Search parcels">
-                <field name="alphanum_code"/>
                 <field name="mapped_to_polygon" invisible="1"/>
+                <field name="alphanum_code"/>
+                <field name="partner_id"/>
+                <field name="official_code"/>
+                <field name="property_id"/>
+                <field name="tag_id"/>
+                <filter string="With parcel manager: Yes"
+                        name="partner_id_yes"
+                        domain="[('partner_id', '!=', None)]"/>
+
+                <filter string="With parcel manager: No"
+                        name="partner_id_no"
+                        domain="[('partner_id', '=', None)]"/>
+                <separator/>
                 <filter string="With GIS link: Yes"
                         name="mapped_to_polygon_yes"
                         domain="[('mapped_to_polygon', '=', True)]"/>
@@ -133,20 +159,94 @@
                 <filter name="inactive"
                         string="Archived"
                         domain="[('active', '=', False)]"/>
+                <group expand="0">
+                    <filter name="grouped_by_partner_id"
+                            string="Parcel Manager"
+                     context="{'group_by':'partner_id'}"/>
+                    <filter name="grouped_by_property_id"
+                            string="Property"
+                     context="{'group_by':'property_id'}"/>
+                    <separator/>
+                    <filter name="grouped_by_region_id"
+                            string="Region"
+                     context="{'group_by':'region_id'}"/>
+                    <filter name="grouped_by_province_id"
+                            string="Province"
+                     context="{'group_by':'province_id'}"/>
+                    <filter name="grouped_by_municipality_id"
+                            string="Municipality"
+                     context="{'group_by':'municipality_id'}"/>
+                </group>
             </search>
+        </field>
+    </record>
+
+    <record id="ter_parcel_view_kanban" model="ir.ui.view">
+        <field name="name">ter.parcel.view.kanban</field>
+        <field name="model">ter.parcel</field>
+        <field name="arch" type="xml">
+            <kanban group_create="false"
+                    group_delete="false"
+                    default_order="alphanum_code"
+                    records_draggable="false"
+                    class="o_kanban_dashboard">
+                <field name="id"/>
+                <field name="aerial_image_shown_256"/>
+                <field name="alphanum_code"/>
+                <field name="partner_id"/>
+                <field name="property_data"/>
+                <field name="address_data"/>
+                <field name="area_official"/>
+                <field name="area_unit_name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_terparcel_kanban_image">
+                                <t t-if="record.aerial_image_shown_256 and record.aerial_image_shown_256.raw_value">
+                                    <img t-att-src="kanban_image('ter.parcel', 'aerial_image_shown_256', record.id.raw_value)" alt="ter_parcel_256" style="border-color:#696969;border-width:1px;border-style:solid"/>
+                                </t>
+                                <t t-else="">
+                                    <img t-att-src="'/base_ter/static/img/avatar_terparcel.png'" width="150" alt="ter_parcel_avatar" style="margin-top:30px"/>
+                                </t>
+                            </div>
+                            <div class="oe_kanban_details" style="margin-top:10px">
+                                <div class="text-center">
+                                    <strong class="o_kanban_record_title"><field name="alphanum_code"/></strong>
+                                </div>
+                                <div name="div_content" style="margin-top:10px;" class="row">
+                                    <div name="div_content_left" class="col-8">
+                                        <ul>
+                                            <li name="partner_id" ><field name="partner_id"/></li>
+                                            <li name="address_data" ><field name="address_data"/></li>
+                                            <li name="property_data">Property: <field name="property_data"/></li>
+                                        </ul>
+                                    </div>
+                                    <div name="div_content_right" class="col-4">
+                                        <ul class="list-unstyled">
+                                            <li name="area_data" class="text-end"><field name="area_official"/> <field name="area_unit_name"/></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
     <record id="ter_parcel_action" model="ir.actions.act_window">
         <field name="name">Parcels</field>
         <field name="res_model">ter.parcel</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
         <field name="view_ids"
          eval="[(5, 0),
                 (0, 0, {'view_mode': 'tree',
                         'view_id': ref('ter_parcel_view_tree')}),
                 (0, 0, {'view_mode': 'form',
-                        'view_id': ref('ter_parcel_view_form')}),]"/>
+                        'view_id': ref('ter_parcel_view_form')}),
+                (0, 0, {'view_mode': 'kanban',
+                        'view_id': ref('ter_parcel_view_kanban')}),]"/>
         <field name="search_view_id" ref="ter_parcel_view_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

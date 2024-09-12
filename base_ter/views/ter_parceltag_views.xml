@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ter_parceltag_view_form" model="ir.ui.view">
+        <field name="name">ter.parceltag.view.form</field>
+        <field name="model">ter.parceltag</field>
+        <field name="arch" type="xml">
+            <form string="Reservoir Tags" duplicate="0">
+                <sheet>
+                    <group name="master_data">
+                        <group name="master_data_left">
+                            <field name="alphanum_code" string = "Tag Name"/>
+                        </group>
+                        <group name="master_data_right">
+                        </group>
+                    </group>
+                    <notebook name="slave_data_notebook" colspan="4">
+                        <page name="page_notes" string="Internal Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ter_parceltag_view_tree" model="ir.ui.view">
+        <field name="name">ter.parceltag.view.tree</field>
+        <field name="model">ter.parceltag</field>
+        <field name="arch" type="xml">
+            <tree default_order="alphanum_code">
+                <field name="alphanum_code" string="Tag Name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ter_parceltag_view_search" model="ir.ui.view">
+        <field name="name">ter.parceltag.view.search</field>
+        <field name="model">ter.parceltag</field>
+        <field name="arch" type="xml">
+            <search string="Search tags">
+                <field name="alphanum_code"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="ter_parceltag_action" model="ir.actions.act_window">
+        <field name="name">Parcel Tags</field>
+        <field name="res_model">ter.parceltag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids"
+         eval="[(5, 0),
+                (0, 0, {'view_mode': 'tree',
+                        'view_id': ref('ter_parceltag_view_tree')}),
+                (0, 0, {'view_mode': 'form',
+                        'view_id': ref('ter_parceltag_view_form')}),]"/>
+        <field name="search_view_id" ref="ter_parceltag_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new parcel tag
+            </p>
+            <p>
+                Manage parcel tags.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="ter_parceltag_menu"
+              parent="menu_configuration_general"
+              action="ter_parceltag_action"
+              sequence="20"/>
+
+</odoo>

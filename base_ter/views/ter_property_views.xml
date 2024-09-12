@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ter_property_view_form" model="ir.ui.view">
+        <field name="name">ter.property.view.form</field>
+        <field name="model">ter.property</field>
+        <field name="arch" type="xml">
+            <form string="Properties" duplicate="0">
+                <sheet>
+                    <group name="master_data">
+                        <group name="master_data_left">
+                            <field name="alphanum_code" string = "Property"/>
+                            <field name="partner_id" string = "Property Manager"/>
+                        </group>
+                        <group name="master_data_right">
+                        </group>
+                    </group>
+                    <notebook name="slave_data_notebook" colspan="4">
+                        <page name="page_notes" string="Internal Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="ter_property_view_tree" model="ir.ui.view">
+        <field name="name">ter.property.view.tree</field>
+        <field name="model">ter.property</field>
+        <field name="arch" type="xml">
+            <tree class="o_base_ter_ter_property"
+                  default_order="alphanum_code">
+                <field name="alphanum_code" string="Property"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ter_property_view_search" model="ir.ui.view">
+        <field name="name">ter.property.view.search</field>
+        <field name="model">ter.property</field>
+        <field name="arch" type="xml">
+            <search string="Search properties">
+                <field name="alphanum_code"/>
+                <field name="mapped_to_polygon" invisible="1"/>
+                <filter string="With GIS link: Yes"
+                        name="mapped_to_polygon_yes"
+                        domain="[('mapped_to_polygon', '=', True)]"/>
+                <filter string="With GIS link: No"
+                        name="mapped_to_polygon_no"
+                        domain="[('mapped_to_polygon', '=', False)]"/>
+                <separator/>
+            </search>
+        </field>
+    </record>
+
+    <record id="ter_property_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">ter.property</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids"
+         eval="[(5, 0),
+                (0, 0, {'view_mode': 'tree',
+                        'view_id': ref('ter_property_view_tree')}),
+                (0, 0, {'view_mode': 'form',
+                        'view_id': ref('ter_property_view_form')}),]"/>
+        <field name="search_view_id" ref="ter_property_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new property
+            </p>
+            <p>
+                Manage properties.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="ter_property_menu"
+              parent="menu_territory"
+              action="ter_property_action"
+              sequence="20"/>
+
+</odoo>

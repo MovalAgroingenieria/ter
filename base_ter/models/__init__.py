@@ -3,3 +3,6 @@
 
 from . import res_config_settings
 from . import ter_parcel
+from . import ter_property
+from . import ter_parceltag
+from . import res_partner

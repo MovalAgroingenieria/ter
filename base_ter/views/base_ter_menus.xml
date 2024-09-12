@@ -42,6 +42,11 @@
               action="base_adi.res_place_action"
               sequence="40"/>
 
+    <menuitem id="menu_configuration_general"
+              name="General"
+              sequence="20"
+              parent="menu_configuration"/>
+
     <menuitem id="menu_thecnicalactions"
               name="Technical Actions"
               sequence="1000"
