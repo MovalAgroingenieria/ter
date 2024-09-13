@@ -8,6 +8,7 @@ class TerProperty(models.Model):
     _name = 'ter.property'
     _description = 'Property'
     _inherit = ['simple.model', 'polygon.model', 'mail.thread']
+    _rec_name = 'alphanum_code'
 
     # Static variables inherited from "simple.model"
     _set_num_code = False

@@ -58,11 +58,11 @@
                                    attrs="{'readonly': [('municipality_id', '=', False)]}"
                                    domain="[('municipality_id', '=', municipality_id)]"
                                    context="{'default_municipality_id': municipality_id}"
-                                   options="{'no_quick_create':True}"/>
+                                   options="{'no_create_edit':True}"/>
                             <field name="property_id" string="Property"
                                    domain="[('partner_id', '=', partner_id)]"
                                    context="{'default_partner_id': partner_id}"
-                                   options="{'no_quick_create':True}"/>
+                                   options="{'no_create_edit':True}"/>
                             <field name="tag_id" widget="many2many_tags"
                                    options="{'color_field': 'color',
                                              'no_quick_create': True,
