@@ -26,3 +26,33 @@
     text-align: center;
     vertical-align: middle;
 }
+
+.o_base_ter_res_partner [data-name="partner_code"] {
+    text-align: right;
+    width: 80px;
+    min-width: 80px;
+}
+
+.o_base_ter_res_partner [data-name="vat"] {
+    text-align: center;
+    width: 130px;
+    min-width: 130px;
+}
+
+.o_base_ter_res_partner [data-name="number_of_properties"] {
+    text-align: center;
+    width: 100px;
+    min-width: 100px;
+}
+
+.o_base_ter_res_partner [data-name="number_of_parcels"] {
+    text-align: center;
+    width: 100px;
+    min-width: 100px;
+}
+
+.o_base_ter_res_partner [data-name="area_official_parcels"] {
+    text-align: right;
+    width: 160px;
+    min-width: 160px;
+}

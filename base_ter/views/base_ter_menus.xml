@@ -7,6 +7,11 @@
               web_icon="base_ter,static/description/icon.png"
               groups="base_ter.group_ter_user"/>
 
+    <menuitem id="menu_management"
+              name="Management"
+              sequence="10"
+              parent="menu_census"/>
+
     <menuitem id="menu_territory"
               name="Territory"
               sequence="20"

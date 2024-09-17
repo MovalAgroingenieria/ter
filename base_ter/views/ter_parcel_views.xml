@@ -27,7 +27,7 @@
                         </button>
                     </div>
                     <widget name="web_ribbon" title="Archived"
-                            bg_color="bg-dark"
+                            bg_color="bg-danger"
                             attrs="{'invisible':
                                     [('active', '=', True)]}"/>
                     <widget name="web_ribbon" title="Check areas!"
@@ -43,7 +43,8 @@
                                            attrs="{'readonly': [('id', '&gt;', 0)]}"/>
                                 </h1>
                                 <field name="partner_id"
-                                       placeholder="(parcel manager)"/>
+                                       placeholder="(parcel manager)"
+                                       domain="[('is_holder', '=', True)]"/>
                             </div>
                             <div name="section_basic_data" colspan="2"
                                  class="text-center mt-3 mb-4">
@@ -65,7 +66,6 @@
                                    options="{'no_create_edit':True}"/>
                             <field name="tag_id" widget="many2many_tags"
                                    options="{'color_field': 'color',
-                                             'no_quick_create': True,
                                              'no_create_edit': True}"
                                    placeholder="Tags..."/>
                         </group>
@@ -100,6 +100,14 @@
                         </group>
                     </group>
                     <notebook name="slave_data_notebook" colspan="4">
+                        <page name="page_partnerlinks" string="Contacts">
+                            <field name="partnerlink_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="percentage"/>
+                                </tree>
+                            </field>
+                        </page>
                         <page name="page_notes" string="Internal Notes">
                             <field name="notes"/>
                         </page>
@@ -135,25 +143,23 @@
         <field name="model">ter.parcel</field>
         <field name="arch" type="xml">
             <search string="Search parcels">
-                <field name="mapped_to_polygon" invisible="1"/>
                 <field name="alphanum_code"/>
                 <field name="partner_id"/>
                 <field name="official_code"/>
                 <field name="property_id"/>
                 <field name="tag_id"/>
-                <filter string="With parcel manager: Yes"
-                        name="partner_id_yes"
+                <filter name="partner_id_yes"
+                        string="With parcel manager: Yes"
                         domain="[('partner_id', '!=', None)]"/>
-
-                <filter string="With parcel manager: No"
-                        name="partner_id_no"
+                <filter name="partner_id_no"
+                        string="With parcel manager: No"
                         domain="[('partner_id', '=', None)]"/>
                 <separator/>
-                <filter string="With GIS link: Yes"
-                        name="mapped_to_polygon_yes"
+                <filter name="mapped_to_polygon_yes"
+                        string="With GIS link: Yes"
                         domain="[('mapped_to_polygon', '=', True)]"/>
-                <filter string="With GIS link: No"
-                        name="mapped_to_polygon_no"
+                <filter name="mapped_to_polygon_no"
+                        string="With GIS link: No"
                         domain="[('mapped_to_polygon', '=', False)]"/>
                 <separator/>
                 <filter name="inactive"

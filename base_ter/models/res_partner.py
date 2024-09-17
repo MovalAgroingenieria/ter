@@ -28,8 +28,6 @@ class ResPartner(models.Model):
                 resp = query_results[0].get('max') + 1
             else:
                 resp = 1
-        # Provisional
-        print(resp)
         return resp
 
     partner_code = fields.Integer(
@@ -61,14 +59,14 @@ class ResPartner(models.Model):
         compute='_compute_number_of_parcels',)
 
     area_official_parcels = fields.Float(
-        string='Managed Area (parcels)',
+        string='Parcel Area',
         digits=(32, 4),
         store=True,
         index=True,
         compute='_compute_area_official_parcels',)
 
     area_official_parcels_m2 = fields.Integer(
-        string='Managed Area (m², parcels)',
+        string='Parcel Area (m²)',
         compute='_compute_area_official_parcels_m2',)
 
     property_ids = fields.One2many(
@@ -83,14 +81,14 @@ class ResPartner(models.Model):
         compute='_compute_number_of_properties',)
 
     area_official_properties = fields.Float(
-        string='Managed Area (properties)',
+        string='Property Area',
         digits=(32, 4),
         store=True,
         index=True,
         compute='_compute_area_official_properties',)
 
     area_official_properties_m2 = fields.Integer(
-        string='Managed Area (m², properties)',
+        string='Property Area (m²)',
         compute='_compute_area_official_properties_m2',)
 
     _sql_constraints = [
@@ -123,7 +121,7 @@ class ResPartner(models.Model):
                 number_of_parcels = len(record.parcel_ids)
             record.number_of_parcels = number_of_parcels
 
-    @api.depends('parcel_ids')
+    @api.depends('parcel_ids', 'parcel_ids.area_official')
     def _compute_area_official_parcels(self):
         for record in self:
             area_official_parcels = 0
@@ -154,7 +152,7 @@ class ResPartner(models.Model):
                 number_of_properties = len(record.property_ids)
             record.number_of_properties = number_of_properties
 
-    @api.depends('property_ids')
+    @api.depends('property_ids', 'property_ids.area_official_parcels')
     def _compute_area_official_properties(self):
         for record in self:
             area_official_properties = 0
@@ -190,3 +188,23 @@ class ResPartner(models.Model):
                    query_results[0].get('count') > 1):
                     raise exceptions.ValidationError(
                         _('Repeated partner code.'))
+
+    def action_gis_viewer(self):
+        self.ensure_one()
+        # TODO
+        print('action_gis_viewer')
+
+    def action_set_partner_code(self):
+        self.ensure_one()
+        # TODO
+        print('action_set_partner_code')
+
+    def action_show_parcels(self):
+        self.ensure_one()
+        # TODO
+        print('action_show_parcels')
+
+    def action_show_properties(self):
+        self.ensure_one()
+        # TODO
+        print('action_show_properties')

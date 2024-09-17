@@ -8,6 +8,7 @@ class TerParceltag(models.Model):
     _name = 'ter.parceltag'
     _description = 'Parcel Tag'
     _inherit = ['simple.model']
+    _rec_name = 'alphanum_code'
 
     # Static variables inherited from "simple.model"
     _set_num_code = False
@@ -27,3 +28,7 @@ class TerParceltag(models.Model):
 
     color = fields.Integer(
         string='Color Index',)
+
+    parcel_ids = fields.Many2many('ter.parcel',
+                                  column1='parcel_id', column2='parceltag_id',
+                                  string='Parcels', copy=False)

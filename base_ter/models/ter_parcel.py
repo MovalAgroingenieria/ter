@@ -167,6 +167,11 @@ class TerParcel(models.Model):
         string='Address Data',
         compute='_compute_address_data',)
 
+    partnerlink_ids = fields.One2many(
+        string='Contacts of parcel',
+        comodel_name='ter.parcel.partnerlink',
+        inverse_name='parcel_id',)
+
     active = fields.Boolean(
         default=True,)
 
@@ -350,6 +355,20 @@ class TerParcel(models.Model):
                     _('The parcel manager and the property manager must '
                       'be the same person.'))
 
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        partner_id = self.partner_id.id
+        if partner_id and ((not self.partnerlink_ids) or
+                           len(self.partnerlink_ids) == 1):
+            operation = 0
+            # if self.partnerlink_ids:
+            #     self.partnerlink_ids = [(5, )]
+            self.partnerlink_ids = [(5, ), (0, 0,
+                                            {
+                                                'partner_id': partner_id,
+                                                'percentage': 100, }
+                                            )]
+
     @api.model
     def _get_view(self, view_id=None, view_type='form', **options):
         arch, view = super()._get_view(view_id, view_type, **options)
@@ -401,14 +420,6 @@ class TerParcel(models.Model):
         # TODO
         print('action_gis_preview')
 
-    @api.model
-    def _add_area_fields(self):
-        # Hook: new area fields to add suffix (name of unit of measure)
-        area_fields = self._area_fields
-        # Example:
-        # area_fields.append(('area_gis', _('GIS Area')))
-        return area_fields
-
     def action_set_parcel_code(self):
         self.ensure_one()
         act_window = {
@@ -422,3 +433,34 @@ class TerParcel(models.Model):
             },
         }
         return act_window
+
+    @api.model
+    def _add_area_fields(self):
+        # Hook: new area fields to add suffix (name of unit of measure)
+        area_fields = self._area_fields
+        # Example:
+        # area_fields.append(('area_gis', _('GIS Area')))
+        return area_fields
+
+
+class TerParcelPartnerlink(models.Model):
+    _name = 'ter.parcel.partnerlink'
+    _description = 'Partner of parcel'
+
+    parcel_id = fields.Many2one(
+        string='Parcel',
+        comodel_name='ter.parcel',
+        index=True,
+        ondelete='cascade',)
+
+    partner_id = fields.Many2one(
+        string='Contact',
+        comodel_name='res.partner',
+        required=True,
+        index=True,
+        ondelete='restrict',)
+
+    percentage = fields.Integer(
+        string='Percentage',
+        default=0,
+        required=True,)
