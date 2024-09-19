@@ -6,3 +6,4 @@ from . import ter_parcel
 from . import ter_property
 from . import ter_parceltag
 from . import res_partner
+from . import ter_profile

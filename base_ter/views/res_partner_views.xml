@@ -32,7 +32,7 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-retweet"
-                        invisible="not context.get('context_ter', False)">
+                        groups="base_ter.group_ter_manager">
                     <span>Change code</span>
                 </button>
                 <button name="action_gis_viewer"
@@ -42,6 +42,12 @@
                         invisible="not context.get('context_ter', False)">
                     <span>GIS Viewer</span>
                 </button>
+            </xpath>
+            <xpath expr="//field[@id='company']" position="attributes">
+                <attribute name="default_focus">0</attribute>
+            </xpath>
+            <xpath expr="//field[@id='individual']" position="attributes">
+                <attribute name="default_focus">0</attribute>
             </xpath>
             <xpath expr="//field[@name='company_type']" position="after">
                 <div name="icon_and_partner_code"
@@ -55,7 +61,9 @@
                                placeholder="Code"
                                required="1"
                                style="width:100px;margin-top:6px;margin-left:12px"
-                               class="align-middle"/>
+                               class="align-middle"
+                               default_focus="1"
+                               attrs="{'readonly': [('id', '>', 0)]}"/>
                     </h1>
                 </div>
             </xpath>
@@ -72,7 +80,7 @@
             <tree class="o_base_ter_res_partner"
                   default_order="partner_code">
                 <field name="partner_code" string="Code"/>
-                <field name="name" string="Name"/>
+                <field name="display_name" string="Name"/>
                 <field name="vat" string="VAT"
                        class="text-center"/>
                 <field name="number_of_properties" string="Properties"/>
@@ -110,16 +118,54 @@
         </field>
     </record>
 
+    <record id="res_partner_kanban_view" model="ir.ui.view">
+        <field name="name">res.partner.kanban.base_ter</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="partner_code"/>
+                    <field name="is_holder"/>
+                    <field name="number_of_parcels"/>
+                    <field name="area_official_parcels"/>
+                    <field name="area_unit_name"/>
+                </field>
+                <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="inside">
+                    <div name="kanban_bottom_left"
+                         attrs="{'invisible': [('is_holder', '=', False)]}">
+                        <i class="fa fa-picture-o fa-lg" style="color:darkgreen;margin-right:6px;" title="holder_icon"/>
+                        <field name="number_of_parcels" style="margin-right:4px"/>
+                        <t t-if="record.number_of_parcels.raw_value > 1 or record.number_of_parcels.raw_value == 0">
+                            <span>parcels</span>
+                        </t>
+                        <t t-else="">
+                            <span>parcel</span>
+                        </t>
+                    </div>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_kanban_bottom_right')]" position="inside">
+                    <div name="kanban_bottom_right"
+                         attrs="{'invisible': [('is_holder', '=', False)]}">
+                        <field name="area_official_parcels"
+                               style="margin-left:6px;margin-right:4px"/>
+                        <field name="area_unit_name"/>
+                    </div>
+                </xpath>
+        </field>
+    </record>
+
     <record id="res_partner_action" model="ir.actions.act_window">
         <field name="name">Managers</field>
         <field name="res_model">res.partner</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
         <field name="view_ids"
          eval="[(5, 0),
                 (0, 0, {'view_mode': 'tree',
                         'view_id': ref('res_partner_view_tree')}),
                 (0, 0, {'view_mode': 'form',
-                        'view_id': ref('view_partner_form')})]"/>
+                        'view_id': ref('view_partner_form')}),
+                (0, 0, {'view_mode': 'kanban',
+                        'view_id': ref('res_partner_kanban_view')})]"/>
         <field name="search_view_id" ref="res_partner_view_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

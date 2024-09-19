@@ -19,13 +19,16 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
+        "data/ter_profile_data.xml",
         "wizards/wizard_set_parcel_code_views.xml",
+        "wizards/wizard_set_partner_code_views.xml",
         "views/base_ter_menus.xml",
         "views/res_config_settings_views.xml",
         "views/ter_parcel_views.xml",
         "views/ter_property_views.xml",
         "views/ter_parceltag_views.xml",
         "views/res_partner_views.xml",
+        "views/ter_profile_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

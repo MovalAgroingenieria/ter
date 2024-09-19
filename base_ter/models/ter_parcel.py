@@ -172,6 +172,10 @@ class TerParcel(models.Model):
         comodel_name='ter.parcel.partnerlink',
         inverse_name='parcel_id',)
 
+    partner_code = fields.Integer(
+        string="Partner Code",
+        compute='_compute_partner_code',)
+
     active = fields.Boolean(
         default=True,)
 
@@ -337,6 +341,13 @@ class TerParcel(models.Model):
                 address_data = record.place_id.name + ' - ' + address_data
             record.address_data = address_data
 
+    def _compute_partner_code(self):
+        for record in self:
+            partner_code = 0
+            if record.partner_id and record.partner_id.partner_code > 0:
+                partner_code = record.partner_id.partner_code
+            record.partner_code = partner_code
+
     @api.constrains('municipality_id', 'place_id')
     def _check_place_id(self):
         for record in self:
@@ -447,6 +458,9 @@ class TerParcelPartnerlink(models.Model):
     _name = 'ter.parcel.partnerlink'
     _description = 'Partner of parcel'
 
+    # Size of the "official_code" field in the model.
+    MAX_SIZE_PARTNERLINK_CODE = 75
+
     parcel_id = fields.Many2one(
         string='Parcel',
         comodel_name='ter.parcel',
@@ -460,7 +474,42 @@ class TerParcelPartnerlink(models.Model):
         index=True,
         ondelete='restrict',)
 
+    name = fields.Char(
+        string='Identifier of partnerlink',
+        size=MAX_SIZE_PARTNERLINK_CODE,
+        store=True,
+        index=True,
+        compute='_compute_name',)
+
+    profile_id = fields.Many2one(
+        string='Profile',
+        comodel_name='ter.profile',
+        index=True,
+        ondelete='restrict',)
+
+    is_main = fields.Boolean(
+        default=False,)
+
     percentage = fields.Integer(
         string='Percentage',
         default=0,
         required=True,)
+
+    _sql_constraints = [
+        ('name_unique',
+         'UNIQUE (name)',
+         'There are repeated lines.'),
+        ('owner_percentage',
+         'CHECK (percentage >= 0 and percentage <= 100)',
+         'Incorrect value of "Percentage".'),
+        ]
+
+    @api.depends('parcel_id', 'parcel_id.alphanum_code',
+                 'partner_id', 'partner_id.partner_code')
+    def _compute_name(self):
+        for record in self:
+            name = ''
+            if record.parcel_id and record.partner_id:
+                name = record.parcel_id.alphanum_code + '-' + \
+                    record.partner_id.partner_code_asstr
+            record.name = name

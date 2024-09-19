@@ -44,7 +44,10 @@
                                 </h1>
                                 <field name="partner_id"
                                        placeholder="(parcel manager)"
-                                       domain="[('is_holder', '=', True)]"/>
+                                       domain="[('is_holder', '=', True)]"
+                                       context="{'context_ter': True}"
+                                       options="{'no_quick_create':True}"
+                                       readonly="context.get('default_partner_id', False)"/>
                             </div>
                             <div name="section_basic_data" colspan="2"
                                  class="text-center mt-3 mb-4">
@@ -102,9 +105,17 @@
                     <notebook name="slave_data_notebook" colspan="4">
                         <page name="page_partnerlinks" string="Contacts">
                             <field name="partnerlink_ids" nolabel="1">
-                                <tree editable="bottom">
-                                    <field name="partner_id"/>
-                                    <field name="percentage"/>
+                                <tree editable="bottom"
+                                      class="o_base_ter_ter_parcel_partnerlink">
+                                    <field name="partner_id" string="Name"
+                                           domain="[('is_holder', '=', True)]"
+                                           context="{'context_ter': True}"
+                                           options="{'no_quick_create':True}"/>
+                                    <field name="is_main" string="Manager"
+                                           class="text-center"/>
+                                    <field name="profile_id" string="Profile"
+                                           class="text-center"/>
+                                    <field name="percentage" string="% Participation"/>
                                 </tree>
                             </field>
                         </page>
@@ -131,7 +142,7 @@
                 <field name="alphanum_code" string="Code"
                        class="text-center"/>
                 <field name="partner_id" string="Manager"/>
-                <field name="area_official"/>
+                <field name="area_official" sum="Total Area"/>
                 <field name="official_code" string="Reference"
                        class="text-center"/>
             </tree>

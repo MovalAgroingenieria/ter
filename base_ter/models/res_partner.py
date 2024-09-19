@@ -17,11 +17,18 @@ class ResPartner(models.Model):
     # Threshold for valid partner codes.
     _partner_code_threshold = sys.maxsize
 
+    # Area fields with unit of measure name, and "ha" name.
+    _area_fields = [('area_official_parcels', _('Parcel Area')),
+                    ('area_official_properties', _('Property Area'))]
+    _ha_name = _('ha')
+
     def _default_partner_code(self):
         resp = 0
         context_ter = self.env.context.get('context_ter', False)
         if context_ter:
-            self.env.cr.execute('SELECT max(partner_code) FROM res_partner')
+            self.env.cr.execute('SELECT max(partner_code) FROM res_partner '
+                                'WHERE partner_code < %s',
+                                tuple((self._partner_code_threshold,)))
             query_results = self.env.cr.dictfetchall()
             if (query_results and
                query_results[0].get('max') is not None):
@@ -91,6 +98,10 @@ class ResPartner(models.Model):
         string='Property Area (m²)',
         compute='_compute_area_official_properties_m2',)
 
+    area_unit_name = fields.Char(
+        string='Area unit name',
+        compute='_compute_area_unit_name',)
+
     _sql_constraints = [
         ('partner_code_ok', 'CHECK (partner_code >= 0)',
          'Wrong partner code.'),
@@ -109,7 +120,7 @@ class ResPartner(models.Model):
     def _compute_is_holder(self):
         for record in self:
             is_holder = False
-            if record.partner_code:
+            if 0 < record.partner_code <= self._partner_code_threshold:
                 is_holder = True
             record.is_holder = is_holder
 
@@ -175,19 +186,73 @@ class ResPartner(models.Model):
             record.area_official_properties_m2 = round(
                 record.area_official_properties * factor)
 
+    def _compute_area_unit_name(self):
+        area_unit_name = _('ha')
+        config = self.env['ir.config_parameter'].sudo()
+        area_unit_is_ha = config.get_param(
+            'base_ter.area_unit_is_ha', False)
+        if not area_unit_is_ha:
+            area_unit_name = config.get_param(
+                'base_ter.area_unit_name', '')
+        for record in self:
+            record.area_unit_name = area_unit_name
+
+    @api.depends('is_company', 'name', 'parent_id.display_name', 'type',
+                 'company_name', 'commercial_company_name', 'partner_code')
+    def _compute_display_name(self):
+        super(ResPartner, self)._compute_display_name()
+
     @api.constrains('partner_code')
     def _check_partner_code(self):
         for record in self:
             if record.partner_code > 0:
-                self.env.cr.execute('SELECT count(*) FROM res_partner '
-                                    'WHERE partner_code=%s',
-                                    tuple((record.partner_code,)))
-                query_results = self.env.cr.dictfetchall()
-                if (query_results and
-                   query_results[0].get('count') is not None and
-                   query_results[0].get('count') > 1):
+                partners_mapped_to_partner_code = \
+                    self.env['res.partner'].search(
+                        [('partner_code', '=', record.partner_code)])
+                if (partners_mapped_to_partner_code and
+                   len(partners_mapped_to_partner_code) > 1):
                     raise exceptions.ValidationError(
                         _('Repeated partner code.'))
+
+    @api.model
+    def _get_view(self, view_id=None, view_type='form', **options):
+        arch, view = super()._get_view(view_id, view_type, **options)
+        if view_type in ['form', 'tree']:
+            area_fields = self._add_area_fields()
+            if area_fields:
+                tmp_dict = {elem[0]: elem for elem in area_fields}
+                area_fields = list(tmp_dict.values())
+                measure_name = self._ha_name
+                config = self.env['ir.config_parameter'].sudo()
+                area_unit_is_ha = config.get_param(
+                    'base_ter.area_unit_is_ha', False)
+                area_unit_name = config.get_param(
+                    'base_ter.area_unit_name', '')
+                area_unit_value_in_ha = float(config.get_param(
+                    'base_ter.area_unit_value_in_ha', 0))
+                if (not area_unit_is_ha
+                   and area_unit_name != measure_name
+                   and area_unit_value_in_ha > 0
+                   and area_unit_value_in_ha != 1):
+                    measure_name = area_unit_name
+                for area_field in area_fields:
+                    field_name = area_field[0]
+                    label_name = area_field[1]
+                    for node in arch.xpath("//field[@name='%s']" % field_name):
+                        self.with_context(lang=self.env.user.lang)
+                        initial_label = _(label_name)
+                        final_label = initial_label + ' (' + measure_name + ')'
+                        node.set('string', final_label)
+        return arch, view
+
+    def name_get(self):
+        resp = []
+        for record in self:
+            name = record.name
+            if 0 < record.partner_code <= self._partner_code_threshold:
+                name = name + ' [' + str(record.partner_code) + ']'
+            resp.append((record.id, name))
+        return resp
 
     def action_gis_viewer(self):
         self.ensure_one()
@@ -196,15 +261,52 @@ class ResPartner(models.Model):
 
     def action_set_partner_code(self):
         self.ensure_one()
-        # TODO
-        print('action_set_partner_code')
+        act_window = {
+            'type': 'ir.actions.act_window',
+            'name': self.name,
+            'res_model': 'wizard.set.partner.code',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'src_model': 'res.partner',
+            },
+        }
+        return act_window
 
     def action_show_parcels(self):
         self.ensure_one()
-        # TODO
-        print('action_show_parcels')
+        current_partner = self
+        id_tree_view = self.sudo().env.ref(
+            'base_ter.ter_parcel_view_tree').id
+        id_form_view = self.sudo().env.ref(
+            'base_ter.ter_parcel_view_form').id
+        id_kanban_view = self.sudo().env.ref(
+            'base_ter.ter_parcel_view_kanban').id
+        search_view = self.sudo().env.ref(
+            'base_ter.ter_parcel_view_search')
+        act_window = {
+            'type': 'ir.actions.act_window',
+            'name': _('Parcels'),
+            'res_model': 'ter.parcel',
+            'view_mode': 'tree,form,kanban',
+            'views': [(id_tree_view, 'tree'), (id_form_view, 'form'),
+                      (id_kanban_view, 'kanban')],
+            'search_view_id': (search_view.id, search_view.name),
+            'target': 'current',
+            'domain': [('partner_id', '=', current_partner.id)],
+            'context': {'default_partner_id': current_partner.id, }
+            }
+        return act_window
 
     def action_show_properties(self):
         self.ensure_one()
         # TODO
         print('action_show_properties')
+
+    @api.model
+    def _add_area_fields(self):
+        # Hook: new area fields to add suffix (name of unit of measure)
+        area_fields = self._area_fields
+        # Example:
+        # area_fields.append(('area_gis', _('GIS Area')))
+        return area_fields

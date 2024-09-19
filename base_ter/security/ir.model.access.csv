@@ -17,3 +17,7 @@ access_wizard_set_parcel_code_user,wre.wizard.set.parcel.code.user,base_ter.mode
 access_wizard_set_parcel_code_manager,wre.wizard.set.parcel.code.manager,base_ter.model_wizard_set_parcel_code,base_ter.group_ter_manager,1,1,1,1
 ter_parcel_partnerlink_rule_group_ter_user,ter.parcel.partnerlink.rule.group.ter.user,base_ter.model_ter_parcel_partnerlink,base_ter.group_ter_user,1,0,0,0
 ter_parcel_partnerlink_rule_group_ter_manager,ter.parcel.partnerlink.rule.group.ter.manager,base_ter.model_ter_parcel_partnerlink,base_ter.group_ter_manager,1,1,1,1
+access_wizard_set_partner_code_user,wre.wizard.set.partner.code.user,base_ter.model_wizard_set_partner_code,base_ter.group_ter_user,1,0,0,0
+access_wizard_set_partner_code_manager,wre.wizard.set.partner.code.manager,base_ter.model_wizard_set_partner_code,base_ter.group_ter_manager,1,1,1,1
+ter_profile_rule_group_ter_user,ter.profile.rule.group.ter.user,base_ter.model_ter_profile,base_ter.group_ter_user,1,0,0,0
+ter_profile_rule_group_ter_manager,ter.profile.rule.group.ter.manager,base_ter.model_ter_profile,base_ter.group_ter_director,1,1,1,1
