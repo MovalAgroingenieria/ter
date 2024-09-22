@@ -579,7 +579,7 @@ class TerParcelPartnerlink(models.Model):
     MAX_SIZE_PARTNERLINK_CODE = 75
 
     # Size of the "partner_code" field.
-    _allow_all_contacts = True
+    _allow_all_contacts = False
 
     def _set_domain_partner_id(self):
         resp = []

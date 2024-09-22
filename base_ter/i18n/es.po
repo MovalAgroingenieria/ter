@@ -58,7 +58,7 @@ msgstr "<span class=\"oe_inline\">EPSG:</span>"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 msgid "<span>Change code</span>"
-msgstr "Cambiar código"
+msgstr "<span>Recodificar</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
@@ -435,7 +435,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Frame"
-msgstr ""
+msgstr "Delimitación"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__area_gis
@@ -449,7 +449,7 @@ msgstr "Área GIS (m²)"
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__perimeter_gis
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "GIS Perimeter (m)"
-msgstr ""
+msgstr "Perímetro GIS (m)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
@@ -510,7 +510,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base_ter.menu_configuration_general
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__has_message
@@ -661,7 +661,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "Internal Notes"
-msgstr ""
+msgstr "Notas internas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__message_is_follower
@@ -732,7 +732,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_configuration_localization
 msgid "Localization"
-msgstr ""
+msgstr "Localización"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__message_main_attachment_id
@@ -774,19 +774,19 @@ msgstr ""
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_management
 msgid "Management"
-msgstr ""
+msgstr "Gestión"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 msgid "Manager"
-msgstr ""
+msgstr "Gestor"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.res_partner_action
 #: model:ir.ui.menu,name:base_ter.res_partner_menu
 msgid "Managers"
-msgstr ""
+msgstr "Gestores"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__mapped_to_polygon
@@ -811,20 +811,20 @@ msgstr "Mensajes"
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.res_municipality_menu
 msgid "Municipalities"
-msgstr ""
+msgstr "Municipios"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__municipality_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "Municipality"
-msgstr ""
+msgstr "Municipio"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -834,7 +834,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 msgid "Not modifiable"
-msgstr ""
+msgstr "No modificable"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__notes
@@ -843,7 +843,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__notes
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 msgid "Notes"
-msgstr ""
+msgstr "Notas internas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__message_needaction_counter
@@ -897,7 +897,7 @@ msgstr "Área oficial"
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__area_official_m2
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Official Area (m²)"
-msgstr ""
+msgstr "Área oficial (m²)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__official_code
@@ -907,7 +907,7 @@ msgstr ""
 #. module: base_ter
 #: model:ter.profile,alphanum_code:base_ter.ter_profile_01
 msgid "Owner"
-msgstr ""
+msgstr "Propietario"
 
 #. module: base_ter
 #. odoo-python
@@ -916,7 +916,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__parcel_id
 #, python-format
 msgid "Parcel"
-msgstr ""
+msgstr "Parcela"
 
 #. module: base_ter
 #. odoo-python
@@ -925,44 +925,44 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_parcels
 #, python-format
 msgid "Parcel Area"
-msgstr ""
+msgstr "Área parcelas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_parcels_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_parcels_m2
 msgid "Parcel Area (m²)"
-msgstr ""
+msgstr "Área parcelas (m²)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__alphanum_code
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__parcel_code
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_parcel_code_view_form
 msgid "Parcel Code"
-msgstr ""
+msgstr "Código de parcela"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__is_holder
 #: model:ir.model.fields,field_description:base_ter.field_res_users__is_holder
 msgid "Parcel Holder"
-msgstr ""
+msgstr "Titular"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__partner_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "Parcel Manager"
-msgstr ""
+msgstr "Gestor"
 
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_ter_parceltag
 #: model:ir.model.fields,field_description:base_ter.field_ter_parceltag__alphanum_code
 msgid "Parcel Tag"
-msgstr ""
+msgstr "Etiqueta de parcela"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.ter_parceltag_action
 #: model:ir.ui.menu,name:base_ter.ter_parceltag_menu
 msgid "Parcel Tags"
-msgstr ""
+msgstr "Etiquetas de parcela"
 
 #. module: base_ter
 #. odoo-python
@@ -977,7 +977,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 #, python-format
 msgid "Parcels"
-msgstr ""
+msgstr "Parcelas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__parcel_ids
@@ -1034,12 +1034,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__place_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Place"
-msgstr ""
+msgstr "Localidad"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.res_place_menu
 msgid "Places"
-msgstr ""
+msgstr "Localidades"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_partner_code_view_form
@@ -1077,7 +1077,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_tree
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
@@ -1088,7 +1088,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base_ter.ter_profile_action
 #: model:ir.ui.menu,name:base_ter.ter_profile_menu
 msgid "Profiles"
-msgstr ""
+msgstr "Perfiles"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1110,7 +1110,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 #, python-format
 msgid "Properties"
-msgstr ""
+msgstr "Fincas"
 
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_ter_property
@@ -1120,7 +1120,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
 msgid "Property"
-msgstr ""
+msgstr "Finca"
 
 #. module: base_ter
 #. odoo-python
@@ -1146,7 +1146,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__partner_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "Property Manager"
-msgstr ""
+msgstr "Titular"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__alphanum_code
@@ -1156,18 +1156,18 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_kanban
 msgid "Property:"
-msgstr ""
+msgstr "Finca:"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__province_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "Province"
-msgstr ""
+msgstr "Provincia"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.res_province_menu
 msgid "Provinces"
-msgstr ""
+msgstr "Provincias"
 
 #. module: base_ter
 #: model:res.groups,name:base_ter.group_ter_user
@@ -1178,28 +1178,28 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 msgid "Reference"
-msgstr ""
+msgstr "Referencia"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_thecnicalactions_refresh
 msgid "Refresh"
-msgstr ""
+msgstr "Refrescar"
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_parcel_reset_aerial_image_serveraction
 msgid "Refresh aerial image"
-msgstr ""
+msgstr "Refrescar imagen aérea"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__region_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "Region"
-msgstr ""
+msgstr "Comunidad Autónoma"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.res_region_menu
 msgid "Regions"
-msgstr ""
+msgstr "Comunidades Autónomas"
 
 #. module: base_ter
 #. odoo-python
@@ -1220,7 +1220,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_tree
 msgid "Required 100%"
-msgstr ""
+msgstr "100% requerido"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
@@ -1265,7 +1265,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base_ter.res_config_settings_action
 #: model:ir.ui.menu,name:base_ter.res_config_settings_menu
 msgid "Settings"
-msgstr ""
+msgstr "Ajustes"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1300,30 +1300,29 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_tree
 msgid "Tag Name"
-msgstr ""
+msgstr "Nombre de la etiqueta"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__tag_id
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Tags..."
-msgstr ""
+msgstr "Etiquetas..."
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_thecnicalactions
 msgid "Technical Actions"
-msgstr ""
+msgstr "Acciones técnicas"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_territory
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Territory"
-msgstr ""
+msgstr "Territorio"
 
-#. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
@@ -1384,7 +1383,7 @@ msgstr ""
 #. module: base_ter
 #: model:ter.profile,alphanum_code:base_ter.ter_profile_02
 msgid "Usufructuary"
-msgstr ""
+msgstr "Usufructuario"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
@@ -1467,23 +1466,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 msgid "With GIS link: No"
-msgstr ""
+msgstr "Con vínculo GIS: No"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 msgid "With GIS link: Yes"
-msgstr ""
+msgstr "Con vínculo GIS: Sí"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "With parcel manager: No"
-msgstr ""
+msgstr "Con gestor: No"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "With parcel manager: Yes"
-msgstr ""
+msgstr "Con gestor: Sí"
 
 #. module: base_ter
 #: model:res.groups,name:base_ter.group_ter_manager
@@ -1510,7 +1509,7 @@ msgstr ""
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
 msgid "not assigned"
-msgstr ""
+msgstr "no asignada"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
