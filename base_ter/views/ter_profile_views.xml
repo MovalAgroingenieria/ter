@@ -23,6 +23,10 @@
                             bg_color="bg-danger"
                             attrs="{'invisible':
                                     [('active', '=', True)]}"/>
+                    <widget name="web_ribbon" title="Not modifiable"
+                            bg_color="bg-info"
+                            attrs="{'invisible':
+                                    ['|', ('active', '=', False), ('is_standard', '=', False)]}"/>
                     <div name="title">
                         <label for="alphanum_code" string="Profile:"/>
                         <h1>

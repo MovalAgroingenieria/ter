@@ -108,7 +108,6 @@
                                 <tree editable="bottom"
                                       class="o_base_ter_ter_parcel_partnerlink">
                                     <field name="partner_id" string="Name"
-                                           domain="[('is_holder', '=', True)]"
                                            context="{'context_ter': True}"
                                            options="{'no_quick_create':True}"/>
                                     <field name="is_main" string="Manager"

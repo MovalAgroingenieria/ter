@@ -14,7 +14,8 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-picture-o"
-                        invisible="not context.get('context_ter', False)">
+                        invisible="not context.get('context_ter', False)"
+                        attrs="{'invisible': [('id', '>', 0), ('partner_code', '=', 0)]}">
                     <field string="Properties"
                            name="number_of_properties"
                            widget="statinfo"/>
@@ -23,7 +24,8 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-square-o"
-                        invisible="not context.get('context_ter', False)">
+                        invisible="not context.get('context_ter', False)"
+                        attrs="{'invisible': [('id', '>', 0), ('partner_code', '=', 0)]}">
                     <field string="Parcels"
                            name="number_of_parcels"
                            widget="statinfo"/>
@@ -39,7 +41,8 @@
                         type="object"
                         class="oe_stat_button"
                         icon="fa-map-marker"
-                        invisible="not context.get('context_ter', False)">
+                        invisible="not context.get('context_ter', False)"
+                        attrs="{'invisible': [('id', '>', 0), ('partner_code', '=', 0)]}">
                     <span>GIS Viewer</span>
                 </button>
             </xpath>
@@ -52,7 +55,7 @@
             <xpath expr="//field[@name='company_type']" position="after">
                 <div name="icon_and_partner_code"
                      invisible="not context.get('context_ter', False)">
-                    <h1>
+                    <h1 attrs="{'invisible': [('id', '>', 0), ('partner_code', '=', 0)]}">
                         <img src="/base_ter/static/description/icon.png"
                              alt="parcel logo"
                              style="width:40px"

@@ -1,8 +1,6 @@
 # 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-import sys
-
 from odoo import fields, models, api, exceptions, _
 
 
@@ -14,9 +12,6 @@ class ResPartner(models.Model):
     # Size of the "partner_code" field.
     _size_partner_code = 6
 
-    # Threshold for valid partner codes.
-    _partner_code_threshold = sys.maxsize
-
     # Area fields with unit of measure name, and "ha" name.
     _area_fields = [('area_official_parcels', _('Parcel Area')),
                     ('area_official_properties', _('Property Area'))]
@@ -26,9 +21,7 @@ class ResPartner(models.Model):
         resp = 0
         context_ter = self.env.context.get('context_ter', False)
         if context_ter:
-            self.env.cr.execute('SELECT max(partner_code) FROM res_partner '
-                                'WHERE partner_code < %s',
-                                tuple((self._partner_code_threshold,)))
+            self.env.cr.execute('SELECT max(partner_code) FROM res_partner')
             query_results = self.env.cr.dictfetchall()
             if (query_results and
                query_results[0].get('max') is not None):
@@ -120,7 +113,7 @@ class ResPartner(models.Model):
     def _compute_is_holder(self):
         for record in self:
             is_holder = False
-            if 0 < record.partner_code <= self._partner_code_threshold:
+            if record.partner_code > 0:
                 is_holder = True
             record.is_holder = is_holder
 
@@ -249,7 +242,7 @@ class ResPartner(models.Model):
         resp = []
         for record in self:
             name = record.name
-            if 0 < record.partner_code <= self._partner_code_threshold:
+            if record.partner_code > 0:
                 name = name + ' [' + str(record.partner_code) + ']'
             resp.append((record.id, name))
         return resp
@@ -300,8 +293,32 @@ class ResPartner(models.Model):
 
     def action_show_properties(self):
         self.ensure_one()
+        current_partner = self
+        id_tree_view = self.sudo().env.ref(
+            'base_ter.ter_property_view_tree').id
+        id_form_view = self.sudo().env.ref(
+            'base_ter.ter_property_view_form').id
         # TODO
-        print('action_show_properties')
+        # id_kanban_view = self.sudo().env.ref(
+        #     'base_ter.ter_property_view_kanban').id
+        search_view = self.sudo().env.ref(
+            'base_ter.ter_property_view_search')
+        act_window = {
+            'type': 'ir.actions.act_window',
+            'name': _('Properties'),
+            'res_model': 'ter.property',
+            # TODO
+            # 'view_mode': 'tree,form,kanban',
+            'view_mode': 'tree,form',
+            # 'views': [(id_tree_view, 'tree'), (id_form_view, 'form'),
+            #           (id_kanban_view, 'kanban')],
+            'views': [(id_tree_view, 'tree'), (id_form_view, 'form')],
+            'search_view_id': (search_view.id, search_view.name),
+            'target': 'current',
+            'domain': [('partner_id', '=', current_partner.id)],
+            'context': {'default_partner_id': current_partner.id, }
+            }
+        return act_window
 
     @api.model
     def _add_area_fields(self):
@@ -310,3 +327,8 @@ class ResPartner(models.Model):
         # Example:
         # area_fields.append(('area_gis', _('GIS Area')))
         return area_fields
+
+    def _refresh_computed_fields(self):
+        # Hook: Refresh of all computed fields.
+        self._compute_number_of_parcels()
+        self._compute_area_official_parcels()

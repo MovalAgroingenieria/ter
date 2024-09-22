@@ -15,7 +15,7 @@ class TerParcel(models.Model):
     # Size of the "official_code" field in the model.
     MAX_SIZE_OFFICIAL_CODE = 50
 
-    # Static variables inherited from "simple.model"
+    # Static variables inherited from "simple.model".
     _set_num_code = False
     _sequence_for_codes = ''
     _size_name = 20
@@ -26,7 +26,7 @@ class TerParcel(models.Model):
     _set_alphanum_code_to_uppercase = True
     _size_description = 75
 
-    # Static variables inherited from "polygon.model"
+    # Static variables inherited from "polygon.model".
     _gis_table = 'ter_gis_parcel'
     _geom_field = 'geom'
     _link_field = 'name'
@@ -36,7 +36,7 @@ class TerParcel(models.Model):
     _aerial_image_size_medium = 256
     _aerial_image_size_small = 128
 
-    # Default value for the zoom of captured aerial images
+    # Default value for the zoom of captured aerial images.
     _aerial_image_zoom = 1.2
 
     # Should aerial images be square?
@@ -366,19 +366,136 @@ class TerParcel(models.Model):
                     _('The parcel manager and the property manager must '
                       'be the same person.'))
 
+    @api.constrains('partner_id')
+    def _check_partner_id(self):
+        for record in self:
+            if record.partner_id:
+                if record.partnerlink_ids:
+                    for partnerlink in record.partnerlink_ids:
+                        if partnerlink.is_main:
+                            if partnerlink.partner_id != record.partner_id:
+                                raise exceptions.ValidationError(
+                                    _('The parcel manager and the main '
+                                      'contact must be the same person.'))
+                            break
+                else:
+                    raise exceptions.ValidationError(
+                        _('If a manager is assigned to the package, it is '
+                          'mandatory to configure the contact list.'))
+
+    @api.constrains('partnerlink_ids')
+    def _check_partnerlink_ids(self):
+        for record in self:
+            if record.partnerlink_ids:
+                # Check #1: only one manager (mandatory).
+                profile_ids = []
+                number_of_managers = 0
+                for partnerlink in record.partnerlink_ids:
+                    if partnerlink.is_main == 1:
+                        number_of_managers = number_of_managers + 1
+                    if number_of_managers > 1:
+                        break
+                    if partnerlink.profile_id:
+                        profile_ids.append(partnerlink.profile_id)
+                if number_of_managers == 0 or number_of_managers > 1:
+                    raise exceptions.ValidationError(
+                        _('It is mandatory to enter the main contact of the '
+                          'parcel (only one).'))
+                # Check #2: sum of percentages equal to 100.
+                if profile_ids:
+                    profile_ids = list(set(profile_ids))
+                    for profile in profile_ids:
+                        if profile.requires_total:
+                            partnerlinks_of_profile = \
+                                self.env['ter.parcel.partnerlink'].search(
+                                    [('parcel_id', '=', record.id),
+                                     ('profile_id', '=', profile.id)])
+                            if partnerlinks_of_profile:
+                                total_percentage = \
+                                    sum(partnerlink_of_profile.percentage
+                                        for partnerlink_of_profile in
+                                        partnerlinks_of_profile)
+                                if total_percentage != 100:
+                                    raise exceptions.ValidationError(
+                                        _('Review the profile percentages: '
+                                          'there is a percentage profile that '
+                                          'does not add up to 100%.'))
+
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
         partner_id = self.partner_id.id
         if partner_id and ((not self.partnerlink_ids) or
                            len(self.partnerlink_ids) == 1):
-            operation = 0
-            # if self.partnerlink_ids:
-            #     self.partnerlink_ids = [(5, )]
+            profile_id, percentage = self._get_default_profile()
             self.partnerlink_ids = [(5, ), (0, 0,
                                             {
                                                 'partner_id': partner_id,
-                                                'percentage': 100, }
+                                                'profile_id': profile_id,
+                                                'is_main': True,
+                                                'percentage': percentage, }
                                             )]
+
+    def _get_default_profile(self):
+        # Hook: get the default profile and % for a single partnerlink.
+        profile_id = self.env.ref('base_ter.ter_profile_01').id
+        percentage = 100
+        return profile_id, percentage
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if 'partnerlink_ids' in vals:
+                if len(vals['partnerlink_ids']) == 1:
+                    partnerlink_data = vals['partnerlink_ids'][0][2]
+                    if not partnerlink_data['is_main']:
+                        partnerlink_data['is_main'] = True
+                    if (not partnerlink_data['profile_id'] and
+                       not partnerlink_data['percentage']):
+                        profile_id, percentage = self._get_default_profile()
+                        partnerlink_data['profile_id'] = profile_id
+                        partnerlink_data['percentage'] = percentage
+                for partnerlink in vals['partnerlink_ids']:
+                    partnerlink_data = partnerlink[2]
+                    if (partnerlink_data['is_main'] and
+                       partnerlink_data['partner_id']):
+                        vals['partner_id'] = partnerlink_data['partner_id']
+                        break
+        parcels = super(TerParcel, self).create(vals_list)
+        return parcels
+
+    def write(self, vals):
+        if 'partnerlink_ids' in vals:
+            for partnerlink in vals['partnerlink_ids']:
+                operation = partnerlink[0]
+                if operation == 0 or operation == 1:
+                    partnerlink_data = partnerlink[2]
+                    if ('is_main' in partnerlink_data and
+                       partnerlink_data['is_main']):
+                        partner_id = 0
+                        if 'partner_id' in partnerlink_data:
+                            partner_id = partnerlink_data['partner_id']
+                        elif operation == 1:
+                            id_of_partnerlink = partnerlink[1]
+                            partnerlink_original = \
+                                self.env['ter.parcel.partnerlink'].browse(
+                                    id_of_partnerlink)
+                            if partnerlink_original:
+                                partner_id = partnerlink_original.partner_id
+                        if partner_id:
+                            vals['partner_id'] = partner_id
+                        break
+        resp = super(TerParcel, self).write(vals)
+        if 'active' in vals:
+            partner_ids = []
+            for record in self:
+                for partnerlink in (record.partnerlink_ids or []):
+                    if partnerlink.partner_id.is_holder:
+                        partner_ids.append(partnerlink.partner_id.id)
+            if partner_ids:
+                partner_ids = list(set(partner_ids))
+                partner_ids = self.env['res.partner'].browse(partner_ids)
+                partner_ids._refresh_computed_fields()
+        return resp
 
     @api.model
     def _get_view(self, view_id=None, view_type='form', **options):
@@ -447,7 +564,7 @@ class TerParcel(models.Model):
 
     @api.model
     def _add_area_fields(self):
-        # Hook: new area fields to add suffix (name of unit of measure)
+        # Hook: new area fields to add suffix (name of unit of measure).
         area_fields = self._area_fields
         # Example:
         # area_fields.append(('area_gis', _('GIS Area')))
@@ -461,6 +578,15 @@ class TerParcelPartnerlink(models.Model):
     # Size of the "official_code" field in the model.
     MAX_SIZE_PARTNERLINK_CODE = 75
 
+    # Size of the "partner_code" field.
+    _allow_all_contacts = True
+
+    def _set_domain_partner_id(self):
+        resp = []
+        if not self._allow_all_contacts:
+            resp = [('is_holder', '=', True)]
+        return resp
+
     parcel_id = fields.Many2one(
         string='Parcel',
         comodel_name='ter.parcel',
@@ -472,7 +598,8 @@ class TerParcelPartnerlink(models.Model):
         comodel_name='res.partner',
         required=True,
         index=True,
-        ondelete='restrict',)
+        ondelete='restrict',
+        domain=_set_domain_partner_id,)
 
     name = fields.Char(
         string='Identifier of partnerlink',
@@ -484,6 +611,7 @@ class TerParcelPartnerlink(models.Model):
     profile_id = fields.Many2one(
         string='Profile',
         comodel_name='ter.profile',
+        required=True,
         index=True,
         ondelete='restrict',)
 
@@ -496,9 +624,6 @@ class TerParcelPartnerlink(models.Model):
         required=True,)
 
     _sql_constraints = [
-        ('name_unique',
-         'UNIQUE (name)',
-         'There are repeated lines.'),
         ('owner_percentage',
          'CHECK (percentage >= 0 and percentage <= 100)',
          'Incorrect value of "Percentage".'),
@@ -509,7 +634,50 @@ class TerParcelPartnerlink(models.Model):
     def _compute_name(self):
         for record in self:
             name = ''
-            if record.parcel_id and record.partner_id:
+            if record.parcel_id:
+                partner_code_asstr = '0'.zfill(
+                    self.env['res.partner']._size_partner_code)
+                if record.partner_id and record.partner_id.partner_code:
+                    partner_code_asstr = record.partner_id.partner_code_asstr
                 name = record.parcel_id.alphanum_code + '-' + \
-                    record.partner_id.partner_code_asstr
+                    partner_code_asstr
             record.name = name
+
+    @api.constrains('partner_id')
+    def _check_partner_id(self):
+        for record in self:
+            if record.parcel_id and record.partner_id:
+                partners_mapped_to_partnerlink = \
+                    self.env['ter.parcel.partnerlink'].search(
+                        [('parcel_id', '=', record.parcel_id.id),
+                         ('partner_id', '=', record.partner_id.id)])
+                if (partners_mapped_to_partnerlink and
+                   len(partners_mapped_to_partnerlink)) > 1:
+                    raise exceptions.ValidationError(
+                        _('Repeated line.'))
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if 'profile_id' in vals:
+                profile_id = vals['profile_id']
+                profile = self.env['ter.profile'].browse(profile_id)
+                if profile and (not profile.requires_total):
+                    vals['percentage'] = 0
+        partnerlinks = super(TerParcelPartnerlink, self).create(vals_list)
+        return partnerlinks
+
+    def write(self, vals):
+        if len(self) == 1:
+            partnerlink = self
+            if 'profile_id' in vals or 'percentage' in vals:
+                profile = None
+                if 'profile_id' in vals:
+                    profile = self.env['ter.profile'].browse(
+                        vals['profile_id'])
+                else:
+                    profile = partnerlink.profile_id
+                if profile and (not profile.requires_total):
+                    vals['percentage'] = 0
+        resp = super(TerParcelPartnerlink, self).write(vals)
+        return resp

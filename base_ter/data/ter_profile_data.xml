@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="ter_profile_01" model="ter.profile">
-        <field name="alphanum_code">Owner</field>
-        <field name="is_standard">True</field>
-    </record>
+    <data noupdate="0">
 
-    <record id="ter_profile_02" model="ter.profile">
-        <field name="alphanum_code">Usufructuary</field>
-        <field name="is_standard">True</field>
-    </record>
+        <record id="ter_profile_01" model="ter.profile">
+            <field name="alphanum_code">Owner</field>
+            <field name="requires_total">True</field>
+            <field name="is_standard">True</field>
+        </record>
+
+    </data>
+
+    <data noupdate="1">
+
+        <record id="ter_profile_02" model="ter.profile">
+            <field name="alphanum_code">Usufructuary</field>
+            <field name="requires_total">False</field>
+            <field name="is_standard">False</field>
+        </record>
+
+    </data>
 
 </odoo>
