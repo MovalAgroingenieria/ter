@@ -5,7 +5,7 @@
         <field name="name">ter.parceltag.view.form</field>
         <field name="model">ter.parceltag</field>
         <field name="arch" type="xml">
-            <form string="Reservoir Tags" duplicate="0">
+            <form string="Parcel Tags" duplicate="0">
                 <sheet>
                     <group name="master_data">
                         <group name="master_data_left">

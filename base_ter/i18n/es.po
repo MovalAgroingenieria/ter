@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-21 17:15+0000\n"
-"PO-Revision-Date: 2024-09-21 17:15+0000\n"
+"POT-Creation-Date: 2024-09-25 12:40+0000\n"
+"PO-Revision-Date: 2024-09-25 12:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,23 +36,21 @@ msgid ""
 "<i class=\"fa fa-picture-o fa-lg\" style=\"color:darkgreen;margin-"
 "right:6px;\" title=\"holder_icon\"/>"
 msgstr ""
-"<i class=\"fa fa-picture-o fa-lg\" style=\"color:darkgreen;margin-"
-"right:6px;\" title=\"holder_icon\"/>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "<span class=\"oe_inline\"> %</span>"
-msgstr "<span class=\"oe_inline\"> %</span>"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "<span class=\"oe_inline\"> ha</span>"
-msgstr "<span class=\"oe_inline\"> ha</span>"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "<span class=\"oe_inline\">EPSG:</span>"
-msgstr "<span class=\"oe_inline\">EPSG:</span>"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
@@ -146,8 +144,8 @@ msgid ""
 "Alert threshold due to the difference between the official area and the GIS "
 "area"
 msgstr ""
-"Umbral de alerta aplicable a la diferencia entre el área oficial y el "
-"área GIS"
+"Umbral de alerta aplicable a la diferencia entre el área oficial y el área "
+"GIS"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_parcel_code_view_form
@@ -237,12 +235,12 @@ msgstr "Color"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_search
 msgid "Companies"
-msgstr "Compañías"
+msgstr "Empresas"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_search
 msgid "Company (y/n)"
-msgstr "Compañía (s/n)"
+msgstr "Empresa (s/n)"
 
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_res_config_settings
@@ -348,7 +346,7 @@ msgstr "Asistente para asignar un código de gestor"
 #. module: base_ter
 #: model:res.groups,name:base_ter.group_ter_director
 msgid "Director"
-msgstr "Director"
+msgstr "Usuario director"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__display_name
@@ -430,7 +428,7 @@ msgid ""
 "                                    pixels, of the frame"
 msgstr ""
 "Para la previsualización integrada, altura, en\n"
-"                                    píxeles, del marco"
+"                                    píxeles, del marco de dicha previsualización"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
@@ -454,63 +452,70 @@ msgstr "Perímetro GIS (m)"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "GIS Preview"
-msgstr ""
+msgstr "Previsualización GIS"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__gis_viewer_previs_additional_args
 msgid "GIS Preview: Additional URL arguments"
-msgstr ""
+msgstr "Previsualización GIS: argumentos adicionales"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__gis_viewer_previs_height
 msgid "GIS Preview: Frame height"
-msgstr ""
+msgstr "Previsualización GIS: altura (píxeles)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__gis_viewer_previs_width_percentage
 msgid "GIS Preview: Width percentage"
-msgstr ""
+msgstr "Previsualización GIS: anchura (%)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "GIS Viewer"
-msgstr ""
+msgstr "Visor GIS"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__gis_viewer_cipherkey
 msgid "GIS Viewer: Cipher key for the technical mode"
-msgstr ""
+msgstr "Visor GIS: clave de cifrado para el modo técnico"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__gis_viewer_password
 msgid "GIS Viewer: Password for the technical mode"
-msgstr ""
+msgstr "Visor GIS: contraseña para el modo técnico"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__gis_viewer_shpcreation_program
 msgid "GIS Viewer: Program to create the SHP files"
-msgstr ""
+msgstr "Visor GIS: ruta del programa que regenera los SHP"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__gis_viewer_epsg
 msgid "GIS Viewer: Spatial Reference"
-msgstr ""
+msgstr "Visor GIS: sistema de referencia espacial"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__gis_viewer_url
 msgid "GIS Viewer: URL"
-msgstr ""
+msgstr "Visor GIS: URL"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__gis_viewer_username
 msgid "GIS Viewer: User name for the technical mode"
-msgstr ""
+msgstr "Visor GIS: nombre de usuario para el modo técnico"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_configuration_general
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "General"
-msgstr "General"
+msgstr ""
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/ter_parcel.py:0
+#, python-format
+msgid "Getting the aerial images..."
+msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__has_message
@@ -527,6 +532,10 @@ msgid ""
 "                                    automatically, to preserve the original\n"
 "                                    proportions)"
 msgstr ""
+"Altura, en píxeles, de las imágenes obtenidas de\n"
+"                                    los servicios WMS (su anchura se calcuará\n"
+"                                    automáticamente, con la idea de preservar\n"
+"                                    las proporciones originales)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__id
@@ -542,16 +551,18 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__name
 msgid "Identifier of partnerlink"
-msgstr ""
+msgstr "Identificador del partnerlink"
 
 #. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
 msgid ""
-"If a manager is assigned to the package, it is mandatory to configure the "
+"If a manager is assigned to the parcel, it is mandatory to configure the "
 "contact list."
 msgstr ""
+"Si a una parcela se le asigna un gestor, es necesario rellenar la lista de "
+"contactos asociados."
 
 #. module: base_ter
 #. odoo-python
@@ -559,6 +570,8 @@ msgstr ""
 #, python-format
 msgid "If a partner has any parcel, it is not possible to reset the code."
 msgstr ""
+"Si un contacto ya tiene a su cargo alguna parcela, no es posible eliminar su"
+" código de gestor."
 
 #. module: base_ter
 #: model:ir.model.fields,help:base_ter.field_res_partner__message_needaction
@@ -574,6 +587,9 @@ msgid ""
 "                                    displayed; otherwise, all parcels will be\n"
 "                                    displayed"
 msgstr ""
+"Si está marcado, sólo se mostrará la parcela\n"
+"                                    central; en caso contrario, se mostrarán\n"
+"                                    todas las parcelas"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -582,6 +598,9 @@ msgid ""
 "                                    displayed; otherwise, all properties will be\n"
 "                                    displayed"
 msgstr ""
+"Si está marcado, sólo se mostrará la finca\n"
+"                                    central; en caso contrario, se mostrarán\n"
+"                                    todas las fincas"
 
 #. module: base_ter
 #: model:ir.model.fields,help:base_ter.field_res_partner__message_has_error
@@ -596,6 +615,8 @@ msgid ""
 "If checked, the area unit will be the ha;\n"
 "                                    else, you can choose another unit of area"
 msgstr ""
+"Si está marcado, la unidad de área será la ha;\n"
+"                                    en caso contrario, deberá elegir otra unidad de área"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -603,62 +624,72 @@ msgid ""
 "If the area unit is not the ha, name of\n"
 "                                    the alternative area unit"
 msgstr ""
+"Si la unidad de área no es la ha, nombre de\n"
+"                                    la unidad de área alternativa"
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_ter_parcel_area_official_ok
 msgid "Incorrect value for \"Official Area\"."
-msgstr ""
+msgstr "Valor incorrecto del dato \"Área oficial\"."
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_res_config_settings_warning_diff_areas_ok
 msgid ""
-"Incorrect value of \"Alert threshold due to the differencebetween the "
+"Incorrect value of \"Alert threshold due to the difference between the "
 "official area and the GIS area\"."
 msgstr ""
+"Valor incorrecto del dato \"Umbral de alerta aplicable a la diferencia entre"
+" el área oficial y el área GIS\"."
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_res_config_settings_gis_viewer_previs_height_ok
 msgid "Incorrect value of \"GIS Preview: Frame height\"."
-msgstr ""
+msgstr "Valor incorrecto del dato \"Previsualización GIS: altura (píxeles)\"."
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_res_config_settings_gis_viewer_previs_width_percentage_ok
 msgid "Incorrect value of \"GIS Preview: Width percentage\"."
-msgstr ""
+msgstr "Valor incorrecto del dato \"Previsualización GIS: anchura (%)\"."
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_res_config_settings_gis_viewer_epsg_ok
 msgid "Incorrect value of \"GIS Viewer: Spatial Reference\"."
-msgstr ""
+msgstr "Valor incorrecto del dato \"Visor GIS: sistema de referencia espacial\"."
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_ter_parcel_partnerlink_owner_percentage
 msgid "Incorrect value of \"Percentage\"."
-msgstr ""
+msgstr "Valor incorrecto del dato \"Porcentaje\"."
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_res_config_settings_area_unit_value_in_ha_ok
 msgid "Incorrect value of \"Standard area unit: Equivalence in ha\"."
 msgstr ""
+"Valor incorrecto del dato \"Unidad de área estándar: equivalencia en ha\"."
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_res_config_settings_aerial_image_height_ok
 msgid "Incorrect value of \"WMS Services: Height of the images\"."
-msgstr ""
+msgstr "Valor incorrecto del dato \"Servicios WMS: altura de las imágenes\"."
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_res_config_settings_aerial_image_zoom_ok
 msgid "Incorrect value of \"WMS Services: Zoom\"."
-msgstr ""
+msgstr "Valor incorrecto del dato \"Servicios WMS: zoom\"."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_search
 msgid "Individuals"
-msgstr ""
+msgstr "Personas"
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__notes
+#: model:ir.model.fields,field_description:base_ter.field_ter_parceltag__notes
+#: model:ir.model.fields,field_description:base_ter.field_ter_profile__notes
+#: model:ir.model.fields,field_description:base_ter.field_ter_property__notes
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "Internal Notes"
 msgstr "Notas internas"
@@ -673,7 +704,7 @@ msgstr "Es un seguidor"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__is_main
 msgid "Is Main"
-msgstr ""
+msgstr "Es gestor"
 
 #. module: base_ter
 #. odoo-python
@@ -681,13 +712,15 @@ msgstr ""
 #, python-format
 msgid "It is mandatory to enter the main contact of the parcel (only one)."
 msgstr ""
+"Es necesario indicar quién es el contacto principal de la parcela, que "
+"actuará como gestor (sólo puede haber uno)."
 
 #. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_profile.py:0
 #, python-format
 msgid "It is not possible to remove a 'STANDARD' partner profile."
-msgstr ""
+msgstr "No se permite eliminar un perfil 'ESTÁNDAR'."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -695,6 +728,8 @@ msgid ""
 "Key used for symmetric encryption of the\n"
 "                                    GIS viewer URL"
 msgstr ""
+"Clave utilizada para el cifrado simétrico\n"
+"                                    de la URL del visor GIS"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel____last_update
@@ -739,37 +774,37 @@ msgstr "Localización"
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__message_main_attachment_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__message_main_attachment_id
 msgid "Main Attachment"
-msgstr "Adjuntos principales"
+msgstr "Adjunto principal"
 
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.res_partner_action
 msgid "Manage managers."
-msgstr ""
+msgstr "Administrar gestores."
 
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.ter_parceltag_action
 msgid "Manage parcel tags."
-msgstr ""
+msgstr "Gestionar etiquetas de parcela."
 
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.ter_parcel_action
 msgid "Manage parcels."
-msgstr ""
+msgstr "Gestionar parcelas."
 
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.ter_profile_action
 msgid "Manage profiles."
-msgstr ""
+msgstr "Gestionar perfiles."
 
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.ter_property_action
 msgid "Manage properties."
-msgstr ""
+msgstr "Gestionar fincas."
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__area_official_parcels
 msgid "Managed Area (parcels)"
-msgstr ""
+msgstr "Área gestionada (parcelas)"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_management
@@ -792,7 +827,7 @@ msgstr "Gestores"
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__mapped_to_polygon
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__mapped_to_polygon
 msgid "Mapped to polygon"
-msgstr ""
+msgstr "Con vínculo GIS"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__message_has_error
@@ -829,21 +864,12 @@ msgstr "Nombre"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Name of the technical user"
-msgstr ""
+msgstr "Nombre del usuario técnico"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 msgid "Not modifiable"
 msgstr "No modificable"
-
-#. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__notes
-#: model:ir.model.fields,field_description:base_ter.field_ter_parceltag__notes
-#: model:ir.model.fields,field_description:base_ter.field_ter_profile__notes
-#: model:ir.model.fields,field_description:base_ter.field_ter_property__notes
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
-msgid "Notes"
-msgstr "Notas internas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__message_needaction_counter
@@ -877,13 +903,13 @@ msgstr "Número de mensajes con error de envío"
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__number_of_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_users__number_of_parcels
 msgid "Number of parcels"
-msgstr ""
+msgstr "Número de parcelas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__number_of_properties
 #: model:ir.model.fields,field_description:base_ter.field_res_users__number_of_properties
 msgid "Number of properties"
-msgstr ""
+msgstr "Número de fincas"
 
 #. module: base_ter
 #. odoo-python
@@ -902,7 +928,7 @@ msgstr "Área oficial (m²)"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__official_code
 msgid "Official Code"
-msgstr ""
+msgstr "Código oficial"
 
 #. module: base_ter
 #: model:ter.profile,alphanum_code:base_ter.ter_profile_01
@@ -944,7 +970,7 @@ msgstr "Código de parcela"
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__is_holder
 #: model:ir.model.fields,field_description:base_ter.field_res_users__is_holder
 msgid "Parcel Holder"
-msgstr "Titular"
+msgstr "Gestor"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__partner_id
@@ -961,6 +987,7 @@ msgstr "Etiqueta de parcela"
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.ter_parceltag_action
 #: model:ir.ui.menu,name:base_ter.ter_parceltag_menu
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
 msgid "Parcel Tags"
 msgstr "Etiquetas de parcela"
 
@@ -982,7 +1009,7 @@ msgstr "Parcelas"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__parcel_ids
 msgid "Parcels of the property"
-msgstr ""
+msgstr "Parcelas de la finca"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__partner_code
@@ -991,34 +1018,34 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__partner_code
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_partner_code_view_form
 msgid "Partner Code"
-msgstr ""
+msgstr "Código"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__partner_code_asstr
 #: model:ir.model.fields,field_description:base_ter.field_res_users__partner_code_asstr
 msgid "Partner Code (as string)"
-msgstr ""
+msgstr "Código (como cadena)"
 
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_ter_profile
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 msgid "Partner Profile"
-msgstr ""
+msgstr "Perfil"
 
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_ter_parcel_partnerlink
 msgid "Partner of parcel"
-msgstr ""
+msgstr "Contacto de parcela"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Password of the technical user"
-msgstr ""
+msgstr "Contraseña del usuario técnico"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__percentage
 msgid "Percentage"
-msgstr ""
+msgstr "Porcentaje"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1029,6 +1056,13 @@ msgid ""
 "                                    official area and the GIS area (if zero,\n"
 "                                    no warning will be displayed)"
 msgstr ""
+"Porcentaje del área oficial de una parcela\n"
+"                                    establecido como umbral máximo permisible\n"
+"                                    para el valor de la diferencia entre esa\n"
+"                                    área oficial y su área GIS; si se supera\n"
+"                                    este porcentaje, se mostrará un aviso\n"
+"                                    (salvo que el porcentaje sea 0, en cuyo caso\n"
+"                                    se entenderá que nunca debe salir el aviso)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__place_id
@@ -1044,12 +1078,12 @@ msgstr "Localidades"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_partner_code_view_form
 msgid "Please, enter a positive partner code (or clear data)"
-msgstr ""
+msgstr "Por favor, introduzca el nuevo código (o borre el que hay)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_parcel_code_view_form
 msgid "Please, update the parcel code"
-msgstr ""
+msgstr "Por favor, introduzca el nuevo código de parcela"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1057,9 +1091,14 @@ msgid ""
 "Possible zoom to apply to images obtained\n"
 "                                    from WMS services; if it is 1, then no zoom\n"
 "                                    is applied; if it is greater than 1, then\n"
-"                                    there is an outward zoom; if it is less\n"
-"                                    than 1, then there is an outward zoom"
+"                                    there is an zoom-out; if it is less\n"
+"                                    than 1, then there is an zoom-in"
 msgstr ""
+"Posible zoom a aplicar a las imágenes obtenidas\n"
+"                                    de servicios WMS; si el parámetro es 1, no se\n"
+"                                    aplicará ningún zoom; si es mayor que 1, se\n"
+"                                    aplicará un zoom hacia fuera; y si es menor\n"
+"                                    que 1, se aplicará un zoom hacia dentro"
 
 #. module: base_ter
 #. odoo-python
@@ -1069,6 +1108,8 @@ msgid ""
 "PostGIS not installed. Please contact your administrator to install it "
 "before proceeding."
 msgstr ""
+"PostGIS no está instalado. Por favor, contacte con el administrador del "
+"sistema antes de continuar."
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__profile_id
@@ -1082,7 +1123,7 @@ msgstr "Perfil"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 msgid "Profile:"
-msgstr ""
+msgstr "Perfil:"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.ter_profile_action
@@ -1097,6 +1138,11 @@ msgid ""
 "                                    services; if none, OGC services will\n"
 "                                    connect directly to PostgreSQL"
 msgstr ""
+"Programa para crear los ficheros SHP utilizados\n"
+"                                    por los servicios OGC; si no se indica\n"
+"                                    ningún programa, se asumirá que los\n"
+"                                    servicios OGC se basarán en una conexión\n"
+"                                    directa a la base de datos PostgreSQL"
 
 #. module: base_ter
 #. odoo-python
@@ -1129,18 +1175,18 @@ msgstr "Finca"
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_properties
 #, python-format
 msgid "Property Area"
-msgstr ""
+msgstr "Área fincas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_properties_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_properties_m2
 msgid "Property Area (m²)"
-msgstr ""
+msgstr "Área fincas (m²)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__property_data
 msgid "Property Data"
-msgstr ""
+msgstr "Datos de la finca"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__partner_id
@@ -1151,7 +1197,7 @@ msgstr "Titular"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__alphanum_code
 msgid "Property Name"
-msgstr ""
+msgstr "Nombre de la finca"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_kanban
@@ -1172,7 +1218,7 @@ msgstr "Provincias"
 #. module: base_ter
 #: model:res.groups,name:base_ter.group_ter_user
 msgid "Reader User"
-msgstr ""
+msgstr "Usuario lector"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
@@ -1194,26 +1240,26 @@ msgstr "Refrescar imagen aérea"
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__region_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "Region"
-msgstr "Comunidad Autónoma"
+msgstr "Región"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.res_region_menu
 msgid "Regions"
-msgstr "Comunidades Autónomas"
+msgstr "Regiones"
 
 #. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
 msgid "Repeated line."
-msgstr ""
+msgstr "Línea repetida."
 
 #. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/res_partner.py:0
 #, python-format
 msgid "Repeated partner code."
-msgstr ""
+msgstr "Código repetido."
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_profile__requires_total
@@ -1223,11 +1269,6 @@ msgid "Required 100%"
 msgstr "100% requerido"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
-msgid "Reservoir Tags"
-msgstr ""
-
-#. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
@@ -1235,31 +1276,33 @@ msgid ""
 "Review the profile percentages: there is a percentage profile that does not "
 "add up to 100%."
 msgstr ""
+"Por favor, revise la suma de porcentajes en los contactos de la parcela: "
+"hay, al menos, un perfil para el que la suma de porcentajes no es 100."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "Search parcels"
-msgstr ""
+msgstr "Buscar parcelas"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_search
 msgid "Search partners"
-msgstr ""
+msgstr "Buscar gestores"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_search
 msgid "Search profiles"
-msgstr ""
+msgstr "Buscar perfiles"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 msgid "Search properties"
-msgstr ""
+msgstr "Buscar fincas"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_search
 msgid "Search tags"
-msgstr ""
+msgstr "Buscar etiquetas"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.res_config_settings_action
@@ -1275,26 +1318,31 @@ msgid ""
 "                                    (If changed, layers will be automatically\n"
 "                                    reprojected)"
 msgstr ""
+"Referencia espacial de las capas\n"
+"                                    guardadas en la base de datos\n"
+"                                    (si se cambia el sistema de referencia\n"
+"                                    espacial, las capas serán reproyectadas\n"
+"                                    automáticamente)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_profile__is_standard
 msgid "Standard Type (y/n)"
-msgstr ""
+msgstr "Tipo estándar (s/n)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__area_unit_value_in_ha
 msgid "Standard area unit: Equivalence in ha"
-msgstr ""
+msgstr "Unidad de área estándar: equivalencia en ha"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__area_unit_name
 msgid "Standard area unit: Name"
-msgstr ""
+msgstr "Unidad de área estándar: nombre"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__area_unit_is_ha
 msgid "Standard area unit: ha (y/n)"
-msgstr ""
+msgstr "Unidad de área estándar: ha (s/n)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
@@ -1323,35 +1371,36 @@ msgstr "Acciones técnicas"
 msgid "Territory"
 msgstr "Territorio"
 
+#. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
 msgid "The parcel manager and the main contact must be the same person."
-msgstr ""
+msgstr "El gestor de la parcela y su contacto principal deben ser la misma persona o empresa."
 
 #. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
 msgid "The parcel manager and the property manager must be the same person."
-msgstr ""
+msgstr "El gestor de la parcela y el titular de la finca deben ser la misma persona o empresa."
 
 #. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
 msgid "The place is not in the municipality."
-msgstr ""
+msgstr "La localidad no pertenece al municipio."
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__diff_areas_threshold_exceeded
 msgid "Threshold exceeded (difference between official and GIS areas)"
-msgstr ""
+msgstr "Umbral superado (diferencia entre las áreas oficial y GIS)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 msgid "Total Area"
-msgstr ""
+msgstr "Área total"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1360,6 +1409,9 @@ msgid ""
 "                                    base image of the parcels and other GIS\n"
 "                                    elements"
 msgstr ""
+"URL del servicio WMS utilizado para obtener la\n"
+"                                    imagen base de las parcelas y del resto\n"
+"                                    de entidades GIS"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1367,18 +1419,20 @@ msgid ""
 "URL of the WMS service used to obtain the\n"
 "                                    vectorial image of the parcels"
 msgstr ""
+"URL del servicio WMS utilizado para obtener\n"
+"                                    la imagen vectorial de las parcelas"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "URL of the integrated GIS viewer"
-msgstr ""
+msgstr "URL del visor GIS"
 
 #. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/res_config_settings.py:0
 #, python-format
 msgid "Unable to update geometry of the layer..."
-msgstr ""
+msgstr "No es posible reproyectar la geometría de la capa..."
 
 #. module: base_ter
 #: model:ter.profile,alphanum_code:base_ter.ter_profile_02
@@ -1388,52 +1442,52 @@ msgstr "Usufructuario"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
 msgid "VAT"
-msgstr ""
+msgstr "DNI/NIF"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_height
 msgid "WMS Services: Height of the images"
-msgstr ""
+msgstr "Servicios WMS: altura de las imágenes"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_zoom
 msgid "WMS Services: Zoom"
-msgstr ""
+msgstr "Servicios WMS: zoom"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsbase_layers
 msgid "WMS of the base image: Layers"
-msgstr ""
+msgstr "WMS de la imagen base: capas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsbase_url
 msgid "WMS of the base image: URL"
-msgstr ""
+msgstr "WMS de la imagen base: URL"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsvec_parcel_filter
 msgid "WMS of the vectorial image: Filtered parcels (y/n)"
-msgstr ""
+msgstr "WMS de la imagen vectorial: sólo la parcela referida (s/n)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsvec_property_filter
 msgid "WMS of the vectorial image: Filtered properties (y/n)"
-msgstr ""
+msgstr "WMS de la imagen vectorial: sólo la finca referida (s/n)"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsvec_parcel_name
 msgid "WMS of the vectorial image: Name of the parcels layer"
-msgstr ""
+msgstr "WMS de la imagen vectorial: nombre de la capa de parcelas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsvec_property_name
 msgid "WMS of the vectorial image: Name of the properties layer"
-msgstr ""
+msgstr "WMS de la imagen vectorial: nombre de la capa de fincas"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsvec_url
 msgid "WMS of the vectorial image: URL"
-msgstr ""
+msgstr "WMS de la imagen vectorial: URL"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1441,6 +1495,8 @@ msgid ""
 "WMS service layer used to obtain the\n"
 "                                    images of the parcels (vectorial elements)"
 msgstr ""
+"Capa del servicio WMS utilizada para obtener\n"
+"                                    las imágenes de las parcelas (elementos vectoriales)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1448,6 +1504,8 @@ msgid ""
 "WMS service layer used to obtain the\n"
 "                                    images of the properties (vectorial elements)"
 msgstr ""
+"Capa del servicio WMS utilizada para obtener\n"
+"                                    las imágenes de las fincas (elementos vectoriales)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1456,11 +1514,14 @@ msgid ""
 "                                    base image of the parcels and other GIS\n"
 "                                    elements"
 msgstr ""
+"Capas del servicio WMS utilizado para obtener\n"
+"                                    la imagen base de las parcelas y resto de\n"
+"                                    entidades GIS"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Warnings"
-msgstr ""
+msgstr "Avisos"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
@@ -1487,12 +1548,12 @@ msgstr "Con gestor: Sí"
 #. module: base_ter
 #: model:res.groups,name:base_ter.group_ter_manager
 msgid "Writer User"
-msgstr ""
+msgstr "Usuario editor"
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_res_partner_partner_code_ok
 msgid "Wrong partner code."
-msgstr ""
+msgstr "Código de gestor incorrecto."
 
 #. module: base_ter
 #. odoo-python
@@ -1502,7 +1563,7 @@ msgstr ""
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
 msgid "ha"
-msgstr ""
+msgstr "ha"
 
 #. module: base_ter
 #. odoo-python
@@ -1514,7 +1575,7 @@ msgstr "no asignada"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 msgid "parcel logo"
-msgstr ""
+msgstr "logotipo de parcela"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_kanban

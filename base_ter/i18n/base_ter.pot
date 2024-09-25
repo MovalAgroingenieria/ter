@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-21 17:14+0000\n"
-"PO-Revision-Date: 2024-09-21 17:14+0000\n"
+"POT-Creation-Date: 2024-09-25 12:40+0000\n"
+"PO-Revision-Date: 2024-09-25 12:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -503,6 +503,13 @@ msgid "General"
 msgstr ""
 
 #. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/ter_parcel.py:0
+#, python-format
+msgid "Getting the aerial images..."
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__has_message
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__has_message
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__has_message
@@ -539,7 +546,7 @@ msgstr ""
 #: code:addons/base_ter/models/ter_parcel.py:0
 #, python-format
 msgid ""
-"If a manager is assigned to the package, it is mandatory to configure the "
+"If a manager is assigned to the parcel, it is mandatory to configure the "
 "contact list."
 msgstr ""
 
@@ -602,7 +609,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_res_config_settings_warning_diff_areas_ok
 msgid ""
-"Incorrect value of \"Alert threshold due to the differencebetween the "
+"Incorrect value of \"Alert threshold due to the difference between the "
 "official area and the GIS area\"."
 msgstr ""
 
@@ -647,8 +654,13 @@ msgid "Individuals"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__notes
+#: model:ir.model.fields,field_description:base_ter.field_ter_parceltag__notes
+#: model:ir.model.fields,field_description:base_ter.field_ter_profile__notes
+#: model:ir.model.fields,field_description:base_ter.field_ter_property__notes
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "Internal Notes"
 msgstr ""
@@ -827,15 +839,6 @@ msgid "Not modifiable"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__notes
-#: model:ir.model.fields,field_description:base_ter.field_ter_parceltag__notes
-#: model:ir.model.fields,field_description:base_ter.field_ter_profile__notes
-#: model:ir.model.fields,field_description:base_ter.field_ter_property__notes
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
-msgid "Notes"
-msgstr ""
-
-#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__message_needaction_counter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__message_needaction_counter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__message_needaction_counter
@@ -951,6 +954,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.ter_parceltag_action
 #: model:ir.ui.menu,name:base_ter.ter_parceltag_menu
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
 msgid "Parcel Tags"
 msgstr ""
 
@@ -1047,8 +1051,8 @@ msgid ""
 "Possible zoom to apply to images obtained\n"
 "                                    from WMS services; if it is 1, then no zoom\n"
 "                                    is applied; if it is greater than 1, then\n"
-"                                    there is an outward zoom; if it is less\n"
-"                                    than 1, then there is an outward zoom"
+"                                    there is an zoom-out; if it is less\n"
+"                                    than 1, then there is an zoom-in"
 msgstr ""
 
 #. module: base_ter
@@ -1210,11 +1214,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_tree
 msgid "Required 100%"
-msgstr ""
-
-#. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
-msgid "Reservoir Tags"
 msgstr ""
 
 #. module: base_ter

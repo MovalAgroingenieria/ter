@@ -116,7 +116,7 @@ class ResConfigSettings(models.TransientModel):
          'Incorrect value of "Standard area unit: Equivalence in ha".'),
         ('warning_diff_areas_ok',
          'CHECK (warning_diff_areas >= 0 AND warning_diff_areas <= 100)',
-         'Incorrect value of "Alert threshold due to the difference'
+         'Incorrect value of "Alert threshold due to the difference '
          'between the official area and the GIS area".'),
         ('aerial_image_height_ok',
          'CHECK (aerial_image_height > 0)',

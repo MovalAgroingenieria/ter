@@ -221,8 +221,8 @@
                                     Possible zoom to apply to images obtained
                                     from WMS services; if it is 1, then no zoom
                                     is applied; if it is greater than 1, then
-                                    there is an outward zoom; if it is less
-                                    than 1, then there is an outward zoom
+                                    there is an zoom-out; if it is less
+                                    than 1, then there is an zoom-in
                                 </div>
                                 <div class="content-group">
                                     <div class="mt16">

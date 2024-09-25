@@ -43,7 +43,7 @@
                         </group>
                     </group>
                     <notebook name="slave_data_notebook" colspan="4">
-                        <page name="page_notes" string="Notes">
+                        <page name="page_notes" string="Internal Notes">
                             <field name="notes"/>
                         </page>
                     </notebook>

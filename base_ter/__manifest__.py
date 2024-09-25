@@ -12,6 +12,7 @@
     "depends": [
         'mail',
         'contacts',
+        'web_progress',
         'base_gen',
         'base_gis',
         'base_adi',

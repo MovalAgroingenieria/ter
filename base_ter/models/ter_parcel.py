@@ -380,7 +380,7 @@ class TerParcel(models.Model):
                             break
                 else:
                     raise exceptions.ValidationError(
-                        _('If a manager is assigned to the package, it is '
+                        _('If a manager is assigned to the parcel, it is '
                           'mandatory to configure the contact list.'))
 
     @api.constrains('partnerlink_ids')
@@ -529,9 +529,13 @@ class TerParcel(models.Model):
         return arch, view
 
     def reset_aerial_image(self):
-        for record in self:
-            record.aerial_image = None
-            record._compute_aerial_image_shown()
+        if len(self) == 1:
+            self.aerial_image = None
+            self._compute_aerial_image_shown()
+        else:
+            for record in self.with_progress(_('Getting the aerial images...')):
+                record.aerial_image = None
+                record._compute_aerial_image_shown()
 
     @api.model
     def action_reset_all_aerial_images(self):
@@ -579,7 +583,7 @@ class TerParcelPartnerlink(models.Model):
     MAX_SIZE_PARTNERLINK_CODE = 75
 
     # Size of the "partner_code" field.
-    _allow_all_contacts = False
+    _allow_all_contacts = True
 
     def _set_domain_partner_id(self):
         resp = []
