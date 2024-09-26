@@ -291,7 +291,7 @@
     </record>
 
     <record id="ter_parcel_reset_all_aerial_images_serveraction" model="ir.actions.server">
-        <field name="name">Aerial images (global)</field>
+        <field name="name">Parcel images (global)</field>
         <field name="model_id" ref="model_ter_parcel"/>
         <field name="state">code</field>
         <field name="code">

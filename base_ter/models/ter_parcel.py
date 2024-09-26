@@ -291,9 +291,14 @@ class TerParcel(models.Model):
                                     aerial_image_raw.getvalue())
                     if aerial_image_shown:
                         record.aerial_image = aerial_image_shown
+                        record.register_in_log(_('Aerial image OK. Parcel: %s',
+                                                 record.name),
+                                               source=self._name,
+                                               message_type='INFO')
                     else:
                         record.register_in_log(_('Error getting aerial image '
                                                  '(is the WMS url correct?)'),
+                                               source=self._name,
                                                message_type='WARNING')
             record.aerial_image_shown = aerial_image_shown
 
@@ -370,6 +375,9 @@ class TerParcel(models.Model):
     def _check_partner_id(self):
         for record in self:
             if record.partner_id:
+                if not record.partner_id.is_holder:
+                    raise exceptions.ValidationError(
+                        _('The contact chosen as main is not an manager.'))
                 if record.partnerlink_ids:
                     for partnerlink in record.partnerlink_ids:
                         if partnerlink.is_main:
@@ -469,20 +477,31 @@ class TerParcel(models.Model):
                 operation = partnerlink[0]
                 if operation == 0 or operation == 1:
                     partnerlink_data = partnerlink[2]
-                    if ('is_main' in partnerlink_data and
-                       partnerlink_data['is_main']):
+                    changed_partner = ('partner_id' in partnerlink_data and
+                                       partnerlink_data['partner_id'])
+                    changed_main = ('is_main' in partnerlink_data and
+                                    partnerlink_data['is_main'])
+                    if changed_partner or changed_main:
                         partner_id = 0
-                        if 'partner_id' in partnerlink_data:
-                            partner_id = partnerlink_data['partner_id']
+                        id_of_partnerlink = partnerlink[1]
+                        if operation == 0:
+                            if changed_partner and changed_main:
+                                partner_id = partnerlink_data['partner_id']
                         elif operation == 1:
-                            id_of_partnerlink = partnerlink[1]
-                            partnerlink_original = \
-                                self.env['ter.parcel.partnerlink'].browse(
-                                    id_of_partnerlink)
-                            if partnerlink_original:
-                                partner_id = partnerlink_original.partner_id
+                            if changed_partner and changed_main:
+                                partner_id = partnerlink_data['partner_id']
+                            else:
+                                partnerlink_original = \
+                                    self.env['ter.parcel.partnerlink'].browse(
+                                        id_of_partnerlink)
+                                if changed_partner:
+                                    if partnerlink_original.is_main:
+                                        partner_id = partnerlink_data['partner_id']
+                                else:
+                                    partner_id = partnerlink_original.partner_id
                         if partner_id:
                             vals['partner_id'] = partner_id
+                            vals['property_id'] = None
                         break
         resp = super(TerParcel, self).write(vals)
         if 'active' in vals:
