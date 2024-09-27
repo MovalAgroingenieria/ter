@@ -432,16 +432,25 @@ class TerParcel(models.Model):
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
         partner_id = self.partner_id.id
-        if partner_id and ((not self.partnerlink_ids) or
-                           len(self.partnerlink_ids) == 1):
-            profile_id, percentage = self._get_default_profile()
-            self.partnerlink_ids = [(5, ), (0, 0,
-                                            {
-                                                'partner_id': partner_id,
-                                                'profile_id': profile_id,
-                                                'is_main': True,
-                                                'percentage': percentage, }
-                                            )]
+        if partner_id:
+            if (not self.partnerlink_ids) or len(self.partnerlink_ids) == 1:
+                profile_id, percentage = self._get_default_profile()
+                self.partnerlink_ids = [(5, ), (0, 0,
+                                                {
+                                                    'partner_id': partner_id,
+                                                    'profile_id': profile_id,
+                                                    'is_main': True,
+                                                    'percentage': percentage,
+                                                })]
+            else:
+                for partnerlink in self.partnerlink_ids:
+                    if partnerlink.is_main:
+                        partnerlink_id = partnerlink.id
+                        self.partnerlink_ids = [(1, partnerlink_id,
+                                                {
+                                                    'partner_id': partner_id,
+                                                })]
+                        break
 
     def _get_default_profile(self):
         # Hook: get the default profile and % for a single partnerlink.
