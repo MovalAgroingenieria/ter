@@ -65,8 +65,10 @@
                                    options="{'no_create_edit':True}"/>
                             <field name="property_id" string="Property"
                                    domain="[('partner_id', '=', partner_id)]"
-                                   context="{'default_partner_id': partner_id}"
-                                   options="{'no_create_edit':True}"/>
+                                   context="{'default_partner_id': partner_id,
+                                             'default_municipality_id': municipality_id}"
+                                   options="{'no_create_edit':True}"
+                                   readonly="context.get('default_property_id', False)"/>
                             <field name="tag_id" widget="many2many_tags"
                                    options="{'color_field': 'color',
                                              'no_create_edit': True}"
@@ -141,9 +143,9 @@
                 <field name="alphanum_code" string="Code"
                        class="text-center"/>
                 <field name="partner_id" string="Manager"/>
-                <field name="area_official" sum="Total Area"/>
                 <field name="official_code" string="Reference"
                        class="text-center"/>
+                <field name="area_official" sum="Total Area"/>
             </tree>
         </field>
     </record>
@@ -192,6 +194,9 @@
                     <filter name="grouped_by_municipality_id"
                             string="Municipality"
                      context="{'group_by':'municipality_id'}"/>
+                    <filter name="grouped_by_place_id"
+                            string="Place"
+                     context="{'group_by':'place_id'}"/>
                 </group>
             </search>
         </field>
@@ -291,7 +296,7 @@
     </record>
 
     <record id="ter_parcel_reset_all_aerial_images_serveraction" model="ir.actions.server">
-        <field name="name">Parcel images (global)</field>
+        <field name="name">Images of parcels (global)</field>
         <field name="model_id" ref="model_ter_parcel"/>
         <field name="state">code</field>
         <field name="code">

@@ -16,12 +16,6 @@
     min-width: 160px;
 }
 
-.o_base_ter_ter_property [data-name="alphanum_code"] {
-    text-align: left;
-    width: 160px;
-    min-width: 160px;
-}
-
 .o_terparcel_kanban_image {
     text-align: center;
     vertical-align: middle;
@@ -40,13 +34,13 @@
 }
 
 .o_base_ter_res_partner [data-name="number_of_properties"] {
-    text-align: center;
+    text-align: right;
     width: 100px;
     min-width: 100px;
 }
 
 .o_base_ter_res_partner [data-name="number_of_parcels"] {
-    text-align: center;
+    text-align: right;
     width: 100px;
     min-width: 100px;
 }
@@ -79,4 +73,27 @@
     text-align: right;
     width: 130px;
     min-width: 130px;
+}
+
+.o_base_ter_ter_property [data-name="alphanum_code"] {
+    text-align: left;
+    width: 260px;
+    min-width: 260px;
+}
+
+.o_base_ter_ter_property [data-name="number_of_parcels"] {
+    text-align: right;
+    width: 100px;
+    min-width: 100px;
+}
+
+.o_base_ter_ter_property [data-name="area_official_parcels"] {
+    text-align: right;
+    width: 160px;
+    min-width: 160px;
+}
+
+.o_terproperty_kanban_image {
+    text-align: center;
+    vertical-align: middle;
 }

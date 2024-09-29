@@ -298,21 +298,17 @@ class ResPartner(models.Model):
             'base_ter.ter_property_view_tree').id
         id_form_view = self.sudo().env.ref(
             'base_ter.ter_property_view_form').id
-        # TODO
-        # id_kanban_view = self.sudo().env.ref(
-        #     'base_ter.ter_property_view_kanban').id
+        id_kanban_view = self.sudo().env.ref(
+            'base_ter.ter_property_view_kanban').id
         search_view = self.sudo().env.ref(
             'base_ter.ter_property_view_search')
         act_window = {
             'type': 'ir.actions.act_window',
             'name': _('Properties'),
             'res_model': 'ter.property',
-            # TODO
-            # 'view_mode': 'tree,form,kanban',
-            'view_mode': 'tree,form',
-            # 'views': [(id_tree_view, 'tree'), (id_form_view, 'form'),
-            #           (id_kanban_view, 'kanban')],
-            'views': [(id_tree_view, 'tree'), (id_form_view, 'form')],
+            'view_mode': 'tree,form,kanban',
+            'views': [(id_tree_view, 'tree'), (id_form_view, 'form'),
+                      (id_kanban_view, 'kanban')],
             'search_view_id': (search_view.id, search_view.name),
             'target': 'current',
             'domain': [('partner_id', '=', current_partner.id)],

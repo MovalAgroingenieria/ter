@@ -516,6 +516,8 @@ class TerParcel(models.Model):
         if 'active' in vals:
             partner_ids = []
             for record in self:
+                if record.property_id:
+                    record.property_id._refresh_computed_fields()
                 for partnerlink in (record.partnerlink_ids or []):
                     if partnerlink.partner_id.is_holder:
                         partner_ids.append(partnerlink.partner_id.id)
@@ -569,6 +571,10 @@ class TerParcel(models.Model):
     def action_reset_all_aerial_images(self):
         parcels = self.search([])
         parcels.reset_aerial_image()
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
 
     def action_gis_viewer(self):
         self.ensure_one()

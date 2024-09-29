@@ -30,6 +30,7 @@
         "views/ter_parceltag_views.xml",
         "views/res_partner_views.xml",
         "views/ter_profile_views.xml",
+        "views/ter_propertytag_views.xml",
     ],
     "assets": {
         "web.assets_backend": [
