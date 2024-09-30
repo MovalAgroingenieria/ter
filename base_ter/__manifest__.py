@@ -31,6 +31,7 @@
         "views/res_partner_views.xml",
         "views/ter_profile_views.xml",
         "views/ter_propertytag_views.xml",
+        "views/ter_gis_parcel_model_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

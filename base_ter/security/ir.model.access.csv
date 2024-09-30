@@ -23,3 +23,4 @@ ter_profile_rule_group_ter_user,ter.profile.rule.group.ter.user,base_ter.model_t
 ter_profile_rule_group_ter_manager,ter.profile.rule.group.ter.manager,base_ter.model_ter_profile,base_ter.group_ter_director,1,1,1,1
 ter_propertytag_rule_group_ter_user,ter.propertytag.rule.group.ter.user,base_ter.model_ter_propertytag,base_ter.group_ter_user,1,0,0,0
 ter_propertytag_rule_group_ter_manager,ter.propertytag.rule.group.ter.manager,base_ter.model_ter_propertytag,base_ter.group_ter_manager,1,1,1,1
+ter_gis_parcel_model_rule_group_ter_user,ter.gis.parcel.model.rule.group.ter.user,base_ter.model_ter_gis_parcel_model,base_ter.group_ter_user,1,0,0,0

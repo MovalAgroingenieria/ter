@@ -137,16 +137,13 @@ class ResConfigSettings(models.TransientModel):
     ]
 
     def set_values(self):
+        prev_gis_viewer_epsg = int(self.env['ir.config_parameter'].sudo(
+            ).get_param('base_ter.gis_viewer_epsg'))
         super(ResConfigSettings, self).set_values()
         # If necessary, update the geometry of the GIS tables
         new_gis_viewer_epsg = self['gis_viewer_epsg']
-        prev_gis_viewer_epsg = self.env['ir.config_parameter'].sudo(
-            ).get_param('base_ter.gis_viewer_epsg')
         if (prev_gis_viewer_epsg and
            (prev_gis_viewer_epsg != new_gis_viewer_epsg)):
-            # TODO
-            # Provisional
-            print('Call to update_geometry')
             (update_geometry_ok, failed_layer) = self.update_geometry(
                 new_gis_viewer_epsg)
             if not update_geometry_ok:
@@ -160,9 +157,9 @@ class ResConfigSettings(models.TransientModel):
         layers = self._set_layers_to_update_geometry()
         for layer in (layers or []):
             update_geometry_ok = True
-            # TODO
-            # SELECT UpdateGeometrySRID(layer, 'geom', new_epsg)
-            # end to-do
+            self.env.cr.execute(
+                'SELECT UpdateGeometrySRID(%s, \'geom\', %s)',
+                tuple((layer, new_epsg)))
             if not update_geometry_ok:
                 resp = (False, layer)
         return resp

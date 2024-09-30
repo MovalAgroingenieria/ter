@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ter_gis_parcel_model_view_tree" model="ir.ui.view">
+        <field name="name">ter.gis.parcel.model.view.tree</field>
+        <field name="model">ter.gis.parcel.model</field>
+        <field name="arch" type="xml">
+            <tree default_order="name">
+                <field name="name" string="Parcel Code"/>
+                <field name="aerial_image_small" widget="image"
+                       string="Image"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ter_gis_parcel_model_action" model="ir.actions.act_window">
+        <field name="name">GIS Parcels</field>
+        <field name="res_model">ter.gis.parcel.model</field>
+        <field name="view_mode">tree</field>
+        <field name="view_ids"
+         eval="[(5, 0),
+                (0, 0, {'view_mode': 'tree',
+                        'view_id': ref('ter_gis_parcel_model_view_tree')}),]"/>
+    </record>
+
+    <menuitem id="ter_gis_parcel_model_menu"
+              parent="menu_thecnicalactions_gis"
+              action="ter_gis_parcel_model_action"
+              sequence="10"/>
+
+</odoo>

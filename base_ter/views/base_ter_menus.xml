@@ -63,4 +63,9 @@
               sequence="10"
               parent="menu_thecnicalactions"/>
 
+    <menuitem id="menu_thecnicalactions_gis"
+              name="GIS"
+              sequence="20"
+              parent="menu_thecnicalactions"/>
+
 </odoo>
