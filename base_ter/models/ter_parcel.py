@@ -9,8 +9,7 @@ from odoo import fields, models, api, exceptions, _
 class TerParcel(models.Model):
     _name = 'ter.parcel'
     _description = 'Parcel'
-    _inherit = ['simple.model', 'polygon.model', 'common.image',
-                'common.log', 'mail.thread']
+    _inherit = ['simple.model', 'polygon.model', 'gis.viewer', 'mail.thread']
 
     # Size of the "official_code" field in the model.
     MAX_SIZE_OFFICIAL_CODE = 50
@@ -30,6 +29,9 @@ class TerParcel(models.Model):
     _gis_table = 'ter_gis_parcel'
     _geom_field = 'geom'
     _link_field = 'name'
+
+    # Static variables inherited from "gis.viewer".
+    _param_gis_selection = 'idparcela'
 
     # Size of the aerial images
     _aerial_image_size_big = 512
@@ -284,22 +286,23 @@ class TerParcel(models.Model):
                             filter=aerial_image_wmsvec_parcel_filter,
                             force_square_shape=self._force_square_shape,)
                         if aerial_image_base_raw and aerial_image_vec_raw:
-                            aerial_image_raw = self.merge_img(
-                                aerial_image_base_raw, aerial_image_vec_raw)
+                            aerial_image_raw = \
+                                self.env['common.image'].merge_img(
+                                    aerial_image_base_raw,
+                                    aerial_image_vec_raw)
                             if aerial_image_raw:
                                 aerial_image_shown = base64.b64encode(
                                     aerial_image_raw.getvalue())
                     if aerial_image_shown:
                         record.aerial_image = aerial_image_shown
-                        record.register_in_log(_('Aerial image OK. Parcel: %s',
-                                                 record.name),
-                                               source=self._name,
-                                               message_type='INFO')
+                        self.env['common.log'].register_in_log(
+                            _('Aerial image OK. Parcel: %s', record.name),
+                            source=self._name, message_type='INFO')
                     else:
-                        record.register_in_log(_('Error getting aerial image '
-                                                 '(is the WMS url correct?)'),
-                                               source=self._name,
-                                               message_type='WARNING')
+                        self.env['common.log'].register_in_log(
+                            _('Error getting aerial image '
+                              '(is the WMS url correct?)'),
+                            source=self._name, message_type='WARNING')
             record.aerial_image_shown = aerial_image_shown
 
     @api.depends('municipality_id', 'municipality_id.province_id')
@@ -377,7 +380,7 @@ class TerParcel(models.Model):
             if record.partner_id:
                 if not record.partner_id.is_holder:
                     raise exceptions.ValidationError(
-                        _('The contact chosen as main is not an manager.'))
+                        _('The contact chosen as main is not a manager.'))
                 if record.partnerlink_ids:
                     for partnerlink in record.partnerlink_ids:
                         if partnerlink.is_main:
@@ -428,6 +431,11 @@ class TerParcel(models.Model):
                                         _('Review the profile percentages: '
                                           'there is a percentage profile that '
                                           'does not add up to 100%.'))
+            else:
+                if record.partner_id:
+                    raise exceptions.ValidationError(
+                        _('The main contact exists, but the contact list of '
+                          'the parcel is empty.'))
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
@@ -457,6 +465,20 @@ class TerParcel(models.Model):
         profile_id = self.env.ref('base_ter.ter_profile_01').id
         percentage = 100
         return profile_id, percentage
+
+    def name_get(self):
+        show_archived_in_parcel_code = self.env.context.get(
+            'show_archived_in_parcel_code', False)
+        resp = []
+        for record in self:
+            name = record.name
+            if show_archived_in_parcel_code:
+                if record.active:
+                    name = _('Available')
+                else:
+                    name = _('ARCHIVED')
+            resp.append((record.id, name))
+        return resp
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -576,15 +598,19 @@ class TerParcel(models.Model):
             'tag': 'reload',
         }
 
-    def action_gis_viewer(self):
-        self.ensure_one()
-        # TODO
-        print('action_gis_viewer')
-
     def action_gis_preview(self):
         self.ensure_one()
-        # TODO
-        print('action_gis_preview')
+        act_window = {
+            'type': 'ir.actions.act_window',
+            'name': _('Parcel on the map') + ' : ' + self.alphanum_code,
+            'res_model': 'wizard.show.gis.preview',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'src_model': 'ter.parcel',
+            },
+        }
+        return act_window
 
     def action_set_parcel_code(self):
         self.ensure_one()
@@ -594,9 +620,6 @@ class TerParcel(models.Model):
             'res_model': 'wizard.set.parcel.code',
             'view_mode': 'form',
             'target': 'new',
-            'context': {
-                'src_model': 'ter.parcel',
-            },
         }
         return act_window
 

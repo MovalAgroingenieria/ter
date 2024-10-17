@@ -5,13 +5,59 @@
         <field name="name">ter.gis.parcel.model.view.tree</field>
         <field name="model">ter.gis.parcel.model</field>
         <field name="arch" type="xml">
-            <tree default_order="name">
-                <field name="name" string="Parcel Code"/>
+            <tree class="o_base_ter_ter_gis_parcel_model"
+                  default_order="name"
+                  decoration-danger="diff_areas_threshold_exceeded == True"
+                  decoration-bf="diff_areas_threshold_exceeded == True">
+                <field name="diff_areas_threshold_exceeded" invisible="1"/>
+                <field name="name" string="Parcel (GIS)"
+                       class="text-center"/>
+                <field name="parcel_id" string="Parcel (DB)"
+                       class="text-center"/>
+                <field name="partner_id" string="Manager"/>
+                <field name="gis_data" string="GIS Data"/>
+                <field name="diff_areas_threshold_exceeded_str"
+                       string="Areas OK?"
+                       class="align-middle text-center"/>
                 <field name="aerial_image_small" widget="image"
                        string="Image"/>
             </tree>
         </field>
     </record>
+
+    <record id="ter_gis_parcel_model_view_search" model="ir.ui.view">
+        <field name="name">ter.gis.parcel.model.view.search</field>
+        <field name="model">ter.gis.parcel.model</field>
+        <field name="arch" type="xml">
+            <search string="Search parcels">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <filter name="partner_id_yes"
+                        string="With parcel manager: Yes"
+                        domain="[('partner_id', '!=', None)]"/>
+                <filter name="partner_id_no"
+                        string="With parcel manager: No"
+                        domain="[('partner_id', '=', None)]"/>
+                <separator/>
+                <filter name="mapped_to_polygon_yes"
+                        string="With GIS link: Yes"
+                        domain="[('parcel_id', '!=', None)]"/>
+                <filter name="mapped_to_polygon_no"
+                        string="With GIS link: No"
+                        domain="[('parcel_id', '=', None)]"/>
+                <separator/>
+                <filter name="inactive"
+                        string="Archived"
+                        domain="[('is_active', '=', False), ('parcel_id', '!=', None)]"/>
+                <group expand="0">
+                    <filter name="grouped_by_partner_id"
+                            string="Parcel Manager"
+                     context="{'group_by':'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
 
     <record id="ter_gis_parcel_model_action" model="ir.actions.act_window">
         <field name="name">GIS Parcels</field>
@@ -21,6 +67,8 @@
          eval="[(5, 0),
                 (0, 0, {'view_mode': 'tree',
                         'view_id': ref('ter_gis_parcel_model_view_tree')}),]"/>
+        <field name="search_view_id" ref="ter_gis_parcel_model_view_search"/>
+        <field name="context">{'show_archived_in_parcel_code': True,}</field>
     </record>
 
     <menuitem id="ter_gis_parcel_model_menu"

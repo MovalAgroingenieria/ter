@@ -22,7 +22,8 @@
                         <button name="action_gis_viewer"
                                 type="object"
                                 class="oe_stat_button"
-                                icon="fa-map-marker">
+                                icon="fa-map-marker"
+                                attrs="{'invisible': [('mapped_to_polygon', '=', False)]}">
                             <span>GIS Viewer</span>
                         </button>
                     </div>
@@ -102,6 +103,10 @@
                             <field name="area_gis" string="GIS Area (m²)"/>
                             <field name="perimeter_gis" string="GIS Perimeter (m)"/>
                             <field name="bounding_box_str" string="Frame"/>
+                            <!-- Provisional -->
+<!--                            <field name="gis_link_public"/>-->
+<!--                            <field name="gis_link_technical"/>-->
+<!--                            <field name="gis_link_minimal"/>-->
                         </group>
                     </group>
                     <notebook name="slave_data_notebook" colspan="4">
@@ -289,6 +294,7 @@
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="model_ter_parcel"/>
         <field name="binding_model_id" ref="model_ter_parcel"/>
+        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_manager'))]"/>
         <field name="state">code</field>
         <field name="code">
             records.reset_aerial_image()
@@ -299,6 +305,7 @@
         <field name="name">Images of parcels (global)</field>
         <field name="model_id" ref="model_ter_parcel"/>
         <field name="state">code</field>
+        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_director'))]"/>
         <field name="code">
             action = env['ter.parcel'].action_reset_all_aerial_images()
         </field>
@@ -308,5 +315,17 @@
               parent="menu_thecnicalactions_refresh"
               action="ter_parcel_reset_all_aerial_images_serveraction"
               sequence="10"/>
+
+    <record id="ter_parcel_gis_viewer_serveraction" model="ir.actions.server">
+        <field name="name">See in GIS viewer</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_ter_parcel"/>
+        <field name="binding_model_id" ref="model_ter_parcel"/>
+        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_user'))]"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_gis_viewer()
+        </field>
+    </record>
 
 </odoo>

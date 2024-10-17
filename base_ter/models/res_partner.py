@@ -247,10 +247,19 @@ class ResPartner(models.Model):
             resp.append((record.id, name))
         return resp
 
-    def action_gis_viewer(self):
-        self.ensure_one()
-        # TODO
-        print('action_gis_viewer')
+    def action_gis_viewer_parcel(self):
+        parcel_ids = []
+        for record in self:
+            parcel_ids.extend(record.parcel_ids.ids)
+        if parcel_ids:
+            return self.env['ter.parcel'].browse(parcel_ids).action_gis_viewer()
+
+    def action_gis_viewer_property(self):
+        property_ids = []
+        for record in self:
+            property_ids.extend(record.property_ids.ids)
+        if property_ids:
+            return self.env['ter.property'].browse(property_ids).action_gis_viewer()
 
     def action_set_partner_code(self):
         self.ensure_one()
@@ -260,9 +269,6 @@ class ResPartner(models.Model):
             'res_model': 'wizard.set.partner.code',
             'view_mode': 'form',
             'target': 'new',
-            'context': {
-                'src_model': 'res.partner',
-            },
         }
         return act_window
 

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <record id="gisviewer_global_serveraction" model="ir.actions.server">
+        <field name="name">Global Viewer</field>
+        <field name="model_id" ref="model_ter_parcel"/>
+        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_user'))]"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = env['ter.parcel'].action_gis_viewer_global()
+        </field>
+    </record>
+
     <menuitem id="menu_census"
               name="Census"
               sequence="-100"
@@ -16,6 +26,12 @@
               name="Territory"
               sequence="20"
               parent="menu_census"/>
+
+    <menuitem id="menu_viewer"
+              name="Global Viewer"
+              sequence="30"
+              parent="menu_census"
+              action="gisviewer_global_serveraction"/>
 
     <menuitem id="menu_configuration"
               name="Configuration"

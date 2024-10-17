@@ -13,6 +13,7 @@
         'mail',
         'contacts',
         'web_progress',
+        'web_tree_many2one_clickable',
         'base_gen',
         'base_gis',
         'base_adi',
@@ -23,6 +24,7 @@
         "data/ter_profile_data.xml",
         "wizards/wizard_set_parcel_code_views.xml",
         "wizards/wizard_set_partner_code_views.xml",
+        "wizards/wizard_show_gis_preview_views.xml",
         "views/base_ter_menus.xml",
         "views/res_config_settings_views.xml",
         "views/ter_parcel_views.xml",
@@ -37,6 +39,11 @@
         "web.assets_backend": [
             "base_ter/static/src/scss/base_ter.scss",
         ]
+    },
+    "external_dependencies": {
+        "python": [
+            'pycryptodome',
+        ],
     },
     "pre_init_hook": "pre_init_hook",
     "post_init_hook": "post_init_hook",

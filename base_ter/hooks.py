@@ -63,6 +63,14 @@ def post_init_hook(cr, registry):
         CREATE INDEX IF NOT EXISTS ter_gis_property_idx
         ON public.ter_gis_property USING gist (geom)
         """)
+    # Creation of SQL views.
+    env.cr.execute("""
+        CREATE VIEW ter_gis_parcel_model AS (
+        SELECT ROW_NUMBER() OVER() AS id, tgp.name, tp.id as parcel_id,
+        tp.partner_id as partner_id, tp.active as is_active
+        FROM ter_gis_parcel tgp LEFT JOIN ter_parcel tp
+        ON tgp.name = tp.name)
+        """)
     # Parameter initialization.
     env['ir.config_parameter'].set_param(
         'base_ter.area_unit_is_ha', True)
@@ -115,7 +123,11 @@ def post_init_hook(cr, registry):
 
 def uninstall_hook(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
-    # Delete of the GIS tables
+    # Delete the views
+    env.cr.execute("""
+        DROP VIEW IF EXISTS ter_gis_parcel_model
+        """)
+    # Delete the GIS tables
     env.cr.execute("""
         DROP TABLE IF EXISTS ter_gis_parcel
         """)

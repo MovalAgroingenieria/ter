@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from . import res_config_settings
+from . import gis_viewer
 from . import ter_parcel
 from . import ter_property
 from . import ter_parceltag

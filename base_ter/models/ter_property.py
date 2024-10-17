@@ -9,8 +9,7 @@ from odoo import fields, models, api, exceptions, _
 class TerProperty(models.Model):
     _name = 'ter.property'
     _description = 'Property'
-    _inherit = ['simple.model', 'polygon.model', 'common.image',
-                'common.log', 'mail.thread']
+    _inherit = ['simple.model', 'polygon.model', 'gis.viewer', 'mail.thread']
     _rec_name = 'alphanum_code'
 
     # Static variables inherited from "simple.model"
@@ -28,6 +27,9 @@ class TerProperty(models.Model):
     _gis_table = 'ter_gis_property'
     _geom_field = 'geom'
     _link_field = 'name'
+
+    # Static variables inherited from "gis.viewer".
+    _param_gis_selection = 'idfinca'
 
     # Size of the aerial images
     _aerial_image_size_big = 512
@@ -219,22 +221,23 @@ class TerProperty(models.Model):
                             filter=aerial_image_wmsvec_property_filter,
                             force_square_shape=self._force_square_shape,)
                         if aerial_image_base_raw and aerial_image_vec_raw:
-                            aerial_image_raw = self.merge_img(
-                                aerial_image_base_raw, aerial_image_vec_raw)
+                            aerial_image_raw = \
+                                self.env['common.image'].merge_img(
+                                    aerial_image_base_raw,
+                                    aerial_image_vec_raw)
                             if aerial_image_raw:
                                 aerial_image_shown = base64.b64encode(
                                     aerial_image_raw.getvalue())
                     if aerial_image_shown:
                         record.aerial_image = aerial_image_shown
-                        record.register_in_log(_('Aerial image OK. Property: %s',
-                                                 record.name),
-                                               source=self._name,
-                                               message_type='INFO')
+                        self.env['common.log'].register_in_log(
+                            _('Aerial image OK. Property: %s', record.name),
+                            source=self._name, message_type='INFO')
                     else:
-                        record.register_in_log(_('Error getting aerial image '
-                                                 '(is the WMS url correct?)'),
-                                               source=self._name,
-                                               message_type='WARNING')
+                        self.env['common.log'].register_in_log(
+                            _('Error getting aerial image '
+                              '(is the WMS url correct?)'),
+                            source=self._name, message_type='WARNING')
             record.aerial_image_shown = aerial_image_shown
 
     @api.depends('parcel_ids')
@@ -397,6 +400,7 @@ class TerProperty(models.Model):
                 'FROM ter_gis_parcel tergispar '
                 'INNER JOIN ter_parcel terpar ON tergispar.name = terpar.name '
                 'INNER JOIN ter_property terpro ON terpro.id = terpar.property_id '
+                'WHERE terpar.active = TRUE '
                 'GROUP BY terpro.name', tuple((gis_viewer_epsg,)))
             self.env.cr.execute(
                 'ALTER TABLE ter_gis_property '
@@ -419,9 +423,9 @@ class TerProperty(models.Model):
             module = 'base_ter'
             model = 'ter.property'
             method = 'action_refresh_properties_layer'
-        self.register_in_log(message, source=self._name, module=module,
-                             model=model, method=method,
-                             message_type=message_type)
+        self.env['common.log'].register_in_log(
+            message, source=self._name, module=module, model=model,
+            method=method, message_type=message_type)
 
     def reset_aerial_image(self):
         if len(self) == 1:
@@ -441,15 +445,19 @@ class TerProperty(models.Model):
             'tag': 'reload',
         }
 
-    def action_gis_viewer(self):
-        self.ensure_one()
-        # TODO
-        print('action_gis_viewer')
-
     def action_gis_preview(self):
         self.ensure_one()
-        # TODO
-        print('action_gis_preview')
+        act_window = {
+            'type': 'ir.actions.act_window',
+            'name': _('Property on the map') + ' : ' + self.alphanum_code,
+            'res_model': 'wizard.show.gis.preview',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'src_model': 'ter.property',
+            },
+        }
+        return act_window
 
     def action_show_parcels(self):
         self.ensure_one()

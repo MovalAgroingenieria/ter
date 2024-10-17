@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wizard_show_gis_preview_views" model="ir.ui.view">
+        <field name="name">Wizard to GIS preview</field>
+        <field name="model">wizard.show.gis.preview</field>
+        <field name="arch" type="xml">
+            <form string="Preview">
+                <script>
+                    $(document).ready(function(){
+                        $('.modal-dialog').css({'width': '600px'});
+                    });
+                </script>
+                <div name="div_preview" style="text-align:center">
+                    <field name="frame_view"
+                           nolabel="1" readonly="1"/>
+                </div>
+                <footer>
+                    <button string="Cancel"
+                            class="btn-default"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

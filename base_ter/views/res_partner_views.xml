@@ -37,13 +37,21 @@
                         groups="base_ter.group_ter_manager">
                     <span>Change code</span>
                 </button>
-                <button name="action_gis_viewer"
+                <button name="action_gis_viewer_parcel"
                         type="object"
                         class="oe_stat_button"
                         icon="fa-map-marker"
                         invisible="not context.get('context_ter', False)"
                         attrs="{'invisible': [('id', '>', 0), ('partner_code', '=', 0)]}">
-                    <span>GIS Viewer</span>
+                    <span>Parcel Viewer</span>
+                </button>
+                <button name="action_gis_viewer_property"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-map-marker"
+                        invisible="not context.get('context_ter', False)"
+                        attrs="{'invisible': [('id', '>', 0), ('partner_code', '=', 0)]}">
+                    <span>Prop. Viewer</span>
                 </button>
             </xpath>
             <xpath expr="//field[@id='company']" position="attributes">
@@ -186,5 +194,29 @@
               parent="menu_management"
               action="res_partner_action"
               sequence="10"/>
+
+    <record id="res_partner_gis_viewer_parcel_serveraction" model="ir.actions.server">
+        <field name="name">See parcels in GIS viewer</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_res_partner"/>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_user'))]"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_gis_viewer_parcel()
+        </field>
+    </record>
+
+    <record id="res_partner_gis_viewer_property_serveraction" model="ir.actions.server">
+        <field name="name">See properties in GIS viewer</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_res_partner"/>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_user'))]"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_gis_viewer_property()
+        </field>
+    </record>
 
 </odoo>
