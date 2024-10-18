@@ -107,18 +107,9 @@ def post_init_hook(cr, registry):
     env['ir.config_parameter'].set_param(
         'base_ter.gis_viewer_password', 'my_password')
     env['ir.config_parameter'].set_param(
-        'base_ter.gis_viewer_cipherkey', 'my_cipher_key')
-    env['ir.config_parameter'].set_param(
-        'base_ter.gis_viewer_shpcreation_program',
-        'sudo -u gis /home/gis/scripts/frompgtoshp')
-    env['ir.config_parameter'].set_param(
         'base_ter.gis_viewer_epsg', 25830)
     env['ir.config_parameter'].set_param(
         'base_ter.gis_viewer_previs_additional_args', 'mode=min')
-    env['ir.config_parameter'].set_param(
-        'base_ter.gis_viewer_previs_height', 380)
-    env['ir.config_parameter'].set_param(
-        'base_ter.gis_viewer_previs_width_percentage', 94)
 
 
 def uninstall_hook(cr, registry):

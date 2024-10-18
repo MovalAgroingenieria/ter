@@ -280,40 +280,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="div_gis_viewer_cipherkey"
-                             class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="gis_viewer_cipherkey"/>
-                                <div class="text-muted">
-                                    Key used for symmetric encryption of the
-                                    GIS viewer URL
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="gis_viewer_cipherkey"
-                                         style="width:90px"
-                                         password="true"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="div_gis_viewer_shpcreation_program"
-                             class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="gis_viewer_shpcreation_program"/>
-                                <div class="text-muted">
-                                    Program for creating SHP files for OGC
-                                    services; if none, OGC services will
-                                    connect directly to PostgreSQL
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="gis_viewer_shpcreation_program"
-                                         style="width:100%"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div id="div_gis_viewer_epsg"
                              class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_right_pane">
@@ -345,39 +311,6 @@
                                     <div class="mt16">
                                         <field name="gis_viewer_previs_additional_args"
                                          style="width:100%"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="div_gis_viewer_previs_height"
-                             class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="gis_viewer_previs_height"/>
-                                <div class="text-muted">
-                                    For the integrated preview, height, in
-                                    pixels, of the frame
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="gis_viewer_previs_height"
-                                         style="width:90px"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="div_gis_viewer_previs_width_percentage"
-                             class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="gis_viewer_previs_width_percentage"/>
-                                <div class="text-muted">
-                                    For integrated preview, frame width, in
-                                    percentage of total available
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="gis_viewer_previs_width_percentage"
-                                         style="width:90px"/>
-                                        <span class="oe_inline"> %</span>
                                     </div>
                                 </div>
                             </div>

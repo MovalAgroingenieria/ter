@@ -83,16 +83,6 @@ class ResConfigSettings(models.TransientModel):
         size=255,
         config_parameter='base_ter.gis_viewer_password',)
 
-    gis_viewer_cipherkey = fields.Char(
-        string='GIS Viewer: Cipher key for the technical mode',
-        size=255,
-        config_parameter='base_ter.gis_viewer_cipherkey',)
-
-    gis_viewer_shpcreation_program = fields.Char(
-        string='GIS Viewer: Program to create the SHP files',
-        size=255,
-        config_parameter='base_ter.gis_viewer_shpcreation_program',)
-
     gis_viewer_epsg = fields.Integer(
         string='GIS Viewer: Spatial Reference',
         config_parameter='base_ter.gis_viewer_epsg',)
@@ -101,14 +91,6 @@ class ResConfigSettings(models.TransientModel):
         string='GIS Preview: Additional URL arguments',
         size=255,
         config_parameter='base_ter.gis_viewer_previs_additional_args',)
-
-    gis_viewer_previs_height = fields.Integer(
-        string='GIS Preview: Frame height',
-        config_parameter='base_ter.gis_viewer_previs_height',)
-
-    gis_viewer_previs_width_percentage = fields.Integer(
-        string='GIS Preview: Width percentage',
-        config_parameter='base_ter.gis_viewer_previs_width_percentage',)
 
     _sql_constraints = [
         ('area_unit_value_in_ha_ok',
@@ -127,13 +109,6 @@ class ResConfigSettings(models.TransientModel):
         ('gis_viewer_epsg_ok',
          'CHECK (gis_viewer_epsg > 0)',
          'Incorrect value of "GIS Viewer: Spatial Reference".'),
-        ('gis_viewer_previs_height_ok',
-         'CHECK (gis_viewer_previs_height > 0)',
-         'Incorrect value of "GIS Preview: Frame height".'),
-        ('gis_viewer_previs_width_percentage_ok',
-         'CHECK (gis_viewer_previs_width_percentage > 0 AND '
-         'gis_viewer_previs_width_percentage <= 100)',
-         'Incorrect value of "GIS Preview: Width percentage".'),
     ]
 
     def set_values(self):

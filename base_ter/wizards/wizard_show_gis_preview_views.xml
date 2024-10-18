@@ -6,17 +6,11 @@
         <field name="model">wizard.show.gis.preview</field>
         <field name="arch" type="xml">
             <form string="Preview">
-                <script>
-                    $(document).ready(function(){
-                        $('.modal-dialog').css({'width': '600px'});
-                    });
-                </script>
-                <div name="div_preview" style="text-align:center">
-                    <field name="frame_view"
-                           nolabel="1" readonly="1"/>
+                <div name="div_preview" class="embed-responsive embed-responsive-1by1">
+                    <field name="frame_view" nolabel="1" readonly="1"/>
                 </div>
                 <footer>
-                    <button string="Cancel"
+                    <button string="Close preview"
                             class="btn-default"
                             special="cancel"/>
                 </footer>

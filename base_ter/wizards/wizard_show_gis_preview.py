@@ -19,13 +19,8 @@ class WizardShowGisPreview(models.TransientModel):
         src_id = self.env.context['active_id']
         record = self.env[src_model].browse(src_id)
         if record:
-            frame_view = \
-                '<p style="text-align:center;margin-top:1px">' + \
-                '<iframe id="iframe_view" scrolling="yes" ' + \
-                'marginheight="0" marginwidth="0" src="' + \
-                record.gis_link_minimal + '" ' + \
-                'frameborder="1" height="200px" width="94%"' + \
-                '</iframe></p>'
+            frame_view = '<iframe class="embed-responsive-item" src="' + \
+                record.gis_link_minimal + '"><iframe/>"'
         return {
             'frame_view': frame_view,
         }
