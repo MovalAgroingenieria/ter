@@ -5,8 +5,7 @@ from odoo import fields, models, api, exceptions, _
 
 
 class ResPartner(models.Model):
-    _name = 'res.partner'
-    _inherit = ['res.partner', 'mail.thread']
+    _inherit = ['res.partner']
     _order = 'partner_code, name'
 
     # Size of the "partner_code" field.

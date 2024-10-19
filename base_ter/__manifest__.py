@@ -22,6 +22,7 @@
         "security/security.xml",
         "security/ir.model.access.csv",
         "data/ter_profile_data.xml",
+        "data/base_ter_cron.xml",
         "wizards/wizard_set_parcel_code_views.xml",
         "wizards/wizard_set_partner_code_views.xml",
         "wizards/wizard_show_gis_preview_views.xml",

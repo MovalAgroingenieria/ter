@@ -335,6 +335,6 @@
               parent="menu_configuration"
               action="res_config_settings_action"
               sequence="10"
-              groups="base_ter.group_ter_director"/>
+              groups="base.group_system"/>
 
 </odoo>

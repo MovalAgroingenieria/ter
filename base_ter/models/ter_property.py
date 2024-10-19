@@ -379,7 +379,7 @@ class TerProperty(models.Model):
         return resp
 
     @api.model
-    def action_refresh_properties_layer(self):
+    def action_refresh_properties_layer(self, from_backend=False):
         config = self.env['ir.config_parameter'].sudo()
         gis_viewer_epsg = config.get_param(
             'base_ter.gis_viewer_epsg', False)
@@ -426,6 +426,11 @@ class TerProperty(models.Model):
         self.env['common.log'].register_in_log(
             message, source=self._name, module=module, model=model,
             method=method, message_type=message_type)
+        if from_backend:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'reload',
+            }
 
     def reset_aerial_image(self):
         if len(self) == 1:
@@ -437,13 +442,14 @@ class TerProperty(models.Model):
                 record._compute_aerial_image_shown()
 
     @api.model
-    def action_reset_all_aerial_images(self):
+    def action_reset_all_aerial_images(self, from_backend=False):
         properties = self.search([])
         properties.reset_aerial_image()
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'reload',
-        }
+        if from_backend:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'reload',
+            }
 
     def action_gis_preview(self):
         self.ensure_one()

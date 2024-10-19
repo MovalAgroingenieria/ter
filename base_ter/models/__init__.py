@@ -10,3 +10,4 @@ from . import res_partner
 from . import ter_profile
 from . import ter_propertytag
 from . import ter_gis_parcel_model
+from . import ir_cron

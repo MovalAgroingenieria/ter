@@ -590,13 +590,14 @@ class TerParcel(models.Model):
                 record._compute_aerial_image_shown()
 
     @api.model
-    def action_reset_all_aerial_images(self):
+    def action_reset_all_aerial_images(self, from_backend=False):
         parcels = self.search([])
         parcels.reset_aerial_image()
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'reload',
-        }
+        if from_backend:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'reload',
+            }
 
     def action_gis_preview(self):
         self.ensure_one()
