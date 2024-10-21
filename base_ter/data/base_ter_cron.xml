@@ -2,7 +2,7 @@
 <odoo noupdate="1">
 
     <record id="ter_parcel_cron_action_reset_all_aerial_images" model="ir.cron">
-        <field name="name">Territorial Branch: Refresh all aerial images of the parcels</field>
+        <field name="name">Territorial Base: Refresh all aerial images of the parcels</field>
         <field name="model_id" ref="base_ter.model_ter_parcel"/>
         <field name="state">code</field>
         <field name="code">model.action_reset_all_aerial_images(from_backend=False)</field>
@@ -16,7 +16,7 @@
     </record>
 
     <record id="ter_property_cron_action_reset_all_aerial_images" model="ir.cron">
-        <field name="name">Territorial Branch: Refresh all aerial images of the properties</field>
+        <field name="name">Territorial Base: Refresh all aerial images of the properties</field>
         <field name="model_id" ref="base_ter.model_ter_property"/>
         <field name="state">code</field>
         <field name="code">model.action_reset_all_aerial_images(from_backend=False)</field>
@@ -30,7 +30,7 @@
     </record>
 
     <record id="ter_property_cron_action_refresh_properties_layer" model="ir.cron">
-        <field name="name">Territorial Branch: Refresh layer of properties</field>
+        <field name="name">Territorial Base: Refresh layer of properties</field>
         <field name="model_id" ref="base_ter.model_ter_property"/>
         <field name="state">code</field>
         <field name="code">model.action_refresh_properties_layer(from_backend=False)</field>
