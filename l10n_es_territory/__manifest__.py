@@ -15,7 +15,13 @@
     ],
     "data": [
         "views/res_province_views.xml",
+        "views/res_municipality_views.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "l10n_es_territory/static/src/scss/l10n_es_territory.scss",
+        ]
+    },
     "installable": True,
     "application": False,
 }

@@ -14,10 +14,10 @@ class ResProvince(models.Model):
         index=True,)
 
     _sql_constraints = [
-        ('cadastral_code_unique',
-         'UNIQUE (cadastral_code)',
-         'Repeated province code.'),
         ('cadastral_code_positive',
          'CHECK (cadastral_code > 0)',
          'A valid cadastral code of province is required.'),
-        ]
+        ('cadastral_code_unique',
+         'UNIQUE (cadastral_code)',
+         'Repeated province code.'),
+    ]

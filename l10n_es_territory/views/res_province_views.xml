@@ -2,9 +2,37 @@
 <odoo>
 
     <record id="res_province_view_form" model="ir.ui.view">
-        <field name="name">res.province.form.base_ter</field>
+        <field name="name">res.province.view.form.l10n_es_territory</field>
         <field name="model">res.province</field>
         <field name="inherit_id" ref="base_adi.res_province_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='region_id']" position="after">
+                <field name="cadastral_code"
+                       string="Cadastral Code"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_province_view_tree" model="ir.ui.view">
+        <field name="name">res.province.view.tree.l10n_es_territory</field>
+        <field name="model">res.province</field>
+        <field name="inherit_id" ref="base_adi.res_province_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="default_order">cadastral_code</attribute>
+            </xpath>
+            <xpath expr="//field[@name='alphanum_code']" position="before">
+                <field name="cadastral_code"
+                       string="Code"
+                       class="text-center"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_province_view_search" model="ir.ui.view">
+        <field name="name">res.province.view.search.l10n_es_territory</field>
+        <field name="model">res.province</field>
+        <field name="inherit_id" ref="base_adi.res_province_view_search"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='region_id']" position="after">
                 <field name="cadastral_code"
