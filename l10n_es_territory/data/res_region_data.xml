@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="res_region_01" model="res.region">
+        <field name="alphanum_code">Andalucía</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_andalucia.png"/>
+    </record>
+
+    <record id="res_region_02" model="res.region">
+        <field name="alphanum_code">Aragón</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_aragon.png"/>
+    </record>
+
+    <record id="res_region_03" model="res.region">
+        <field name="alphanum_code">Principado de Asturias</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_asturias.png"/>
+    </record>
+
+    <record id="res_region_04" model="res.region">
+        <field name="alphanum_code">Illes Balears</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_baleares.png"/>
+    </record>
+
+    <record id="res_region_05" model="res.region">
+        <field name="alphanum_code">Islas Canarias</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_canarias.png"/>
+    </record>
+
+    <record id="res_region_06" model="res.region">
+        <field name="alphanum_code">Cantabria</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_cantabria.png"/>
+    </record>
+
+    <record id="res_region_07" model="res.region">
+        <field name="alphanum_code">Castilla y León</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_castillayleon.png"/>
+    </record>
+
+    <record id="res_region_08" model="res.region">
+        <field name="alphanum_code">Castilla - La Mancha</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_castillalamancha.png"/>
+    </record>
+
+    <record id="res_region_09" model="res.region">
+        <field name="alphanum_code">Cataluña</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_catalunya.png"/>
+    </record>
+
+    <record id="res_region_10" model="res.region">
+        <field name="alphanum_code">Comunitad Valenciana</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_valencia.png"/>
+    </record>
+
+    <record id="res_region_11" model="res.region">
+        <field name="alphanum_code">Extremadura</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_extremadura.png"/>
+    </record>
+
+    <record id="res_region_12" model="res.region">
+        <field name="alphanum_code">Galicia</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_galicia.png"/>
+    </record>
+
+    <record id="res_region_13" model="res.region">
+        <field name="alphanum_code">Comunidad de Madrid</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_madrid.png"/>
+    </record>
+
+    <record id="res_region_14" model="res.region">
+        <field name="alphanum_code">Región de Murcia</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_murcia.png"/>
+    </record>
+
+    <record id="res_region_15" model="res.region">
+        <field name="alphanum_code">Comunidad Foral de Navarra</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_navarra.png"/>
+    </record>
+
+    <record id="res_region_16" model="res.region">
+        <field name="alphanum_code">País Vasco</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_paisvasco.png"/>
+    </record>
+
+    <record id="res_region_17" model="res.region">
+        <field name="alphanum_code">La Rioja</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_larioja.png"/>
+    </record>
+
+    <record id="res_region_18" model="res.region">
+        <field name="alphanum_code">Ceuta</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_ceuta.png"/>
+    </record>
+
+    <record id="res_region_19" model="res.region">
+        <field name="alphanum_code">Melilla</field>
+        <field name="flag_image_256" type="base64"
+               file="l10n_es_territory/static/img/flag_of_melilla.png"/>
+    </record>
+
+        <record id="res_province_04" model="res.province">
+            <field name="alphanum_code">Almería</field>
+            <field name="cadastral_code">4</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_01"/>
+        </record>
+
+        <record id="res_province_11" model="res.province">
+            <field name="alphanum_code">Cádiz</field>
+            <field name="cadastral_code">11</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_01"/>
+        </record>
+
+        <record id="res_province_14" model="res.province">
+            <field name="alphanum_code">Córdoba</field>
+            <field name="cadastral_code">14</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_01"/>
+        </record>
+
+        <record id="res_province_18" model="res.province">
+            <field name="alphanum_code">Granada</field>
+            <field name="cadastral_code">18</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_01"/>
+        </record>
+
+        <record id="res_province_21" model="res.province">
+            <field name="alphanum_code">Huelva</field>
+            <field name="cadastral_code">21</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_01"/>
+        </record>
+
+        <record id="res_province_23" model="res.province">
+            <field name="alphanum_code">Jaén</field>
+            <field name="cadastral_code">23</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_01"/>
+        </record>
+
+        <record id="res_province_29" model="res.province">
+            <field name="alphanum_code">Málaga</field>
+            <field name="cadastral_code">29</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_01"/>
+        </record>
+
+        <record id="res_province_41" model="res.province">
+            <field name="alphanum_code">Sevilla</field>
+            <field name="cadastral_code">41</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_01"/>
+        </record>
+
+        <record id="res_province_22" model="res.province">
+            <field name="alphanum_code">Huesca</field>
+            <field name="cadastral_code">22</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_02"/>
+        </record>
+
+        <record id="res_province_44" model="res.province">
+            <field name="alphanum_code">Teruel</field>
+            <field name="cadastral_code">44</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_02"/>
+        </record>
+
+        <record id="res_province_50" model="res.province">
+            <field name="alphanum_code">Zaragoza</field>
+            <field name="cadastral_code">50</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_02"/>
+        </record>
+
+        <record id="res_province_33" model="res.province">
+            <field name="alphanum_code">Asturias</field>
+            <field name="cadastral_code">33</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_03"/>
+        </record>
+
+        <record id="res_province_07" model="res.province">
+            <field name="alphanum_code">Baleares</field>
+            <field name="cadastral_code">7</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_04"/>
+        </record>
+
+        <record id="res_province_35" model="res.province">
+            <field name="alphanum_code">Las Palmas</field>
+            <field name="cadastral_code">35</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_05"/>
+        </record>
+
+        <record id="res_province_38" model="res.province">
+            <field name="alphanum_code">Santa Cruz de Tenerife</field>
+            <field name="cadastral_code">38</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_05"/>
+        </record>
+
+        <record id="res_province_39" model="res.province">
+            <field name="alphanum_code">Cantabria</field>
+            <field name="cadastral_code">39</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_06"/>
+        </record>
+
+        <record id="res_province_05" model="res.province">
+            <field name="alphanum_code">Ávila</field>
+            <field name="cadastral_code">5</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_07"/>
+        </record>
+
+        <record id="res_province_09" model="res.province">
+            <field name="alphanum_code">Burgos</field>
+            <field name="cadastral_code">9</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_07"/>
+        </record>
+
+        <record id="res_province_24" model="res.province">
+            <field name="alphanum_code">León</field>
+            <field name="cadastral_code">24</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_07"/>
+        </record>
+
+        <record id="res_province_34" model="res.province">
+            <field name="alphanum_code">Palencia</field>
+            <field name="cadastral_code">34</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_07"/>
+        </record>
+
+        <record id="res_province_37" model="res.province">
+            <field name="alphanum_code">Salamanca</field>
+            <field name="cadastral_code">37</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_07"/>
+        </record>
+
+        <record id="res_province_40" model="res.province">
+            <field name="alphanum_code">Segovia</field>
+            <field name="cadastral_code">40</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_07"/>
+        </record>
+
+>        <record id="res_province_42" model="res.province">
+            <field name="alphanum_code">Soria</field>
+            <field name="cadastral_code">42</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_07"/>
+        </record>
+
+        <record id="res_province_47" model="res.province">
+            <field name="alphanum_code">Valladolid</field>
+            <field name="cadastral_code">47</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_07"/>
+        </record>
+
+        <record id="res_province_49" model="res.province">
+            <field name="alphanum_code">Zamora</field>
+            <field name="cadastral_code">49</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_07"/>
+        </record>
+
+        <record id="res_province_02" model="res.province">
+            <field name="alphanum_code">Albacete</field>
+            <field name="cadastral_code">2</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_08"/>
+        </record>
+
+        <record id="res_province_13" model="res.province">
+            <field name="alphanum_code">Ciudad Real</field>
+            <field name="cadastral_code">13</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_08"/>
+        </record>
+
+        <record id="res_province_16" model="res.province">
+            <field name="alphanum_code">Cuenca</field>
+            <field name="cadastral_code">16</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_08"/>
+        </record>
+
+        <record id="res_province_19" model="res.province">
+            <field name="alphanum_code">Guadalajara</field>
+            <field name="cadastral_code">19</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_08"/>
+        </record>
+
+        <record id="res_province_45" model="res.province">
+            <field name="alphanum_code">Toledo</field>
+            <field name="cadastral_code">45</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_08"/>
+        </record>
+
+        <record id="res_province_08" model="res.province">
+            <field name="alphanum_code">Barcelona</field>
+            <field name="cadastral_code">8</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_09"/>
+        </record>
+
+        <record id="res_province_17" model="res.province">
+            <field name="alphanum_code">Girona</field>
+            <field name="cadastral_code">17</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_09"/>
+        </record>
+
+        <record id="res_province_25" model="res.province">
+            <field name="alphanum_code">Lleida</field>
+            <field name="cadastral_code">25</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_09"/>
+        </record>
+
+        <record id="res_province_43" model="res.province">
+            <field name="alphanum_code">Tarragona</field>
+            <field name="cadastral_code">43</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_09"/>
+        </record>
+
+        <record id="res_province_03" model="res.province">
+            <field name="alphanum_code">Alicante/Alacant</field>
+            <field name="cadastral_code">3</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_10"/>
+        </record>
+
+        <record id="res_province_12" model="res.province">
+            <field name="alphanum_code">Castellón/Castelló</field>
+            <field name="cadastral_code">12</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_10"/>
+        </record>
+
+        <record id="res_province_46" model="res.province">
+            <field name="alphanum_code">Valencia/València</field>
+            <field name="cadastral_code">46</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_10"/>
+        </record>
+
+        <record id="res_province_06" model="res.province">
+            <field name="alphanum_code">Badajoz</field>
+            <field name="cadastral_code">6</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_11"/>
+        </record>
+
+        <record id="res_province_10" model="res.province">
+            <field name="alphanum_code">Cáceres</field>
+            <field name="cadastral_code">10</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_11"/>
+        </record>
+
+        <record id="res_province_15" model="res.province">
+            <field name="alphanum_code">A Coruña</field>
+            <field name="cadastral_code">15</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_12"/>
+        </record>
+
+        <record id="res_province_27" model="res.province">
+            <field name="alphanum_code">Lugo</field>
+            <field name="cadastral_code">27</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_12"/>
+        </record>
+
+        <record id="res_province_32" model="res.province">
+            <field name="alphanum_code">Ourense</field>
+            <field name="cadastral_code">32</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_12"/>
+        </record>
+
+        <record id="res_province_36" model="res.province">
+            <field name="alphanum_code">Pontevedra</field>
+            <field name="cadastral_code">36</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_12"/>
+        </record>
+
+        <record id="res_province_28" model="res.province">
+            <field name="alphanum_code">Madrid</field>
+            <field name="cadastral_code">28</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_13"/>
+        </record>
+
+        <record id="res_province_30" model="res.province">
+            <field name="alphanum_code">Murcia</field>
+            <field name="cadastral_code">30</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_14"/>
+        </record>
+
+        <record id="res_province_31" model="res.province">
+            <field name="alphanum_code">Navarra</field>
+            <field name="cadastral_code">31</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_15"/>
+        </record>
+
+        <record id="res_province_01" model="res.province">
+            <field name="alphanum_code">Araba/Álava</field>
+            <field name="cadastral_code">1</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_16"/>
+        </record>
+
+        <record id="res_province_20" model="res.province">
+            <field name="alphanum_code">Guipuzkoa</field>
+            <field name="cadastral_code">20</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_16"/>
+        </record>
+
+        <record id="res_province_48" model="res.province">
+            <field name="alphanum_code">Bizkaia</field>
+            <field name="cadastral_code">48</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_16"/>
+        </record>
+
+        <record id="res_province_26" model="res.province">
+            <field name="alphanum_code">La Rioja</field>
+            <field name="cadastral_code">26</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_17"/>
+        </record>
+
+        <record id="res_province_51" model="res.province">
+            <field name="alphanum_code">Ceuta</field>
+            <field name="cadastral_code">51</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_18"/>
+        </record>
+
+        <record id="res_province_52" model="res.province">
+            <field name="alphanum_code">Melilla</field>
+            <field name="cadastral_code">52</field>
+            <field name="region_id" ref="l10n_es_territory.res_region_19"/>
+        </record>
+
+</odoo>

@@ -1,7 +1,7 @@
 # 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import fields, models, api
+from odoo import fields, models, api, exceptions, _
 
 
 class ResMunicipality(models.Model):
@@ -32,9 +32,6 @@ class ResMunicipality(models.Model):
         ('municipality_number_positive',
          'CHECK (municipality_number > 0)',
          'A valid municipality number is required.'),
-        ('cadastral_code_unique',
-         'UNIQUE (cadastral_code)',
-         'Repeated municipality code.'),
     ]
 
     @api.depends('province_id', 'province_id.cadastral_code',
@@ -50,3 +47,14 @@ class ResMunicipality(models.Model):
                     str(record.municipality_number).zfill(
                         self._size_municipality_number)
             record.cadastral_code = cadastral_code
+
+    @api.constrains('cadastral_code')
+    def _check_cadastral_code(self):
+        for record in self:
+            if record.cadastral_code:
+                other_municipality = self.env['res.municipality'].search(
+                    [('id', '!=', record.id),
+                     ('cadastral_code', '=', record.cadastral_code)])
+                if other_municipality:
+                    raise exceptions.ValidationError(_(
+                        'Repeated municipality code.'))

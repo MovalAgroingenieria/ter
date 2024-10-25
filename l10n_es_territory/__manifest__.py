@@ -14,6 +14,7 @@
         'base_ter',
     ],
     "data": [
+        "data/res_region_data.xml",
         "views/res_province_views.xml",
         "views/res_municipality_views.xml",
     ],
@@ -22,6 +23,7 @@
             "l10n_es_territory/static/src/scss/l10n_es_territory.scss",
         ]
     },
+    "post_init_hook": "post_init_hook",
     "installable": True,
     "application": False,
 }
