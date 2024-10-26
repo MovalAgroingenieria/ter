@@ -9,7 +9,6 @@ class ResProvince(models.Model):
 
     cadastral_code = fields.Integer(
         string='Cadastral Code',
-        default=1,
         required=True,
         index=True,)
 

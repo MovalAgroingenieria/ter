@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ter_parcel_view_form" model="ir.ui.view">
+        <field name="name">ter.parcel.view.form.l10n_es_territory</field>
+        <field name="model">ter.parcel</field>
+        <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='municipality_id']" position="after">
+                <field name="parcel_type"
+                       string="Type"
+                       widget="radio" options="{'horizontal': true}"/>
+                <field name="official_code_urban"
+                       string="Cadastral Ref."
+                       attrs="{'invisible': [('parcel_type', '!=', '02_U')]}"/>
+                <span name="cadastral_name" class="o_form_label o_td_label"
+                      attrs="{'invisible': [('parcel_type', '!=', '01_R')]}">
+                    Cadastral Ref.
+                </span>
+                <div name="div_line_cadastral_fields" class="o_address_format"
+                     style="display: flex; gap: 10px;"
+                     attrs="{'invisible': [('parcel_type', '!=', '01_R')]}">
+                    <field name="municipality_cadastral_code"
+                           attrs="{'invisible': [('municipality_id', '=', False)]}"
+                           style="max-width:40px"/>
+                    <field name="cadastral_sector"
+                           placeholder="Sector"
+                           style="max-width:40px"/>
+                    <field name="cadastral_polygon"
+                           placeholder="Polygon"
+                           style="max-width:40px"/>
+                    <field name="cadastral_parcel"
+                           placeholder="Parcel"
+                           style="max-width:40px"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='official_code']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ter_parcel_view_tree" model="ir.ui.view">
+        <field name="name">ter.parcel.view.tree.l10n_es_territory</field>
+        <field name="model">ter.parcel</field>
+        <field name="inherit_id" ref="base_ter.ter_parcel_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='official_code']" position="attributes">
+                <attribute name="string">Cadastral Ref.</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ter_parcel_view_search" model="ir.ui.view">
+        <field name="name">ter.parcel.view.search.l10n_es_territory</field>
+        <field name="model">ter.parcel</field>
+        <field name="inherit_id" ref="base_ter.ter_parcel_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='partner_id_no']" position="after">
+                <separator/>
+                <filter name="parcel_type_01_r"
+                        string="Parcel Type: Rustic"
+                        domain="[('parcel_type', '=', '01_R')]"/>
+                <filter name="parcel_type_02_u"
+                        string="Parcel Type: Urban"
+                        domain="[('parcel_type', '=', '02_U')]"/>
+            </xpath>
+            <xpath expr="//filter[@name='grouped_by_property_id']" position="after">
+                <filter name="grouped_by_parcel_type"
+                        string="Parcel Type"
+                 context="{'group_by':'parcel_type'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

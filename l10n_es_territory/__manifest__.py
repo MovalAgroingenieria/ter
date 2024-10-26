@@ -15,8 +15,10 @@
     ],
     "data": [
         "data/res_region_data.xml",
+        "data/res_province_data.xml",
         "views/res_province_views.xml",
         "views/res_municipality_views.xml",
+        "views/ter_parcel_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

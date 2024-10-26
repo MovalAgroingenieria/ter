@@ -18,7 +18,6 @@ class ResMunicipality(models.Model):
 
     municipality_number = fields.Integer(
         string='Municipality Number',
-        default=1,
         required=True,)
 
     cadastral_code = fields.Char(

@@ -3,3 +3,4 @@
 
 from . import res_province
 from . import res_municipality
+from . import ter_parcel
