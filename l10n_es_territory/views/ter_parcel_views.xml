@@ -6,6 +6,15 @@
         <field name="model">ter.parcel</field>
         <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_gis_viewer']" position="before">
+                <button name="action_show_cadastral_form"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-info-circle"
+                        attrs="{'invisible': [('official_code', '=', False)]}">
+                    <span>Cadastre</span>
+                </button>
+            </xpath>
             <xpath expr="//field[@name='municipality_id']" position="after">
                 <field name="parcel_type"
                        string="Type"
@@ -15,27 +24,27 @@
                        attrs="{'invisible': [('parcel_type', '!=', '02_U')]}"/>
                 <span name="cadastral_name" class="o_form_label o_td_label"
                       attrs="{'invisible': [('parcel_type', '!=', '01_R')]}">
-                    Cadastral Ref.
+                    Sec / Pol / Par
                 </span>
                 <div name="div_line_cadastral_fields" class="o_address_format"
                      style="display: flex; gap: 10px;"
                      attrs="{'invisible': [('parcel_type', '!=', '01_R')]}">
-                    <field name="municipality_cadastral_code"
-                           attrs="{'invisible': [('municipality_id', '=', False)]}"
-                           style="max-width:40px"/>
                     <field name="cadastral_sector"
-                           placeholder="Sector"
-                           style="max-width:40px"/>
+                           style="max-width:20px"/>
+                    <span>/</span>
                     <field name="cadastral_polygon"
-                           placeholder="Polygon"
-                           style="max-width:40px"/>
+                           style="max-width:30px"/>
+                    <span>/</span>
                     <field name="cadastral_parcel"
-                           placeholder="Parcel"
-                           style="max-width:40px"/>
+                           style="max-width:45px"/>
                 </div>
             </xpath>
             <xpath expr="//field[@name='official_code']" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="string">Cadastral Ref.</attribute>
+                <attribute name="attrs">{'invisible': [('parcel_type', '!=', '01_R')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='area_official']" position="after">
+                <field name="cadastral_area" string="Cadastral Area (m²)"/>
             </xpath>
         </field>
     </record>

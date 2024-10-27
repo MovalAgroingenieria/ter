@@ -1,6 +1,9 @@
 # 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import requests
+import xml.etree.ElementTree as ET
+
 from odoo import fields, models, api, exceptions, _
 
 
@@ -13,6 +16,15 @@ class TerParcel(models.Model):
     # Size of a cadastral field (sector, polygon or parcel), in the model.
     MAX_SIZE_CADASTRAL_FIELD = 10
 
+    # Size of the "rc1" part of a cadastral reference.
+    SIZE_RC1 = 7
+
+    # Size of the "rc2" part of a cadastral reference.
+    SIZE_RC2 = 7
+
+    # Timeout for the cadastral-area request (sec).
+    REQUEST_TIMEOUT = 5
+
     # Cadastral reference: size of the cadastral code of the municipality.
     _size_municipality_cadastral_code = 5
 
@@ -24,6 +36,20 @@ class TerParcel(models.Model):
 
     # Cadastral reference: size of the cadastral parcel.
     _size_cadastral_parcel = 5
+
+    # Cadastral URL to get the cadastral data of a parcel from its
+    # cadastral reference.
+    _url_cadastral_data = 'http://ovc.catastro.meh.es/ovcservweb/' + \
+        'OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPRC?' + \
+        'Provincia=&Municipio=&RC='
+
+    # Cadastral URL to show the official form mapped to a cadastral
+    # reference.
+    _url_cadastral_form = 'https://www1.sedecatastro.gob.es/' + \
+        'CYCBienInmueble/OVCListaBienes.aspx?del=&muni=&rc1=rc1val&rc2=rc2val'
+
+    # Update cadastral area when entering cadastral reference?
+    _automatic_update_cadastral_data = True
 
     parcel_type = fields.Selection(
         string='Parcel Type',
@@ -40,13 +66,10 @@ class TerParcel(models.Model):
         string='Urban official code',
         size=MAX_SIZE_OFFICIAL_CODE_URBAN,)
 
-    municipality_cadastral_code = fields.Char(
-        string='Cadastral code of the municipality',
-        related='municipality_id.cadastral_code',)
-
     cadastral_sector = fields.Char(
         string='Cadastral Sector',
-        size=MAX_SIZE_CADASTRAL_FIELD,)
+        size=MAX_SIZE_CADASTRAL_FIELD,
+        default='A',)
 
     cadastral_polygon = fields.Char(
         string='Cadastral Polygon',
@@ -60,10 +83,16 @@ class TerParcel(models.Model):
         store=True,
         compute='_compute_official_code',)
 
+    cadastral_area = fields.Integer(
+        string='Cadastral Area (m²)',
+        default=0,)
+
     _sql_constraints = [
         ('official_code_unique',
          'UNIQUE (official_code)',
          'Repeated cadastral reference.'),
+        ('cadastral_area_ok', 'CHECK (cadastral_area >= 0)',
+         'Incorrect value for "Cadastral Area (m²)".'),
     ]
 
     @api.depends('parcel_type', 'municipality_id',
@@ -77,12 +106,16 @@ class TerParcel(models.Model):
                    record.cadastral_polygon and record.cadastral_parcel):
                     official_code = record.municipality_id.cadastral_code + \
                         record.cadastral_sector + \
-                        record.cadastral_polygon + \
-                        record.cadastral_parcel
+                        record.cadastral_polygon.zfill(
+                            self._size_cadastral_polygon) + \
+                        record.cadastral_parcel.zfill(
+                            self._size_cadastral_parcel)
             else:
                 if record.official_code_urban:
                     official_code = record.official_code_urban.strip()
             record.official_code = official_code
+            if official_code and record.cadastral_area == 0:
+                record.cadastral_area = record._get_cadastral_area()
 
     @api.constrains('official_code')
     def _check_official_code(self):
@@ -130,3 +163,42 @@ class TerParcel(models.Model):
                 vals['cadastral_polygon'] = None
                 vals['cadastral_parcel'] = None
         return None
+
+    def _get_cadastral_area(self):
+        self.ensure_one()
+        cadastral_area = 0
+        if self.official_code:
+            # Add try for exceptions on Cadastre services
+            try:
+                resp_http_get = requests.get(
+                    self._url_cadastral_data + self.official_code,
+                    timeout=self.REQUEST_TIMEOUT)
+                if resp_http_get.status_code == 200:
+                    cadastral_data = ET.fromstring(resp_http_get.content)
+                    prefix = ''
+                    pos_closing = cadastral_data.tag.find('}')
+                    if pos_closing != -1:
+                        prefix = cadastral_data.tag[:pos_closing + 1]
+                    number_of_items = int(cadastral_data[0][0].text)
+                    if number_of_items == 1:
+                        for item in cadastral_data.iter(prefix + 'ssp'):
+                            area = int(item.text)
+                            cadastral_area = cadastral_area + area
+            except Exception:
+                cadastral_area = 0
+        return cadastral_area
+
+    def action_show_cadastral_form(self):
+        self.ensure_one()
+        if self.official_code:
+            length_cadastral_reference = self.SIZE_RC1 + self.SIZE_RC2
+            if len(self.official_code) == length_cadastral_reference:
+                rc1 = self.official_code[:self.SIZE_RC1]
+                rc2 = self.official_code[self.SIZE_RC2:]
+                cadastral_link = self._url_cadastral_form.replace(
+                    'rc1val', rc1).replace('rc2val', rc2)
+                return {
+                    'type': 'ir.actions.act_url',
+                    'url': cadastral_link,
+                    'target': 'new',
+                }

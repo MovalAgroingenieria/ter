@@ -205,8 +205,7 @@ class TerParcel(models.Model):
             'base_ter.warning_diff_areas', 0))
         for record in self:
             diff_areas_threshold_exceeded = False
-            if (warning_diff_areas > 0 and record.area_official > 0 and
-               record.mapped_to_polygon):
+            if warning_diff_areas > 0 and record.mapped_to_polygon:
                 area_gis = record.area_gis
                 area_official = record.area_official_m2
                 diff_areas = abs(area_official - area_gis)

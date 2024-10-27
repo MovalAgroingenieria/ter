@@ -75,10 +75,7 @@ class TerGisParcelModel(models.Model):
                 if bounding_box_str:
                     pos_bracket = bounding_box_str.find('(')
                     if pos_bracket != -1:
-                        bounding_box_epsg = bounding_box_str[:pos_bracket-1]
-                        bounding_box_frame = bounding_box_str[pos_bracket:]
-                        bounding_box_str = bounding_box_epsg + '\n' + \
-                                           '⸰ ' + bounding_box_frame
+                        bounding_box_str = bounding_box_str[pos_bracket:]
                 gis_data = \
                     '⸰ ' + _('Official Area (m²)') + ': ' + \
                     self.env['common.format'].transform_integer_to_locale(

@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_ter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-27 07:58+0000\n"
+"PO-Revision-Date: 2024-10-27 07:58+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__region_id
+#: model:ir.model.fields,field_description:base_ter.field_ter_property__region_id
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
+msgid "Region"
+msgstr "Comunitat Autònoma"
+
+#. module: base_ter
+#: model:ir.ui.menu,name:base_ter.res_region_menu
+msgid "Regions"
+msgstr "CC. AA."

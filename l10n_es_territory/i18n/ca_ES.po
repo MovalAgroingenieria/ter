@@ -1,0 +1,534 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_es_territory
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-27 06:57+0000\n"
+"PO-Revision-Date: 2024-10-27 06:57+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+msgid ""
+"<span name=\"cadastral_name\" class=\"o_form_label o_td_label\" attrs=\"{'invisible': [('parcel_type', '!=', '01_R')]}\">\n"
+"                    Sec / Pol / Par\n"
+"                </span>"
+msgstr ""
+"<span name=\"cadastral_name\" class=\"o_form_label o_td_label\" attrs=\"{'invisible': [('parcel_type', '!=', '01_R')]}\">\n"
+"                    Sec / Pol / Par\n"
+"                </span>"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+msgid "<span>/</span>"
+msgstr "<span>/</span>"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+msgid "<span>Cadastre</span>"
+msgstr "Cadastre"
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_15
+msgid "A Coruña"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.constraint,message:l10n_es_territory.constraint_res_province_cadastral_code_positive
+msgid "A valid cadastral code of province is required."
+msgstr "El codi cadastral de província introduït no és vàlid."
+
+#. module: l10n_es_territory
+#: model:ir.model.constraint,message:l10n_es_territory.constraint_res_municipality_municipality_number_positive
+msgid "A valid municipality number is required."
+msgstr "El número de municipi introduït no és vàlid."
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_02
+msgid "Albacete"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_03
+msgid "Alicante/Alacant"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_04
+msgid "Almería"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_01
+msgid "Andalucía"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_01
+msgid "Araba/Álava"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_02
+msgid "Aragón"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_33
+msgid "Asturias"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_06
+msgid "Badajoz"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_07
+msgid "Baleares"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_08
+msgid "Barcelona"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_48
+msgid "Bizkaia"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_09
+msgid "Burgos"
+msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_gis_parcel_model.py:0
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_area
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+#, python-format
+msgid "Cadastral Area (m²)"
+msgstr "Àrea cadastral (m²)"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_municipality__cadastral_code
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_province__cadastral_code
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_municipality_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_municipality_view_search
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_province_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_province_view_search
+msgid "Cadastral Code"
+msgstr "Codi cadastral"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_parcel
+msgid "Cadastral Parcel"
+msgstr "Parcel·la cadastral"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_polygon
+msgid "Cadastral Polygon"
+msgstr "Polígon cadastral"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
+msgid "Cadastral Ref."
+msgstr "Ref. cadastral"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_sector
+msgid "Cadastral Sector"
+msgstr "Sector cadastral"
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_39
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_06
+msgid "Cantabria"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_12
+msgid "Castellón/Castelló"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_08
+msgid "Castilla - La Mancha"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_07
+msgid "Castilla y León"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_09
+msgid "Cataluña"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_51
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_18
+msgid "Ceuta"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_13
+msgid "Ciudad Real"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_municipality_view_tree
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_province_view_tree
+msgid "Code"
+msgstr "Codi"
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_15
+msgid "Comunidad Foral de Navarra"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_13
+msgid "Comunidad de Madrid"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_10
+msgid "Comunitad Valenciana"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_16
+msgid "Cuenca"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_10
+msgid "Cáceres"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_11
+msgid "Cádiz"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_14
+msgid "Córdoba"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_11
+msgid "Extremadura"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model,name:l10n_es_territory.model_ter_gis_parcel_model
+msgid "GIS Parcel"
+msgstr "Parcel·la GIS"
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_12
+msgid "Galicia"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_17
+msgid "Girona"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_18
+msgid "Granada"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_19
+msgid "Guadalajara"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_20
+msgid "Guipuzkoa"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_21
+msgid "Huelva"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_22
+msgid "Huesca"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_04
+msgid "Illes Balears"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.constraint,message:l10n_es_territory.constraint_ter_parcel_cadastral_area_ok
+msgid "Incorrect value for \"Cadastral Area (m²)\"."
+msgstr "Valor incorrecte de la dada \"Àrea cadastral (m²)\"."
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_05
+msgid "Islas Canarias"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_23
+msgid "Jaén"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_26
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_17
+msgid "La Rioja"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_35
+msgid "Las Palmas"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_24
+msgid "León"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_25
+msgid "Lleida"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_27
+msgid "Lugo"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_28
+msgid "Madrid"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_52
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_19
+msgid "Melilla"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model,name:l10n_es_territory.model_res_municipality
+msgid "Municipality"
+msgstr "Municipi"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_municipality_view_form
+msgid "Municipality N."
+msgstr "Nº municipi"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_municipality__municipality_number
+msgid "Municipality Number"
+msgstr "Nombre de municipi"
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_30
+msgid "Murcia"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_29
+msgid "Málaga"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_31
+msgid "Navarra"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__official_code
+msgid "Official Code"
+msgstr "Referència cadastral"
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_32
+msgid "Ourense"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_34
+msgid "Palencia"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model,name:l10n_es_territory.model_ter_parcel
+msgid "Parcel"
+msgstr "Parcel·la"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__parcel_type
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_search
+msgid "Parcel Type"
+msgstr "Tipus de parcel·la"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_search
+msgid "Parcel Type: Rustic"
+msgstr "Tipus de parcel·la: Rústica"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_search
+msgid "Parcel Type: Urban"
+msgstr "Tipus de parcel·la: Urbana"
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_16
+msgid "País Vasco"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_36
+msgid "Pontevedra"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_03
+msgid "Principado de Asturias"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model,name:l10n_es_territory.model_res_province
+msgid "Province"
+msgstr "Província"
+
+#. module: l10n_es_territory
+#: model:res.region,alphanum_code:l10n_es_territory.res_region_14
+msgid "Región de Murcia"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.constraint,message:l10n_es_territory.constraint_ter_parcel_official_code_unique
+msgid "Repeated cadastral reference."
+msgstr "Referència cadastral repetida."
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/res_municipality.py:0
+#, python-format
+msgid "Repeated municipality code."
+msgstr "Codi cadastral de municipi repetit."
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/res_province.py:0
+#, python-format
+msgid "Repeated province code."
+msgstr "Codi cadastral de província repetit."
+
+#. module: l10n_es_territory
+#: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__parcel_type__01_r
+msgid "Rustic"
+msgstr "Rústica"
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_37
+msgid "Salamanca"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_38
+msgid "Santa Cruz de Tenerife"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_40
+msgid "Segovia"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_41
+msgid "Sevilla"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_42
+msgid "Soria"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_43
+msgid "Tarragona"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_44
+msgid "Teruel"
+msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+#, python-format
+msgid "The length of the cadastral reference is not correct."
+msgstr "La longitud de la referència cadastral no és correcta."
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_45
+msgid "Toledo"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+msgid "Type"
+msgstr "Tipus"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__parcel_type__02_u
+msgid "Urban"
+msgstr "Urbana"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__official_code_urban
+msgid "Urban official code"
+msgstr "Referència cadastral urbana"
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_46
+msgid "Valencia/València"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_47
+msgid "Valladolid"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_49
+msgid "Zamora"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_50
+msgid "Zaragoza"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_05
+msgid "Ávila"
+msgstr ""
