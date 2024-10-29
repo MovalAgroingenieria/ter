@@ -642,6 +642,9 @@ class TerParcelPartnerlink(models.Model):
     # Size of the "partner_code" field.
     _allow_all_contacts = False
 
+    def _default_profile_id(self):
+        return self.env.ref('base_ter.ter_profile_01').id
+
     def _set_domain_partner_id(self):
         resp = []
         if not self._allow_all_contacts:
@@ -672,6 +675,7 @@ class TerParcelPartnerlink(models.Model):
     profile_id = fields.Many2one(
         string='Profile',
         comodel_name='ter.profile',
+        default=_default_profile_id,
         required=True,
         index=True,
         ondelete='restrict',)
