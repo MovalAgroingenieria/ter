@@ -639,7 +639,8 @@ class TerParcelPartnerlink(models.Model):
     # Size of the "official_code" field in the model.
     MAX_SIZE_PARTNERLINK_CODE = 75
 
-    # Size of the "partner_code" field.
+    # It is possible to choose any contact as a partner-link: no
+    # (parcel managers only).
     _allow_all_contacts = False
 
     def _default_profile_id(self):
