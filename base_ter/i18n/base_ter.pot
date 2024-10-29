@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-20 17:37+0000\n"
-"PO-Revision-Date: 2024-10-20 17:37+0000\n"
+"POT-Creation-Date: 2024-10-29 16:26+0000\n"
+"PO-Revision-Date: 2024-10-29 16:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -816,6 +816,11 @@ msgid "Is Main"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
+msgid "Is manager"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ir_cron__is_base_ter
 msgid "Is this a base_ter action?"
 msgstr ""
@@ -928,7 +933,6 @@ msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 msgid "Manager"
 msgstr ""
@@ -1545,21 +1549,33 @@ msgid "Technical Actions"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
-#: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
-msgid "Territorial Base: Refresh all aerial images of the parcels"
-msgstr ""
-
-#. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_property_cron_action_reset_all_aerial_images_ir_actions_server
-#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_reset_all_aerial_images
 msgid "Territorial Base: Refresh all aerial images of the properties"
 msgstr ""
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_property_cron_action_refresh_properties_layer_ir_actions_server
-#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_refresh_properties_layer
 msgid "Territorial Base: Refresh layer of properties"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
+msgid "Territorial Base: refresh all aerial images of the parcels"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
+msgid "Territorial Branch: Refresh all aerial images of the parcels"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_reset_all_aerial_images
+msgid "Territorial Branch: Refresh all aerial images of the properties"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_refresh_properties_layer
+msgid "Territorial Branch: Refresh layer of properties"
 msgstr ""
 
 #. module: base_ter

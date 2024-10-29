@@ -103,10 +103,6 @@
                             <field name="area_gis" string="GIS Area (m²)"/>
                             <field name="perimeter_gis" string="GIS Perimeter (m)"/>
                             <field name="bounding_box_str" string="Frame"/>
-                            <!-- Provisional -->
-<!--                            <field name="gis_link_public"/>-->
-<!--                            <field name="gis_link_technical"/>-->
-<!--                            <field name="gis_link_minimal"/>-->
                         </group>
                     </group>
                     <notebook name="slave_data_notebook" colspan="4">
@@ -117,7 +113,7 @@
                                     <field name="partner_id" string="Name"
                                            context="{'context_ter': True}"
                                            options="{'no_quick_create':True}"/>
-                                    <field name="is_main" string="Manager"
+                                    <field name="is_main" string="Is manager"
                                            class="text-center"/>
                                     <field name="profile_id" string="Profile"
                                            class="text-center"/>

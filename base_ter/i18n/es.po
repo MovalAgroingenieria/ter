@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-20 17:37+0000\n"
-"PO-Revision-Date: 2024-10-20 17:37+0000\n"
+"POT-Creation-Date: 2024-10-29 16:27+0000\n"
+"PO-Revision-Date: 2024-10-29 16:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -622,7 +622,7 @@ msgstr "Visor GIS: nombre de usuario para el modo técnico"
 #: model:ir.ui.menu,name:base_ter.menu_configuration_general
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. module: base_ter
 #. odoo-python
@@ -841,6 +841,11 @@ msgid "Is Main"
 msgstr "Es gestor"
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
+msgid "Is manager"
+msgstr "Socio gestor"
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ir_cron__is_base_ter
 msgid "Is this a base_ter action?"
 msgstr "¿Relacionada con base_ter?"
@@ -955,7 +960,6 @@ msgstr "Gestión"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 msgid "Manager"
 msgstr "Gestor"
@@ -1074,7 +1078,7 @@ msgstr "Área oficial (m²)"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__official_code
 msgid "Official Code"
-msgstr "Código oficial"
+msgstr "Referencia catastral"
 
 #. module: base_ter
 #: model:ter.profile,alphanum_code:base_ter.ter_profile_01
@@ -1438,12 +1442,12 @@ msgstr "Refrescar imagen aérea"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 msgid "Region"
-msgstr "Región"
+msgstr "Comunidad Autónoma"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.res_region_menu
 msgid "Regions"
-msgstr "Regiones"
+msgstr "CC. AA."
 
 #. module: base_ter
 #. odoo-python
@@ -1593,22 +1597,34 @@ msgid "Technical Actions"
 msgstr "Acciones técnicas"
 
 #. module: base_ter
-#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
-#: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
-msgid "Territorial Base: Refresh all aerial images of the parcels"
-msgstr "Base territorial: Refrescar todas las imágenes aéreas de parcelas"
-
-#. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_property_cron_action_reset_all_aerial_images_ir_actions_server
-#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_reset_all_aerial_images
 msgid "Territorial Base: Refresh all aerial images of the properties"
 msgstr "Base territorial: Refrescar todas las imágenes aéreas de fincas"
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_property_cron_action_refresh_properties_layer_ir_actions_server
-#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_refresh_properties_layer
 msgid "Territorial Base: Refresh layer of properties"
 msgstr "Base territorial: Refrescar capa de fincas"
+
+#. module: base_ter
+#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
+msgid "Territorial Base: refresh all aerial images of the parcels"
+msgstr "Base territorial: refrescar todas las imágenes aéreas de parcelas"
+
+#. module: base_ter
+#: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
+msgid "Territorial Branch: Refresh all aerial images of the parcels"
+msgstr "Rama territorial: Refrescar todas las imágenes aéreas de parcelas"
+
+#. module: base_ter
+#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_reset_all_aerial_images
+msgid "Territorial Branch: Refresh all aerial images of the properties"
+msgstr "Rama territorial: Refrescar todas las imágenes aéreas de fincas"
+
+#. module: base_ter
+#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_refresh_properties_layer
+msgid "Territorial Branch: Refresh layer of properties"
+msgstr "Rama territorial: Refrescar capa de fincas"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_territory
