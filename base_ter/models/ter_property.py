@@ -396,7 +396,7 @@ class TerProperty(models.Model):
             self.env.cr.execute(
                 'CREATE TABLE ter_gis_property AS '
                 'SELECT ROW_NUMBER() OVER (ORDER BY terpro.name) AS gid, terpro.name, '
-                'ST_UNION(tergispar.geom)::geometry(MultiPolygon,%s) AS geom '
+                'ST_UNION(tergispar.geom)::postgis.geometry(MultiPolygon,%s) AS geom '
                 'FROM ter_gis_parcel tergispar '
                 'INNER JOIN ter_parcel terpar ON tergispar.name = terpar.name '
                 'INNER JOIN ter_property terpro ON terpro.id = terpar.property_id '
