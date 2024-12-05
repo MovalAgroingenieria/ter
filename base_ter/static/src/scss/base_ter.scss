@@ -127,3 +127,7 @@
     width: 100px;
     min-width: 100px;
 }
+
+.table-no-border-header table {
+    border-top: none !important;
+}

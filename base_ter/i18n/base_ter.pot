@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 16:26+0000\n"
-"PO-Revision-Date: 2024-10-29 16:26+0000\n"
+"POT-Creation-Date: 2024-12-05 15:00+0000\n"
+"PO-Revision-Date: 2024-12-05 15:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,42 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "% Participation"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "&amp;nbsp;"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.actions.report,print_report_name:base_ter.action_parcel_report
+msgid "'Parcel - %s - %s' % (object.name, object.partner_id.name or '')"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.actions.report,print_report_name:base_ter.action_parcel_partner_report
+msgid "'Parcels Report - %s ' % (object.name or '')"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.actions.report,print_report_name:base_ter.action_property_report
+msgid "'Property - %s - %s' % (object.name, object.partner_id.name or '')"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.actions.report,print_report_name:base_ter.action_property_partner_report
+msgid "'Property Report - %s ' % (object.name or '')"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "(VAT:&amp;nbsp;"
 msgstr ""
 
 #. module: base_ter
@@ -41,10 +77,86 @@ msgid "(property name)"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+msgid ""
+"<br/>\n"
+"                                Area:"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid ""
+"<br/>\n"
+"                                Parcels Area:"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid ""
+"<br/>\n"
+"                                Place:"
+msgstr ""
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_kanban_view
 msgid ""
-"<i class=\"fa fa-picture-o fa-lg\" style=\"color:darkgreen;margin-"
+"<i class=\"fa fa-ter-property fa-lg\" style=\"color:darkgreen;margin-"
 "right:6px;\" title=\"holder_icon\"/>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid ""
+"<span class=\"fa fa-picture-o\"/>\n"
+"                            <span>Aerial Image</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+msgid ""
+"<span class=\"fa fa-picture-o\"/>\n"
+"                            <span>Aerial Images</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+msgid ""
+"<span class=\"fa fa-ter-parcel\"/>\n"
+"                            <span>Parcel</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+msgid ""
+"<span class=\"fa fa-ter-parcel\"/>\n"
+"                            <span>Parcels</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+msgid ""
+"<span class=\"fa fa-ter-property\"/>\n"
+"                            <span>Properties</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid ""
+"<span class=\"fa fa-ter-property\"/>\n"
+"                            <span>Property</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid ""
+"<span class=\"fa fa-user\"/>\n"
+"                            <span>Partner</span>"
 msgstr ""
 
 #. module: base_ter
@@ -63,9 +175,41 @@ msgid "<span class=\"oe_inline\">EPSG:</span>"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>-&amp;nbsp;</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>Area official parcels</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>Area official</span>"
+msgstr ""
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 msgid "<span>Change code</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>GIS Area</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>GIS Perimeter</span>"
 msgstr ""
 
 #. module: base_ter
@@ -75,13 +219,68 @@ msgid "<span>GIS Viewer</span>"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>Municipality</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+msgid "<span>Number of parcels</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>Number of properties</span>"
+msgstr ""
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 msgid "<span>Parcel Viewer</span>"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>Place</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>Printing date</span>"
+msgstr ""
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 msgid "<span>Prop. Viewer</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>Tags</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+msgid "<span>Total Area</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>m</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "<span>m²</span>"
 msgstr ""
 
 #. module: base_ter
@@ -92,6 +291,32 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_kanban_view
 msgid "<span>parcels</span>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+msgid "<strong>Area</strong>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+msgid "<strong>Municipality</strong>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+msgid "<strong>Parcel</strong>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+msgid "<strong>Property</strong>"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+msgid "<strong>Total Parcel Area</strong>"
 msgstr ""
 
 #. module: base_ter
@@ -183,6 +408,12 @@ msgid "Aerial image OK. Property: %s"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+msgid "Aerial image not found"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__warning_diff_areas
 msgid ""
 "Alert threshold due to the difference between the official area and the GIS "
@@ -203,6 +434,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_search
 msgid "Archived"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+msgid "Area"
 msgstr ""
 
 #. module: base_ter
@@ -273,6 +509,7 @@ msgid "Close preview"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
@@ -618,6 +855,12 @@ msgstr ""
 #: model:ir.ui.menu,name:base_ter.menu_configuration_general
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "General"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__geom_geojson
+#: model:ir.model.fields,field_description:base_ter.field_ter_property__geom_geojson
+msgid "GeoJSON Geometry"
 msgstr ""
 
 #. module: base_ter
@@ -969,11 +1212,18 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__municipality_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__municipality_id
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 msgid "Municipality"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "Municipality:"
 msgstr ""
 
 #. module: base_ter
@@ -1123,6 +1373,17 @@ msgid "Parcel Partner"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.actions.report,name:base_ter.action_parcel_partner_report
+msgid "Parcel Partner Report"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.actions.report,name:base_ter.action_parcel_report
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+msgid "Parcel Report"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model,name:base_ter.model_ter_parceltag
 #: model:ir.model.fields,field_description:base_ter.field_ter_parceltag__alphanum_code
 msgid "Parcel Tag"
@@ -1151,6 +1412,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_res_users__parcel_ids
 #: model:ir.model.fields,field_description:base_ter.field_ter_parceltag__parcel_ids
 #: model:ir.ui.menu,name:base_ter.ter_parcel_menu
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
@@ -1158,6 +1420,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 #, python-format
 msgid "Parcels"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+msgid "Parcels Area"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+msgid "Parcels Report"
 msgstr ""
 
 #. module: base_ter
@@ -1214,6 +1486,8 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__place_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__place_id
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
@@ -1261,6 +1535,12 @@ msgid "Preview"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "Printing date"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__profile_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_profile__alphanum_code
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
@@ -1296,8 +1576,15 @@ msgid "Properties"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
+msgid "Properties Report"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model,name:base_ter.model_ter_property
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__property_id
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
@@ -1333,6 +1620,17 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__alphanum_code
 msgid "Property Name"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.actions.report,name:base_ter.action_property_partner_report
+msgid "Property Partner Report"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.actions.report,name:base_ter.action_property_report
+#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
+msgid "Property Report"
 msgstr ""
 
 #. module: base_ter
@@ -1549,31 +1847,19 @@ msgid "Technical Actions"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.actions.server,name:base_ter.ter_property_cron_action_reset_all_aerial_images_ir_actions_server
-msgid "Territorial Base: Refresh all aerial images of the properties"
-msgstr ""
-
-#. module: base_ter
-#: model:ir.actions.server,name:base_ter.ter_property_cron_action_refresh_properties_layer_ir_actions_server
-msgid "Territorial Base: Refresh layer of properties"
-msgstr ""
-
-#. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
-msgid "Territorial Base: refresh all aerial images of the parcels"
-msgstr ""
-
-#. module: base_ter
 #: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
 msgid "Territorial Branch: Refresh all aerial images of the parcels"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.actions.server,name:base_ter.ter_property_cron_action_reset_all_aerial_images_ir_actions_server
 #: model:ir.cron,cron_name:base_ter.ter_property_cron_action_reset_all_aerial_images
 msgid "Territorial Branch: Refresh all aerial images of the properties"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.actions.server,name:base_ter.ter_property_cron_action_refresh_properties_layer_ir_actions_server
 #: model:ir.cron,cron_name:base_ter.ter_property_cron_action_refresh_properties_layer
 msgid "Territorial Branch: Refresh layer of properties"
 msgstr ""

@@ -1,0 +1,184 @@
+<odoo>
+
+    <record id="action_property_partner_report" model="ir.actions.report">
+        <field name="name">Property Partner Report</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">base_ter.property_partner_template</field>
+        <field name="report_file">base_ter.property_partner_template</field>
+        <field name="paperformat_id" ref="base_report.paperformat_reports"/>
+        <field name="print_report_name">'Properties Report - %s ' % (object.name or '')</field>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="property_partner_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="base_ter.property_partner_report_document" t-lang="o.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="property_partner_report_document">
+        <t t-set="o" t-value="o.with_context(lang=o.lang)"/>
+        <t t-call="web.external_layout">
+
+            <!-- Vars -->
+            <t t-set="area_unit_name" t-value="o.env['ir.config_parameter'].sudo().get_param('base_ter.area_unit_name', False)"/>
+            <t t-set="printing_date" t-value="o.env['common.format'].transform_date_to_locale(datetime.datetime.now(), lang=o.lang)"/>
+
+            <!-- Page -->
+            <div class="page">
+                <h2 name="title" class="text-center">Properties Report</h2>
+
+                <section id="informations" name="partner_data" style="margin-bottom: 20px;">
+                    <div id="section_title" name="title_partner">
+                        <h2 style="font-size: 1.4em;">
+                            <span class="fa fa-user"/>
+                            <span>Partner</span>
+                            <div style="border-top: 1px solid lightgrey;"/>
+                        </h2>
+                    </div>
+                    <t t-if="o.name">
+                        <strong><span t-field="o.name"/></strong>
+                        <t t-if="o.vat"><span>(VAT:&amp;nbsp;<span t-field="o.vat"/>)</span></t>
+                    </t>
+                    <br/>
+                    <div class="row" style="margin-top: 4px;">
+                        <div class="col-xs-12" style="display: table;">
+                            <div style="width: 50%; display: table-cell;border-right: 1px solid lightgrey;">
+                                <t t-if="o.street or o.street2">
+                                    <t t-if="o.street"><span t-field="o.street"/></t>
+                                    <t t-if="o.street2"><span t-field="o.street2"/></t>
+                                    <br/>
+                                </t>
+                                <t t-if="o.city or o.zip">
+                                    <t t-if="o.city"><span t-field="o.city"/></t>
+                                    <t t-if="o.zip"><span>-&amp;nbsp;</span><span t-field="o.zip"/></t>
+                                    <br/>
+                                </t>
+                                <t t-if="o.state_id or o.country_id">
+                                    <t t-if="o.state_id"><span t-field="o.state_id"/></t>
+                                    <t t-if="o.country_id"><span>-&amp;nbsp;</span><span t-field="o.country_id"></span></t>
+                                    <br/>
+                                </t>
+                                <t t-if="o.phone or o.mobile">
+                                    <t t-if="o.phone"><span t-field="o.phone"/></t>
+                                    <t t-if="o.mobile"><span t-field="o.mobile"/></t>
+                                    <br/>
+                                </t>
+                                <t t-if="o.email"><span t-field="o.email"/><br/></t>
+                            </div>
+                            <div style="display: table-cell; padding-left: 32px;">
+                                <div>&amp;nbsp;</div>
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr name="tr_number_of_properties">
+                                            <td><span>Number of properties</span></td>
+                                            <td class="text-end"><span t-field="o.number_of_properties"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>Printing date</span></td>
+                                            <td class="text-end"><span t-esc="printing_date"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="informations" name="properties_data" style="margin-bottom: 20px;">
+                    <div id="section_title" name="title_properties">
+                        <h2 style="font-size: 1.4em;">
+                            <span class="fa fa-ter-property"/>
+                            <span>Properties</span>
+                            <div style="border-top: 1px solid lightgrey;"/>
+                        </h2>
+                    </div>
+                    <table  class="table table-sm">
+                        <thead>
+                            <tr style="border-top: 1px solid white">
+                                <th name="th_property" class="text-start">Property</th>
+                                <th name="th_municipality_id" class="text-start">Municipality</th>
+                                <th name="th_place_id" class="text-start">Place</th>
+                                <th name="th_number_of_parcels" class="text-end">Parcels</th>
+                                <th name="th_.area_official_parcels" class="text-end">Parcels Area</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.property_ids" t-as="property">
+                                <tr>
+                                    <td name="td_property"><span t-field="property.name"/></td>
+                                    <td name="td_municipality_id"><span t-field="property.municipality_id.name"/></td>
+                                    <td name="td_place_id"><span t-field="property.place_id.name"/></td>
+                                    <td name="td_number_of_parcels" class="text-end">
+                                        <span t-field="property.number_of_parcels"/>
+                                    </td>
+                                    <td name="td_.area_official_parcels" class="text-end">
+                                        <span t-field="property.area_official_parcels"/>
+                                        <span t-out="area_unit_name"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Force new page -->
+                <p style="page-break-after:always;"/>
+
+                <section id="informations" name="aerial_images">
+                    <div id="section_title" name="title_aerial_images">
+                        <h2 style="font-size: 1.4em;">
+                            <span class="fa fa-picture-o"/>
+                            <span>Aerial Images</span>
+                            <div style="border-top: 1px solid lightgrey;"/>
+                        </h2>
+                    </div>
+                    <t t-foreach="o.property_ids" t-as="property">
+                        <div style="width: 48%; float: left; display: table; border: 1px solid black; margin: 1.5% 0.5%; page-break-inside: avoid;">
+                            <div name="propierty_data" style="border-bottom: 1px solid black; padding: 2%;">
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr id="row_property_id">
+                                            <td><strong>Property</strong></td>
+                                            <td class="text-end"><span t-field="property.name"/></td>
+                                        </tr>
+                                        <tr id="row_municipality">
+                                            <td><strong>Municipality</strong></td>
+                                            <td class="text-end"><span t-field="property.municipality_id.name"/></td>
+                                        </tr>
+                                        <tr id="row_propierty_area">
+                                            <td><strong>Total Parcel Area</strong></td>
+                                            <td class="text-end">
+                                                <span t-field="property.area_official_parcels"/>
+                                                <span t-out="area_unit_name"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div name="property_aerial_image" class="text-center">
+                                <t t-if="property.aerial_image_shown">
+                                    <img t-attf-src="data:image/png;base64, #{property.aerial_image_shown}"
+                                        style="max-width: 408px; max-height: 408px;"/>
+                                </t>
+                                <t t-else="">
+                                    <div class="text-center text-muted" style="width: 408px; height: 408px; padding-top: 40%;">
+                                        <div class="fa fa-file-image-o" style="font-size: 4em;"/>
+                                        <br/>
+                                        <div>Aerial image not found</div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </section>
+
+            </div> <!-- End page -->
+        </t>
+    </template>
+
+</odoo>

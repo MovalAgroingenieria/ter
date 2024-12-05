@@ -13,7 +13,7 @@
                 <button name="action_show_properties"
                         type="object"
                         class="oe_stat_button"
-                        icon="fa-picture-o"
+                        icon="fa-ter-property"
                         invisible="not context.get('context_ter', False)"
                         attrs="{'invisible': [('id', '>', 0), ('partner_code', '=', 0)]}">
                     <field string="Properties"
@@ -23,7 +23,7 @@
                 <button name="action_show_parcels"
                         type="object"
                         class="oe_stat_button"
-                        icon="fa-square-o"
+                        icon="fa-ter-parcel"
                         invisible="not context.get('context_ter', False)"
                         attrs="{'invisible': [('id', '>', 0), ('partner_code', '=', 0)]}">
                     <field string="Parcels"
@@ -144,7 +144,7 @@
                 <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="inside">
                     <div name="kanban_bottom_left"
                          attrs="{'invisible': [('is_holder', '=', False)]}">
-                        <i class="fa fa-picture-o fa-lg" style="color:darkgreen;margin-right:6px;" title="holder_icon"/>
+                        <i class="fa fa-ter-property fa-lg" style="color:darkgreen;margin-right:6px;" title="holder_icon"/>
                         <field name="number_of_parcels" style="margin-right:4px"/>
                         <t t-if="record.number_of_parcels.raw_value > 1 or record.number_of_parcels.raw_value == 0">
                             <span>parcels</span>
