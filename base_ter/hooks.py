@@ -66,7 +66,9 @@ def post_init_hook(cr, registry):
     # Creation of SQL views.
     env.cr.execute("""
         CREATE VIEW ter_gis_parcel_model AS (
-        SELECT ROW_NUMBER() OVER() AS id, tgp.name, tp.id as parcel_id,
+        SELECT ROW_NUMBER() OVER() AS id, tgp.name,
+        postgis.st_asgeojson(tgp.geom) AS geom_geojson,
+        tp AS parcel_id,
         tp.partner_id as partner_id, tp.active as is_active
         FROM ter_gis_parcel tgp LEFT JOIN ter_parcel tp
         ON tgp.name = tp.name)

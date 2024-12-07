@@ -1,7 +1,7 @@
 # 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import fields, models, tools, _
+from odoo import fields, models, _
 
 
 class TerGisParcelModel(models.Model):
@@ -24,6 +24,9 @@ class TerGisParcelModel(models.Model):
 
     name = fields.Char(
         string='Parcel Code', )
+
+    geom_geojson = fields.Char(
+        string='GeoJSON Geometry',)
 
     parcel_id = fields.Many2one(
         string='Parcel',
