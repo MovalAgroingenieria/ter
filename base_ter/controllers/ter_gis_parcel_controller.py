@@ -10,7 +10,7 @@ class TerGisParcelController(http.Controller):
     def _format_parcel_data(self, parcel):
         return {
             'name': parcel.name,
-            'geom': parcel.geom_geojson,
+            'geometry': parcel.geom_geojson,
             'parcel_id': parcel.parcel_id.id if parcel.parcel_id else False,
             'munici': parcel.parcel_id.municipality_id.name if
                 parcel.parcel_id else '',
