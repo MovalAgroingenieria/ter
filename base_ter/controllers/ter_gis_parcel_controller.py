@@ -1,24 +1,45 @@
 # 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-
 from odoo import http, _
 from odoo.http import request
 
+
 class TerGisParcelController(http.Controller):
 
-    def _format_parcel_data(self, parcel):
-        return {
-            'name': parcel.name,
-            'geometry': parcel.geom_geojson,
-            'parcel_id': parcel.parcel_id.id if parcel.parcel_id else False,
-            'munici': parcel.parcel_id.municipality_id.name if
-                parcel.parcel_id else '',
-            'area': parcel.parcel_id.area_official_m2 if
-                parcel.parcel_id else 0.0,
-            'off_code': parcel.parcel_id.official_code if
-                parcel.parcel_id else '',
-        }
+    def _format_parcel_data(self, parcel, source):
+        data = {'name': parcel.name}
+        if source in ['gis', 'combined']:
+            data['geometry'] = parcel.geom_geojson
+        if source in ['ter', 'combined']:
+            data.update({
+                'parcel_id': parcel.id,
+                'munici': parcel.municipality_id.name if
+                    parcel.municipality_id else '',
+                'area': parcel.area_official_m2 if
+                    parcel.area_official_m2 else 0.0,
+                'area_official': parcel.area_official,
+                'area_unit': parcel.area_unit_name,
+                'place_name': parcel.place_id.name if parcel.place_id else '',
+                'partnerlinks': parcel.partnerlink_ids.mapped(
+                    lambda pl: {
+                        'partner_name': pl.partner_id.name,
+                        'partner_code': pl.partner_id.partner_code,
+                        'profile_name': pl.profile_id.name,
+                        'percentage': pl.percentage,
+                    }
+                ),
+                'off_code': parcel.official_code if
+                    parcel.official_code else '',
+            })
+        if source == 'gis':
+            data.update({
+                'parcel_id': None,
+                'munici': '',
+                'area': 0.0,
+                'off_code': '',
+            })
+        return data
 
     @http.route(
         '/get_parcels', type='json', auth='user', methods=['POST'], csrf=False)
@@ -29,29 +50,47 @@ class TerGisParcelController(http.Controller):
             if operator not in ['=', 'ilike']:
                 return {
                     'status': 'error',
-                    'error': _('Invalid operators Use "=" or "ilike".')
+                    'error': _('Invalid operators. Use "=" or "ilike".')
                 }
             if not name:
                 return {
                     'status': 'error',
                     'error': _('Name field is mandatory.')
                 }
-            parcel_data = []
             name_values = [value.strip() for value in name.split(',')]
-            if (len(name_values) == 1):
+            if len(name_values) == 1:
                 domain = [('name', operator, name)]
             else:
                 domain = ['|'] * (len(name_values) - 1) + [
                     ('name', operator, value) for value in name_values]
-            parcels = request.env['ter.gis.parcel.model'].search(domain)
-            parcel_data = [
-                self._format_parcel_data(parcel) for parcel in parcels]
+            gis_parcels = request.env['ter.gis.parcel.model'].search(domain)
+            ter_parcels = request.env['ter.parcel'].search(domain)
+            gis_parcel_map = {p.name: p for p in gis_parcels}
+            ter_parcel_map = {p.name: p for p in ter_parcels}
+            gis_parcel_names = set(gis_parcel_map.keys())
+            ter_parcel_names = set(ter_parcel_map.keys())
+            all_names = gis_parcel_names.union(ter_parcel_names)
+            combined_data = []
+            for name in all_names:
+                gis_parcel = gis_parcel_map.get(name)
+                ter_parcel = ter_parcel_map.get(name)
+                if gis_parcel and ter_parcel:
+                    combined_data.append(
+                        self._format_parcel_data(
+                            ter_parcel, source='combined'))
+                elif gis_parcel:
+                    combined_data.append(
+                        self._format_parcel_data(gis_parcel, source='gis'))
+                elif ter_parcel:
+                    combined_data.append(
+                        self._format_parcel_data(
+                            ter_parcel, source='ter'))
             return {
                 'status': 'success',
-                'data': parcel_data
+                'data': combined_data,
             }
         except Exception as e:
             return {
                 'status': 'error',
-                'error': _(f'Unexpected error: {str(e)}')
+                'error': _(f'Unexpected error: {str(e)}'),
             }
