@@ -120,12 +120,12 @@ class GisViewer(models.AbstractModel):
                 minimum = '00'
             else:
                 minimum = '30'
-            iv = (current_datetime[:14] + minimum).encode('utf-8')
+            iv = (current_datetime[:14] + minimum).encode('utf-8')[:16]
             cipher_key = self._cipher_key.encode('utf-8')
             cipher = AES.new(cipher_key, AES.MODE_CBC, iv)
             plain_text = pad(plain_text.encode('utf-8'), block_size)
             encrypted_data = cipher.encrypt(plain_text)
-            resp = base64.urlsafe_b64encode(encrypted_data).decode('utf-8')
+            resp = base64.b64encode(encrypted_data).decode('utf-8')
             # Provisional (TEST)
             # print(resp)
             # cipher2 = AES.new(cipher_key, AES.MODE_CBC, iv)
