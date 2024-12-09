@@ -74,9 +74,8 @@ class GisViewer(models.AbstractModel):
         xmin, ymin, xmax, ymax = self._get_bounding_box()
         if (xmin >= 0 and ymin >= 0 and xmax >= 0 and ymax >= 0 and
            xmin < xmax and ymin < ymax):
-            gis_viewer_url = gis_viewer_url + \
-                '&xmin=' + str(xmin) + '&ymin=' + str(ymin) + \
-                '&xmax=' + str(xmax) + '&ymax=' + str(ymax)
+            bbox = f"{xmin},{ymin},{xmax},{ymax}"
+            gis_viewer_url = gis_viewer_url + '&bbox=' + bbox
         return {
             'type': 'ir.actions.act_url',
             'url': gis_viewer_url,
@@ -181,9 +180,8 @@ class GisViewer(models.AbstractModel):
             xmin, ymin, xmax, ymax = self._get_bounding_box()
             if (xmin >= 0 and ymin >= 0 and xmax >= 0 and ymax >= 0 and
                xmin < xmax and ymin < ymax):
-                gis_link = gis_link + \
-                    '&xmin=' + str(xmin) + '&ymin=' + str(ymin) + \
-                    '&xmax=' + str(xmax) + '&ymax=' + str(ymax)
+                bbox = f"{xmin},{ymin},{xmax},{ymax}"
+                gis_link = gis_link + '&bbox=' + bbox
             if minimal:
                 gis_link = gis_link + '&' + additional_args
             elif not public:

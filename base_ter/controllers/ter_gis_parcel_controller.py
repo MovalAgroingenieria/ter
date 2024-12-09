@@ -24,6 +24,7 @@ class TerGisParcelController(http.Controller):
                 'partnerlinks': parcel.partnerlink_ids.mapped(
                     lambda pl: {
                         'partner_name': pl.partner_id.name,
+                        'partner_id': pl.partner_id.id,
                         'partner_code': pl.partner_id.partner_code,
                         'profile_name': pl.profile_id.name,
                         'percentage': pl.percentage,
