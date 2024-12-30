@@ -204,7 +204,8 @@ class ResPartner(models.Model):
                    len(partners_mapped_to_partner_code) > 1):
                     raise exceptions.ValidationError(
                         _('Repeated partner code.'))
-            elif self.env.context.get('context_ter', False):
+            elif (self.env.context.get('context_ter', False) and
+                  (not record.parent_id)):
                 raise exceptions.ValidationError(
                     _('The code must be a positive value.'))
 

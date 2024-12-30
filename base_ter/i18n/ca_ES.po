@@ -1986,7 +1986,7 @@ msgstr "Territori"
 #: code:addons/base_ter/models/res_partner.py:0
 #, python-format
 msgid "The code must be a positive value."
-msgstr ""
+msgstr "El codi ha de ser un valor positiu."
 
 #. module: base_ter
 #. odoo-python
