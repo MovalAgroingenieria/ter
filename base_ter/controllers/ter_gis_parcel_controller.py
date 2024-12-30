@@ -14,13 +14,14 @@ class TerGisParcelController(http.Controller):
         if source in ['ter', 'combined']:
             data.update({
                 'parcel_id': parcel.id,
-                'munici': parcel.municipality_id.name if
-                    parcel.municipality_id else '',
-                'area': parcel.area_official_m2 if
-                    parcel.area_official_m2 else 0.0,
+                'munici': (parcel.municipality_id.name
+                           if parcel.municipality_id else ''),
+                'area': (parcel.area_official_m2
+                         if parcel.area_official_m2 else 0.0),
                 'area_official': parcel.area_official,
                 'area_unit': parcel.area_unit_name,
-                'place_name': parcel.place_id.name if parcel.place_id else '',
+                'place_name': (parcel.place_id.name
+                               if parcel.place_id else ''),
                 'partnerlinks': parcel.partnerlink_ids.mapped(
                     lambda pl: {
                         'partner_name': pl.partner_id.name,
@@ -30,8 +31,8 @@ class TerGisParcelController(http.Controller):
                         'percentage': pl.percentage,
                     }
                 ),
-                'off_code': parcel.official_code if
-                    parcel.official_code else '',
+                'off_code': (parcel.official_code
+                             if parcel.official_code else ''),
             })
         if source == 'gis':
             data.update({

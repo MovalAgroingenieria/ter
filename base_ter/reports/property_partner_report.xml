@@ -60,7 +60,7 @@
                                 </t>
                                 <t t-if="o.state_id or o.country_id">
                                     <t t-if="o.state_id"><span t-field="o.state_id"/></t>
-                                    <t t-if="o.country_id"><span>-&amp;nbsp;</span><span t-field="o.country_id"></span></t>
+                                    <t t-if="o.country_id"><span>-&amp;nbsp;</span><span t-field="o.country_id"/></t>
                                     <br/>
                                 </t>
                                 <t t-if="o.phone or o.mobile">

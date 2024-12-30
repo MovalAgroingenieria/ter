@@ -1,13 +1,23 @@
 .o_base_ter_ter_parcel [data-name="alphanum_code"] {
     text-align: center;
-    width: 160px;
-    min-width: 160px;
+    width: 140px;
+    min-width: 140px;
+}
+
+.o_base_ter_ter_parcel [data-name="municipality_id"] {
+    width: 135px;
+    min-width: 135px;
+}
+
+.o_base_ter_ter_parcel [data-name="property_id"] {
+    width: 180px;
+    min-width: 180px;
 }
 
 .o_base_ter_ter_parcel [data-name="official_code"] {
     text-align: center;
-    width: 160px;
-    min-width: 160px;
+    width: 140px;
+    min-width: 140px;
 }
 
 .o_base_ter_ter_parcel [data-name="area_official"] {
@@ -79,6 +89,11 @@
     text-align: left;
     width: 260px;
     min-width: 260px;
+}
+
+.o_base_ter_ter_property [data-name="municipality_id"] {
+    width: 180px;
+    min-width: 180px;
 }
 
 .o_base_ter_ter_property [data-name="number_of_parcels"] {

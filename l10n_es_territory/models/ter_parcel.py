@@ -87,6 +87,10 @@ class TerParcel(models.Model):
         string='Cadastral Area (m²)',
         default=0,)
 
+    cadastral_subparcel = fields.Char(
+        string='Cadastral Subparcel',
+        size=MAX_SIZE_CADASTRAL_FIELD, )
+
     _sql_constraints = [
         ('official_code_unique',
          'UNIQUE (official_code)',

@@ -393,11 +393,15 @@ class TerParcel(models.Model):
                         _('If a manager is assigned to the parcel, it is '
                           'mandatory to configure the contact list.'))
 
-    @api.constrains('partnerlink_ids')
+    @api.constrains('partner_id', 'partnerlink_ids')
     def _check_partnerlink_ids(self):
         for record in self:
             if record.partnerlink_ids:
-                # Check #1: only one manager (mandatory).
+                # Check #1: the partner_id is required.
+                if not record.partner_id:
+                    raise exceptions.ValidationError(
+                        _('It is mandatory to enter the parcel manager.'))
+                # Check #2: only one manager (mandatory).
                 profile_ids = []
                 number_of_managers = 0
                 for partnerlink in record.partnerlink_ids:
@@ -411,7 +415,7 @@ class TerParcel(models.Model):
                     raise exceptions.ValidationError(
                         _('It is mandatory to enter the main contact of the '
                           'parcel (only one).'))
-                # Check #2: sum of percentages equal to 100.
+                # Check #3: sum of percentages equal to 100.
                 if profile_ids:
                     profile_ids = list(set(profile_ids))
                     for profile in profile_ids:
@@ -531,7 +535,6 @@ class TerParcel(models.Model):
                                     partner_id = partnerlink_original.partner_id
                         if partner_id:
                             vals['partner_id'] = partner_id
-                            vals['property_id'] = None
                         break
         resp = super(TerParcel, self).write(vals)
         if 'active' in vals:

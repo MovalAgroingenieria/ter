@@ -14,10 +14,10 @@ class TerGisPropertyController(http.Controller):
         if source in ['ter', 'combined']:
             data.update({
                 'property_id': property.id,
-                'munici': property.municipality_id.name if
-                    property.municipality_id else '',
-                'area': property.area_official_parcels_m2 if
-                    property.area_official_parcels_m2 else 0.0,
+                'munici': (property.municipality_id.name
+                           if property.municipality_id else ''),
+                'area': (property.area_official_parcels_m2
+                         if property.area_official_parcels_m2 else 0.0),
                 'area_official_parcels': property.area_official_parcels,
                 'area_unit': property.area_unit_name,
                 'partner_name': property.partner_id.name,

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 15:01+0000\n"
-"PO-Revision-Date: 2024-12-05 15:01+0000\n"
+"POT-Creation-Date: 2024-12-30 18:46+0000\n"
+"PO-Revision-Date: 2024-12-30 18:46+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -39,14 +39,14 @@ msgid "'Parcels Report - %s ' % (object.name or '')"
 msgstr "'Informe parcelas - %s ' % (object.name or '')"
 
 #. module: base_ter
+#: model:ir.actions.report,print_report_name:base_ter.action_property_partner_report
+msgid "'Properties Report - %s ' % (object.name or '')"
+msgstr "'Informe Fincas - %s ' % (object.name or '')"
+
+#. module: base_ter
 #: model:ir.actions.report,print_report_name:base_ter.action_property_report
 msgid "'Property - %s - %s' % (object.name, object.partner_id.name or '')"
 msgstr "'Finca - %s - %s' % (object.name, object.partner_id.name or '')"
-
-#. module: base_ter
-#: model:ir.actions.report,print_report_name:base_ter.action_property_partner_report
-msgid "'Properties Report - %s ' % (object.name or '')"
-msgstr "'Property Report - %s ' % (object.name or '')"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
@@ -148,6 +148,8 @@ msgid ""
 "<span class=\"fa fa-ter-parcel\"/>\n"
 "                            <span>Parcels</span>"
 msgstr ""
+"<span class=\"fa fa-ter-parcel\"/>\n"
+"                            <span>Parcelas</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
@@ -165,7 +167,7 @@ msgid ""
 "                            <span>Property</span>"
 msgstr ""
 "<span class=\"fa fa-ter-property\"/>\n"
-"                            <span>Fincas</span>"
+"                            <span>Finca</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
@@ -236,7 +238,7 @@ msgstr "<span>Perímetro GIS</span>"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "<span>GIS Viewer</span>"
-msgstr "<span>Visor GIS</span>"
+msgstr "Visor GIS"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
@@ -265,7 +267,7 @@ msgstr "<span>GIS (parcelas)</span>"
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
 msgid "<span>Place</span>"
-msgstr ""
+msgstr "<span>Localidad</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
@@ -306,7 +308,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_kanban_view
 msgid "<span>parcel</span>"
-msgstr "<span>parcela</span>"
+msgstr "parcela"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_kanban_view
@@ -882,6 +884,7 @@ msgid "General"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__geom_geojson
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__geom_geojson
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__geom_geojson
 msgid "GeoJSON Geometry"
@@ -1093,6 +1096,14 @@ msgid "Internal Notes"
 msgstr "Notas internas"
 
 #. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/controllers/ter_gis_parcel_controller.py:0
+#: code:addons/base_ter/controllers/ter_gis_property_controller.py:0
+#, python-format
+msgid "Invalid operators. Use \"=\" or \"ilike\"."
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__message_is_follower
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__message_is_follower
 msgid "Is Follower"
@@ -1106,7 +1117,7 @@ msgstr "Es gestor"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Is manager"
-msgstr "Socio gestor"
+msgstr "Contacto gestor"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ir_cron__is_base_ter
@@ -1121,6 +1132,13 @@ msgid "It is mandatory to enter the main contact of the parcel (only one)."
 msgstr ""
 "Es necesario indicar quién es el contacto principal de la parcela, que "
 "actuará como gestor (sólo puede haber uno)."
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/ter_parcel.py:0
+#, python-format
+msgid "It is mandatory to enter the parcel manager."
+msgstr "Es obligatorio indicar quién es el gestor de la parcela."
 
 #. module: base_ter
 #. odoo-python
@@ -1262,8 +1280,10 @@ msgstr "Municipios"
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
 msgid "Municipality"
 msgstr "Municipio"
 
@@ -1271,13 +1291,21 @@ msgstr "Municipio"
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
 msgid "Municipality:"
-msgstr ""
+msgstr "Municipio:"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Name"
 msgstr "Nombre"
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/controllers/ter_gis_parcel_controller.py:0
+#: code:addons/base_ter/controllers/ter_gis_property_controller.py:0
+#, python-format
+msgid "Name field is mandatory."
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1570,7 +1598,7 @@ msgid ""
 "Possible zoom to apply to images obtained\n"
 "                                    from WMS services; if it is 1, then no zoom\n"
 "                                    is applied; if it is greater than 1, then\n"
-"                                    there is an zoom-out; if it is less\n"
+"                                    there is a zoom-out; if it is less\n"
 "                                    than 1, then there is an zoom-in"
 msgstr ""
 "Posible zoom a aplicar a las imágenes obtenidas\n"
@@ -1599,7 +1627,7 @@ msgstr "Previsualización"
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
 msgid "Printing date"
-msgstr ""
+msgstr "Fecha de impresión"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__profile_id
@@ -1639,7 +1667,7 @@ msgstr "Fincas"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 msgid "Properties Report"
-msgstr "Informe Fincas"
+msgstr "Informe fincas"
 
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_ter_property
@@ -1648,6 +1676,7 @@ msgstr "Informe Fincas"
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
 msgid "Property"
@@ -1915,28 +1944,47 @@ msgid "Technical Actions"
 msgstr "Acciones técnicas"
 
 #. module: base_ter
-#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
-#: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
-msgid "Territorial Branch: Refresh all aerial images of the parcels"
-msgstr "Base territorial: refrescar todas las imágenes aéreas de parcelas"
-
-#. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_property_cron_action_reset_all_aerial_images_ir_actions_server
-#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_reset_all_aerial_images
-msgid "Territorial Branch: Refresh all aerial images of the properties"
+msgid "Territorial Base: Refresh all aerial images of the properties"
 msgstr "Base territorial: Refrescar todas las imágenes aéreas de fincas"
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_property_cron_action_refresh_properties_layer_ir_actions_server
+msgid "Territorial Base: Refresh layer of properties"
+msgstr "Base territorial: Refrescar capa de fincas"
+
+#. module: base_ter
+#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
+msgid "Territorial Base: refresh all aerial images of the parcels"
+msgstr "Base territorial: Refrescar todas las imágenes aéreas de parcelas"
+
+#. module: base_ter
+#: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
+msgid "Territorial Branch: Refresh all aerial images of the parcels"
+msgstr "Rama territorial: Refrescar todas las imágenes aéreas de parcelas"
+
+#. module: base_ter
+#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_reset_all_aerial_images
+msgid "Territorial Branch: Refresh all aerial images of the properties"
+msgstr "Rama territorial: Refrescar todas las imágenes aéreas de fincas"
+
+#. module: base_ter
 #: model:ir.cron,cron_name:base_ter.ter_property_cron_action_refresh_properties_layer
 msgid "Territorial Branch: Refresh layer of properties"
-msgstr "Base territorial: Refrescar capa de fincas"
+msgstr "Rama territorial: Refrescar capa de fincas"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_territory
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Territory"
 msgstr "Territorio"
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/res_partner.py:0
+#, python-format
+msgid "The code must be a positive value."
+msgstr ""
 
 #. module: base_ter
 #. odoo-python

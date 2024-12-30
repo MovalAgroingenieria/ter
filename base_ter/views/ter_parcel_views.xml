@@ -144,6 +144,8 @@
                 <field name="alphanum_code" string="Code"
                        class="text-center"/>
                 <field name="partner_id" string="Manager"/>
+                <field name="municipality_id" string="Municipality"/>
+                <field name="property_id" string="Property"/>
                 <field name="official_code" string="Reference"
                        class="text-center"/>
                 <field name="area_official" sum="Total Area"/>

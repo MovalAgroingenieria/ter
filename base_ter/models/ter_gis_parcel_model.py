@@ -16,7 +16,8 @@ class TerGisParcelModel(models.Model):
     #     tools.drop_view_if_exists(self.env.cr, 'ter_gis_parcel_model')
     #     self.env.cr.execute("""
     #         CREATE OR REPLACE VIEW ter_gis_parcel_model AS (
-    #         SELECT ROW_NUMBER() OVER() AS id, tgp.name, tp.id as parcel_id,
+    #         SELECT ROW_NUMBER() OVER() AS id, tgp.name,
+    #         POSTGIS.ST_ASGEOJSON(tgp.geom) AS geom_geojson, tp.id as parcel_id,
     #         tp.partner_id as partner_id, tp.active as is_active
     #         FROM ter_gis_parcel tgp LEFT JOIN ter_parcel tp
     #         ON tgp.name = tp.name)

@@ -117,6 +117,7 @@
                   default_order="alphanum_code">
                 <field name="alphanum_code" string="Property"/>
                 <field name="partner_id" string="Holder"/>
+                <field name="municipality_id" string="Municipality"/>
                 <field name="number_of_parcels" string="Parcels"/>
                 <field name="area_official_parcels" sum="Total Area"/>
             </tree>

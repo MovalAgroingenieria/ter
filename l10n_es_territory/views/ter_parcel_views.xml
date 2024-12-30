@@ -43,6 +43,10 @@
                 <attribute name="string">Cadastral Ref.</attribute>
                 <attribute name="attrs">{'invisible': [('parcel_type', '!=', '01_R')]}</attribute>
             </xpath>
+            <xpath expr="//field[@name='official_code']" position="after">
+                <field name="cadastral_subparcel" string="Subparcel"
+                       attrs="{'invisible': [('parcel_type', '=', '02_U')]}"/>
+            </xpath>
             <xpath expr="//field[@name='area_official']" position="after">
                 <field name="cadastral_area" string="Cadastral Area (m²)"/>
             </xpath>

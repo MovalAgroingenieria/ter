@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-27 06:57+0000\n"
-"PO-Revision-Date: 2024-10-27 06:57+0000\n"
+"POT-Creation-Date: 2024-12-30 18:47+0000\n"
+"PO-Revision-Date: 2024-12-30 18:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -146,6 +146,11 @@ msgstr ""
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_sector
 msgid "Cadastral Sector"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_subparcel
+msgid "Cadastral Subparcel"
 msgstr ""
 
 #. module: l10n_es_territory
@@ -466,6 +471,11 @@ msgstr ""
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_42
 msgid "Soria"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+msgid "Subparcel"
 msgstr ""
 
 #. module: l10n_es_territory

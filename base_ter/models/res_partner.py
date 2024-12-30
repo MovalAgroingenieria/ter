@@ -18,8 +18,7 @@ class ResPartner(models.Model):
 
     def _default_partner_code(self):
         resp = 0
-        context_ter = self.env.context.get('context_ter', False)
-        if context_ter:
+        if self.env.context.get('context_ter', False):
             self.env.cr.execute('SELECT max(partner_code) FROM res_partner')
             query_results = self.env.cr.dictfetchall()
             if (query_results and
@@ -205,6 +204,9 @@ class ResPartner(models.Model):
                    len(partners_mapped_to_partner_code) > 1):
                     raise exceptions.ValidationError(
                         _('Repeated partner code.'))
+            elif self.env.context.get('context_ter', False):
+                raise exceptions.ValidationError(
+                    _('The code must be a positive value.'))
 
     @api.model
     def _get_view(self, view_id=None, view_type='form', **options):
@@ -245,6 +247,15 @@ class ResPartner(models.Model):
                 name = name + ' [' + str(record.partner_code) + ']'
             resp.append((record.id, name))
         return resp
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # A "child contact" cannot have a code.
+        for vals in vals_list:
+            if 'parent_id' in vals and vals['parent_id']:
+                vals['partner_code'] = 0
+        partners = super(ResPartner, self).create(vals_list)
+        return partners
 
     def action_gis_viewer_parcel(self):
         parcel_ids = []
