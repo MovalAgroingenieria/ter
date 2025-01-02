@@ -218,10 +218,21 @@
         </field>
     </record>
 
+    <record id="ter_property_view_pivot" model="ir.ui.view">
+        <field name="name">ter.property.view.pivot</field>
+        <field name="model">ter.property</field>
+        <field name="arch" type="xml">
+            <pivot string="Agregated Values" display_quantity="true">
+                <field name="partner_id" type="row"/>
+                <field name="area_official_parcels" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
     <record id="ter_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
         <field name="res_model">ter.property</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
         <field name="view_ids"
          eval="[(5, 0),
                 (0, 0, {'view_mode': 'tree',
@@ -229,7 +240,9 @@
                 (0, 0, {'view_mode': 'form',
                         'view_id': ref('ter_property_view_form')}),
                 (0, 0, {'view_mode': 'kanban',
-                        'view_id': ref('ter_property_view_kanban')}),]"/>
+                        'view_id': ref('ter_property_view_kanban')}),
+                (0, 0, {'view_mode': 'pivot',
+                        'view_id': ref('ter_property_view_pivot')}),]"/>
         <field name="search_view_id" ref="ter_property_view_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
