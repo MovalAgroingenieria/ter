@@ -34,13 +34,12 @@
                     <group name="master_data">
                         <group name="master_data_left">
                             <div class="oe_title" colspan="2">
-                                <h1>
+                                <h4>
                                     <field name="alphanum_code" string="Property"
                                            placeholder="(property name)"/>
-                                </h1>
+                                </h4>
                                 <field name="partner_id"
                                        placeholder="(holder)"
-                                       domain="[('is_holder', '=', True)]"
                                        context="{'context_ter': True}"
                                        options="{'no_quick_create':True}"
                                        readonly="context.get('default_partner_id', False)"/>

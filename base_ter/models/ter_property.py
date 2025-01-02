@@ -15,13 +15,13 @@ class TerProperty(models.Model):
     # Static variables inherited from "simple.model"
     _set_num_code = False
     _sequence_for_codes = ''
-    _size_name = 30
+    _size_name = 100
     _minlength = 0
-    _maxlength = 30
+    _maxlength = 100
     _allowed_blanks_in_code = True
     _set_alphanum_code_to_lowercase = False
     _set_alphanum_code_to_uppercase = False
-    _size_description = 75
+    _size_description = 175
 
     # Static variables inherited from "polygon.model"
     _gis_table = 'ter_gis_property'
@@ -66,7 +66,6 @@ class TerProperty(models.Model):
     partner_id = fields.Many2one(
         string='Property Manager',
         comodel_name='res.partner',
-        required=True,
         index=True,
         ondelete='restrict',)
 

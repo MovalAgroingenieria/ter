@@ -91,7 +91,7 @@
             <tree class="o_base_ter_res_partner"
                   default_order="partner_code">
                 <field name="partner_code" string="Code"/>
-                <field name="display_name" string="Name"/>
+                <field name="name" string="Name"/>
                 <field name="vat" string="VAT"
                        class="text-center"/>
                 <field name="number_of_properties" string="Properties"/>

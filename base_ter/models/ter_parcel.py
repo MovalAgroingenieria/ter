@@ -367,7 +367,6 @@ class TerParcel(models.Model):
     def _check_property_id(self):
         for record in self:
             if (record.partner_id and record.property_id and
-               record.property_id.partner_id and
                record.partner_id != record.property_id.partner_id):
                 raise exceptions.ValidationError(
                     _('The parcel manager and the property manager must '
