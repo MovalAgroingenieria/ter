@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import requests
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ElementTree
 
 from odoo import fields, models, api, exceptions, _
 
@@ -91,13 +91,27 @@ class TerParcel(models.Model):
         string='Cadastral Subparcel',
         size=MAX_SIZE_CADASTRAL_FIELD, )
 
+    official_code_with_subparcel = fields.Char(
+        string='Official Code with subparcel',
+        store=True,
+        index=True,
+        compute='_compute_official_code_with_subparcel',)
+
     _sql_constraints = [
-        ('official_code_unique',
-         'UNIQUE (official_code)',
-         'Repeated cadastral reference.'),
         ('cadastral_area_ok', 'CHECK (cadastral_area >= 0)',
          'Incorrect value for "Cadastral Area (m²)".'),
     ]
+
+    @api.depends('official_code', 'cadastral_subparcel')
+    def _compute_official_code_with_subparcel(self):
+        for record in self:
+            official_code_with_subparcel = ''
+            if record.official_code:
+                official_code_with_subparcel = record.official_code
+                if record.cadastral_subparcel:
+                    official_code_with_subparcel = official_code_with_subparcel + \
+                        '-' + record.cadastral_subparcel
+            record.official_code_with_subparcel = official_code_with_subparcel
 
     @api.depends('parcel_type', 'municipality_id',
                  'municipality_id.cadastral_code', 'official_code_urban',
@@ -131,6 +145,21 @@ class TerParcel(models.Model):
                len(record.official_code) != official_code_length):
                 raise exceptions.ValidationError(_(
                     'The length of the cadastral reference is not correct.'))
+
+    @api.constrains('official_code_with_subparcel')
+    def _check_official_code_with_subparcel(self):
+        for record in self:
+            official_code_with_subparcel = record.official_code_with_subparcel
+            if official_code_with_subparcel:
+                id_to_exclude = record.id
+                possible_duplicates = self.search(
+                    [('official_code_with_subparcel', '=',
+                      official_code_with_subparcel),
+                     ('id', '!=', id_to_exclude)])
+                if possible_duplicates:
+                    raise exceptions.ValidationError(_(
+                        'Repeated cadastral reference (with subparcel). '
+                        'Check archived parcels.'))
 
     # Hook redefined.
     def _process_vals(self, vals):
@@ -166,6 +195,9 @@ class TerParcel(models.Model):
                 vals['cadastral_sector'] = None
                 vals['cadastral_polygon'] = None
                 vals['cadastral_parcel'] = None
+        if 'cadastral_subparcel' in vals and vals['cadastral_subparcel']:
+            vals['cadastral_subparcel'] = \
+                vals['cadastral_subparcel'].strip().upper()
         return None
 
     def _get_cadastral_area(self):
@@ -178,7 +210,7 @@ class TerParcel(models.Model):
                     self._url_cadastral_data + self.official_code,
                     timeout=self.REQUEST_TIMEOUT)
                 if resp_http_get.status_code == 200:
-                    cadastral_data = ET.fromstring(resp_http_get.content)
+                    cadastral_data = ElementTree.fromstring(resp_http_get.content)
                     prefix = ''
                     pos_closing = cadastral_data.tag.find('}')
                     if pos_closing != -1:

@@ -58,8 +58,9 @@
         <field name="model">ter.parcel</field>
         <field name="inherit_id" ref="base_ter.ter_parcel_view_tree"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='official_code']" position="attributes">
-                <attribute name="string">Cadastral Ref.</attribute>
+            <xpath expr="//field[@name='official_code']" position="after">
+                <field name="cadastral_subparcel" string="Subp."
+                       class="text-center"/>
             </xpath>
         </field>
     </record>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 18:48+0000\n"
-"PO-Revision-Date: 2024-12-30 18:48+0000\n"
+"POT-Creation-Date: 2025-01-08 13:04+0000\n"
+"PO-Revision-Date: 2025-01-08 13:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr ""
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
 msgid "<span>/</span>"
-msgstr ""
+msgstr "<span>/</span>"
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
@@ -142,7 +142,6 @@ msgstr "Polígon cadastral"
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
 msgid "Cadastral Ref."
 msgstr "Ref. cadastral"
 
@@ -372,6 +371,11 @@ msgid "Official Code"
 msgstr "Referència cadastral"
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__official_code_with_subparcel
+msgid "Official Code with subparcel"
+msgstr "Referència cadastral amb subparcel·la"
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_32
 msgid "Ourense"
 msgstr ""
@@ -428,9 +432,11 @@ msgid "Región de Murcia"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:ir.model.constraint,message:l10n_es_territory.constraint_ter_parcel_official_code_unique
-msgid "Repeated cadastral reference."
-msgstr "Referència cadastral repetida."
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+#, python-format
+msgid "Repeated cadastral reference (with subparcel). Check archived parcels."
+msgstr "Referència cadastral repetida (amb subparcel·la). Si no trobeu el duplicat, comproveu si esteu entre les parcel·les arxivades."
 
 #. module: l10n_es_territory
 #. odoo-python
@@ -475,6 +481,11 @@ msgstr ""
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_42
 msgid "Soria"
 msgstr ""
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
+msgid "Subp."
+msgstr "Subp."
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
