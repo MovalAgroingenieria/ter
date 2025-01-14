@@ -90,12 +90,17 @@
         <field name="arch" type="xml">
             <tree class="o_base_ter_res_partner"
                   default_order="partner_code">
+                <field name="number_of_parcels" invisible="1"/>
                 <field name="partner_code" string="Code"/>
                 <field name="name" string="Name"/>
                 <field name="vat" string="VAT"
                        class="text-center"/>
                 <field name="number_of_properties" string="Properties"/>
                 <field name="number_of_parcels" string="Parcels"/>
+                <button name="action_gis_viewer_parcel"
+                        title="GIS Viewer" type="object" class="oe_stat_button"
+                        icon="fa-map-marker"
+                        attrs="{'invisible': [('number_of_parcels', '=', 0)]}"/>
                 <field name="area_official_parcels"/>
             </tree>
         </field>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 18:45+0000\n"
-"PO-Revision-Date: 2024-12-30 18:45+0000\n"
+"POT-Creation-Date: 2025-01-14 19:36+0000\n"
+"PO-Revision-Date: 2025-01-14 19:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -411,6 +411,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 msgid "Aerial image not found"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_pivot
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_pivot
+msgid "Agregated Values"
 msgstr ""
 
 #. module: base_ter
@@ -828,6 +834,9 @@ msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
 msgid "GIS Viewer"
 msgstr ""
 

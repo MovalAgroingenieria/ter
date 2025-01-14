@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-30 18:46+0000\n"
-"PO-Revision-Date: 2024-12-30 18:46+0000\n"
+"POT-Creation-Date: 2025-01-14 19:36+0000\n"
+"PO-Revision-Date: 2025-01-14 19:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgstr "(codi de parcel·la)"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "(parcel manager)"
-msgstr "(gestor)"
+msgstr "(soci)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
@@ -238,7 +238,7 @@ msgstr "<span>Perímetre GIS</span>"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "<span>GIS Viewer</span>"
-msgstr "Visor GIS"
+msgstr "<span>Visor GIS</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
@@ -436,6 +436,12 @@ msgid "Aerial image not found"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_pivot
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_pivot
+msgid "Agregated Values"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__warning_diff_areas
 msgid ""
 "Alert threshold due to the difference between the official area and the GIS "
@@ -603,7 +609,7 @@ msgstr "Contactes de parcel·la"
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.res_partner_action
 msgid "Create a new manager"
-msgstr "Crear un gestor nou"
+msgstr "Crear un soci nou"
 
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.ter_parcel_action
@@ -853,6 +859,9 @@ msgstr "Previsualització GIS: arguments addicionals"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
 msgid "GIS Viewer"
 msgstr "Visor GIS"
 
@@ -880,7 +889,7 @@ msgstr "Visor GIS: nom d'usuari pel mode tècnic"
 #: model:ir.ui.menu,name:base_ter.menu_configuration_general
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__geom_geojson
@@ -1118,7 +1127,7 @@ msgstr "És gestor"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Is manager"
-msgstr "Contacte gestor"
+msgstr "Soci gestor"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ir_cron__is_base_ter
@@ -1208,7 +1217,7 @@ msgstr "Adjunt principal"
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.res_partner_action
 msgid "Manage managers."
-msgstr "Administrar gestors."
+msgstr "Administrar socis."
 
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.ter_parceltag_action
@@ -1244,13 +1253,13 @@ msgstr "Gestió"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 msgid "Manager"
-msgstr "Gestor"
+msgstr "Soci"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.res_partner_action
 #: model:ir.ui.menu,name:base_ter.res_partner_menu
 msgid "Managers"
-msgstr "Gestors"
+msgstr "Socis"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__mapped_to_polygon
@@ -1441,7 +1450,7 @@ msgstr "Gestor"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 msgid "Parcel Manager"
-msgstr "Gestor"
+msgstr "Soci"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__partner_id
@@ -1958,7 +1967,7 @@ msgstr "Base territorial: Refrescar capa de finques"
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
 msgid "Territorial Base: refresh all aerial images of the parcels"
-msgstr "Base territorial: Refrescar totes les imatges aèries de parcel·les"
+msgstr "Base territorial: refrescar totes les imatges aèries de parcel·les"
 
 #. module: base_ter
 #: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
@@ -2192,13 +2201,13 @@ msgstr "Amb enllaç GIS: Sí"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "With parcel manager: No"
-msgstr "Amb gestor: No"
+msgstr "Amb soci: No"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 msgid "With parcel manager: Yes"
-msgstr "Amb gestor: Sí"
+msgstr "Amb soci: Sí"
 
 #. module: base_ter
 #: model:res.groups,name:base_ter.group_ter_manager

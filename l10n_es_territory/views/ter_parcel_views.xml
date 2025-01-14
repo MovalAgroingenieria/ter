@@ -62,6 +62,13 @@
                 <field name="cadastral_subparcel" string="Subp."
                        class="text-center"/>
             </xpath>
+            <xpath expr="//button[@name='action_gis_viewer']" position="before">
+                <field name="official_code" invisible="1"/>
+                <button name="action_show_cadastral_form"
+                        title="Cadastral Form" type="object" class="oe_stat_button"
+                        icon="fa-info-circle"
+                        attrs="{'invisible': [('official_code', '=', False)]}"/>
+            </xpath>
         </field>
     </record>
 

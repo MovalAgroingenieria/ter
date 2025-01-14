@@ -114,10 +114,15 @@
         <field name="arch" type="xml">
             <tree class="o_base_ter_ter_property"
                   default_order="alphanum_code">
+                <field name="mapped_to_polygon" invisible="1"/>
                 <field name="alphanum_code" string="Property"/>
                 <field name="partner_id" string="Holder"/>
                 <field name="municipality_id" string="Municipality"/>
                 <field name="number_of_parcels" string="Parcels"/>
+                <button name="action_gis_viewer"
+                        title="GIS Viewer" type="object" class="oe_stat_button"
+                        icon="fa-map-marker"
+                        attrs="{'invisible': [('mapped_to_polygon', '=', False)]}"/>
                 <field name="area_official_parcels" sum="Total Area"/>
             </tree>
         </field>

@@ -6,7 +6,6 @@ from odoo import fields, models, api, exceptions, _
 
 class ResPartner(models.Model):
     _inherit = ['res.partner']
-    _order = 'partner_code, name'
 
     # Size of the "partner_code" field.
     _size_partner_code = 6

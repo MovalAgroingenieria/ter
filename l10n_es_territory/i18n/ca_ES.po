@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-08 13:04+0000\n"
-"PO-Revision-Date: 2025-01-08 13:04+0000\n"
+"POT-Creation-Date: 2025-01-14 19:49+0000\n"
+"PO-Revision-Date: 2025-01-14 19:49+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,19 +22,16 @@ msgid ""
 "                    Sec / Pol / Par\n"
 "                </span>"
 msgstr ""
-"<span name=\"cadastral_name\" class=\"o_form_label o_td_label\" attrs=\"{'invisible': [('parcel_type', '!=', '01_R')]}\">\n"
-"                    Sec / Pol / Par\n"
-"                </span>"
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
 msgid "<span>/</span>"
-msgstr "<span>/</span>"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
 msgid "<span>Cadastre</span>"
-msgstr "Cadastre"
+msgstr "<span>Cadastre</span>"
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_15
@@ -129,6 +126,11 @@ msgstr "Àrea cadastral (m²)"
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_province_view_search
 msgid "Cadastral Code"
 msgstr "Codi cadastral"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
+msgid "Cadastral Form"
+msgstr "Fitxa cadastral"
 
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_parcel
@@ -436,7 +438,9 @@ msgstr ""
 #: code:addons/l10n_es_territory/models/ter_parcel.py:0
 #, python-format
 msgid "Repeated cadastral reference (with subparcel). Check archived parcels."
-msgstr "Referència cadastral repetida (amb subparcel·la). Si no trobeu el duplicat, comproveu si esteu entre les parcel·les arxivades."
+msgstr ""
+"Referència cadastral repetida (amb subparcel·la). Si no trobeu el duplicat, "
+"comproveu si esteu entre les parcel·les arxivades."
 
 #. module: l10n_es_territory
 #. odoo-python
@@ -485,7 +489,7 @@ msgstr ""
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
 msgid "Subp."
-msgstr "Subp."
+msgstr ""
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
