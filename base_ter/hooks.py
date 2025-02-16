@@ -71,7 +71,8 @@ def post_init_hook(cr, registry):
         tp.id AS parcel_id,
         tp.partner_id as partner_id, tp.active as is_active
         FROM ter_gis_parcel tgp LEFT JOIN ter_parcel tp
-        ON tgp.name = tp.name)
+        ON tgp.name = tp.name
+        ORDER BY tgp.name)
         """)
     # Parameter initialization.
     env['ir.config_parameter'].set_param(

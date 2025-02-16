@@ -20,7 +20,8 @@ class TerGisParcelModel(models.Model):
     #         POSTGIS.ST_ASGEOJSON(tgp.geom) AS geom_geojson, tp.id as parcel_id,
     #         tp.partner_id as partner_id, tp.active as is_active
     #         FROM ter_gis_parcel tgp LEFT JOIN ter_parcel tp
-    #         ON tgp.name = tp.name)
+    #         ON tgp.name = tp.name
+    #         ORDER BY tgp.name)
     #         """)
 
     name = fields.Char(
