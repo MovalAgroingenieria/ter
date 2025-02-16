@@ -12,17 +12,17 @@ class TerGisParcelModel(models.Model):
     # Size of the aerial images
     _aerial_image_size_small = 128
 
-    # def init(self):
-    #     tools.drop_view_if_exists(self.env.cr, 'ter_gis_parcel_model')
-    #     self.env.cr.execute("""
-    #         CREATE OR REPLACE VIEW ter_gis_parcel_model AS (
-    #         SELECT ROW_NUMBER() OVER() AS id, tgp.name,
-    #         POSTGIS.ST_ASGEOJSON(tgp.geom) AS geom_geojson, tp.id as parcel_id,
-    #         tp.partner_id as partner_id, tp.active as is_active
-    #         FROM ter_gis_parcel tgp LEFT JOIN ter_parcel tp
-    #         ON tgp.name = tp.name
-    #         ORDER BY tgp.name)
-    #         """)
+    def init(self):
+        self.env.cr.execute("""
+            CREATE OR REPLACE VIEW ter_gis_parcel_model AS (
+            SELECT ROW_NUMBER() OVER() AS id, tgp.name,
+            POSTGIS.ST_ASGEOJSON(tgp.geom) AS geom_geojson, tp.id as parcel_id,
+            tp.partner_id as partner_id, tp.active as is_active
+            FROM ter_gis_parcel tgp LEFT JOIN ter_parcel tp
+            ON tgp.name = tp.name
+            WHERE tp.partner_id IS NOT NULL OR tp.partner_id IS NULL
+            ORDER BY tgp.name)
+            """)
 
     name = fields.Char(
         string='Parcel Code', )
