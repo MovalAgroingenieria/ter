@@ -43,6 +43,37 @@ class TerGisParcelController(http.Controller):
             })
         return data
 
+    def _get_gis_parcel(self, name_values, operator):
+        cr = request.env.cr
+        gis_parcels = []
+        try:
+            if operator == 'ilike':
+                where_clause = " OR ".join(
+                    ["name ILIKE %s" for _ in name_values]
+                )
+                params = [f"%{value}%" for value in name_values]
+            else:
+                where_clause = " OR ".join(
+                    ["name = %s" for _ in name_values]
+                )
+                params = name_values
+            query = f"""
+                SELECT name, ST_AsGeoJSON(geom) as geom_geojson, gid
+                FROM ter_gis_parcel
+                WHERE {where_clause}
+            """
+            cr.execute(query, params)
+            results = cr.dictfetchall()
+            for result in results:
+                gis_parcels.append({
+                    'name': result['name'],
+                    'geom_geojson': result['geom_geojson'],
+                    'gid': result['gid'],
+                })
+        except Exception as e:
+            http.request._cr.rollback()
+        return gis_parcels
+
     @http.route(
         '/get_parcels', type='json', auth='user', methods=['POST'], csrf=False)
     def get_parcels(self, **kwargs):
@@ -65,9 +96,10 @@ class TerGisParcelController(http.Controller):
             else:
                 domain = ['|'] * (len(name_values) - 1) + [
                     ('name', operator, value) for value in name_values]
-            gis_parcels = request.env['ter.gis.parcel.model'].search(domain)
+            # gis_parcels = request.env['ter.gis.parcel.model'].search(domain)
+            gis_parcels = self._get_gis_parcels(name_values, operator)
             ter_parcels = request.env['ter.parcel'].search(domain)
-            gis_parcel_map = {p.name: p for p in gis_parcels}
+            gis_parcel_map = {p['name']: p for p in gis_parcels}
             ter_parcel_map = {p.name: p for p in ter_parcels}
             gis_parcel_names = set(gis_parcel_map.keys())
             ter_parcel_names = set(ter_parcel_map.keys())
