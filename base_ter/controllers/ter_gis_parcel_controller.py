@@ -43,7 +43,7 @@ class TerGisParcelController(http.Controller):
             })
         return data
 
-    def _get_gis_parcel(self, name_values, operator):
+    def _get_gis_parcels(self, name_values, operator):
         cr = request.env.cr
         gis_parcels = []
         try:
