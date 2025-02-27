@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ter_iconset';
-  src:  url('fonts/ter_iconset.eot?gnhx01');
-  src:  url('fonts/ter_iconset.eot?gnhx01#iefix') format('embedded-opentype'),
-    url('fonts/ter_iconset.ttf?gnhx01') format('truetype'),
-    url('fonts/ter_iconset.woff?gnhx01') format('woff'),
-    url('fonts/ter_iconset.svg?gnhx01#ter_iconset') format('svg');
+  src:  url('fonts/ter_iconset.eot?ctsbdg');
+  src:  url('fonts/ter_iconset.eot?ctsbdg#iefix') format('embedded-opentype'),
+    url('fonts/ter_iconset.ttf?ctsbdg') format('truetype'),
+    url('fonts/ter_iconset.woff?ctsbdg') format('woff'),
+    url('fonts/ter_iconset.svg?ctsbdg#ter_iconset') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -40,6 +40,15 @@
 }
 
 /* Icons */
+.fa-ter-parcel:before {
+  content: "\e903";
+}
+.fa-ter-parcel-duotone::before {
+  content: "\e904";
+}
+.fa-ter-parcel-duotone::after {
+  content: "\e905";
+}
 .fa-ter-property:before {
   content: "\e900";
 }
@@ -48,28 +57,4 @@
 }
 .fa-ter-property-duotone::after {
   content: "\e902";
-}
-.fa-ter-parcel:before {
-  content: "\e903";
-}
-.fa-ter-subparcel:before {
-  content: "\e904";
-}
-.fa-ter-subparcel-duotone::before {
-  content: "\e905";
-}
-.fa-ter-subparcel-duotone::after {
-  content: "\e906";
-}
-.fa-ter-file-parcel:before {
-  content: "\e907";
-}
-.fa-ter-file-subparcel:before {
-  content: "\e908";
-}
-.fa-ter-file-subparcel-duotone::before {
-  content: "\e909";
-}
-.fa-ter-file-subparcel-duotone::after {
-  content: "\e90a";
 }
