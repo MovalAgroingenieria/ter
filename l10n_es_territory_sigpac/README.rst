@@ -16,7 +16,6 @@ This module allows to link the parcels with the official SIGPAC enclosures,
 using spatial functions of the PostGis extension of PostgreSql.
 
 Functionality:
-
 * Load of SIGPAC enclosures of each municipality.
 * Automatic spatial calculation of the SIGPAC enclosures linked to parcels.
 * Extraction of alphanumeric data from SIGPAC.
