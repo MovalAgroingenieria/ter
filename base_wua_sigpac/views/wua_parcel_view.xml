@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wua_parcel_view_form" model="ir.ui.view">
+        <field name="name">Parcels (form view)</field>
+        <field name="model">wua.parcel</field>
+        <field name="inherit_id"
+               ref="base_wua.wua_parcel_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_see_cadastral_report']"
+                   position="after">
+                <button name="action_get_enclosures"
+                        type="object" class="oe_stat_button"
+                        icon="fa-moval-sigpac-duotone"
+                        attrs="{'invisible': [('number_of_sigpaclinks','=',0)]}">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="number_of_sigpaclinks"/>
+                         </span>
+                        <span class="o_stat_text">Enclosures</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//group[@name='aerial_img_group']" position="inside">
+                <field name="aerial_img_sigpac" widget="image" class="oe_img_259_160"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpac_view_form" model="ir.ui.view" >
+        <field name="name">Parcels with enclosures (form view)</field>
+        <field name="model">wua.parcel</field>
+        <field name="priority" eval="100"/>
+        <field name="arch" type="xml">
+            <form string="Parcels (SIGPAC enclosures)"
+                  duplicate="false" create="false" edit="false" delete="false">
+                <div class="panel-body text-center" style="background:#ededed;border-color:#696969;border-width:1px;border-style:solid;padding-top:7px;padding-bottom:0px;margin-bottom:20px"><h4><span class="o_stat_text"><field name="parcel_title_sigpac"/></span></h4></div>
+                <group name="master_data">
+                    <group name="master_data_left">
+                        <field name="hydraulic_infrastructure_type" invisible="1"/>
+                        <field name="partner_id" string="Irrigation Partner"/>
+                        <field name="county_id" string="Municipality"/>
+                        <field name="hydraulicsector_id"
+                               string="Hydraulic Sector"
+                               attrs="{'invisible':['|', ('hydraulic_infrastructure_type', '=', 0), ('hydraulic_infrastructure_type', '=', 2)]}"/>
+                        <field name="irrigationditch_id"
+                               string="Hydraulic Sector"
+                               attrs="{'invisible':['|', ('hydraulic_infrastructure_type', '=', 0), ('hydraulic_infrastructure_type', '=', 1)]}"/>
+                        <field name="cadastral_reference"
+                               string="Cadastral Reference"/>
+                        <field name="number_of_subparcels"
+                               string="N. subparcels"/>
+                        <field name="number_of_partnerlinks"
+                               string="N. partners"/>
+                        <field name="area_official_hec"
+                               string="Official Area (ha)"/>
+                        <field name="area_gis"
+                               string="GIS Area (ha)"/>
+                    </group>
+                    <group name="master_data_right">
+                        <div colspan="2">
+                            <div style="width:20%;display:inline-block;"/>
+                            <div class="text-center"
+                                 style="width:60%; display:inline-block">
+                                <field name="aerial_img_nonpersistent" widget="image" style="border-color:#696969;border-width:1px;border-style:solid"/>
+                            </div>
+                            <div style="width:20%;display:inline-block;"/>
+                        </div>
+                    </group>
+                </group>
+                <div class="panel-body text-center" style="margin-top:8px;background:#ededed;border-color:#696969;border-width:1px;border-style:solid">
+                    <field name="sigpaclink_ids"
+                           context="{'tree_view_ref':'base_wua_sigpac.wua_parcel_sigpaclink_only_enclosures_view_tree'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpaclink_view_form" model="ir.ui.view">
+        <field name="name">SIGPAC links of parcels (form view)</field>
+        <field name="model">wua.parcel.sigpaclink</field>
+        <field name="arch" type="xml">
+            <form duplicate="false" create="false"
+                  delete="false" edit="false">
+                <field name="irrigation_model_type" invisible="1"/>
+                <sheet>
+                    <div name="grp_cult_icon"
+                         style="display: inline-block;">
+                        <img src="/base_wua_sigpac/static/img/icon_fruit_tree.png"
+                             attrs="{'invisible':[('grp_cult', '!=', 'CP')]}"/>
+                        <img src="/base_wua_sigpac/static/img/icon_pastures.png"
+                             attrs="{'invisible':[('grp_cult', '!=', 'PT')]}"/>
+                        <img src="/base_wua_sigpac/static/img/icon_irrigation_land.png"
+                             attrs="{'invisible':[('grp_cult', '!=', 'TCR')]}"/>
+                        <img src="/base_wua_sigpac/static/img/icon_dry_farming.png"
+                             attrs="{'invisible':[('grp_cult', '!=', 'TCS')]}"/>
+                        <b><field name="grp_cult" style="margin-left:15px"/></b>
+                    </div>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_gis_viewer"
+                                type="object" class="oe_stat_button"
+                                icon="fa-map-marker">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">GIS</span>
+                                <span class="o_stat_text">Viewer</span>
+                            </div>
+                        </button>
+                        <button name="action_sigpac_viewer"
+                                type="object" class="oe_stat_button"
+                                icon="fa-map-marker">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_text">SIGPAC</span>
+                                <span class="o_stat_text">Viewer</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group name="master_data">
+                        <group name="master_data_left">
+                            <div name="title_master_data_left" colspan="2"
+                                style="text-align:center">
+                                <span style="font-weight:bold;">
+                                PARCEL DATA
+                                </span>
+                            </div>
+                            <hr colspan="2" style="margin-right:10px;margin-bottom:26px"/>
+                            <field name="parcel_id" string="Parcel"/>
+                            <field name="parcel_area_ha" string="GIS Area (ha)"/>
+                            <field name="county_id" string="Municipality"/>
+                            <field name="hydraulicsector_id"
+                                   string="Hydraulic Sector"
+                                   attrs="{'invisible': [('irrigation_model_type', '=', 1)]}"/>
+                            <field name="irrigationditch_id"
+                                   string="Irrigation Ditch"
+                                   attrs="{'invisible': [('irrigation_model_type', '=', 0)]}"/>
+                            <field name="number_of_sigpaclinks"
+                                   string="N. enclosures"/>
+                        </group>
+                        <group name="master_data_right">
+                            <div name="title_master_data_right" colspan="2"
+                                style="text-align:center;">
+                                <span style="font-weight:bold;">
+                                SIGPAC DATA
+                                </span>
+                            </div>
+                            <hr colspan="2" style="margin-bottom:26px"/>
+                            <field name="sigpac_id" string="SIGPAC Enclosure"/>
+                            <field name="enclosure_number"
+                                   string="Enclosure Number"/>
+                            <field name="area_ha" string="Area (ha)"/>
+                            <field name="intersection_percentage"
+                                   string="% of parcel"/>
+                            <field name="uso_sigpac" string="Land Use"/>
+                            <field name="coef_rega" string="Irrig. Coef. (0-100)"/>
+                            <field name="pend_media_porc" string="Medium Slope (%)"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpaclink_view_tree" model="ir.ui.view">
+        <field name="name">SIGPAC links of parcels (tree view)</field>
+        <field name="model">wua.parcel.sigpaclink</field>
+        <field name="arch" type="xml">
+            <tree class="o_base_wua_sigpac_parcel_sigpaclink_view_tree"
+                  create="false" delete="false">
+                <field name="parcel_id" string="Parcel"
+                       widget="many2one_unclickable"/>
+                <button name="action_gis_viewer"
+                        type="object" class="oe_stat_button"
+                        icon="fa-map-marker"/>
+                <field name="sigpac_id" string="SIGPAC Enclosure"
+                       widget="many2one_unclickable"/>
+                <button name="action_sigpac_viewer"
+                        type="object" class="oe_stat_button"
+                        icon="fa-map-marker"/>
+                <field name="area_ha" string="Area (ha)"/>
+                <field name="intersection_percentage" string="% of parcel"/>
+                <field name="county_id" string="Municipality"
+                       widget="many2one_unclickable"/>
+                <field name="pend_media_porc" string="Slope %"/>
+                <field name="coef_rega" string="Irrig. Coef. (0-100)"/>
+                <field name="uso_sigpac" string="Land Use"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpaclink_view_search" model="ir.ui.view">
+        <field name="name">SIGPAC links of parcels (search view)</field>
+        <field name="model">wua.parcel.sigpaclink</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="parcel_id" string="Parcel"/>
+                <field name="sigpac_id" string="SIGPAC Enclosure"/>
+                <field name="county_id" string="Municipality"/>
+                <field name="uso_sigpac" string="Land Use"/>
+                <filter string="Crop Group: CP - Cultivos permanentes"
+                        name="grp_cult_cp"
+                        domain="[('grp_cult','=','CP')]"/>
+                <filter string="Crop Group: PT - Pastos"
+                        name="grp_cult_pt"
+                        domain="[('grp_cult','=','PT')]"/>
+                <filter string="Crop Group: TCR - Tierras de cultivo de regadío"
+                        name="grp_cult_tcr"
+                        domain="[('grp_cult','=','TCR')]"/>
+                <filter string="Crop Group: TCS - Tierras de cultivo de secano"
+                        name="grp_cult_tcs"
+                        domain="[('grp_cult','=','TCS')]"/>
+                <filter string="Crop Group: Not assigned"
+                        name="grp_cult_na"
+                        domain="[('grp_cult','=','')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Municipality"
+                            name="grouped_county_id"
+                     context="{'group_by':'county_id'}"/>
+                    <filter string="Hydraulic Sector"
+                            name="grouped_hydraulicsector_id"
+                     context="{'group_by':'hydraulicsector_id'}"/>
+                    <filter string="Irrigation Ditch"
+                            name="grouped_irrigationditch_id"
+                     context="{'group_by':'irrigationditch_id'}"/>
+                    <filter string="Crop Group"
+                            name="grouped_grp_cult"
+                     context="{'group_by':'grp_cult'}"/>
+                    <filter string="Land Use"
+                            name="grouped_uso_sigpac"
+                     context="{'group_by':'uso_sigpac'}"/>
+                    <filter string="Parcel"
+                            name="grouped_parcel_id"
+                     context="{'group_by':'parcel_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpaclink_view_pivot" model="ir.ui.view">
+        <field name="name">wua.parcel.sigpaclink.view.pivot</field>
+        <field name="model">wua.parcel.sigpaclink</field>
+        <field name="arch" type="xml">
+            <pivot string="Area (ha)">
+                <field name="grp_cult" type="col"/>
+                <field name="uso_sigpac" type="row"/>
+                <field name="area_ha" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpaclink_view_graph" model="ir.ui.view">
+        <field name="name">wua.parcel.sigpaclink.view.graph</field>
+        <field name="model">wua.parcel.sigpaclink</field>
+        <field name="arch" type="xml">
+            <graph string="Area (ha)">
+                <field name="uso_sigpac" type="row"/>
+                <field name="area_ha" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpaclink_only_parcels_view_tree" model="ir.ui.view">
+        <field name="name">Parcels mapped to a SIGPAC enclosure (tree view)</field>
+        <field name="model">wua.parcel.sigpaclink</field>
+        <field name="arch" type="xml">
+            <tree class="o_base_wua_sigpac_parcel_sigpaclink_only_parcels_view_tree"
+                  create="false" delete="false">
+                <field name="parcel_id" string="Parcel"/>
+                <button name="action_gis_viewer"
+                        type="object" class="oe_stat_button"
+                        icon="fa-map-marker"/>
+                <field name="county_id" string="Municipality"
+                       widget="many2one_unclickable"/>
+                <field name="hydraulicsector_id" string="Hydraulic Sector"
+                       widget="many2one_unclickable"/>
+                <field name="irrigationditch_id" string="Irrigation Ditch"
+                       widget="many2one_unclickable"/>
+                <field name="parcel_area_ha" string="Parcel Area (ha)"/>
+                <field name="area_ha" string="Intersection Area (ha)"/>
+                <field name="intersection_percentage" string="% of parcel"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpaclink_only_parcels_view_search" model="ir.ui.view">
+        <field name="name">Parcels mapped to a SIGPAC enclosure (search view)</field>
+        <field name="model">wua.parcel.sigpaclink</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="parcel_id" string="Parcel"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpaclink_only_enclosures_view_tree" model="ir.ui.view">
+        <field name="name">SIGPAC enclosures mapped to a parcel (tree view)</field>
+        <field name="model">wua.parcel.sigpaclink</field>
+        <field name="arch" type="xml">
+            <tree class="o_base_wua_sigpac_parcel_sigpaclink_only_enclosures_view_tree"
+                  create="false" delete="false">
+                <field name="enclosure_number" string=""/>
+                <field name="sigpac_id" string="SIGPAC Enclosure"/>
+                <button name="action_sigpac_viewer"
+                        type="object" class="oe_stat_button"
+                        icon="fa-map-marker"/>
+                <field name="uso_sigpac" string="Land Use"/>
+                <field name="coef_rega" string="Irrig. Coef. (0-100)"/>
+                <field name="parcel_area_ha" string="Parcel Area (ha)"/>
+                <field name="area_ha" string="Intersection (ha)"/>
+                <field name="intersection_percentage" string="% of parcel"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="wua_parcel_sigpaclink_action"
+            model="ir.actions.act_window">
+        <field name="name">SIGPAC enclos. in parcels</field>
+        <field name="res_model">wua.parcel.sigpaclink</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_ids"
+         eval="[(5, 0),
+                (0, 0, {'view_mode': 'tree',
+                        'view_id': ref('wua_parcel_sigpaclink_view_tree')}),
+                (0, 0, {'view_mode': 'form',
+                        'view_id': ref('wua_parcel_sigpaclink_view_form')}),
+                (0, 0, {'view_mode': 'pivot',
+                        'view_id': ref('wua_parcel_sigpaclink_view_pivot')}),
+                (0, 0, {'view_mode': 'graph',
+                        'view_id': ref('wua_parcel_sigpaclink_view_graph')})]"/>
+        <field name="search_view_id" ref="wua_parcel_sigpaclink_view_search"/>
+        <field name="context">{"graph_mode": "pie"}</field>
+    </record>
+
+    <menuitem id="parcel_sigpaclink_menu"
+              name="SIGPAC enclos. in parcels"
+              parent="base_wua.base_wua_census_landparcels_menu"
+              sequence="41"
+              action="wua_parcel_sigpaclink_action"
+              groups="base_wua.group_wua_user"/>
+
+    <record id="wua_technical_refresh_sigpac_intersections_action"
+            model="ir.actions.server">
+        <field name="name">Refresh SIGPAC in parcels</field>
+        <field name="model_id" ref="base_wua_sigpac.model_wua_parcel_sigpaclink"/>
+        <field name="code">action = env["wua.parcel.sigpaclink"].action_refresh_sigpac_intersections()</field>
+    </record>
+
+
+    <record id="wua_regenerate_aerial_img_sigpac_individual" model="ir.actions.server">
+        <field name="name">Generate Aerial Image SIGPAC</field>
+        <field name="model_id" ref="base_wua_sigpac.model_wua_parcel"/>
+        <field name="code">
+            action =  env['wua.parcel'].browse(context['active_ids']).regenerate_aerial_img_sigpac()
+        </field>
+    </record>
+
+    <record id="wua_action_regenerate_aerial_img_sigpac_individual" model="ir.values">
+        <field name="name">Generate Aerial Image SIGPAC</field>
+        <field name="model">wua.parcel</field>
+        <field name="key">action</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.server,' + str(ref('wua_regenerate_aerial_img_sigpac_individual'))"/>
+    </record>
+
+    <record id="wua_technical_regenerate_aerial_img_sigpac_action" model="ir.actions.server">
+        <field name="name">Generate Aerial Images SIGPAC</field>
+        <field name="model_id" ref="base_wua_sigpac.model_wua_parcel"/>
+        <field name="code">action = env["wua.parcel"].action_regenerate_aerial_img_sigpac()</field>
+    </record>
+    <menuitem id="wua_technical_refresh_sigpac_intersections"
+              name="Refresh SIGPAC in parcels"
+              parent="base_wua.base_wua_technical_menu"
+              action="wua_technical_refresh_sigpac_intersections_action"
+              sequence="10"/>
+    <menuitem id="wua_technical_regenerate_aerial_img_sigpac"
+              name="Aerial Image SIGPAC Regeneration"
+              parent="base_wua.base_wua_technical_menu"
+              action="wua_technical_regenerate_aerial_img_sigpac_action"
+              sequence="11"
+              groups="base.group_system"/>
+</odoo>

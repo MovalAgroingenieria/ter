@@ -1,0 +1,1094 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* base_wua_sigpac
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-14 14:07+0000\n"
+"PO-Revision-Date: 2024-10-14 14:07+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_intersection_percentage
+msgid "% in parcel"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_enclosures_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_parcels_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_tree
+msgid "% of parcel"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "(There is no partner associated with this parcel)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<br/>\n"
+"                                        Cadastral parcel:"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<br/>\n"
+"                                        Cadastral polygon:"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_view_form
+msgid "<span class=\"o_stat_text\">Enclosures</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+msgid "<span class=\"o_stat_text\">GIS</span>\n"
+"                                <span class=\"o_stat_text\">Viewer</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "<span class=\"o_stat_text\">Parcels</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "<span class=\"o_stat_text\">SIGPAC</span>\n"
+"                                <span class=\"o_stat_text\">Viewer</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "<span style=\"font-weight:bold;\">\n"
+"                                IDENTIFICATION\n"
+"                                </span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+msgid "<span style=\"font-weight:bold;\">\n"
+"                                PARCEL DATA\n"
+"                                </span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "<span style=\"font-weight:bold;\">\n"
+"                                SIGPAC DATA\n"
+"                                </span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Area official:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Ave. Elevation:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Cadastral area:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Cadastral parcel:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Cadastral polygon:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Cadastral reference:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Code:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>County:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Farm Property:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>GIS Area:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Max. Elevation:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Min. Elevation:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Parcel SIGPAC report [</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Rural Location:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Type:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>Water reservoir:</span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<span>m<sup>2</sup></span>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<strong>Areas&amp;nbsp;and&amp;nbsp;physical&amp;nbsp;attributes</strong>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<strong>Enclosures</strong>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<strong>Identity&amp;nbsp;and&amp;nbsp;casdastral&amp;nbsp;data</strong>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<strong>Partner</strong>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "<strong>Partners</strong>"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "AG - CORRIENTES Y SUPERFICIES DE AGUA"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: code:addons/base_wua_sigpac/hooks.py:19
+#, python-format
+msgid "ATTENTION: it is not possible to install this module, because the table \"wua_gis_parcel\" does not exist (the parcels do not have GIS links)."
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.menu,name:base_wua_sigpac.wua_technical_regenerate_aerial_img_sigpac
+msgid "Aerial Image SIGPAC Regeneration"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_aerial_img_sigpac
+msgid "Aerial image SIGPAC"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_aerial_img_sigpac_nonpersistent
+msgid "Aerial image SIGPAC, non-persistent"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_aerial_img_nonpersistent
+msgid "Aerial image, non-persistent"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_agregado
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Aggregate"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Area (GIS,"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_area_ha
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_dn_surface_ha
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_graph
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_pivot
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_graph
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_pivot
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_tree
+msgid "Area (ha)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_dn_surface
+msgid "Area (m²)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_sigpac_area
+msgid "Area of SIGPAC enclosure (m²)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "CA - VIALES"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "CF - ASOCIACIÓN CÍTRICOS-FRUTALES"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "CI - CITRICOS"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,grp_cult:0
+#: selection:wua.sigpac,grp_cult:0
+msgid "CP - Cultivos permanentes"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "CS - ASOCIACIÓN CÍTRICOS-FRUTALES DE CÁSCARA"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "CV - ASOCIACIÓN CÍTRICOS-VIÑEDO"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_view_form
+msgid "Cadastral Reference"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_config_settings_view_form
+msgid "Click on the following link to import the SIGPAC enclosures from the official shapefiles into the database."
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+msgid "Code"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_name
+msgid "Code of SIGPAC link"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_tree
+msgid "Code: prov. - munic. - aggreg. - zone - polyg. - parcel - enclos."
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_coef_admis
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_coef_admis
+msgid "Coefficient of admissibility in pastures (0-100)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model,name:base_wua_sigpac.model_wua_configuration
+msgid "Configuration of base_wua module"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Costs (%)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "County:"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_grp_cult
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_grp_cult
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+msgid "Crop Group"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+msgid "Crop Group: CP - Cultivos permanentes"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+msgid "Crop Group: Not assigned"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+msgid "Crop Group: PT - Pastos"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+msgid "Crop Group: TCR - Tierras de cultivo de regadío"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+msgid "Crop Group: TCS - Tierras de cultivo de secano"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_display_name
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "ED - EDIFICACIONES"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "EP - ELEMENTO DEL PAISAJE"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_recinto
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Enclosure"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_enclosure_number
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+msgid "Enclosure Number"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model,name:base_wua_sigpac.model_wua_parcel
+msgid "Entity (parcel)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "FF - ASOCIACIÓN FRUTALES-FRUTALES DE CÁSCARA"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "FL - FRUTOS SECOS Y OLIVAR"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "FO - FORESTAL"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "FS - FRUTOS SECOS"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "FV - FRUTOS SECOS Y VIÑEDO"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "FY - FRUTALES"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+msgid "GIS Area (ha)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_parcel_area_ha
+msgid "GIS Area of parcel (ha)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_parcel_area
+msgid "GIS Area of parcel (m²)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_gis_viewer_link
+msgid "GIS Viewer"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.actions.server,name:base_wua_sigpac.wua_regenerate_aerial_img_sigpac_individual
+msgid "Generate Aerial Image SIGPAC"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.actions.server,name:base_wua_sigpac.wua_technical_regenerate_aerial_img_sigpac_action
+msgid "Generate Aerial Images SIGPAC"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+msgid "Group By"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_hydraulicsector_id
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_parcels_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+msgid "Hydraulic Sector"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_id
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_id
+msgid "ID"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "IM - IMPRODUCTIVOS"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_config_settings_view_form
+msgid "IMPORTANT: If the 'Min. Intersection' parameter is changed, it will be necessary to reload the SIGPAC enclosures."
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "IV - INVERNADEROS Y CULTIVOS BAJO PLASTICO"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_incidencia
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_incidencia
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Incidence Codes"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_enclosures_view_tree
+msgid "Intersection (ha)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_parcels_view_tree
+msgid "Intersection Area (ha)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_number_of_sigpaclinks
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_sigpaclink_ids
+msgid "Intersections parcel-SIGPAC enclosure"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_enclosures_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_tree
+msgid "Irrig. Coef. (0-100)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_coef_rega
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_coef_rega
+msgid "Irrigation Coefficient (0-100)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_irrigationditch_id
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_parcels_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+msgid "Irrigation Ditch"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_view_form
+msgid "Irrigation Partner"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_irrigation_model_type
+msgid "Irrigation Type (parameter)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Irrigation partner"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Land Parcel"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_uso_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_uso_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_enclosures_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_tree
+msgid "Land Use"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink___last_update
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_config_settings_view_form
+msgid "Load SIGPAC enclosures"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: code:addons/base_wua_sigpac/models/wua_config_settings.py:84
+#, python-format
+msgid "Loading SIGPAC enclosures: failed process (error code: %s), message:\n"
+"%s"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "MT - MATORRAL"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_pend_media_porc
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_pend_media_porc
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Medium Slope (%)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_pend_media
+msgid "Medium Slope (per thousand)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_config_settings_view_form
+msgid "Min. Intersection (%)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_configuration_sigpac_minimum_intersection_percentage
+msgid "Minimum intersection percentage"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,help:base_wua_sigpac.field_wua_configuration_sigpac_minimum_intersection_percentage
+msgid "Minimum intersection percentage allowed for parcels and SIGPAC enclosures"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_county_id
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_municipio
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_parcels_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_tree
+msgid "Municipality"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Municipality Code"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+msgid "N. enclosures"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_view_form
+msgid "N. partners"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_view_form
+msgid "N. subparcels"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Name [ code ]"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_configuration_sigpac_names
+msgid "Names of the SIGPAC shapefiles"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,help:base_wua_sigpac.field_wua_configuration_sigpac_names
+msgid "Names of the official shapefiles of SIGPAC (separated by commas)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_config_settings_view_form
+msgid "Names of the shapefiles"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,grp_cult:0
+#: selection:wua.sigpac,grp_cult:0
+msgid "No asignado"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Number"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_number_of_sigpaclinks
+msgid "Number of associated SIGPAC enclosures of the parcel"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_number_of_sigpaclinks
+msgid "Number of associated parcels"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "OC - ASOCIACIÓN OLIVAR-CÍTRICOS"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "OF - OLIVAR - FRUTAL"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "OV - OLIVAR"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_view_form
+msgid "Official Area (ha)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: code:addons/base_wua_sigpac/models/wua_config_settings.py:98
+#: code:addons/base_wua_sigpac/models/wua_config_settings.py:110
+#, python-format
+msgid "One or more shapefiles not found."
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Ownership (%)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "PA - PASTO CON ARBOLADO"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: code:addons/base_wua_sigpac/models/wua_parcel.py:75
+#, python-format
+msgid "PARCEL"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "PR - PASTO ARBUSTIVO"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "PS - PASTIZAL"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,grp_cult:0
+#: selection:wua.sigpac,grp_cult:0
+msgid "PT - Pastos"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_parcel_id
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_parcela
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_parcels_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_parcels_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Parcel"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_enclosures_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_parcels_view_tree
+msgid "Parcel Area (ha)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_parcel_title_sigpac
+msgid "Parcel Title for SIGPAC table"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Parcel:"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: code:addons/base_wua_sigpac/models/wua_config_settings.py:75
+#, python-format
+msgid "Parcels"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_view_form
+msgid "Parcels (SIGPAC enclosures)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: code:addons/base_wua_sigpac/models/wua_sigpac.py:194
+#, python-format
+msgid "Parcels of the enclosure"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Past. Coef. (0-100)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_configuration_sigpac_path
+msgid "Path of the SIGPAC shapefiles"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,help:base_wua_sigpac.field_wua_configuration_sigpac_path
+msgid "Path of the official shapefiles of SIGPAC, in the server"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_config_settings_view_form
+msgid "Path of the shapefiles"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_dn_perim
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Perimeter (m)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_poligono
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Polygon"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Printed"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Printing date:"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Profile"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_provincia
+msgid "Province"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Province Code"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.actions.server,name:base_wua_sigpac.wua_technical_refresh_sigpac_intersections_action
+#: model:ir.ui.menu,name:base_wua_sigpac.wua_technical_refresh_sigpac_intersections
+msgid "Refresh SIGPAC in parcels"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_region
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_region
+msgid "Region"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_name
+msgid "SIGPAC Code"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: code:addons/base_wua_sigpac/models/wua_parcel.py:76
+#, python-format
+msgid "SIGPAC ENCLOSURES"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model,name:base_wua_sigpac.model_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_sigpac_id
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_only_enclosures_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_tree
+msgid "SIGPAC Enclosure"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_search
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_tree
+msgid "SIGPAC Id."
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_sigpac_link
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_sigpac_link
+msgid "SIGPAC Link"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_dn_oid
+msgid "SIGPAC Original Identifier"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_config_settings_view_form
+msgid "SIGPAC Settings"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.actions.act_window,name:base_wua_sigpac.wua_parcel_sigpaclink_action
+#: model:ir.ui.menu,name:base_wua_sigpac.parcel_sigpaclink_menu
+msgid "SIGPAC enclos. in parcels"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.actions.act_window,name:base_wua_sigpac.wua_sigpac_action
+#: model:ir.ui.menu,name:base_wua_sigpac.sigpac_menu
+msgid "SIGPAC enclosures"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: code:addons/base_wua_sigpac/models/wua_parcel.py:281
+#, python-format
+msgid "SIGPAC enclosures of the parcel"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model,name:base_wua_sigpac.model_wua_parcel_sigpaclink
+msgid "SIGPAC link of a parcel"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_sigpaclink_ids
+msgid "SIGPAC links"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_parcel_aerial_img_sigpac_scale
+msgid "Scale"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Scale ~"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpaclink_view_tree
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_tree
+msgid "Slope %"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "TA - TIERRAS ARABLES"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,grp_cult:0
+#: selection:wua.sigpac,grp_cult:0
+msgid "TCR - Tierras de cultivo de regadío"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,grp_cult:0
+#: selection:wua.sigpac,grp_cult:0
+msgid "TCS - Tierras de cultivo de secano"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "TH - HUERTA"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: code:addons/base_wua_sigpac/models/wua_parcel.py:188
+#, python-format
+msgid "The \"URL GIS Viewer WMS\" parameter or \"URL GIS Viewer WFS\" are not populated."
+msgstr ""
+
+#. module: base_wua_sigpac
+#: sql_constraint:wua.configuration:0
+msgid "The minimum intersection percentage must be a value between 0 and 100."
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "VF - VIÑEDO - FRUTAL"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "VI - VIÑEDO"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "VO - VIÑEDO - OLIVAR"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_parcel_sigpac_report_document
+msgid "Water (%)"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.actions.report.xml,name:base_wua_sigpac.wua_parcel_sigpac_report
+msgid "Wua parcel SIGPAC report"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "ZC - ZONA CONCENTRADA NO INCLUIDA EN LA ORTOFOTO"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "ZU - ZONA URBANA"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: selection:wua.parcel.sigpaclink,uso_sigpac:0
+#: selection:wua.sigpac,uso_sigpac:0
+msgid "ZV - ZONA CENSURADA"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_sigpac_zona
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_sigpac_view_form
+msgid "Zone"
+msgstr ""
+
+#. module: base_wua_sigpac
+#: model:ir.model.fields,field_description:base_wua_sigpac.field_wua_configuration_sigpac_use_venv27
+#: model:ir.ui.view,arch_db:base_wua_sigpac.wua_config_settings_view_form
+msgid "venv27 (python)"
+msgstr ""
