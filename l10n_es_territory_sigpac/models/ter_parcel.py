@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Moval Agroingeniería
+# Copyright 2025 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import io
@@ -11,8 +11,8 @@ from owslib.wfs import WebFeatureService
 from odoo import models, fields, api, _, exceptions
 
 
-class WuaParcel(models.Model):
-    _inherit = 'wua.parcel'
+class TerParcel(models.Model):
+    _inherit = 'ter.parcel'
 
     _aerial_img_sigpac_layers = [
         'pnoa',
@@ -31,7 +31,7 @@ class WuaParcel(models.Model):
 
     sigpaclink_ids = fields.One2many(
         string='SIGPAC links',
-        comodel_name='wua.parcel.sigpaclink',
+        comodel_name='ter.parcel.sigpaclink',
         inverse_name='parcel_id')
 
     number_of_sigpaclinks = fields.Integer(
@@ -60,7 +60,6 @@ class WuaParcel(models.Model):
         compute='_compute_aerial_img_sigpac_nonpersistent',
     )
 
-    @api.multi
     def _compute_number_of_sigpaclinks(self):
         for record in self:
             number_of_sigpaclinks = 0
@@ -68,7 +67,6 @@ class WuaParcel(models.Model):
                 number_of_sigpaclinks = len(record.sigpaclink_ids)
             record.number_of_sigpaclinks = number_of_sigpaclinks
 
-    @api.multi
     def _compute_parcel_title_sigpac(self):
         for record in self:
             parcel_title_sigpac = \
@@ -76,7 +74,6 @@ class WuaParcel(models.Model):
                 _('SIGPAC ENCLOSURES')
             record.parcel_title_sigpac = parcel_title_sigpac
 
-    @api.multi
     def _compute_aerial_img_nonpersistent(self):
         for record in self:
             aerial_img_nonpersistent = None
@@ -90,7 +87,6 @@ class WuaParcel(models.Model):
                     aerial_img_nonpersistent = None
             record.aerial_img_nonpersistent = aerial_img_nonpersistent
 
-    @api.multi
     def _compute_aerial_img_sigpac_nonpersistent(self):
         for record in self:
             aerial_img_sigpac_nonpersistent = None
@@ -178,12 +174,11 @@ class WuaParcel(models.Model):
             '</StyledLayerDescriptor>'
         return body
 
-    @api.multi
     def regenerate_aerial_img_sigpac(self):
-        url_gis_viewer_wms = self.env['ir.values'].get_default(
-            'wua.configuration', 'url_gis_viewer_wms')
-        url_gis_viewer_wfs = self.env['ir.values'].get_default(
-            'wua.configuration', 'url_gis_viewer_wfs')
+        url_gis_viewer_wms = self.env['ir.default'].get(
+            'res.config.settings', 'url_gis_viewer_wms')
+        url_gis_viewer_wfs = self.env['ir.default'].get(
+            'res.config.settings', 'url_gis_viewer_wfs')
         if (not url_gis_viewer_wms or not url_gis_viewer_wfs):
             raise exceptions.UserError(_('The "URL GIS Viewer WMS" parameter '
                                          'or "URL GIS Viewer WFS" are not '
@@ -270,17 +265,15 @@ class WuaParcel(models.Model):
                         _logger.exception('SIGPAC Aerial IMG')
                         pass
 
-    @api.multi
     def action_get_enclosures(self):
         self.ensure_one()
         id_form_view = self.env.ref(
-            'base_wua_sigpac.'
-            'wua_parcel_sigpac_view_form').id
+            'l10n_es_territory_sigpac.'
+            'ter_parcel_sigpac_view_form').id
         act_window = {
             'type': 'ir.actions.act_window',
             'name': _('SIGPAC enclosures of the parcel'),
-            'res_model': 'wua.parcel',
-            'view_type': 'form',
+            'res_model': 'ter.parcel',
             'view_mode': 'form',
             'views': [(id_form_view, 'form')],
             'target': 'current',
@@ -288,9 +281,8 @@ class WuaParcel(models.Model):
             }
         return act_window
 
-    @api.multi
     def action_regenerate_aerial_img_sigpac(self, limit=0):
-        parcels = self.env['wua.parcel'].search(
+        parcels = self.env['ter.parcel'].search(
             [('with_gis_parcel', '=', True)],
             order='aerial_img_last_import_date',
             limit=limit)
@@ -299,8 +291,8 @@ class WuaParcel(models.Model):
             self.env.cr.commit()
 
 
-class WuaParcelSigpaclink(models.Model):
-    _name = 'wua.parcel.sigpaclink'
+class TerParcelSigpaclink(models.Model):
+    _name = 'ter.parcel.sigpaclink'
     _auto = False
     _description = 'SIGPAC link of a parcel'
     _order = 'name'
@@ -310,27 +302,19 @@ class WuaParcelSigpaclink(models.Model):
 
     parcel_id = fields.Many2one(
         string='Parcel',
-        comodel_name='wua.parcel',)
+        comodel_name='ter.parcel',)
 
     sigpac_id = fields.Many2one(
         string='SIGPAC Enclosure',
-        comodel_name='wua.sigpac',)
+        comodel_name='ter.sigpac',)
 
     enclosure_number = fields.Integer(
         string='Enclosure Number',
         compute='_compute_enclosure_number',)
 
-    county_id = fields.Many2one(
+    municipality_id = fields.Many2one(
         string='Municipality',
-        comodel_name='wua.region.state.county',)
-
-    hydraulicsector_id = fields.Many2one(
-        string='Hydraulic Sector',
-        comodel_name='wua.hydraulicsector',)
-
-    irrigationditch_id = fields.Many2one(
-        string='Irrigation Ditch',
-        comodel_name='wua.irrigationditch',)
+        comodel_name='res.municipality',)
 
     parcel_area = fields.Float(
         string='GIS Area of parcel (m²)',
@@ -415,9 +399,17 @@ class WuaParcelSigpaclink(models.Model):
             ('', 'No asignado'),
         ],)
 
-    gis_viewer_link = fields.Char(
+    gis_link_public = fields.Char(
         string='GIS Viewer',
-        related='parcel_id.gis_viewer_link',)
+        related='parcel_id.gis_link_public',)
+
+    gis_link_minimal = fields.Char(
+        string='GIS Viewer',
+        related='parcel_id.gis_link_minimal',)
+
+    gis_link_technical = fields.Char(
+        string='GIS Viewer',
+        related='parcel_id.gis_link_technical',)
 
     sigpac_link = fields.Char(
         string='SIGPAC Link',
@@ -431,7 +423,6 @@ class WuaParcelSigpaclink(models.Model):
         string='Irrigation Type (parameter)',
         compute='_compute_irrigation_model_type',)
 
-    @api.multi
     def _compute_enclosure_number(self):
         for record in self:
             enclosure_number = 0
@@ -441,15 +432,13 @@ class WuaParcelSigpaclink(models.Model):
                     enclosure_number = int(enclosure_number_as_str)
             record.enclosure_number = enclosure_number
 
-    @api.multi
     def _compute_parcel_area_ha(self):
         for record in self:
             record.parcel_area_ha = record.parcel_area / 10000
 
-    @api.multi
     def _compute_irrigation_model_type(self):
-        irrigation_model_type = self.env['ir.values'].get_default(
-            'wua.infrastructure.configuration', 'irrigation_model_type')
+        irrigation_model_type = self.env['ir.default'].get(
+            'ter.infrastructure.configuration', 'irrigation_model_type')
         for record in self:
             record.irrigation_model_type = irrigation_model_type
 
@@ -461,20 +450,18 @@ class WuaParcelSigpaclink(models.Model):
         for field in fields_to_remove:
             if field in fields:
                 fields.remove(field)
-        return super(WuaParcelSigpaclink, self).read_group(
+        return super().read_group(
             domain, fields, groupby, offset, limit, orderby, lazy)
 
-    @api.multi
     def action_gis_viewer(self):
         self.ensure_one()
-        if self.gis_viewer_link:
+        if self.gis_link_public:
             return {
                 'type': 'ir.actions.act_url',
-                'url': self.gis_viewer_link,
+                'url': self.gis_link_public,
                 'target': 'new',
             }
 
-    @api.multi
     def action_sigpac_viewer(self):
         self.ensure_one()
         if self.sigpac_link:
@@ -487,4 +474,4 @@ class WuaParcelSigpaclink(models.Model):
     @api.model
     def action_refresh_sigpac_intersections(self):
         self.sudo().env.cr.execute(
-            'REFRESH MATERIALIZED VIEW CONCURRENTLY wua_parcel_sigpaclink')
+            'REFRESH MATERIALIZED VIEW CONCURRENTLY ter_parcel_sigpaclink')

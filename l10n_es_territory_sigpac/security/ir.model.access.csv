@@ -1,5 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_wua_sigpac_user,access.wua.sigpac.user,model_wua_sigpac,base_wua.group_wua_user,1,0,0,0
-access_wua_parcel_sigpaclink_user,access.wua.parcel.sigpaclink.user,model_wua_parcel_sigpaclink,base_wua.group_wua_user,1,0,0,0
-access_wua_sigpac_portal_user,access.wua.sigpac.portal.user,model_wua_sigpac,base_wua.group_wua_portal_user,1,0,0,0
-access_wua_parcel_sigpaclink_portal_user,access.wua.parcel.sigpaclink.portal.user,model_wua_parcel_sigpaclink,base_wua.group_wua_portal_user,1,0,0,0
+access_ter_sigpac_user,access.ter.sigpac.user,model_ter_sigpac,base_ter.group_ter_user,1,0,0,0
+access_ter_parcel_sigpaclink_user,access.ter.parcel.sigpaclink.user,model_ter_parcel_sigpaclink,base_ter.group_ter_user,1,0,0,0

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Moval Agroingeniería
+# Copyright 2025 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models, fields, api, _
 
 
-class WuaSigpac(models.Model):
-    _name = 'wua.sigpac'
+class TerSigpac(models.Model):
+    _name = 'ter.sigpac'
     _auto = False
     _description = 'SIGPAC Enclosure'
     _order = 'name'
@@ -128,7 +128,7 @@ class WuaSigpac(models.Model):
 
     sigpaclink_ids = fields.One2many(
         string='Intersections parcel-SIGPAC enclosure',
-        comodel_name='wua.parcel.sigpaclink',
+        comodel_name='ter.parcel.sigpaclink',
         inverse_name='sigpac_id')
 
     number_of_sigpaclinks = fields.Integer(
@@ -151,7 +151,6 @@ class WuaSigpac(models.Model):
                 replace('recintoval', recinto)
         record.sigpac_link = sigpac_link
 
-    @api.multi
     def _compute_number_of_sigpaclinks(self):
         for record in self:
             number_of_sigpaclinks = 0
@@ -166,10 +165,9 @@ class WuaSigpac(models.Model):
         for field in fields_to_remove:
             if field in fields:
                 fields.remove(field)
-        return super(WuaSigpac, self).read_group(
+        return super().read_group(
             domain, fields, groupby, offset, limit, orderby, lazy)
 
-    @api.multi
     def action_sigpac_viewer(self):
         self.ensure_one()
         if self.sigpac_link:
@@ -179,20 +177,19 @@ class WuaSigpac(models.Model):
                 'target': 'new',
             }
 
-    @api.multi
     def action_get_parcels(self):
         self.ensure_one()
         if self.sigpaclink_ids:
             id_tree_view = self.env.ref(
-                'base_wua_sigpac.'
-                'wua_parcel_sigpaclink_only_parcels_view_tree').id
+                'l10n_es_territory_sigpac.'
+                'ter_parcel_sigpaclink_only_parcels_view_tree').id
             search_view = self.env.ref(
-                'base_wua_sigpac.'
-                'wua_parcel_sigpaclink_only_parcels_view_search')
+                'l10n_es_territory_sigpac.'
+                'ter_parcel_sigpaclink_only_parcels_view_search')
             act_window = {
                 'type': 'ir.actions.act_window',
                 'name': _('Parcels of the enclosure'),
-                'res_model': 'wua.parcel.sigpaclink',
+                'res_model': 'ter.parcel.sigpaclink',
                 'view_mode': 'tree',
                 'views': [(id_tree_view, 'tree')],
                 'search_view_id': (search_view.id, search_view.name),

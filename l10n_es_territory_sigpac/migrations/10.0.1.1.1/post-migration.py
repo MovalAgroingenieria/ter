@@ -7,12 +7,12 @@ from odoo import api, SUPERUSER_ID
 
 def migrate(cr, version):
     env = api.Environment(cr, SUPERUSER_ID, {})
-    values = env['ir.values'].sudo()
+    values = env['ir.config_parameter'].sudo()
     sigpac_minimum_intersection_percentage = 0.0
-    old_intersection = values.get_default(
-        'wua.configuration', 'sigpac_minimum_intersection_percentage')
+    old_intersection = values.get_param(
+        'l10n_es_territory_sigpac.sigpac_minimum_intersection_percentage')
     if (old_intersection):
         sigpac_minimum_intersection_percentage = float(old_intersection)
-    values.set_default('wua.configuration',
-                       'sigpac_minimum_intersection_percentage',
-                       sigpac_minimum_intersection_percentage)
+    values.set_param('l10n_es_territory_sigpac.'
+                     'sigpac_minimum_intersection_percentage',
+                     sigpac_minimum_intersection_percentage)

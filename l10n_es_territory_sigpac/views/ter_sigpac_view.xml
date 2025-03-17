@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="wua_sigpac_view_form" model="ir.ui.view">
+    <record id="ter_sigpac_view_form" model="ir.ui.view">
         <field name="name">SIGPAC enclosures (form view)</field>
-        <field name="model">wua.sigpac</field>
+        <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
             <form duplicate="false" create="false"
                   delete="false" edit="false">
                 <sheet>
                     <div name="grp_cult_icon"
                          style="display: inline-block;">
-                        <img src="/base_wua_sigpac/static/img/icon_fruit_tree.png"
-                             attrs="{'invisible':[('grp_cult', '!=', 'CP')]}"/>
-                        <img src="/base_wua_sigpac/static/img/icon_pastures.png"
-                             attrs="{'invisible':[('grp_cult', '!=', 'PT')]}"/>
-                        <img src="/base_wua_sigpac/static/img/icon_irrigation_land.png"
-                             attrs="{'invisible':[('grp_cult', '!=', 'TCR')]}"/>
-                        <img src="/base_wua_sigpac/static/img/icon_dry_farming.png"
-                             attrs="{'invisible':[('grp_cult', '!=', 'TCS')]}"/>
+                        <img src="/l10n_es_territory_sigpac/static/img/icon_fruit_tree.png"
+                             attrs="{'invisible':[('grp_cult', '!=', 'CP')]}"
+                             alt="fruit tree"/>
+                        <img src="/l10n_es_territory_sigpac/static/img/icon_pastures.png"
+                             attrs="{'invisible':[('grp_cult', '!=', 'PT')]}"
+                             alt="pastures"/>
+                        <img src="/l10n_es_territory_sigpac/static/img/icon_irrigation_land.png"
+                             attrs="{'invisible':[('grp_cult', '!=', 'TCR')]}"
+                             alt="irrigation land"/>
+                        <img src="/l10n_es_territory_sigpac/static/img/icon_dry_farming.png"
+                             attrs="{'invisible':[('grp_cult', '!=', 'TCS')]}"
+                             alt="dry farming"/>
                         <b><field name="grp_cult" style="margin-left:15px"/></b>
                     </div>
                     <div class="oe_button_box" name="button_box">
@@ -81,12 +85,12 @@
         </field>
     </record>
 
-    <record id="wua_sigpac_view_tree" model="ir.ui.view">
+    <record id="ter_sigpac_view_tree" model="ir.ui.view">
         <field name="name">SIGPAC enclosures (tree view)</field>
-        <field name="model">wua.sigpac</field>
+        <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
-            <tree class="o_base_wua_sigpac_sigpac_view_tree"
-                  create="false" delete="false">
+            <tree class="o_l10n_es_territory_sigpac_sigpac_view_tree"
+                  create="false" delete="false" string="base ter sigpac view tree">
                 <field name="name"
                        string="Code: prov. - munic. - aggreg. - zone - polyg. - parcel - enclos."/>
                 <button name="action_sigpac_viewer"
@@ -101,9 +105,9 @@
         </field>
     </record>
 
-    <record id="wua_sigpac_view_search" model="ir.ui.view">
+    <record id="ter_sigpac_view_search" model="ir.ui.view">
         <field name="name">SIGPAC enclosures (search view)</field>
-        <field name="model">wua.sigpac</field>
+        <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" string="Code"/>
@@ -136,9 +140,9 @@
         </field>
     </record>
 
-    <record id="wua_sigpac_view_pivot" model="ir.ui.view">
-        <field name="name">wua.sigpac.view.pivot</field>
-        <field name="model">wua.sigpac</field>
+    <record id="ter_sigpac_view_pivot" model="ir.ui.view">
+        <field name="name">ter.sigpac.view.pivot</field>
+        <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
             <pivot string="Area (ha)">
                 <field name="grp_cult" type="col"/>
@@ -148,9 +152,9 @@
         </field>
     </record>
 
-    <record id="wua_sigpac_view_graph" model="ir.ui.view">
-        <field name="name">wua.sigpac.view.graph</field>
-        <field name="model">wua.sigpac</field>
+    <record id="ter_sigpac_view_graph" model="ir.ui.view">
+        <field name="name">ter.sigpac.view.graph</field>
+        <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
             <graph string="Area (ha)">
                 <field name="uso_sigpac" type="row"/>
@@ -159,31 +163,30 @@
         </field>
     </record>
 
-    <record id="wua_sigpac_action"
+    <record id="ter_sigpac_action"
             model="ir.actions.act_window">
         <field name="name">SIGPAC enclosures</field>
-        <field name="res_model">wua.sigpac</field>
-        <field name="view_type">form</field>
+        <field name="res_model">ter.sigpac</field>
         <field name="view_mode">tree,form,pivot,graph</field>
         <field name="view_ids"
          eval="[(5, 0),
                 (0, 0, {'view_mode': 'tree',
-                        'view_id': ref('wua_sigpac_view_tree')}),
+                        'view_id': ref('ter_sigpac_view_tree')}),
                 (0, 0, {'view_mode': 'form',
-                        'view_id': ref('wua_sigpac_view_form')}),
+                        'view_id': ref('ter_sigpac_view_form')}),
                 (0, 0, {'view_mode': 'pivot',
-                        'view_id': ref('wua_sigpac_view_pivot')}),
+                        'view_id': ref('ter_sigpac_view_pivot')}),
                 (0, 0, {'view_mode': 'graph',
-                        'view_id': ref('wua_sigpac_view_graph')})]"/>
-        <field name="search_view_id" ref="wua_sigpac_view_search"/>
+                        'view_id': ref('ter_sigpac_view_graph')})]"/>
+        <field name="search_view_id" ref="ter_sigpac_view_search"/>
         <field name="context">{"graph_mode": "pie"}</field>
     </record>
 
     <menuitem id="sigpac_menu"
               name="SIGPAC enclosures"
-              parent="base_wua.base_wua_census_landparcels_menu"
-              sequence="40"
-              action="wua_sigpac_action"
-              groups="base_wua.group_wua_user"/>
-
+              parent="base_ter.menu_territory"
+              sequence="30"
+              action="ter_sigpac_action"
+              />
+<!--groups="l10n_es_territory_sigpac.group_ter_user"-->
 </odoo>

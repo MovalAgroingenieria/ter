@@ -3,7 +3,7 @@
    :alt: License: AGPL-3
 
 ===============================================
-SIGPAC Integration for Water Users Associations
+SIGPAC Integration for Territory
 ===============================================
 
 Integration of the SIGPAC enclosures, and creation of a spatial link with
@@ -23,7 +23,7 @@ Functionality:
 Requirements:
 
 * Postgis extension installed in the database.
-* Table "wua_gis_parcel" in the database.
+* Table "ter_gis_parcel" in the database.
 * "ogr2ogr" installed in the system.
 * "SHP Path" and "SHP Names" parameters with values.
 
@@ -46,6 +46,7 @@ Contributors
 * Juanu Sandoval <jsandoval@moval.es>
 * Salvador Sánchez <ssanchez@moval.es>
 * Jorge Vera <jvera@moval.es>
+* Guillermo Amante <gamante@moval.es>
 
 Maintainer
 ----------

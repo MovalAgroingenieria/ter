@@ -1,0 +1,170 @@
+/**/
+/* ter.sigpac */
+/**/
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-id="name"] {
+    width: 25%;
+    text-align: center;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-field="name"] {
+    text-align: center;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-id="dn_oid"] {
+    width: 10%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-field="dn_oid"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-id="dn_surface_ha"] {
+    width: 8%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-field="dn_surface_ha"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-id="pend_media_porc"] {
+    width: 8%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-field="pend_media_porc"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-id="coef_rega"] {
+    width: 8%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-field="coef_rega"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-id="uso_sigpac"] {
+    width: 41%;
+}
+
+/**/
+/* ter.parcel.sigpaclink */
+/**/
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-id="parcel_id"] {
+    width: 10%;
+    text-align: center;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-field="parcel_id"] {
+    text-align: center;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-id="sigpac_id"] {
+    width: 20%;
+    text-align: center;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-field="sigpac_id"] {
+    text-align: center;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-id="area_ha"] {
+    width: 8%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-field="area_ha"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-id="intersection_percentage"] {
+    width: 8%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-field="intersection_percentage"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-id="county_id"] {
+    width: 15%;
+ }
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-id="pend_media_porc"] {
+    width: 8%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-field="pend_media_porc"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-id="coef_rega"] {
+    width: 8%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-field="coef_rega"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-id="uso_sigpac"] {
+    width: 23%;
+ }
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-id="parcel_id"] {
+    width: 10%;
+    text-align: center;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-field="parcel_id"] {
+    text-align: center;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-id="county_id"] {
+    width: 20%;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-id="hydraulicsector_id"] {
+    width: 20%;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-id="irrigationditch_id"] {
+    width: 20%;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-id="parcel_area_ha"] {
+    width: 10%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-field="parcel_area_ha"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-id="area_ha"] {
+    width: 10%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-field="area_ha"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-id="intersection_percentage"] {
+    width: 10%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree [data-field="intersection_percentage"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-id="sigpac_id"] {
+    width: 22%;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-field="sigpac_id"] {
+    text-align: left;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-id="uso_sigpac"] {
+    width: 20%;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-field="uso_sigpac"] {
+    text-align: left;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-id="coef_rega"] {
+    width: 15%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-field="coef_rega"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-id="parcel_area_ha"] {
+    width: 15%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-field="parcel_area_ha"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-id="area_ha"] {
+    width: 15%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-field="area_ha"] {
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-id="intersection_percentage"] {
+    width: 13%;
+    text-align: right;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-field="intersection_percentage"] {
+    text-align: right;
+}

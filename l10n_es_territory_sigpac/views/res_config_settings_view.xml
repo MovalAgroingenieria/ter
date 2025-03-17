@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">Parameters</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='base_ter']" position="inside">
+                <div class="app_settings_block" data-string="SIGPAC Settings" string="SIGPAC Settings" data-key="sigpac_settings">
+                    <h2>SIGPAC Settings</h2>
+                    <div class="row mt16 o_settings_container" name="sigpac_settings_container">
+                        <div id="div_sigpac_path" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="sigpac_path"/>
+                                <div class="text-muted">
+                                    Path of the shapefiles
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sigpac_path" string="Path of the shapefiles" placeholder="/tmp/p1" style="width:300px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_sigpac_names" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="sigpac_names"/>
+                                <div class="text-muted">
+                                    Names of the shapefiles
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sigpac_names" string="Names of the shapefiles" placeholder="rec_30016_2022_20220113.shp,rec_30030_2022_20220113.shp,rec_30045_2022_20220113.shp" style="width:300px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_sigpac_minimum_intersection_percentage" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="sigpac_minimum_intersection_percentage"/>
+                                <div class="text-muted">
+                                    Min. Intersection (%)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sigpac_minimum_intersection_percentage" string="Min. Intersection (%)" style="width:100px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_sigpac_use_venv310" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="sigpac_use_venv310"/>
+                                <div class="text-muted">
+                                    venv310 (python)
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sigpac_use_venv310" string="venv310 (python)"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_action_load_sigpac" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="action_load_sigpac"/>
+                                <div class="mt16">
+                                    <button type="object" name="action_load_sigpac" string="Load SIGPAC enclosures" icon="fa-download" class="oe_inline oe_link"/>
+                                </div>
+                                <div class="mt16">
+                                    <label for="sigpac_minimum_intersection_percentage" string="IMPORTANT: If the 'Min. Intersection' parameter is changed, it will be necessary to reload the SIGPAC enclosures."/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

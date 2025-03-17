@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <report id="wua_parcel_sigpac_report"
-        string="Wua parcel SIGPAC report"
-        model="wua.parcel"
+    <report id="ter_parcel_sigpac_report"
+        string="ter parcel SIGPAC report"
+        model="ter.parcel"
         report_type="qweb-pdf"
-        file="base_wua_sigpac.wua_parcel_sigpac_report_document"
-        name="base_wua_sigpac.wua_parcel_sigpac_report_document"
-        paperformat="base_wua_report.paperformat_wua_reports"/>
+        file="l10n_es_territory_sigpac.ter_parcel_sigpac_report_document"
+        name="l10n_es_territory_sigpac.ter_parcel_sigpac_report_document"
+        paperformat="base_report.paperformat_reports"/>
 
-    <template id="wua_parcel_sigpac_report_document">
-        <t t-call="report.html_container">
+    <template id="ter_parcel_sigpac_report_document">
+        <t t-call="web.external_layout">
             <t t-foreach="docs" t-as="o">
-                <t t-call="base_wua_report.wua_external_layout">
+                <t t-call="base_ter_report.ter_external_layout">
                     <div class="page">
 
                         <!-- Vars -->
-                        <t t-set="report_style" t-value="o.env['ir.values'].get_default('wua.configuration', 'reports_style')"/>
+                        <t t-set="report_style" t-value="o.env['ir.values'].get('res.config.settings', 'reports_style')"/>
                         <t t-set="printing_date" t-value="o.transform_date_to_locale(
                             datetime.datetime.now().date().strftime('%Y-%m-%d'), lang=o.partner_id.lang)"/>
 
                         <!-- Printing date -->
-                        <div name="printing_date" class="text-right" style="margin: 0px; padding: 0px;">
+                        <div name="printing_date" class="text-end" style="margin: 0px; padding: 0px;">
                             <span>Printing date: <strong><span t-esc="printing_date"/></strong></span>
                         </div>
 
@@ -71,9 +71,9 @@
                                             <th width="32%" name="th_name_code">Name [ code ]</th>
                                             <th width="14%" name="th_irrigation" class="text-center">Irrigation partner</th>
                                             <th width="18%" name="th_profile" class="text-center">Profile</th>
-                                            <th width="12%" name="th_ownership" class="text-right">Ownership (%)</th>
-                                            <th width="12%" name="th_water" class="text-right">Water (%)</th>
-                                            <th width="12%" name="th_costs" class="text-right">Costs (%)</th>
+                                            <th width="12%" name="th_ownership" class="text-end">Ownership (%)</th>
+                                            <th width="12%" name="th_water" class="text-end">Water (%)</th>
+                                            <th width="12%" name="th_costs" class="text-end">Costs (%)</th>
                                         </thead>
                                         <tbody>
                                             <t t-if="o.partnerlink_ids">
@@ -89,9 +89,9 @@
                                                            <t t-if="p.irrigation_partner"><span class="fa fa-check"/></t>
                                                        </td>
                                                        <td name="td_profile_name" class="text-center"><span t-field="p.profile"/></td>
-                                                       <td name="td_ownership" class="text-right"><span t-field="p.ownership_percentage"></span></td>
-                                                       <td name="td_water" class="text-right"><span t-field="p.water_costs_percentage"/></td>
-                                                       <td name="td_costs" class="text-right"><span t-field="p.other_costs_percentage"/></td>
+                                                       <td name="td_ownership" class="text-end"><span t-field="p.ownership_percentage"></span></td>
+                                                       <td name="td_water" class="text-end"><span t-field="p.water_costs_percentage"/></td>
+                                                       <td name="td_costs" class="text-end"><span t-field="p.other_costs_percentage"/></td>
                                                     </tr>
                                                 </t>
                                             </t>
@@ -129,15 +129,15 @@
                                             <tbody>
                                                 <tr name="tr_code">
                                                     <td><span>Code:</span></td>
-                                                    <td class="text-right"><span t-field="o.name"/></td>
+                                                    <td class="text-end"><span t-field="o.name"/></td>
                                                 </tr>
                                                 <tr name="tr_type">
                                                     <td><span>Type:</span></td>
-                                                    <td class="text-right"><span t-field="o.parcel_type"/></td>
+                                                    <td class="text-end"><span t-field="o.parcel_type"/></td>
                                                 </tr>
                                                 <tr name="tr_county">
                                                     <td><span>County:</span></td>
-                                                    <td class="text-right"><span t-field="o.county_id"/></td>
+                                                    <td class="text-end"><span t-field="o.county_id"/></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -147,19 +147,19 @@
                                             <tbody>
                                                 <tr name="tr_polygone">
                                                     <td><span>Cadastral polygon:</span></td>
-                                                    <td class="text-right"><span t-field="o.cadastral_polygon"/></td>
+                                                    <td class="text-end"><span t-field="o.cadastral_polygon"/></td>
                                                 </tr>
                                                 <tr name="tr_parcel">
                                                     <td><span>Cadastral parcel:</span></td>
-                                                    <td class="text-right"><span t-field="o.cadastral_parcel"/></td>
+                                                    <td class="text-end"><span t-field="o.cadastral_parcel"/></td>
                                                 </tr>
                                                 <tr name="tr_reference">
                                                     <td><span>Cadastral reference:</span></td>
-                                                    <td class="text-right"><span t-field="o.cadastral_reference"/></td>
+                                                    <td class="text-end"><span t-field="o.cadastral_reference"/></td>
                                                 </tr>
                                                 <tr name="tr_area">
                                                     <td><span>Cadastral area:</span></td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span t-field="o.area_cadaster"/>
                                                         <span>m<sup>2</sup></span>
                                                     </td>
@@ -194,7 +194,7 @@
                                             <tbody>
                                                 <tr name="tr_area_official">
                                                     <td><span>Area official:</span></td>
-                                                     <td class="text-right">
+                                                     <td class="text-end">
                                                         <span t-field="o.area_official"/>
                                                         <t t-set="measurement_unit" t-value="o._compute_area_measurement_name()"/>
                                                         <span><t t-esc="measurement_unit"/></span>
@@ -202,21 +202,21 @@
                                                 </tr>
                                                 <tr name="tr_elev_min">
                                                     <td><span>Min. Elevation:</span></td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span t-field="o.elev_min"/>
                                                         <span>m</span>
                                                     </td>
                                                 </tr>
                                                 <tr name="tr_elev_ave">
                                                     <td><span>Ave. Elevation:</span></td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span t-field="o.elev_ave"/>
                                                         <span>m</span>
                                                     </td>
                                                 </tr>
                                                 <tr name="tr_elev_max">
                                                     <td><span>Max. Elevation:</span></td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span t-field="o.elev_max"/>
                                                         <span>m</span>
                                                     </td>
@@ -229,7 +229,7 @@
                                             <tbody>
                                                 <tr name="tr_area_gis">
                                                     <td><span>GIS Area:</span></td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <span t-field="o.area_gis"/>
                                                         <span><t t-esc="measurement_unit"/></span>
                                                     </td>
@@ -237,15 +237,15 @@
                                                 </tr>
                                                 <tr name="tr_rurallocation">
                                                     <td><span>Rural Location:</span></td>
-                                                    <td class="text-right"><span t-field="o.rurallocation_id"/></td>
+                                                    <td class="text-end"><span t-field="o.rurallocation_id"/></td>
                                                 </tr>
                                                 <tr name="tr_farmproperty">
                                                     <td><span>Farm Property:</span></td>
-                                                    <td class="text-right"><span t-field="o.farmproperty_id"/></td>
+                                                    <td class="text-end"><span t-field="o.farmproperty_id"/></td>
                                                 </tr>
                                                 <tr name="tr_waterreservoir">
                                                     <td><span>Water reservoir:</span></td>
-                                                    <td class="text-right">
+                                                    <td class="text-end">
                                                         <t t-if="o.with_waterreservoir"><span class="fa fa-check"/></t>
                                                     </td>
                                                 </tr>
@@ -277,12 +277,12 @@
                                         <table class="table table-condensed table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th name="th_parcel_sigpac" class="text-left">Land Parcel</th>
-                                                    <th name="th_number_sigpac" class="text-right">Number</th>
-                                                    <th name="th_uso_sigpac" class="text-left">Land Use</th>
-                                                    <th name="th_coef_rega_sigpac" class="text-right">Irrig. Coef. (0-100)</th>
-                                                    <th name="th_area_gis_sigpac" class="text-right">Area (GIS, <span><t t-esc="measurement_unit"/></span>)</th>
-                                                    <th name="th_intersection_percentage_sigpac" class="text-right">% of parcel</th>
+                                                    <th name="th_parcel_sigpac" class="text-start">Land Parcel</th>
+                                                    <th name="th_number_sigpac" class="text-end">Number</th>
+                                                    <th name="th_uso_sigpac" class="text-start">Land Use</th>
+                                                    <th name="th_coef_rega_sigpac" class="text-end">Irrig. Coef. (0-100)</th>
+                                                    <th name="th_area_gis_sigpac" class="text-end">Area (GIS, <span><t t-esc="measurement_unit"/></span>)</th>
+                                                    <th name="th_intersection_percentage_sigpac" class="text-end">% of parcel</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -306,11 +306,12 @@
                        <!-- Aerial image -->
                         <t t-if="o.aerial_img_sigpac_nonpersistent">
                             <div name="aerial_img_sigpac_nonpersistent" class="text-center" style="border: 1px solid black; padding: 1% 0%;">
-                                <img t-attf-src="data:image/png;base64, #{o.aerial_img_sigpac_nonpersistent}" style="max-width: 824px; max-height: 824px;"/>
+                                <img t-attf-src="data:image/png;base64, #{o.aerial_img_sigpac_nonpersistent}" style="max-width: 824px; max-height: 824px;"
+                                     alt="aerial image"/>
                             </div>
                             <div style="display: table; border: 1px solid black; border-top:0px; width:100%;">
                                 <div class="text-center" style="padding: 1%; border-right: 1px solid black; width: 20%; display: table-cell;">
-                                    <img src="/web/binary/company_logo" style="max-height: 100px; max-width: 100px;"/>
+                                    <img src="/web/binary/company_logo" style="max-height: 100px; max-width: 100px;" alt="company logo"/>
                                 </div>
                                 <div style="border-right: 1px solid black; width: 40%; display: table-cell; vertical-align: top;">
                                     <div style="padding: 2%;">
@@ -330,7 +331,7 @@
                                         </t>
                                     </div>
                                     <hr style="margin:0px; padding:0px;border-top: 1px solid black"/>
-                                    <div class="text-right" style="padding: 2%;">
+                                    <div class="text-end" style="padding: 2%;">
                                         Printed <span t-field="o.date_now" t-options="{'format': 'dd MMMM YYYY'}"/>
                                     </div>
                                 </div>
