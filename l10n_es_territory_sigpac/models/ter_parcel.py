@@ -2,13 +2,8 @@
 # Copyright 2025 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import io
 import base64
-import logging
-from xml.etree import ElementTree
-from owslib.wms import WebMapService
-from owslib.wfs import WebFeatureService
-from odoo import models, fields, api, _, exceptions
+from odoo import models, fields, api, _
 
 
 class TerParcel(models.Model):

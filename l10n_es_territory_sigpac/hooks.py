@@ -89,7 +89,8 @@ def pre_init_hook(cr):
         COALESCE(grp_cult, '') AS grp_cult
         FROM ter_gis_sigpac
         WHERE uso_sigpac IN ('AG', 'CA', 'CF', 'CI', 'CS', 'CV', 'ED',
-                         'EP', 'FF', 'FL', 'FO', 'FS', 'FV', 'FY', 'IM', 'IV', 'MT', 'OC',
+                         'EP', 'FF', 'FL', 'FO', 'FS', 'FV', 'FY', 'IM', 'IV',
+                         'MT', 'OC',
                          'OF', 'OV', 'PA', 'PR', 'PS', 'TA', 'TH', 'VF', 'VI',
                          'VO', 'ZC', 'ZU', 'ZV'))""")
     env.cr.execute("""
