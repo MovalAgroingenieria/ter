@@ -65,6 +65,12 @@ class TerParcel(models.Model):
                 _('SIGPAC ENCLOSURES')
             record.parcel_title_sigpac = parcel_title_sigpac
 
+    def name_get(self):
+        res = super().name_get()
+        if self.env.context.get('sigpac'):
+            res = [(record_id, f"{name} (Sigpac)") for record_id, name in res]
+        return res
+
     def _compute_aerial_img_sigpac_shown(self):
         config = self.env['ir.config_parameter'].sudo()
         aerial_image_wmsbase_url = config.get_param(
@@ -253,6 +259,7 @@ class TerParcel(models.Model):
             'views': [(id_form_view, 'form')],
             'target': 'current',
             'res_id': self.id,
+            'context': {'sigpac': True},
             }
         return act_window
 
