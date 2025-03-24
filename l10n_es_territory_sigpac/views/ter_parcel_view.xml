@@ -11,7 +11,7 @@
                    position="after">
                 <button name="action_get_enclosures"
                         type="object" class="oe_stat_button"
-                        icon="fa-moval-sigpac-duotone"
+                        icon="fa-sigpac-parcel"
                         attrs="{'invisible': [('number_of_sigpaclinks','=',0)]}">
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_value">
@@ -21,46 +21,51 @@
                     </div>
                 </button>
             </xpath>
-            <xpath expr="//group[@name='master_data_right']" position="inside">
-                <field name="aerial_img_sigpac" widget="image" class="oe_img_259_160"/>
-            </xpath>
         </field>
     </record>
 
-    <record id="ter_parcel_sigpac_view_form" model="ir.ui.view" >
+    <record id="ter_parcel_sigpac_view_form" model="ir.ui.view">
         <field name="name">Parcels with enclosures (form view)</field>
         <field name="model">ter.parcel</field>
         <field name="priority" eval="100"/>
         <field name="arch" type="xml">
             <form string="Parcels (SIGPAC enclosures)"
-                  duplicate="false" create="false" edit="false" delete="false">
-                <div class="panel-body text-center" style="background:#ededed;border-color:#696969;border-width:1px;border-style:solid;padding-top:7px;padding-bottom:0px;margin-bottom:20px"><h4><span class="o_stat_text"><field name="parcel_title_sigpac"/></span></h4></div>
-                <group name="master_data">
-                    <group name="master_data_left">
-                        <field name="partner_id" string="Manager"/>
-                        <field name="municipality_id" string="Municipality"/>
-                        <field name="official_code"
-                               string="Reference"/>
-                        <field name="area_official"
-                               string="Official Area (ha)"/>
-                        <field name="area_gis"
-                               string="GIS Area (ha)"/>
-                    </group>
-                    <group name="master_data_right">
-                        <div colspan="2">
-                            <div style="width:20%;display:inline-block;"/>
-                            <div class="text-center"
-                                 style="width:60%; display:inline-block">
-                                <field name="aerial_img_nonpersistent" widget="image" style="border-color:#696969;border-width:1px;border-style:solid"/>
+                duplicate="false" create="false" edit="false" delete="false">
+                <sheet>
+                    <div class="oe_title" style="margin-bottom: 20px;">
+                        <h1>
+                            <field name="parcel_title_sigpac"/>
+                        </h1>
+                    </div>
+                    <group name="master_data">
+                        <group name="master_data_left">
+                            <div class="text-center mt-3 mb-2" colspan="2">
+                                <p style="width:100%" class="border p-2 fw-bold">BASIC DATA</p>
                             </div>
-                            <div style="width:20%;display:inline-block;"/>
-                        </div>
+                            <field name="partner_id" string="Manager"/>
+                            <field name="municipality_id" string="Municipality"/>
+                            <field name="official_code" string="Reference"/>
+                            <field name="area_official" string="Official Area (ha)"/>
+                            <field name="area_gis" string="GIS Area (ha)"/>
+                        </group>
+                        <group name="master_data_right">
+                            <div name="section_aerial_img_title" colspan="2" class="text-center mb-4">
+                                <p style="width:100%" class="border p-2 fw-bold">SIGPAC AERIAL IMAGE</p>
+                            </div>
+                            <div name="section_aerial_img_content" colspan="2" class="text-center mb-4">
+                                <div name="div_aerial_image" style="display:inline-block;">
+                                    <field name="aerial_img_sigpac_shown" widget="image"
+                                        style="border-color:#696969;border-width:1px;border-style:solid"/>
+                                </div>
+                            </div>
+                        </group>
                     </group>
-                </group>
-                <div class="panel-body text-center" style="margin-top:8px;background:#ededed;border-color:#696969;border-width:1px;border-style:solid">
-                    <field name="sigpaclink_ids"
-                           context="{'tree_view_ref':'l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_enclosures_view_tree'}"/>
-                </div>
+                    <div class="panel-body text-center"
+                        style="margin-top:8px; background:#ededed; border:1px solid #696969;">
+                        <field name="sigpaclink_ids"
+                            context="{'tree_view_ref':'l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_enclosures_view_tree'}"/>
+                    </div>
+                </sheet>
             </form>
         </field>
     </record>
@@ -92,7 +97,7 @@
                     <div class="oe_button_box" name="button_box">
                         <button name="action_gis_viewer"
                                 type="object" class="oe_stat_button"
-                                icon="fa-map-marker">
+                                icon="fa-map-marker" title="Gis Viewer">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">GIS</span>
                                 <span class="o_stat_text">Viewer</span>
@@ -100,7 +105,7 @@
                         </button>
                         <button name="action_sigpac_viewer"
                                 type="object" class="oe_stat_button"
-                                icon="fa-map-marker">
+                                icon="fa-map-marker" title="Sigpac Viewer">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">SIGPAC</span>
                                 <span class="o_stat_text">Viewer</span>
@@ -156,12 +161,12 @@
                        widget="many2one_unclickable"/>
                 <button name="action_gis_viewer"
                         type="object" class="oe_stat_button"
-                        icon="fa-map-marker"/>
+                        icon="fa-map-marker" title="Gis Viewer"/>
                 <field name="sigpac_id" string="SIGPAC Enclosure"
                        widget="many2one_unclickable"/>
                 <button name="action_sigpac_viewer"
                         type="object" class="oe_stat_button"
-                        icon="fa-map-marker"/>
+                        icon="fa-map-marker" title="Sigpac Viewer"/>
                 <field name="area_ha" string="Area (ha)"/>
                 <field name="intersection_percentage" string="% of parcel"/>
                 <field name="municipality_id" string="Municipality"
@@ -247,7 +252,7 @@
                 <field name="parcel_id" string="Parcel"/>
                 <button name="action_gis_viewer"
                         type="object" class="oe_stat_button"
-                        icon="fa-map-marker"/>
+                        icon="fa-map-marker" title="Gis Viewer"/>
                 <field name="municipality_id" string="Municipality"
                        widget="many2one_unclickable"/>
                 <field name="parcel_area_ha" string="Parcel Area (ha)"/>
@@ -277,7 +282,7 @@
                 <field name="sigpac_id" string="SIGPAC Enclosure"/>
                 <button name="action_sigpac_viewer"
                         type="object" class="oe_stat_button"
-                        icon="fa-map-marker"/>
+                        icon="fa-map-marker" title="Sigpac Viewer"/>
                 <field name="uso_sigpac" string="Land Use"/>
                 <field name="coef_rega" string="Irrig. Coef. (0-100)"/>
                 <field name="parcel_area_ha" string="Parcel Area (ha)"/>
@@ -318,6 +323,7 @@
         <field name="model_id" ref="model_ter_parcel_sigpaclink"/>
         <field name="state">code</field>
         <field name="code">action = env["ter.parcel.sigpaclink"].action_refresh_sigpac_intersections()</field>
+        <field name="groups_id" eval="[(6, 0, [ref('base_ter.group_ter_user')])]"/>
     </record>
 
     <record id="ter_regenerate_aerial_img_sigpac_individual" model="ir.actions.server">
@@ -325,7 +331,7 @@
         <field name="model_id" ref="model_ter_parcel"/>
         <field name="state">code</field>
         <field name="code">
-            action =  env['ter.parcel'].browse(context['active_ids']).regenerate_aerial_img_sigpac()
+            action =  env['ter.parcel'].browse(context['active_ids'])._compute_aerial_img_sigpac()
         </field>
     </record>
 
@@ -342,20 +348,24 @@
         <field name="state">code</field>
         <field name="code">
             <![CDATA[
-            action = env['ter.parcel'].browse(env.context.get('active_ids', [])).regenerate_aerial_img_sigpac()
+            action = env['ter.parcel'].browse(env.context.get('active_ids', []))._compute_aerial_img_sigpac()
             ]]>
         </field>
     </record>
 
+    <menuitem id="menu_thecnicalactions_sigpac"
+              name="SIGPAC"
+              sequence="40"
+              parent="base_ter.menu_thecnicalactions"/>
     <menuitem id="ter_technical_refresh_sigpac_intersections"
               name="Refresh SIGPAC in parcels"
-              parent="base_ter.menu_thecnicalactions"
+              parent="menu_thecnicalactions_sigpac"
               action="ter_technical_refresh_sigpac_intersections_action"
-              sequence="10"/>
+              sequence="41"/>
     <menuitem id="ter_technical_regenerate_aerial_img_sigpac"
               name="Aerial Image SIGPAC Regeneration"
-              parent="base_ter.menu_thecnicalactions"
+              parent="menu_thecnicalactions_sigpac"
               action="ter_technical_regenerate_aerial_img_sigpac_action"
-              sequence="11"
+              sequence="42"
               groups="base.group_system"/>
 </odoo>

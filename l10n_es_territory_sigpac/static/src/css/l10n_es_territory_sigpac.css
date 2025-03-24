@@ -168,3 +168,6 @@
 .o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-field="intersection_percentage"] {
     text-align: right;
 }
+.no-break {
+    white-space: nowrap;
+}

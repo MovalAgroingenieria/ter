@@ -27,7 +27,7 @@
                     <div class="oe_button_box" name="button_box">
                         <button name="action_sigpac_viewer"
                                 type="object" class="oe_stat_button"
-                                icon="fa-map-marker">
+                                icon="fa-map-marker" title="Sigpac Viewer">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">SIGPAC</span>
                                 <span class="o_stat_text">Viewer</span>
@@ -95,7 +95,7 @@
                        string="Code: prov. - munic. - aggreg. - zone - polyg. - parcel - enclos."/>
                 <button name="action_sigpac_viewer"
                         type="object" class="oe_stat_button"
-                        icon="fa-map-marker"/>
+                        icon="fa-map-marker" title="Sigpac Viewer"/>
                 <field name="dn_oid" string="SIGPAC Id."/>
                 <field name="dn_surface_ha" string="Area (ha)"/>
                 <field name="pend_media_porc" string="Slope %"/>
@@ -179,7 +179,6 @@
                 (0, 0, {'view_mode': 'graph',
                         'view_id': ref('ter_sigpac_view_graph')})]"/>
         <field name="search_view_id" ref="ter_sigpac_view_search"/>
-        <field name="context">{"graph_mode": "pie"}</field>
     </record>
 
     <menuitem id="sigpac_menu"
@@ -187,6 +186,6 @@
               parent="base_ter.menu_territory"
               sequence="30"
               action="ter_sigpac_action"
+              groups="base_ter.group_ter_user"
               />
-<!--groups="l10n_es_territory_sigpac.group_ter_user"-->
 </odoo>

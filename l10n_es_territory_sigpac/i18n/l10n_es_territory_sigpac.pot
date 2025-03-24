@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-17 07:39+0000\n"
-"PO-Revision-Date: 2025-03-17 07:39+0000\n"
+"POT-Creation-Date: 2025-03-24 13:35+0000\n"
+"PO-Revision-Date: 2025-03-24 13:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,7 @@ msgid "% in parcel"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_enclosures_view_tree
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_parcels_view_tree
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_form
@@ -29,8 +30,39 @@ msgid "% of parcel"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model:ir.actions.report,print_report_name:l10n_es_territory_sigpac.ter_parcel_sigpac_report
+msgid "'Parcel Sigpac report '"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "(There is no partner associated with this parcel)"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
 msgid "/tmp/p1"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid ""
+"<br/>\n"
+"                                            Cadastral parcel:"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid ""
+"<br/>\n"
+"                                            Cadastral polygon:"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid ""
+"<span class=\"fa fa-users\" style=\"margin-right: "
+"32px;\"/><strong>Partner</strong>"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -84,6 +116,76 @@ msgid ""
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>Area official:</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>Cadastral parcel:</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>Cadastral polygon:</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>Code:</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>GIS Area:</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>Municipality:</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>Parcel SIGPAC report [</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>Printed: </span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>Type:</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>[</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<span>]</span>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<strong>Areas and physical attributes</strong>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<strong>Enclosures</strong>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "<strong>Identity and cadastral data</strong>"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ag
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ag
 msgid "AG - CORRIENTES Y SUPERFICIES DE AGUA"
@@ -104,24 +206,31 @@ msgid "Aerial Image SIGPAC Regeneration"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#. odoo-python
+#: code:addons/l10n_es_territory_sigpac/models/ter_parcel.py:0
+#, python-format
+msgid "Aerial image OK. Parcel: %s"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel__aerial_img_sigpac
 msgid "Aerial image SIGPAC"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
-#: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel__aerial_img_sigpac_nonpersistent
+#: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel__aerial_img_sigpac_shown
 msgid "Aerial image SIGPAC, non-persistent"
-msgstr ""
-
-#. module: l10n_es_territory_sigpac
-#: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel__aerial_img_nonpersistent
-msgid "Aerial image, non-persistent"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_sigpac__agregado
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_sigpac_view_form
 msgid "Aggregate"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "Area (GIS)"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -146,6 +255,11 @@ msgstr ""
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel_sigpaclink__sigpac_area
 msgid "Area of SIGPAC enclosure (m²)"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_view_form
+msgid "BASIC DATA"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -279,6 +393,13 @@ msgid "Enclosure Number"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#. odoo-python
+#: code:addons/l10n_es_territory_sigpac/models/ter_parcel.py:0
+#, python-format
+msgid "Error getting aerial image (is the WMS url correct?)"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ff
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ff
 msgid "FF - ASOCIACIÓN FRUTALES-FRUTALES DE CÁSCARA"
@@ -353,9 +474,22 @@ msgid "Generate Aerial Images SIGPAC"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_parcels_view_tree
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_tree
+msgid "Gis Viewer"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_search
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_sigpac_view_search
 msgid "Group By"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__grp_cult__
+#: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__grp_cult__
+msgid "Grupo de cultivo: No asignado"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -407,6 +541,7 @@ msgid "Intersections parcel-SIGPAC enclosure"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_enclosures_view_tree
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_form
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_tree
@@ -427,8 +562,14 @@ msgid "Irrigation Type (parameter)"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "Land Parcel"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel_sigpaclink__uso_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_sigpac__uso_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_enclosures_view_tree
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_form
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_search
@@ -516,6 +657,11 @@ msgid "Municipality Code"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "Municipality:"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_form
 msgid "N. enclosures"
 msgstr ""
@@ -536,9 +682,8 @@ msgid "Names of the shapefiles"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
-#: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__grp_cult__
-#: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__grp_cult__
-msgid "No asignado"
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "Number"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -638,6 +783,11 @@ msgid "Parcel Title for SIGPAC table"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "Parcel:"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #. odoo-python
 #: code:addons/l10n_es_territory_sigpac/models/res_config_settings.py:0
 #, python-format
@@ -689,6 +839,11 @@ msgid "Polygon"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "Printed:"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_sigpac__provincia
 msgid "Province"
 msgstr ""
@@ -713,6 +868,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel_sigpaclink__region
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_sigpac__region
 msgid "Region"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model:ir.ui.menu,name:l10n_es_territory_sigpac.menu_thecnicalactions_sigpac
+msgid "SIGPAC"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_view_form
+msgid "SIGPAC AERIAL IMAGE"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -790,8 +955,28 @@ msgid "SIGPAC links"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model:ir.actions.server,name:l10n_es_territory_sigpac.ter_cron_action_refresh_sigpac_intersections_ir_actions_server
+#: model:ir.cron,cron_name:l10n_es_territory_sigpac.ter_cron_action_refresh_sigpac_intersections
+msgid "SIGPAC update service in parcels"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel__aerial_img_sigpac_scale
 msgid "Scale"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "Scale ~"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_enclosures_view_tree
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_tree
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_sigpac_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_sigpac_view_tree
+msgid "Sigpac Viewer"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -825,17 +1010,18 @@ msgid "TH - HUERTA"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
-#. odoo-python
-#: code:addons/l10n_es_territory_sigpac/models/ter_parcel.py:0
-#, python-format
-msgid ""
-"The \"URL GIS Viewer WMS\" parameter or \"URL GIS Viewer WFS\" are not "
-"populated."
+#: model:ir.actions.report,name:l10n_es_territory_sigpac.ter_parcel_sigpac_report
+msgid "Ter parcel SIGPAC report"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.constraint,message:l10n_es_territory_sigpac.constraint_res_config_settings_valid_minimum_intersection_percentage
 msgid "The minimum intersection percentage must be a value between 0 and 100."
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
+msgid "URL of the WMS service used to obtain SIGPAC images"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -854,6 +1040,21 @@ msgstr ""
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__vo
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__vo
 msgid "VO - VIÑEDO - OLIVAR"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_res_config_settings__wms_sigpac_layer
+msgid "WMS SIGPAC Layers"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_res_config_settings__wms_sigpac_url
+msgid "WMS SIGPAC URL"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
+msgid "WMS service layer used to obtain SIGPAC images"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -881,8 +1082,18 @@ msgid "Zone"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "aerial image"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_sigpac_view_tree
 msgid "base ter sigpac view tree"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
+msgid "company logo"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -928,10 +1139,4 @@ msgstr ""
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpaclink_view_tree
 msgid "sigpac parcel sigpaclink view tree"
-msgstr ""
-
-#. module: l10n_es_territory_sigpac
-#: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_res_config_settings__sigpac_use_venv310
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
-msgid "venv310 (python)"
 msgstr ""

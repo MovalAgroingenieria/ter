@@ -87,7 +87,11 @@ def pre_init_hook(cr):
         COALESCE(incidencia, '') AS incidencia,
         COALESCE(region, '') AS region,
         COALESCE(grp_cult, '') AS grp_cult
-        FROM ter_gis_sigpac)""")
+        FROM ter_gis_sigpac
+        WHERE uso_sigpac IN ('AG', 'CA', 'CF', 'CI', 'CS', 'CV', 'ED',
+                         'EP', 'FF', 'FL', 'FO', 'FS', 'FV', 'FY', 'IM', 'IV', 'MT', 'OC',
+                         'OF', 'OV', 'PA', 'PR', 'PS', 'TA', 'TH', 'VF', 'VI',
+                         'VO', 'ZC', 'ZU', 'ZV'))""")
     env.cr.execute("""
         CREATE UNIQUE INDEX ter_sigpac_id_index
         ON ter_sigpac (id)""")
@@ -95,26 +99,39 @@ def pre_init_hook(cr):
         CREATE INDEX ter_sigpac_name_index
         ON ter_sigpac (name)""")
     env.cr.execute("""
-        CREATE MATERIALIZED VIEW ter_parcel_sigpaclink AS
-        (SELECT row_number() OVER () AS id,
-        p.name || '-' || s.name AS name, p.id AS parcel_id, s.id AS sigpac_id,
-        c.id AS municipality_id,
-        ST_AREA(gp.geom) AS parcel_area, ST_AREA(gs.geom) AS sigpac_area,
-        ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) AS area,
-        (ST_AREA(ST_INTERSECTION(gp.geom, gs.geom))/10000) AS area_ha,
-        100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) / ST_AREA(gp.geom) AS
-        intersection_percentage, s.pend_media_porc, s.coef_admis, s.coef_rega,
-        s.uso_sigpac, s.incidencia, s.region, s.grp_cult,
-        ST_INTERSECTION(gp.geom, gs.geom) AS geom
-        FROM ter_gis_parcel gp
-        INNER JOIN ter_parcel p ON p.name=gp.name
-        INNER JOIN res_municipality c ON p.municipality_id = c.id,
-        ter_gis_sigpac gs
-        INNER JOIN ter_sigpac s ON s.dn_oid = gs.dn_oid
-        WHERE p.active=true AND ST_ISVALID(gp.geom) AND ST_ISVALID(gs.geom) AND
-        ST_INTERSECTS(gp.geom, gs.geom) AND ST_AREA(gp.geom) > 0 AND
-        (100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) / ST_AREA(gp.geom))
-        >= %s)""", (DEF_INT_PERC,))
+        CREATE MATERIALIZED VIEW ter_parcel_sigpaclink AS(
+            SELECT row_number() OVER () AS id,
+                p.name || '-' || s.name AS name,
+                p.id AS parcel_id,
+                s.id AS sigpac_id,
+                c.id AS municipality_id,
+                ST_AREA(gp.geom) AS parcel_area,
+                ST_AREA(gs.geom) AS sigpac_area,
+                ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) AS area,
+                (ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) / 10000)
+                AS area_ha, 100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom))
+                / ST_AREA(gp.geom) AS intersection_percentage,
+                s.pend_media_porc,
+                s.coef_admis,
+                s.coef_rega,
+                s.uso_sigpac,
+                s.incidencia,
+                s.region,
+                s.grp_cult,
+                ST_INTERSECTION(gp.geom, gs.geom) AS geom,
+                gs.gid AS sigpac_gid
+            FROM ter_gis_parcel gp
+            INNER JOIN ter_parcel p ON p.name = gp.name
+            INNER JOIN res_municipality c ON p.municipality_id = c.id,
+                ter_gis_sigpac gs
+            INNER JOIN ter_sigpac s ON s.dn_oid = gs.dn_oid
+            WHERE p.active = true
+            AND ST_ISVALID(gp.geom)
+            AND ST_ISVALID(gs.geom)
+            AND ST_INTERSECTS(gp.geom, gs.geom)
+            AND ST_AREA(gp.geom) > 0
+            AND (100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom))
+            / ST_AREA(gp.geom)) >= %s)""", (DEF_INT_PERC,))
     env.cr.execute("""
         CREATE UNIQUE INDEX ter_parcel_sigpaclink_id_index
         ON ter_parcel_sigpaclink (id)""")
@@ -129,9 +146,18 @@ def uninstall_hook(cr, registry):
         env.cr.savepoint()
         env.cr.execute("""
             DELETE FROM ir_config_parameter
-            WHERE key LIKE 'sigpac.%'""")
+            WHERE key LIKE 'l10n_es_territory_sigpac.%'
+        """)
         env.cr.commit()
     except Exception:
         env.cr.rollback()
+    env.cr.execute("""
+        ALTER TABLE ter_parcel
+            DROP COLUMN IF EXISTS number_of_sigpaclinks,
+            DROP COLUMN IF EXISTS parcel_title_sigpac,
+            DROP COLUMN IF EXISTS aerial_img_sigpac,
+            DROP COLUMN IF EXISTS aerial_img_sigpac_shown,
+            DROP COLUMN IF EXISTS aerial_img_sigpac_scale;
+    """)
     env.cr.execute('DROP TABLE IF EXISTS public.ter_gis_sigpac CASCADE')
     env.cr.execute('DROP SEQUENCE IF EXISTS public.ter_gis_sigpac_gid_seq')

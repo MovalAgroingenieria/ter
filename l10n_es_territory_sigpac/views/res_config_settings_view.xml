@@ -49,19 +49,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="div_sigpac_use_venv310" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="sigpac_use_venv310"/>
-                                <div class="text-muted">
-                                    venv310 (python)
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="sigpac_use_venv310" string="venv310 (python)"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div id="div_action_load_sigpac" class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_right_pane">
                                 <label for="action_load_sigpac"/>
@@ -69,8 +56,36 @@
                                     <button type="object" name="action_load_sigpac" string="Load SIGPAC enclosures" icon="fa-download" class="oe_inline oe_link"/>
                                 </div>
                                 <div class="mt16">
-                                    <label for="sigpac_minimum_intersection_percentage" string="IMPORTANT: If the 'Min. Intersection' parameter is changed, it will be necessary to reload the SIGPAC enclosures."/>
+                                    <label for="action_load_sigpac" string="IMPORTANT: If the 'Min. Intersection' parameter is changed, it will be necessary to reload the SIGPAC enclosures."/>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//div[@id='div_aerial_image_wmsvec_parcel_name']" position="after">
+                <div id="div_wms_sigpac_url" class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <label for="wms_sigpac_url"/>
+                        <div class="text-muted">
+                            URL of the WMS service used to obtain SIGPAC images
+                        </div>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="wms_sigpac_url" style="width:100%"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="div_wms_sigpac_layer" class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <label for="wms_sigpac_layer"/>
+                        <div class="text-muted">
+                            WMS service layer used to obtain SIGPAC images
+                        </div>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="wms_sigpac_layer" style="width:100%"/>
                             </div>
                         </div>
                     </div>

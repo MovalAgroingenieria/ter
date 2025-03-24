@@ -9,13 +9,13 @@ import psycopg2
 # Examples:
 #
 # 1. One SHP:
-# python load_sigpac.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval odoo10movalEis51n1970molino1750 /tmp/rec_30045_2022_20220113.shp 25830
+# python load_sigpac.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval passwd /tmp/rec_30045_2022_20220113.shp 25830
 #
 # 2. Two SHP:
-# python load_sigpac.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval odoo10movalEis51n1970molino1750 /tmp/rec_03142_2022_20220113.shp#/tmp/rec_30045_2022_20220113.shp 25830
+# python load_sigpac.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval passwd /tmp/rec_03142_2022_20220113.shp#/tmp/rec_30045_2022_20220113.shp 25830
 #
 # 3. Three SHP, a SHP with filter:
-# python load_sigpac.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval odoo10movalEis51n1970molino1750 '/tmp/rec_03142_2022_20220113.shp#/tmp/rec_30045_2022_20220113.shp("poligono">=529 and "poligono"<=539)#/tmp/rec_30045_2022_20220113.shp' 25830
+# python load_sigpac.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval passwd '/tmp/rec_03142_2022_20220113.shp#/tmp/rec_30045_2022_20220113.shp("poligono">=529 and "poligono"<=539)#/tmp/rec_30045_2022_20220113.shp' 25830
 
 num_args = len(sys.argv)
 if num_args == 8:

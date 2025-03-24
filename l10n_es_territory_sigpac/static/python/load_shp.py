@@ -8,10 +8,10 @@ import subprocess
 # Examples:
 #
 # No filter:
-# python load_shp.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval odoo10movalEis51n1970molino1750 /tmp/rec_30045_2022_20220113.shp ter_gis_sigpac 25830
+# python load_shp.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval passwd /tmp/rec_30045_2022_20220113.shp ter_gis_sigpac 25830
 #
 # Filter (last argument):
-# python load_shp.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval odoo10movalEis51n1970molino1750 /tmp/rec_30045_2022_20220113.shp ter_gis_sigpac 25830 '"poligono">=529 and "poligono"<=539'
+# python load_shp.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval passwd /tmp/rec_30045_2022_20220113.shp ter_gis_sigpac 25830 '"poligono">=529 and "poligono"<=539'
 
 num_args = len(sys.argv)
 if num_args == 9 or num_args == 10:
@@ -41,7 +41,7 @@ if num_args == 9 or num_args == 10:
 else:
     print 'SHP to PostgreSQL, incorrect sintax. Use:\npython load_shp.py {host} {port} {dbname} {user} {password} {shp} {table} {srs} [{\'condition\'}]'
     print '\nExample 1 (no filter):\n'
-    print 'python load_shp.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval odoo10movalEis51n1970molino1750 /tmp/rec_30045_2022_20220113.shp ter_gis_sigpac 25830'
+    print 'python load_shp.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval passwd /tmp/rec_30045_2022_20220113.shp ter_gis_sigpac 25830'
     print '\nExample 2 (with filter):\n'
-    print 'python load_shp.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval odoo10movalEis51n1970molino1750 /tmp/rec_30045_2022_20220113.shp ter_gis_sigpac 25830 \'"poligono">=529 and "poligono"<=539\''
+    print 'python load_shp.py 127.0.0.1 5432 v10_cr_campo_cartagena_restored_20221229 odoo10moval passwd /tmp/rec_30045_2022_20220113.shp ter_gis_sigpac 25830 \'"poligono">=529 and "poligono"<=539\''
     sys.exit(255)

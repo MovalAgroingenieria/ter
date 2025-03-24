@@ -42,23 +42,19 @@ class TerParcel(models.Model):
         string='Parcel Title for SIGPAC table',
         compute='_compute_parcel_title_sigpac')
 
-    aerial_img_nonpersistent = fields.Binary(
-        string='Aerial image, non-persistent',
-        compute='_compute_aerial_img_nonpersistent')
-
     aerial_img_sigpac = fields.Binary(
         string='Aerial image SIGPAC',
         attachment=True,
     )
 
+    aerial_img_sigpac_shown = fields.Binary(
+        string='Aerial image SIGPAC, non-persistent',
+        compute='_compute_aerial_img_sigpac_shown',
+    )
+
     aerial_img_sigpac_scale = fields.Integer(
         string='Scale',
         readonly=True)
-
-    aerial_img_sigpac_nonpersistent = fields.Binary(
-        string='Aerial image SIGPAC, non-persistent',
-        compute='_compute_aerial_img_sigpac_nonpersistent',
-    )
 
     def _compute_number_of_sigpaclinks(self):
         for record in self:
@@ -74,32 +70,107 @@ class TerParcel(models.Model):
                 _('SIGPAC ENCLOSURES')
             record.parcel_title_sigpac = parcel_title_sigpac
 
-    def _compute_aerial_img_nonpersistent(self):
+    def _compute_aerial_img_sigpac_shown(self):
+        config = self.env['ir.config_parameter'].sudo()
+        aerial_image_wmsbase_url = config.get_param(
+            'base_ter.aerial_image_wmsbase_url', False)
+        aerial_image_wmsbase_layers = config.get_param(
+            'base_ter.aerial_image_wmsbase_layers', False)
+        aerial_image_wmsvec_url = config.get_param(
+            'base_ter.aerial_image_wmsvec_url', False)
+        aerial_image_wmsvec_parcel_name = config.get_param(
+            'base_ter.aerial_image_wmsvec_parcel_name', False)
+        aerial_image_wmsvec_parcel_filter = config.get_param(
+            'base_ter.aerial_image_wmsvec_parcel_filter', False)
+        aerial_image_height = int(config.get_param(
+            'base_ter.aerial_image_height', 0))
+        aerial_image_zoom = float(config.get_param(
+            'base_ter.aerial_image_zoom', 0))
+        aerial_image_wmssigpac_url = config.get_param(
+            'l10n_es_territory_sigpac.wms_sigpac_url', False)
+        aerial_image_wmssigpac_layers = config.get_param(
+            'l10n_es_territory_sigpac.wms_sigpac_layers', False)
+        ogc_data_ok = True
+        ogc_vec_layer = False
+        if (aerial_image_wmsbase_url and aerial_image_wmsbase_layers and
+           aerial_image_height >= 0 and aerial_image_zoom >= 0):
+            if aerial_image_height == 0:
+                aerial_image_height = self._aerial_image_size_big
+            if aerial_image_zoom == 0:
+                aerial_image_zoom = self._aerial_image_zoom
+            if aerial_image_wmsvec_url and aerial_image_wmsvec_parcel_name:
+                ogc_vec_layer = True
+        else:
+            ogc_data_ok = False
         for record in self:
-            aerial_img_nonpersistent = None
-            if record.aerial_img:
-                aerial_img_nonpersistent = record.aerial_img
-            else:
-                try:
-                    record.regenerate_aerial_img()
-                    aerial_img_nonpersistent = record.aerial_img
-                except Exception:
-                    aerial_img_nonpersistent = None
-            record.aerial_img_nonpersistent = aerial_img_nonpersistent
-
-    def _compute_aerial_img_sigpac_nonpersistent(self):
-        for record in self:
-            aerial_img_sigpac_nonpersistent = None
+            aerial_img_sigpac_shown = None
             if record.aerial_img_sigpac:
-                aerial_img_sigpac_nonpersistent = record.aerial_img_sigpac
+                aerial_img_sigpac_shown = record.aerial_img_sigpac
             else:
-                try:
-                    record.regenerate_aerial_img_sigpac()
-                    aerial_img_sigpac_nonpersistent = record.aerial_img_sigpac
-                except Exception:
-                    aerial_img_sigpac_nonpersistent = None
-            record.aerial_img_sigpac_nonpersistent = \
-                aerial_img_sigpac_nonpersistent
+                if ogc_data_ok and record.mapped_to_polygon:
+                    if not ogc_vec_layer:
+                        aerial_img_sigpac_shown = record.get_aerial_image(
+                            wms=aerial_image_wmsbase_url,
+                            layers=aerial_image_wmsbase_layers,
+                            image_height=aerial_image_height,
+                            format='png',
+                            zoom=aerial_image_zoom,
+                            force_square_shape=self._force_square_shape,)
+                    else:
+                        aerial_image_base_raw = record.get_aerial_image(
+                            wms=aerial_image_wmsbase_url,
+                            layers=aerial_image_wmsbase_layers,
+                            image_height=aerial_image_height,
+                            format='png',
+                            zoom=aerial_image_zoom,
+                            get_raw=True,
+                            filter=False,
+                            force_square_shape=self._force_square_shape,)
+                        aerial_image_vec_raw = record.get_aerial_image(
+                            wms=aerial_image_wmsvec_url,
+                            layers=aerial_image_wmsvec_parcel_name,
+                            image_height=aerial_image_height,
+                            format='png',
+                            zoom=aerial_image_zoom,
+                            get_raw=True,
+                            filter=aerial_image_wmsvec_parcel_filter,
+                            force_square_shape=self._force_square_shape,)
+                        aerial_image_sigpac_raw = record.get_aerial_image(
+                            wms=aerial_image_wmssigpac_url,
+                            layers=aerial_image_wmssigpac_layers,
+                            image_height=aerial_image_height,
+                            format='png',
+                            zoom=aerial_image_zoom,
+                            get_raw=True,
+                            filter=False,
+                            styles="recinto",
+                            force_square_shape=self._force_square_shape,)
+                        print(aerial_image_sigpac_raw)
+                        if aerial_image_base_raw and aerial_image_vec_raw and \
+                           aerial_image_sigpac_raw:
+                            aerial_image_raw = \
+                                self.env['common.image'].merge_img(
+                                    aerial_image_base_raw,
+                                    aerial_image_sigpac_raw)
+                            aerial_image_raw = \
+                                self.env['common.image'].merge_img(
+                                    aerial_image_raw,
+                                    aerial_image_vec_raw
+                                    )
+                            if aerial_image_raw:
+                                aerial_img_sigpac_shown = base64.b64encode(
+                                    aerial_image_raw.getvalue())
+                    if aerial_img_sigpac_shown:
+                        record.aerial_img_sigpac = aerial_img_sigpac_shown
+                        self.env['common.log'].register_in_log(
+                            _('Aerial image OK. Parcel: %s', record.name),
+                            source=self._name, message_type='INFO')
+                    else:
+                        self.env['common.log'].register_in_log(
+                            _('Error getting aerial image '
+                              '(is the WMS url correct?)'),
+                            source=self._name, message_type='WARNING')
+            record.aerial_img_sigpac_shown = aerial_img_sigpac_shown
 
     def _get_aerial_image_sigpac_layers(self, parcel):
         return self._aerial_img_sigpac_layers
@@ -174,97 +245,6 @@ class TerParcel(models.Model):
             '</StyledLayerDescriptor>'
         return body
 
-    def regenerate_aerial_img_sigpac(self):
-        url_gis_viewer_wms = self.env['ir.default'].get(
-            'res.config.settings', 'url_gis_viewer_wms')
-        url_gis_viewer_wfs = self.env['ir.default'].get(
-            'res.config.settings', 'url_gis_viewer_wfs')
-        if (not url_gis_viewer_wms or not url_gis_viewer_wfs):
-            raise exceptions.UserError(_('The "URL GIS Viewer WMS" parameter '
-                                         'or "URL GIS Viewer WFS" are not '
-                                         'populated.'))
-        else:
-            mapserver_dpi = 90
-            wms = WebMapService(
-                url=url_gis_viewer_wms, version='1.1.1',
-                timeout=self.OWS_SERVICES_TIMEOUT)
-            wfs = WebFeatureService(
-                url=url_gis_viewer_wfs, version='1.1.0',
-                timeout=self.OWS_SERVICES_TIMEOUT)
-            for record in self:
-                if record.with_gis_parcel:
-                    sld_sigpac_body = record.get_sld_sigpac_body()
-                    try:
-                        response = record._get_wfs_response(wfs, record)
-                        parsed_response = ElementTree.fromstring(
-                            response.getvalue())
-                        ns = parsed_response[0].tag.split('}')[0] + '}'
-                        parcel_member = parsed_response.find(ns +
-                                                             'boundedBy')
-                        parcel_envelop = parcel_member[0]
-                        crs = parcel_envelop.attrib['srsName']
-                        lowerCorner = [float(n) for n in (parcel_envelop.find(
-                            ns + 'lowerCorner').text).split(' ')]
-                        upperCorner = [float(n) for n in (parcel_envelop.find(
-                            ns + 'upperCorner').text).split(' ')]
-                        width = int(upperCorner[0] - lowerCorner[0])
-                        height = int(upperCorner[1] - lowerCorner[1])
-                        max_width = record._aerial_image_width
-                        max_height = record._aerial_image_height
-                        if (width > max_width or height > max_height):
-                            increment = (int(self.getClosestMul(
-                                max_width, max(height, width))))
-                            incrementX = (increment - width)/2
-                            incrementY = (increment - height)/2
-                            lowerCorner[0] = int(lowerCorner[0] - incrementX)
-                            upperCorner[0] = int(round(
-                                upperCorner[0] + incrementX))
-                            lowerCorner[1] = int(
-                                round(lowerCorner[1] - incrementY))
-                            upperCorner[1] = int(upperCorner[1] + incrementY)
-                        elif (width < max_width or height < max_height):
-                            increment = int(self.getClosestDiv(
-                                max_width, max(height, width)))
-                            incrementX = (increment - width)/2
-                            incrementY = (increment - height)/2
-                            lowerCorner[0] = int(lowerCorner[0] - incrementX)
-                            upperCorner[0] = int(round(
-                                upperCorner[0] + incrementX))
-                            lowerCorner[1] = int(
-                                round(lowerCorner[1] - incrementY))
-                            upperCorner[1] = int(upperCorner[1] + incrementY)
-                        width = max_width
-                        height = max_height
-                        bbox = ((int(lowerCorner[0])), (int(lowerCorner[1])),
-                                (int(upperCorner[0])), (int(upperCorner[1])))
-                        img = wms.getmap(
-                            layers=record._get_aerial_image_sigpac_layers(
-                                record),
-                            styles=record.
-                            _get_aerial_image_sigpac_layers_styles(
-                                record),
-                            srs=crs, bbox=bbox, size=(width, height),
-                            format=self._aerial_img_format, transparent=True,
-                            SLD_BODY=sld_sigpac_body)
-                        image = io.BytesIO(img.read())
-                        base64_img = base64.b64encode(image.getvalue())
-                        # GET SCALE:
-                        # With BBOX get meters in the real world
-                        width_in_real_meters = bbox[2] - bbox[0]
-                        # With pixels Width and dpi get the size of the image
-                        width_in_image_meters = (width / mapserver_dpi) * \
-                            0.0254
-                        aerial_img_scale = width_in_real_meters /\
-                            width_in_image_meters
-                        record.write({
-                            'aerial_img_sigpac': base64_img,
-                            'aerial_img_sigpac_scale': aerial_img_scale,
-                        })
-                    except Exception:
-                        _logger = logging.getLogger(self.__class__.__name__)
-                        _logger.exception('SIGPAC Aerial IMG')
-                        pass
-
     def action_get_enclosures(self):
         self.ensure_one()
         id_form_view = self.env.ref(
@@ -281,14 +261,11 @@ class TerParcel(models.Model):
             }
         return act_window
 
-    def action_regenerate_aerial_img_sigpac(self, limit=0):
+    def action_regenerate_aerial_img_sigpac(self):
         parcels = self.env['ter.parcel'].search(
-            [('with_gis_parcel', '=', True)],
-            order='aerial_img_last_import_date',
-            limit=limit)
+            [('mapped_to_polygon', '=', True)])
         for parcel in parcels:
-            parcel.regenerate_aerial_img_sigpac()
-            self.env.cr.commit()
+            parcel._compute_aerial_img_sigpac_shown()
 
 
 class TerParcelSigpaclink(models.Model):
@@ -396,7 +373,7 @@ class TerParcelSigpaclink(models.Model):
             ('PT', 'PT - Pastos'),
             ('TCR', 'TCR - Tierras de cultivo de regadío'),
             ('TCS', 'TCS - Tierras de cultivo de secano'),
-            ('', 'No asignado'),
+            ('', 'Grupo de cultivo: No asignado'),
         ],)
 
     gis_link_public = fields.Char(

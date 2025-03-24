@@ -118,7 +118,7 @@ class TerSigpac(models.Model):
             ('PT', 'PT - Pastos'),
             ('TCR', 'TCR - Tierras de cultivo de regadío'),
             ('TCS', 'TCS - Tierras de cultivo de secano'),
-            ('', 'No asignado'),
+            ('', 'Grupo de cultivo: No asignado'),
         ],)
 
     sigpac_link = fields.Char(

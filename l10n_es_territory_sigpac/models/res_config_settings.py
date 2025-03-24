@@ -36,9 +36,15 @@ class ResConfigSettings(models.TransientModel):
         config_parameter='l10n_es_territory_sigpac.'
         'sigpac_minimum_intersection_percentage')
 
-    sigpac_use_venv310 = fields.Boolean(
-        string='venv310 (python)',
-        config_parameter='l10n_es_territory_sigpac.sigpac_use_venv310')
+    wms_sigpac_url = fields.Char(
+        string='WMS SIGPAC URL',
+        default='https://wms.mapa.gob.es/sigpac/wms',
+        config_parameter='l10n_es_territory_sigpac.wms_sigpac_url')
+
+    wms_sigpac_layer = fields.Char(
+        string='WMS SIGPAC Layers',
+        default='recinto',
+        config_parameter='l10n_es_territory_sigpac.wms_sigpac_layers')
 
     _sql_constraints = [
         ('valid_minimum_intersection_percentage',
@@ -177,10 +183,10 @@ class ResConfigSettings(models.TransientModel):
     def _rebuild_ter_parcel_sigpaclink_view(
             self, minimum_intersection_percentage=DEF_INT_PERC):
         self.env.cr.execute("""
-            DROP MATERIALIZED VIEW IF EXISTS ter_parcel_sigpaclink""")
+            DROP MATERIALIZED VIEW IF EXISTS ter_parcel_sigpaclink CASCADE""")
         self.env.cr.execute("""
             CREATE MATERIALIZED VIEW ter_parcel_sigpaclink AS(
-            SELECT gp.gid AS id,
+            SELECT row_number() OVER () AS id,
                 p.name || '-' || s.name AS name,
                 p.id AS parcel_id,
                 s.id AS sigpac_id,
@@ -188,8 +194,9 @@ class ResConfigSettings(models.TransientModel):
                 ST_AREA(gp.geom) AS parcel_area,
                 ST_AREA(gs.geom) AS sigpac_area,
                 ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) AS area,
-                (ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) / 10000) AS area_ha,
-                100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) / ST_AREA(gp.geom) AS intersection_percentage,
+                (ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) / 10000)
+                AS area_ha, 100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) /
+                ST_AREA(gp.geom) AS intersection_percentage,
                 s.pend_media_porc,
                 s.coef_admis,
                 s.coef_rega,
@@ -208,11 +215,18 @@ class ResConfigSettings(models.TransientModel):
             AND ST_ISVALID(gp.geom)
             AND ST_ISVALID(gs.geom)
             AND ST_INTERSECTS(gp.geom, gs.geom)
+            AND gs.uso_sigpac IN ('AG', 'CA', 'CF', 'CI', 'CS', 'CV', 'ED',
+            'EP', 'FF', 'FL', 'FO', 'FS', 'FV', 'FY', 'IM', 'IV', 'MT', 'OC',
+            'OF', 'OV', 'PA', 'PR', 'PS', 'TA', 'TH', 'VF', 'VI',
+            'VO', 'ZC', 'ZU', 'ZV')
             AND ST_AREA(gp.geom) > 0
-            AND (100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) / ST_AREA(gp.geom)) >= %s)""",(minimum_intersection_percentage,))
+            AND (100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) /
+            ST_AREA(gp.geom)) >= %s)""", (minimum_intersection_percentage,))
         self.env.cr.execute("""
             CREATE UNIQUE INDEX ter_parcel_sigpaclink_id_index
             ON ter_parcel_sigpaclink (id)""")
         self.env.cr.execute("""
             CREATE INDEX ter_parcel_sigpaclink_name_index
             ON ter_parcel_sigpaclink (name)""")
+        self.env.cr.execute("""
+            REFRESH MATERIALIZED VIEW ter_parcel_sigpaclink;""")

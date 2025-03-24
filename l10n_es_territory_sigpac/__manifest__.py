@@ -25,7 +25,13 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "l10n_es_territory_sigpac/static/src/css/l10n_es_territory_sigpac.css",
+            'l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css',
+        ],
+        "web.assets_frontend": [
+            'l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css',
+        ],
+        'web.report_assets_common': [
+            'l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css',
         ],
     },
     "installable": True,
