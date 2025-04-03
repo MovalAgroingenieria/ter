@@ -8,22 +8,6 @@
             <form duplicate="false" create="false"
                   delete="false" edit="false">
                 <sheet>
-                    <div name="grp_cult_icon"
-                         style="display: inline-block;">
-                        <img src="/l10n_es_territory_sigpac/static/img/icon_fruit_tree.png"
-                             attrs="{'invisible':[('grp_cult', '!=', 'CP')]}"
-                             alt="fruit tree"/>
-                        <img src="/l10n_es_territory_sigpac/static/img/icon_pastures.png"
-                             attrs="{'invisible':[('grp_cult', '!=', 'PT')]}"
-                             alt="pastures"/>
-                        <img src="/l10n_es_territory_sigpac/static/img/icon_irrigation_land.png"
-                             attrs="{'invisible':[('grp_cult', '!=', 'TCR')]}"
-                             alt="irrigation land"/>
-                        <img src="/l10n_es_territory_sigpac/static/img/icon_dry_farming.png"
-                             attrs="{'invisible':[('grp_cult', '!=', 'TCS')]}"
-                             alt="dry farming"/>
-                        <b><field name="grp_cult" style="margin-left:15px"/></b>
-                    </div>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_sigpac_viewer"
                                 type="object" class="oe_stat_button"
@@ -47,13 +31,10 @@
                     </div>
                     <group name="master_data">
                         <group name="master_data_left">
-                            <div name="title_master_data_left" colspan="2"
-                                style="text-align:center">
-                                <span style="font-weight:bold;">
-                                IDENTIFICATION
-                                </span>
+                            <div name="section_sigpac_identification" colspan="2"
+                                 class="text-center mb-4">
+                                <p style="width:100%" class="border p-2 fw-bold">IDENTIFICATION</p>
                             </div>
-                            <hr colspan="2" style="margin-right:10px;margin-bottom:26px"/>
                             <field name="dn_oid" string="SIGPAC Id."/>
                             <field name="provincia" string="Province Code"/>
                             <field name="municipio" string="Municipality Code"/>
@@ -64,13 +45,10 @@
                             <field name="recinto" string="Enclosure"/>
                         </group>
                         <group name="master_data_right">
-                            <div name="title_master_data_right" colspan="2"
-                                style="text-align:center;">
-                                <span style="font-weight:bold;">
-                                SIGPAC DATA
-                                </span>
+                            <div name="section_sigpac_data" colspan="2"
+                                 class="text-center mb-4">
+                                <p style="width:100%" class="border p-2 fw-bold">SIGPAC DATA</p>
                             </div>
-                            <hr colspan="2" style="margin-bottom:26px"/>
                             <field name="uso_sigpac" string="Land Use"/>
                             <field name="coef_rega" string="Irrig. Coef. (0-100)"/>
                             <field name="dn_surface_ha" string="Area (ha)"/>
@@ -113,25 +91,7 @@
                 <field name="name" string="Code"/>
                 <field name="dn_oid" string="SIGPAC Id."/>
                 <field name="uso_sigpac" string="Land Use"/>
-                <filter string="Crop Group: CP - Cultivos permanentes"
-                        name="grp_cult_cp"
-                        domain="[('grp_cult','=','CP')]"/>
-                <filter string="Crop Group: PT - Pastos"
-                        name="grp_cult_pt"
-                        domain="[('grp_cult','=','PT')]"/>
-                <filter string="Crop Group: TCR - Tierras de cultivo de regadío"
-                        name="grp_cult_tcr"
-                        domain="[('grp_cult','=','TCR')]"/>
-                <filter string="Crop Group: TCS - Tierras de cultivo de secano"
-                        name="grp_cult_tcs"
-                        domain="[('grp_cult','=','TCS')]"/>
-                <filter string="Crop Group: Not assigned"
-                        name="grp_cult_na"
-                        domain="[('grp_cult','=','')]"/>
                 <group expand="0" string="Group By">
-                    <filter string="Crop Group"
-                            name="grouped_grp_cult"
-                     context="{'group_by':'grp_cult'}"/>
                     <filter string="Land Use"
                             name="grouped_uso_sigpac"
                      context="{'group_by':'uso_sigpac'}"/>
@@ -145,7 +105,6 @@
         <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
             <pivot string="Area (ha)">
-                <field name="grp_cult" type="col"/>
                 <field name="uso_sigpac" type="row"/>
                 <field name="dn_surface_ha" type="measure"/>
             </pivot>

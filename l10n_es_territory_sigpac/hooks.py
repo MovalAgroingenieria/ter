@@ -60,7 +60,6 @@ def pre_init_hook(cr):
             uso_sigpac CHARACTER VARYING(2),
             incidencia CHARACTER VARYING(50),
             region CHARACTER VARYING(4),
-            grp_cult CHARACTER VARYING(3),
             geom POSTGIS.GEOMETRY(Polygon,%s),
             CONSTRAINT ter_gis_sigpac_pkey PRIMARY KEY (gid))""", (epsg,))
     env.cr.execute("""
@@ -86,7 +85,6 @@ def pre_init_hook(cr):
         uso_sigpac,
         COALESCE(incidencia, '') AS incidencia,
         COALESCE(region, '') AS region,
-        COALESCE(grp_cult, '') AS grp_cult
         FROM ter_gis_sigpac
         WHERE uso_sigpac IN ('AG', 'CA', 'CF', 'CI', 'CS', 'CV', 'ED',
                          'EP', 'FF', 'FL', 'FO', 'FS', 'FV', 'FY', 'IM', 'IV',
@@ -118,7 +116,6 @@ def pre_init_hook(cr):
                 s.uso_sigpac,
                 s.incidencia,
                 s.region,
-                s.grp_cult,
                 ST_INTERSECTION(gp.geom, gs.geom) AS geom,
                 gs.gid AS sigpac_gid
             FROM ter_gis_parcel gp
@@ -139,6 +136,17 @@ def pre_init_hook(cr):
     env.cr.execute("""
         CREATE INDEX ter_parcel_sigpaclink_name_index
         ON ter_parcel_sigpaclink (name)""")
+
+
+def post_init_hook(cr, registry):
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    env['ir.config_parameter'].set_param(
+        'l10n_es_territory_sigpac.wms_sigpac_layer', 'recinto')
+    env['ir.config_parameter'].set_param(
+        'l10n_es_territory_sigpac.wms_sigpac_url',
+        'https://wms.mapa.gob.es/sigpac/wms')
+    env['ir.config_parameter'].set_param(
+        'l10n_es_territory_sigpac.sigpac_minimum_intersection_percentage', 5.0)
 
 
 def uninstall_hook(cr, registry):

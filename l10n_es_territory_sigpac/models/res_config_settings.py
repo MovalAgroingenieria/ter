@@ -28,7 +28,6 @@ class ResConfigSettings(models.TransientModel):
 
     sigpac_minimum_intersection_percentage = fields.Float(
         string='Minimum intersection percentage',
-        default=DEF_INT_PERC,
         digits=(32, 4),
         required=True,
         help='Minimum intersection percentage allowed for parcels and SIGPAC '
@@ -38,13 +37,11 @@ class ResConfigSettings(models.TransientModel):
 
     wms_sigpac_url = fields.Char(
         string='WMS SIGPAC URL',
-        default='https://wms.mapa.gob.es/sigpac/wms',
         config_parameter='l10n_es_territory_sigpac.wms_sigpac_url')
 
     wms_sigpac_layer = fields.Char(
         string='WMS SIGPAC Layers',
-        default='recinto',
-        config_parameter='l10n_es_territory_sigpac.wms_sigpac_layers')
+        config_parameter='l10n_es_territory_sigpac.wms_sigpac_layer')
 
     _sql_constraints = [
         ('valid_minimum_intersection_percentage',
@@ -203,7 +200,6 @@ class ResConfigSettings(models.TransientModel):
                 s.uso_sigpac,
                 s.incidencia,
                 s.region,
-                s.grp_cult,
                 ST_INTERSECTION(gp.geom, gs.geom) AS geom,
                 gs.gid AS sigpac_gid
             FROM ter_gis_parcel gp

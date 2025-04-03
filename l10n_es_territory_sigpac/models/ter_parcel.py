@@ -90,7 +90,7 @@ class TerParcel(models.Model):
         aerial_image_wmssigpac_url = config.get_param(
             'l10n_es_territory_sigpac.wms_sigpac_url', False)
         aerial_image_wmssigpac_layers = config.get_param(
-            'l10n_es_territory_sigpac.wms_sigpac_layers', False)
+            'l10n_es_territory_sigpac.wms_sigpac_layer', False)
         ogc_data_ok = True
         ogc_vec_layer = False
         if (aerial_image_wmsbase_url and aerial_image_wmsbase_layers and
@@ -178,73 +178,6 @@ class TerParcel(models.Model):
 
     def _get_aerial_image_sigpac_layers_styles(self, parcel):
         return self._aerial_img_sigpac_layers_styles
-
-    def get_sld_sigpac_body(self):
-        body = ''
-        body = body + '<?xml version="1.0" encoding="UTF-8"?>' + \
-            '<StyledLayerDescriptor version="1.0.0" ' + \
-            'xmlns="http://www.opengis.net/sld" xmlns:ogc="' + \
-            'http://www.opengis.net/ogc" xmlns:xlink="' + \
-            'http://www.w3.org/1999/xlink" xmlns:xsi="' + \
-            'http://www.w3.org/2001/XMLSchema-instance"' + \
-            'xsi:schemaLocation="http://www.opengis.net/sld ' + \
-            'http://schemas.opengis.net/sld/1.0.0/StyledLaye' + \
-            'rDescriptor.xsd">' + \
-            '<NamedLayer><Name>parcel</Name>' + \
-            '<UserStyle><Title>xxx</Title><FeatureTypeStyle>' + \
-            '<Rule><Filter><PropertyIsLike ' + \
-            'wildCard="*" singleChar="." escape="!"><Property' + \
-            'Name>name</PropertyName><Literal>' + self.name + \
-            '</Literal></PropertyIsLike></Filter>' + \
-            '<PolygonSymbolizer>' + \
-            '<Stroke>' + \
-            '<CssParameter name="stroke">#ffffff</CssParameter>' + \
-            '<CssParameter name="stroke-width">3</CssParameter>' + \
-            '<CssParameter name="stroke-linecap">round</CssParameter>' + \
-            '</Stroke>' + \
-            '<Fill>' + \
-            '<CssParameter name="fill">#02f2ff</CssParameter>' + \
-            '<CssParameter name="fill-opacity">0.6</CssParameter>' + \
-            '</Fill>' + \
-            '</PolygonSymbolizer>' + \
-            '<TextSymbolizer>' + \
-            '<Label>' + \
-            '<ogc:PropertyName>' + \
-            'name' + \
-            '</ogc:PropertyName>' + \
-            '</Label>' + \
-            '<Font>' + \
-            '<CssParameter name="font-family">Arial</CssParameter>' + \
-            '<CssParameter name="font-size">14</CssParameter>' + \
-            '<CssParameter name="font-style">normal</CssParameter>' + \
-            '<CssParameter name="font-weight">bold</CssParameter>' + \
-            '</Font>' + \
-            '<Halo>' + \
-            '<Radius>3</Radius>' + \
-            '<Fill>' + \
-            '<CssParameter name="fill">#00ff00</CssParameter>' + \
-            '</Fill>' + \
-            '</Halo>' + \
-            '<Fill>' + \
-            '<CssParameter name="fill">#000000</CssParameter>' + \
-            '</Fill>' + \
-            '</TextSymbolizer>' + \
-            '</Rule></FeatureTypeStyle>' + \
-            '</UserStyle></NamedLayer>' + \
-            '<NamedLayer><Name>sigpac</Name>' + \
-            '<UserStyle><Title>xxx2</Title><FeatureTypeStyle>' + \
-            '<Rule>' + \
-            '<PolygonSymbolizer>' + \
-            '<Stroke>' + \
-            '<CssParameter name="stroke">#c006c9</CssParameter>' + \
-            '<CssParameter name="stroke-width">1</CssParameter>' + \
-            '<CssParameter name="stroke-linecap">round</CssParameter>' + \
-            '</Stroke>' + \
-            '</PolygonSymbolizer>' + \
-            '</Rule></FeatureTypeStyle>' + \
-            '</UserStyle></NamedLayer>' + \
-            '</StyledLayerDescriptor>'
-        return body
 
     def action_get_enclosures(self):
         self.ensure_one()
@@ -368,26 +301,16 @@ class TerParcelSigpaclink(models.Model):
     region = fields.Char(
         string='Region',)
 
-    grp_cult = fields.Selection(
-        string='Crop Group',
-        selection=[
-            ('CP', 'CP - Cultivos permanentes'),
-            ('PT', 'PT - Pastos'),
-            ('TCR', 'TCR - Tierras de cultivo de regadío'),
-            ('TCS', 'TCS - Tierras de cultivo de secano'),
-            ('', 'Grupo de cultivo: No asignado'),
-        ],)
-
     gis_link_public = fields.Char(
-        string='GIS Viewer',
+        string='GIS Viewer Public',
         related='parcel_id.gis_link_public',)
 
     gis_link_minimal = fields.Char(
-        string='GIS Viewer',
+        string='GIS Viewer Minimal',
         related='parcel_id.gis_link_minimal',)
 
     gis_link_technical = fields.Char(
-        string='GIS Viewer',
+        string='GIS Viewer Technical',
         related='parcel_id.gis_link_technical',)
 
     sigpac_link = fields.Char(

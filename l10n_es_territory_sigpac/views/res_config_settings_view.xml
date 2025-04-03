@@ -14,11 +14,11 @@
                             <div class="o_setting_right_pane">
                                 <label for="sigpac_path"/>
                                 <div class="text-muted">
-                                    Path of the shapefiles
+                                    Path of the shapefiles that contains SIGPAC
                                 </div>
                                 <div class="content-group">
                                     <div class="mt16">
-                                        <field name="sigpac_path" string="Path of the shapefiles" placeholder="/tmp/p1" style="width:300px"/>
+                                        <field name="sigpac_path" string="Path of the shapefiles" style="width:300px"/>
                                     </div>
                                 </div>
                             </div>
@@ -27,11 +27,37 @@
                             <div class="o_setting_right_pane">
                                 <label for="sigpac_names"/>
                                 <div class="text-muted">
-                                    Names of the shapefiles
+                                    Names of the shapefiles that contains SIGPAC
                                 </div>
                                 <div class="content-group">
                                     <div class="mt16">
-                                        <field name="sigpac_names" string="Names of the shapefiles" placeholder="rec_30016_2022_20220113.shp,rec_30030_2022_20220113.shp,rec_30045_2022_20220113.shp" style="width:300px"/>
+                                        <field name="sigpac_names" string="Names of the shapefiles" style="width:300px"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_wms_sigpac_url" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="wms_sigpac_url"/>
+                                <div class="text-muted">
+                                    URL of the WMS service used to obtain SIGPAC images
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="wms_sigpac_url" style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="div_wms_sigpac_layer" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="wms_sigpac_layer"/>
+                                <div class="text-muted">
+                                    WMS service layer used to obtain SIGPAC images
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="wms_sigpac_layer" style="width:100%"/>
                                     </div>
                                 </div>
                             </div>
@@ -40,11 +66,11 @@
                             <div class="o_setting_right_pane">
                                 <label for="sigpac_minimum_intersection_percentage"/>
                                 <div class="text-muted">
-                                    Min. Intersection (%)
+                                    Minimal Intersection (%)
                                 </div>
                                 <div class="content-group">
                                     <div class="mt16">
-                                        <field name="sigpac_minimum_intersection_percentage" string="Min. Intersection (%)" style="width:100px"/>
+                                        <field name="sigpac_minimum_intersection_percentage" string="Minimal Intersection(%)" style="width:100px"/>
                                     </div>
                                 </div>
                             </div>
@@ -63,35 +89,6 @@
                     </div>
                 </div>
             </xpath>
-            <xpath expr="//div[@id='div_aerial_image_wmsvec_parcel_name']" position="after">
-                <div id="div_wms_sigpac_url" class="col-12 col-lg-6 o_setting_box">
-                    <div class="o_setting_right_pane">
-                        <label for="wms_sigpac_url"/>
-                        <div class="text-muted">
-                            URL of the WMS service used to obtain SIGPAC images
-                        </div>
-                        <div class="content-group">
-                            <div class="mt16">
-                                <field name="wms_sigpac_url" style="width:100%"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="div_wms_sigpac_layer" class="col-12 col-lg-6 o_setting_box">
-                    <div class="o_setting_right_pane">
-                        <label for="wms_sigpac_layer"/>
-                        <div class="text-muted">
-                            WMS service layer used to obtain SIGPAC images
-                        </div>
-                        <div class="content-group">
-                            <div class="mt16">
-                                <field name="wms_sigpac_layer" style="width:100%"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </xpath>
         </field>
     </record>
-
 </odoo>
