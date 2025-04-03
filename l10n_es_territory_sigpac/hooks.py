@@ -84,13 +84,14 @@ def pre_init_hook(cr):
         COALESCE(coef_rega, 0) AS coef_rega,
         uso_sigpac,
         COALESCE(incidencia, '') AS incidencia,
-        COALESCE(region, '') AS region,
+        COALESCE(region, '') AS region
         FROM ter_gis_sigpac
         WHERE uso_sigpac IN ('AG', 'CA', 'CF', 'CI', 'CS', 'CV', 'ED',
-                         'EP', 'FF', 'FL', 'FO', 'FS', 'FV', 'FY', 'IM', 'IV',
-                         'MT', 'OC',
-                         'OF', 'OV', 'PA', 'PR', 'PS', 'TA', 'TH', 'VF', 'VI',
-                         'VO', 'ZC', 'ZU', 'ZV'))""")
+                            'EP', 'FF', 'FL', 'FO', 'FS', 'FV', 'FY', 'IM',
+                            'IV','MT', 'OC',
+                            'OF', 'OV', 'PA', 'PR', 'PS', 'TA', 'TH', 'VF',
+                            'VI', 'VO', 'ZC', 'ZU', 'ZV'))
+    """)
     env.cr.execute("""
         CREATE UNIQUE INDEX ter_sigpac_id_index
         ON ter_sigpac (id)""")
