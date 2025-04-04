@@ -148,6 +148,14 @@ def post_init_hook(cr, registry):
         'https://wms.mapa.gob.es/sigpac/wms')
     env['ir.config_parameter'].set_param(
         'l10n_es_territory_sigpac.sigpac_minimum_intersection_percentage', 5.0)
+    env['ir.config_parameter'].set_param(
+        'l10n_es_territory_sigpac.sigpac_viewer_url',
+        'https://sigpac.mapa.es/fega/visor/#&visible=Inicio-SigPac;'
+        '1/2.000.000;1/200.000;Ortofotos;1/25.000;Recinto&provincia='
+        '{{ object.provincia }}&municipio={{ object.municipio }}&poligono='
+        '{{ object.poligono }}&parcela={{ object.parcela }}&recinto='
+        '{{ object.recinto }}&agregado={{ object.agregado }}'
+        '&zona={{ object.zona }}')
 
 
 def uninstall_hook(cr, registry):

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-03 07:59+0000\n"
-"PO-Revision-Date: 2025-04-03 07:59+0000\n"
+"POT-Creation-Date: 2025-04-04 06:31+0000\n"
+"PO-Revision-Date: 2025-04-04 06:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -908,6 +908,11 @@ msgid "SIGPAC links"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
+msgid "SIGPAC viewer url"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel__aerial_img_sigpac_scale
 msgid "Scale"
 msgstr ""
@@ -961,8 +966,18 @@ msgid "The minimum intersection percentage must be a value between 0 and 100."
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_res_config_settings__sigpac_viewer_url
+msgid "URL SIGPAC Viewer"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
 msgid "URL of the WMS service used to obtain SIGPAC images"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
+msgid "Url template for SIGPAC viewer"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac

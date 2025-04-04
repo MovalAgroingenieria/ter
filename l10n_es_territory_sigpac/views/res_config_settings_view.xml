@@ -86,6 +86,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="div_sigpac_viewer_url" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="sigpac_viewer_url"/>
+                                <div class="text-muted">
+                                    Url template for SIGPAC viewer
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sigpac_viewer_url" string="SIGPAC viewer url" style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </xpath>

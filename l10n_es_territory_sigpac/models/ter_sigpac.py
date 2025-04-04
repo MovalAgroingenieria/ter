@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models, fields, api, _
+from jinja2 import Template
 
 
 class TerSigpac(models.Model):
@@ -12,11 +13,6 @@ class TerSigpac(models.Model):
     _order = 'name'
 
     # URL to show the official form mapped to a SIGPAC enclosure.
-    _url_sigpac_viewer = 'https://sigpac.mapa.es/fega/visor/' + \
-        '#&visible=Inicio-SigPac;1/2.000.000;1/200.000;Ortofotos;1/25.000;' + \
-        'Recinto&provincia=provinciaval&municipio=municipioval&' + \
-        'poligono=poligonoval&parcela=parcelaval&recinto=recintoval' + \
-        '&agregado=agregadoval&zona=zonaval'
 
     name = fields.Char(
         string='SIGPAC Code',)
@@ -129,22 +125,20 @@ class TerSigpac(models.Model):
     def _compute_sigpac_link(self):
         for record in self:
             sigpac_link = ''
-            provincia = str(record.provincia).zfill(2)
-            municipio = str(record.municipio).zfill(3)
-            poligono = str(record.poligono).zfill(3)
-            parcela = str(record.parcela).zfill(5)
-            recinto = str(record.recinto)
-            agregado = str(record.agregado)
-            zona = str(record.zona)
-            sigpac_link = \
-                self._url_sigpac_viewer.replace('provinciaval', provincia).\
-                replace('municipioval', municipio).\
-                replace('poligonoval', poligono).\
-                replace('parcelaval', parcela).\
-                replace('recintoval', recinto).\
-                replace('agregadoval', agregado).\
-                replace('zonaval', zona)
-            record.sigpac_link = sigpac_link
+            context = {
+                'object': record,
+            }
+            sigpac_link = self.env['ir.config_parameter'].get_param(
+                'l10n_es_territory_sigpac.sigpac_viewer_url')
+            if sigpac_link:
+                try:
+                    template = Template(sigpac_link)
+                    rendered_url = template.render(context)
+                except Exception:
+                    rendered_url = sigpac_link
+                record.sigpac_link = rendered_url
+            else:
+                record.sigpac_link = ''
 
     def _compute_number_of_sigpaclinks(self):
         for record in self:

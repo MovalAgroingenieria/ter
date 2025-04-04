@@ -43,6 +43,10 @@ class ResConfigSettings(models.TransientModel):
         string='WMS SIGPAC Layers',
         config_parameter='l10n_es_territory_sigpac.wms_sigpac_layer')
 
+    sigpac_viewer_url = fields.Char(
+        string='URL SIGPAC Viewer',
+        config_parameter='l10n_es_territory_sigpac.sigpac_viewer_url')
+
     _sql_constraints = [
         ('valid_minimum_intersection_percentage',
          'CHECK (sigpac_minimum_intersection_percentage >= 0 '
