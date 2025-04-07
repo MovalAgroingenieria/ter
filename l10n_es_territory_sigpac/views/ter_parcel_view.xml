@@ -293,7 +293,7 @@
         <field name="model_id" ref="model_ter_parcel"/>
         <field name="state">code</field>
         <field name="code">
-            action =  env['ter.parcel'].browse(context['active_ids'])._compute_aerial_img_sigpac()
+            action =  env['ter.parcel'].browse(context['active_ids'])._compute_aerial_img_sigpac_shown()
         </field>
     </record>
 
@@ -309,25 +309,19 @@
         <field name="model_id" ref="model_ter_parcel"/>
         <field name="state">code</field>
         <field name="code">
-            <![CDATA[
-            action = env['ter.parcel'].browse(env.context.get('active_ids', []))._compute_aerial_img_sigpac()
-            ]]>
+            action = env['ter.parcel'].browse(env.context.get('active_ids', []))._compute_aerial_img_sigpac_shown()
         </field>
     </record>
 
-    <menuitem id="menu_thecnicalactions_sigpac"
-              name="SIGPAC"
-              sequence="40"
-              parent="base_ter.menu_thecnicalactions"/>
     <menuitem id="ter_technical_refresh_sigpac_intersections"
-              name="Refresh SIGPAC in parcels"
-              parent="menu_thecnicalactions_sigpac"
+              name="Layer of intersections with SIGPAC enclosures"
+              parent="base_ter.menu_thecnicalactions_refresh"
               action="ter_technical_refresh_sigpac_intersections_action"
-              sequence="41"/>
+              sequence="30"/>
     <menuitem id="ter_technical_regenerate_aerial_img_sigpac"
-              name="Aerial Image SIGPAC Regeneration"
-              parent="menu_thecnicalactions_sigpac"
+              name="SIGPAC Images (global)"
+              parent="base_ter.menu_thecnicalactions_refresh"
               action="ter_technical_regenerate_aerial_img_sigpac_action"
-              sequence="42"
+              sequence="20"
               groups="base.group_system"/>
 </odoo>

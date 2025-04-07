@@ -3,28 +3,26 @@
 /**/
 .o_l10n_es_territory_sigpac_sigpac_view_tree [data-name="name"] {
     text-align: center;
-    width: 250px;
-    min-width: 250px;
 }
 .o_l10n_es_territory_sigpac_sigpac_view_tree [data-name="dn_oid"] {
+    text-align: right;
+    width: 110px;
+    min-width: 110px;
+}
+.o_l10n_es_territory_sigpac_sigpac_view_tree [data-name="dn_surface_ha"] {
     text-align: right;
     width: 100px;
     min-width: 100px;
 }
-.o_l10n_es_territory_sigpac_sigpac_view_tree [data-name="dn_surface_ha"] {
-    text-align: right;
-    width: 80px;
-    min-width: 80px;
-}
 .o_l10n_es_territory_sigpac_sigpac_view_tree [data-name="pend_media_porc"] {
     text-align: right;
-    width: 80px;
-    min-width: 80px;
+    width: 120px;
+    min-width: 120px;
 }
 .o_l10n_es_territory_sigpac_sigpac_view_tree [data-name="coef_rega"] {
     text-align: right;
-    width: 80px;
-    min-width: 80px;
+    width: 140px;
+    min-width: 140px;
 }
 .o_l10n_es_territory_sigpac_sigpac_view_tree [data-name="uso_sigpac"] {
     text-align: left;
@@ -36,8 +34,6 @@
 /**/
 .o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-name="parcel_id"] {
     text-align: center;
-    width: 100px;
-    min-width: 100px;
 }
 .o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-name="sigpac_id"] {
     text-align: center;
@@ -51,8 +47,8 @@
 }
 .o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-name="intersection_percentage"] {
     text-align: right;
-    width: 80px;
-    min-width: 80px;
+    width: 120px;
+    min-width: 120px;
 }
 .o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-name="county_id"] {
     text-align: left;
@@ -61,13 +57,13 @@
 }
 .o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-name="pend_media_porc"] {
     text-align: right;
-    width: 80px;
-    min-width: 80px;
+    width: 120px;
+    min-width: 120px;
 }
 .o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-name="coef_rega"] {
     text-align: right;
-    width: 80px;
-    min-width: 80px;
+    width: 140px;
+    min-width: 140px;
 }
 .o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree [data-name="uso_sigpac"] {
     text-align: left;
@@ -104,6 +100,11 @@
     text-align: right;
     width: 100px;
     min-width: 100px;
+}
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-name="enclosure_number"] {
+    text-align: right;
+    width: 80px;
+    min-width: 80px;
 }
 .o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree [data-name="sigpac_id"] {
     text-align: left;

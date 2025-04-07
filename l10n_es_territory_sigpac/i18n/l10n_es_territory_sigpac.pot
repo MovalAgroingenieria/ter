@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-04 06:31+0000\n"
-"PO-Revision-Date: 2025-04-04 06:31+0000\n"
+"POT-Creation-Date: 2025-04-07 07:42+0000\n"
+"PO-Revision-Date: 2025-04-07 07:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -168,11 +168,6 @@ msgstr ""
 msgid ""
 "ATTENTION: it is not possible to install this module, because the table "
 "\"ter_gis_parcel\" does not exist (the parcels do not have GIS links)."
-msgstr ""
-
-#. module: l10n_es_territory_sigpac
-#: model:ir.ui.menu,name:l10n_es_territory_sigpac.ter_technical_regenerate_aerial_img_sigpac
-msgid "Aerial Image SIGPAC Regeneration"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -520,6 +515,11 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
+#: model:ir.ui.menu,name:l10n_es_territory_sigpac.ter_technical_refresh_sigpac_intersections
+msgid "Layer of intersections with SIGPAC enclosures"
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
 msgid "Load SIGPAC enclosures"
 msgstr ""
@@ -807,7 +807,6 @@ msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.actions.server,name:l10n_es_territory_sigpac.ter_technical_refresh_sigpac_intersections_action
-#: model:ir.ui.menu,name:l10n_es_territory_sigpac.ter_technical_refresh_sigpac_intersections
 msgid "Refresh SIGPAC in parcels"
 msgstr ""
 
@@ -815,11 +814,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel_sigpaclink__region
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_sigpac__region
 msgid "Region"
-msgstr ""
-
-#. module: l10n_es_territory_sigpac
-#: model:ir.ui.menu,name:l10n_es_territory_sigpac.menu_thecnicalactions_sigpac
-msgid "SIGPAC"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
@@ -860,6 +854,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_sigpac_view_search
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_sigpac_view_tree
 msgid "SIGPAC Id."
+msgstr ""
+
+#. module: l10n_es_territory_sigpac
+#: model:ir.ui.menu,name:l10n_es_territory_sigpac.ter_technical_regenerate_aerial_img_sigpac
+msgid "SIGPAC Images (global)"
 msgstr ""
 
 #. module: l10n_es_territory_sigpac
