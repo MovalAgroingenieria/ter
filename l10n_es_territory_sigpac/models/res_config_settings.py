@@ -32,15 +32,18 @@ class ResConfigSettings(models.TransientModel):
         required=True,
         help='Minimum intersection percentage allowed for parcels and SIGPAC '
              'enclosures',
+        default=DEF_INT_PERC,
         config_parameter='l10n_es_territory_sigpac.'
         'sigpac_minimum_intersection_percentage')
 
     wms_sigpac_url = fields.Char(
         string='WMS SIGPAC URL',
+        default='https://wms.mapa.gob.es/sigpac/wms',
         config_parameter='l10n_es_territory_sigpac.wms_sigpac_url')
 
     wms_sigpac_layer = fields.Char(
         string='WMS SIGPAC Layers',
+        default='recinto',
         config_parameter='l10n_es_territory_sigpac.wms_sigpac_layer')
 
     sigpac_viewer_url = fields.Char(

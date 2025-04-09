@@ -284,33 +284,28 @@
         <field name="name">Refresh SIGPAC in parcels</field>
         <field name="model_id" ref="model_ter_parcel_sigpaclink"/>
         <field name="state">code</field>
+        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_director'))]"/>
         <field name="code">action = env["ter.parcel.sigpaclink"].action_refresh_sigpac_intersections()</field>
         <field name="groups_id" eval="[(6, 0, [ref('base_ter.group_ter_user')])]"/>
     </record>
 
     <record id="ter_regenerate_aerial_img_sigpac_individual" model="ir.actions.server">
-        <field name="name">Generate Aerial Image SIGPAC</field>
+        <field name="name">Refresh aerial image SIGPAC</field>
         <field name="model_id" ref="model_ter_parcel"/>
+        <field name="binding_model_id" ref="model_ter_parcel"/>
+        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_manager'))]"/>
         <field name="state">code</field>
         <field name="code">
-            action =  env['ter.parcel'].browse(context['active_ids'])._compute_aerial_img_sigpac_shown()
+            records._compute_aerial_img_sigpac_shown()
         </field>
     </record>
 
-        <record id="ter_technical_regenerate_aerial_img_sigpac_action" model="ir.actions.server">
+    <record id="ter_technical_regenerate_aerial_img_sigpac_action" model="ir.actions.server">
         <field name="name">Generate Aerial Images SIGPAC</field>
         <field name="model_id" ref="model_ter_parcel"/>
+        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_director'))]"/>
         <field name="state">code</field>
         <field name="code">action = env["ter.parcel"].action_regenerate_aerial_img_sigpac()</field>
-    </record>
-
-    <record id="ter_action_regenerate_aerial_img_sigpac_individual" model="ir.actions.server">
-        <field name="name">Generate Aerial Image SIGPAC (Multi)</field>
-        <field name="model_id" ref="model_ter_parcel"/>
-        <field name="state">code</field>
-        <field name="code">
-            action = env['ter.parcel'].browse(env.context.get('active_ids', []))._compute_aerial_img_sigpac_shown()
-        </field>
     </record>
 
     <menuitem id="ter_technical_refresh_sigpac_intersections"
