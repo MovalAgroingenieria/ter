@@ -99,6 +99,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="div_python_venv_url" class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="python_venv_url"/>
+                                <div class="text-muted">
+                                    Url for python virtual environment
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="python_venv_url" string="Python virtual enviroments" style="width:100%"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </xpath>

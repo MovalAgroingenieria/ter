@@ -156,6 +156,9 @@ def post_init_hook(cr, registry):
         '{{ object.poligono }}&parcela={{ object.parcela }}&recinto='
         '{{ object.recinto }}&agregado={{ object.agregado }}'
         '&zona={{ object.zona }}')
+    env['ir.config_parameter'].set_param(
+        'l10n_es_territory_sigpac.sigpac_minimum_intersection_percentage',
+        '/home/odoo16/venv3.10/bin/python')
 
 
 def uninstall_hook(cr, registry):

@@ -50,6 +50,11 @@ class ResConfigSettings(models.TransientModel):
         string='URL SIGPAC Viewer',
         config_parameter='l10n_es_territory_sigpac.sigpac_viewer_url')
 
+    python_venv_url = fields.Char(
+        string='Python Virtual Environment URL',
+        default='/home/odoo16/venv3.10/bin/python',
+        config_parameter='l10n_es_territory_sigpac.python_venv_url')
+
     _sql_constraints = [
         ('valid_minimum_intersection_percentage',
          'CHECK (sigpac_minimum_intersection_percentage >= 0 '
@@ -93,6 +98,8 @@ class ResConfigSettings(models.TransientModel):
             return -1, _('One or more shapefiles not found.')
         sigpac_names = model_ir_config.get_param(
             'l10n_es_territory_sigpac.sigpac_names')
+        python_venv_url = model_ir_config.get_param(
+            'l10n_es_territory_sigpac.python_venv_url')
         if (not sigpac_names):
             sigpac_names = ''
         else:
@@ -121,10 +128,10 @@ class ResConfigSettings(models.TransientModel):
             if shp['condition'] != '':
                 shptoimport = shptoimport + '(' + shp['condition'] + ')'
         shptoimport = shptoimport[1:]
-        external_program = 'python'
+        external_program = python_venv_url
         list_of_args = [external_program, program_path, host,
                         str(port), dbname, user, password,
-                        shptoimport, str(srs)]
+                        shptoimport, "EPSG:" + str(srs)]
         python_ok = True
         try:
             subprocess.Popen(list_of_args)
