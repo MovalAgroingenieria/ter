@@ -97,8 +97,6 @@ class ResConfigSettings(models.TransientModel):
             sigpac_names = ''
         else:
             sigpac_names = sigpac_names.strip()
-        sigpac_use_venv310 = model_ir_config.get_param(
-            'l10n_es_territory_sigpac.sigpac_use_venv310')
         # Get shapefiles and conditions.
         shp_list = self._get_shp_list(sigpac_path, sigpac_names)
         if (not shp_list):
@@ -124,8 +122,6 @@ class ResConfigSettings(models.TransientModel):
                 shptoimport = shptoimport + '(' + shp['condition'] + ')'
         shptoimport = shptoimport[1:]
         external_program = 'python'
-        if sigpac_use_venv310:
-            external_program = '/home/odoo10/venv3.10/bin/python'
         list_of_args = [external_program, program_path, host,
                         str(port), dbname, user, password,
                         shptoimport, str(srs)]
