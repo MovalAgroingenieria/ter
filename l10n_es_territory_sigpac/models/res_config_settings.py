@@ -131,7 +131,7 @@ class ResConfigSettings(models.TransientModel):
         external_program = python_venv_url
         list_of_args = [external_program, program_path, host,
                         str(port), dbname, user, password,
-                        shptoimport, "EPSG:" + str(srs)]
+                        shptoimport, str(srs)]
         python_ok = True
         try:
             subprocess.Popen(list_of_args)
