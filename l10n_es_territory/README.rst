@@ -30,6 +30,7 @@ Credits
 Contributors
 ------------
 
+* Guillermo Amante <gamante@moval.es>
 * Samuel Fernández <sfernandez@moval.es>
 * Alberto Hernández <ahernandez@moval.es>
 * Eduardo Iniesta <einiesta@moval.es>

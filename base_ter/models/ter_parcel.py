@@ -552,6 +552,7 @@ class TerParcel(models.Model):
 
     @api.model
     def _get_view(self, view_id=None, view_type='form', **options):
+        self.env['ir.ui.view'].clear_caches()
         arch, view = super()._get_view(view_id, view_type, **options)
         if view_type in ['form', 'tree']:
             area_fields = self._add_area_fields()

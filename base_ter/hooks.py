@@ -114,6 +114,9 @@ def post_init_hook(cr, registry):
         'base_ter.gis_viewer_epsg', 25830)
     env['ir.config_parameter'].set_param(
         'base_ter.gis_viewer_previs_additional_args', 'mode=min')
+    # Load i18n_extra.
+    env.ref('base.module_base_ter')._update_translations(
+        overwrite=True)
 
 
 def uninstall_hook(cr, registry):

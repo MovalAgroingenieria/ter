@@ -105,19 +105,19 @@ def pre_init_hook(cr):
                 p.id AS parcel_id,
                 s.id AS sigpac_id,
                 c.id AS municipality_id,
-                ST_AREA(gp.geom) AS parcel_area,
-                ST_AREA(gs.geom) AS sigpac_area,
-                ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) AS area,
-                (ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) / 10000)
-                AS area_ha, 100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom))
-                / ST_AREA(gp.geom) AS intersection_percentage,
+                postgis.ST_AREA(gp.geom) AS parcel_area,
+                postgis.ST_AREA(gs.geom) AS sigpac_area,
+                postgis.ST_AREA(postgis.ST_INTERSECTION(gp.geom, gs.geom)) AS area,
+                (postgis.ST_AREA(postgis.ST_INTERSECTION(gp.geom, gs.geom)) / 10000)
+                AS area_ha, 100 * postgis.ST_AREA(postgis.ST_INTERSECTION(gp.geom, gs.geom))
+                / postgis.ST_AREA(gp.geom) AS intersection_percentage,
                 s.pend_media_porc,
                 s.coef_admis,
                 s.coef_rega,
                 s.uso_sigpac,
                 s.incidencia,
                 s.region,
-                ST_INTERSECTION(gp.geom, gs.geom) AS geom,
+                postgis.ST_INTERSECTION(gp.geom, gs.geom) AS geom,
                 gs.gid AS sigpac_gid
             FROM ter_gis_parcel gp
             INNER JOIN ter_parcel p ON p.name = gp.name
@@ -125,12 +125,12 @@ def pre_init_hook(cr):
                 ter_gis_sigpac gs
             INNER JOIN ter_sigpac s ON s.dn_oid = gs.dn_oid
             WHERE p.active = true
-            AND ST_ISVALID(gp.geom)
-            AND ST_ISVALID(gs.geom)
-            AND ST_INTERSECTS(gp.geom, gs.geom)
-            AND ST_AREA(gp.geom) > 0
-            AND (100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom))
-            / ST_AREA(gp.geom)) >= %s)""", (DEF_INT_PERC,))
+            AND postgis.ST_ISVALID(gp.geom)
+            AND postgis.ST_ISVALID(gs.geom)
+            AND postgis.ST_INTERSECTS(gp.geom, gs.geom)
+            AND postgis.ST_AREA(gp.geom) > 0
+            AND (100 * postgis.ST_AREA(postgis.ST_INTERSECTION(gp.geom, gs.geom))
+            / postgis.ST_AREA(gp.geom)) >= %s)""", (DEF_INT_PERC,))
     env.cr.execute("""
         CREATE UNIQUE INDEX ter_parcel_sigpaclink_id_index
         ON ter_parcel_sigpaclink (id)""")
