@@ -43,9 +43,9 @@
               sequence="30"
               parent="menu_configuration"/>
 
-    <menuitem id="res_region_menu"
+    <menuitem id="res_admregion_menu"
               parent="menu_configuration_localization"
-              action="base_adi.res_region_action"
+              action="base_adi.res_admregion_action"
               sequence="10"/>
 
     <menuitem id="res_province_menu"

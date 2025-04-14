@@ -64,7 +64,7 @@ msgid "Almería"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_01
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_01
 msgid "Andalucía"
 msgstr ""
 
@@ -74,7 +74,7 @@ msgid "Araba/Álava"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_02
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_02
 msgid "Aragón"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr "Subparcel·la cadastral"
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_39
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_06
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_06
 msgid "Cantabria"
 msgstr ""
 
@@ -169,23 +169,23 @@ msgid "Castellón/Castelló"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_08
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_08
 msgid "Castilla - La Mancha"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_07
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_07
 msgid "Castilla y León"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_09
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_09
 msgid "Cataluña"
 msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_51
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_18
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_18
 msgid "Ceuta"
 msgstr ""
 
@@ -201,17 +201,17 @@ msgid "Code"
 msgstr "Codi"
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_15
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_15
 msgid "Comunidad Foral de Navarra"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_13
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_13
 msgid "Comunidad de Madrid"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_10
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_10
 msgid "Comunitad Valenciana"
 msgstr ""
 
@@ -236,7 +236,7 @@ msgid "Córdoba"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_11
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_11
 msgid "Extremadura"
 msgstr ""
 
@@ -246,7 +246,7 @@ msgid "GIS Parcel"
 msgstr "Parcel·la GIS"
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_12
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_12
 msgid "Galicia"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgid "Huesca"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_04
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_04
 msgid "Illes Balears"
 msgstr ""
 
@@ -291,7 +291,7 @@ msgid "Incorrect value for \"Cadastral Area (m²)\"."
 msgstr "Valor incorrecte de la dada \"Àrea cadastral (m²)\"."
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_05
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_05
 msgid "Islas Canarias"
 msgstr ""
 
@@ -302,7 +302,7 @@ msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_26
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_17
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_17
 msgid "La Rioja"
 msgstr ""
 
@@ -333,7 +333,7 @@ msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_52
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_19
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_19
 msgid "Melilla"
 msgstr ""
 
@@ -409,7 +409,7 @@ msgid "Parcel Type: Urban"
 msgstr "Tipus de parcel·la: Urbana"
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_16
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_16
 msgid "País Vasco"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgid "Pontevedra"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_03
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_03
 msgid "Principado de Asturias"
 msgstr ""
 
@@ -429,7 +429,7 @@ msgid "Province"
 msgstr "Província"
 
 #. module: l10n_es_territory
-#: model:res.region,alphanum_code:l10n_es_territory.res_region_14
+#: model:res.admregion,alphanum_code:l10n_es_territory.res_region_14
 msgid "Región de Murcia"
 msgstr ""
 

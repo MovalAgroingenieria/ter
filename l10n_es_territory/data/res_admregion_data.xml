@@ -1,115 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
 
-    <record id="res_region_01" model="res.region">
+    <record id="res_region_01" model="res.admregion">
         <field name="alphanum_code">Andalucía</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_andalucia.png"/>
     </record>
 
-    <record id="res_region_02" model="res.region">
+    <record id="res_region_02" model="res.admregion">
         <field name="alphanum_code">Aragón</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_aragon.png"/>
     </record>
 
-    <record id="res_region_03" model="res.region">
+    <record id="res_region_03" model="res.admregion">
         <field name="alphanum_code">Principado de Asturias</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_asturias.png"/>
     </record>
 
-    <record id="res_region_04" model="res.region">
+    <record id="res_region_04" model="res.admregion">
         <field name="alphanum_code">Illes Balears</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_baleares.png"/>
     </record>
 
-    <record id="res_region_05" model="res.region">
+    <record id="res_region_05" model="res.admregion">
         <field name="alphanum_code">Islas Canarias</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_canarias.png"/>
     </record>
 
-    <record id="res_region_06" model="res.region">
+    <record id="res_region_06" model="res.admregion">
         <field name="alphanum_code">Cantabria</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_cantabria.png"/>
     </record>
 
-    <record id="res_region_07" model="res.region">
+    <record id="res_region_07" model="res.admregion">
         <field name="alphanum_code">Castilla y León</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_castillayleon.png"/>
     </record>
 
-    <record id="res_region_08" model="res.region">
+    <record id="res_region_08" model="res.admregion">
         <field name="alphanum_code">Castilla - La Mancha</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_castillalamancha.png"/>
     </record>
 
-    <record id="res_region_09" model="res.region">
+    <record id="res_region_09" model="res.admregion">
         <field name="alphanum_code">Cataluña</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_catalunya.png"/>
     </record>
 
-    <record id="res_region_10" model="res.region">
+    <record id="res_region_10" model="res.admregion">
         <field name="alphanum_code">Comunitad Valenciana</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_valencia.png"/>
     </record>
 
-    <record id="res_region_11" model="res.region">
+    <record id="res_region_11" model="res.admregion">
         <field name="alphanum_code">Extremadura</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_extremadura.png"/>
     </record>
 
-    <record id="res_region_12" model="res.region">
+    <record id="res_region_12" model="res.admregion">
         <field name="alphanum_code">Galicia</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_galicia.png"/>
     </record>
 
-    <record id="res_region_13" model="res.region">
+    <record id="res_region_13" model="res.admregion">
         <field name="alphanum_code">Comunidad de Madrid</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_madrid.png"/>
     </record>
 
-    <record id="res_region_14" model="res.region">
+    <record id="res_region_14" model="res.admregion">
         <field name="alphanum_code">Región de Murcia</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_murcia.png"/>
     </record>
 
-    <record id="res_region_15" model="res.region">
+    <record id="res_region_15" model="res.admregion">
         <field name="alphanum_code">Comunidad Foral de Navarra</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_navarra.png"/>
     </record>
 
-    <record id="res_region_16" model="res.region">
+    <record id="res_region_16" model="res.admregion">
         <field name="alphanum_code">País Vasco</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_paisvasco.png"/>
     </record>
 
-    <record id="res_region_17" model="res.region">
+    <record id="res_region_17" model="res.admregion">
         <field name="alphanum_code">La Rioja</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_larioja.png"/>
     </record>
 
-    <record id="res_region_18" model="res.region">
+    <record id="res_region_18" model="res.admregion">
         <field name="alphanum_code">Ceuta</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_ceuta.png"/>
     </record>
 
-    <record id="res_region_19" model="res.region">
+    <record id="res_region_19" model="res.admregion">
         <field name="alphanum_code">Melilla</field>
         <field name="flag_image_256" type="base64"
                file="l10n_es_territory/static/img/flag_of_melilla.png"/>

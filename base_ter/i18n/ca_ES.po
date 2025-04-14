@@ -1802,7 +1802,7 @@ msgid "Region"
 msgstr "Comunitat Autònoma"
 
 #. module: base_ter
-#: model:ir.ui.menu,name:base_ter.res_region_menu
+#: model:ir.ui.menu,name:base_ter.res_admregion_menu
 msgid "Regions"
 msgstr "CC. AA."
 
