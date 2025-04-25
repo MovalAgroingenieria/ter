@@ -84,6 +84,11 @@
               sequence="20"
               parent="menu_thecnicalactions"/>
 
+    <menuitem id="menu_thecnicalactions_detailmodels"
+              name="Detail Models"
+              sequence="30"
+              parent="menu_thecnicalactions"/>
+
     <record id="ir_cron_action" model="ir.actions.act_window">
         <field name="name">Scheduled Actions</field>
         <field name="res_model">ir.cron</field>

@@ -17,14 +17,12 @@ class ResPartner(models.Model):
 
     def _default_partner_code(self):
         resp = 0
-        if self.env.context.get('context_ter', False):
+        if self.env.context.get('context_default_partner_code', False):
             self.env.cr.execute('SELECT max(partner_code) FROM res_partner')
             query_results = self.env.cr.dictfetchall()
             if (query_results and
                query_results[0].get('max') is not None):
                 resp = query_results[0].get('max') + 1
-            else:
-                resp = 1
         return resp
 
     partner_code = fields.Integer(
@@ -203,10 +201,6 @@ class ResPartner(models.Model):
                    len(partners_mapped_to_partner_code) > 1):
                     raise exceptions.ValidationError(
                         _('Repeated partner code.'))
-            elif (self.env.context.get('context_ter', False) and
-                  (not record.parent_id)):
-                raise exceptions.ValidationError(
-                    _('The code must be a positive value.'))
 
     @api.model
     def _get_view(self, view_id=None, view_type='form', **options):

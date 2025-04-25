@@ -692,6 +692,10 @@ class TerParcelPartnerlink(models.Model):
         default=0,
         required=True,)
 
+    active = fields.Boolean(
+        store=True,
+        related='parcel_id.active',)
+
     _sql_constraints = [
         ('owner_percentage',
          'CHECK (percentage >= 0 and percentage <= 100)',

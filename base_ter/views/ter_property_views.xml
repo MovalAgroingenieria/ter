@@ -40,7 +40,6 @@
                                 </h4>
                                 <field name="partner_id"
                                        placeholder="(holder)"
-                                       context="{'context_ter': True}"
                                        options="{'no_quick_create':True}"
                                        readonly="context.get('default_partner_id', False)"/>
                             </div>

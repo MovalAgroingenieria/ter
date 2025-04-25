@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-14 19:36+0000\n"
-"PO-Revision-Date: 2025-01-14 19:36+0000\n"
+"POT-Creation-Date: 2025-04-25 14:53+0000\n"
+"PO-Revision-Date: 2025-04-25 14:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "% Participation"
 msgstr "% Participació"
@@ -69,7 +70,7 @@ msgstr "(codi de parcel·la)"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "(parcel manager)"
-msgstr "(soci)"
+msgstr "(gestor)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
@@ -179,7 +180,7 @@ msgid ""
 "                            <span>Partner</span>"
 msgstr ""
 "<span class=\"fa fa-user\"/>\n"
-"                            <span>Soci</span>"
+"                            <span>Contacte</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -238,7 +239,7 @@ msgstr "<span>Perímetre GIS</span>"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "<span>GIS Viewer</span>"
-msgstr "<span>Visor GIS</span>"
+msgstr "Visor GIS"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
@@ -363,6 +364,7 @@ msgstr "Acció necessària"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__is_active
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__active
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__active
 #: model:ir.model.fields,field_description:base_ter.field_ter_profile__active
 msgid "Active"
 msgstr "Registre actiu"
@@ -458,6 +460,7 @@ msgstr "Aplicar"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
@@ -609,7 +612,7 @@ msgstr "Contactes de parcel·la"
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.res_partner_action
 msgid "Create a new manager"
-msgstr "Crear un soci nou"
+msgstr "Crear un gestor nou"
 
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.ter_parcel_action
@@ -680,6 +683,11 @@ msgstr "Dades del gestor"
 #: model:ir.model.fields,field_description:base_ter.field_ter_propertytag__description
 msgid "Description"
 msgstr "Descripció"
+
+#. module: base_ter
+#: model:ir.ui.menu,name:base_ter.menu_thecnicalactions_detailmodels
+msgid "Detail Models"
+msgstr "Models de detall"
 
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_wizard_set_parcel_code
@@ -889,7 +897,7 @@ msgstr "Visor GIS: nom d'usuari pel mode tècnic"
 #: model:ir.ui.menu,name:base_ter.menu_configuration_general
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "General"
-msgstr "General"
+msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__geom_geojson
@@ -1125,9 +1133,20 @@ msgid "Is Main"
 msgstr "És gestor"
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Is manager"
-msgstr "Soci gestor"
+msgstr "Contacte gestor"
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
+msgid "Is manager: No"
+msgstr "Contacte gestor: No"
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
+msgid "Is manager: Yes"
+msgstr "Contacte gestor: Sí"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ir_cron__is_base_ter
@@ -1217,7 +1236,7 @@ msgstr "Adjunt principal"
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.res_partner_action
 msgid "Manage managers."
-msgstr "Administrar socis."
+msgstr "Administrar gestors."
 
 #. module: base_ter
 #: model_terms:ir.actions.act_window,help:base_ter.ter_parceltag_action
@@ -1253,13 +1272,13 @@ msgstr "Gestió"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 msgid "Manager"
-msgstr "Soci"
+msgstr "Gestor"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.res_partner_action
 #: model:ir.ui.menu,name:base_ter.res_partner_menu
 msgid "Managers"
-msgstr "Socis"
+msgstr "Gestors"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__mapped_to_polygon
@@ -1305,6 +1324,8 @@ msgstr "Municipi:"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Name"
 msgstr "Nom"
@@ -1399,6 +1420,8 @@ msgstr "Propietari"
 #: model:ir.model,name:base_ter.model_ter_parcel
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__parcel_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__parcel_id
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
 #, python-format
 msgid "Parcel"
 msgstr "Parcel·la"
@@ -1447,10 +1470,11 @@ msgstr "Gestor"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__partner_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 msgid "Parcel Manager"
-msgstr "Soci"
+msgstr "Gestor"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__partner_id
@@ -1549,6 +1573,12 @@ msgid "Partner of parcel"
 msgstr "Contacte de parcel·la"
 
 #. module: base_ter
+#: model:ir.actions.act_window,name:base_ter.ter_parcel_partnerlink_action
+#: model:ir.ui.menu,name:base_ter.ter_parcel_partnerlink_menu
+msgid "Partner-Links"
+msgstr "Enllaços parcel·la-contacte"
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Password of the technical user"
 msgstr "Contrasenya de l'usuari tècnic"
@@ -1642,6 +1672,7 @@ msgstr "Data d'impressió"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__profile_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_profile__alphanum_code
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_tree
@@ -1853,6 +1884,11 @@ msgid "Search parcels"
 msgstr "Buscar parcel·les"
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
+msgid "Search partner-links"
+msgstr "Buscar enllaços parcel·la-contacte"
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_search
 msgid "Search partners"
 msgstr "Buscar gestors"
@@ -1955,34 +1991,22 @@ msgid "Technical Actions"
 msgstr "Accions tècniques"
 
 #. module: base_ter
+#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
+#: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
+msgid "Territorial Base: Refresh all aerial images of the parcels"
+msgstr "Base territorial: Refrescar totes les imatges aèries de parcel·les"
+
+#. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_property_cron_action_reset_all_aerial_images_ir_actions_server
+#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_reset_all_aerial_images
 msgid "Territorial Base: Refresh all aerial images of the properties"
 msgstr "Base territorial: Refrescar totes les imatges aèries de finques"
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_property_cron_action_refresh_properties_layer_ir_actions_server
+#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_refresh_properties_layer
 msgid "Territorial Base: Refresh layer of properties"
 msgstr "Base territorial: Refrescar capa de finques"
-
-#. module: base_ter
-#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
-msgid "Territorial Base: refresh all aerial images of the parcels"
-msgstr "Base territorial: refrescar totes les imatges aèries de parcel·les"
-
-#. module: base_ter
-#: model:ir.cron,cron_name:base_ter.ter_parcel_cron_action_reset_all_aerial_images
-msgid "Territorial Branch: Refresh all aerial images of the parcels"
-msgstr "Branca territorial: Refrescar totes les imatges aèries de parcel·les"
-
-#. module: base_ter
-#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_reset_all_aerial_images
-msgid "Territorial Branch: Refresh all aerial images of the properties"
-msgstr "Branca territorial: Refrescar totes les imatges aèries de finques"
-
-#. module: base_ter
-#: model:ir.cron,cron_name:base_ter.ter_property_cron_action_refresh_properties_layer
-msgid "Territorial Branch: Refresh layer of properties"
-msgstr "Branca territorial: Refrescar capa de finques"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_territory

@@ -46,9 +46,9 @@
                                 <field name="partner_id"
                                        placeholder="(parcel manager)"
                                        domain="[('is_holder', '=', True)]"
-                                       context="{'context_ter': True}"
                                        options="{'no_quick_create':True}"
-                                       readonly="context.get('default_partner_id', False)"/>
+                                       readonly="context.get('default_partner_id', False)"
+                                       context="{'context_default_partner_code': True}"/>
                             </div>
                             <div name="section_basic_data" colspan="2"
                                  class="text-center mt-3 mb-4">
@@ -111,8 +111,8 @@
                                 <tree editable="bottom"
                                       class="o_base_ter_ter_parcel_partnerlink">
                                     <field name="partner_id" string="Name"
-                                           context="{'context_ter': True}"
-                                           options="{'no_quick_create':True}"/>
+                                           options="{'no_quick_create':True}"
+                                           context="{'context_default_partner_code': True}"/>
                                     <field name="is_main" string="Is manager"
                                            class="text-center"/>
                                     <field name="profile_id" string="Profile"
@@ -343,5 +343,67 @@
             action = records.action_gis_viewer()
         </field>
     </record>
+
+    <record id="ter_parcel_partnerlink_view_tree" model="ir.ui.view">
+        <field name="name">ter.parcel.partnerlink.view.tree</field>
+        <field name="model">ter.parcel.partnerlink</field>
+        <field name="arch" type="xml">
+            <tree edit="false" delete="false"
+                  class="o_base_ter_ter_parcel_partnerlink_technical">
+                <field name="parcel_id" string="Parcel"/>
+                <field name="partner_id" string="Name"/>
+                <field name="is_main" string="Is manager"
+                       class="text-center"/>
+                <field name="profile_id" string="Profile"
+                       class="text-center"/>
+                <field name="percentage" string="% Participation"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ter_parcel_partnerlink_view_search" model="ir.ui.view">
+        <field name="name">ter.parcel.partnerlink.view.search</field>
+        <field name="model">ter.parcel.partnerlink</field>
+        <field name="arch" type="xml">
+            <search string="Search partner-links">
+                <field name="parcel_id" string="Parcel"/>
+                <field name="partner_id" string="Name"/>
+                <filter name="is_main_yes"
+                        string="Is manager: Yes"
+                        domain="[('is_main', '=', True)]"/>
+                <filter name="is_main_no"
+                        string="Is manager: No"
+                        domain="[('is_main', '=', False)]"/>
+                <separator/>
+                <filter name="inactive"
+                        string="Archived"
+                        domain="[('active', '=', False)]"/>
+                <group expand="0">
+                    <filter name="grouped_by_partner_id"
+                            string="Parcel Manager"
+                     context="{'group_by':'partner_id'}"/>
+                    <filter name="grouped_by_parcel_id"
+                            string="Parcel"
+                     context="{'group_by':'parcel_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="ter_parcel_partnerlink_action" model="ir.actions.act_window">
+        <field name="name">Partner-Links</field>
+        <field name="res_model">ter.parcel.partnerlink</field>
+        <field name="view_mode">tree</field>
+        <field name="view_ids"
+         eval="[(5, 0),
+                (0, 0, {'view_mode': 'tree',
+                        'view_id': ref('ter_parcel_partnerlink_view_tree')}),]"/>
+        <field name="search_view_id" ref="ter_parcel_partnerlink_view_search"/>
+    </record>
+
+    <menuitem id="ter_parcel_partnerlink_menu"
+              parent="menu_thecnicalactions_detailmodels"
+              action="ter_parcel_partnerlink_action"
+              sequence="10"/>
 
 </odoo>
