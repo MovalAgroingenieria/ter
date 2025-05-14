@@ -33,47 +33,26 @@
             <div class="page">
                 <h2 name="title" class="text-center">Property Report</h2>
 
-                <section id="informations" name="partner_data" style="margin-bottom: 20px;">
+                <section id="informations" name="partner_data" style="margin-bottom: 20px; page-break-inside: avoid;">
                     <div id="section_title" name="title_partner">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-user"/>
                             <span>Partner</span>
-                            <div style="border-top: 1px solid lightgrey;"/>
+                            <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
-                    <t t-if="o.partner_id.name">
-                        <strong><span t-field="o.partner_id.name"/></strong>
-                        <t t-if="o.partner_id.vat"><span>(VAT:&amp;nbsp;<span t-field="o.partner_id.vat"/>)</span></t>
-                    </t>
+                    <strong><span t-field="o.partner_id.display_name"></span></strong>
+                    <t t-if="o.partner_id.vat"><span>(VAT:&amp;nbsp;<span t-field="o.partner_id.vat"/>)</span></t>
                     <br/>
                     <div class="row" style="margin-top: 4px;">
                         <div class="col-xs-12" style="display: table;">
                             <div style="width: 50%; display: table-cell;border-right: 1px solid lightgrey;">
-                                <t t-if="o.partner_id.street or o.partner_id.street2">
-                                    <t t-if="o.partner_id.street"><span t-field="o.partner_id.street"/></t>
-                                    <t t-if="o.partner_id.street2"><span t-field="o.partner_id.street2"/></t>
-                                    <br/>
-                                </t>
-                                <t t-if="o.partner_id.city or o.partner_id.zip">
-                                    <t t-if="o.partner_id.city"><span t-field="o.partner_id.city"/></t>
-                                    <t t-if="o.partner_id.zip"><span>-&amp;nbsp;</span><span t-field="o.partner_id.zip"/></t>
-                                    <br/>
-                                </t>
-                                <t t-if="o.partner_id.state_id or o.partner_id.country_id">
-                                    <t t-if="o.partner_id.state_id"><span t-field="o.partner_id.state_id"/></t>
-                                    <t t-if="o.partner_id.country_id"><span>-&amp;nbsp;</span><span t-field="o.partner_id.country_id"/></t>
-                                    <br/>
-                                </t>
-                                <t t-if="o.partner_id.phone or o.partner_id.mobile">
-                                    <t t-if="o.partner_id.phone"><span t-field="o.partner_id.phone"/></t>
-                                    <t t-if="o.partner_id.mobile"><span t-field="o.partner_id.mobile"/></t>
-                                    <br/>
-                                </t>
-                                <t t-if="o.partner_id.email"><span t-field="o.partner_id.email"/><br/></t>
+                                <div t-field="o.partner_id"
+                                     t-options='{"widget": "contact", "no_marker": True,
+                                                 "fields": ["address", "phone", "mobile", "email"]}'/>
                             </div>
-                            <div style="display: table-cell; padding-left: 32px;">
-                                <div>&amp;nbsp;</div>
-                                <table style="width: 100%;">
+                            <div style="padding-left: 32px;">
+                                <table style="width: 100%;" class="table-condensed table-borderless">
                                     <tbody>
                                         <tr name="tr_number_of_properties">
                                             <td><span>Number of properties</span></td>
@@ -90,18 +69,18 @@
                     </div>
                 </section>
 
-                <section id="informations" name="property_data" style="margin-bottom: 20px;">
+                <section id="informations" name="property_data" style="margin-bottom: 20px; page-break-inside: avoid;">
                     <div id="section_title" name="title_property">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-ter-property"/>
                             <span>Property</span>
-                            <div style="border-top: 1px solid lightgrey;"/>
+                            <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
-                   <div class="row" style="margin-top: 4px;">
+                    <div class="row" style="margin-top: 4px;">
                         <div class="col-xs-12" style="display: table;">
-                            <div style="display: table-cell;">
-                                <table name="basic_data" class="table-condensed" style="width:90%;">
+                            <div style="width: 50%; padding-right: 32px; display: table-cell; border-right: 1px solid lightgrey;">
+                                 <table name="property_basic_data" style="width: 100%;" class="table-condensed table-borderless">
                                     <tbody>
                                         <tr name="tr_municipality">
                                             <td><span>Municipality</span></td>
@@ -133,8 +112,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div style="display: table-cell; padding-left: 40px;">
-                                <table name="areas_data"  class="table-condensed" style="width:90%;">
+                            <div style="padding-left: 32px;">
+                                <table name="property_area_data" style="width:100%;" class="table-condensed table-borderless">
                                     <tbody>
                                         <tr name="tr_area_official">
                                             <td><span>Area official</span></td>
@@ -172,12 +151,12 @@
                     </div>
                 </section>
 
-                <section id="informations" name="aerial_image">
+               <section id="informations" name="aerial_image" style="margin-bottom: 20px; page-break-inside: avoid;">
                     <div id="section_title" name="title_aerial_image">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-picture-o"/>
                             <span>Aerial Image</span>
-                            <div style="border-top: 1px solid lightgrey;"/>
+                            <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
                     <div name="aerial_image" class="text-center" style="border: 1px solid black; padding: 1% 0%;">
@@ -214,9 +193,5 @@
             </div> <!-- End page -->
         </t>
     </template>
-
-
-
-
 
 </odoo>

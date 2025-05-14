@@ -235,11 +235,19 @@ class ResPartner(models.Model):
 
     def name_get(self):
         resp = []
-        for record in self:
-            name = record.name
-            if record.partner_code > 0:
-                name = name + ' [' + str(record.partner_code) + ']'
-            resp.append((record.id, name))
+        resp_original = super(ResPartner, self).name_get()
+        for partner_data in resp_original or []:
+            id_of_partner = partner_data[0]
+            name_of_partner = partner_data[1]
+            partner = self.browse(id_of_partner)
+            if partner and partner.partner_code > 0:
+                name_parts = name_of_partner.split('\n')
+                name_parts[0] = name_parts[0] + \
+                    ' [' + str(partner.partner_code) + ']'
+                name_of_partner = '\n'.join(name_parts)
+                resp.append((id_of_partner, name_of_partner))
+            else:
+                resp.append(partner_data)
         return resp
 
     @api.model_create_multi

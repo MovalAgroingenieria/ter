@@ -33,47 +33,26 @@
             <div class="page">
                 <h2 name="title" class="text-center">Properties Report</h2>
 
-                <section id="informations" name="partner_data" style="margin-bottom: 20px;">
+                <section id="informations" name="partner_data" style="margin-bottom: 20px; page-break-inside: avoid;">
                     <div id="section_title" name="title_partner">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-user"/>
                             <span>Partner</span>
-                            <div style="border-top: 1px solid lightgrey;"/>
+                            <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
-                    <t t-if="o.name">
-                        <strong><span t-field="o.name"/></strong>
-                        <t t-if="o.vat"><span>(VAT:&amp;nbsp;<span t-field="o.vat"/>)</span></t>
-                    </t>
+                    <strong><span t-field="o.display_name"></span></strong>
+                    <t t-if="o.vat"><span>(VAT:&amp;nbsp;<span t-field="o.vat"/>)</span></t>
                     <br/>
                     <div class="row" style="margin-top: 4px;">
                         <div class="col-xs-12" style="display: table;">
                             <div style="width: 50%; display: table-cell;border-right: 1px solid lightgrey;">
-                                <t t-if="o.street or o.street2">
-                                    <t t-if="o.street"><span t-field="o.street"/></t>
-                                    <t t-if="o.street2"><span t-field="o.street2"/></t>
-                                    <br/>
-                                </t>
-                                <t t-if="o.city or o.zip">
-                                    <t t-if="o.city"><span t-field="o.city"/></t>
-                                    <t t-if="o.zip"><span>-&amp;nbsp;</span><span t-field="o.zip"/></t>
-                                    <br/>
-                                </t>
-                                <t t-if="o.state_id or o.country_id">
-                                    <t t-if="o.state_id"><span t-field="o.state_id"/></t>
-                                    <t t-if="o.country_id"><span>-&amp;nbsp;</span><span t-field="o.country_id"/></t>
-                                    <br/>
-                                </t>
-                                <t t-if="o.phone or o.mobile">
-                                    <t t-if="o.phone"><span t-field="o.phone"/></t>
-                                    <t t-if="o.mobile"><span t-field="o.mobile"/></t>
-                                    <br/>
-                                </t>
-                                <t t-if="o.email"><span t-field="o.email"/><br/></t>
+                                <div t-esc="o"
+                                     t-options='{"widget": "contact", "no_marker": True,
+                                                 "fields": ["address", "phone", "mobile", "email"]}'/>
                             </div>
-                            <div style="display: table-cell; padding-left: 32px;">
-                                <div>&amp;nbsp;</div>
-                                <table style="width: 100%;">
+                            <div style="padding-left: 32px;">
+                                <table style="width: 100%;" class="table-condensed table-borderless">
                                     <tbody>
                                         <tr name="tr_number_of_properties">
                                             <td><span>Number of properties</span></td>
@@ -90,22 +69,22 @@
                     </div>
                 </section>
 
-                <section id="informations" name="properties_data" style="margin-bottom: 20px;">
+                <section id="informations" name="properties_data" style="margin-bottom: 20px; page-break-inside: avoid;">
                     <div id="section_title" name="title_properties">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-ter-property"/>
                             <span>Properties</span>
-                            <div style="border-top: 1px solid lightgrey;"/>
+                            <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
-                    <table  class="table table-sm">
+                    <table class="table table-condensed table-borderless" style="width:100%;">
                         <thead>
-                            <tr style="border-top: 1px solid white">
+                            <tr style="border-bottom: 1px solid lightgrey">
                                 <th name="th_property" class="text-start">Property</th>
                                 <th name="th_municipality_id" class="text-start">Municipality</th>
                                 <th name="th_place_id" class="text-start">Place</th>
                                 <th name="th_number_of_parcels" class="text-end">Parcels</th>
-                                <th name="th_.area_official_parcels" class="text-end">Parcels Area</th>
+                                <th name="th_area_official_parcels" class="text-end">Parcels Area</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,18 +109,18 @@
                 <!-- Force new page -->
                 <p style="page-break-after:always;"/>
 
-                <section id="informations" name="aerial_images">
+                <section id="informations" name="aerial_images" style="margin-bottom: 20px; page-break-inside: avoid;">
                     <div id="section_title" name="title_aerial_images">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-picture-o"/>
                             <span>Aerial Images</span>
-                            <div style="border-top: 1px solid lightgrey;"/>
+                            <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
                     <t t-foreach="o.property_ids" t-as="property">
                         <div style="width: 48%; float: left; display: table; border: 1px solid black; margin: 1.5% 0.5%; page-break-inside: avoid;">
                             <div name="propierty_data" style="border-bottom: 1px solid black; padding: 2%;">
-                                <table style="width: 100%;">
+                                <table style="width: 100%;" class="table-condensed table-borderless">
                                     <tbody>
                                         <tr id="row_property_id">
                                             <td><strong>Property</strong></td>

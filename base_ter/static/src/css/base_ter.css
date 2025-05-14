@@ -1,6 +1,4 @@
-
-
-/* Table class */
+/* Table classes */
 .table-no-border-header thead tr {
     border-top: none !important;
 }
