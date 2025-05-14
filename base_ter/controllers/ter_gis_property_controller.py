@@ -123,5 +123,5 @@ class TerGisPropertyController(http.Controller):
         except Exception as e:
             return {
                 'status': 'error',
-                'error': _(f'Unexpected error: {str(e)}'),
+                'error': _(f'Unexpected error: {e}'),
             }
