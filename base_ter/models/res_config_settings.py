@@ -26,6 +26,10 @@ class ResConfigSettings(models.TransientModel):
                'area and the GIS area',
         config_parameter='base_ter.warning_diff_areas',)
 
+    same_parcelmanager_propertyowner = fields.Boolean(
+        string='Force the parcel manager and the property owner to be the same',
+        config_parameter='base_ter.same_parcelmanager_propertyowner',)
+
     aerial_image_wmsbase_url = fields.Char(
         string='WMS of the base image: URL',
         size=255,

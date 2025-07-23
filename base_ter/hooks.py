@@ -85,6 +85,8 @@ def post_init_hook(cr, registry):
     env['ir.config_parameter'].set_param(
         'base_ter.warning_diff_areas', 10)
     env['ir.config_parameter'].set_param(
+        'base_ter.same_parcelmanager_propertyowner', False)
+    env['ir.config_parameter'].set_param(
         'base_ter.aerial_image_wmsbase_url',
         'https://www.ign.es/wms-inspire/pnoa-ma')
     env['ir.config_parameter'].set_param(

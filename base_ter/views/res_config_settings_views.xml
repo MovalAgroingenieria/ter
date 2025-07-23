@@ -82,6 +82,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="div_same_parcelmanager_propertyowner"
+                            class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="same_parcelmanager_propertyowner"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="same_parcelmanager_propertyowner"/>
+                                <div class="text-muted">
+                                    If clicked, any parcel associated with a
+                                    property that has an owner must have that
+                                    owner as its manager
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <h2>Aerial Images</h2>
                     <div class="row mt16 o_settings_container" name="aerial_settings">

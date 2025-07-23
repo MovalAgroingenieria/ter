@@ -365,12 +365,16 @@ class TerParcel(models.Model):
 
     @api.constrains('partner_id', 'property_id')
     def _check_property_id(self):
-        for record in self:
-            if (record.partner_id and record.property_id and
-               record.partner_id != record.property_id.partner_id):
-                raise exceptions.ValidationError(
-                    _('The parcel manager and the property manager must '
-                      'be the same person.'))
+        config = self.env['ir.config_parameter'].sudo()
+        same_parcelmanager_propertyowner = config.get_param(
+            'base_ter.same_parcelmanager_propertyowner', False)
+        if same_parcelmanager_propertyowner:
+            for record in self:
+                if (record.partner_id and record.property_id and
+                   record.partner_id != record.property_id.partner_id):
+                    raise exceptions.ValidationError(
+                        _('The parcel manager and the property manager must '
+                          'be the same person.'))
 
     @api.constrains('partner_id')
     def _check_partner_id(self):

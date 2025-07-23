@@ -367,7 +367,11 @@ class TerProperty(models.Model):
         if len(self) == 1:
             old_partner_id = self.partner_id
         resp = super(TerProperty, self).write(vals)
-        if old_partner_id and 'partner_id' in vals and vals['partner_id']:
+        config = self.env['ir.config_parameter'].sudo()
+        same_parcelmanager_propertyowner = config.get_param(
+            'base_ter.same_parcelmanager_propertyowner', False)
+        if (same_parcelmanager_propertyowner and old_partner_id and
+           'partner_id' in vals and vals['partner_id']):
             new_partner_id = self.env['res.partner'].browse(vals['partner_id'])
             for parcel in (self.parcel_ids or []):
                 for partnerlink in (parcel.partnerlink_ids or []):

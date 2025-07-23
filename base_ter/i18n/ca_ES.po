@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-25 14:53+0000\n"
-"PO-Revision-Date: 2025-04-25 14:53+0000\n"
+"POT-Creation-Date: 2025-07-23 15:58+0000\n"
+"PO-Revision-Date: 2025-07-23 15:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,14 +20,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "% Participation"
 msgstr "% Participació"
-
-#. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
-#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
-#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
-#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
-msgid "&amp;nbsp;"
-msgstr ""
 
 #. module: base_ter
 #: model:ir.actions.report,print_report_name:base_ter.action_parcel_report
@@ -195,14 +187,6 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "<span class=\"oe_inline\">EPSG:</span>"
-msgstr ""
-
-#. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
-#: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
-#: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
-#: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
-msgid "<span>-&amp;nbsp;</span>"
 msgstr ""
 
 #. module: base_ter
@@ -771,6 +755,11 @@ msgstr ""
 "                                    a afegir a la URL del visor GIS"
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_res_config_settings__same_parcelmanager_propertyowner
+msgid "Force the parcel manager and the property owner to be the same"
+msgstr "Obligar que el gestor de la parcel·la i el titular de la seva finca coincideixin"
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "Frame"
@@ -1026,6 +1015,17 @@ msgid ""
 msgstr ""
 "Si està marcat, la unitat dàrea serà la ha;\n"
 "                                    en cas contrari, haureu de triar una altra unitat d'àrea"
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
+msgid ""
+"If clicked, any parcel associated with a\n"
+"                                    property that has an owner must have that\n"
+"                                    owner as its manager"
+msgstr ""
+"Si es polsa, qualsevol parcel·la associada a una\n"
+"                                    finca que tingui titular haurà de tenir\n"
+"                                    com a gestor aquest titular"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -2013,13 +2013,6 @@ msgstr "Base territorial: Refrescar capa de finques"
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Territory"
 msgstr "Territori"
-
-#. module: base_ter
-#. odoo-python
-#: code:addons/base_ter/models/res_partner.py:0
-#, python-format
-msgid "The code must be a positive value."
-msgstr "El codi ha de ser un valor positiu."
 
 #. module: base_ter
 #. odoo-python
