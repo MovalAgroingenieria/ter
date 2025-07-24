@@ -88,6 +88,9 @@ class TerParcel(models.Model):
     partner_id = fields.Many2one(
         string='Parcel Manager',
         comodel_name='res.partner',
+        store=True,
+        compute='_compute_partner_id',
+        readonly=False,
         index=True,)
 
     property_id = fields.Many2one(
@@ -213,6 +216,17 @@ class TerParcel(models.Model):
                 if diff_areas > threshold:
                     diff_areas_threshold_exceeded = True
             record.diff_areas_threshold_exceeded = diff_areas_threshold_exceeded
+
+    @api.depends('partnerlink_ids', 'partnerlink_ids.is_main')
+    def _compute_partner_id(self):
+        for record in self:
+            partner_id = None
+            if record.partnerlink_ids:
+                for partnkerlink in record.partnerlink_ids:
+                    if partnkerlink.is_main:
+                        partner_id = partnkerlink.partner_id
+                        break
+            record.partner_id = partner_id
 
     # def _compute_aerial_image_calculated(self):
     #     wms = self.env['ir.config_parameter'].sudo().get_param(
@@ -376,25 +390,25 @@ class TerParcel(models.Model):
                         _('The parcel manager and the property manager must '
                           'be the same person.'))
 
-    @api.constrains('partner_id')
+    @api.constrains('partner_id', 'partnerlink_ids')
     def _check_partner_id(self):
         for record in self:
             if record.partner_id:
                 if not record.partner_id.is_holder:
                     raise exceptions.ValidationError(
                         _('The contact chosen as main is not a manager.'))
-                if record.partnerlink_ids:
-                    for partnerlink in record.partnerlink_ids:
-                        if partnerlink.is_main:
-                            if partnerlink.partner_id != record.partner_id:
-                                raise exceptions.ValidationError(
-                                    _('The parcel manager and the main '
-                                      'contact must be the same person.'))
-                            break
-                else:
+                if not record.partnerlink_ids:
                     raise exceptions.ValidationError(
                         _('If a manager is assigned to the parcel, it is '
                           'mandatory to configure the contact list.'))
+            if record.partnerlink_ids:
+                for partnerlink in record.partnerlink_ids:
+                    if partnerlink.is_main:
+                        if partnerlink.partner_id != record.partner_id:
+                            raise exceptions.ValidationError(
+                                _('The parcel manager and the main '
+                                  'contact must be the same person.'))
+                        break
 
     @api.constrains('partner_id', 'partnerlink_ids')
     def _check_partnerlink_ids(self):
@@ -499,46 +513,16 @@ class TerParcel(models.Model):
                         profile_id, percentage = self._get_default_profile()
                         partnerlink_data['profile_id'] = profile_id
                         partnerlink_data['percentage'] = percentage
-                for partnerlink in vals['partnerlink_ids']:
-                    partnerlink_data = partnerlink[2]
-                    if (partnerlink_data['is_main'] and
-                       partnerlink_data['partner_id']):
-                        vals['partner_id'] = partnerlink_data['partner_id']
-                        break
+                # for partnerlink in vals['partnerlink_ids']:
+                #     partnerlink_data = partnerlink[2]
+                #     if (partnerlink_data['is_main'] and
+                #        partnerlink_data['partner_id']):
+                #         vals['partner_id'] = partnerlink_data['partner_id']
+                #         break
         parcels = super(TerParcel, self).create(vals_list)
         return parcels
 
     def write(self, vals):
-        if 'partnerlink_ids' in vals:
-            for partnerlink in vals['partnerlink_ids']:
-                operation = partnerlink[0]
-                if operation == 0 or operation == 1:
-                    partnerlink_data = partnerlink[2]
-                    changed_partner = ('partner_id' in partnerlink_data and
-                                       partnerlink_data['partner_id'])
-                    changed_main = ('is_main' in partnerlink_data and
-                                    partnerlink_data['is_main'])
-                    if changed_partner or changed_main:
-                        partner_id = 0
-                        id_of_partnerlink = partnerlink[1]
-                        if operation == 0:
-                            if changed_partner and changed_main:
-                                partner_id = partnerlink_data['partner_id']
-                        elif operation == 1:
-                            if changed_partner and changed_main:
-                                partner_id = partnerlink_data['partner_id']
-                            else:
-                                partnerlink_original = \
-                                    self.env['ter.parcel.partnerlink'].browse(
-                                        id_of_partnerlink)
-                                if changed_partner:
-                                    if partnerlink_original.is_main:
-                                        partner_id = partnerlink_data['partner_id']
-                                else:
-                                    partner_id = partnerlink_original.partner_id
-                        if partner_id:
-                            vals['partner_id'] = partner_id
-                        break
         resp = super(TerParcel, self).write(vals)
         if 'active' in vals:
             partner_ids = []
