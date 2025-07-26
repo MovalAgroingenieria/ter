@@ -171,7 +171,8 @@
                     group_delete="false"
                     default_order="alphanum_code"
                     records_draggable="false"
-                    class="o_kanban_dashboard">
+                    class="o_kanban_dashboard"
+                    js_class="ter_parcel_view_kanban">
                 <field name="id"/>
                 <field name="aerial_image_shown_256"/>
                 <field name="alphanum_code"/>
