@@ -463,13 +463,9 @@ class TerParcel(models.Model):
         if partner_id:
             if (not self.partnerlink_ids) or len(self.partnerlink_ids) == 1:
                 profile_id, percentage = self._get_default_profile()
-                self.partnerlink_ids = [(5, ), (0, 0,
-                                                {
-                                                    'partner_id': partner_id,
-                                                    'profile_id': profile_id,
-                                                    'is_main': True,
-                                                    'percentage': percentage,
-                                                })]
+                self.partnerlink_ids = \
+                    [(5,), (0, 0, self._get_default_first_partnerlink_vals(
+                        partner_id, profile_id, percentage))]
             else:
                 for partnerlink in self.partnerlink_ids:
                     if partnerlink.is_main:
@@ -486,6 +482,15 @@ class TerParcel(models.Model):
         percentage = 100
         return profile_id, percentage
 
+    def _get_default_first_partnerlink_vals(self, partner_id, profile_id,
+                                            percentage):
+        return {
+            'partner_id': partner_id,
+            'profile_id': profile_id,
+            'is_main': True,
+            'percentage': percentage,
+        }
+
     def name_get(self):
         show_archived_in_parcel_code = self.env.context.get(
             'show_archived_in_parcel_code', False)
@@ -499,28 +504,6 @@ class TerParcel(models.Model):
                     name = _('ARCHIVED')
             resp.append((record.id, name))
         return resp
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        for vals in vals_list:
-            if 'partnerlink_ids' in vals:
-                if len(vals['partnerlink_ids']) == 1:
-                    partnerlink_data = vals['partnerlink_ids'][0][2]
-                    if not partnerlink_data['is_main']:
-                        partnerlink_data['is_main'] = True
-                    if (not partnerlink_data['profile_id'] and
-                       not partnerlink_data['percentage']):
-                        profile_id, percentage = self._get_default_profile()
-                        partnerlink_data['profile_id'] = profile_id
-                        partnerlink_data['percentage'] = percentage
-                # for partnerlink in vals['partnerlink_ids']:
-                #     partnerlink_data = partnerlink[2]
-                #     if (partnerlink_data['is_main'] and
-                #        partnerlink_data['partner_id']):
-                #         vals['partner_id'] = partnerlink_data['partner_id']
-                #         break
-        parcels = super(TerParcel, self).create(vals_list)
-        return parcels
 
     def write(self, vals):
         resp = super(TerParcel, self).write(vals)
