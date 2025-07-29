@@ -675,8 +675,9 @@ class TerParcelPartnerlink(models.Model):
     is_main = fields.Boolean(
         default=False,)
 
-    percentage = fields.Integer(
+    percentage = fields.Float(
         string='Percentage',
+        digits=(32, 2),
         default=0,
         required=True,)
 
