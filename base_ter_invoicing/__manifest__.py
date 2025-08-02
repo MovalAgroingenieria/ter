@@ -13,6 +13,7 @@
     'application': False,
     'installable': True,
     'post_init_hook': 'post_init_hook',
+    'uninstall_hook': 'uninstall_hook',
     'depends': [
         'base_ter',
         'base_invoicing',
@@ -20,6 +21,7 @@
     'data': [
         'data/product_category_data.xml',
         'views/ter_parcel_views.xml',
+        'views/account_move_line_views.xml',
     ],
     'assets': {
         'web.assets_backend': [

@@ -8,6 +8,32 @@ class TerParcel(models.Model):
     _name = 'ter.parcel'
     _inherit = ['ter.parcel']
 
+    total_invoiced = fields.Monetary(
+        string='Total Invoiced',
+        compute='_compute_total_invoiced',)
+
+    currency_id = fields.Many2one(
+        string='Currency',
+        comodel_name='res.currency',
+        compute='_compute_currency_id',)
+
+    def _compute_total_invoiced(self):
+        for record in self:
+            total_invoiced = 0
+            self.env.cr.execute("""
+                SELECT sum(price_subtotal) FROM account_move_line
+                WHERE parcel_id = %s AND parent_state NOT IN ('draft', 'cancel')
+                AND quantity > 0""", (record.id,))
+            query_results = self.env.cr.dictfetchall()
+            if query_results and query_results[0].get('sum') is not None:
+                total_invoiced = query_results[0].get('sum')
+            record.total_invoiced = total_invoiced
+
+    def _compute_currency_id(self):
+        currency_id = self.env.company.currency_id
+        for record in self:
+            record.currency_id = currency_id
+
     @api.constrains('partner_id', 'partnerlink_ids')
     def _check_partnerlink_ids(self):
         super(TerParcel, self)._check_partnerlink_ids()
@@ -33,6 +59,25 @@ class TerParcel(models.Model):
         area_fields.append(('area_ownership', _('🡸 Area')))
         area_fields.append(('area_overhead', _('🡸 Area')))
         return area_fields
+
+    def action_show_move_lines(self):
+        self.ensure_one()
+        current_parcel = self
+        id_tree_view = self.sudo().env.ref(
+            'base_ter_invoicing.account_move_line_view_tree').id
+        search_view = self.sudo().env.ref(
+            'base_ter_invoicing.account_move_line_view_search')
+        act_window = {
+            'type': 'ir.actions.act_window',
+            'name': _('Invoice Lines'),
+            'res_model': 'account.move.line',
+            'view_mode': 'tree',
+            'views': [(id_tree_view, 'tree')],
+            'search_view_id': (search_view.id, search_view.name),
+            'target': 'current',
+            'domain': [('parcel_id', '=', current_parcel.id)],
+            }
+        return act_window
 
 
 class TerParcelPartnerlink(models.Model):
