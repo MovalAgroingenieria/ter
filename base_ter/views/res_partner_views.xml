@@ -87,7 +87,6 @@
         <field name="arch" type="xml">
             <tree class="o_base_ter_res_partner"
                   default_order="partner_code">
-                <field name="number_of_parcels" invisible="1"/>
                 <field name="partner_code" string="Code"/>
                 <field name="name" string="Name"/>
                 <field name="vat" string="VAT"
