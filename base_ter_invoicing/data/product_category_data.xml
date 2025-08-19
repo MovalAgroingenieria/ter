@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <data noupdate="0">
-        <record id="product_category_02" model="product.category">
-            <field name="category_code">2</field>
-            <field name="name">Areas</field>
-            <field name="billable_item_model_id" ref="base_ter.model_ter_parcel_partnerlink"/>
-            <field name="billable_item_quantity_field">area_overhead</field>
-            <field name="parent_id" ref="product.product_category_1"/>
-        </record>
-    </data>
-
     <data noupdate="1">
         <record id="product_category_02" model="product.category">
+            <field name="name">Areas</field>
+            <field name="billable_item_quantity_field">area_overhead</field>
             <field name="billable_item_detail_desc">{%if billable_item.property_name%}Property: {{billable_item.property_name}}. {% endif %}Parcel: {{billable_item.parcel_id.alphanum_code}} ({{billable_item.parcel_id.area_official}} {{billable_item.parcel_id.area_unit_name}}). {{billable_item.profile_id.alphanum_code}}, {{billable_item.percentage_overhead}}% overhead.</field>
             <field name="billable_item_domain">area_overhead &gt;0</field>
             <field name="aux_01_char_field">parcel_code</field>
@@ -22,6 +14,14 @@
             <field name="aux_02_float_field">percentage_overhead</field>
             <field name="aux_03_char_field">property_name</field>
             <field name="aux_03_bool_field">partner_is_company</field>
+        </record>
+    </data>
+
+    <data noupdate="0">
+        <record id="product_category_02" model="product.category">
+            <field name="category_code">2</field>
+            <field name="billable_item_model_id" ref="base_ter.model_ter_parcel_partnerlink"/>
+            <field name="parent_id" ref="product.product_category_1"/>
         </record>
     </data>
 
