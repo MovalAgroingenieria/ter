@@ -124,23 +124,42 @@ class ResConfigSettings(models.TransientModel):
         if (prev_gis_viewer_epsg and
            (prev_gis_viewer_epsg != new_gis_viewer_epsg)):
             (update_geometry_ok, failed_layer) = self.update_geometry(
-                new_gis_viewer_epsg)
+                prev_gis_viewer_epsg, new_gis_viewer_epsg)
             if not update_geometry_ok:
                 error_message = _('Unable to update geometry of the '
                                   'layer...') + ' ' + failed_layer
-                raise exceptions.UserError(error_message + '.')
+                raise exceptions.UserError(error_message)
 
     @api.model
-    def update_geometry(self, new_epsg):
+    def update_geometry(self, old_epsg, new_epsg):
         resp = (True, '')
         layers = self._set_layers_to_update_geometry()
         for layer in (layers or []):
             update_geometry_ok = True
-            self.env.cr.execute(
-                'SELECT UpdateGeometrySRID(%s, \'geom\', %s)',
-                tuple((layer, new_epsg)))
+            error_message = ''
+            try:
+                self.env.cr.execute(
+                    'DROP VIEW IF EXISTS ter_gis_parcel_model')
+                self.env.cr.execute(
+                    'ALTER TABLE ' + layer + ' ALTER COLUMN geom '
+                    'TYPE postgis.geometry(Geometry, ' + str(new_epsg) + ') '
+                    'USING postgis.ST_Transform(postgis.ST_SetSRID(geom, ' +
+                    str(old_epsg) + '), ' + str(new_epsg) + ')')
+                self.env.cr.execute(
+                    'CREATE VIEW ter_gis_parcel_model AS '
+                    '(SELECT ROW_NUMBER() OVER() AS id, tgp.name, '
+                    'postgis.st_asgeojson(tgp.geom) AS geom_geojson, '
+                    'tp.id AS parcel_id, tp.partner_id as partner_id, '
+                    'tp.active as is_active FROM ter_gis_parcel tgp '
+                    'LEFT JOIN ter_parcel tp ON tgp.name = tp.name '
+                    'WHERE tp.partner_id IS NOT NULL OR tp.partner_id IS NULL '
+                    'ORDER BY tgp.name)')
+            except Exception as error:
+                error_message = str(error)
+                update_geometry_ok = False
             if not update_geometry_ok:
-                resp = (False, layer)
+                resp = (False, layer + '\n\nERROR:\n\n' + error_message)
+                break
         return resp
 
     @api.model
