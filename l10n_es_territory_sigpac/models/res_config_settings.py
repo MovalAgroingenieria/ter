@@ -236,3 +236,27 @@ class ResConfigSettings(models.TransientModel):
             ON ter_parcel_sigpaclink (name)""")
         self.env.cr.execute("""
             REFRESH MATERIALIZED VIEW ter_parcel_sigpaclink;""")
+
+    @api.model
+    def update_geometry(self, old_epsg, new_epsg):
+        resp = (True, '')
+        try:
+            self.env.cr.execute(
+                "DROP MATERIALIZED VIEW IF EXISTS"
+                " ter_parcel_sigpaclink CASCADE")
+        except Exception as error:
+            return (False, str(error))
+        resp = super(ResConfigSettings, self).update_geometry(
+            old_epsg, new_epsg)
+        if not resp[0]:
+            return resp
+        try:
+            perc = self.env['ir.config_parameter'].sudo().get_param(
+                'base_ter.def_int_perc', '')
+            if perc != '':
+                self._rebuild_ter_parcel_sigpaclink_view(float(perc))
+            else:
+                self._rebuild_ter_parcel_sigpaclink_view()
+        except Exception as error:
+            return (False, str(error))
+        return resp
