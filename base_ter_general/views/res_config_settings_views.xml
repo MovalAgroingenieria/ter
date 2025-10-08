@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.base_ter_general</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_ter.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='gisviewer_settings']" position="after">
+                <h2>Mapping</h2>
+                <div class="row mt16 o_settings_container" name="mapping_settings">
+                    <div id="div_jinja2_template">
+                        <div class="o_setting_right_pane">
+                            <label for="jinja2_template"/>
+                            <div class="text-muted">
+                                The template used to render the partner information associated with a secondary parcel.
+                                <br/>
+                                Use {{ partner.attributes }} to access partner fields.
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="jinja2_template" style="width:100%" widget="textarea"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

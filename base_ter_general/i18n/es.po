@@ -1,0 +1,427 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_ter_general
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-08 09:25+0000\n"
+"PO-Revision-Date: 2025-10-08 11:28+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.7\n"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "<b>Scan results</b>"
+msgstr "<b>Resultados del escaneo</b>"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "<br/><br/><b>Mapping results</b>"
+msgstr "<br/><br/><b>Resultados del mapeo</b>"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "<br/>· Parcels failed to map in base entity: %d"
+msgstr "<br/>· Las parcelas no se pudieron mapear en la entidad base: %d"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "<br/>· Parcels failed to scan: %d"
+msgstr "<br/>· Parcelas que no se pudieron escanear: %d"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "<br/>· Parcels found in base entity: %d"
+msgstr "<br/>· Parcelas encontradas en la entidad base: %d"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "<br/>· Parcels mapped property mismatch: %d"
+msgstr "<br/>· Parcelas mapeadas que no coinciden con ninguna finca del socio: %d"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "<br/>· Parcels not found in general entity: %d"
+msgstr "<br/>· Parcelas no encontradas en la entidad general: %d"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "<br/>· Parcels successfully mapped in base entity: %d"
+msgstr "<br/>· Parcelas mapeadas en la entidad base: %d"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "<br/>· Parcels successfully mapped: %d"
+msgstr "<br/>· Parcelas mapeadas: %d"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "Authentication into database %s failed."
+msgstr "La autenticación en la base de datos %s falló."
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_company_id
+#: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_company_id
+#: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_company_id
+msgid "Base company ID"
+msgstr "ID compañía"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "Company"
+msgstr "Compañía"
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_company_id
+#: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_company_id
+#: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_company_id
+msgid "Company ID used in the base instance."
+msgstr "ID de compañía en la instancia base."
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "Company ID..."
+msgstr "ID compañía..."
+
+#. module: base_ter_general
+#: model:ir.model,name:base_ter_general.model_res_config_settings
+msgid "Configuration of the electronic office"
+msgstr "Ajustes de configuración"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "Connection"
+msgstr "Conexión"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "Connection parameters to %s are not fully configured."
+msgstr "Los parámetros de conexión a %s no están completamente configurados."
+
+#. module: base_ter_general
+#: model:ir.model,name:base_ter_general.model_res_partner
+msgid "Contact"
+msgstr "Comunero"
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_database
+#: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_database
+#: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_database
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "Database"
+msgstr "Base de datos"
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_database
+#: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_database
+#: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_database
+msgid "Database name of the base instance."
+msgstr "Nombre de la base de datos de la instancia base."
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "Database name..."
+msgstr "Nombre base de datos..."
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_ter_parcel__last_update
+msgid "Date of the last update from with general instance."
+msgstr "Fecha de la última actualización con instancia general."
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_host
+#: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_host
+#: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_host
+msgid "Host"
+msgstr "Dirección"
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_host
+#: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_host
+#: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_host
+msgid "Host or IP address of the base instance. It must begin with 'http://' or 'https://'."
+msgstr "La dirección o la IP de la instancia base. Debe comenzar con 'http://' o 'https://'."
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_ter_parcel__mapped_from_base
+msgid "Indicates if this parcel has been mapped from base entity."
+msgstr "Indica si esta parcela ha sido mapeada desde la entidad base."
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_ter_parcel__is_secondary
+msgid "Indicates if this parcel is a secondary parcel."
+msgstr "Indica si esta parcela es una parcela secundaria."
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_res_fee__mapped_to_base
+#: model:ir.model.fields,help:base_ter_general.field_res_partner__mapped_to_base
+#: model:ir.model.fields,help:base_ter_general.field_res_users__mapped_to_base
+msgid "Indicates that this partner has been mapped to base instance."
+msgstr "Indica que este socio ha sido mapeado en la instancia de base."
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_ter_parcel__partner_info
+msgid "Information about the partner associated with this parcel."
+msgstr "Información sobre el socio asociado a esta parcela."
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_res_config_settings__jinja2_template
+#: model:ir.model.fields,field_description:base_ter_general.field_res_registry_config_settings__jinja2_template
+msgid "Jinja2 Template"
+msgstr "Plantilla Jinja2"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "Jinja2 template not configured in Territory parameters."
+msgstr "Plantilla Jinja2 no configurada en los parámetros de Territorio."
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_ter_parcel__last_update
+msgid "Last Update"
+msgstr "Última actualización"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.ter_parcel_view_form
+msgid "MAPPING DATA"
+msgstr "DATOS MAPEO"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "Map Base"
+msgstr " Mapear base"
+
+#. module: base_ter_general
+#: model:ir.actions.server,name:base_ter_general.ir_cron_map_base_entities_ir_actions_server
+#: model:ir.cron,cron_name:base_ter_general.ir_cron_map_base_entities
+msgid "Map Base Entities"
+msgstr "Mapeo entidades base"
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_ter_parcel__mapped_from_base
+#: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_tree
+msgid "Mapped"
+msgstr "Mapeada"
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__mapped_to_base
+#: model:ir.model.fields,field_description:base_ter_general.field_res_partner__mapped_to_base
+#: model:ir.model.fields,field_description:base_ter_general.field_res_users__mapped_to_base
+msgid "Mapped to Base"
+msgstr "Mapeada en base"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.res_config_settings_view_form
+msgid "Mapping"
+msgstr "Mapeo"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "Mapping %s"
+msgstr "Mapeo %s"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "Mapping results"
+msgstr "Resultados mapeo"
+
+#. module: base_ter_general
+#: model:ir.model,name:base_ter_general.model_ter_parcel
+msgid "Parcel"
+msgstr "Parcela"
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_ter_parcel__partner_info
+#: model_terms:ir.ui.view,arch_db:base_ter_general.ter_parcel_view_form
+msgid "Partner Information"
+msgstr "Información socio"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_search
+msgid "Partner Primary"
+msgstr "Socio primario"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_search
+msgid "Partner Secondary"
+msgstr "Socio secundario"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "Partner code is not set. Can not be mapped to base entity."
+msgstr "El código de socio no está definido. No se puede mapear a la entidad base."
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_password
+#: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_password
+#: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_password
+msgid "Password"
+msgstr "Contraseña"
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_password
+#: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_password
+#: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_password
+msgid "Password of the base instance."
+msgstr "Contraseña de la entidad de base."
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "Password..."
+msgstr "Contraseña..."
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_port
+#: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_port
+#: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_port
+msgid "Port"
+msgstr "Puerto"
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_port
+#: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_port
+#: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_port
+msgid "Port of the base instance."
+msgstr "Puerto de la instancia de base."
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "Port..."
+msgstr "Puerto..."
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.ter_parcel_view_search
+msgid "Primary"
+msgstr "Primaria"
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_ter_parcel__is_secondary
+#: model_terms:ir.ui.view,arch_db:base_ter_general.ter_parcel_view_search
+msgid "Secondary"
+msgstr "Secundaria"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "Server"
+msgstr "Servidor"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "The base module does not appear to be installed in the database %s."
+msgstr "El módulo base no parece estar instalado en la base de datos %s."
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "The company ID %s was not found in the database %s."
+msgstr "El ID de la compañía %s no se encontró en la base de datos %s."
+
+#. module: base_ter_general
+#: model:ir.model.constraint,message:base_ter_general.constraint_res_partner_base_connection_company_id_ok
+msgid "The company ID must be a positive integer."
+msgstr "El ID de la compaññia debe ser un número entero positivo."
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "The database %s does not exist [%s]"
+msgstr "La base de datos %s no existe [%s]"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "The host must begin with 'http://' or 'https://' [%s]"
+msgstr "Dirección debe comenzar con 'http://' o 'https://' [%s]"
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "The port must be between 0 (no port) and 65535 [%s]"
+msgstr "El puerto debe estar entre 0 (sin puerto) y 65535 [%s]"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.res_config_settings_view_form
+msgid ""
+"The template used to render the partner information associated with a secondary parcel.\n"
+"                                <br/>\n"
+"                                Use {{ partner.attributes }} to access partner fields."
+msgstr ""
+"La plantilla utilizada para representar la información del socio asociada con una parcela "
+"secundaria..\n"
+"                                <br/>\n"
+"                                Utilice {{ partner.atributo }} para acceder a los campos del socio."
+
+#. module: base_ter_general
+#. odoo-python
+#: code:addons/base_ter_general/models/res_partner.py:0
+#, python-format
+msgid "There is no connection to %s."
+msgstr "No hay conexión con %s."
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "User..."
+msgstr "Usuario..."
+
+#. module: base_ter_general
+#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_username
+#: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_username
+#: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_username
+msgid "Username"
+msgstr "Usuario"
+
+#. module: base_ter_general
+#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_username
+#: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_username
+#: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_username
+msgid "Username of the base instance."
+msgstr "Usuario de la entidad de base."
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
+msgid "http(s)://Host_or_IP..."
+msgstr "http(s)://Dirección_o_IP..."
