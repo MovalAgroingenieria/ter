@@ -29,7 +29,7 @@ class TerParcel(models.Model):
     )
 
     partner_info = fields.Text(
-        string="Partner Information",
+        string="Partner Information Base Entity",
         readonly=True,
         help="Information about the partner associated with this parcel.",
     )

@@ -78,7 +78,7 @@ class ResPartner(models.Model):
     def _get_port(self, host, port):
         if port != 0:
             port = port
-        elif host and port:
+        elif host and port == 0:
             if host.startswith("http://"):
                 port = 80
             elif host.startswith("https://"):
