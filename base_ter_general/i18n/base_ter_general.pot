@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 09:24+0000\n"
-"PO-Revision-Date: 2025-10-08 09:24+0000\n"
+"POT-Creation-Date: 2025-10-15 15:21+0000\n"
+"PO-Revision-Date: 2025-10-15 15:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,6 @@ msgid "Authentication into database %s failed."
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_company_id
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_company_id
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_company_id
 msgid "Base company ID"
@@ -98,7 +97,6 @@ msgid "Company"
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_company_id
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_company_id
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_company_id
 msgid "Company ID used in the base instance."
@@ -132,7 +130,6 @@ msgid "Contact"
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_database
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_database
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_database
 #: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
@@ -140,7 +137,6 @@ msgid "Database"
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_database
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_database
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_database
 msgid "Database name of the base instance."
@@ -157,14 +153,12 @@ msgid "Date of the last update from with general instance."
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_host
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_host
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_host
 msgid "Host"
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_host
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_host
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_host
 msgid ""
@@ -183,7 +177,6 @@ msgid "Indicates if this parcel is a secondary parcel."
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__mapped_to_base
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__mapped_to_base
 #: model:ir.model.fields,help:base_ter_general.field_res_users__mapped_to_base
 msgid "Indicates that this partner has been mapped to base instance."
@@ -236,10 +229,19 @@ msgid "Mapped"
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__mapped_to_base
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__mapped_to_base
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__mapped_to_base
 msgid "Mapped to Base"
+msgstr ""
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.ter_parcel_view_search
+msgid "Mapped: No"
+msgstr ""
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.ter_parcel_view_search
+msgid "Mapped: Yes"
 msgstr ""
 
 #. module: base_ter_general
@@ -290,14 +292,12 @@ msgid "Partner code is not set. Can not be mapped to base entity."
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_password
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_password
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_password
 msgid "Password"
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_password
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_password
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_password
 msgid "Password of the base instance."
@@ -309,14 +309,12 @@ msgid "Password..."
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_port
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_port
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_port
 msgid "Port"
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_port
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_port
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_port
 msgid "Port of the base instance."
@@ -404,14 +402,12 @@ msgid "User..."
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_username
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_username
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_username
 msgid "Username"
 msgstr ""
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_username
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_username
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_username
 msgid "Username of the base instance."

@@ -12,6 +12,8 @@ class TerParcel(models.Model):
         string="Mapped",
         default=False,
         readonly=True,
+        store=True,
+        compute='_compute_mapped_from_base',
         help="Indicates if this parcel has been mapped from base entity.",
     )
 
@@ -24,7 +26,6 @@ class TerParcel(models.Model):
     is_secondary = fields.Boolean(
         string="Secondary",
         default=False,
-        readonly=True,
         help="Indicates if this parcel is a secondary parcel.",
     )
 

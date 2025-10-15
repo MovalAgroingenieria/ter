@@ -6,19 +6,22 @@
         <field name="model">ter.parcel</field>
         <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_id']" position="after">
+                <field name="is_secondary" />
+            </xpath>
             <xpath expr="//group[@name='master_data_right']" position="after">
-                <group name="mapping_data" attrs="{'invisible': [('is_secondary', '=', False)]}">
+                <group name="mapping_data" attrs="{'invisible': [('mapped_from_base', '=', False)]}">
                     <div name="section_basic_data" colspan="2"
                             class="text-center mt-3 mb-4">
                         <p style="width:100%" class="border p-2 fw-bold">MAPPING DATA</p>
                     </div>
-                    <field name="is_secondary" invisible="1"/>
                     <field name="mapped_from_base" />
                     <field name="last_update" />
                 </group>
             </xpath>
             <xpath expr="//page[@name='page_partnerlinks']" position="before">
-                <page name="partner_info" string="Partner Information Base Entity" attrs="{'invisible': [('is_secondary', '=', False)]}">
+                <page name="partner_info" string="Partner Information Base Entity"
+                    attrs="{'invisible': [('mapped_from_base', '=', False)]}">
                     <field name="partner_info" class="o_full_width"/>
                 </page>
             </xpath>
@@ -48,6 +51,13 @@
                 <filter name="is_secondary_yes"
                         string="Secondary"
                         domain="[('is_secondary', '=', True)]"/>
+                <separator/>
+                <filter name="mapped_yes"
+                        string="Mapped: Yes"
+                        domain="[('mapped_from_base', '=', True)]"/>
+                <filter name="mapped_no"
+                        string="Mapped: No"
+                        domain="[('mapped_from_base', '=', False)]"/>
                 <separator/>
             </xpath>
         </field>

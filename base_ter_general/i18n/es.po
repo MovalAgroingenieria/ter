@@ -6,16 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 09:25+0000\n"
-"PO-Revision-Date: 2025-10-08 11:28+0200\n"
+"POT-Creation-Date: 2025-10-15 15:22+0000\n"
+"PO-Revision-Date: 2025-10-15 15:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: base_ter_general
 #. odoo-python
@@ -57,7 +55,8 @@ msgstr "<br/>· Parcelas encontradas en la entidad base: %d"
 #: code:addons/base_ter_general/models/res_partner.py:0
 #, python-format
 msgid "<br/>· Parcels mapped property mismatch: %d"
-msgstr "<br/>· Parcelas mapeadas que no coinciden con ninguna finca del socio: %d"
+msgstr ""
+"<br/>· Parcelas mapeadas que no coinciden con ninguna finca del socio: %d"
 
 #. module: base_ter_general
 #. odoo-python
@@ -88,7 +87,6 @@ msgid "Authentication into database %s failed."
 msgstr "La autenticación en la base de datos %s falló."
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_company_id
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_company_id
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_company_id
 msgid "Base company ID"
@@ -100,7 +98,6 @@ msgid "Company"
 msgstr "Compañía"
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_company_id
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_company_id
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_company_id
 msgid "Company ID used in the base instance."
@@ -134,7 +131,6 @@ msgid "Contact"
 msgstr "Comunero"
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_database
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_database
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_database
 #: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
@@ -142,7 +138,6 @@ msgid "Database"
 msgstr "Base de datos"
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_database
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_database
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_database
 msgid "Database name of the base instance."
@@ -159,18 +154,20 @@ msgid "Date of the last update from with general instance."
 msgstr "Fecha de la última actualización con instancia general."
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_host
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_host
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_host
 msgid "Host"
 msgstr "Dirección"
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_host
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_host
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_host
-msgid "Host or IP address of the base instance. It must begin with 'http://' or 'https://'."
-msgstr "La dirección o la IP de la instancia base. Debe comenzar con 'http://' o 'https://'."
+msgid ""
+"Host or IP address of the base instance. It must begin with 'http://' or "
+"'https://'."
+msgstr ""
+"La dirección o la IP de la instancia base. Debe comenzar con 'http://' o "
+"'https://'."
 
 #. module: base_ter_general
 #: model:ir.model.fields,help:base_ter_general.field_ter_parcel__mapped_from_base
@@ -183,7 +180,6 @@ msgid "Indicates if this parcel is a secondary parcel."
 msgstr "Indica si esta parcela es una parcela secundaria."
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__mapped_to_base
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__mapped_to_base
 #: model:ir.model.fields,help:base_ter_general.field_res_users__mapped_to_base
 msgid "Indicates that this partner has been mapped to base instance."
@@ -221,7 +217,7 @@ msgstr "DATOS MAPEO"
 #: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
 msgid "Map Base"
-msgstr " Mapear base"
+msgstr "Mapear base"
 
 #. module: base_ter_general
 #: model:ir.actions.server,name:base_ter_general.ir_cron_map_base_entities_ir_actions_server
@@ -236,11 +232,20 @@ msgid "Mapped"
 msgstr "Mapeada"
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__mapped_to_base
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__mapped_to_base
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__mapped_to_base
 msgid "Mapped to Base"
 msgstr "Mapeada en base"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.ter_parcel_view_search
+msgid "Mapped: No"
+msgstr "Mapeada: No"
+
+#. module: base_ter_general
+#: model_terms:ir.ui.view,arch_db:base_ter_general.ter_parcel_view_search
+msgid "Mapped: Yes"
+msgstr "Mapeada: Sí"
 
 #. module: base_ter_general
 #: model_terms:ir.ui.view,arch_db:base_ter_general.res_config_settings_view_form
@@ -270,7 +275,7 @@ msgstr "Parcela"
 #: model:ir.model.fields,field_description:base_ter_general.field_ter_parcel__partner_info
 #: model_terms:ir.ui.view,arch_db:base_ter_general.ter_parcel_view_form
 msgid "Partner Information Base Entity"
-msgstr "Información socio entidad base"
+msgstr "Información socio"
 
 #. module: base_ter_general
 #: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_search
@@ -287,17 +292,16 @@ msgstr "Socio secundario"
 #: code:addons/base_ter_general/models/res_partner.py:0
 #, python-format
 msgid "Partner code is not set. Can not be mapped to base entity."
-msgstr "El código de socio no está definido. No se puede mapear a la entidad base."
+msgstr ""
+"El código de socio no está definido. No se puede mapear a la entidad base."
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_password
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_password
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_password
 msgid "Password"
 msgstr "Contraseña"
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_password
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_password
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_password
 msgid "Password of the base instance."
@@ -309,14 +313,12 @@ msgid "Password..."
 msgstr "Contraseña..."
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_port
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_port
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_port
 msgid "Port"
 msgstr "Puerto"
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_port
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_port
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_port
 msgid "Port of the base instance."
@@ -390,8 +392,7 @@ msgid ""
 "                                <br/>\n"
 "                                Use {{ partner.attributes }} to access partner fields."
 msgstr ""
-"La plantilla utilizada para representar la información del socio asociada con una parcela "
-"secundaria..\n"
+"La plantilla utilizada para representar la información del socio asociada con una parcela secundaria..\n"
 "                                <br/>\n"
 "                                Utilice {{ partner.atributo }} para acceder a los campos del socio."
 
@@ -408,14 +409,12 @@ msgid "User..."
 msgstr "Usuario..."
 
 #. module: base_ter_general
-#: model:ir.model.fields,field_description:base_ter_general.field_res_fee__base_connection_username
 #: model:ir.model.fields,field_description:base_ter_general.field_res_partner__base_connection_username
 #: model:ir.model.fields,field_description:base_ter_general.field_res_users__base_connection_username
 msgid "Username"
 msgstr "Usuario"
 
 #. module: base_ter_general
-#: model:ir.model.fields,help:base_ter_general.field_res_fee__base_connection_username
 #: model:ir.model.fields,help:base_ter_general.field_res_partner__base_connection_username
 #: model:ir.model.fields,help:base_ter_general.field_res_users__base_connection_username
 msgid "Username of the base instance."
