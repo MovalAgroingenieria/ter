@@ -8,29 +8,37 @@ from odoo.http import request
 class TerGisParcelController(http.Controller):
 
     def _format_parcel_data(self, parcel, source):
+        # Get user language and apply to parcel
+        user_lang = request.env.user.lang
+        if source in ['ter', 'combined'] and hasattr(parcel, 'with_context'):
+            parcel = parcel.with_context(lang=user_lang)
         data = {'name': parcel.name}
         if source in ['gis', 'combined']:
             data['geometry'] = parcel.geom_geojson
         if source in ['ter', 'combined']:
+            # Build partnerlinks with proper language context
+            partnerlinks = []
+            for pl in parcel.partnerlink_ids:
+                partnerlinks.append({
+                    'partner_name': pl.partner_id.display_name,
+                    'partner_id': pl.partner_id.id,
+                    'partner_code': pl.partner_id.partner_code,
+                    'profile_name': pl.profile_id.display_name,
+                    'percentage': pl.percentage,
+                })
             data.update({
                 'parcel_id': parcel.id,
-                'munici': (parcel.municipality_id.name
+                'munici': (parcel.municipality_id.display_name
                            if parcel.municipality_id else ''),
                 'area': (parcel.area_official_m2
                          if parcel.area_official_m2 else 0.0),
+                'area_gis': (parcel.area_gis
+                            if parcel.area_gis else 0.0),
                 'area_official': parcel.area_official,
                 'area_unit': parcel.area_unit_name,
-                'place_name': (parcel.place_id.name
+                'place_name': (parcel.place_id.display_name
                                if parcel.place_id else ''),
-                'partnerlinks': parcel.partnerlink_ids.mapped(
-                    lambda pl: {
-                        'partner_name': pl.partner_id.name,
-                        'partner_id': pl.partner_id.id,
-                        'partner_code': pl.partner_id.partner_code,
-                        'profile_name': pl.profile_id.name,
-                        'percentage': pl.percentage,
-                    }
-                ),
+                'partnerlinks': partnerlinks,
                 'off_code': (parcel.official_code
                              if parcel.official_code else ''),
             })
