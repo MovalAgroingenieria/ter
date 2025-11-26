@@ -25,7 +25,7 @@
         'base_adi',
         'base_report',
     ],
-    'data': [
+    'data_old': [
         'security/security.xml',
         'security/ir.model.access.csv',
         'data/ter_profile_data.xml',

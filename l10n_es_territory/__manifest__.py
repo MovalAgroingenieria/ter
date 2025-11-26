@@ -13,7 +13,7 @@
     'depends': [
         'base_ter',
     ],
-    'data': [
+    'data_old': [
         'data/res_admregion_data.xml',
         'data/res_province_data.xml',
         'views/res_province_views.xml',

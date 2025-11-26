@@ -15,7 +15,7 @@
         'base_ter',
         'sms_wausms',
     ],
-    'data': [
+    'data_old': [
         'views/ter_parcel_views.xml',
         'views/ter_property_views.xml',
     ],

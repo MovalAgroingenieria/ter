@@ -18,7 +18,7 @@
         'base_ter',
         'base_invoicing',
     ],
-    'data': [
+    'data_old': [
         'data/product_category_data.xml',
         'views/ter_parcel_views.xml',
         'views/account_move_line_views.xml',

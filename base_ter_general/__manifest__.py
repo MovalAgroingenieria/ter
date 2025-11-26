@@ -16,7 +16,7 @@
         "base_ter",
         "queue_job",
     ],
-    "data": [
+    "data_old": [
         "data/base_ter_general_cron.xml",
         "views/ter_parcel_views.xml",
         "views/res_config_settings_views.xml",

@@ -14,7 +14,7 @@
         "base_ter",
         "l10n_es_territory",
     ],
-    "data": [
+    "data_old": [
         "security/ir.model.access.csv",
         "data/ter_parcel_sigpaclink_cron.xml",
         "views/res_config_settings_view.xml",
