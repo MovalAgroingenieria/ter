@@ -4,7 +4,7 @@
 {
     "name": "Base-Territory General Mapping Module",
     "summary": "Synchronization of partners and parcels with base entities.",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Territory Management",
     "website": "https://www.moval.es",
     "author": "Moval Agroingeniería",
