@@ -5,7 +5,7 @@
     'name': 'Area-based massive invoicing',
     'summary': 'Extension of the massive invoicing module (base_invoicing) '
                'to support area-based billing.',
-    'version': '16.0.1.0.0',
+    'version': "17.0.1.0.0",
     'category': 'Accounting/Accounting',
     'website': 'https://www.moval.es',
     'author': 'Moval Agroingeniería',
