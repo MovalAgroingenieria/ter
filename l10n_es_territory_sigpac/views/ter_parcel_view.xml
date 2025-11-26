@@ -138,7 +138,7 @@
         <field name="model">ter.parcel.sigpaclink</field>
         <field name="arch" type="xml">
             <tree class="o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree"
-                  create="false" delete="false" string="sigpac parcel sigpaclink view tree">
+                  create="false" delete="false">
                 <field name="parcel_id" string="Parcel"
                        widget="many2one_unclickable"/>
                 <button name="action_gis_viewer"
@@ -210,7 +210,7 @@
         <field name="model">ter.parcel.sigpaclink</field>
         <field name="arch" type="xml">
             <tree class="o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree"
-                  create="false" delete="false" string="sigpac parcel sigpaclink only parcels view tree">
+                  create="false" delete="false">
                 <field name="parcel_id" string="Parcel"/>
                 <button name="action_gis_viewer"
                         type="object" class="oe_stat_button"
@@ -239,7 +239,7 @@
         <field name="model">ter.parcel.sigpaclink</field>
         <field name="arch" type="xml">
             <tree class="o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree"
-                  create="false" delete="false" string="sigpac parcel sigpaclink only enclosures view tree">
+                  create="false" delete="false">
                 <field name="enclosure_number" string=""/>
                 <field name="sigpac_id" string="SIGPAC Enclosure"/>
                 <button name="action_sigpac_viewer"

@@ -68,7 +68,7 @@
         <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
             <tree class="o_l10n_es_territory_sigpac_sigpac_view_tree"
-                  create="false" delete="false" string="base ter sigpac view tree">
+                  create="false" delete="false">
                 <field name="name"
                        string="Code: prov. - munic. - aggreg. - zone - polyg. - parcel - enclos."/>
                 <button name="action_sigpac_viewer"
