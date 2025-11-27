@@ -2,7 +2,7 @@
 <odoo>
 
     <record id="account_move_line_view_tree" model="ir.ui.view">
-        <field name="name">account.move.line.view.tree.inherit.base_ter_invoicing</field>
+        <field name="name">account.move.line.view.list.inherit.base_ter_invoicing</field>
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="base_invoicing.account_move_line_view_tree"/>
         <field name="arch" type="xml">
