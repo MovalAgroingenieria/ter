@@ -108,7 +108,7 @@
                     <notebook name="slave_data_notebook" colspan="4">
                         <page name="page_partnerlinks" string="Contacts">
                             <field name="partnerlink_ids" nolabel="1">
-                                <tree editable="bottom"
+                                <list editable="bottom"
                                       class="o_base_ter_ter_parcel_partnerlink">
                                     <field name="partner_id" string="Name"
                                            options="{'no_quick_create':True}"
@@ -118,7 +118,7 @@
                                     <field name="profile_id" string="Profile"
                                            class="text-center"/>
                                     <field name="percentage" string="% Participation"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="page_notes" string="Internal Notes">
@@ -126,20 +126,16 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"
-                           widget="mail_followers"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
 
     <record id="ter_parcel_view_tree" model="ir.ui.view">
-        <field name="name">ter.parcel.view.tree</field>
+        <field name="name">ter.parcel.view.list</field>
         <field name="model">ter.parcel</field>
         <field name="arch" type="xml">
-            <tree class="o_base_ter_ter_parcel"
+            <list class="o_base_ter_ter_parcel"
                   default_order="alphanum_code">
                 <field name="mapped_to_polygon" invisible="1"/>
                 <field name="alphanum_code" string="Code"
@@ -154,7 +150,7 @@
                         icon="fa-map-marker"
                         attrs="{'invisible': [('mapped_to_polygon', '=', False)]}"/>
                 <field name="area_official" sum="Total Area"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -279,10 +275,10 @@
     <record id="ter_parcel_action" model="ir.actions.act_window">
         <field name="name">Parcels</field>
         <field name="res_model">ter.parcel</field>
-        <field name="view_mode">tree,form,kanban,pivot</field>
+        <field name="view_mode">list,form,kanban,pivot</field>
         <field name="view_ids"
          eval="[(5, 0),
-                (0, 0, {'view_mode': 'tree',
+                (0, 0, {'view_mode': 'list',
                         'view_id': ref('ter_parcel_view_tree')}),
                 (0, 0, {'view_mode': 'form',
                         'view_id': ref('ter_parcel_view_form')}),
@@ -346,10 +342,10 @@
     </record>
 
     <record id="ter_parcel_partnerlink_view_tree" model="ir.ui.view">
-        <field name="name">ter.parcel.partnerlink.view.tree</field>
+        <field name="name">ter.parcel.partnerlink.view.list</field>
         <field name="model">ter.parcel.partnerlink</field>
         <field name="arch" type="xml">
-            <tree edit="false" delete="false"
+            <list edit="false" delete="false"
                   class="o_base_ter_ter_parcel_partnerlink_technical">
                 <field name="parcel_id" string="Parcel"/>
                 <field name="partner_id" string="Name"/>
@@ -358,7 +354,7 @@
                 <field name="profile_id" string="Profile"
                        class="text-center"/>
                 <field name="percentage" string="% Participation"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -394,10 +390,10 @@
     <record id="ter_parcel_partnerlink_action" model="ir.actions.act_window">
         <field name="name">Partner-Links</field>
         <field name="res_model">ter.parcel.partnerlink</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_ids"
          eval="[(5, 0),
-                (0, 0, {'view_mode': 'tree',
+                (0, 0, {'view_mode': 'list',
                         'view_id': ref('ter_parcel_partnerlink_view_tree')}),]"/>
         <field name="search_view_id" ref="ter_parcel_partnerlink_view_search"/>
     </record>

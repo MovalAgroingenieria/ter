@@ -5,7 +5,7 @@
 
     'name': 'Base-Territory Module',
     'summary': 'Base module for those modules that manage a territorial census',
-    'version': "17.0.1.0.0",
+    'version': "18.0.1.0.0",
     'category': 'Territory Management',
     'website': 'https://www.moval.es',
     'author': 'Moval Agroingeniería',

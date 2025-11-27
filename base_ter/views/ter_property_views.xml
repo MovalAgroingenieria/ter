@@ -98,20 +98,16 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"
-                           widget="mail_followers"/>
-                    <field name="message_ids" widget="mail_thread"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
 
     <record id="ter_property_view_tree" model="ir.ui.view">
-        <field name="name">ter.property.view.tree</field>
+        <field name="name">ter.property.view.list</field>
         <field name="model">ter.property</field>
         <field name="arch" type="xml">
-            <tree class="o_base_ter_ter_property"
+            <list class="o_base_ter_ter_property"
                   default_order="alphanum_code">
                 <field name="mapped_to_polygon" invisible="1"/>
                 <field name="alphanum_code" string="Property"/>
@@ -123,7 +119,7 @@
                         icon="fa-map-marker"
                         attrs="{'invisible': [('mapped_to_polygon', '=', False)]}"/>
                 <field name="area_official_parcels" sum="Total Area"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -237,10 +233,10 @@
     <record id="ter_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
         <field name="res_model">ter.property</field>
-        <field name="view_mode">tree,form,kanban,pivot</field>
+        <field name="view_mode">list,form,kanban,pivot</field>
         <field name="view_ids"
          eval="[(5, 0),
-                (0, 0, {'view_mode': 'tree',
+                (0, 0, {'view_mode': 'list',
                         'view_id': ref('ter_property_view_tree')}),
                 (0, 0, {'view_mode': 'form',
                         'view_id': ref('ter_property_view_form')}),
