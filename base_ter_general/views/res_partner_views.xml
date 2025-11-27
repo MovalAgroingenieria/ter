@@ -45,7 +45,7 @@
     </record>
 
     <record id="res_partner_view_tree" model="ir.ui.view">
-        <field name="name">res.partner.view.tree.base_ter_general</field>
+        <field name="name">res.partner.view.list.base_ter_general</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base_ter.res_partner_view_tree"/> <!-- inherit base_ter -->
         <field name="arch" type="xml">
