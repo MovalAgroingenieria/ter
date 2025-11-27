@@ -18,11 +18,11 @@
     </record>
 
     <record id="res_municipality_view_tree" model="ir.ui.view">
-        <field name="name">res.municipality.view.tree.l10n_es_territory</field>
+        <field name="name">res.municipality.view.list.l10n_es_territory</field>
         <field name="model">res.municipality</field>
         <field name="inherit_id" ref="base_adi.res_municipality_view_tree"/>
         <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
+            <xpath expr="//list" position="attributes">
                 <attribute name="default_order">cadastral_code</attribute>
             </xpath>
             <xpath expr="//field[@name='province_id']" position="before">

@@ -5,7 +5,7 @@
     'name': 'Base-Territory (Spanish Localization)',
     'summary': 'Customization of the territorial base (base_ter module) '
                'to the administrative scope of Spain.',
-    'version': "17.0.1.0.0",
+    'version': "18.0.1.0.0",
     'author': 'Moval Agroingeniería',
     'license': 'AGPL-3',
     'website': 'https://moval.es',
