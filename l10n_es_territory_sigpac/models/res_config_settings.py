@@ -68,13 +68,13 @@ class ResConfigSettings(models.TransientModel):
         self.execute()
         # Load SIGPAC.
         exit_code, message_error = self.load_sigpac()
-        # Show tree view.
+        # Show list view.
         if exit_code == 0:
             return {
                 'type': 'ir.actions.act_window',
                 'name': _('Parcels'),
                 'res_model': 'ter.parcel',
-                'view_mode': 'tree,form',
+                'view_mode': 'list,form',
                 'target': 'current',
                 'context': self.env.context,
             }

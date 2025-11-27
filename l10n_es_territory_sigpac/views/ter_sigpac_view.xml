@@ -67,7 +67,7 @@
         <field name="name">SIGPAC enclosures (tree view)</field>
         <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
-            <tree class="o_l10n_es_territory_sigpac_sigpac_view_tree"
+            <list class="o_l10n_es_territory_sigpac_sigpac_view_tree"
                   create="false" delete="false">
                 <field name="name"
                        string="Code: prov. - munic. - aggreg. - zone - polyg. - parcel - enclos."/>
@@ -79,7 +79,7 @@
                 <field name="pend_media_porc" string="Slope %"/>
                 <field name="coef_rega" string="Irrig. Coef. (0-100)"/>
                 <field name="uso_sigpac" string="Land Use"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -126,10 +126,10 @@
             model="ir.actions.act_window">
         <field name="name">SIGPAC enclosures</field>
         <field name="res_model">ter.sigpac</field>
-        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_mode">list,form,pivot,graph</field>
         <field name="view_ids"
          eval="[(5, 0),
-                (0, 0, {'view_mode': 'tree',
+                (0, 0, {'view_mode': 'list',
                         'view_id': ref('ter_sigpac_view_tree')}),
                 (0, 0, {'view_mode': 'form',
                         'view_id': ref('ter_sigpac_view_form')}),
