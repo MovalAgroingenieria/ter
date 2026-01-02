@@ -757,7 +757,9 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__same_parcelmanager_propertyowner
 msgid "Force the parcel manager and the property owner to be the same"
-msgstr "Obligar que el gestor de la parcel·la i el titular de la seva finca coincideixin"
+msgstr ""
+"Obligar que el gestor de la parcel·la i el titular de la seva finca "
+"coincideixin"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form

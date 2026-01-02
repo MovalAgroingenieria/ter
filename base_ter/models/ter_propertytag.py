@@ -5,14 +5,14 @@ from odoo import fields, models
 
 
 class TerPropertytag(models.Model):
-    _name = 'ter.propertytag'
-    _description = 'Property Tag'
-    _inherit = ['simple.model']
-    _rec_name = 'alphanum_code'
+    _name = "ter.propertytag"
+    _description = "Property Tag"
+    _inherit = ["simple.model"]
+    _rec_name = "alphanum_code"
 
     # Static variables inherited from "simple.model"
     _set_num_code = False
-    _sequence_for_codes = ''
+    _sequence_for_codes = ""
     _size_name = 30
     _minlength = 0
     _maxlength = 30
@@ -22,13 +22,19 @@ class TerPropertytag(models.Model):
     _size_description = 75
 
     alphanum_code = fields.Char(
-        string='Property Tag',
+        string="Property Tag",
         required=True,
-        translate=True,)
+        translate=True,
+    )
 
     color = fields.Integer(
-        string='Color Index',)
+        string="Color Index",
+    )
 
-    property_ids = fields.Many2many('ter.property',
-                                  column1='property_id', column2='propertytag_id',
-                                  string='Properties', copy=False)
+    property_ids = fields.Many2many(
+        "ter.property",
+        column1="property_id",
+        column2="propertytag_id",
+        string="Properties",
+        copy=False,
+    )

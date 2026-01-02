@@ -5,9 +5,9 @@ from odoo import fields, models
 
 
 class IrCron(models.Model):
-    _inherit = ['ir.cron']
+    _inherit = ["ir.cron"]
 
     is_base_ter = fields.Boolean(
-        string='Is this a base_ter action?',
+        string="Is this a base_ter action?",
         default=False,
     )
