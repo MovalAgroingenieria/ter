@@ -1,5 +1,4 @@
 # 2025 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from . import ter_parcel
-from . import account_move_line
+from . import account_move_line, ter_parcel
