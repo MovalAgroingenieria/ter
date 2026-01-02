@@ -1,6 +1,6 @@
 
-import sys
 import subprocess
+import sys
 
 # SHP to PostgreSQL (if the table exists records will be added, otherwise the table will be created and records added afterwards).
 #

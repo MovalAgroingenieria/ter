@@ -4,7 +4,7 @@
 {
     "name": "Territory: SIGPAC Integration",
     "summary": "In a territorial census, integration of the SIGPAC "
-               "enclosures, and creation of a spatial link with the parcels.",
+    "enclosures, and creation of a spatial link with the parcels.",
     "version": "18.0.1.0.0",
     "category": "Territory Management",
     "website": "http://www.moval.es",
@@ -24,14 +24,14 @@
     ],
     "assets": {
         "web.assets_backend": [
-            'l10n_es_territory_sigpac/static/src/scss/l10n_es_territory_sigpac.scss',
-            'l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css',
+            "l10n_es_territory_sigpac/static/src/scss/l10n_es_territory_sigpac.scss",
+            "l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css",
         ],
         "web.assets_frontend": [
-            'l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css',
+            "l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css",
         ],
-        'web.report_assets_common': [
-            'l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css',
+        "web.report_assets_common": [
+            "l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css",
         ],
     },
     "installable": True,

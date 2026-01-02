@@ -2,65 +2,73 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import glob
+import logging
 import os
 import subprocess
-import logging
-from odoo import models, fields, api, tools, exceptions, _
+
+from odoo import _, api, exceptions, fields, models, tools
 
 DEF_INT_PERC = 5.0
 
 
 class ResConfigSettings(models.TransientModel):
-    _inherit = 'res.config.settings'
+    _inherit = "res.config.settings"
 
     sigpac_path = fields.Char(
-        string='Path of the SIGPAC shapefiles',
+        string="Path of the SIGPAC shapefiles",
         size=255,
-        help='Path of the official shapefiles of SIGPAC, in the server',
-        config_parameter='l10n_es_territory_sigpac.sigpac_path')
+        help="Path of the official shapefiles of SIGPAC, in the server",
+        config_parameter="l10n_es_territory_sigpac.sigpac_path",
+    )
 
     sigpac_names = fields.Char(
-        string='Names of the SIGPAC shapefiles',
-        help='Names of the official shapefiles of SIGPAC (separated by '
-             'commas)',
-        config_parameter='l10n_es_territory_sigpac.sigpac_names')
+        string="Names of the SIGPAC shapefiles",
+        help="Names of the official shapefiles of SIGPAC (separated by " "commas)",
+        config_parameter="l10n_es_territory_sigpac.sigpac_names",
+    )
 
     sigpac_minimum_intersection_percentage = fields.Float(
-        string='Minimum intersection percentage',
+        string="Minimum intersection percentage",
         digits=(32, 4),
         required=True,
-        help='Minimum intersection percentage allowed for parcels and SIGPAC '
-             'enclosures',
+        help="Minimum intersection percentage allowed for parcels and SIGPAC "
+        "enclosures",
         default=DEF_INT_PERC,
-        config_parameter='l10n_es_territory_sigpac.'
-        'sigpac_minimum_intersection_percentage')
+        config_parameter="l10n_es_territory_sigpac."
+        "sigpac_minimum_intersection_percentage",
+    )
 
     wms_sigpac_url = fields.Char(
-        string='WMS SIGPAC URL',
-        default='https://wms.mapa.gob.es/sigpac/wms',
-        config_parameter='l10n_es_territory_sigpac.wms_sigpac_url')
+        string="WMS SIGPAC URL",
+        default="https://wms.mapa.gob.es/sigpac/wms",
+        config_parameter="l10n_es_territory_sigpac.wms_sigpac_url",
+    )
 
     wms_sigpac_layer = fields.Char(
-        string='WMS SIGPAC Layers',
-        default='recinto',
-        config_parameter='l10n_es_territory_sigpac.wms_sigpac_layer')
+        string="WMS SIGPAC Layers",
+        default="recinto",
+        config_parameter="l10n_es_territory_sigpac.wms_sigpac_layer",
+    )
 
     sigpac_viewer_url = fields.Char(
-        string='URL SIGPAC Viewer',
-        config_parameter='l10n_es_territory_sigpac.sigpac_viewer_url')
+        string="URL SIGPAC Viewer",
+        config_parameter="l10n_es_territory_sigpac.sigpac_viewer_url",
+    )
 
     python_venv_url = fields.Char(
-        string='Python Virtual Environment URL',
-        default='/home/odoo16/venv3.10/bin/python',
-        config_parameter='l10n_es_territory_sigpac.python_venv_url')
+        string="Python Virtual Environment URL",
+        default="/home/odoo16/venv3.10/bin/python",
+        config_parameter="l10n_es_territory_sigpac.python_venv_url",
+    )
 
     _sql_constraints = [
-        ('valid_minimum_intersection_percentage',
-         'CHECK (sigpac_minimum_intersection_percentage >= 0 '
-         'and sigpac_minimum_intersection_percentage <= 100)',
-         'The minimum intersection percentage must be a value between '
-         '0 and 100.'),
-        ]
+        (
+            "valid_minimum_intersection_percentage",
+            "CHECK (sigpac_minimum_intersection_percentage >= 0 "
+            "and sigpac_minimum_intersection_percentage <= 100)",
+            "The minimum intersection percentage must be a value between " "0 and 100.",
+        ),
+    ]
 
     def action_load_sigpac(self):
         self.ensure_one()
@@ -71,126 +79,146 @@ class ResConfigSettings(models.TransientModel):
         # Show list view.
         if exit_code == 0:
             return {
-                'type': 'ir.actions.act_window',
-                'name': _('Parcels'),
-                'res_model': 'ter.parcel',
-                'view_mode': 'list,form',
-                'target': 'current',
-                'context': self.env.context,
+                "type": "ir.actions.act_window",
+                "name": _("Parcels"),
+                "res_model": "ter.parcel",
+                "view_mode": "list,form",
+                "target": "current",
+                "context": self.env.context,
             }
         else:
             raise exceptions.UserError(
-                _('Loading SIGPAC enclosures: failed process '
-                  '(error code: %s), message:\n%s') %
-                (exit_code, message_error))
+                _(
+                    "Loading SIGPAC enclosures: failed process "
+                    "(error code: %s), message:\n%s"
+                )
+                % (exit_code, message_error)
+            )
 
     @api.model
     def load_sigpac(self):
         # if exit_code is 0 then there is no error.
         exit_code = 0
-        message_error = ''
+        message_error = ""
         # Get parameters.
-        model_ir_config = self.env['ir.config_parameter'].sudo()
-        sigpac_path = model_ir_config.get_param(
-            'l10n_es_territory_sigpac.sigpac_path')
-        if ((not sigpac_path) or sigpac_path == ''):
-            return -1, _('One or more shapefiles not found.')
+        model_ir_config = self.env["ir.config_parameter"].sudo()
+        sigpac_path = model_ir_config.get_param("l10n_es_territory_sigpac.sigpac_path")
+        if (not sigpac_path) or sigpac_path == "":
+            return -1, _("One or more shapefiles not found.")
         sigpac_names = model_ir_config.get_param(
-            'l10n_es_territory_sigpac.sigpac_names')
+            "l10n_es_territory_sigpac.sigpac_names"
+        )
         python_venv_url = model_ir_config.get_param(
-            'l10n_es_territory_sigpac.python_venv_url')
-        if (not sigpac_names):
-            sigpac_names = ''
+            "l10n_es_territory_sigpac.python_venv_url"
+        )
+        if not sigpac_names:
+            sigpac_names = ""
         else:
             sigpac_names = sigpac_names.strip()
         # Get shapefiles and conditions.
         shp_list = self._get_shp_list(sigpac_path, sigpac_names)
-        if (not shp_list):
-            return -1, _('One or more shapefiles not found.')
+        if not shp_list:
+            return -1, _("One or more shapefiles not found.")
         # Get parameters for ogr2ogr.
         host, port, user, password, dbname, srs = self._get_ogr_params()
         # Import features, step 1: empty "ter_gis_table".
-        self.env.cr.execute('TRUNCATE TABLE ter_gis_sigpac')
+        self.env.cr.execute("TRUNCATE TABLE ter_gis_sigpac")
         # Import features, step 2: rebuild the "ter_parcel_sigpaclink"
         # materiazed view.
         sigpac_minimum_intersection_percentage = model_ir_config.get_param(
-            'l10n_es_territory_sigpac.sigpac_minimum_intersection_percentage')
-        self._rebuild_ter_parcel_sigpaclink_view(
-            sigpac_minimum_intersection_percentage)
+            "l10n_es_territory_sigpac.sigpac_minimum_intersection_percentage"
+        )
+        self._rebuild_ter_parcel_sigpaclink_view(sigpac_minimum_intersection_percentage)
         # Import features, step 3: call the program "load_sigpac".
-        program_path = \
-            '{}/../static/python/load_sigpac.py'.format(
-                os.path.dirname(__file__))
-        shptoimport = ''
+        program_path = "{}/../static/python/load_sigpac.py".format(
+            os.path.dirname(__file__)
+        )
+        shptoimport = ""
         for shp in shp_list:
-            shptoimport = shptoimport + '#' + shp['shapefile']
-            if shp['condition'] != '':
-                shptoimport = shptoimport + '(' + shp['condition'] + ')'
+            shptoimport = shptoimport + "#" + shp["shapefile"]
+            if shp["condition"] != "":
+                shptoimport = shptoimport + "(" + shp["condition"] + ")"
         shptoimport = shptoimport[1:]
         external_program = python_venv_url
-        list_of_args = [external_program, program_path, host,
-                        str(port), dbname, user, password,
-                        shptoimport, str(srs)]
+        list_of_args = [
+            external_program,
+            program_path,
+            host,
+            str(port),
+            dbname,
+            user,
+            password,
+            shptoimport,
+            str(srs),
+        ]
         python_ok = True
         try:
             subprocess.Popen(list_of_args)
         except Exception:
             python_ok = False
             exit_code = 1
-            message_error = 'Python Error'
+            message_error = "Python Error"
         if python_ok:
             _logger = logging.getLogger(self.__class__.__name__)
-            _logger.info('load_sigpac.py (ogr2ogr) for... ' +
-                         ' '.join([str(x) for x in list_of_args]))
+            _logger.info(
+                "load_sigpac.py (ogr2ogr) for... "
+                + " ".join([str(x) for x in list_of_args])
+            )
         return exit_code, message_error
 
     def _get_shp_list(self, sigpac_path, sigpac_names):
         resp = []
-        if sigpac_path == '' or sigpac_path[-1] != '/':
-            sigpac_path = sigpac_path + '/'
-        if sigpac_names == '':
-            shapefiles = glob.glob(sigpac_path + '*.shp')
-            for shapefile in (shapefiles or []):
-                resp.append({'shapefile': shapefile,
-                             'condition': ''})
+        if sigpac_path == "" or sigpac_path[-1] != "/":
+            sigpac_path = sigpac_path + "/"
+        if sigpac_names == "":
+            shapefiles = glob.glob(sigpac_path + "*.shp")
+            for shapefile in shapefiles or []:
+                resp.append({"shapefile": shapefile, "condition": ""})
         else:
-            shapefiles = sigpac_names.split(',')
+            shapefiles = sigpac_names.split(",")
             for shapefile in shapefiles:
-                condition = ''
-                pos_initial_bracket = shapefile.find('(')
+                condition = ""
+                pos_initial_bracket = shapefile.find("(")
                 if pos_initial_bracket != -1:
-                    pos_final_bracket = shapefile.find(')')
-                    if (pos_final_bracket != -1 and
-                       pos_initial_bracket < pos_final_bracket):
+                    pos_final_bracket = shapefile.find(")")
+                    if (
+                        pos_final_bracket != -1
+                        and pos_initial_bracket < pos_final_bracket
+                    ):
                         condition = shapefile[
-                            pos_initial_bracket + 1: pos_final_bracket]
+                            pos_initial_bracket + 1 : pos_final_bracket
+                        ]
                         shapefile = shapefile[:pos_initial_bracket]
                 shapefile = sigpac_path + shapefile
                 if os.path.isfile(shapefile):
-                    resp.append({'shapefile': shapefile,
-                                 'condition': condition})
+                    resp.append({"shapefile": shapefile, "condition": condition})
                 else:
                     resp = []
                     break
         return resp
 
     def _get_ogr_params(self):
-        host = tools.config['db_host']
-        port = tools.config['db_port']
-        user = tools.config['db_user']
-        password = tools.config['db_password']
+        host = tools.config["db_host"]
+        port = tools.config["db_port"]
+        user = tools.config["db_user"]
+        password = tools.config["db_password"]
         dbname = self.env.cr.dbname
-        srs = self.env['ir.default'].get(
-            'res.config.settings', 'url_gis_viewer_epsg_code')
+        srs = self.env["ir.default"].get(
+            "res.config.settings", "url_gis_viewer_epsg_code"
+        )
         if not srs:
             srs = 25830
         return host, port, user, password, dbname, srs
 
     def _rebuild_ter_parcel_sigpaclink_view(
-            self, minimum_intersection_percentage=DEF_INT_PERC):
-        self.env.cr.execute("""
-            DROP MATERIALIZED VIEW IF EXISTS ter_parcel_sigpaclink CASCADE""")
-        self.env.cr.execute("""
+        self, minimum_intersection_percentage=DEF_INT_PERC
+    ):
+        self.env.cr.execute(
+            """
+            DROP MATERIALIZED VIEW IF EXISTS ter_parcel_sigpaclink CASCADE"""
+        )
+        self.env.cr.execute(
+            """
             CREATE MATERIALIZED VIEW ter_parcel_sigpaclink AS(
             SELECT row_number() OVER () AS id,
                 p.name || '-' || s.name AS name,
@@ -226,33 +254,43 @@ class ResConfigSettings(models.TransientModel):
             'VO', 'ZC', 'ZU', 'ZV')
             AND ST_AREA(gp.geom) > 0
             AND (100 * ST_AREA(ST_INTERSECTION(gp.geom, gs.geom)) /
-            ST_AREA(gp.geom)) >= %s)""", (minimum_intersection_percentage,))
-        self.env.cr.execute("""
+            ST_AREA(gp.geom)) >= %s)""",
+            (minimum_intersection_percentage,),
+        )
+        self.env.cr.execute(
+            """
             CREATE UNIQUE INDEX ter_parcel_sigpaclink_id_index
-            ON ter_parcel_sigpaclink (id)""")
-        self.env.cr.execute("""
+            ON ter_parcel_sigpaclink (id)"""
+        )
+        self.env.cr.execute(
+            """
             CREATE INDEX ter_parcel_sigpaclink_name_index
-            ON ter_parcel_sigpaclink (name)""")
-        self.env.cr.execute("""
-            REFRESH MATERIALIZED VIEW ter_parcel_sigpaclink;""")
+            ON ter_parcel_sigpaclink (name)"""
+        )
+        self.env.cr.execute(
+            """
+            REFRESH MATERIALIZED VIEW ter_parcel_sigpaclink;"""
+        )
 
     @api.model
     def update_geometry(self, old_epsg, new_epsg):
-        resp = (True, '')
+        resp = (True, "")
         try:
             self.env.cr.execute(
-                "DROP MATERIALIZED VIEW IF EXISTS"
-                " ter_parcel_sigpaclink CASCADE")
+                "DROP MATERIALIZED VIEW IF EXISTS" " ter_parcel_sigpaclink CASCADE"
+            )
         except Exception as error:
             return (False, str(error))
-        resp = super(ResConfigSettings, self).update_geometry(
-            old_epsg, new_epsg)
+        resp = super(ResConfigSettings, self).update_geometry(old_epsg, new_epsg)
         if not resp[0]:
             return resp
         try:
-            perc = self.env['ir.config_parameter'].sudo().get_param(
-                'base_ter.def_int_perc', '')
-            if perc != '':
+            perc = (
+                self.env["ir.config_parameter"]
+                .sudo()
+                .get_param("base_ter.def_int_perc", "")
+            )
+            if perc != "":
                 self._rebuild_ter_parcel_sigpaclink_view(float(perc))
             else:
                 self._rebuild_ter_parcel_sigpaclink_view()
