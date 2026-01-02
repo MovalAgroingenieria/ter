@@ -31,7 +31,7 @@ msgstr ""
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
 msgid "<span>Cadastre</span>"
-msgstr "<span>Cadastre</span>"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_15
