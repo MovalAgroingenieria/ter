@@ -10,7 +10,9 @@ class TestReportProperty(TransactionCase):
         cls.municipality = cls.env["res.municipality"].create(
             {"name": "M1", "province_id": province.id}
         )
-        cls.partner = cls.env["res.partner"].create({"name": "Partner Property", "partner_code": 1})
+        cls.partner = cls.env["res.partner"].create(
+            {"name": "Partner Property", "partner_code": 1}
+        )
 
         cls.prop = cls.env["ter.property"].create(
             {

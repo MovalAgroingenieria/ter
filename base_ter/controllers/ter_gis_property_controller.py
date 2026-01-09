@@ -33,7 +33,9 @@ class TerGisPropertyController(http.Controller):
             name = prop.name or ""
             geom_geojson = getattr(prop, "geom_geojson", None)
             prop_id = prop.id
-            municipality = prop.municipality_id.display_name if prop.municipality_id else ""
+            municipality = (
+                prop.municipality_id.display_name if prop.municipality_id else ""
+            )
             area = prop.area_official_parcels_m2 or 0.0
             area_official_parcels = prop.area_official_parcels
             area_unit = prop.area_unit_name
@@ -43,7 +45,9 @@ class TerGisPropertyController(http.Controller):
             partner_code = partner.partner_code if partner else ""
             partner_id = partner.id if partner else None
 
-            parcels = [{"parcel_name": p.name, "parcel_id": p.id} for p in prop.parcel_ids]
+            parcels = [
+                {"parcel_name": p.name, "parcel_id": p.id} for p in prop.parcel_ids
+            ]
 
         data = {"name": name}
 
@@ -94,7 +98,9 @@ class TerGisPropertyController(http.Controller):
 
         return cr.dictfetchall()
 
-    @http.route("/get_properties", type="json", auth="user", methods=["POST"], csrf=False)
+    @http.route(
+        "/get_properties", type="json", auth="user", methods=["POST"], csrf=False
+    )
     def get_properties(self, **kwargs):
         name = (kwargs.get("name") or "").strip()
         operator = kwargs.get("operator") or "="
@@ -130,13 +136,22 @@ class TerGisPropertyController(http.Controller):
                 ter_prop = ter_property_map.get(prop_name)
 
                 if gis_prop and ter_prop:
-                    combined_data.append(self._format_property_data(ter_prop, source="combined"))
+                    combined_data.append(
+                        self._format_property_data(ter_prop, source="combined")
+                    )
                 elif gis_prop:
-                    combined_data.append(self._format_property_data(gis_prop, source="gis"))
+                    combined_data.append(
+                        self._format_property_data(gis_prop, source="gis")
+                    )
                 else:
-                    combined_data.append(self._format_property_data(ter_prop, source="ter"))
+                    combined_data.append(
+                        self._format_property_data(ter_prop, source="ter")
+                    )
 
             return {"status": "success", "data": combined_data}
         except Exception:
             _logger.exception("Unexpected error in /get_properties")
-            return {"status": "error", "error": _("Unexpected error while processing the request.")}
+            return {
+                "status": "error",
+                "error": _("Unexpected error while processing the request."),
+            }

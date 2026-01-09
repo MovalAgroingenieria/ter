@@ -7,10 +7,16 @@ class TestTerParcelPartnerlink(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.partner = cls.env["res.partner"].create({"name": "Holder", "partner_code": 1})
+        cls.partner = cls.env["res.partner"].create(
+            {"name": "Holder", "partner_code": 1}
+        )
 
         # Minimal geo hierarchy (adjust if your models require extra fields)
-        region = cls.env["res.admregion"].create({"name": "R1"}) if "res.admregion" in cls.env else None
+        region = (
+            cls.env["res.admregion"].create({"name": "R1"})
+            if "res.admregion" in cls.env
+            else None
+        )
         province_vals = {"name": "P1"}
         if region:
             province_vals["region_id"] = region.id
@@ -51,7 +57,9 @@ class TestTerParcelPartnerlink(TransactionCase):
             )
 
     def test_profile_without_total_forces_percentage_zero(self):
-        profile = self.env["ter.profile"].create({"name": "NoTotal", "requires_total": False})
+        profile = self.env["ter.profile"].create(
+            {"name": "NoTotal", "requires_total": False}
+        )
         link = self.env["ter.parcel.partnerlink"].create(
             {
                 "parcel_id": self.parcel.id,

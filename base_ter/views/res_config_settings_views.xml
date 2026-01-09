@@ -1,325 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
 
-    <record id="res_config_settings_view_form" model="ir.ui.view">
-        <field name="name">res.config.settings.view.form.inherit.base_ter</field>
-        <field name="model">res.config.settings</field>
-        <field name="priority" eval="10"/>
-        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('settings')]" position="inside">
-                <div class="app_settings_block"
-                     data-string="Territory"
-                     string="Territory"
-                     data-key="base_ter">
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.base_ter</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="10"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
 
-                    <h2>General</h2>
-                    <div class="row mt16 o_settings_container" name="general_settings">
-                        <div id="div_area_unit_is_ha" class="col-12 col-lg-12 o_setting_box">
-                            <div class="o_setting_left_pane">
+                    <app name="base_ter" string="Territory" data-string="Territory">
+
+                        <block title="General" name="base_ter_general">
+                            <setting id="base_ter_area_unit_is_ha"
+                                     string="Area unit is hectare"
+                                     help="If checked, the area unit will be the ha; otherwise you can choose another unit of area.">
                                 <field name="area_unit_is_ha"/>
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="area_unit_is_ha"/>
-                                <div class="text-muted">
-                                    If checked, the area unit will be the ha; else, you can choose another unit of area
-                                </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_area_unit_name"
-                             class="col-12 col-lg-6 o_setting_box"
-                             invisible="area_unit_is_ha">
-                            <div class="o_setting_right_pane">
-                                <label for="area_unit_name"/>
-                                <div class="text-muted">
-                                    If the area unit is not the ha, name of the alternative area unit
-                                </div>
+                            <setting id="base_ter_area_unit_name"
+                                     string="Alternative area unit name"
+                                     help="If the area unit is not the ha, name of the alternative area unit."
+                                     invisible="area_unit_is_ha">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="area_unit_name" style="width: 90px;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_area_unit_value_in_ha"
-                             class="col-12 col-lg-6 o_setting_box"
-                             invisible="area_unit_is_ha">
-                            <div class="o_setting_right_pane">
-                                <label for="area_unit_value_in_ha"/>
-                                <div class="text-muted">
-                                    Equivalence, in ha, of the chosen area unit
-                                </div>
+                            <setting id="base_ter_area_unit_value_in_ha"
+                                     string="Alternative unit equivalence (ha)"
+                                     help="Equivalence, in ha, of the chosen area unit."
+                                     invisible="area_unit_is_ha">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="area_unit_value_in_ha" style="width: 90px;"/>
                                         <span class="oe_inline">ha</span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </setting>
+                        </block>
 
-                    <h2>Warnings</h2>
-                    <div class="row mt16 o_settings_container" name="warning_settings">
-                        <div id="div_warning_diff_areas" class="col-12 col-lg-12 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="warning_diff_areas"/>
-                                <div class="text-muted">
-                                    Percentage (of the official area of a parcel) designated as the maximum allowable
-                                    threshold for the difference between this official area and the GIS area (if zero,
-                                    no warning will be displayed)
-                                </div>
+                        <block title="Warnings" name="base_ter_warnings">
+                            <setting id="base_ter_warning_diff_areas"
+                                     string="Maximum GIS area difference (%)"
+                                     help="Percentage (of the official area of a parcel) designated as the maximum allowable threshold for the difference between this official area and the GIS area (if zero, no warning will be displayed).">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="warning_diff_areas" style="width: 90px;"/>
                                         <span class="oe_inline">%</span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_same_parcelmanager_propertyowner" class="col-12 col-lg-12 o_setting_box">
-                            <div class="o_setting_left_pane">
+                            <setting id="base_ter_same_parcelmanager_propertyowner"
+                                     string="Force parcel manager to be property owner"
+                                     help="If enabled, any parcel associated with a property that has an owner must have that owner as its manager.">
                                 <field name="same_parcelmanager_propertyowner"/>
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="same_parcelmanager_propertyowner"/>
-                                <div class="text-muted">
-                                    If clicked, any parcel associated with a property that has an owner must have that
-                                    owner as its manager
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            </setting>
+                        </block>
 
-                    <h2>Aerial Images</h2>
-                    <div class="row mt16 o_settings_container" name="aerial_settings">
-                        <div id="div_aerial_image_wmsbase_url" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="aerial_image_wmsbase_url"/>
-                                <div class="text-muted">
-                                    URL of the WMS service used to obtain the base image of the parcels and other GIS
-                                    elements
-                                </div>
+                        <block title="Aerial Images" name="base_ter_aerial_images">
+                            <setting id="base_ter_aerial_image_wmsbase_url"
+                                     string="Base WMS URL"
+                                     help="URL of the WMS service used to obtain the base image of the parcels and other GIS elements.">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="aerial_image_wmsbase_url" style="width: 100%;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_aerial_image_wmsbase_layers" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="aerial_image_wmsbase_layers"/>
-                                <div class="text-muted">
-                                    WMS service layers used to obtain the base image of the parcels and other GIS
-                                    elements
-                                </div>
+                            <setting id="base_ter_aerial_image_wmsbase_layers"
+                                     string="Base WMS layers"
+                                     help="WMS service layers used to obtain the base image of the parcels and other GIS elements.">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="aerial_image_wmsbase_layers" style="width: 100%;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_aerial_image_wmsvec_url" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="aerial_image_wmsvec_url"/>
-                                <div class="text-muted">
-                                    URL of the WMS service used to obtain the vectorial image of the parcels
-                                </div>
+                            <setting id="base_ter_aerial_image_wmsvec_url"
+                                     string="Vector WMS URL"
+                                     help="URL of the WMS service used to obtain the vectorial image of the parcels.">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="aerial_image_wmsvec_url" style="width: 100%;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_aerial_image_wmsvec_parcel_name" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="aerial_image_wmsvec_parcel_name"/>
-                                <div class="text-muted">
-                                    WMS service layer used to obtain the images of the parcels (vectorial elements)
-                                </div>
+                            <setting id="base_ter_aerial_image_wmsvec_parcel_name"
+                                     string="Parcel vector layer"
+                                     help="WMS service layer used to obtain the images of the parcels (vectorial elements).">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="aerial_image_wmsvec_parcel_name" style="width: 100%;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_aerial_image_wmsvec_parcel_filter" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_left_pane">
+                            <setting id="base_ter_aerial_image_wmsvec_parcel_filter"
+                                     string="Only central parcel"
+                                     help="If checked, only the central parcel will be displayed; otherwise, all parcels will be displayed.">
                                 <field name="aerial_image_wmsvec_parcel_filter"/>
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="aerial_image_wmsvec_parcel_filter"/>
-                                <div class="text-muted">
-                                    If checked, only the central parcel will be displayed; otherwise, all parcels will
-                                    be displayed
-                                </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_aerial_image_wmsvec_property_name" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="aerial_image_wmsvec_property_name"/>
-                                <div class="text-muted">
-                                    WMS service layer used to obtain the images of the properties (vectorial elements)
-                                </div>
+                            <setting id="base_ter_aerial_image_wmsvec_property_name"
+                                     string="Property vector layer"
+                                     help="WMS service layer used to obtain the images of the properties (vectorial elements).">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="aerial_image_wmsvec_property_name" style="width: 100%;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_aerial_image_wmsvec_property_filter" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_left_pane">
+                            <setting id="base_ter_aerial_image_wmsvec_property_filter"
+                                     string="Only central property"
+                                     help="If checked, only the central property will be displayed; otherwise, all properties will be displayed.">
                                 <field name="aerial_image_wmsvec_property_filter"/>
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="aerial_image_wmsvec_property_filter"/>
-                                <div class="text-muted">
-                                    If checked, only the central property will be displayed; otherwise, all properties
-                                    will be displayed
-                                </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_aerial_image_height" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="aerial_image_height"/>
-                                <div class="text-muted">
-                                    Height, in pixels, of images captured from WMS services (the width will be
-                                    calculated
-                                    automatically, to preserve the original proportions)
-                                </div>
+                            <setting id="base_ter_aerial_image_height"
+                                     string="Image height (px)"
+                                     help="Height, in pixels, of images captured from WMS services (the width will be calculated automatically to preserve the original proportions).">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="aerial_image_height" style="width: 90px;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_aerial_image_zoom" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="aerial_image_zoom"/>
-                                <div class="text-muted">
-                                    Possible zoom to apply to images obtained from WMS services; if it is 1, then no
-                                    zoom is applied;
-                                    if it is greater than 1, then there is a zoom-out; if it is less than 1, then there
-                                    is a zoom-in
-                                </div>
+                            <setting id="base_ter_aerial_image_zoom"
+                                     string="Image zoom"
+                                     help="Zoom applied to images obtained from WMS services: 1 means no zoom; &gt; 1 zoom-out; &lt; 1 zoom-in.">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="aerial_image_zoom" style="width: 90px;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </setting>
 
-                    <h2>GIS Viewer</h2>
-                    <div class="row mt16 o_settings_container" name="gisviewer_settings">
-                        <div id="div_gis_viewer_url" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="gis_viewer_url"/>
-                                <div class="text-muted">
-                                    URL of the integrated GIS viewer
-                                </div>
+                        </block>
+
+                        <block title="GIS Viewer" name="base_ter_gis_viewer">
+                            <setting id="base_ter_gis_viewer_url"
+                                     string="Viewer URL"
+                                     help="URL of the integrated GIS viewer.">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="gis_viewer_url" style="width: 100%;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_gis_viewer_username" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="gis_viewer_username"/>
-                                <div class="text-muted">
-                                    Name of the technical user
-                                </div>
+                            <setting id="base_ter_gis_viewer_username"
+                                     string="Technical user"
+                                     help="Name of the technical user.">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="gis_viewer_username" style="width: 90px;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_gis_viewer_password" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="gis_viewer_password"/>
-                                <div class="text-muted">
-                                    Password of the technical user
-                                </div>
+                            <setting id="base_ter_gis_viewer_password"
+                                     string="Technical password"
+                                     help="Password of the technical user.">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="gis_viewer_password" style="width: 90px;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_gis_viewer_epsg" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="gis_viewer_epsg"/>
-                                <div class="text-muted">
-                                    Spatial reference of the layers stored in the database (if changed, layers will be
-                                    automatically reprojected)
-                                </div>
+                            <setting id="base_ter_gis_viewer_epsg"
+                                     string="EPSG"
+                                     help="Spatial reference of the layers stored in the database (if changed, layers will be automatically reprojected).">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <span class="oe_inline">EPSG:</span>
                                         <field name="gis_viewer_epsg" style="width: 90px;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </setting>
 
-                        <div id="div_gis_viewer_previs_additional_args" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="gis_viewer_previs_additional_args"/>
-                                <div class="text-muted">
-                                    For the integrated preview, arguments to add to the GIS viewer URL
-                                </div>
+                            <setting id="base_ter_gis_viewer_previs_additional_args"
+                                     string="Preview URL arguments"
+                                     help="For the integrated preview, arguments to add to the GIS viewer URL.">
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="gis_viewer_previs_additional_args" style="width: 100%;"/>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </setting>
+                        </block>
 
-                </div>
-            </xpath>
-        </field>
-    </record>
+                    </app>
 
-    <record id="res_config_settings_action" model="ir.actions.act_window">
-        <field name="name">Settings</field>
-        <field name="res_model">res.config.settings</field>
-        <field name="view_mode">form</field>
-        <field name="target">inline</field>
-        <field name="context">{'module': 'base_ter'}</field>
-    </record>
+                </xpath>
+            </field>
+        </record>
 
-    <menuitem id="res_config_settings_menu"
-              parent="menu_configuration"
-              action="res_config_settings_action"
-              sequence="10"
-              groups="base.group_system"/>
+        <record id="res_config_settings_action" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module': 'base_ter'}</field>
+        </record>
 
+        <menuitem id="res_config_settings_menu"
+                  parent="menu_configuration"
+                  action="res_config_settings_action"
+                  sequence="10"
+                  groups="base.group_system"/>
+
+    </data>
 </odoo>

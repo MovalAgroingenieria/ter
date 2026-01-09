@@ -40,11 +40,19 @@ class TestTerGisParcelModelCompute(TransactionCase):
         formatter = Mock()
         formatter.transform_integer_to_locale.side_effect = lambda v: str(v)
 
-        with patch.object(type(self.env["common.format"]), "transform_integer_to_locale",
-                          side_effect=lambda self, v: str(v)):
+        with patch.object(
+            type(self.env["common.format"]),
+            "transform_integer_to_locale",
+            side_effect=lambda self, v: str(v),
+        ):
             # easier: patch env service to our mock
-            with patch.object(self.env, "__getitem__",
-                              side_effect=lambda k: formatter if k == "common.format" else self.env[k]):
+            with patch.object(
+                self.env,
+                "__getitem__",
+                side_effect=lambda k: (
+                    formatter if k == "common.format" else self.env[k]
+                ),
+            ):
                 rec._compute_gis_data()
 
         self.assertIn("⸰", rec.gis_data)

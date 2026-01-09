@@ -8,11 +8,23 @@ class TestWizardSetParcelCode(TransactionCase):
         self.parcel = self.env["ter.parcel"].create(
             {
                 "alphanum_code": "PARCEL-01",
-                "municipality_id": self.env["res.municipality"].create(
-                    {"name": "Test Municipality", "province_id": self.env["res.province"].create(
-                        {"name": "Test Province",
-                         "region_id": self.env["res.admregion"].create({"name": "Test Region"}).id}).id}
-                ).id,
+                "municipality_id": self.env["res.municipality"]
+                .create(
+                    {
+                        "name": "Test Municipality",
+                        "province_id": self.env["res.province"]
+                        .create(
+                            {
+                                "name": "Test Province",
+                                "region_id": self.env["res.admregion"]
+                                .create({"name": "Test Region"})
+                                .id,
+                            }
+                        )
+                        .id,
+                    }
+                )
+                .id,
                 "area_official": 1.0,
             }
         )

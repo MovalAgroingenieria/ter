@@ -13,7 +13,6 @@
 
     <menuitem id="menu_census"
               name="Census"
-              parent=""
               sequence="-100"
               web_icon="base_ter,static/description/icon.png"
               groups="base_ter.group_ter_user"/>

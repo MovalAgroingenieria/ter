@@ -5,9 +5,7 @@ from odoo.tests.common import TransactionCase, tagged
 @tagged("post_install", "-at_install")
 class TestResPartnerPartnerCode(TransactionCase):
     def test_partner_code_asstr_padding(self):
-        partner = self.env["res.partner"].create(
-            {"name": "P1", "partner_code": 12}
-        )
+        partner = self.env["res.partner"].create({"name": "P1", "partner_code": 12})
         self.assertEqual(partner.partner_code_asstr, "000012")
 
     def test_is_holder(self):

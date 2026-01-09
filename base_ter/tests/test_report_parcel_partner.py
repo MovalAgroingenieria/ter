@@ -6,7 +6,9 @@ class TestReportParcelPartner(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.partner = cls.env["res.partner"].create({"name": "Partner Report", "partner_code": 1})
+        cls.partner = cls.env["res.partner"].create(
+            {"name": "Partner Report", "partner_code": 1}
+        )
 
     def test_report_action_exists(self):
         report = self.env.ref("base_ter.action_parcel_partner_report")

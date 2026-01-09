@@ -33,7 +33,9 @@ class TerGisParcelController(http.Controller):
             name = parcel.name or ""
             geom_geojson = getattr(parcel, "geom_geojson", None)
             parcel_id = parcel.id
-            municipality = parcel.municipality_id.display_name if parcel.municipality_id else ""
+            municipality = (
+                parcel.municipality_id.display_name if parcel.municipality_id else ""
+            )
             area = parcel.area_official_m2 or 0.0
             area_gis = parcel.area_gis or 0.0
             area_official = parcel.area_official
@@ -144,13 +146,22 @@ class TerGisParcelController(http.Controller):
                 ter_parcel = ter_parcel_map.get(parcel_name)
 
                 if gis_parcel and ter_parcel:
-                    combined_data.append(self._format_parcel_data(ter_parcel, source="combined"))
+                    combined_data.append(
+                        self._format_parcel_data(ter_parcel, source="combined")
+                    )
                 elif gis_parcel:
-                    combined_data.append(self._format_parcel_data(gis_parcel, source="gis"))
+                    combined_data.append(
+                        self._format_parcel_data(gis_parcel, source="gis")
+                    )
                 else:
-                    combined_data.append(self._format_parcel_data(ter_parcel, source="ter"))
+                    combined_data.append(
+                        self._format_parcel_data(ter_parcel, source="ter")
+                    )
 
             return {"status": "success", "data": combined_data}
         except Exception:
             _logger.exception("Unexpected error in /get_parcels")
-            return {"status": "error", "error": _("Unexpected error while processing the request.")}
+            return {
+                "status": "error",
+                "error": _("Unexpected error while processing the request."),
+            }

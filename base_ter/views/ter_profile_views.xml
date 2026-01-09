@@ -8,21 +8,22 @@
             <form string="Partner Profile" duplicate="0">
                 <field name="active" invisible="1"/>
                 <field name="is_standard" invisible="1"/>
+
                 <sheet>
                     <widget name="web_ribbon"
                             title="Archived"
-                            bg_color="bg-danger"
-                            attrs="{'invisible': [('active', '=', True)]}"/>
+                            bg_color="text-bg-danger"
+                            invisible="active"/>
+
                     <widget name="web_ribbon"
                             title="Not modifiable"
-                            bg_color="bg-info"
-                            attrs="{'invisible': ['|', ('active', '=', False), ('is_standard', '=', False)]}"/>
+                            bg_color="text-bg-info"
+                            invisible="not is_standard or not active"/>
 
                     <div name="title">
                         <label for="alphanum_code" string="Profile:"/>
                         <h1>
-                            <field name="alphanum_code"
-                                   attrs="{'readonly': [('is_standard', '=', True)]}"/>
+                            <field name="alphanum_code" readonly="is_standard"/>
                         </h1>
                     </div>
 
@@ -30,7 +31,7 @@
                         <group name="master_data_left">
                             <field name="requires_total"
                                    string="Required 100%"
-                                   attrs="{'readonly': [('is_standard', '=', True)]}"/>
+                                   readonly="is_standard"/>
                         </group>
                         <group name="master_data_right"/>
                     </group>
