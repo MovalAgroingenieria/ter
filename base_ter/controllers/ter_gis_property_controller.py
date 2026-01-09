@@ -1,135 +1,142 @@
-# 2024 Moval Agroingeniería
+# 2024-2026 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+
+import logging
 
 from odoo import _, http
 from odoo.http import request
+from odoo.osv import expression
+
+_logger = logging.getLogger(__name__)
 
 
 class TerGisPropertyController(http.Controller):
+    def _format_property_data(self, prop, source):
+        user_lang = request.env.user.lang
 
-    def _format_property_data(self, property, source):
-        data = {"name": property.name}
-        if source in ["gis", "combined"]:
-            data["geometry"] = property.geom_geojson
-        if source in ["ter", "combined"]:
+        if isinstance(prop, dict):
+            name = prop.get("name") or ""
+            geom_geojson = prop.get("geom_geojson")
+            prop_id = None
+            municipality = ""
+            area = 0.0
+            area_official_parcels = False
+            area_unit = ""
+            partner_name = ""
+            partner_code = ""
+            partner_id = None
+            parcels = []
+        else:
+            if source in ("ter", "combined"):
+                prop = prop.with_context(lang=user_lang)
+
+            name = prop.name or ""
+            geom_geojson = getattr(prop, "geom_geojson", None)
+            prop_id = prop.id
+            municipality = prop.municipality_id.display_name if prop.municipality_id else ""
+            area = prop.area_official_parcels_m2 or 0.0
+            area_official_parcels = prop.area_official_parcels
+            area_unit = prop.area_unit_name
+
+            partner = prop.partner_id
+            partner_name = partner.display_name if partner else ""
+            partner_code = partner.partner_code if partner else ""
+            partner_id = partner.id if partner else None
+
+            parcels = [{"parcel_name": p.name, "parcel_id": p.id} for p in prop.parcel_ids]
+
+        data = {"name": name}
+
+        if source in ("gis", "combined"):
+            data["geometry"] = geom_geojson
+
+        if source in ("ter", "combined"):
             data.update(
                 {
-                    "property_id": property.id,
-                    "munici": (
-                        property.municipality_id.name
-                        if property.municipality_id
-                        else ""
-                    ),
-                    "area": (
-                        property.area_official_parcels_m2
-                        if property.area_official_parcels_m2
-                        else 0.0
-                    ),
-                    "area_official_parcels": property.area_official_parcels,
-                    "area_unit": property.area_unit_name,
-                    "partner_name": property.partner_id.name,
-                    "partner_code": property.partner_id.partner_code,
-                    "partner_id": property.partner_id.id,
-                    "parcels": property.parcel_ids.mapped(
-                        lambda p: {
-                            "parcel_name": p.name,
-                            "parcel_id": p.id,
-                        }
-                    ),
+                    "property_id": prop_id,
+                    "munici": municipality,
+                    "area": area,
+                    "area_official_parcels": area_official_parcels,
+                    "area_unit": area_unit,
+                    "partner_name": partner_name,
+                    "partner_code": partner_code,
+                    "partner_id": partner_id,
+                    "parcels": parcels,
                 }
             )
-        if source == "gis":
-            data.update(
-                {
-                    "property_id": None,
-                    "munici": "",
-                    "area": 0.0,
-                }
-            )
+        elif source == "gis":
+            data.update({"property_id": None, "munici": "", "area": 0.0})
+
         return data
 
     def _get_gis_properties(self, name_values, operator):
         cr = request.env.cr
-        gis_properties = []
-        try:
-            if operator == "ilike":
-                where_clause = " OR ".join(["name ILIKE %s" for _ in name_values])
-                params = [f"%{value}%" for value in name_values]
-            else:
-                where_clause = " OR ".join(["name = %s" for _ in name_values])
-                params = name_values
-            query = f"""
-                SELECT name, ST_AsGeoJSON(geom) as geom_geojson, gid
-                FROM ter_gis_property
-                WHERE {where_clause}
-            """
-            cr.execute(query, params)
-            results = cr.dictfetchall()
-            for result in results:
-                gis_properties.append(
-                    {
-                        "name": result["name"],
-                        "geom_geojson": result["geom_geojson"],
-                        "gid": result["gid"],
-                    }
-                )
-        except Exception as e:
-            http.request._cr.rollback()
-        return gis_properties
 
-    @http.route(
-        "/get_properties", type="json", auth="user", methods=["POST"], csrf=False
-    )
-    def get_properties(self, **kwargs):
+        if operator == "ilike":
+            where_clause = " OR ".join(["name ILIKE %s" for _ in name_values])
+            params = [f"%{value}%" for value in name_values]
+        else:
+            where_clause = " OR ".join(["name = %s" for _ in name_values])
+            params = list(name_values)
+
+        query = f"""
+            SELECT name, ST_AsGeoJSON(geom) AS geom_geojson, gid
+            FROM ter_gis_property
+            WHERE {where_clause}
+        """
+
         try:
-            name = kwargs.get("name", "")
-            operator = kwargs.get("operator", "=")
-            if operator not in ["=", "ilike"]:
-                return {
-                    "status": "error",
-                    "error": _('Invalid operators. Use "=" or "ilike".'),
-                }
-            if not name:
-                return {"status": "error", "error": _("Name field is mandatory.")}
-            name_values = [value.strip() for value in name.split(",")]
-            gis_properties = self._get_gis_properties(name_values, operator)
-            domain = ["|"] * (len(name_values) - 1) + [
-                ("name", operator, value) for value in name_values
-            ]
-            ter_properties = request.env["ter.property"].search(domain)
-            gis_property_map = {p["name"]: p for p in gis_properties}
-            ter_property_map = {p.name: p for p in ter_properties}
-            gis_property_names = set(gis_property_map.keys())
-            ter_property_names = set(ter_property_map.keys())
-            all_names = gis_property_names.union(ter_property_names)
-            combined_data = []
-            for name in all_names:
-                gis_property = gis_property_map.get(name)
-                ter_property = ter_property_map.get(name)
-                if gis_property and ter_property:
-                    combined_data.append(
-                        self._format_property_data(ter_property, source="combined")
-                    )
-                elif gis_property:
-                    combined_data.append(
-                        {
-                            "name": gis_property["name"],
-                            "geometry": gis_property["geom_geojson"],
-                            "property_id": None,
-                            "munici": "",
-                            "area": 0.0,
-                        }
-                    )
-                elif ter_property:
-                    combined_data.append(
-                        self._format_property_data(ter_property, source="ter")
-                    )
-            return {
-                "status": "success",
-                "data": combined_data,
-            }
-        except Exception as e:
+            cr.execute(query, params)
+        except Exception:
+            cr.rollback()
+            _logger.exception("Error fetching GIS properties")
+            return []
+
+        return cr.dictfetchall()
+
+    @http.route("/get_properties", type="json", auth="user", methods=["POST"], csrf=False)
+    def get_properties(self, **kwargs):
+        name = (kwargs.get("name") or "").strip()
+        operator = kwargs.get("operator") or "="
+
+        if operator not in ("=", "ilike"):
             return {
                 "status": "error",
-                "error": _(f"Unexpected error: {e}"),
+                "error": _('Invalid operator. Use "=" or "ilike".'),
             }
+
+        if not name:
+            return {"status": "error", "error": _("Name field is mandatory.")}
+
+        name_values = [value.strip() for value in name.split(",") if value.strip()]
+        if not name_values:
+            return {"status": "error", "error": _("Name field is mandatory.")}
+
+        domains = [[("name", operator, value)] for value in name_values]
+        domain = expression.OR(domains) if len(domains) > 1 else domains[0]
+
+        try:
+            gis_properties = self._get_gis_properties(name_values, operator)
+            ter_properties = request.env["ter.property"].search(domain)
+
+            gis_property_map = {p["name"]: p for p in gis_properties if p.get("name")}
+            ter_property_map = {p.name: p for p in ter_properties if p.name}
+
+            all_names = set(gis_property_map) | set(ter_property_map)
+
+            combined_data = []
+            for prop_name in sorted(all_names):
+                gis_prop = gis_property_map.get(prop_name)
+                ter_prop = ter_property_map.get(prop_name)
+
+                if gis_prop and ter_prop:
+                    combined_data.append(self._format_property_data(ter_prop, source="combined"))
+                elif gis_prop:
+                    combined_data.append(self._format_property_data(gis_prop, source="gis"))
+                else:
+                    combined_data.append(self._format_property_data(ter_prop, source="ter"))
+
+            return {"status": "success", "data": combined_data}
+        except Exception:
+            _logger.exception("Unexpected error in /get_properties")
+            return {"status": "error", "error": _("Unexpected error while processing the request.")}
