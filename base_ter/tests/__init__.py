@@ -8,3 +8,4 @@ from . import test_ter_parcel_partnerlink
 from . import test_ter_parcel_constraints
 from . import test_ter_parceltag_m2m
 from . import test_ter_profile_unlink
+from . import test_ter_property_write_partner_sync
