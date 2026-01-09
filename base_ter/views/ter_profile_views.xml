@@ -9,39 +9,32 @@
                 <field name="active" invisible="1"/>
                 <field name="is_standard" invisible="1"/>
                 <sheet>
-<!--                    <div class="oe_button_box" name="button_box">-->
-<!--                        <button name="action_show_provinces"-->
-<!--                                type="object"-->
-<!--                                class="oe_stat_button"-->
-<!--                                icon="fa-sitemap">-->
-<!--                            <field string="Provinces"-->
-<!--                                   name="number_of_provinces"-->
-<!--                                   widget="statinfo"/>-->
-<!--                        </button>-->
-<!--                    </div>-->
-                    <widget name="web_ribbon" title="Archived"
+                    <widget name="web_ribbon"
+                            title="Archived"
                             bg_color="bg-danger"
-                            attrs="{'invisible':
-                                    [('active', '=', True)]}"/>
-                    <widget name="web_ribbon" title="Not modifiable"
+                            attrs="{'invisible': [('active', '=', True)]}"/>
+                    <widget name="web_ribbon"
+                            title="Not modifiable"
                             bg_color="bg-info"
-                            attrs="{'invisible':
-                                    ['|', ('active', '=', False), ('is_standard', '=', False)]}"/>
+                            attrs="{'invisible': ['|', ('active', '=', False), ('is_standard', '=', False)]}"/>
+
                     <div name="title">
                         <label for="alphanum_code" string="Profile:"/>
                         <h1>
-                             <field name="alphanum_code"
-                                    attrs="{'readonly': [('is_standard', '=', True)]}"/>
+                            <field name="alphanum_code"
+                                   attrs="{'readonly': [('is_standard', '=', True)]}"/>
                         </h1>
                     </div>
+
                     <group name="master_data">
                         <group name="master_data_left">
-                            <field name="requires_total" string="Required 100%"
+                            <field name="requires_total"
+                                   string="Required 100%"
                                    attrs="{'readonly': [('is_standard', '=', True)]}"/>
                         </group>
-                        <group name="master_data_right">
-                        </group>
+                        <group name="master_data_right"/>
                     </group>
+
                     <notebook name="slave_data_notebook" colspan="4">
                         <page name="page_notes" string="Internal Notes">
                             <field name="notes"/>
@@ -55,12 +48,10 @@
     <record id="ter_profile_view_tree" model="ir.ui.view">
         <field name="name">ter.profile.view.list</field>
         <field name="model">ter.profile</field>
-            <field name="arch" type="xml">
-            <list class="o_base_ter_ter_profile"
-                  default_order="alphanum_code">
+        <field name="arch" type="xml">
+            <list class="o_base_ter_ter_profile" default_order="alphanum_code">
                 <field name="alphanum_code" string="Profile"/>
-                <field name="requires_total" string="Required 100%"
-                       class="text-center"/>
+                <field name="requires_total" string="Required 100%" class="text-center"/>
             </list>
         </field>
     </record>
@@ -83,11 +74,9 @@
         <field name="res_model">ter.profile</field>
         <field name="view_mode">list,form</field>
         <field name="view_ids"
-         eval="[(5, 0),
-                (0, 0, {'view_mode': 'list',
-                        'view_id': ref('ter_profile_view_tree')}),
-                (0, 0, {'view_mode': 'form',
-                        'view_id': ref('ter_profile_view_form')})]"/>
+               eval="[(5, 0),
+                      (0, 0, {'view_mode': 'list', 'view_id': ref('ter_profile_view_tree')}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('ter_profile_view_form')})]"/>
         <field name="search_view_id" ref="ter_profile_view_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
