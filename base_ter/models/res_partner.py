@@ -1,30 +1,27 @@
-# 2024 Moval Agroingeniería
+# 2024- Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import _, api, exceptions, fields, models
 
 
 class ResPartner(models.Model):
-    _inherit = ["res.partner"]
+    _inherit = "res.partner"
 
-    # Size of the "partner_code" field.
     _size_partner_code = 6
-
-    # Area fields with unit of measure name, and "ha" name.
     _area_fields = [
-        ("area_official_parcels", _("Parcel Area")),
-        ("area_official_properties", _("Property Area")),
+        ("area_official_parcels", "Parcel Area"),
+        ("area_official_properties", "Property Area"),
     ]
-    _ha_name = _("ha")
+    _ha_name = "ha"
 
     def _default_partner_code(self):
-        resp = 0
-        if self.env.context.get("context_default_partner_code", False):
-            self.env.cr.execute("SELECT max(partner_code) FROM res_partner")
-            query_results = self.env.cr.dictfetchall()
-            if query_results and query_results[0].get("max") is not None:
-                resp = query_results[0].get("max") + 1
-        return resp
+        if not self.env.context.get("context_default_partner_code"):
+            return 0
+
+        self.env.cr.execute("SELECT max(partner_code) FROM res_partner")
+        result = self.env.cr.dictfetchone()
+        max_code = result.get("max") if result else None
+        return (max_code or 0) + 1 if max_code is not None else 0
 
     partner_code = fields.Integer(
         string="Partner Code",
@@ -32,13 +29,11 @@ class ResPartner(models.Model):
         required=True,
         index=True,
     )
-
     partner_code_asstr = fields.Char(
         string="Partner Code (as string)",
         store=True,
         compute="_compute_partner_code_asstr",
     )
-
     is_holder = fields.Boolean(
         string="Parcel Holder",
         default=False,
@@ -51,14 +46,12 @@ class ResPartner(models.Model):
         comodel_name="ter.parcel",
         inverse_name="partner_id",
     )
-
     number_of_parcels = fields.Integer(
         string="Number of parcels",
         store=True,
         index=True,
         compute="_compute_number_of_parcels",
     )
-
     area_official_parcels = fields.Float(
         string="Parcel Area",
         digits=(32, 4),
@@ -66,7 +59,6 @@ class ResPartner(models.Model):
         index=True,
         compute="_compute_area_official_parcels",
     )
-
     area_official_parcels_m2 = fields.Integer(
         string="Parcel Area (m²)",
         compute="_compute_area_official_parcels_m2",
@@ -77,14 +69,12 @@ class ResPartner(models.Model):
         comodel_name="ter.property",
         inverse_name="partner_id",
     )
-
     number_of_properties = fields.Integer(
         string="Number of properties",
         store=True,
         index=True,
         compute="_compute_number_of_properties",
     )
-
     area_official_properties = fields.Float(
         string="Property Area",
         digits=(32, 4),
@@ -92,7 +82,6 @@ class ResPartner(models.Model):
         index=True,
         compute="_compute_area_official_properties",
     )
-
     area_official_properties_m2 = fields.Integer(
         string="Property Area (m²)",
         compute="_compute_area_official_properties_m2",
@@ -110,264 +99,192 @@ class ResPartner(models.Model):
     @api.depends("partner_code")
     def _compute_partner_code_asstr(self):
         for record in self:
-            partner_code_asstr = ""
-            if record.partner_code:
-                partner_code_asstr = str(record.partner_code).zfill(
-                    self._size_partner_code
-                )
-            record.partner_code_asstr = partner_code_asstr
+            record.partner_code_asstr = (
+                str(record.partner_code).zfill(self._size_partner_code)
+                if record.partner_code
+                else ""
+            )
 
     @api.depends("partner_code")
     def _compute_is_holder(self):
         for record in self:
-            is_holder = False
-            if record.partner_code > 0:
-                is_holder = True
-            record.is_holder = is_holder
+            record.is_holder = bool(record.partner_code and record.partner_code > 0)
 
     @api.depends("parcel_ids")
     def _compute_number_of_parcels(self):
         for record in self:
-            number_of_parcels = 0
-            if record.parcel_ids:
-                number_of_parcels = len(record.parcel_ids)
-            record.number_of_parcels = number_of_parcels
+            record.number_of_parcels = len(record.parcel_ids)
 
-    @api.depends("parcel_ids", "parcel_ids.area_official")
+    @api.depends("parcel_ids.area_official")
     def _compute_area_official_parcels(self):
         for record in self:
-            area_official_parcels = 0
-            if record.parcel_ids:
-                area_official_parcels = sum(
-                    parcel.area_official for parcel in record.parcel_ids
-                )
-            record.area_official_parcels = area_official_parcels
+            record.area_official_parcels = sum(record.parcel_ids.mapped("area_official"))
 
+    @api.depends("area_official_parcels")
     def _compute_area_official_parcels_m2(self):
         config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = config.get_param("base_ter.area_unit_is_ha", False)
-        factor = 10000
+        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        factor = 10000.0
         if not area_unit_is_ha:
-            area_unit_value_in_ha = float(
-                config.get_param("base_ter.area_unit_value_in_ha", 0)
-            )
-            if area_unit_value_in_ha > 0 and area_unit_value_in_ha != 1:
-                factor = area_unit_value_in_ha * 10000
+            value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
+            if value_in_ha and value_in_ha != 1:
+                factor = value_in_ha * 10000.0
+
         for record in self:
-            record.area_official_parcels_m2 = round(
-                record.area_official_parcels * factor
-            )
+            record.area_official_parcels_m2 = round((record.area_official_parcels or 0.0) * factor)
 
     @api.depends("property_ids")
     def _compute_number_of_properties(self):
         for record in self:
-            number_of_properties = 0
-            if record.property_ids:
-                number_of_properties = len(record.property_ids)
-            record.number_of_properties = number_of_properties
+            record.number_of_properties = len(record.property_ids)
 
-    @api.depends("property_ids", "property_ids.area_official_parcels")
+    @api.depends("property_ids.area_official_parcels")
     def _compute_area_official_properties(self):
         for record in self:
-            area_official_properties = 0
-            if record.property_ids:
-                area_official_properties = sum(
-                    property.area_official_parcels for property in record.property_ids
-                )
-            record.area_official_properties = area_official_properties
+            record.area_official_properties = sum(record.property_ids.mapped("area_official_parcels"))
 
+    @api.depends("area_official_properties")
     def _compute_area_official_properties_m2(self):
         config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = config.get_param("base_ter.area_unit_is_ha", False)
-        factor = 10000
+        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        factor = 10000.0
         if not area_unit_is_ha:
-            area_unit_value_in_ha = float(
-                config.get_param("base_ter.area_unit_value_in_ha", 0)
-            )
-            if area_unit_value_in_ha > 0 and area_unit_value_in_ha != 1:
-                factor = area_unit_value_in_ha * 10000
-        for record in self:
-            record.area_official_properties_m2 = round(
-                record.area_official_properties * factor
-            )
+            value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
+            if value_in_ha and value_in_ha != 1:
+                factor = value_in_ha * 10000.0
 
+        for record in self:
+            record.area_official_properties_m2 = round((record.area_official_properties or 0.0) * factor)
+
+    @api.depends_context("lang")
     def _compute_area_unit_name(self):
-        area_unit_name = _("ha")
         config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = config.get_param("base_ter.area_unit_is_ha", False)
-        if not area_unit_is_ha:
-            area_unit_name = config.get_param("base_ter.area_unit_name", "")
+        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        unit_name = _("ha") if area_unit_is_ha else (config.get_param("base_ter.area_unit_name", "") or "")
         for record in self:
-            record.area_unit_name = area_unit_name
-
-    @api.depends(
-        "is_company",
-        "name",
-        "parent_id.display_name",
-        "type",
-        "company_name",
-        "commercial_company_name",
-        "partner_code",
-    )
-    def _compute_display_name(self):
-        super(ResPartner, self)._compute_display_name()
+            record.area_unit_name = unit_name
 
     @api.constrains("partner_code")
     def _check_partner_code(self):
         for record in self:
-            if record.partner_code > 0:
-                partners_mapped_to_partner_code = self.env["res.partner"].search(
-                    [("partner_code", "=", record.partner_code)]
-                )
-                if (
-                    partners_mapped_to_partner_code
-                    and len(partners_mapped_to_partner_code) > 1
-                ):
-                    raise exceptions.ValidationError(_("Repeated partner code."))
+            if not record.partner_code or record.partner_code <= 0:
+                continue
+            count = self.search_count(
+                [("partner_code", "=", record.partner_code), ("id", "!=", record.id)]
+            )
+            if count:
+                raise exceptions.ValidationError(_("Repeated partner code."))
 
     @api.model
     def _get_view(self, view_id=None, view_type="form", **options):
         arch, view = super()._get_view(view_id, view_type, **options)
-        if view_type in ["form", "tree"]:
-            area_fields = self._add_area_fields()
-            if area_fields:
-                tmp_dict = {elem[0]: elem for elem in area_fields}
-                area_fields = list(tmp_dict.values())
-                measure_name = self._ha_name
-                config = self.env["ir.config_parameter"].sudo()
-                area_unit_is_ha = config.get_param("base_ter.area_unit_is_ha", False)
-                area_unit_name = config.get_param("base_ter.area_unit_name", "")
-                area_unit_value_in_ha = float(
-                    config.get_param("base_ter.area_unit_value_in_ha", 0)
-                )
-                if (
-                    not area_unit_is_ha
-                    and area_unit_name != measure_name
-                    and area_unit_value_in_ha > 0
-                    and area_unit_value_in_ha != 1
-                ):
-                    measure_name = area_unit_name
-                for area_field in area_fields:
-                    field_name = area_field[0]
-                    label_name = area_field[1]
-                    for node in arch.xpath("//field[@name='%s']" % field_name):
-                        self.with_context(lang=self.env.user.lang)
-                        initial_label = _(label_name)
-                        final_label = initial_label + " (" + measure_name + ")"
-                        node.set("string", final_label)
+
+        if view_type not in ("form", "list"):
+            return arch, view
+
+        area_fields = self._add_area_fields() or []
+        if not area_fields:
+            return arch, view
+
+        seen = {}
+        for field_name, label in area_fields:
+            seen[field_name] = label
+
+        config = self.env["ir.config_parameter"].sudo()
+        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        area_unit_name = config.get_param("base_ter.area_unit_name", "") or ""
+        value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
+
+        measure_name = _(self._ha_name)
+        if not area_unit_is_ha and area_unit_name and value_in_ha and value_in_ha != 1 and area_unit_name != measure_name:
+            measure_name = area_unit_name
+
+        for field_name, label in seen.items():
+            for node in arch.xpath(f"//field[@name='{field_name}']"):
+                node.set("string", "%s (%s)" % (_(label), measure_name))
+
         return arch, view
 
     def name_get(self):
-        resp = []
-        resp_original = super(ResPartner, self).name_get()
-        for partner_data in resp_original or []:
-            id_of_partner = partner_data[0]
-            name_of_partner = partner_data[1]
-            partner = self.browse(id_of_partner)
-            if partner and partner.partner_code > 0:
-                name_parts = name_of_partner.split("\n")
-                name_parts[0] = name_parts[0] + " [" + str(partner.partner_code) + "]"
-                name_of_partner = "\n".join(name_parts)
-                resp.append((id_of_partner, name_of_partner))
-            else:
-                resp.append(partner_data)
-        return resp
+        res = []
+        for partner_id, name in super().name_get():
+            partner = self.browse(partner_id)
+            if partner.partner_code and partner.partner_code > 0:
+                parts = name.split("\n")
+                parts[0] = "%s [%s]" % (parts[0], partner.partner_code)
+                name = "\n".join(parts)
+            res.append((partner_id, name))
+        return res
 
     @api.model_create_multi
     def create(self, vals_list):
-        # A "child contact" cannot have a code.
         for vals in vals_list:
-            if "parent_id" in vals and vals["parent_id"]:
+            if vals.get("parent_id"):
                 vals["partner_code"] = 0
-        partners = super(ResPartner, self).create(vals_list)
-        return partners
+        return super().create(vals_list)
 
     def action_gis_viewer_parcel(self):
-        parcel_ids = []
-        for record in self:
-            parcel_ids.extend(record.parcel_ids.ids)
-        if parcel_ids:
-            return self.env["ter.parcel"].browse(parcel_ids).action_gis_viewer()
+        parcels = self.mapped("parcel_ids")
+        return parcels.action_gis_viewer() if parcels else None
 
     def action_gis_viewer_property(self):
-        property_ids = []
-        for record in self:
-            property_ids.extend(record.property_ids.ids)
-        if property_ids:
-            return self.env["ter.property"].browse(property_ids).action_gis_viewer()
+        properties = self.mapped("property_ids")
+        return properties.action_gis_viewer() if properties else None
 
     def action_set_partner_code(self):
         self.ensure_one()
-        act_window = {
+        return {
             "type": "ir.actions.act_window",
             "name": self.name,
             "res_model": "wizard.set.partner.code",
             "view_mode": "form",
             "target": "new",
         }
-        return act_window
 
     def action_show_parcels(self):
         self.ensure_one()
-        current_partner = self
-        id_tree_view = self.sudo().env.ref("base_ter.ter_parcel_view_tree").id
-        id_form_view = self.sudo().env.ref("base_ter.ter_parcel_view_form").id
-        id_kanban_view = self.sudo().env.ref("base_ter.ter_parcel_view_kanban").id
-        search_view = self.sudo().env.ref("base_ter.ter_parcel_view_search")
-        act_window = {
+        tree_view = self.env.ref("base_ter.ter_parcel_view_tree")
+        form_view = self.env.ref("base_ter.ter_parcel_view_form")
+        kanban_view = self.env.ref("base_ter.ter_parcel_view_kanban")
+        search_view = self.env.ref("base_ter.ter_parcel_view_search")
+        return {
             "type": "ir.actions.act_window",
             "name": _("Parcels"),
             "res_model": "ter.parcel",
             "view_mode": "list,form,kanban",
             "views": [
-                (id_tree_view, "list"),
-                (id_form_view, "form"),
-                (id_kanban_view, "kanban"),
+                (tree_view.id, "list"),
+                (form_view.id, "form"),
+                (kanban_view.id, "kanban"),
             ],
-            "search_view_id": (search_view.id, search_view.name),
+            "search_view_id": search_view.id,
             "target": "current",
-            "domain": [("partner_id", "=", current_partner.id)],
-            "context": {
-                "default_partner_id": current_partner.id,
-            },
+            "domain": [("partner_id", "=", self.id)],
+            "context": {"default_partner_id": self.id},
         }
-        return act_window
 
     def action_show_properties(self):
         self.ensure_one()
-        current_partner = self
-        id_tree_view = self.sudo().env.ref("base_ter.ter_property_view_tree").id
-        id_form_view = self.sudo().env.ref("base_ter.ter_property_view_form").id
-        id_kanban_view = self.sudo().env.ref("base_ter.ter_property_view_kanban").id
-        search_view = self.sudo().env.ref("base_ter.ter_property_view_search")
-        act_window = {
+        tree_view = self.env.ref("base_ter.ter_property_view_tree")
+        form_view = self.env.ref("base_ter.ter_property_view_form")
+        kanban_view = self.env.ref("base_ter.ter_property_view_kanban")
+        search_view = self.env.ref("base_ter.ter_property_view_search")
+        return {
             "type": "ir.actions.act_window",
             "name": _("Properties"),
             "res_model": "ter.property",
             "view_mode": "list,form,kanban",
             "views": [
-                (id_tree_view, "list"),
-                (id_form_view, "form"),
-                (id_kanban_view, "kanban"),
+                (tree_view.id, "list"),
+                (form_view.id, "form"),
+                (kanban_view.id, "kanban"),
             ],
-            "search_view_id": (search_view.id, search_view.name),
+            "search_view_id": search_view.id,
             "target": "current",
-            "domain": [("partner_id", "=", current_partner.id)],
-            "context": {
-                "default_partner_id": current_partner.id,
-            },
+            "domain": [("partner_id", "=", self.id)],
+            "context": {"default_partner_id": self.id},
         }
-        return act_window
 
     @api.model
     def _add_area_fields(self):
-        # Hook: new area fields to add suffix (name of unit of measure)
-        area_fields = self._area_fields
-        # Example:
-        # area_fields.append(('area_gis', _('GIS Area')))
-        return area_fields
-
-    def _refresh_computed_fields(self):
-        # Hook: Refresh of all computed fields.
-        self._compute_number_of_parcels()
-        self._compute_area_official_parcels()
+        return self._area_fields
