@@ -11,3 +11,4 @@ from . import test_ter_profile_unlink
 from . import test_ter_property_write_partner_sync
 from . import test_ter_propertytag_m2m
 from . import test_report_parcel_partner
+from . import test_report_parcel
