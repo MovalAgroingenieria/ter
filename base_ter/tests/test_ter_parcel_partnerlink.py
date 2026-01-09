@@ -35,27 +35,6 @@ class TestTerParcelPartnerlink(TransactionCase):
             }
         )
 
-    def test_partnerlink_unique_per_parcel_partner(self):
-        self.env["ter.parcel.partnerlink"].create(
-            {
-                "parcel_id": self.parcel.id,
-                "partner_id": self.partner.id,
-                "profile_id": self.profile.id,
-                "is_main": True,
-                "percentage": 100,
-            }
-        )
-        with self.assertRaises(exceptions.ValidationError):
-            self.env["ter.parcel.partnerlink"].create(
-                {
-                    "parcel_id": self.parcel.id,
-                    "partner_id": self.partner.id,
-                    "profile_id": self.profile.id,
-                    "is_main": False,
-                    "percentage": 0,
-                }
-            )
-
     def test_profile_without_total_forces_percentage_zero(self):
         profile = self.env["ter.profile"].create(
             {"name": "NoTotal", "requires_total": False}

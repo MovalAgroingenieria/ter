@@ -26,7 +26,7 @@ class ResPartner(models.Model):
     partner_code = fields.Integer(
         string="Partner Code",
         default=_default_partner_code,
-        required=True,
+        required=False,
         index=True,
     )
     partner_code_asstr = fields.Char(
@@ -213,11 +213,11 @@ class ResPartner(models.Model):
 
         measure_name = _(self._ha_name)
         if (
-            not area_unit_is_ha
-            and area_unit_name
-            and value_in_ha
-            and value_in_ha != 1
-            and area_unit_name != measure_name
+                not area_unit_is_ha
+                and area_unit_name
+                and value_in_ha
+                and value_in_ha != 1
+                and area_unit_name != measure_name
         ):
             measure_name = area_unit_name
 

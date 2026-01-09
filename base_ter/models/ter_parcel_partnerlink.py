@@ -72,21 +72,6 @@ class TerParcelPartnerlink(models.Model):
                 code_asstr = record.partner_id.partner_code_asstr
             record.name = "%s-%s" % (record.parcel_id.alphanum_code, code_asstr)
 
-    @api.constrains("parcel_id", "partner_id")
-    def _check_partner_id(self):
-        for record in self:
-            if not (record.parcel_id and record.partner_id):
-                continue
-            count = self.search_count(
-                [
-                    ("parcel_id", "=", record.parcel_id.id),
-                    ("partner_id", "=", record.partner_id.id),
-                    ("id", "!=", record.id),
-                ]
-            )
-            if count:
-                raise exceptions.ValidationError(_("Repeated line."))
-
     @api.model_create_multi
     def create(self, vals_list):
         profiles = {

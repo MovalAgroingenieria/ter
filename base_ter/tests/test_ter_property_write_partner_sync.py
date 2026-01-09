@@ -10,13 +10,14 @@ class TestTerPropertyWritePartnerSync(TransactionCase):
         cls.config.set_param("base_ter.same_parcelmanager_propertyowner", "True")
 
         cls.old_partner = cls.env["res.partner"].create(
-            {"name": "Old", "partner_code": 1}
+            {"name": "Old", "partner_code": 12}
         )
         cls.new_partner = cls.env["res.partner"].create(
-            {"name": "New", "partner_code": 2}
+            {"name": "New", "partner_code": 20}
         )
 
-        province = cls.env["res.province"].create({"name": "P1"})
+        region = cls.env["res.admregion"].create({"name": "R1"})
+        province = cls.env["res.province"].create({"name": "P1", "region_id": region.id})
         cls.municipality = cls.env["res.municipality"].create(
             {"name": "M1", "province_id": province.id}
         )

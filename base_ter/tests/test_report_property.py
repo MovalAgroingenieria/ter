@@ -6,7 +6,8 @@ class TestReportProperty(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        province = cls.env["res.province"].create({"name": "P1"})
+        region = cls.env["res.admregion"].create({"name": "R1"})
+        province = cls.env["res.province"].create({"name": "P1", "region_id": region.id})
         cls.municipality = cls.env["res.municipality"].create(
             {"name": "M1", "province_id": province.id}
         )
