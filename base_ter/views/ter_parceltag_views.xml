@@ -9,10 +9,9 @@
                 <sheet>
                     <group name="master_data">
                         <group name="master_data_left">
-                            <field name="alphanum_code" string = "Tag Name"/>
+                            <field name="alphanum_code" string="Tag Name"/>
                         </group>
-                        <group name="master_data_right">
-                        </group>
+                        <group name="master_data_right"/>
                     </group>
                     <notebook name="slave_data_notebook" colspan="4">
                         <page name="page_notes" string="Internal Notes">
@@ -49,11 +48,9 @@
         <field name="res_model">ter.parceltag</field>
         <field name="view_mode">list,form</field>
         <field name="view_ids"
-         eval="[(5, 0),
-                (0, 0, {'view_mode': 'list',
-                        'view_id': ref('ter_parceltag_view_tree')}),
-                (0, 0, {'view_mode': 'form',
-                        'view_id': ref('ter_parceltag_view_form')}),]"/>
+               eval="[(5, 0),
+                      (0, 0, {'view_mode': 'list', 'view_id': ref('ter_parceltag_view_tree')}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('ter_parceltag_view_form')})]"/>
         <field name="search_view_id" ref="ter_parceltag_view_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
