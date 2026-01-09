@@ -15,3 +15,4 @@ from . import test_report_parcel
 from . import test_report_property_partner
 from . import test_security_groups
 from . import test_menus_and_actions
+from . import test_res_config_settings_view
