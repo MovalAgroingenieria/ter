@@ -22,3 +22,4 @@ from . import test_ter_parcel_views
 from . import test_ter_profile_views
 from . import test_ter_property_views
 from . import test_ter_propertytag_views
+from . import test_wizard_set_parcel_code

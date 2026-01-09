@@ -8,31 +8,29 @@ class WizardSetParcelCode(models.TransientModel):
     _name = "wizard.set.parcel.code"
     _description = "Dialog box to set a parcel code"
 
-    parcel_code = fields.Char(
-        string="Parcel Code",
-    )
+    parcel_code = fields.Char(string="Parcel Code")
 
     @api.model
-    def default_get(self, var_fields):
-        resp = None
-        record = self.env["ter.parcel"].browse(self.env.context["active_id"])
-        if record:
-            resp = {
-                "parcel_code": record.alphanum_code,
-            }
-        return resp
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        active_id = self.env.context.get("active_id")
+        if not active_id:
+            return res
+
+        parcel = self.env["ter.parcel"].browse(active_id)
+        if parcel.exists():
+            res["parcel_code"] = parcel.alphanum_code
+        return res
 
     def set_parcel_code(self):
         self.ensure_one()
-        record = self.env["ter.parcel"].browse(self.env.context["active_id"])
-        if record:
-            parcel_code = self.parcel_code
-            if not parcel_code:
-                parcel_code = None
-            else:
-                parcel_code = parcel_code.strip().upper()
-            record.write(
-                {
-                    "alphanum_code": parcel_code,
-                }
-            )
+        active_id = self.env.context.get("active_id")
+        if not active_id:
+            return
+
+        parcel = self.env["ter.parcel"].browse(active_id)
+        if not parcel.exists():
+            return
+
+        parcel_code = (self.parcel_code or "").strip().upper() or False
+        parcel.write({"alphanum_code": parcel_code})
