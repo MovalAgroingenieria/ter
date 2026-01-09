@@ -1,4 +1,4 @@
-# 2024 Moval Agroingeniería
+# 2024-2026 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import fields, models
@@ -7,10 +7,9 @@ from odoo import fields, models
 class TerParceltag(models.Model):
     _name = "ter.parceltag"
     _description = "Parcel Tag"
-    _inherit = ["simple.model"]
+    _inherit = "simple.model"
     _rec_name = "alphanum_code"
 
-    # Static variables inherited from "simple.model"
     _set_num_code = False
     _sequence_for_codes = ""
     _size_name = 30
@@ -27,14 +26,13 @@ class TerParceltag(models.Model):
         translate=True,
     )
 
-    color = fields.Integer(
-        string="Color Index",
-    )
+    color = fields.Integer(string="Color Index")
 
     parcel_ids = fields.Many2many(
-        "ter.parcel",
-        column1="parcel_id",
-        column2="parceltag_id",
+        comodel_name="ter.parcel",
+        relation="ter_parcel_parceltag_rel",
+        column1="parceltag_id",
+        column2="parcel_id",
         string="Parcels",
         copy=False,
     )

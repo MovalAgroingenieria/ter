@@ -6,3 +6,4 @@ from . import test_res_partner_partner_code
 from . import test_ter_gis_parcel_model_compute
 from . import test_ter_parcel_partnerlink
 from . import test_ter_parcel_constraints
+from . import test_ter_parceltag_m2m
