@@ -1,7 +1,7 @@
 # 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 
 
 class TerGisParcelModel(models.Model):
@@ -9,95 +9,80 @@ class TerGisParcelModel(models.Model):
     _description = "GIS Parcel"
     _auto = False
 
-    # Size of the aerial images
     _aerial_image_size_small = 128
 
-    name = fields.Char(
-        string="Parcel Code",
-    )
+    name = fields.Char(string="Parcel Code")
+    geom_geojson = fields.Char(string="GeoJSON Geometry")
 
-    geom_geojson = fields.Char(
-        string="GeoJSON Geometry",
-    )
-
-    parcel_id = fields.Many2one(
-        string="Parcel",
-        comodel_name="ter.parcel",
-    )
-
-    partner_id = fields.Many2one(
-        string="Parcel Partner",
-        comodel_name="res.partner",
-    )
-
-    is_active = fields.Boolean(
-        string="Active",
-    )
+    parcel_id = fields.Many2one(string="Parcel", comodel_name="ter.parcel")
+    partner_id = fields.Many2one(string="Parcel Partner", comodel_name="res.partner")
+    is_active = fields.Boolean(string="Active")
 
     diff_areas_threshold_exceeded = fields.Boolean(
         string="Threshold exceeded (difference between official and GIS areas)",
         related="parcel_id.diff_areas_threshold_exceeded",
+        readonly=True,
     )
-
     diff_areas_threshold_exceeded_str = fields.Char(
         string="Threshold exceeded (difference between official and GIS areas) -str-",
         compute="_compute_diff_areas_threshold_exceeded_str",
     )
 
-    gis_data = fields.Text(
-        string="GIS Data",
-        compute="_compute_gis_data",
-    )
+    gis_data = fields.Text(string="GIS Data", compute="_compute_gis_data")
 
     aerial_image_small = fields.Image(
         string="Aerial Image (small size)",
         max_width=_aerial_image_size_small,
         max_height=_aerial_image_size_small,
         related="parcel_id.aerial_image_small",
+        readonly=True,
     )
 
+    @api.depends("parcel_id", "diff_areas_threshold_exceeded")
     def _compute_diff_areas_threshold_exceeded_str(self):
         for record in self:
-            diff_areas_threshold_exceeded_str = ""
-            if record.parcel_id:
-                diff_areas_threshold_exceeded_str = _("ok")
-                if record.diff_areas_threshold_exceeded:
-                    diff_areas_threshold_exceeded_str = _("CHECK")
-            record.diff_areas_threshold_exceeded_str = diff_areas_threshold_exceeded_str
+            if not record.parcel_id:
+                record.diff_areas_threshold_exceeded_str = ""
+                continue
 
+            record.diff_areas_threshold_exceeded_str = _("CHECK") if record.diff_areas_threshold_exceeded else _("ok")
+
+    @api.depends(
+        "parcel_id",
+        "parcel_id.area_official_m2",
+        "parcel_id.area_gis",
+        "parcel_id.perimeter_gis",
+        "parcel_id.bounding_box_str",
+    )
     def _compute_gis_data(self):
+        formatter = self.env["common.format"]
         for record in self:
-            gis_data = ""
-            if record.parcel_id:
-                area_official_m2 = record.parcel_id.area_official_m2
-                area_gis = record.parcel_id.area_gis
-                perimeter_gis = record.parcel_id.perimeter_gis
-                bounding_box_str = record.parcel_id.bounding_box_str
-                if bounding_box_str:
-                    pos_bracket = bounding_box_str.find("(")
-                    if pos_bracket != -1:
-                        bounding_box_str = bounding_box_str[pos_bracket:]
-                gis_data = (
-                    "⸰ "
-                    + _("Official Area (m²)")
-                    + ": "
-                    + self.env["common.format"].transform_integer_to_locale(
-                        area_official_m2
-                    )
-                    + "\n"
-                    + "⸰ "
-                    + _("GIS Area (m²)")
-                    + ": "
-                    + self.env["common.format"].transform_integer_to_locale(area_gis)
-                    + "\n"
-                    + "⸰ "
-                    + _("GIS Perimeter (m)")
-                    + ": "
-                    + self.env["common.format"].transform_integer_to_locale(
-                        perimeter_gis
-                    )
-                    + "\n"
-                    + "⸰ "
-                    + bounding_box_str
-                )
-            record.gis_data = gis_data
+            if not record.parcel_id:
+                record.gis_data = ""
+                continue
+
+            bbox = record.parcel_id.bounding_box_str or ""
+            pos = bbox.find("(")
+            if pos != -1:
+                bbox = bbox[pos:]
+
+            record.gis_data = "\n".join(
+                [
+                    "⸰ %s: %s"
+                    % (
+                        _("Official Area (m²)"),
+                        formatter.transform_integer_to_locale(record.parcel_id.area_official_m2),
+                    ),
+                    "⸰ %s: %s"
+                    % (
+                        _("GIS Area (m²)"),
+                        formatter.transform_integer_to_locale(record.parcel_id.area_gis),
+                    ),
+                    "⸰ %s: %s"
+                    % (
+                        _("GIS Perimeter (m)"),
+                        formatter.transform_integer_to_locale(record.parcel_id.perimeter_gis),
+                    ),
+                    "⸰ %s" % bbox,
+                ]
+            )

@@ -1,4 +1,4 @@
-# 2024- Moval Agroingeniería
+# 2024-2026 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import _, api, exceptions, fields, models
