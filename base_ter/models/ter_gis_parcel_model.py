@@ -1,4 +1,4 @@
-# 2024 Moval Agroingeniería
+# Copyright 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import _, api, fields, models
@@ -8,15 +8,24 @@ class TerGisParcelModel(models.Model):
     _name = "ter.gis.parcel.model"
     _description = "GIS Parcel"
     _auto = False
+    _log_access = True  # avoid warning for Image fields on SQL view models
 
     _aerial_image_size_small = 128
 
-    name = fields.Char(string="Parcel Code")
-    geom_geojson = fields.Char(string="GeoJSON Geometry")
+    name = fields.Char(string="Parcel Code", readonly=True)
+    geom_geojson = fields.Char(string="GeoJSON Geometry", readonly=True)
 
-    parcel_id = fields.Many2one(string="Parcel", comodel_name="ter.parcel")
-    partner_id = fields.Many2one(string="Parcel Partner", comodel_name="res.partner")
-    is_active = fields.Boolean(string="Active")
+    parcel_id = fields.Many2one(
+        comodel_name="ter.parcel",
+        string="Parcel",
+        readonly=True,
+    )
+    partner_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Parcel Partner",
+        readonly=True,
+    )
+    is_active = fields.Boolean(string="Active", readonly=True)
 
     diff_areas_threshold_exceeded = fields.Boolean(
         string="Threshold exceeded (difference between official and GIS areas)",
@@ -26,9 +35,10 @@ class TerGisParcelModel(models.Model):
     diff_areas_threshold_exceeded_str = fields.Char(
         string="Threshold exceeded (difference between official and GIS areas) -str-",
         compute="_compute_diff_areas_threshold_exceeded_str",
+        readonly=True,
     )
 
-    gis_data = fields.Text(string="GIS Data", compute="_compute_gis_data")
+    gis_data = fields.Text(string="GIS Data", compute="_compute_gis_data", readonly=True)
 
     aerial_image_small = fields.Image(
         string="Aerial Image (small size)",
@@ -44,8 +54,9 @@ class TerGisParcelModel(models.Model):
             if not record.parcel_id:
                 record.diff_areas_threshold_exceeded_str = ""
                 continue
-
-            record.diff_areas_threshold_exceeded_str = _("CHECK") if record.diff_areas_threshold_exceeded else _("ok")
+            record.diff_areas_threshold_exceeded_str = (
+                _("CHECK") if record.diff_areas_threshold_exceeded else _("ok")
+            )
 
     @api.depends(
         "parcel_id",
@@ -57,11 +68,12 @@ class TerGisParcelModel(models.Model):
     def _compute_gis_data(self):
         formatter = self.env["common.format"]
         for record in self:
-            if not record.parcel_id:
+            parcel = record.parcel_id
+            if not parcel:
                 record.gis_data = ""
                 continue
 
-            bbox = record.parcel_id.bounding_box_str or ""
+            bbox = parcel.bounding_box_str or ""
             pos = bbox.find("(")
             if pos != -1:
                 bbox = bbox[pos:]
@@ -71,17 +83,17 @@ class TerGisParcelModel(models.Model):
                     "⸰ %s: %s"
                     % (
                         _("Official Area (m²)"),
-                        formatter.transform_integer_to_locale(record.parcel_id.area_official_m2),
+                        formatter.transform_integer_to_locale(parcel.area_official_m2),
                     ),
                     "⸰ %s: %s"
                     % (
                         _("GIS Area (m²)"),
-                        formatter.transform_integer_to_locale(record.parcel_id.area_gis),
+                        formatter.transform_integer_to_locale(parcel.area_gis),
                     ),
                     "⸰ %s: %s"
                     % (
                         _("GIS Perimeter (m)"),
-                        formatter.transform_integer_to_locale(record.parcel_id.perimeter_gis),
+                        formatter.transform_integer_to_locale(parcel.perimeter_gis),
                     ),
                     "⸰ %s" % bbox,
                 ]

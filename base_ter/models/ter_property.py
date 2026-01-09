@@ -92,7 +92,9 @@ class TerProperty(models.Model):
         max_height=_aerial_image_size_medium,
         related="aerial_image_shown",
     )
-    image_1920 = fields.Image(string="Aerial Image (zoom)", related="aerial_image_shown")
+    image_1920 = fields.Image(
+        string="Aerial Image (zoom)", related="aerial_image_shown"
+    )
 
     tag_id = fields.Many2many(
         string="Tags",
@@ -145,7 +147,9 @@ class TerProperty(models.Model):
         compute="_compute_region_id",
     )
 
-    area_unit_name = fields.Char(string="Area unit name", compute="_compute_area_unit_name")
+    area_unit_name = fields.Char(
+        string="Area unit name", compute="_compute_area_unit_name"
+    )
     address_data = fields.Char(string="Address Data", compute="_compute_address_data")
 
     @api.depends("aerial_image", "mapped_to_polygon")
@@ -155,12 +159,18 @@ class TerProperty(models.Model):
         wmsbase_url = config.get_param("base_ter.aerial_image_wmsbase_url", False)
         wmsbase_layers = config.get_param("base_ter.aerial_image_wmsbase_layers", False)
         wmsvec_url = config.get_param("base_ter.aerial_image_wmsvec_url", False)
-        wmsvec_layer = config.get_param("base_ter.aerial_image_wmsvec_property_name", False)
-        wmsvec_filter = bool(config.get_param("base_ter.aerial_image_wmsvec_property_filter", False))
+        wmsvec_layer = config.get_param(
+            "base_ter.aerial_image_wmsvec_property_name", False
+        )
+        wmsvec_filter = bool(
+            config.get_param("base_ter.aerial_image_wmsvec_property_filter", False)
+        )
         image_height = int(config.get_param("base_ter.aerial_image_height", 0) or 0)
         image_zoom = float(config.get_param("base_ter.aerial_image_zoom", 0) or 0)
 
-        ogc_ok = bool(wmsbase_url and wmsbase_layers and image_height >= 0 and image_zoom >= 0)
+        ogc_ok = bool(
+            wmsbase_url and wmsbase_layers and image_height >= 0 and image_zoom >= 0
+        )
         if image_height == 0:
             image_height = self._aerial_image_size_big
         if image_zoom == 0:
@@ -233,7 +243,9 @@ class TerProperty(models.Model):
     @api.depends("parcel_ids.area_official")
     def _compute_area_official_parcels(self):
         for record in self:
-            record.area_official_parcels = sum(record.parcel_ids.mapped("area_official"))
+            record.area_official_parcels = sum(
+                record.parcel_ids.mapped("area_official")
+            )
 
     @api.depends("area_official_parcels")
     def _compute_area_official_parcels_m2(self):
@@ -241,41 +253,66 @@ class TerProperty(models.Model):
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
         factor = 10000.0
         if not area_unit_is_ha:
-            value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
+            value_in_ha = float(
+                config.get_param("base_ter.area_unit_value_in_ha", 0) or 0
+            )
             if value_in_ha and value_in_ha != 1:
                 factor = value_in_ha * 10000.0
 
         for record in self:
-            record.area_official_parcels_m2 = round((record.area_official_parcels or 0.0) * factor)
+            record.area_official_parcels_m2 = round(
+                (record.area_official_parcels or 0.0) * factor
+            )
 
-    @api.depends("mapped_to_polygon", "area_official_parcels_m2", "area_gis", "area_official_parcels")
+    @api.depends(
+        "mapped_to_polygon",
+        "area_official_parcels_m2",
+        "area_gis",
+        "area_official_parcels",
+    )
     def _compute_diff_areas_threshold_exceeded(self):
         config = self.env["ir.config_parameter"].sudo()
         warning = int(config.get_param("base_ter.warning_diff_areas", 0) or 0)
 
         for record in self:
             exceeded = False
-            if warning > 0 and record.area_official_parcels > 0 and record.mapped_to_polygon:
-                diff = abs((record.area_official_parcels_m2 or 0) - (record.area_gis or 0))
-                threshold = int(round((record.area_official_parcels_m2 or 0) * (warning / 100.0)))
+            if (
+                warning > 0
+                and record.area_official_parcels > 0
+                and record.mapped_to_polygon
+            ):
+                diff = abs(
+                    (record.area_official_parcels_m2 or 0) - (record.area_gis or 0)
+                )
+                threshold = int(
+                    round((record.area_official_parcels_m2 or 0) * (warning / 100.0))
+                )
                 exceeded = diff > threshold
             record.diff_areas_threshold_exceeded = exceeded
 
     @api.depends("municipality_id.province_id")
     def _compute_province_id(self):
         for record in self:
-            record.province_id = record.municipality_id.province_id if record.municipality_id else False
+            record.province_id = (
+                record.municipality_id.province_id if record.municipality_id else False
+            )
 
     @api.depends("province_id.region_id")
     def _compute_region_id(self):
         for record in self:
-            record.region_id = record.province_id.region_id if record.province_id else False
+            record.region_id = (
+                record.province_id.region_id if record.province_id else False
+            )
 
     @api.depends_context("lang")
     def _compute_area_unit_name(self):
         config = self.env["ir.config_parameter"].sudo()
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        unit_name = _("ha") if area_unit_is_ha else (config.get_param("base_ter.area_unit_name", "") or "")
+        unit_name = (
+            _("ha")
+            if area_unit_is_ha
+            else (config.get_param("base_ter.area_unit_name", "") or "")
+        )
         for record in self:
             record.area_unit_name = unit_name
 
@@ -286,16 +323,29 @@ class TerProperty(models.Model):
                 record.address_data = ""
                 continue
 
-            base = "%s (%s)" % (record.municipality_id.name, record.municipality_id.province_id.name)
-            if record.place_id and (record.place_id.name or "").lower() != (record.municipality_id.name or "").lower():
+            base = "%s (%s)" % (
+                record.municipality_id.name,
+                record.municipality_id.province_id.name,
+            )
+            if (
+                record.place_id
+                and (record.place_id.name or "").lower()
+                != (record.municipality_id.name or "").lower()
+            ):
                 base = "%s - %s" % (record.place_id.name, base)
             record.address_data = base
 
     @api.constrains("municipality_id", "place_id")
     def _check_place_id(self):
         for record in self:
-            if record.municipality_id and record.place_id and record.place_id.municipality_id != record.municipality_id:
-                raise exceptions.ValidationError(_("The place is not in the municipality."))
+            if (
+                record.municipality_id
+                and record.place_id
+                and record.place_id.municipality_id != record.municipality_id
+            ):
+                raise exceptions.ValidationError(
+                    _("The place is not in the municipality.")
+                )
 
     @api.model
     def _get_view(self, view_id=None, view_type="form", **options):
@@ -315,7 +365,13 @@ class TerProperty(models.Model):
         value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
 
         measure_name = _(self._ha_name)
-        if not area_unit_is_ha and area_unit_name and value_in_ha and value_in_ha != 1 and area_unit_name != measure_name:
+        if (
+            not area_unit_is_ha
+            and area_unit_name
+            and value_in_ha
+            and value_in_ha != 1
+            and area_unit_name != measure_name
+        ):
             measure_name = area_unit_name
 
         for field_name, label in area_map.items():
@@ -329,7 +385,9 @@ class TerProperty(models.Model):
         res = super().write(vals)
 
         config = self.env["ir.config_parameter"].sudo()
-        same_owner = bool(config.get_param("base_ter.same_parcelmanager_propertyowner", False))
+        same_owner = bool(
+            config.get_param("base_ter.same_parcelmanager_propertyowner", False)
+        )
         if not (same_owner and old_partner and vals.get("partner_id")):
             return res
 
@@ -337,7 +395,9 @@ class TerProperty(models.Model):
         for prop in self:
             for parcel in prop.parcel_ids:
                 # Replace only when old partner was present on the line
-                links = parcel.partnerlink_ids.filtered(lambda l: l.partner_id == old_partner)
+                links = parcel.partnerlink_ids.filtered(
+                    lambda l: l.partner_id == old_partner
+                )
                 links.write({"partner_id": new_partner.id})
                 parcel.partner_id = new_partner
 
@@ -368,7 +428,9 @@ class TerProperty(models.Model):
                 (epsg,),
             )
             self.env.cr.execute("ALTER TABLE ter_gis_property ADD PRIMARY KEY (gid)")
-            self.env.cr.execute("ALTER TABLE ter_gis_property ALTER COLUMN name SET NOT NULL")
+            self.env.cr.execute(
+                "ALTER TABLE ter_gis_property ALTER COLUMN name SET NOT NULL"
+            )
             self.env.cr.execute(
                 "ALTER TABLE ter_gis_property ADD CONSTRAINT ter_gis_property_name_key UNIQUE(name)"
             )

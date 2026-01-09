@@ -47,7 +47,9 @@ class TerParcelPartnerlink(models.Model):
         ondelete="restrict",
     )
     is_main = fields.Boolean(default=False)
-    percentage = fields.Float(string="Percentage", digits=(32, 2), default=0, required=True)
+    percentage = fields.Float(
+        string="Percentage", digits=(32, 2), default=0, required=True
+    )
     active = fields.Boolean(store=True, related="parcel_id.active")
 
     _sql_constraints = [
@@ -87,8 +89,12 @@ class TerParcelPartnerlink(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        profiles = {p.id: p for p in
-                    self.env["ter.profile"].browse([v.get("profile_id") for v in vals_list if v.get("profile_id")])}
+        profiles = {
+            p.id: p
+            for p in self.env["ter.profile"].browse(
+                [v.get("profile_id") for v in vals_list if v.get("profile_id")]
+            )
+        }
         for vals in vals_list:
             profile = profiles.get(vals.get("profile_id"))
             if profile and not profile.requires_total:

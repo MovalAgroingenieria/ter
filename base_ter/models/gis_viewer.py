@@ -23,9 +23,15 @@ class GisViewer(models.AbstractModel):
     _param_gis_selection = "idparcela"
 
     gis_code = fields.Char(string="GIS Code", compute="_compute_gis_code")
-    gis_link_public = fields.Char(string="GIS Link (public)", compute="_compute_gis_link_public")
-    gis_link_technical = fields.Char(string="GIS Link (technical)", compute="_compute_gis_link_technical")
-    gis_link_minimal = fields.Char(string="GIS Link (minimal version)", compute="_compute_gis_link_minimal")
+    gis_link_public = fields.Char(
+        string="GIS Link (public)", compute="_compute_gis_link_public"
+    )
+    gis_link_technical = fields.Char(
+        string="GIS Link (technical)", compute="_compute_gis_link_technical"
+    )
+    gis_link_minimal = fields.Char(
+        string="GIS Link (minimal version)", compute="_compute_gis_link_minimal"
+    )
 
     def _compute_gis_code(self):
         for record in self:
@@ -45,7 +51,9 @@ class GisViewer(models.AbstractModel):
 
     def action_gis_viewer(self):
         config = self.env["ir.config_parameter"].sudo()
-        base_url = config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        base_url = (
+            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        )
         codes = ",".join([rec.gis_code for rec in self if rec.gis_code])
 
         url = f"{base_url}?arg={self._get_encrypted_credentials()}&{self._param_gis_selection}={codes}"
@@ -59,7 +67,9 @@ class GisViewer(models.AbstractModel):
     @api.model
     def action_gis_viewer_global(self):
         config = self.env["ir.config_parameter"].sudo()
-        base_url = config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        base_url = (
+            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        )
         url = f"{base_url}?arg={self._get_encrypted_credentials()}"
         return {"type": "ir.actions.act_url", "url": url, "target": "new"}
 
@@ -103,7 +113,9 @@ class GisViewer(models.AbstractModel):
             if not getattr(record, "mapped_to_polygon", False):
                 continue
 
-            _srid, bbox = record.extract_bounding_box(record.geom_ewkt, force_square_shape=True)
+            _srid, bbox = record.extract_bounding_box(
+                record.geom_ewkt, force_square_shape=True
+            )
             bxmin, bymin, bxmax, bymax = bbox
 
             if first:
@@ -124,8 +136,12 @@ class GisViewer(models.AbstractModel):
             return ""
 
         config = self.env["ir.config_parameter"].sudo()
-        base_url = config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
-        additional_args = config.get_param("base_ter.gis_viewer_previs_additional_args") or "mode=min"
+        base_url = (
+            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        )
+        additional_args = (
+            config.get_param("base_ter.gis_viewer_previs_additional_args") or "mode=min"
+        )
 
         url = f"{base_url}?{self._param_gis_selection}={self.gis_code}"
 

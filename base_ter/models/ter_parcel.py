@@ -72,7 +72,9 @@ class TerParcel(models.Model):
         compute="_compute_diff_areas_threshold_exceeded",
     )
 
-    official_code = fields.Char(string="Official Code", size=MAX_SIZE_OFFICIAL_CODE, index=True)
+    official_code = fields.Char(
+        string="Official Code", size=MAX_SIZE_OFFICIAL_CODE, index=True
+    )
 
     partner_id = fields.Many2one(
         string="Parcel Manager",
@@ -122,7 +124,9 @@ class TerParcel(models.Model):
         max_height=_aerial_image_size_medium,
         related="aerial_image_shown",
     )
-    image_1920 = fields.Image(string="Aerial Image (zoom)", related="aerial_image_shown")
+    image_1920 = fields.Image(
+        string="Aerial Image (zoom)", related="aerial_image_shown"
+    )
 
     tag_id = fields.Many2many(
         string="Tags",
@@ -147,9 +151,13 @@ class TerParcel(models.Model):
         compute="_compute_region_id",
     )
 
-    area_unit_name = fields.Char(string="Area unit name", compute="_compute_area_unit_name")
+    area_unit_name = fields.Char(
+        string="Area unit name", compute="_compute_area_unit_name"
+    )
 
-    property_data = fields.Char(string="Property Data", compute="_compute_property_data")
+    property_data = fields.Char(
+        string="Property Data", compute="_compute_property_data"
+    )
     address_data = fields.Char(string="Address Data", compute="_compute_address_data")
 
     partnerlink_ids = fields.One2many(
@@ -157,12 +165,18 @@ class TerParcel(models.Model):
         comodel_name="ter.parcel.partnerlink",
         inverse_name="parcel_id",
     )
-    partner_code = fields.Integer(string="Partner Code", compute="_compute_partner_code")
+    partner_code = fields.Integer(
+        string="Partner Code", compute="_compute_partner_code"
+    )
 
     active = fields.Boolean(default=True)
 
     _sql_constraints = [
-        ("area_official_ok", "CHECK (area_official >= 0)", 'Incorrect value for "Official Area".'),
+        (
+            "area_official_ok",
+            "CHECK (area_official >= 0)",
+            'Incorrect value for "Official Area".',
+        ),
     ]
 
     @api.depends("area_official")
@@ -171,7 +185,9 @@ class TerParcel(models.Model):
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
         factor = 10000.0
         if not area_unit_is_ha:
-            value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
+            value_in_ha = float(
+                config.get_param("base_ter.area_unit_value_in_ha", 0) or 0
+            )
             if value_in_ha and value_in_ha != 1:
                 factor = value_in_ha * 10000.0
 
@@ -187,7 +203,9 @@ class TerParcel(models.Model):
             exceeded = False
             if warning > 0 and record.mapped_to_polygon:
                 diff = abs((record.area_official_m2 or 0) - (record.area_gis or 0))
-                threshold = int(round((record.area_official_m2 or 0) * (warning / 100.0)))
+                threshold = int(
+                    round((record.area_official_m2 or 0) * (warning / 100.0))
+                )
                 exceeded = diff > threshold
             record.diff_areas_threshold_exceeded = exceeded
 
@@ -204,12 +222,18 @@ class TerParcel(models.Model):
         wmsbase_url = config.get_param("base_ter.aerial_image_wmsbase_url", False)
         wmsbase_layers = config.get_param("base_ter.aerial_image_wmsbase_layers", False)
         wmsvec_url = config.get_param("base_ter.aerial_image_wmsvec_url", False)
-        wmsvec_parcel_layer = config.get_param("base_ter.aerial_image_wmsvec_parcel_name", False)
-        wmsvec_filter = bool(config.get_param("base_ter.aerial_image_wmsvec_parcel_filter", False))
+        wmsvec_parcel_layer = config.get_param(
+            "base_ter.aerial_image_wmsvec_parcel_name", False
+        )
+        wmsvec_filter = bool(
+            config.get_param("base_ter.aerial_image_wmsvec_parcel_filter", False)
+        )
         image_height = int(config.get_param("base_ter.aerial_image_height", 0) or 0)
         image_zoom = float(config.get_param("base_ter.aerial_image_zoom", 0) or 0)
 
-        ogc_ok = bool(wmsbase_url and wmsbase_layers and image_height >= 0 and image_zoom >= 0)
+        ogc_ok = bool(
+            wmsbase_url and wmsbase_layers and image_height >= 0 and image_zoom >= 0
+        )
         if image_height == 0:
             image_height = self._aerial_image_size_big
         if image_zoom == 0:
@@ -277,25 +301,35 @@ class TerParcel(models.Model):
     @api.depends("municipality_id.province_id")
     def _compute_province_id(self):
         for record in self:
-            record.province_id = record.municipality_id.province_id if record.municipality_id else False
+            record.province_id = (
+                record.municipality_id.province_id if record.municipality_id else False
+            )
 
     @api.depends("province_id.region_id")
     def _compute_region_id(self):
         for record in self:
-            record.region_id = record.province_id.region_id if record.province_id else False
+            record.region_id = (
+                record.province_id.region_id if record.province_id else False
+            )
 
     @api.depends_context("lang")
     def _compute_area_unit_name(self):
         config = self.env["ir.config_parameter"].sudo()
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        unit_name = _("ha") if area_unit_is_ha else (config.get_param("base_ter.area_unit_name", "") or "")
+        unit_name = (
+            _("ha")
+            if area_unit_is_ha
+            else (config.get_param("base_ter.area_unit_name", "") or "")
+        )
         for record in self:
             record.area_unit_name = unit_name
 
     @api.depends("property_id")
     def _compute_property_data(self):
         for record in self:
-            record.property_data = record.property_id.name if record.property_id else _("not assigned")
+            record.property_data = (
+                record.property_id.name if record.property_id else _("not assigned")
+            )
 
     @api.depends("municipality_id", "place_id", "municipality_id.province_id")
     def _compute_address_data(self):
@@ -304,33 +338,58 @@ class TerParcel(models.Model):
                 record.address_data = ""
                 continue
 
-            base = "%s (%s)" % (record.municipality_id.name, record.municipality_id.province_id.name)
-            if record.place_id and (record.place_id.name or "").lower() != (record.municipality_id.name or "").lower():
+            base = "%s (%s)" % (
+                record.municipality_id.name,
+                record.municipality_id.province_id.name,
+            )
+            if (
+                record.place_id
+                and (record.place_id.name or "").lower()
+                != (record.municipality_id.name or "").lower()
+            ):
                 base = "%s - %s" % (record.place_id.name, base)
             record.address_data = base
 
     @api.depends("partner_id.partner_code")
     def _compute_partner_code(self):
         for record in self:
-            record.partner_code = record.partner_id.partner_code if record.partner_id and record.partner_id.partner_code > 0 else 0
+            record.partner_code = (
+                record.partner_id.partner_code
+                if record.partner_id and record.partner_id.partner_code > 0
+                else 0
+            )
 
     @api.constrains("municipality_id", "place_id")
     def _check_place_id(self):
         for record in self:
-            if record.municipality_id and record.place_id and record.place_id.municipality_id != record.municipality_id:
-                raise exceptions.ValidationError(_("The place is not in the municipality."))
+            if (
+                record.municipality_id
+                and record.place_id
+                and record.place_id.municipality_id != record.municipality_id
+            ):
+                raise exceptions.ValidationError(
+                    _("The place is not in the municipality.")
+                )
 
     @api.constrains("partner_id", "property_id")
     def _check_property_id(self):
         config = self.env["ir.config_parameter"].sudo()
-        same_owner = bool(config.get_param("base_ter.same_parcelmanager_propertyowner", False))
+        same_owner = bool(
+            config.get_param("base_ter.same_parcelmanager_propertyowner", False)
+        )
         if not same_owner:
             return
 
         for record in self:
-            if record.partner_id and record.property_id and record.partner_id != record.property_id.partner_id:
+            if (
+                record.partner_id
+                and record.property_id
+                and record.partner_id != record.property_id.partner_id
+            ):
                 raise exceptions.ValidationError(
-                    _("The parcel manager and the property manager must be the same person.")
+                    _(
+                        "The parcel manager and the property manager must be the same person."
+                    )
                 )
 
     @api.constrains("partner_id", "partnerlink_ids")
@@ -338,16 +397,22 @@ class TerParcel(models.Model):
         for record in self:
             if record.partner_id:
                 if not record.partner_id.is_holder:
-                    raise exceptions.ValidationError(_("The contact chosen as main is not a manager."))
+                    raise exceptions.ValidationError(
+                        _("The contact chosen as main is not a manager.")
+                    )
                 if not record.partnerlink_ids:
                     raise exceptions.ValidationError(
-                        _("If a manager is assigned to the parcel, it is mandatory to configure the contact list.")
+                        _(
+                            "If a manager is assigned to the parcel, it is mandatory to configure the contact list."
+                        )
                     )
 
             main = record.partnerlink_ids.filtered("is_main")[:1]
             if main and record.partner_id and main.partner_id != record.partner_id:
                 raise exceptions.ValidationError(
-                    _("The parcel manager and the main contact must be the same person.")
+                    _(
+                        "The parcel manager and the main contact must be the same person."
+                    )
                 )
 
     @api.constrains("partner_id", "partnerlink_ids")
@@ -356,28 +421,38 @@ class TerParcel(models.Model):
             if not record.partnerlink_ids:
                 if record.partner_id:
                     raise exceptions.ValidationError(
-                        _("The main contact exists, but the contact list of the parcel is empty.")
+                        _(
+                            "The main contact exists, but the contact list of the parcel is empty."
+                        )
                     )
                 continue
 
             if not record.partner_id:
-                raise exceptions.ValidationError(_("It is mandatory to enter the parcel manager."))
+                raise exceptions.ValidationError(
+                    _("It is mandatory to enter the parcel manager.")
+                )
 
             mains = record.partnerlink_ids.filtered("is_main")
             if len(mains) != 1:
                 raise exceptions.ValidationError(
-                    _("It is mandatory to enter the main contact of the parcel (only one).")
+                    _(
+                        "It is mandatory to enter the main contact of the parcel (only one)."
+                    )
                 )
 
             profiles = record.partnerlink_ids.mapped("profile_id")
             for profile in profiles:
                 if not profile or not profile.requires_total:
                     continue
-                links = record.partnerlink_ids.filtered(lambda l: l.profile_id == profile)
+                links = record.partnerlink_ids.filtered(
+                    lambda l: l.profile_id == profile
+                )
                 total = sum(links.mapped("percentage"))
                 if total != 100:
                     raise exceptions.ValidationError(
-                        _("Review the profile percentages: there is a percentage profile that does not add up to 100%.")
+                        _(
+                            "Review the profile percentages: there is a percentage profile that does not add up to 100%."
+                        )
                     )
 
     @api.onchange("partner_id")
@@ -392,7 +467,9 @@ class TerParcel(models.Model):
                 (
                     0,
                     0,
-                    self._get_default_first_partnerlink_vals(self.partner_id.id, profile_id, percentage),
+                    self._get_default_first_partnerlink_vals(
+                        self.partner_id.id, profile_id, percentage
+                    ),
                 ),
             ]
             return
@@ -414,7 +491,9 @@ class TerParcel(models.Model):
         }
 
     def name_get(self):
-        show_archived = bool(self.env.context.get("show_archived_in_parcel_code", False))
+        show_archived = bool(
+            self.env.context.get("show_archived_in_parcel_code", False)
+        )
         res = []
         for record in self:
             name = record.name
@@ -455,7 +534,13 @@ class TerParcel(models.Model):
         value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
 
         measure_name = _(self._ha_name)
-        if not area_unit_is_ha and area_unit_name and value_in_ha and value_in_ha != 1 and area_unit_name != measure_name:
+        if (
+            not area_unit_is_ha
+            and area_unit_name
+            and value_in_ha
+            and value_in_ha != 1
+            and area_unit_name != measure_name
+        ):
             measure_name = area_unit_name
 
         for field_name, label in area_map.items():

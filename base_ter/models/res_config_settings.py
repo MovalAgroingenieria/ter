@@ -1,9 +1,8 @@
 # 2024-2026 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from psycopg2 import sql
-
 from odoo import _, api, exceptions, fields, models
+from psycopg2 import sql
 
 
 class ResConfigSettings(models.TransientModel):

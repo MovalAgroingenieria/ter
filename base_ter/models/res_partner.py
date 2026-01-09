@@ -118,7 +118,9 @@ class ResPartner(models.Model):
     @api.depends("parcel_ids.area_official")
     def _compute_area_official_parcels(self):
         for record in self:
-            record.area_official_parcels = sum(record.parcel_ids.mapped("area_official"))
+            record.area_official_parcels = sum(
+                record.parcel_ids.mapped("area_official")
+            )
 
     @api.depends("area_official_parcels")
     def _compute_area_official_parcels_m2(self):
@@ -126,12 +128,16 @@ class ResPartner(models.Model):
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
         factor = 10000.0
         if not area_unit_is_ha:
-            value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
+            value_in_ha = float(
+                config.get_param("base_ter.area_unit_value_in_ha", 0) or 0
+            )
             if value_in_ha and value_in_ha != 1:
                 factor = value_in_ha * 10000.0
 
         for record in self:
-            record.area_official_parcels_m2 = round((record.area_official_parcels or 0.0) * factor)
+            record.area_official_parcels_m2 = round(
+                (record.area_official_parcels or 0.0) * factor
+            )
 
     @api.depends("property_ids")
     def _compute_number_of_properties(self):
@@ -141,7 +147,9 @@ class ResPartner(models.Model):
     @api.depends("property_ids.area_official_parcels")
     def _compute_area_official_properties(self):
         for record in self:
-            record.area_official_properties = sum(record.property_ids.mapped("area_official_parcels"))
+            record.area_official_properties = sum(
+                record.property_ids.mapped("area_official_parcels")
+            )
 
     @api.depends("area_official_properties")
     def _compute_area_official_properties_m2(self):
@@ -149,18 +157,26 @@ class ResPartner(models.Model):
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
         factor = 10000.0
         if not area_unit_is_ha:
-            value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
+            value_in_ha = float(
+                config.get_param("base_ter.area_unit_value_in_ha", 0) or 0
+            )
             if value_in_ha and value_in_ha != 1:
                 factor = value_in_ha * 10000.0
 
         for record in self:
-            record.area_official_properties_m2 = round((record.area_official_properties or 0.0) * factor)
+            record.area_official_properties_m2 = round(
+                (record.area_official_properties or 0.0) * factor
+            )
 
     @api.depends_context("lang")
     def _compute_area_unit_name(self):
         config = self.env["ir.config_parameter"].sudo()
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        unit_name = _("ha") if area_unit_is_ha else (config.get_param("base_ter.area_unit_name", "") or "")
+        unit_name = (
+            _("ha")
+            if area_unit_is_ha
+            else (config.get_param("base_ter.area_unit_name", "") or "")
+        )
         for record in self:
             record.area_unit_name = unit_name
 
@@ -196,7 +212,13 @@ class ResPartner(models.Model):
         value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
 
         measure_name = _(self._ha_name)
-        if not area_unit_is_ha and area_unit_name and value_in_ha and value_in_ha != 1 and area_unit_name != measure_name:
+        if (
+            not area_unit_is_ha
+            and area_unit_name
+            and value_in_ha
+            and value_in_ha != 1
+            and area_unit_name != measure_name
+        ):
             measure_name = area_unit_name
 
         for field_name, label in seen.items():
