@@ -4,44 +4,45 @@
     <record id="gisviewer_global_serveraction" model="ir.actions.server">
         <field name="name">Global Viewer</field>
         <field name="model_id" ref="model_ter_parcel"/>
-        <field name='groups_id' eval="[(4, ref('base_ter.group_ter_user'))]"/>
+        <field name="binding_model_id" ref="model_ter_parcel"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="groups_id" eval="[(4, ref('base_ter.group_ter_user'))]"/>
         <field name="state">code</field>
-        <field name="code">
-            action = env['ter.parcel'].action_gis_viewer_global()
-        </field>
+        <field name="code">action = env["ter.parcel"].action_gis_viewer_global()</field>
     </record>
 
     <menuitem id="menu_census"
               name="Census"
+              parent=""
               sequence="-100"
               web_icon="base_ter,static/description/icon.png"
               groups="base_ter.group_ter_user"/>
 
     <menuitem id="menu_management"
               name="Management"
-              sequence="10"
-              parent="menu_census"/>
+              parent="menu_census"
+              sequence="10"/>
 
     <menuitem id="menu_territory"
               name="Territory"
-              sequence="20"
-              parent="menu_census"/>
+              parent="menu_census"
+              sequence="20"/>
 
     <menuitem id="menu_viewer"
               name="Global Viewer"
-              sequence="30"
               parent="menu_census"
+              sequence="30"
               action="gisviewer_global_serveraction"/>
 
     <menuitem id="menu_configuration"
               name="Configuration"
-              sequence="900"
-              parent="menu_census"/>
+              parent="menu_census"
+              sequence="900"/>
 
     <menuitem id="menu_configuration_localization"
               name="Localization"
-              sequence="30"
-              parent="menu_configuration"/>
+              parent="menu_configuration"
+              sequence="30"/>
 
     <menuitem id="res_admregion_menu"
               parent="menu_configuration_localization"
@@ -65,29 +66,29 @@
 
     <menuitem id="menu_configuration_general"
               name="General"
-              sequence="20"
-              parent="menu_configuration"/>
+              parent="menu_configuration"
+              sequence="20"/>
 
     <menuitem id="menu_thecnicalactions"
               name="Technical Actions"
-              sequence="1000"
               parent="menu_census"
+              sequence="1000"
               groups="base_ter.group_ter_director"/>
 
     <menuitem id="menu_thecnicalactions_refresh"
               name="Refresh"
-              sequence="10"
-              parent="menu_thecnicalactions"/>
+              parent="menu_thecnicalactions"
+              sequence="10"/>
 
     <menuitem id="menu_thecnicalactions_gis"
               name="GIS"
-              sequence="20"
-              parent="menu_thecnicalactions"/>
+              parent="menu_thecnicalactions"
+              sequence="20"/>
 
     <menuitem id="menu_thecnicalactions_detailmodels"
               name="Detail Models"
-              sequence="30"
-              parent="menu_thecnicalactions"/>
+              parent="menu_thecnicalactions"
+              sequence="30"/>
 
     <record id="ir_cron_action" model="ir.actions.act_window">
         <field name="name">Scheduled Actions</field>
@@ -100,8 +101,8 @@
 
     <menuitem id="menu_thecnicalactions_cron"
               name="Scheduled Actions"
-              sequence="1000"
               parent="menu_thecnicalactions"
+              sequence="1000"
               action="ir_cron_action"
               groups="base.group_system"/>
 
