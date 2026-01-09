@@ -8,6 +8,7 @@ import logging
 import pytz
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
+
 from odoo import api, fields, models
 from odoo.http import request
 
@@ -51,12 +52,13 @@ class GisViewer(models.AbstractModel):
 
     def action_gis_viewer(self):
         config = self.env["ir.config_parameter"].sudo()
-        base_url = (
-            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
-        )
-        codes = ",".join([rec.gis_code for rec in self if rec.gis_code])
+        base_url = config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        codes = ",".join(rec.gis_code for rec in self if rec.gis_code)
 
-        url = f"{base_url}?arg={self._get_encrypted_credentials()}&{self._param_gis_selection}={codes}"
+        url = (
+            f"{base_url}?arg={self._get_encrypted_credentials()}"
+            f"&{self._param_gis_selection}={codes}"
+        )
 
         xmin, ymin, xmax, ymax = self._get_bounding_box()
         if xmin < xmax and ymin < ymax and min(xmin, ymin, xmax, ymax) >= 0:
@@ -67,16 +69,23 @@ class GisViewer(models.AbstractModel):
     @api.model
     def action_gis_viewer_global(self):
         config = self.env["ir.config_parameter"].sudo()
-        base_url = (
-            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
-        )
+        base_url = config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
         url = f"{base_url}?arg={self._get_encrypted_credentials()}"
         return {"type": "ir.actions.act_url", "url": url, "target": "new"}
 
     def _get_cipher_key(self):
         config = self.env["ir.config_parameter"].sudo()
         key = config.get_param("base_ter.gis_viewer_cipher_key") or "z%C*F-JaNdRgUkXp"
-        return key.encode("utf-8")
+        raw = key.encode("utf-8")
+
+        if len(raw) in (16, 24, 32):
+            return raw
+
+        _logger.warning(
+            "Invalid AES key length (%s) for base_ter.gis_viewer_cipher_key",
+            len(raw),
+        )
+        return (raw + b"0" * 32)[:32]
 
     def _get_session_sid(self):
         try:
@@ -99,14 +108,14 @@ class GisViewer(models.AbstractModel):
 
         minute = "00" if now_local.minute < 30 else "30"
         iv_str = now_local.strftime("%Y-%m-%dT%H:%M")
-        iv = (iv_str[:14] + minute).encode("utf-8")[:16]
+        iv = (iv_str[:14] + minute).encode("utf-8")
 
         cipher = AES.new(self._get_cipher_key(), AES.MODE_CBC, iv)
         encrypted = cipher.encrypt(pad(plain, AES.block_size))
         return base64.b64encode(encrypted).decode("utf-8")
 
     def _get_bounding_box(self):
-        xmin = ymin = xmax = ymax = 0
+        xmin = ymin = xmax = ymax = 0.0
         first = True
 
         for record in self:
@@ -136,11 +145,9 @@ class GisViewer(models.AbstractModel):
             return ""
 
         config = self.env["ir.config_parameter"].sudo()
-        base_url = (
-            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
-        )
+        base_url = config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
         additional_args = (
-            config.get_param("base_ter.gis_viewer_previs_additional_args") or "mode=min"
+                config.get_param("base_ter.gis_viewer_previs_additional_args") or "mode=min"
         )
 
         url = f"{base_url}?{self._param_gis_selection}={self.gis_code}"
