@@ -8,6 +8,7 @@ from . import (
     res_partner,
     ter_gis_parcel_model,
     ter_parcel,
+    ter_parcel_partnerlink,
     ter_parceltag,
     ter_profile,
     ter_property,
