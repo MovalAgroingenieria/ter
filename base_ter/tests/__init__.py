@@ -1,25 +1,27 @@
-from . import models
-from . import test_gis_viewer
-from . import test_ir_cron_extension
-from . import test_res_config_settings_geometry
-from . import test_res_partner_partner_code
-from . import test_ter_gis_parcel_model_compute
-from . import test_ter_parcel_partnerlink
-from . import test_ter_parcel_constraints
-from . import test_ter_parceltag_m2m
-from . import test_ter_profile_unlink
-from . import test_ter_property_write_partner_sync
-from . import test_ter_propertytag_m2m
-from . import test_report_parcel_partner
-from . import test_report_parcel
-from . import test_report_property_partner
-from . import test_security_groups
-from . import test_menus_and_actions
-from . import test_res_config_settings_view
-from . import test_res_partner_views
-from . import test_ter_gis_parcel_model_views
-from . import test_ter_parcel_views
-from . import test_ter_profile_views
-from . import test_ter_property_views
-from . import test_ter_propertytag_views
-from . import test_wizard_set_parcel_code
+from . import (
+    models,
+    test_gis_viewer,
+    test_ir_cron_extension,
+    test_menus_and_actions,
+    test_report_parcel,
+    test_report_parcel_partner,
+    test_report_property_partner,
+    test_res_config_settings_geometry,
+    test_res_config_settings_view,
+    test_res_partner_partner_code,
+    test_res_partner_views,
+    test_security_groups,
+    test_ter_gis_parcel_model_compute,
+    test_ter_gis_parcel_model_views,
+    test_ter_parcel_constraints,
+    test_ter_parcel_partnerlink,
+    test_ter_parcel_views,
+    test_ter_parceltag_m2m,
+    test_ter_profile_unlink,
+    test_ter_profile_views,
+    test_ter_property_views,
+    test_ter_property_write_partner_sync,
+    test_ter_propertytag_m2m,
+    test_ter_propertytag_views,
+    test_wizard_set_parcel_code,
+)

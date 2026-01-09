@@ -1,4 +1,3 @@
-import re
 from unittest.mock import patch
 
 from odoo.tests.common import TransactionCase, tagged
@@ -21,7 +20,6 @@ class TestGisViewer(TransactionCase):
 
     def test_compute_gis_code(self):
         rec = self._create(name="P-001")
-        rec.flush_recordset()
         self.assertEqual(rec.gis_code, "P-001")
 
     def test_get_gis_link_empty_when_not_mapped(self):
