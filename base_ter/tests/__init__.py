@@ -18,3 +18,4 @@ from . import test_menus_and_actions
 from . import test_res_config_settings_view
 from . import test_res_partner_views
 from . import test_ter_gis_parcel_model_views
+from . import test_ter_parcel_views
