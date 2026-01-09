@@ -7,10 +7,9 @@ from odoo import fields, models
 class TerPropertytag(models.Model):
     _name = "ter.propertytag"
     _description = "Property Tag"
-    _inherit = ["simple.model"]
+    _inherit = "simple.model"
     _rec_name = "alphanum_code"
 
-    # Static variables inherited from "simple.model"
     _set_num_code = False
     _sequence_for_codes = ""
     _size_name = 30
@@ -27,14 +26,13 @@ class TerPropertytag(models.Model):
         translate=True,
     )
 
-    color = fields.Integer(
-        string="Color Index",
-    )
+    color = fields.Integer(string="Color Index")
 
     property_ids = fields.Many2many(
-        "ter.property",
-        column1="property_id",
-        column2="propertytag_id",
+        comodel_name="ter.property",
+        relation="ter_property_propertytag_rel",
+        column1="propertytag_id",
+        column2="property_id",
         string="Properties",
         copy=False,
     )
