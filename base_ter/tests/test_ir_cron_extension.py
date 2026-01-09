@@ -12,7 +12,6 @@ class TestIrCronExtension(TransactionCase):
                 "code": "model.search([])[:1]",
                 "interval_number": 1,
                 "interval_type": "days",
-                "numbercall": 1,
                 "active": False,
                 "is_base_ter": True,
             }
