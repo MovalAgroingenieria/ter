@@ -20,3 +20,5 @@ from . import test_res_partner_views
 from . import test_ter_gis_parcel_model_views
 from . import test_ter_parcel_views
 from . import test_ter_profile_views
+from . import test_ter_property_views
+from . import test_ter_propertytag_views
