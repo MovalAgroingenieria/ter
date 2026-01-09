@@ -174,3 +174,7 @@
   width: 160px;
   min-width: 160px;
 }
+
+.o_dialog_container .modal-dialog:has(.o_wizard_set_parcel_code) {
+  max-width: 300px;
+}

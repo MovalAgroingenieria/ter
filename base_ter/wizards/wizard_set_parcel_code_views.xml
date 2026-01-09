@@ -2,34 +2,30 @@
 <odoo>
 
     <record id="wizard_set_parcel_code_view_form" model="ir.ui.view">
-        <field name="name">Wizard to set a parcel code</field>
+        <field name="name">wizard.set.parcel.code.form</field>
         <field name="model">wizard.set.parcel.code</field>
         <field name="arch" type="xml">
-            <form string="Data of the parcel">
-                <script>
-                    $(document).ready(function(){
-                        $('.modal-dialog').css({'width': '300px'});
-                    });
-                </script>
-                <div style="text-align:center">
+            <form string="Data of the parcel" class="o_wizard_set_parcel_code">
+                <div class="text-center">
                     <h4 class="mb-3">Please, update the parcel code</h4>
                 </div>
+
                 <group name="group_parcel_code_data">
-                    <field name="parcel_code" colspan="2" nolabel="1"
-                           string="Parcel Code"
-                           required="True"/>
+                    <field name="parcel_code" nolabel="1" required="1"/>
                 </group>
+
                 <footer>
-                    <button name="set_parcel_code"
-                            type="object"
-                            string="Apply"
-                            class="btn-primary"/>
-                    <button string="Cancel"
-                            class="btn-default"
-                            special="cancel"/>
+                    <button name="set_parcel_code" type="object" string="Apply" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
+    </record>
+    <record id="action_set_parcel_code" model="ir.actions.act_window">
+        <field name="name">Change parcel code</field>
+        <field name="res_model">wizard.set.parcel.code</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
     </record>
 
 </odoo>
