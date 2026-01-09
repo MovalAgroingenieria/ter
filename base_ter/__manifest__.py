@@ -17,14 +17,12 @@
     "depends": [
         "mail",
         "contacts",
-        "web_progress",
-        "web_tree_many2one_clickable",
         "base_gen",
         "base_gis",
         "base_adi",
         "base_report",
     ],
-    "data_old": [
+    "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
         "data/ter_profile_data.xml",
@@ -61,8 +59,6 @@
         ],
     },
     "external_dependencies": {
-        "python": [
-            "pycryptodome",
-        ],
+        "python": ["pycryptodome"],
     },
 }
