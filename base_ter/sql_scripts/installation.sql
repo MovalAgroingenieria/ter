@@ -1,0 +1,6 @@
+CREATE SCHEMA postgis;
+CREATE EXTENSION postgis WITH SCHEMA postgis;
+ALTER DATABASE <db_name> SET search_path = public, postgis;
+GRANT USAGE ON SCHEMA postgis TO public;
+GRANT SELECT, REFERENCES, TRIGGER ON ALL TABLES IN SCHEMA postgis TO public;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA postgis TO public;

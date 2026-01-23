@@ -6,11 +6,6 @@
         <field name="model">wizard.set.partner.code</field>
         <field name="arch" type="xml">
             <form string="Data of the partner">
-                <script>
-                    $(document).ready(function(){
-                        $('.modal-dialog').css({'width': '300px'});
-                    });
-                </script>
                 <div style="text-align:center">
                     <h4 class="mb-3">Please, enter a positive partner code (or clear data)</h4>
                 </div>
