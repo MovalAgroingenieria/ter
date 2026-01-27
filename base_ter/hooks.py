@@ -1,17 +1,13 @@
 # Copyright 2024 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 from __future__ import annotations
 
-from typing import Optional, Union
+from typing import Optional
 
-from psycopg2 import sql
-
-from odoo import SUPERUSER_ID, _, api
+from odoo import api
 from odoo.exceptions import ValidationError
-from odoo.sql_db import BaseCursor
-
-EnvOrCr = Union[api.Environment, BaseCursor]
+from psycopg2 import sql
 
 POSTGIS_EXT = "postgis"
 POSTGIS_SCHEMA = "postgis"
@@ -45,105 +41,98 @@ PARAM_DEFAULTS = {
 }
 
 
-def _env(env_or_cr: EnvOrCr) -> api.Environment:
-    if isinstance(env_or_cr, api.Environment):
-        return env_or_cr
-    if isinstance(env_or_cr, BaseCursor):
-        return api.Environment(env_or_cr, SUPERUSER_ID, {})
-    raise TypeError(f"Unsupported hook argument type: {type(env_or_cr)!r}")
-
-
-def _ensure_postgis(env: api.Environment) -> None:
-    # Best-effort: may fail if DB user lacks privileges.
-    with env.cr.savepoint():
-        env.cr.execute(
-            sql.SQL("CREATE SCHEMA IF NOT EXISTS {}").format(
-                sql.Identifier(POSTGIS_SCHEMA)
-            )
-        )
-        env.cr.execute(
-            sql.SQL("CREATE EXTENSION IF NOT EXISTS {} WITH SCHEMA {}").format(
-                sql.Identifier(POSTGIS_EXT),
-                sql.Identifier(POSTGIS_SCHEMA),
-            )
-        )
-
-        env.cr.execute(
-            sql.SQL("GRANT USAGE ON SCHEMA {} TO public").format(
-                sql.Identifier(POSTGIS_SCHEMA)
-            )
-        )
-        env.cr.execute(
-            sql.SQL(
-                "GRANT SELECT, REFERENCES, TRIGGER ON ALL TABLES IN SCHEMA {} TO public"
-            ).format(sql.Identifier(POSTGIS_SCHEMA))
-        )
-        env.cr.execute(
-            sql.SQL("GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA {} TO public").format(
-                sql.Identifier(POSTGIS_SCHEMA)
-            )
-        )
-
+def _postgis_extension_exists(env: api.Environment) -> bool:
     env.cr.execute(
-        "SELECT EXISTS(SELECT 1 FROM pg_extension WHERE extname = %s)", (POSTGIS_EXT,)
+        "SELECT EXISTS(SELECT 1 FROM pg_extension WHERE extname = %s)",
+        (POSTGIS_EXT,),
     )
-    if not env.cr.fetchone()[0]:
-        raise ValidationError(
-            _(
-                "PostGIS is not installed or cannot be enabled in this database. "
-                "Please ask your administrator to install/enable PostGIS before installing this module."
-            )
-        )
+    return bool(env.cr.fetchone()[0])
 
 
-def _set_db_search_path(env: api.Environment) -> None:
+def _geometry_type_exists_any_schema(env: api.Environment) -> bool:
+    env.cr.execute("SELECT EXISTS(SELECT 1 FROM pg_type WHERE typname = 'geometry')")
+    return bool(env.cr.fetchone()[0])
+
+
+def _set_search_path(env: api.Environment) -> None:
     env.cr.execute(
         sql.SQL("ALTER DATABASE {} SET search_path = public, {}").format(
             sql.Identifier(env.cr.dbname),
             sql.Identifier(POSTGIS_SCHEMA),
         )
     )
+    env.cr.execute(
+        sql.SQL("SET search_path TO public, {}").format(sql.Identifier(POSTGIS_SCHEMA))
+    )
+
+
+def _grant_postgis_privileges(env: api.Environment) -> None:
+    env.cr.execute(
+        sql.SQL("GRANT USAGE ON SCHEMA {} TO public").format(
+            sql.Identifier(POSTGIS_SCHEMA)
+        )
+    )
+    env.cr.execute(
+        sql.SQL(
+            "GRANT SELECT, REFERENCES, TRIGGER ON ALL TABLES IN SCHEMA {} TO public"
+        ).format(sql.Identifier(POSTGIS_SCHEMA))
+    )
+    env.cr.execute(
+        sql.SQL("GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA {} TO public").format(
+            sql.Identifier(POSTGIS_SCHEMA)
+        )
+    )
+
+
+def _ensure_postgis(env: api.Environment) -> None:
+    try:
+        env.cr.execute(
+            sql.SQL("CREATE SCHEMA IF NOT EXISTS {}").format(
+                sql.Identifier(POSTGIS_SCHEMA)
+            )
+        )
+        env.cr.execute(
+            sql.SQL("CREATE EXTENSION IF NOT EXISTS {}").format(
+                sql.Identifier(POSTGIS_EXT)
+            )
+        )
+        env.cr.execute(
+            sql.SQL("ALTER EXTENSION {} SET SCHEMA {}").format(
+                sql.Identifier(POSTGIS_EXT),
+                sql.Identifier(POSTGIS_SCHEMA),
+            )
+        )
+        _set_search_path(env)
+        _grant_postgis_privileges(env)
+    except Exception as exc:
+        raise ValidationError(
+            "PostGIS could not be enabled in this database. "
+            "Install PostGIS on PostgreSQL and ensure the DB user can run CREATE EXTENSION."
+        ) from exc
+
+    if not _postgis_extension_exists(env) or not _geometry_type_exists_any_schema(env):
+        raise ValidationError(
+            "PostGIS is not available in this database. Install/enable PostGIS and retry."
+        )
 
 
 def _create_gis_structures(env: api.Environment) -> None:
+    _set_search_path(env)
+
     env.cr.execute(
         sql.SQL(
             """
             CREATE TABLE IF NOT EXISTS {}.{}
             (
-                gid
-                INTEGER
-                GENERATED
-                BY
-                DEFAULT AS
-                IDENTITY
-                PRIMARY
-                KEY,
-                name
-                VARCHAR
-            (
-                255
-            ) NOT NULL UNIQUE CHECK
-            (
-                name
-                <>
-                ''
-            ),
-                geom geometry
-            (
-                MultiPolygon,
-                25830
+                gid INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+                name VARCHAR(255) NOT NULL UNIQUE CHECK (name <> ''),
+                geom geometry(MultiPolygon, 25830)
             )
-                )
             """
         ).format(sql.Identifier(GIS_SCHEMA), sql.Identifier(PARCEL_TABLE))
     )
     env.cr.execute(
-        sql.SQL(
-            """
-            CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)
-            """
-        ).format(
+        sql.SQL("CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)").format(
             sql.Identifier(f"{PARCEL_TABLE}_geom_gist"),
             sql.Identifier(GIS_SCHEMA),
             sql.Identifier(PARCEL_TABLE),
@@ -155,30 +144,11 @@ def _create_gis_structures(env: api.Environment) -> None:
             """
             CREATE TABLE IF NOT EXISTS {}.{}
             (
-                gid
-                INTEGER
-                NOT
-                NULL,
-                name
-                VARCHAR
-            (
-                255
-            ) NOT NULL UNIQUE CHECK
-            (
-                name
-                <>
-                ''
-            ),
-                geom geometry
-            (
-                MultiPolygon,
-                25830
-            ),
-                CONSTRAINT {} PRIMARY KEY
-            (
-                gid
+                gid INTEGER NOT NULL,
+                name VARCHAR(255) NOT NULL UNIQUE CHECK (name <> ''),
+                geom geometry(MultiPolygon, 25830),
+                CONSTRAINT {} PRIMARY KEY (gid)
             )
-                )
             """
         ).format(
             sql.Identifier(GIS_SCHEMA),
@@ -187,11 +157,7 @@ def _create_gis_structures(env: api.Environment) -> None:
         )
     )
     env.cr.execute(
-        sql.SQL(
-            """
-            CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)
-            """
-        ).format(
+        sql.SQL("CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)").format(
             sql.Identifier(f"{PROPERTY_TABLE}_geom_gist"),
             sql.Identifier(GIS_SCHEMA),
             sql.Identifier(PROPERTY_TABLE),
@@ -201,8 +167,7 @@ def _create_gis_structures(env: api.Environment) -> None:
     env.cr.execute(
         sql.SQL(
             """
-            CREATE
-            OR REPLACE VIEW {} AS (
+            CREATE OR REPLACE VIEW {} AS (
                 SELECT
                     row_number() OVER (ORDER BY tgp.name) AS id,
                     tgp.name,
@@ -228,37 +193,36 @@ def _init_params(env: api.Environment) -> None:
         params.set_param(key, value)
 
 
-def pre_init_hook(env_or_cr: EnvOrCr) -> None:
-    env = _env(env_or_cr)
+def pre_init_hook(env: api.Environment) -> None:
     _ensure_postgis(env)
-    _set_db_search_path(env)
 
 
-def post_init_hook(env_or_cr: EnvOrCr, registry: Optional[object] = None) -> None:
-    env = _env(env_or_cr)
-
+def post_init_hook(env: api.Environment, registry: Optional[object] = None) -> None:
+    _ensure_postgis(env)
     _create_gis_structures(env)
     _init_params(env)
-
     env.ref("base.module_base_ter")._update_translations(overwrite=True)
 
 
-def uninstall_hook(env_or_cr: EnvOrCr, registry: Optional[object] = None) -> None:
-    env = _env(env_or_cr)
-
-    env.cr.execute(sql.SQL("DROP VIEW IF EXISTS {}").format(sql.Identifier(PARCEL_VIEW)))
+def uninstall_hook(env: api.Environment, registry: Optional[object] = None) -> None:
+    env.cr.execute(
+        sql.SQL("DROP VIEW IF EXISTS {}").format(sql.Identifier(PARCEL_VIEW))
+    )
     env.cr.execute(
         sql.SQL("DROP TABLE IF EXISTS {}.{}").format(
-            sql.Identifier(GIS_SCHEMA), sql.Identifier(PARCEL_TABLE)
+            sql.Identifier(GIS_SCHEMA),
+            sql.Identifier(PARCEL_TABLE),
         )
     )
     env.cr.execute(
         sql.SQL("DROP TABLE IF EXISTS {}.{}").format(
-            sql.Identifier(GIS_SCHEMA), sql.Identifier(PROPERTY_TABLE)
+            sql.Identifier(GIS_SCHEMA),
+            sql.Identifier(PROPERTY_TABLE),
         )
     )
 
     with env.cr.savepoint():
         env.cr.execute(
-            "DELETE FROM ir_config_parameter WHERE key LIKE %s", (f"{PARAM_PREFIX}%",)
+            "DELETE FROM ir_config_parameter WHERE key LIKE %s",
+            (f"{PARAM_PREFIX}%",),
         )

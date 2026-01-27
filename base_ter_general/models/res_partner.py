@@ -57,7 +57,12 @@ class ResPartner(models.Model):
                     _("The host must start with 'http://' or 'https://' [%s]")
                     % (record.base_connection_database or "")
                 )
-            record.base_connection_host = host.rstrip("/")
+
+    def write(self, vals):
+        if "base_connection_host" in vals and vals["base_connection_host"]:
+            host = vals["base_connection_host"].strip()
+            vals["base_connection_host"] = host.rstrip("/")
+        return super().write(vals)
 
     @api.constrains("base_connection_port")
     def _check_base_connection_port(self):
@@ -200,14 +205,17 @@ class ResPartner(models.Model):
                 [company_id, {"general_code": partner_code}],
             )
 
-            parcels_info = rpc_models.execute_kw(
-                database,
-                uid,
-                password,
-                "wua.parcel",
-                "get_parcels_info_from_base_entity",
-                [[], jinja2_template],
-            ) or []
+            parcels_info = (
+                rpc_models.execute_kw(
+                    database,
+                    uid,
+                    password,
+                    "wua.parcel",
+                    "get_parcels_info_from_base_entity",
+                    [[], jinja2_template],
+                )
+                or []
+            )
             num_of_parcels_found = len(parcels_info)
 
             _logger.info(
@@ -237,7 +245,9 @@ class ResPartner(models.Model):
                     failed_mapped += 1
                     continue
 
-                existing_parcel = TerParcel.search([("name", "=", parcel_code)], limit=1)
+                existing_parcel = TerParcel.search(
+                    [("name", "=", parcel_code)], limit=1
+                )
                 if not existing_parcel:
                     parcel_not_found += 1
                     continue
@@ -278,21 +288,26 @@ class ResPartner(models.Model):
                 ]
             ).mapped("name")
 
-            base_mapping_results = rpc_models.execute_kw(
-                database,
-                uid,
-                password,
-                "wua.parcel",
-                "set_parcel_info_to_base_entity",
-                [[], success_mapped_parcels],
-            ) or []
+            base_mapping_results = (
+                rpc_models.execute_kw(
+                    database,
+                    uid,
+                    password,
+                    "wua.parcel",
+                    "set_parcel_info_to_base_entity",
+                    [[], success_mapped_parcels],
+                )
+                or []
+            )
 
             if base_mapping_results:
                 success_mapped_in_base, failed_mapped_in_base = base_mapping_results
             else:
                 success_mapped_in_base, failed_mapped_in_base = 0, 0
 
-            _logger.info("Mapping parcels mapped in base entity: %d", success_mapped_in_base)
+            _logger.info(
+                "Mapping parcels mapped in base entity: %d", success_mapped_in_base
+            )
             if failed_mapped_in_base:
                 _logger.info(
                     "Mapping parcels failed to map in base entity: %d",
@@ -300,20 +315,36 @@ class ResPartner(models.Model):
                 )
 
             message_log = _("<b>Scan results</b>")
-            message_log += _("<br/>· Parcels found in base entity: %d") % num_of_parcels_found
+            message_log += (
+                _("<br/>· Parcels found in base entity: %d") % num_of_parcels_found
+            )
             if success_mapped:
-                message_log += _("<br/>· Parcels successfully mapped: %d") % success_mapped
+                message_log += (
+                    _("<br/>· Parcels successfully mapped: %d") % success_mapped
+                )
             if success_mapped_property_mismatch:
-                message_log += _("<br/>· Parcels property mismatch: %d") % success_mapped_property_mismatch
+                message_log += (
+                    _("<br/>· Parcels property mismatch: %d")
+                    % success_mapped_property_mismatch
+                )
             if parcel_not_found:
-                message_log += _("<br/>· Parcels not found in general entity: %d") % parcel_not_found
+                message_log += (
+                    _("<br/>· Parcels not found in general entity: %d")
+                    % parcel_not_found
+                )
             if failed_mapped:
                 message_log += _("<br/>· Parcels failed to scan: %d") % failed_mapped
             message_log += _("<br/><br/><b>Mapping results</b>")
             if success_mapped_in_base:
-                message_log += _("<br/>· Parcels mapped in base entity: %d") % success_mapped_in_base
+                message_log += (
+                    _("<br/>· Parcels mapped in base entity: %d")
+                    % success_mapped_in_base
+                )
             if failed_mapped_in_base:
-                message_log += _("<br/>· Parcels failed to map in base entity: %d") % failed_mapped_in_base
+                message_log += (
+                    _("<br/>· Parcels failed to map in base entity: %d")
+                    % failed_mapped_in_base
+                )
             record.message_post(body=message_log)
 
             if not cronjob:

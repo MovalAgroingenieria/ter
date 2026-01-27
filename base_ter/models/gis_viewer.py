@@ -8,7 +8,6 @@ import logging
 import pytz
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
-
 from odoo import api, fields, models
 from odoo.http import request
 
@@ -52,7 +51,9 @@ class GisViewer(models.AbstractModel):
 
     def action_gis_viewer(self):
         config = self.env["ir.config_parameter"].sudo()
-        base_url = config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        base_url = (
+            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        )
         codes = ",".join(rec.gis_code for rec in self if rec.gis_code)
 
         url = (
@@ -69,7 +70,9 @@ class GisViewer(models.AbstractModel):
     @api.model
     def action_gis_viewer_global(self):
         config = self.env["ir.config_parameter"].sudo()
-        base_url = config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        base_url = (
+            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        )
         url = f"{base_url}?arg={self._get_encrypted_credentials()}"
         return {"type": "ir.actions.act_url", "url": url, "target": "new"}
 
@@ -145,9 +148,11 @@ class GisViewer(models.AbstractModel):
             return ""
 
         config = self.env["ir.config_parameter"].sudo()
-        base_url = config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        base_url = (
+            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
+        )
         additional_args = (
-                config.get_param("base_ter.gis_viewer_previs_additional_args") or "mode=min"
+            config.get_param("base_ter.gis_viewer_previs_additional_args") or "mode=min"
         )
 
         url = f"{base_url}?{self._param_gis_selection}={self.gis_code}"

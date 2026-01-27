@@ -38,7 +38,9 @@ class TerGisParcelModel(models.Model):
         readonly=True,
     )
 
-    gis_data = fields.Text(string="GIS Data", compute="_compute_gis_data", readonly=True)
+    gis_data = fields.Text(
+        string="GIS Data", compute="_compute_gis_data", readonly=True
+    )
 
     aerial_image_small = fields.Image(
         string="Aerial Image (small size)",

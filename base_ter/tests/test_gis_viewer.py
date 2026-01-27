@@ -1,7 +1,6 @@
 from unittest.mock import patch
 
 from odoo.tests.common import TransactionCase, tagged
-from unittest.mock import patch
 
 
 @tagged("post_install", "-at_install")
