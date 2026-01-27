@@ -5,8 +5,8 @@
         <record id="product_category_02" model="product.category">
             <field name="name">Areas</field>
             <field name="billable_item_quantity_field">area_overhead</field>
-            <field name="billable_item_detail_desc">{%if billable_item.property_name%}Property: {{billable_item.property_name}}. {% endif %}Parcel: {{billable_item.parcel_id.alphanum_code}} ({{billable_item.parcel_id.area_official}} {{billable_item.parcel_id.area_unit_name}}). {{billable_item.profile_id.alphanum_code}}, {{billable_item.percentage_overhead}}% overhead.</field>
-            <field name="billable_item_domain">area_overhead &gt;0</field>
+            <field name="billable_item_detail_desc">{% if billable_item.property_name %}Property: {{ billable_item.property_name }}. {% endif %}Parcel: {{ billable_item.parcel_id.alphanum_code }} ({{ billable_item.parcel_id.area_official }} {{ billable_item.parcel_id.area_unit_name }}). {{ billable_item.profile_id.alphanum_code }}, {{ billable_item.percentage_overhead }}% overhead.</field>
+            <field name="billable_item_domain">area_overhead &gt; 0</field>
             <field name="aux_01_char_field">parcel_code</field>
             <field name="aux_01_int_field">number_of_invoices</field>
             <field name="aux_01_float_field">parcel_area_official</field>
@@ -15,6 +15,10 @@
             <field name="aux_03_char_field">property_name</field>
             <field name="aux_03_bool_field">partner_is_company</field>
         </record>
+
+        <record id="base_invoicing.product_category_01" model="product.category">
+            <field name="billable_item_domain">partner_code &gt; 0 and partner_parent_id is null and partner_partner_share and partner_id != 1</field>
+        </record>
     </data>
 
     <data>
@@ -22,12 +26,6 @@
             <field name="category_code">2</field>
             <field name="billable_item_model_id" ref="base_ter.model_ter_parcel_partnerlink"/>
             <field name="parent_id" ref="product.product_category_1"/>
-        </record>
-    </data>
-
-    <data noupdate="1">
-        <record id="base_invoicing.product_category_01" model="product.category">
-            <field name="billable_item_domain">partner_code&gt;0 and partner_parent_id is null and partner_partner_share and partner_id&lt;&gt;1</field>
         </record>
     </data>
 

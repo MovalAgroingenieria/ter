@@ -1,5 +1,5 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :target: https://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
 ============================
@@ -14,12 +14,15 @@ Area-based massive invoicing
 Description
 ===========
 
-Extension of the massive invoicing module (base_invoicing) to support area-based billing.
+Extension of the massive invoicing module (*base_invoicing*) to support
+area-based billing.
 
-Functionality:
+Functionality
+=============
 
-* Possibility to allocate a percentage of overhead costs to each parcel stakeholder.
-* Mass billing by surface area, where the amount to be invoiced comes from the percentage of overhead costs applied to the total area of the parcel (surface-based cost apportionment).
+* Allocation of a percentage of overhead costs to each parcel stakeholder.
+* Massive invoicing by surface area, where the invoiced amount is calculated
+  from the overhead percentage applied to the total parcel area.
 
 Credits
 =======
@@ -39,12 +42,13 @@ Contributors
 * Juanu Sandoval <jsandoval@moval.es>
 * Salvador Sánchez <ssanchez@moval.es>
 * Jorge Vera <jvera@moval.es>
+* César Andrés <candres@moval.es>
 
 Maintainer
 ----------
 
 .. image:: https://services.moval.es/static/images/logo_moval_small.png
-   :target: http://moval.es
+   :target: https://www.moval.es
    :alt: Moval Agroingeniería
 
 This module is maintained by Moval Agroingeniería.

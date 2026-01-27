@@ -13,7 +13,9 @@ class TestParcelInvoicing(SavepointCase):
         cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
         cls.parcel = cls.env["ter.parcel"].create({"name": "P-001"})
 
-        cls.owner_profile = cls.env.ref("base_ter.ter_profile_01", raise_if_not_found=False)
+        cls.owner_profile = cls.env.ref(
+            "base_ter.ter_profile_01", raise_if_not_found=False
+        )
         if not cls.owner_profile:
             cls.owner_profile = cls.env["ter.profile"].create({"name": "Owner"})
 
@@ -25,7 +27,9 @@ class TestParcelInvoicing(SavepointCase):
                 "company_id": cls.env.company.id,
             }
         )
-        cls.journal = cls.env["account.journal"].search([("type", "=", "general")], limit=1)
+        cls.journal = cls.env["account.journal"].search(
+            [("type", "=", "general")], limit=1
+        )
         if not cls.journal:
             cls.journal = cls.env["account.journal"].create(
                 {

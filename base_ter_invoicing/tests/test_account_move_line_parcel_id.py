@@ -20,9 +20,9 @@ class TestAccountMoveLineParcelId(TransactionCase):
         cls.move = cls.env["account.move"].create(
             {
                 "move_type": "entry",
-                "date": cls.env["ir.fields.converter"]._str_to_datetime(
-                    "2025-01-01 00:00:00"
-                ).date(),
+                "date": cls.env["ir.fields.converter"]
+                ._str_to_datetime("2025-01-01 00:00:00")
+                .date(),
                 "journal_id": cls.env["account.journal"]
                 .search([("type", "=", "general")], limit=1)
                 .id,

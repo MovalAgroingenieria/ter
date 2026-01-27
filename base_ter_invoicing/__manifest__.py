@@ -3,8 +3,10 @@
 
 {
     "name": "Area-based massive invoicing",
-    "summary": "Extension of the massive invoicing module (base_invoicing) "
-    "to support area-based billing.",
+    "summary": (
+        "Extension of the massive invoicing module (base_invoicing) "
+        "to support area-based billing."
+    ),
     "version": "18.0.1.0.0",
     "category": "Accounting/Accounting",
     "website": "https://www.moval.es",
@@ -18,7 +20,7 @@
         "base_ter",
         "base_invoicing",
     ],
-    "data_old": [
+    "data": [
         "data/product_category_data.xml",
         "views/ter_parcel_views.xml",
         "views/account_move_line_views.xml",
