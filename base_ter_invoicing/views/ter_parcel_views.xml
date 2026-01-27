@@ -15,15 +15,16 @@
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_value">
                             <field name="currency_id" invisible="1"/>
-                            <field name="total_invoiced" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_invoiced" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                         </span>
                         <span class="o_stat_text">Invoiced</span>
                     </div>
                 </button>
             </xpath>
+
             <xpath expr="//field[@name='percentage']" position="after">
                 <field name="area_ownership" string="🡸 Area"/>
-                <field name="percentage_overhead" string="% Overhead"/>
+                <field name="percentage_overhead"/>
                 <field name="area_overhead" string="🡸 Area"/>
             </xpath>
         </field>
@@ -35,7 +36,7 @@
         <field name="inherit_id" ref="base_ter.ter_parcel_partnerlink_view_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='percentage']" position="after">
-                <field name="percentage_overhead" string="% Overhead"/>
+                <field name="percentage_overhead"/>
             </xpath>
         </field>
     </record>
