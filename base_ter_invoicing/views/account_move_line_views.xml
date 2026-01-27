@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="account_move_line_view_tree" model="ir.ui.view">
+    <record id="account_move_line_view_list" model="ir.ui.view">
         <field name="name">account.move.line.view.list.inherit.base_ter_invoicing</field>
         <field name="model">account.move.line</field>
-        <field name="inherit_id" ref="base_invoicing.account_move_line_view_tree"/>
+        <field name="inherit_id" ref="base_invoicing.account_move_line_view_list"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
                 <field name="parcel_id" optional="hide"/>
@@ -21,9 +21,11 @@
                 <field name="parcel_id"/>
             </xpath>
             <xpath expr="//filter[@name='grouped_by_product_id']" position="after">
-                <filter name="grouped_by_parcel_id"
-                        string="Parcel"
-                        context="{'group_by': 'parcel_id'}"/>
+                <filter
+                    name="grouped_by_parcel_id"
+                    string="Parcel"
+                    context="{'group_by': 'parcel_id'}"
+                />
             </xpath>
         </field>
     </record>

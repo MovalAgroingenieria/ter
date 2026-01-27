@@ -7,15 +7,17 @@
         <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_gis_viewer']" position="after">
-                <button name="action_show_move_lines"
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-pencil-square-o"
-                        groups="account.group_account_invoice,account.group_account_readonly">
+                <button
+                    name="action_show_move_lines"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-pencil-square-o"
+                    groups="account.group_account_invoice,account.group_account_readonly"
+                >
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_value">
                             <field name="currency_id" invisible="1"/>
-                            <field name="total_invoiced" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="total_invoiced" widget="monetary"/>
                         </span>
                         <span class="o_stat_text">Invoiced</span>
                     </div>
@@ -23,9 +25,9 @@
             </xpath>
 
             <xpath expr="//field[@name='percentage']" position="after">
-                <field name="area_ownership" string="🡸 Area"/>
+                <field name="area_ownership"/>
                 <field name="percentage_overhead"/>
-                <field name="area_overhead" string="🡸 Area"/>
+                <field name="area_overhead"/>
             </xpath>
         </field>
     </record>
