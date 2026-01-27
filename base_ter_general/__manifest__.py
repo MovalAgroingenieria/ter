@@ -1,13 +1,12 @@
-# 2025 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 {
-    "name": "Base-Territory General Mapping Module",
-    "summary": "Synchronization of partners and parcels with base entities.",
+    "name": "Base Territory General",
+    "summary": "Synchronize partners and parcels with base entities.",
     "version": "18.0.1.0.0",
-    "category": "Territory Management",
+    "category": "Territory",
     "website": "https://www.moval.es",
-    "author": "Moval Agroingeniería",
+    "author": "Moval Agroingenieria",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
@@ -18,9 +17,9 @@
     ],
     "data": [
         "data/base_ter_general_cron.xml",
-        "views/ter_parcel_views.xml",
         "views/res_config_settings_views.xml",
         "views/res_partner_views.xml",
+        "views/ter_parcel_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

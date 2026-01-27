@@ -5,26 +5,23 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="base_ter.res_config_settings_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@name='gisviewer_settings']" position="after">
-                <div class="app_settings_block" string="Mapping" name="mapping_settings">
-                    <h2>Mapping</h2>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-12 col-lg-6 o_setting_box" id="div_jinja2_template">
-                            <div class="o_setting_left_pane"/>
-                            <div class="o_setting_right_pane">
-                                <label for="jinja2_template"/>
-                                <div class="text-muted">
-                                    The template used to render the partner information associated with a secondary parcel.
-                                    <br/>
-                                    Use {{ partner.attributes }} to access partner fields.
-                                </div>
-                                <div class="content-group mt16">
-                                    <field name="jinja2_template" widget="textarea" class="w-100"/>
-                                </div>
+            <xpath expr="//app[@name='base_ter']/block[@name='base_ter_gis_viewer']" position="after">
+                <block title="Mapping" name="base_ter_general_mapping">
+                    <setting
+                        id="base_ter_general_jinja2_template"
+                        string="Jinja2 template"
+                        help="Template used to render the partner information for secondary parcels."
+                    >
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="jinja2_template" widget="textarea" class="w-100"/>
+                            </div>
+                            <div class="text-muted mt8">
+                                Use {{ partner.attributes }} to access partner fields.
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </setting>
+                </block>
             </xpath>
         </field>
     </record>

@@ -3,7 +3,7 @@
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">base_ter_general.res_partner_form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="inherit_id" ref="base_ter.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button
@@ -105,7 +105,7 @@
         </field>
     </record>
 
-    <record id="base_ter_res_partner_action_ctx" model="ir.actions.act_window">
+    <record id="base_ter.res_partner_action" model="ir.actions.act_window">
         <field name="context">{'search_default_mapped_to_base_yes': 1}</field>
     </record>
 </odoo>

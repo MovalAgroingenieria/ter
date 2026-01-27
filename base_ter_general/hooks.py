@@ -4,8 +4,7 @@
 from odoo import SUPERUSER_ID, _, api
 
 
-def uninstall_hook(cr, registry):
-    env = api.Environment(cr, SUPERUSER_ID, {})
+def uninstall_hook(env):
     try:
         env.cr.savepoint()
         env.cr.execute(
