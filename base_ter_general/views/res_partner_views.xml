@@ -1,42 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <record id="view_partner_form" model="ir.ui.view">
-        <field name="name">res.partner.form.base_ter_general</field>
+        <field name="name">base_ter_general.res_partner_form</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/> <!-- inherit base -->
+        <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="inside">
-                <button name="map_base_entity"
-                        type="object"
-                        string="Map Base"
-                        class="oe_stat_button"
-                        icon="fa-rotate"
-                        invisible="context.get('context_no_ter', False)"
-                        attrs="{'invisible': [('mapped_to_base', '=', False)]}"
-                        groups="base_ter.group_ter_manager">
-                </button>
+                <button
+                    name="map_base_entity"
+                    type="object"
+                    string="Map Base"
+                    class="oe_stat_button"
+                    icon="fa-rotate-right"
+                    invisible="context.get('context_no_ter', False) or not mapped_to_base"
+                    groups="base_ter.group_ter_manager"
+                />
             </xpath>
+
             <xpath expr="//div[hasclass('oe_title')]" position="after">
                 <group>
-                    <field name="mapped_to_base" invisible="context.get('context_no_ter', False)"/>
+                    <field
+                        name="mapped_to_base"
+                        invisible="context.get('context_no_ter', False)"
+                    />
                 </group>
             </xpath>
+
             <xpath expr="//page[@name='internal_notes']" position="after">
-                <page name="connection_params" string="Connection" attrs="{'invisible': [('mapped_to_base', '=', False)]}">
+                <page
+                    name="connection_params"
+                    string="Connection"
+                    invisible="not mapped_to_base"
+                >
                     <field name="mapped_to_base" invisible="1"/>
-                    <group name="container_row_2">
-                        <group string="Server" name="server">
-                            <field name="base_connection_host" placeholder="http(s)://Host_or_IP..." />
-                            <field name="base_connection_port" placeholder="Port..." />
+                    <group name="connection_params_group">
+                        <group name="server" string="Server">
+                            <field
+                                name="base_connection_host"
+                                placeholder="http(s)://host_or_ip"
+                            />
+                            <field name="base_connection_port" placeholder="0"/>
                         </group>
-                        <group string="Database" name="database">
-                            <field name="base_connection_database" placeholder="Database name..." />
-                            <field name="base_connection_username" placeholder="User..." />
-                            <field name="base_connection_password" placeholder="Password..." password="True"/>
+                        <group name="database" string="Database">
+                            <field name="base_connection_database"/>
+                            <field name="base_connection_username"/>
+                            <field name="base_connection_password" password="1"/>
                         </group>
-                        <group string="Company" name="company">
-                            <field name="base_connection_company_id" placeholder="Company ID..." />
+                        <group name="company" string="Company">
+                            <field name="base_connection_company_id"/>
                         </group>
                     </group>
                 </page>
@@ -45,46 +56,56 @@
     </record>
 
     <record id="res_partner_view_tree" model="ir.ui.view">
-        <field name="name">res.partner.view.list.base_ter_general</field>
+        <field name="name">base_ter_general.res_partner_view_tree</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base_ter.res_partner_view_tree"/> <!-- inherit base_ter -->
+        <field name="inherit_id" ref="base_ter.res_partner_view_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_code']" position="before">
                 <header>
-                    <button name="map_base_entity"
-                            string=" Map Base"
-                            type="object"
-                            class="btn-primary"
-                            icon="fa-rotate"
-                            groups="base_ter.group_ter_manager"/>
+                    <button
+                        name="map_base_entity"
+                        string="Map Base"
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-rotate-right"
+                        groups="base_ter.group_ter_manager"
+                    />
                 </header>
             </xpath>
+
             <xpath expr="//field[@name='area_official_parcels']" position="after">
-                <field name="mapped_to_base" string="Mapped" class="text-center" optional="show"/>
+                <field
+                    name="mapped_to_base"
+                    string="Mapped"
+                    class="text-center"
+                    optional="show"
+                />
             </xpath>
         </field>
     </record>
 
     <record id="res_partner_view_search" model="ir.ui.view">
-        <field name="name">res.partner.view.search.base_ter_general</field>
+        <field name="name">base_ter_general.res_partner_view_search</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base_ter.res_partner_view_search"/> <!-- inherit base_ter -->
+        <field name="inherit_id" ref="base_ter.res_partner_view_search"/>
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='inactive']" position="before">
-                <filter name="mapped_to_base_yes"
-                        string="Partner Primary"
-                        domain="[('mapped_to_base', '=', True)]"/>
-                <filter name="mapped_to_base_no"
-                        string="Partner Secondary"
-                        domain="[('mapped_to_base', '=', False)]"/>
+                <filter
+                    name="mapped_to_base_yes"
+                    string="Partner Primary"
+                    domain="[('mapped_to_base', '=', True)]"
+                />
+                <filter
+                    name="mapped_to_base_no"
+                    string="Partner Secondary"
+                    domain="[('mapped_to_base', '=', False)]"
+                />
                 <separator/>
             </xpath>
         </field>
     </record>
 
-    <!-- Show by default primary partners -->
-    <record id="base_ter.res_partner_action" model="ir.actions.act_window">
+    <record id="base_ter_res_partner_action_ctx" model="ir.actions.act_window">
         <field name="context">{'search_default_mapped_to_base_yes': 1}</field>
     </record>
-
 </odoo>
