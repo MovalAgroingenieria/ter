@@ -7,8 +7,7 @@
         <field name="inherit_id" ref="base_invoicing.account_move_line_view_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="parcel_id" string="Parcel"
-                       optional="hide"/>
+                <field name="parcel_id" optional="hide"/>
             </xpath>
         </field>
     </record>
@@ -19,11 +18,12 @@
         <field name="inherit_id" ref="base_invoicing.account_move_line_view_search"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="parcel_id" string="Parcel"/>
+                <field name="parcel_id"/>
             </xpath>
             <xpath expr="//filter[@name='grouped_by_product_id']" position="after">
-                <filter name="grouped_by_parcel_id" string="Parcel"
-                        context="{'group_by':'parcel_id'}"/>
+                <filter name="grouped_by_parcel_id"
+                        string="Parcel"
+                        context="{'group_by': 'parcel_id'}"/>
             </xpath>
         </field>
     </record>
