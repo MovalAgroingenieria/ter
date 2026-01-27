@@ -1,44 +1,36 @@
-# 2025 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# 2024-2026 Moval Agroingeniería
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 from odoo import api, fields, models
 
 
 class TerParcel(models.Model):
-    _name = "ter.parcel"
-    _inherit = ["ter.parcel"]
+    _inherit = "ter.parcel"
 
     mapped_from_base = fields.Boolean(
-        string="Mapped",
-        default=False,
         readonly=True,
         store=True,
         compute="_compute_mapped_from_base",
-        help="Indicates if this parcel has been mapped from base entity.",
+        help="Whether this parcel has been mapped from the base entity.",
     )
-
     last_update = fields.Datetime(
-        default=False,
         readonly=True,
-        help="Date of the last update from with general instance.",
+        help="Last update timestamp received from the base entity.",
     )
-
     is_secondary = fields.Boolean(
-        string="Secondary",
         default=False,
-        help="Indicates if this parcel is a secondary parcel.",
+        help="Whether this parcel is marked as secondary.",
     )
-
     partner_info = fields.Text(
-        string="Partner Information Base Entity",
         readonly=True,
-        help="Information about the partner associated with this parcel.",
+        help="Partner information received from the base entity.",
     )
 
     @api.depends("is_secondary")
     def _compute_mapped_from_base(self):
         for record in self:
-            if not record.is_secondary:
-                record.mapped_from_base = False
-                record.last_update = False
-                record.partner_info = False
+            if record.is_secondary:
+                continue
+            record.mapped_from_base = False
+            record.last_update = False
+            record.partner_info = False
