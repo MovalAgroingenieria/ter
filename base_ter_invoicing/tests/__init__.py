@@ -1,1 +1,0 @@
-from . import test_account_move_line_parcel_id, test_parcel_invoicing, test_ter_parcel_partnerlink

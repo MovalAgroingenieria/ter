@@ -29,7 +29,7 @@ class TerParcel(models.Model):
         ]
         grouped = aml.read_group(domain, ["price_subtotal:sum"], ["parcel_id"])
         totals = {
-            g["parcel_id"][0]: g["price_subtotal_sum"]
+            g["parcel_id"][0]: g["price_subtotal"]
             for g in grouped
             if g.get("parcel_id")
         }
