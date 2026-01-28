@@ -9,13 +9,11 @@
     "website": "https://www.moval.es",
     "author": "Moval Agroingeniería",
     "license": "AGPL-3",
-    "application": False,
-    "installable": True,
     "depends": [
         "base_ter",
         "sms_wausms",
     ],
-    "data_old": [
+    "data": [
         "views/ter_parcel_views.xml",
         "views/ter_property_views.xml",
     ],
