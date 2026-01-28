@@ -1,9 +1,8 @@
-.o_base_adi_res_province [data-name="cadastral_code"] {
-    text-align: center;
-    width: 80px;
-    min-width: 80px;
-}
+/* 2024 Moval Agroingeniería
+ * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+ */
 
+.o_base_adi_res_province [data-name="cadastral_code"],
 .o_base_adi_res_municipality [data-name="cadastral_code"] {
     text-align: center;
     width: 80px;

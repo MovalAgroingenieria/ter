@@ -13,12 +13,13 @@
     "depends": [
         "base_ter",
     ],
-    "data_old": [
+    "data": [
         "data/res_admregion_data.xml",
         "data/res_province_data.xml",
         "views/res_province_views.xml",
         "views/res_municipality_views.xml",
         "views/ter_parcel_views.xml",
+        "views/res_config_settings_views.xml",
     ],
     "assets": {
         "web.assets_backend": [
@@ -26,6 +27,4 @@
         ]
     },
     "post_init_hook": "post_init_hook",
-    "installable": True,
-    "application": False,
 }

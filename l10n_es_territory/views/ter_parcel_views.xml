@@ -7,67 +7,73 @@
         <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_gis_viewer']" position="before">
-                <button name="action_show_cadastral_form"
-                        type="object"
-                        class="oe_stat_button"
-                        icon="fa-info-circle"
-                        attrs="{'invisible': [('official_code', '=', False)]}">
+                <button
+                    name="action_show_cadastral_form"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-info-circle"
+                    invisible="not official_code"
+                >
                     <span>Cadastre</span>
                 </button>
             </xpath>
+
             <xpath expr="//field[@name='municipality_id']" position="after">
-                <field name="parcel_type"
-                       string="Type"
-                       widget="radio" options="{'horizontal': true}"/>
-                <field name="official_code_urban"
-                       string="Cadastral Ref."
-                       attrs="{'invisible': [('parcel_type', '!=', '02_U')]}"/>
-                <span name="cadastral_name" class="o_form_label o_td_label"
-                      attrs="{'invisible': [('parcel_type', '!=', '01_R')]}">
+                <field name="parcel_type" widget="radio" options="{'horizontal': true}"/>
+
+                <field name="official_code_urban" invisible="parcel_type != '02_U'"/>
+
+                <div name="cadastral_name" class="o_form_label" invisible="parcel_type != '01_R'">
                     Sec / Pol / Par
-                </span>
-                <div name="div_line_cadastral_fields" class="o_address_format"
-                     style="display: flex; gap: 10px;"
-                     attrs="{'invisible': [('parcel_type', '!=', '01_R')]}">
-                    <field name="cadastral_sector"
-                           style="max-width:20px"/>
+                </div>
+
+                <div
+                    name="div_line_cadastral_fields"
+                    class="o_address_format"
+                    style="display: flex; gap: 10px;"
+                    invisible="parcel_type != '01_R'"
+                >
+                    <field name="cadastral_sector" style="max-width:20px"/>
                     <span>/</span>
-                    <field name="cadastral_polygon"
-                           style="max-width:30px"/>
+                    <field name="cadastral_polygon" style="max-width:30px"/>
                     <span>/</span>
-                    <field name="cadastral_parcel"
-                           style="max-width:45px"/>
+                    <field name="cadastral_parcel" style="max-width:45px"/>
                 </div>
             </xpath>
+
             <xpath expr="//field[@name='official_code']" position="attributes">
-                <attribute name="string">Cadastral Ref.</attribute>
-                <attribute name="attrs">{'invisible': [('parcel_type', '!=', '01_R')]}</attribute>
+                <attribute name="invisible">parcel_type != '01_R'</attribute>
             </xpath>
+
             <xpath expr="//field[@name='official_code']" position="after">
-                <field name="cadastral_subparcel" string="Subparcel"
-                       attrs="{'invisible': [('parcel_type', '=', '02_U')]}"/>
+                <field name="cadastral_subparcel" invisible="parcel_type == '02_U'"/>
             </xpath>
+
             <xpath expr="//field[@name='area_official']" position="after">
-                <field name="cadastral_area" string="Cadastral Area (m²)"/>
+                <field name="cadastral_area"/>
             </xpath>
         </field>
     </record>
 
-    <record id="ter_parcel_view_tree" model="ir.ui.view">
+    <record id="ter_parcel_view_list" model="ir.ui.view">
         <field name="name">ter.parcel.view.list.l10n_es_territory</field>
         <field name="model">ter.parcel</field>
         <field name="inherit_id" ref="base_ter.ter_parcel_view_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='official_code']" position="after">
-                <field name="cadastral_subparcel" string="Subp."
-                       class="text-center"/>
+                <field name="cadastral_subparcel" class="text-center"/>
             </xpath>
+
             <xpath expr="//button[@name='action_gis_viewer']" position="before">
                 <field name="official_code" invisible="1"/>
-                <button name="action_show_cadastral_form"
-                        title="Cadastral Form" type="object" class="oe_stat_button"
-                        icon="fa-info-circle"
-                        attrs="{'invisible': [('official_code', '=', False)]}"/>
+                <button
+                    name="action_show_cadastral_form"
+                    type="object"
+                    icon="fa-info-circle"
+                    string="Cadastre"
+                    class="btn btn-link"
+                    invisible="not official_code"
+                />
             </xpath>
         </field>
     </record>
@@ -79,17 +85,24 @@
         <field name="arch" type="xml">
             <xpath expr="//filter[@name='partner_id_no']" position="after">
                 <separator/>
-                <filter name="parcel_type_01_r"
-                        string="Parcel Type: Rustic"
-                        domain="[('parcel_type', '=', '01_R')]"/>
-                <filter name="parcel_type_02_u"
-                        string="Parcel Type: Urban"
-                        domain="[('parcel_type', '=', '02_U')]"/>
+                <filter
+                    name="parcel_type_01_r"
+                    string="Parcel Type: Rustic"
+                    domain="[('parcel_type', '=', '01_R')]"
+                />
+                <filter
+                    name="parcel_type_02_u"
+                    string="Parcel Type: Urban"
+                    domain="[('parcel_type', '=', '02_U')]"
+                />
             </xpath>
+
             <xpath expr="//filter[@name='grouped_by_property_id']" position="after">
-                <filter name="grouped_by_parcel_type"
-                        string="Parcel Type"
-                 context="{'group_by':'parcel_type'}"/>
+                <filter
+                    name="grouped_by_parcel_type"
+                    string="Parcel Type"
+                    context="{'group_by': 'parcel_type'}"
+                />
             </xpath>
         </field>
     </record>
