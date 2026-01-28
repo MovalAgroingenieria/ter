@@ -14,7 +14,7 @@
         "base_ter",
         "l10n_es_territory",
     ],
-    "data_old": [
+    "data": [
         "security/ir.model.access.csv",
         "data/ter_parcel_sigpaclink_cron.xml",
         "views/res_config_settings_view.xml",
@@ -34,9 +34,7 @@
             "l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css",
         ],
     },
-    "installable": True,
     "pre_init_hook": "pre_init_hook",
     "post_init_hook": "post_init_hook",
     "uninstall_hook": "uninstall_hook",
-    "application": False,
 }

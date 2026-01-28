@@ -1,119 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <record id="res_config_settings_view_form" model="ir.ui.view">
-        <field name="name">Parameters</field>
+        <field name="name">l10n_es_territory_sigpac.res_config_settings_view_form</field>
         <field name="model">res.config.settings</field>
-        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="priority" eval="30"/>
+        <field name="inherit_id" ref="base_ter.res_config_settings_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@data-key='base_ter']" position="inside">
-                <div class="app_settings_block" data-string="SIGPAC Settings" string="SIGPAC Settings" data-key="sigpac_settings">
-                    <h2>SIGPAC Settings</h2>
-                    <div class="row mt16 o_settings_container" name="sigpac_settings_container">
-                        <div id="div_sigpac_path" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="sigpac_path"/>
-                                <div class="text-muted">
-                                    Path of the shapefiles that contains SIGPAC
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="sigpac_path" string="Path of the shapefiles" style="width:300px"/>
-                                    </div>
-                                </div>
+            <xpath expr="//app[@name='base_ter']" position="inside">
+                <block title="SIGPAC" name="sigpac_settings">
+                    <setting id="sigpac_path"
+                             string="SIGPAC shapefiles path"
+                             help="Path of the official shapefiles of SIGPAC, in the server.">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="sigpac_path" style="width: 300px;"/>
                             </div>
                         </div>
-                        <div id="div_sigpac_names" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="sigpac_names"/>
-                                <div class="text-muted">
-                                    Names of the shapefiles that contains SIGPAC
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="sigpac_names" string="Names of the shapefiles" style="width:300px"/>
-                                    </div>
-                                </div>
+                    </setting>
+
+                    <setting id="sigpac_names"
+                             string="SIGPAC shapefiles names"
+                             help="Names of the official shapefiles of SIGPAC (comma-separated).">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="sigpac_names" style="width: 300px;"/>
                             </div>
                         </div>
-                        <div id="div_wms_sigpac_url" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="wms_sigpac_url"/>
-                                <div class="text-muted">
-                                    URL of the WMS service used to obtain SIGPAC images
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="wms_sigpac_url" style="width:100%"/>
-                                    </div>
-                                </div>
+                    </setting>
+
+                    <setting id="wms_sigpac_url"
+                             string="WMS SIGPAC URL"
+                             help="URL of the WMS service used to obtain SIGPAC images.">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="wms_sigpac_url" style="width: 100%;"/>
                             </div>
                         </div>
-                        <div id="div_wms_sigpac_layer" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="wms_sigpac_layer"/>
-                                <div class="text-muted">
-                                    WMS service layer used to obtain SIGPAC images
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="wms_sigpac_layer" style="width:100%"/>
-                                    </div>
-                                </div>
+                    </setting>
+
+                    <setting id="wms_sigpac_layer"
+                             string="WMS SIGPAC layer"
+                             help="WMS service layer used to obtain SIGPAC images.">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="wms_sigpac_layer" style="width: 100%;"/>
                             </div>
                         </div>
-                        <div id="div_sigpac_minimum_intersection_percentage" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="sigpac_minimum_intersection_percentage"/>
-                                <div class="text-muted">
-                                    Minimal Intersection (%)
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="sigpac_minimum_intersection_percentage" string="Minimal Intersection(%)" style="width:100px"/>
-                                    </div>
-                                </div>
+                    </setting>
+
+                    <setting id="sigpac_minimum_intersection_percentage"
+                             string="Minimum intersection (%)"
+                             help="Minimum intersection percentage allowed for parcels and SIGPAC enclosures.">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="sigpac_minimum_intersection_percentage" style="width: 90px;"/>
+                                <span class="oe_inline">%</span>
                             </div>
                         </div>
-                        <div id="div_action_load_sigpac" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="action_load_sigpac"/>
-                                <div class="mt16">
-                                    <button type="object" name="action_load_sigpac" string="Load SIGPAC enclosures" icon="fa-download" class="oe_inline oe_link"/>
-                                </div>
-                                <div class="mt16">
-                                    <label for="action_load_sigpac" string="IMPORTANT: If the 'Min. Intersection' parameter is changed, it will be necessary to reload the SIGPAC enclosures."/>
-                                </div>
+                    </setting>
+
+                    <setting id="sigpac_viewer_url"
+                             string="SIGPAC viewer URL template"
+                             help="URL template for SIGPAC viewer (Jinja2).">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="sigpac_viewer_url" style="width: 100%;"/>
                             </div>
                         </div>
-                        <div id="div_sigpac_viewer_url" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="sigpac_viewer_url"/>
-                                <div class="text-muted">
-                                    Url template for SIGPAC viewer
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="sigpac_viewer_url" string="SIGPAC viewer url" style="width:100%"/>
-                                    </div>
-                                </div>
+                    </setting>
+
+                    <setting id="python_venv_url"
+                             string="Python interpreter"
+                             help="Python interpreter path used to run the SIGPAC import helper.">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="python_venv_url" style="width: 100%;"/>
                             </div>
                         </div>
-                        <div id="div_python_venv_url" class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <label for="python_venv_url"/>
-                                <div class="text-muted">
-                                    Url for python virtual environment
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="python_venv_url" string="Python virtual enviroments" style="width:100%"/>
-                                    </div>
-                                </div>
+                    </setting>
+
+                    <setting id="action_load_sigpac"
+                             string="Load SIGPAC enclosures"
+                             help="Imports the SIGPAC enclosures into the GIS tables and refreshes intersections.">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <button type="object"
+                                        name="action_load_sigpac"
+                                        string="Load SIGPAC enclosures"
+                                        icon="fa-download"
+                                        class="oe_inline oe_link"/>
+                            </div>
+                            <div class="text-muted mt16">
+                                IMPORTANT: If the 'Minimum intersection' parameter is changed, it is necessary to reload the SIGPAC enclosures.
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </setting>
+                </block>
             </xpath>
         </field>
     </record>

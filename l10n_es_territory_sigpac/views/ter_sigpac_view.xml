@@ -2,25 +2,28 @@
 <odoo>
 
     <record id="ter_sigpac_view_form" model="ir.ui.view">
-        <field name="name">SIGPAC enclosures (form view)</field>
+        <field name="name">l10n_es_territory_sigpac.ter_sigpac_view_form</field>
         <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
-            <form duplicate="false" create="false"
-                  delete="false" edit="false">
+            <form duplicate="false" create="false" delete="false" edit="false">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_sigpac_viewer"
-                                type="object" class="oe_stat_button"
-                                icon="fa-map-marker" title="Sigpac Viewer">
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-map-marker"
+                                title="SIGPAC Viewer">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_text">SIGPAC</span>
                                 <span class="o_stat_text">Viewer</span>
                             </div>
                         </button>
+
                         <button name="action_get_parcels"
-                                type="object" class="oe_stat_button"
+                                type="object"
+                                class="oe_stat_button"
                                 icon="fa-moval-parcel"
-                                attrs="{'invisible': [('number_of_sigpaclinks','=',0)]}">
+                                invisible="number_of_sigpaclinks == 0">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_value">
                                     <field name="number_of_sigpaclinks"/>
@@ -29,33 +32,33 @@
                             </div>
                         </button>
                     </div>
+
                     <group name="master_data">
                         <group name="master_data_left">
-                            <div name="section_sigpac_identification" colspan="2"
-                                 class="text-center mb-4">
-                                <p style="width:100%" class="border p-2 fw-bold">IDENTIFICATION</p>
+                            <div name="section_sigpac_identification" colspan="2" class="text-center mb-4">
+                                <p class="border p-2 fw-bold" style="width:100%">IDENTIFICATION</p>
                             </div>
-                            <field name="dn_oid" string="SIGPAC Id."/>
-                            <field name="provincia" string="Province Code"/>
-                            <field name="municipio" string="Municipality Code"/>
-                            <field name="agregado" string="Aggregate"/>
-                            <field name="zona" string="Zone"/>
-                            <field name="poligono" string="Polygon"/>
-                            <field name="parcela" string="Parcel"/>
-                            <field name="recinto" string="Enclosure"/>
+                            <field name="dn_oid"/>
+                            <field name="provincia"/>
+                            <field name="municipio"/>
+                            <field name="agregado"/>
+                            <field name="zona"/>
+                            <field name="poligono"/>
+                            <field name="parcela"/>
+                            <field name="recinto"/>
                         </group>
+
                         <group name="master_data_right">
-                            <div name="section_sigpac_data" colspan="2"
-                                 class="text-center mb-4">
-                                <p style="width:100%" class="border p-2 fw-bold">SIGPAC DATA</p>
+                            <div name="section_sigpac_data" colspan="2" class="text-center mb-4">
+                                <p class="border p-2 fw-bold" style="width:100%">SIGPAC DATA</p>
                             </div>
-                            <field name="uso_sigpac" string="Land Use"/>
-                            <field name="coef_rega" string="Irrig. Coef. (0-100)"/>
-                            <field name="dn_surface_ha" string="Area (ha)"/>
-                            <field name="dn_perim" string="Perimeter (m)"/>
-                            <field name="pend_media_porc" string="Medium Slope (%)"/>
-                            <field name="coef_admis" string="Past. Coef. (0-100)"/>
-                            <field name="incidencia" string="Incidence Codes"/>
+                            <field name="uso_sigpac"/>
+                            <field name="coef_rega"/>
+                            <field name="dn_surface_ha"/>
+                            <field name="dn_perim"/>
+                            <field name="pend_media_porc"/>
+                            <field name="coef_admis"/>
+                            <field name="incidencia"/>
                         </group>
                     </group>
                 </sheet>
@@ -64,44 +67,44 @@
     </record>
 
     <record id="ter_sigpac_view_tree" model="ir.ui.view">
-        <field name="name">SIGPAC enclosures (tree view)</field>
+        <field name="name">l10n_es_territory_sigpac.ter_sigpac_view_list</field>
         <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
-            <list class="o_l10n_es_territory_sigpac_sigpac_view_tree"
-                  create="false" delete="false">
+            <list class="o_l10n_es_territory_sigpac_sigpac_view_tree" create="false" delete="false">
                 <field name="name"
                        string="Code: prov. - munic. - aggreg. - zone - polyg. - parcel - enclos."/>
                 <button name="action_sigpac_viewer"
-                        type="object" class="oe_stat_button"
-                        icon="fa-map-marker" title="Sigpac Viewer"/>
+                        type="object"
+                        icon="fa-map-marker"
+                        title="SIGPAC Viewer"/>
                 <field name="dn_oid" string="SIGPAC Id."/>
-                <field name="dn_surface_ha" string="Area (ha)"/>
+                <field name="dn_surface_ha"/>
                 <field name="pend_media_porc" string="Slope %"/>
-                <field name="coef_rega" string="Irrig. Coef. (0-100)"/>
-                <field name="uso_sigpac" string="Land Use"/>
+                <field name="coef_rega"/>
+                <field name="uso_sigpac"/>
             </list>
         </field>
     </record>
 
     <record id="ter_sigpac_view_search" model="ir.ui.view">
-        <field name="name">SIGPAC enclosures (search view)</field>
+        <field name="name">l10n_es_territory_sigpac.ter_sigpac_view_search</field>
         <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" string="Code"/>
                 <field name="dn_oid" string="SIGPAC Id."/>
-                <field name="uso_sigpac" string="Land Use"/>
+                <field name="uso_sigpac"/>
                 <group expand="0" string="Group By">
                     <filter string="Land Use"
                             name="grouped_uso_sigpac"
-                     context="{'group_by':'uso_sigpac'}"/>
+                            context="{'group_by': 'uso_sigpac'}"/>
                 </group>
             </search>
         </field>
     </record>
 
     <record id="ter_sigpac_view_pivot" model="ir.ui.view">
-        <field name="name">ter.sigpac.view.pivot</field>
+        <field name="name">l10n_es_territory_sigpac.ter_sigpac_view_pivot</field>
         <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
             <pivot string="Area (ha)">
@@ -112,7 +115,7 @@
     </record>
 
     <record id="ter_sigpac_view_graph" model="ir.ui.view">
-        <field name="name">ter.sigpac.view.graph</field>
+        <field name="name">l10n_es_territory_sigpac.ter_sigpac_view_graph</field>
         <field name="model">ter.sigpac</field>
         <field name="arch" type="xml">
             <graph string="Area (ha)">
@@ -122,21 +125,16 @@
         </field>
     </record>
 
-    <record id="ter_sigpac_action"
-            model="ir.actions.act_window">
+    <record id="ter_sigpac_action" model="ir.actions.act_window">
         <field name="name">SIGPAC enclosures</field>
         <field name="res_model">ter.sigpac</field>
         <field name="view_mode">list,form,pivot,graph</field>
         <field name="view_ids"
-         eval="[(5, 0),
-                (0, 0, {'view_mode': 'list',
-                        'view_id': ref('ter_sigpac_view_tree')}),
-                (0, 0, {'view_mode': 'form',
-                        'view_id': ref('ter_sigpac_view_form')}),
-                (0, 0, {'view_mode': 'pivot',
-                        'view_id': ref('ter_sigpac_view_pivot')}),
-                (0, 0, {'view_mode': 'graph',
-                        'view_id': ref('ter_sigpac_view_graph')})]"/>
+               eval="[(5, 0),
+                      (0, 0, {'view_mode': 'list', 'view_id': ref('ter_sigpac_view_tree')}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('ter_sigpac_view_form')}),
+                      (0, 0, {'view_mode': 'pivot', 'view_id': ref('ter_sigpac_view_pivot')}),
+                      (0, 0, {'view_mode': 'graph', 'view_id': ref('ter_sigpac_view_graph')})]"/>
         <field name="search_view_id" ref="ter_sigpac_view_search"/>
     </record>
 
@@ -145,6 +143,6 @@
               parent="base_ter.menu_territory"
               sequence="30"
               action="ter_sigpac_action"
-              groups="base_ter.group_ter_user"
-              />
+              groups="base_ter.group_ter_user"/>
+
 </odoo>

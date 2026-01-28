@@ -6,31 +6,44 @@
 SIGPAC Integration for Territory
 ===============================================
 
-Integration of the SIGPAC enclosures, and creation of a spatial link with
-the parcels.
+This module integrates SIGPAC enclosures and creates a spatial link with
+Territory parcels.
 
 Description
 ===========
 
-This module allows to link the parcels with the official SIGPAC enclosures,
-using spatial functions of the PostGis extension of PostgreSql.
+This module links parcels with the official SIGPAC enclosures using spatial
+functions provided by the PostGIS extension of PostgreSQL.
 
-Functionality:
-* Load of SIGPAC enclosures of each municipality.
-* Automatic spatial calculation of the SIGPAC enclosures linked to parcels.
-* Extraction of alphanumeric data from SIGPAC.
+Main features:
 
-Requirements:
+* Import of SIGPAC enclosure geometries from official shapefiles.
+* Automatic spatial calculation of SIGPAC enclosures linked to parcels.
+* Extraction of SIGPAC alphanumeric data and visualization shortcuts.
 
-* Postgis extension installed in the database.
-* Table "ter_gis_parcel" in the database.
-* "ogr2ogr" installed in the system.
-* "SHP Path" and "SHP Names" parameters with values.
+Requirements
+============
 
-Parameter Examples:
+* PostGIS extension installed in the database.
+* Table ``ter_gis_parcel`` available in the database (parcels must be mapped to GIS).
+* ``ogr2ogr`` installed on the server.
+* SIGPAC settings configured at company level.
 
-* SHP Path: /tmp
-* SHP Names: rec_30016_2022_20220113.shp,rec_30030_2022_20220113.shp("poligono">=529 and "poligono"<=539),rec_30045_2022_20220113.shp
+Configuration
+=============
+
+The configuration is available in *Settings > Territory* (``base_ter`` app).
+All parameters are company-specific.
+
+* **SIGPAC shapefiles path**: e.g. ``/tmp``
+* **SIGPAC shapefiles names**: comma-separated list of shapefiles.
+  Optionally, each file may include a filter expression using parentheses.
+
+Example:
+
+* ``rec_30016_2022_20220113.shp``
+* ``rec_30030_2022_20220113.shp("poligono">=529 and "poligono"<=539)``
+* ``rec_30045_2022_20220113.shp``
 
 Credits
 =======
@@ -39,6 +52,7 @@ Credits
 
 Contributors
 ------------
+
 * Guillermo Amante <gamante@moval.es>
 * Samuel Fernández <sfernandez@moval.es>
 * Alberto Hernández <ahernandez@moval.es>
@@ -49,6 +63,7 @@ Contributors
 * Juanu Sandoval <jsandoval@moval.es>
 * Salvador Sánchez <ssanchez@moval.es>
 * Jorge Vera <jvera@moval.es>
+* César Andrés <candres@moval.es>
 
 Maintainer
 ----------
