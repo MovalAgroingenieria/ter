@@ -2289,17 +2289,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_graph
 msgid "Ter Unit"
-msgstr ""
+msgstr "Unidad Territorial"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_pivot
 msgid "Ter Unit Items"
-msgstr ""
+msgstr "Unidad Territorial"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_project__unit_ids
 msgid "Ter Unit(s)"
-msgstr ""
+msgstr "Unidad Territorial"
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
@@ -2325,7 +2325,7 @@ msgstr "Territorio"
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_ter_project_project_date_greater
 msgid "The project's start date must be before its end date."
-msgstr ""
+msgstr "La fecha de comienzo del proyecto debe ser inferior a la fecha de fin"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__diff_areas_threshold_exceeded

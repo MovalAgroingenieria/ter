@@ -18,6 +18,8 @@
                 <field name="unit_amount" sum="Quantity" optional="hide"/>
                 <field name="product_uom_id" optional="hide"/>
                 <field name="partner_id" optional="hide"/>
+                <field name="parcel_id"/>
+                <field name="area_official"/>
                 <field name="company_id" groups="base.group_multi_company" optional="show"/>
                 <field name="amount" sum="Total" optional="show"/>
                 <field name="date"/>
@@ -65,7 +67,7 @@
                         </group>
                         <group name="amount" string="Product/Amount">
 
-                            <field name="categ_id" required="1" />
+                            <field name="categ_id" required="1"/>
                             <field name="product_tmpl_id"
                                    invisible="not categ_id"
                                    required="categ_id != False"
