@@ -8,7 +8,7 @@ class TerGisParcelModel(models.Model):
     _name = "ter.gis.parcel.model"
     _description = "GIS Parcel"
     _auto = False
-    _log_access = True  # avoid warning for Image fields on SQL view models
+    _log_access = True
 
     _aerial_image_size_small = 128
 
@@ -38,9 +38,7 @@ class TerGisParcelModel(models.Model):
         readonly=True,
     )
 
-    gis_data = fields.Text(
-        string="GIS Data", compute="_compute_gis_data", readonly=True
-    )
+    gis_data = fields.Text(string="GIS Data", compute="_compute_gis_data", readonly=True)
 
     aerial_image_small = fields.Image(
         string="Aerial Image (small size)",
@@ -50,12 +48,13 @@ class TerGisParcelModel(models.Model):
         readonly=True,
     )
 
-    @api.depends("parcel_id", "diff_areas_threshold_exceeded")
+    @api.depends("parcel_id", "parcel_id.diff_areas_threshold_exceeded")
     def _compute_diff_areas_threshold_exceeded_str(self):
         for record in self:
             if not record.parcel_id:
                 record.diff_areas_threshold_exceeded_str = ""
                 continue
+
             record.diff_areas_threshold_exceeded_str = (
                 _("CHECK") if record.diff_areas_threshold_exceeded else _("ok")
             )
@@ -76,9 +75,7 @@ class TerGisParcelModel(models.Model):
                 continue
 
             bbox = parcel.bounding_box_str or ""
-            pos = bbox.find("(")
-            if pos != -1:
-                bbox = bbox[pos:]
+            bbox = bbox[bbox.find("(") :] if "(" in bbox else bbox
 
             record.gis_data = "\n".join(
                 [
