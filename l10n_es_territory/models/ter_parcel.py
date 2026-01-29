@@ -1,10 +1,10 @@
-# 2024+2026 Moval Agroingeniería
+# Copyright 2024+2026 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
-# pylint: disable=protected-access
 
 from xml.etree import ElementTree
 
 import requests
+
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -12,47 +12,29 @@ from odoo.exceptions import ValidationError
 class TerParcel(models.Model):
     _inherit = "ter.parcel"
 
-    # Size of the "official_code_urban" field in the model.
     MAX_SIZE_OFFICIAL_CODE_URBAN = 50
-
-    # Size of a cadastral field (sector, polygon or parcel), in the model.
     MAX_SIZE_CADASTRAL_FIELD = 10
 
-    # Size of the "rc1" part of a cadastral reference.
     SIZE_RC1 = 7
-
-    # Size of the "rc2" part of a cadastral reference.
     SIZE_RC2 = 7
 
-    # Timeout for the cadastral-area request (sec).
     REQUEST_TIMEOUT = 5
 
-    # Cadastral reference: size of the cadastral code of the municipality.
     _SIZE_MUNICIPALITY_CADASTRAL_CODE = 5
-
-    # Cadastral reference: size of the cadastral sector.
     _SIZE_CADASTRAL_SECTOR = 1
-
-    # Cadastral reference: size of the cadastral polygon.
     _SIZE_CADASTRAL_POLYGON = 3
-
-    # Cadastral reference: size of the cadastral parcel.
     _SIZE_CADASTRAL_PARCEL = 5
 
-    # Cadastral URL to get the cadastral data of a parcel from its cadastral reference.
     _URL_CADASTRAL_DATA = (
         "http://ovc.catastro.meh.es/ovcservweb/"
         "OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPRC?"
         "Provincia=&Municipio=&RC="
     )
-
-    # Cadastral URL to show the official form mapped to a cadastral reference.
     _URL_CADASTRAL_FORM = (
         "https://www1.sedecatastro.gob.es/"
         "CYCBienInmueble/OVCListaBienes.aspx?del=&muni=&rc1=rc1val&rc2=rc2val"
     )
 
-    # Update cadastral area when entering cadastral reference?
     _AUTOMATIC_UPDATE_CADASTRAL_DATA = True
 
     parcel_type = fields.Selection(
@@ -65,22 +47,11 @@ class TerParcel(models.Model):
         index=True,
     )
 
-    official_code_urban = fields.Char(
-        size=MAX_SIZE_OFFICIAL_CODE_URBAN,
-    )
+    official_code_urban = fields.Char(size=MAX_SIZE_OFFICIAL_CODE_URBAN)
 
-    cadastral_sector = fields.Char(
-        size=MAX_SIZE_CADASTRAL_FIELD,
-        default="A",
-    )
-
-    cadastral_polygon = fields.Char(
-        size=MAX_SIZE_CADASTRAL_FIELD,
-    )
-
-    cadastral_parcel = fields.Char(
-        size=MAX_SIZE_CADASTRAL_FIELD,
-    )
+    cadastral_sector = fields.Char(size=MAX_SIZE_CADASTRAL_FIELD, default="A")
+    cadastral_polygon = fields.Char(size=MAX_SIZE_CADASTRAL_FIELD)
+    cadastral_parcel = fields.Char(size=MAX_SIZE_CADASTRAL_FIELD)
 
     official_code = fields.Char(
         store=True,
@@ -88,13 +59,9 @@ class TerParcel(models.Model):
         readonly=True,
     )
 
-    cadastral_area = fields.Integer(
-        default=0,
-    )
+    cadastral_area = fields.Integer(default=0)
 
-    cadastral_subparcel = fields.Char(
-        size=MAX_SIZE_CADASTRAL_FIELD,
-    )
+    cadastral_subparcel = fields.Char(size=MAX_SIZE_CADASTRAL_FIELD)
 
     official_code_with_subparcel = fields.Char(
         store=True,
@@ -106,17 +73,15 @@ class TerParcel(models.Model):
     @api.depends("official_code", "cadastral_subparcel")
     def _compute_official_code_with_subparcel(self):
         for record in self:
-            record.official_code_with_subparcel = (
-                record._get_official_code_with_subparcel()
-            )
-
-    def _get_official_code_with_subparcel(self):
-        self.ensure_one()
-        if not self.official_code:
-            return ""
-        if self.cadastral_subparcel:
-            return f"{self.official_code}-{self.cadastral_subparcel}"
-        return self.official_code
+            if not record.official_code:
+                record.official_code_with_subparcel = ""
+                continue
+            if record.cadastral_subparcel:
+                record.official_code_with_subparcel = (
+                    f"{record.official_code}-{record.cadastral_subparcel}"
+                )
+            else:
+                record.official_code_with_subparcel = record.official_code
 
     @api.depends(
         "parcel_type",
@@ -129,21 +94,21 @@ class TerParcel(models.Model):
     )
     def _compute_official_code(self):
         for record in self:
-            official_code = record._get_official_code()
-            record.official_code = official_code
-            record._update_cadastral_area_from_official_code(official_code)
+            record.official_code = record._get_official_code() or ""
 
     def _get_official_code(self):
         self.ensure_one()
+
         if self.parcel_type == "01_R":
-            if (
-                not self.municipality_id
-                or not self.municipality_id.cadastral_code
-                or not self.cadastral_sector
-                or not self.cadastral_polygon
-                or not self.cadastral_parcel
+            if not (
+                self.municipality_id
+                and self.municipality_id.cadastral_code
+                and self.cadastral_sector
+                and self.cadastral_polygon
+                and self.cadastral_parcel
             ):
-                return False
+                return ""
+
             return (
                 f"{self.municipality_id.cadastral_code}"
                 f"{self.cadastral_sector}"
@@ -152,18 +117,9 @@ class TerParcel(models.Model):
             )
 
         if self.official_code_urban:
-            return self.official_code_urban.strip()
-        return False
+            return (self.official_code_urban or "").strip()
 
-    def _update_cadastral_area_from_official_code(self, official_code):
-        self.ensure_one()
-        if (
-            not self._AUTOMATIC_UPDATE_CADASTRAL_DATA
-            or not official_code
-            or self.cadastral_area
-        ):
-            return
-        self.cadastral_area = self._get_cadastral_area()
+        return ""
 
     @api.constrains("cadastral_area")
     def _check_cadastral_area_non_negative(self):
@@ -196,11 +152,7 @@ class TerParcel(models.Model):
                 continue
             if self.search_count(
                 [
-                    (
-                        "official_code_with_subparcel",
-                        "=",
-                        record.official_code_with_subparcel,
-                    ),
+                    ("official_code_with_subparcel", "=", record.official_code_with_subparcel),
                     ("id", "!=", record.id),
                 ]
             ):
@@ -212,8 +164,10 @@ class TerParcel(models.Model):
                 )
 
     def _sanitize_vals(self, vals):
-        if "cadastral_sector" in vals and vals["cadastral_sector"]:
-            vals["cadastral_sector"] = vals["cadastral_sector"].strip().upper()
+        vals = dict(vals or {})
+
+        if vals.get("cadastral_sector"):
+            vals["cadastral_sector"] = (vals["cadastral_sector"] or "").strip().upper()
 
         if "cadastral_polygon" in vals:
             vals["cadastral_polygon"] = self._normalize_cadastral_numeric_field(
@@ -235,8 +189,10 @@ class TerParcel(models.Model):
                 vals["cadastral_polygon"] = False
                 vals["cadastral_parcel"] = False
 
-        if "cadastral_subparcel" in vals and vals["cadastral_subparcel"]:
-            vals["cadastral_subparcel"] = vals["cadastral_subparcel"].strip().upper()
+        if vals.get("cadastral_subparcel"):
+            vals["cadastral_subparcel"] = (
+                (vals["cadastral_subparcel"] or "").strip().upper()
+            )
 
         return vals
 
@@ -251,10 +207,41 @@ class TerParcel(models.Model):
             return False
         return str(number).zfill(size)
 
-    # Hook redefined.
     def _process_vals(self, vals):
-        vals = self._sanitize_vals(dict(vals or {}))
+        vals = self._sanitize_vals(vals)
         return super()._process_vals(vals)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._maybe_update_cadastral_area()
+        return records
+
+    def write(self, vals):
+        vals = self._sanitize_vals(vals)
+        tracked = {
+            "parcel_type",
+            "municipality_id",
+            "official_code_urban",
+            "cadastral_sector",
+            "cadastral_polygon",
+            "cadastral_parcel",
+        }
+        need_update = bool(tracked.intersection(vals.keys()))
+        res = super().write(vals)
+        if need_update:
+            self._maybe_update_cadastral_area()
+        return res
+
+    def _maybe_update_cadastral_area(self):
+        if not self._AUTOMATIC_UPDATE_CADASTRAL_DATA:
+            return
+        for record in self:
+            if not record.official_code:
+                continue
+            if record.cadastral_area:
+                continue
+            record.cadastral_area = record._get_cadastral_area()
 
     def _get_cadastral_area(self):
         self.ensure_one()
