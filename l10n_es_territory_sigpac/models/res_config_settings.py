@@ -34,7 +34,10 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.sigpac_viewer_url", readonly=False
     )
     python_venv_url = fields.Char(related="company_id.python_venv_url", readonly=False)
-
+    irrigation_model_type = fields.Integer(
+        related="company_id.irrigation_model_type",
+        readonly=False,
+    )
     @api.constrains("sigpac_minimum_intersection_percentage")
     def _check_sigpac_minimum_intersection_percentage(self):
         for record in self:

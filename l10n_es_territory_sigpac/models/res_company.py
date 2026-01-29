@@ -34,3 +34,4 @@ class ResCompany(models.Model):
         default="/home/odoo16/venv3.10/bin/python",
         help="Python interpreter path for the SIGPAC import helper.",
     )
+    irrigation_model_type = fields.Integer()
