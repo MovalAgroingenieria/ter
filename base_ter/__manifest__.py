@@ -21,6 +21,10 @@
         "base_gis",
         "base_adi",
         "base_report",
+        "analytic",
+        "date_range",
+        'account',
+        "sale_product_matrix",
     ],
     "data": [
         "security/security.xml",
@@ -43,6 +47,8 @@
         "reports/parcel_partner_report.xml",
         "reports/parcel_report.xml",
         "reports/property_report.xml",
+        "views/ter_unit_views.xml",
+        "views/ter_project_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

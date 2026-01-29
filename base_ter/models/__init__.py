@@ -13,4 +13,6 @@ from . import (
     ter_profile,
     ter_property,
     ter_propertytag,
+    ter_unit,
+    ter_project
 )
