@@ -1,5 +1,6 @@
 # 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# pylint: disable=too-many-locals
 
 import base64
 
@@ -65,6 +66,8 @@ class TerProperty(models.Model):
         max_width=_aerial_image_size_big,
         max_height=_aerial_image_size_big,
     )
+    aerial_image_key = fields.Char(index=True, readonly=True)
+
     aerial_image_medium = fields.Image(
         string="Aerial Image (medium size)",
         max_width=_aerial_image_size_medium,
@@ -86,15 +89,17 @@ class TerProperty(models.Model):
         max_height=_aerial_image_size_big,
         compute="_compute_aerial_image_shown",
     )
+    aerial_image_shown_b64 = fields.Char(
+        string="Aerial Image shown (base64)",
+        compute="_compute_aerial_image_shown",
+    )
     aerial_image_shown_256 = fields.Image(
         string="Aerial Image (medium size, non-persistent)",
         max_width=_aerial_image_size_medium,
         max_height=_aerial_image_size_medium,
         related="aerial_image_shown",
     )
-    image_1920 = fields.Image(
-        string="Aerial Image (zoom)", related="aerial_image_shown"
-    )
+    image_1920 = fields.Image(string="Aerial Image (zoom)", related="aerial_image_shown")
 
     tag_id = fields.Many2many(
         string="Tags",
@@ -147,10 +152,35 @@ class TerProperty(models.Model):
         compute="_compute_region_id",
     )
 
-    area_unit_name = fields.Char(
-        string="Area unit name", compute="_compute_area_unit_name"
-    )
+    area_unit_name = fields.Char(string="Area unit name", compute="_compute_area_unit_name")
     address_data = fields.Char(string="Address Data", compute="_compute_address_data")
+
+    def _aerial_cache_key(
+        self,
+        *,
+        wms,
+        layers,
+        styles,
+        image_height,
+        image_width,
+        zoom,
+        force_square_shape,
+        apply_filter,
+        extra="",
+    ):
+        self.ensure_one()
+        return self._make_wms_key(
+            self.geom_ewkt or "",
+            wms or "",
+            layers or "",
+            styles or "",
+            int(image_height or 0),
+            int(image_width or 0),
+            float(zoom or 0.0),
+            bool(force_square_shape),
+            bool(apply_filter),
+            extra or "",
+        )
 
     @api.depends("aerial_image", "mapped_to_polygon")
     def _compute_aerial_image_shown(self):
@@ -179,61 +209,109 @@ class TerProperty(models.Model):
         use_vec = bool(ogc_ok and wmsvec_url and wmsvec_layer)
 
         for record in self:
-            shown = record.aerial_image or None
-            if shown or not (ogc_ok and record.mapped_to_polygon):
-                record.aerial_image_shown = shown
+            if not (ogc_ok and record.mapped_to_polygon):
+                stored = record.aerial_image or False
+                record.aerial_image_shown = stored
+                record.aerial_image_shown_b64 = (
+                    (stored or b"").decode("ascii", errors="ignore")
+                    if isinstance(stored, (bytes, bytearray))
+                    else (stored or "")
+                )
                 continue
 
-            if not use_vec:
-                shown = record.get_aerial_image(
-                    wms=wmsbase_url,
-                    layers=wmsbase_layers,
-                    image_height=image_height,
-                    format="png",
-                    zoom=image_zoom,
-                    force_square_shape=self._force_square_shape,
-                )
-            else:
-                base_raw = record.get_aerial_image(
-                    wms=wmsbase_url,
-                    layers=wmsbase_layers,
-                    image_height=image_height,
-                    format="png",
-                    zoom=image_zoom,
-                    get_raw=True,
-                    filter=False,
-                    force_square_shape=self._force_square_shape,
-                )
-                vec_raw = record.get_aerial_image(
-                    wms=wmsvec_url,
-                    layers=wmsvec_layer,
-                    image_height=image_height,
-                    format="png",
-                    zoom=image_zoom,
-                    get_raw=True,
-                    filter=wmsvec_filter,
-                    force_square_shape=self._force_square_shape,
-                )
-                if base_raw and vec_raw:
-                    merged = self.env["common.image"].merge_img(base_raw, vec_raw)
-                    if merged:
-                        shown = base64.b64encode(merged.getvalue())
+            stored_b64 = None
+            key = None
 
-            if shown:
-                record.aerial_image = shown
+            if not use_vec:
+                key = record._aerial_cache_key(
+                    wms=wmsbase_url,
+                    layers=wmsbase_layers,
+                    styles="default",
+                    image_height=image_height,
+                    image_width=0,
+                    zoom=image_zoom,
+                    force_square_shape=self._force_square_shape,
+                    apply_filter=False,
+                    extra="base",
+                )
+                if record.aerial_image and record.aerial_image_key == key:
+                    stored_b64 = record.aerial_image
+                else:
+                    stored_b64 = record.get_aerial_image(
+                        wms=wmsbase_url,
+                        layers=wmsbase_layers,
+                        image_height=image_height,
+                        image_format="png",
+                        zoom=image_zoom,
+                        force_square_shape=self._force_square_shape,
+                    )
+            else:
+                key = record._aerial_cache_key(
+                    wms=wmsbase_url,
+                    layers=wmsbase_layers,
+                    styles="default",
+                    image_height=image_height,
+                    image_width=0,
+                    zoom=image_zoom,
+                    force_square_shape=self._force_square_shape,
+                    apply_filter=False,
+                    extra="base+vec:%s:%s:%s"
+                    % (wmsvec_url or "", wmsvec_layer or "", int(wmsvec_filter)),
+                )
+                if record.aerial_image and record.aerial_image_key == key:
+                    stored_b64 = record.aerial_image
+                else:
+                    base_raw = record.get_aerial_image(
+                        wms=wmsbase_url,
+                        layers=wmsbase_layers,
+                        image_height=image_height,
+                        image_format="png",
+                        zoom=image_zoom,
+                        get_raw=True,
+                        apply_filter=False,
+                        force_square_shape=self._force_square_shape,
+                    )
+                    vec_raw = record.get_aerial_image(
+                        wms=wmsvec_url,
+                        layers=wmsvec_layer,
+                        image_height=image_height,
+                        image_format="png",
+                        zoom=image_zoom,
+                        get_raw=True,
+                        apply_filter=wmsvec_filter,
+                        force_square_shape=self._force_square_shape,
+                    )
+                    if base_raw and vec_raw:
+                        merged_bytes = self.env["common.image"].merge_img(
+                            base_raw,
+                            vec_raw,
+                            return_base64=False,
+                        )
+                        if merged_bytes:
+                            stored_b64 = base64.b64encode(merged_bytes)
+
+            if stored_b64:
+                record.aerial_image = stored_b64
+                record.aerial_image_key = key
+                record.aerial_image_shown = stored_b64
+                record.aerial_image_shown_b64 = (
+                    stored_b64.decode("ascii", errors="ignore")
+                    if isinstance(stored_b64, (bytes, bytearray))
+                    else (stored_b64 or "")
+                )
                 self.env["common.log"].register_in_log(
                     _("Aerial image OK. Property: %s") % (record.name,),
                     source=self._name,
                     message_type="INFO",
                 )
             else:
+                record.aerial_image_shown = False
+                record.aerial_image_shown_b64 = ""
                 self.env["common.log"].register_in_log(
                     _("Error getting aerial image (is the WMS url correct?)"),
                     source=self._name,
                     message_type="WARNING",
                 )
-
-            record.aerial_image_shown = shown
 
     @api.depends("parcel_ids")
     def _compute_number_of_parcels(self):
@@ -243,9 +321,7 @@ class TerProperty(models.Model):
     @api.depends("parcel_ids.area_official")
     def _compute_area_official_parcels(self):
         for record in self:
-            record.area_official_parcels = sum(
-                record.parcel_ids.mapped("area_official")
-            )
+            record.area_official_parcels = sum(record.parcel_ids.mapped("area_official"))
 
     @api.depends("area_official_parcels")
     def _compute_area_official_parcels_m2(self):
@@ -343,9 +419,7 @@ class TerProperty(models.Model):
                 and record.place_id
                 and record.place_id.municipality_id != record.municipality_id
             ):
-                raise exceptions.ValidationError(
-                    _("The place is not in the municipality.")
-                )
+                raise exceptions.ValidationError(_("The place is not in the municipality."))
 
     @api.model
     def _get_view(self, view_id=None, view_type="form", **options):
@@ -394,7 +468,6 @@ class TerProperty(models.Model):
         new_partner = self.env["res.partner"].browse(vals["partner_id"])
         for prop in self:
             for parcel in prop.parcel_ids:
-                # Replace only when old partner was present on the line
                 links = parcel.partnerlink_ids.filtered(
                     lambda l: l.partner_id == old_partner
                 )
@@ -461,11 +534,13 @@ class TerProperty(models.Model):
     def reset_aerial_image(self):
         if len(self) == 1:
             self.aerial_image = False
+            self.aerial_image_key = False
             self._compute_aerial_image_shown()
             return
 
         for record in self.with_progress(_("Getting the aerial images...")):
             record.aerial_image = False
+            record.aerial_image_key = False
             record._compute_aerial_image_shown()
 
     @api.model
@@ -482,7 +557,10 @@ class TerProperty(models.Model):
             "res_model": "wizard.show.gis.preview",
             "view_mode": "form",
             "target": "new",
-            "context": {"src_model": "ter.property"},
+            "context": {
+                "src_model": "ter.property",
+                "active_id": self.id,
+            },
         }
 
     def action_show_parcels(self):
