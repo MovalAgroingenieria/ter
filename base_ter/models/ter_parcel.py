@@ -242,13 +242,19 @@ class TerParcel(models.Model):
         use_vec = bool(ogc_ok and wmsvec_url and wmsvec_parcel_layer)
 
         for record in self:
-            shown = record.aerial_image or None
-            if shown or not (ogc_ok and record.mapped_to_polygon):
-                record.aerial_image_shown = shown
+            shown_b64 = record.aerial_image or None
+            if shown_b64 and isinstance(shown_b64, bytes):
+                shown_b64 = shown_b64.decode("ascii", errors="ignore")
+
+            if shown_b64 or not (ogc_ok and record.mapped_to_polygon):
+                record.aerial_image_shown = shown_b64
                 continue
 
+            shown_b64 = None
+            stored_b64 = None
+
             if not use_vec:
-                shown = record.get_aerial_image(
+                shown_b64 = record.get_aerial_image(
                     wms=wmsbase_url,
                     layers=wmsbase_layers,
                     image_height=image_height,
@@ -256,34 +262,41 @@ class TerParcel(models.Model):
                     zoom=image_zoom,
                     force_square_shape=self._force_square_shape,
                 )
+                stored_b64 = shown_b64
             else:
                 base_raw = record.get_aerial_image(
                     wms=wmsbase_url,
                     layers=wmsbase_layers,
                     image_height=image_height,
-                    format="png",
+                    image_format="png",
                     zoom=image_zoom,
                     get_raw=True,
-                    filter=False,
+                    apply_filter=False,
                     force_square_shape=self._force_square_shape,
                 )
                 vec_raw = record.get_aerial_image(
                     wms=wmsvec_url,
                     layers=wmsvec_parcel_layer,
                     image_height=image_height,
-                    format="png",
+                    image_format="png",
                     zoom=image_zoom,
                     get_raw=True,
-                    filter=wmsvec_filter,
+                    apply_filter=wmsvec_filter,
                     force_square_shape=self._force_square_shape,
                 )
-                if base_raw and vec_raw:
-                    merged = self.env["common.image"].merge_img(base_raw, vec_raw)
-                    if merged:
-                        shown = base64.b64encode(merged.getvalue())
 
-            if shown:
-                record.aerial_image = shown
+                if base_raw and vec_raw:
+                    merged_bytes = self.env["common.image"].merge_img(
+                        base_raw,
+                        vec_raw,
+                        return_base64=False,
+                    )
+                    if merged_bytes:
+                        stored_b64 = base64.b64encode(merged_bytes)  # bytes base64 para fields.Image
+                        shown_b64 = stored_b64.decode("ascii")  # str base64 para QWeb
+
+            if stored_b64:
+                record.aerial_image = stored_b64
                 self.env["common.log"].register_in_log(
                     _("Aerial image OK. Parcel: %s") % (record.name,),
                     source=self._name,
@@ -296,7 +309,7 @@ class TerParcel(models.Model):
                     message_type="WARNING",
                 )
 
-            record.aerial_image_shown = shown
+            record.aerial_image_shown = shown_b64
 
     @api.depends("municipality_id.province_id")
     def _compute_province_id(self):
