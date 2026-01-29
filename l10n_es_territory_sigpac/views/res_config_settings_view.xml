@@ -48,6 +48,16 @@
                         </div>
                     </setting>
 
+                    <setting id="irrigation_model_type"
+                             string="Irrigation model type"
+                             help="Default irrigation model type used in SIGPAC views (company-specific).">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="irrigation_model_type" style="width: 120px;"/>
+                            </div>
+                        </div>
+                    </setting>
+
                     <setting id="sigpac_minimum_intersection_percentage"
                              string="Minimum intersection (%)"
                              help="Minimum intersection percentage allowed for parcels and SIGPAC enclosures.">
