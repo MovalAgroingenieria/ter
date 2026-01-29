@@ -167,14 +167,21 @@ def _create_gis_structures(env: api.Environment) -> None:
     env.cr.execute(
         sql.SQL(
             """
-            CREATE OR REPLACE VIEW {} AS (
+            CREATE
+            OR REPLACE VIEW {} AS (
                 SELECT
                     row_number() OVER (ORDER BY tgp.name) AS id,
                     tgp.name,
                     ST_AsGeoJSON(tgp.geom) AS geom_geojson,
                     tp.id AS parcel_id,
                     tp.partner_id AS partner_id,
-                    tp.active AS is_active
+                    tp.active AS is_active,
+
+                    -- log_access fields required by Odoo when _log_access=True
+                    NULL::integer AS create_uid,
+                    NOW() AT TIME ZONE 'UTC' AS create_date,
+                    NULL::integer AS write_uid,
+                    NOW() AT TIME ZONE 'UTC' AS write_date
                 FROM {}.{} tgp
                 LEFT JOIN ter_parcel tp ON tgp.name = tp.name
             )
