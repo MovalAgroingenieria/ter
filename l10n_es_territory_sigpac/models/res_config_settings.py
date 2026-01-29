@@ -38,6 +38,10 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.irrigation_model_type",
         readonly=False,
     )
+    url_gis_viewer_epsg_code = fields.Integer(
+        related="company_id.url_gis_viewer_epsg_code",
+        readonly=False,
+    )
     @api.constrains("sigpac_minimum_intersection_percentage")
     def _check_sigpac_minimum_intersection_percentage(self):
         for record in self:
@@ -171,13 +175,7 @@ class ResConfigSettings(models.TransientModel):
         user = tools.config.get("db_user")
         password = tools.config.get("db_password")
         dbname = self.env.cr.dbname
-
-        srs = (
-            self.env["ir.default"].get(
-                "res.config.settings", "url_gis_viewer_epsg_code"
-            )
-            or 25830
-        )
+        srs = int(self.env.company.url_gis_viewer_epsg_code or 25830)
         return host, port, user, password, dbname, srs
 
     def _rebuild_ter_parcel_sigpaclink_view(

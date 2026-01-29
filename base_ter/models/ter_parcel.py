@@ -626,6 +626,20 @@ class TerParcel(models.Model):
 
         return arch, view
 
+    def delete_aerial_image(self):
+        for record in self:
+            record.aerial_image = False
+            record.aerial_image_key = False
+            record.aerial_image_medium = False
+            record.aerial_image_small = False
+            record.aerial_image_shown = False
+            record.aerial_image_shown_256 = False
+            record.aerial_image_shown_b64 = False
+            record.image_1920 = False
+
+
+
+
     def reset_aerial_image(self):
         if len(self) == 1:
             self.aerial_image = False

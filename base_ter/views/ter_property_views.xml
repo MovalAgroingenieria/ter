@@ -307,6 +307,19 @@
         </field>
     </record>
 
+     <record id="ter_property_reset_aerial_image_delete" model="ir.actions.server">
+        <field name="name">Delete aerial image</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_ter_property"/>
+        <field name="binding_model_id" ref="model_ter_property"/>
+        <field name="groups_id" eval="[(4, ref('base_ter.group_ter_manager'))]"/>
+        <field name="state">code</field>
+        <field name="code">
+            records.delete_aerial_image()
+        </field>
+    </record>
+
+
     <record id="ter_property_reset_all_aerial_images_serveraction" model="ir.actions.server">
         <field name="name">Images of properties (global)</field>
         <field name="model_id" ref="model_ter_property"/>

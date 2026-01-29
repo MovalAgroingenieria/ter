@@ -31,7 +31,9 @@ class ResCompany(models.Model):
         help="URL template for SIGPAC viewer (Jinja2).",
     )
     python_venv_url = fields.Char(
-        default="/home/odoo16/venv3.10/bin/python",
+        default="/home/odoo18/venv3.10/bin/python",
         help="Python interpreter path for the SIGPAC import helper.",
     )
     irrigation_model_type = fields.Integer()
+
+    url_gis_viewer_epsg_code = fields.Integer('URL Gist viewer', default=25830)
