@@ -2,13 +2,57 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import _, api, fields, models
+from psycopg2 import sql
 
+
+def _view_has_column(env, view_name, column_name):
+    env.cr.execute(
+        """
+        SELECT EXISTS (SELECT 1
+                       FROM information_schema.columns
+                       WHERE table_name = %s
+                         AND column_name = %s)
+        """,
+        (view_name, column_name),
+    )
+    return bool(env.cr.fetchone()[0])
 
 class TerGisParcelModel(models.Model):
     _name = "ter.gis.parcel.model"
     _description = "GIS Parcel"
     _auto = False
     _log_access = True
+
+    def init(self):
+        if _view_has_column(self.env, "ter_gis_parcel_model", "write_date"):
+            return
+        self.env.cr.execute(
+            sql.SQL(
+                """
+                CREATE
+                OR REPLACE VIEW {} AS (
+                    SELECT
+                        row_number() OVER (ORDER BY tgp.name) AS id,
+                        tgp.name,
+                        ST_AsGeoJSON(tgp.geom) AS geom_geojson,
+                        tp.id AS parcel_id,
+                        tp.partner_id AS partner_id,
+                        tp.active AS is_active,
+
+                        NULL::integer AS create_uid,
+                        NOW() AT TIME ZONE 'UTC' AS create_date,
+                        NULL::integer AS write_uid,
+                        NOW() AT TIME ZONE 'UTC' AS write_date
+                    FROM {}.{} tgp
+                    LEFT JOIN ter_parcel tp ON tgp.name = tp.name
+                )
+                """
+            ).format(
+                sql.Identifier("ter_gis_parcel_model"),
+                sql.Identifier("public"),
+                sql.Identifier("ter_gis_parcel"),
+            )
+        )
 
     _aerial_image_size_small = 128
 
@@ -38,7 +82,9 @@ class TerGisParcelModel(models.Model):
         readonly=True,
     )
 
-    gis_data = fields.Text(string="GIS Data", compute="_compute_gis_data", readonly=True)
+    gis_data = fields.Text(
+        string="GIS Data", compute="_compute_gis_data", readonly=True
+    )
 
     aerial_image_small = fields.Image(
         string="Aerial Image (small size)",

@@ -99,7 +99,9 @@ class TerProperty(models.Model):
         max_height=_aerial_image_size_medium,
         related="aerial_image_shown",
     )
-    image_1920 = fields.Image(string="Aerial Image (zoom)", related="aerial_image_shown")
+    image_1920 = fields.Image(
+        string="Aerial Image (zoom)", related="aerial_image_shown"
+    )
 
     tag_id = fields.Many2many(
         string="Tags",
@@ -152,7 +154,9 @@ class TerProperty(models.Model):
         compute="_compute_region_id",
     )
 
-    area_unit_name = fields.Char(string="Area unit name", compute="_compute_area_unit_name")
+    area_unit_name = fields.Char(
+        string="Area unit name", compute="_compute_area_unit_name"
+    )
     address_data = fields.Char(string="Address Data", compute="_compute_address_data")
 
     def _aerial_cache_key(
@@ -341,7 +345,9 @@ class TerProperty(models.Model):
     @api.depends("parcel_ids.area_official")
     def _compute_area_official_parcels(self):
         for record in self:
-            record.area_official_parcels = sum(record.parcel_ids.mapped("area_official"))
+            record.area_official_parcels = sum(
+                record.parcel_ids.mapped("area_official")
+            )
 
     @api.depends("area_official_parcels")
     def _compute_area_official_parcels_m2(self):
@@ -439,7 +445,9 @@ class TerProperty(models.Model):
                 and record.place_id
                 and record.place_id.municipality_id != record.municipality_id
             ):
-                raise exceptions.ValidationError(_("The place is not in the municipality."))
+                raise exceptions.ValidationError(
+                    _("The place is not in the municipality.")
+                )
 
     @api.model
     def _get_view(self, view_id=None, view_type="form", **options):
@@ -511,14 +519,18 @@ class TerProperty(models.Model):
                 """
                 CREATE TABLE ter_gis_property AS
                 SELECT ROW_NUMBER() OVER (ORDER BY terpro.name) AS gid, terpro.name,
-                       ST_UNION(tergispar.geom) ::postgis.geometry(MultiPolygon,%s) AS geom
+                       ST_Multi(
+                               ST_Union(
+                                       ST_Transform(tergispar.geom::geometry, %s)
+                               )
+                       ) ::geometry(MultiPolygon,%s) AS geom
                 FROM ter_gis_parcel tergispar
                          INNER JOIN ter_parcel terpar ON tergispar.name = terpar.name
                          INNER JOIN ter_property terpro ON terpro.id = terpar.property_id
                 WHERE terpar.active = TRUE
                 GROUP BY terpro.name
                 """,
-                (epsg,),
+                (epsg, epsg),
             )
             self.env.cr.execute("ALTER TABLE ter_gis_property ADD PRIMARY KEY (gid)")
             self.env.cr.execute(
