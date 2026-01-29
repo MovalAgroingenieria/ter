@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <record id="wizard_show_gis_preview_views" model="ir.ui.view">
         <field name="name">Wizard to GIS preview</field>
         <field name="model">wizard.show.gis.preview</field>
         <field name="arch" type="xml">
             <form string="Preview">
-                <div name="div_preview" class="embed-responsive embed-responsive-1by1">
-                    <field name="frame_view" nolabel="1" readonly="1"/>
+                <div class="embed-responsive embed-responsive-1by1">
+                    <field name="frame_view" widget="html" nolabel="1" readonly="1"/>
                 </div>
                 <footer>
-                    <button string="Close preview"
-                            class="btn-default"
-                            special="cancel"/>
+                    <button string="Close preview" class="btn-default" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
-
 </odoo>

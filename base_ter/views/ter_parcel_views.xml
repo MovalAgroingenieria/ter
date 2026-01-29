@@ -149,7 +149,7 @@
         <field name="model">ter.parcel</field>
         <field name="arch" type="xml">
             <list class="o_base_ter_ter_parcel" default_order="alphanum_code">
-                <field name="mapped_to_polygon" invisible="1"/>
+                <field name="mapped_to_polygon"/>
                 <field name="alphanum_code" string="Code" class="text-center"/>
                 <field name="partner_id" string="Manager"/>
                 <field name="municipality_id" string="Municipality"/>

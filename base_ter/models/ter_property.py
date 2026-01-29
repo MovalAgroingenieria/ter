@@ -290,6 +290,26 @@ class TerProperty(models.Model):
                         if merged_bytes:
                             stored_b64 = base64.b64encode(merged_bytes)
 
+            if not stored_b64:
+                stored_b64 = record.get_aerial_image(
+                    wms=wmsbase_url,
+                    layers=wmsbase_layers,
+                    image_height=image_height,
+                    image_format="png",
+                    zoom=image_zoom,
+                    force_square_shape=self._force_square_shape,
+                )
+                key = record._aerial_cache_key(
+                    wms=wmsbase_url,
+                    layers=wmsbase_layers,
+                    styles="default",
+                    image_height=image_height,
+                    image_width=0,
+                    zoom=image_zoom,
+                    force_square_shape=self._force_square_shape,
+                    apply_filter=False,
+                    extra="base",
+                )
             if stored_b64:
                 record.aerial_image = stored_b64
                 record.aerial_image_key = key

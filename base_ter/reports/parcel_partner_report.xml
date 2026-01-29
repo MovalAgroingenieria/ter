@@ -187,8 +187,8 @@
                             </div>
 
                             <div name="parcel_aerial_image" class="text-center">
-                                <t t-if="parcel.aerial_image_shown">
-                                    <img t-attf-src="data:image/png;base64, #{parcel.aerial_image_shown}"
+                                <t t-if="parcel.aerial_image_shown_b64">
+                                    <img t-attf-src="data:image/png;base64, #{parcel.aerial_image_shown_b64}"
                                          style="width: 408px; height: 408px;"/>
                                 </t>
                                 <t t-else="">
