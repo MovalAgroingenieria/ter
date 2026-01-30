@@ -227,16 +227,15 @@ class ResPartner(models.Model):
 
         return arch, view
 
-    def name_get(self):
-        res = []
-        for partner_id, name in super().name_get():
-            partner = self.browse(partner_id)
-            if partner.partner_code and partner.partner_code > 0:
-                parts = name.split("\n")
-                parts[0] = "%s [%s]" % (parts[0], partner.partner_code)
-                name = "\n".join(parts)
-            res.append((partner_id, name))
-        return res
+    display_name = fields.Char(compute="_compute_display_name")
+
+    @api.depends("partner_code")
+    def _compute_display_name(self):
+        super()._compute_display_name()
+        for rec in self.filtered(lambda r: r.partner_code and r.partner_code > 0):
+            parts = (rec.display_name or "").split("\n")
+            parts[0] = "%s [%s]" % (parts[0], rec.partner_code)
+            rec.display_name = "\n".join(parts)
 
     @api.model_create_multi
     def create(self, vals_list):
