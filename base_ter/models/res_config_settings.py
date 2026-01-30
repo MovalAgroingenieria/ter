@@ -8,122 +8,55 @@ from psycopg2 import sql
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
-    area_unit_is_ha = fields.Boolean(
-        string="Standard area unit: ha (y/n)",
-        config_parameter="base_ter.area_unit_is_ha",
-    )
-    area_unit_name = fields.Char(
-        string="Standard area unit: Name",
-        size=255,
-        config_parameter="base_ter.area_unit_name",
-    )
+    _inherit = "res.config.settings"
+
+    area_unit_is_ha = fields.Boolean(related="company_id.area_unit_is_ha", readonly=False)
+    area_unit_name = fields.Char(related="company_id.area_unit_name", readonly=False)
     area_unit_value_in_ha = fields.Float(
-        string="Standard area unit: Equivalence in ha",
+        related="company_id.area_unit_value_in_ha",
+        readonly=False,
         digits=(32, 4),
-        config_parameter="base_ter.area_unit_value_in_ha",
     )
-    warning_diff_areas = fields.Integer(
-        string="Alert threshold due to the difference between the official area and the GIS area",
-        config_parameter="base_ter.warning_diff_areas",
-    )
+    warning_diff_areas = fields.Integer(related="company_id.warning_diff_areas", readonly=False)
     same_parcelmanager_propertyowner = fields.Boolean(
-        string="Force the parcel manager and the property owner to be the same",
-        config_parameter="base_ter.same_parcelmanager_propertyowner",
+        related="company_id.same_parcelmanager_propertyowner",
+        readonly=False,
     )
-    aerial_image_wmsbase_url = fields.Char(
-        string="WMS of the base image: URL",
-        size=255,
-        config_parameter="base_ter.aerial_image_wmsbase_url",
-    )
-    aerial_image_wmsbase_layers = fields.Char(
-        string="WMS of the base image: Layers",
-        size=255,
-        config_parameter="base_ter.aerial_image_wmsbase_layers",
-    )
-    aerial_image_wmsvec_url = fields.Char(
-        string="WMS of the vectorial image: URL",
-        size=255,
-        config_parameter="base_ter.aerial_image_wmsvec_url",
-    )
+    aerial_image_wmsbase_url = fields.Char(related="company_id.aerial_image_wmsbase_url", readonly=False)
+    aerial_image_wmsbase_layers = fields.Char(related="company_id.aerial_image_wmsbase_layers", readonly=False)
+    aerial_image_wmsvec_url = fields.Char(related="company_id.aerial_image_wmsvec_url", readonly=False)
     aerial_image_wmsvec_parcel_name = fields.Char(
-        string="WMS of the vectorial image: Name of the parcels layer",
-        size=255,
-        config_parameter="base_ter.aerial_image_wmsvec_parcel_name",
+        related="company_id.aerial_image_wmsvec_parcel_name",
+        readonly=False,
     )
     aerial_image_wmsvec_parcel_filter = fields.Boolean(
-        string="WMS of the vectorial image: Filtered parcels (y/n)",
-        config_parameter="base_ter.aerial_image_wmsvec_parcel_filter",
+        related="company_id.aerial_image_wmsvec_parcel_filter",
+        readonly=False,
     )
     aerial_image_wmsvec_property_name = fields.Char(
-        string="WMS of the vectorial image: Name of the properties layer",
-        size=255,
-        config_parameter="base_ter.aerial_image_wmsvec_property_name",
+        related="company_id.aerial_image_wmsvec_property_name",
+        readonly=False,
     )
     aerial_image_wmsvec_property_filter = fields.Boolean(
-        string="WMS of the vectorial image: Filtered properties (y/n)",
-        config_parameter="base_ter.aerial_image_wmsvec_property_filter",
+        related="company_id.aerial_image_wmsvec_property_filter",
+        readonly=False,
     )
-    aerial_image_height = fields.Integer(
-        string="WMS Services: Height of the images",
-        config_parameter="base_ter.aerial_image_height",
-    )
+    aerial_image_height = fields.Integer(related="company_id.aerial_image_height", readonly=False)
     aerial_image_zoom = fields.Float(
-        string="WMS Services: Zoom",
+        related="company_id.aerial_image_zoom",
+        readonly=False,
         digits=(32, 4),
-        config_parameter="base_ter.aerial_image_zoom",
     )
-    gis_viewer_url = fields.Char(
-        string="GIS Viewer: URL",
-        size=255,
-        config_parameter="base_ter.gis_viewer_url",
-    )
-    gis_viewer_username = fields.Char(
-        string="GIS Viewer: User name for the technical mode",
-        size=255,
-        config_parameter="base_ter.gis_viewer_username",
-    )
-    gis_viewer_password = fields.Char(
-        string="GIS Viewer: Password for the technical mode",
-        size=255,
-        config_parameter="base_ter.gis_viewer_password",
-    )
-    gis_viewer_epsg = fields.Integer(
-        string="GIS Viewer: Spatial Reference",
-        config_parameter="base_ter.gis_viewer_epsg",
-    )
+    gis_viewer_url = fields.Char(related="company_id.gis_viewer_url", readonly=False)
+    gis_viewer_username = fields.Char(related="company_id.gis_viewer_username", readonly=False)
+    gis_viewer_password = fields.Char(related="company_id.gis_viewer_password", readonly=False)
+    gis_viewer_epsg = fields.Integer(related="company_id.gis_viewer_epsg", readonly=False)
     gis_viewer_previs_additional_args = fields.Char(
-        string="GIS Preview: Additional URL arguments",
-        size=255,
-        config_parameter="base_ter.gis_viewer_previs_additional_args",
+        related="company_id.gis_viewer_previs_additional_args",
+        readonly=False,
     )
+    ter_unit_sequence_id = fields.Many2one(related="company_id.ter_unit_sequence_id", readonly=False)
 
-    _sql_constraints = [
-        (
-            "area_unit_value_in_ha_ok",
-            "CHECK (area_unit_value_in_ha > 0)",
-            'Incorrect value of "Standard area unit: Equivalence in ha".',
-        ),
-        (
-            "warning_diff_areas_ok",
-            "CHECK (warning_diff_areas >= 0 AND warning_diff_areas <= 100)",
-            'Incorrect value of "Alert threshold due to the difference between the official area and the GIS area".',
-        ),
-        (
-            "aerial_image_height_ok",
-            "CHECK (aerial_image_height > 0)",
-            'Incorrect value of "WMS Services: Height of the images".',
-        ),
-        (
-            "aerial_image_zoom_ok",
-            "CHECK (aerial_image_zoom > 0)",
-            'Incorrect value of "WMS Services: Zoom".',
-        ),
-        (
-            "gis_viewer_epsg_ok",
-            "CHECK (gis_viewer_epsg > 0)",
-            'Incorrect value of "GIS Viewer: Spatial Reference".',
-        ),
-    ]
 
     def set_values(self):
         self.ensure_one()

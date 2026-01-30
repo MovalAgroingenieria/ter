@@ -5,24 +5,13 @@
         <field name="model">ter.unit</field>
         <field name="arch" type="xml">
             <list string="Analytic Items" multi_edit="1" js_class="analytic_list">
-                <field name="company_id" column_invisible="True"/>
-                <field name="product_uom_category_id" column_invisible="True"/>
                 <field name="name"/>
-                <field name="project_id"/>
-                <field name="analytic_distribution"
-                       widget="analytic_distribution"
-                       optional="hide"
-                       options="{'multi_edit': true}"
-                />
-                <field name="currency_id" column_invisible="True"/>
-                <field name="unit_amount" sum="Quantity" optional="hide"/>
-                <field name="product_uom_id" optional="hide"/>
-                <field name="partner_id" optional="hide"/>
+                <field name="partner_id"/>
                 <field name="parcel_id"/>
                 <field name="area_official"/>
-                <field name="company_id" groups="base.group_multi_company" optional="show"/>
-                <field name="amount" sum="Total" optional="show"/>
-                <field name="date"/>
+                <field name="date_range_id"/>
+                <field name="account_id"/>
+                <field name="date_start"/>
                 <field name="date_end"/>
             </list>
         </field>
@@ -34,12 +23,15 @@
         <field name="arch" type="xml">
             <search string="Search Analytic Lines">
                 <field name="name"/>
-                <field name="date"/>
+                <field name="date_range_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
                 <separator/>
-                <filter name="month" string="Date" date="date"/>
+                <filter name="month" string="Date" date="date_start"/>
                 <group string="Group By..." expand="0" name="groupby">
                     <separator/>
-                    <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                    <filter string="Start Date" name="group_date_start" context="{'group_by': 'date_start'}"/>
+                    <filter string="End Date" name="group_date_end" context="{'group_by': 'date_end'}"/>
                 </group>
             </search>
         </field>
@@ -52,103 +44,50 @@
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <form string="Ter Unit">
-                <field name="company_id" invisible="1"/>
                 <sheet>
                     <group>
-                        <group name="analytic_item" string="Analytic Item">
-                            <field name="name"/>
-                            <field name="project_id" required="1"/>
-                            <field name="account_id" invisible="1"/>
-                            <field name="company_id" groups="base.group_multi_company"/>
+                        <group name="analytic_item" string="Description">
+                            <field name="name" readonly="1"/>
                             <field name="description"/>
                             <field name="active"/>
                             <field name="sequence"/>
-                            <field name="partner_id"/>
+                            <field name="account_id" options='{"no_open": True, "no_create": True}'/>
                         </group>
-                        <group name="amount" string="Product/Amount">
-
-                            <field name="categ_id" required="1"/>
-                            <field name="product_tmpl_id"
-                                   invisible="not categ_id"
-                                   required="categ_id != False"
-                                   context="{'default_categ_id': categ_id}"
-                                   domain="[('categ_id', '=', categ_id)]"/>
-                            <field name="product_id"
-                                   invisible="not categ_id or not product_tmpl_id"
-                                   context="{'default_product_tmpl_id': product_tmpl_id}"
-                                   required="categ_id and product_tmpl_id"
-                                   domain="[('product_tmpl_id', '=', product_tmpl_id)]"/>
-
-                            <field name="unit_amount"/>
-                            <field name="product_uom_category_id"/>
-                            <field name="product_uom_id" class="oe_inline"/>
-                            <field name="amount"/>
-                            <field name="currency_id"/>
-                        </group>
-                        <group>
-                            <field name="parcel_id"/>
+                        <group string="Location">
+                            <field name="parcel_id" options='{"no_open": True, "no_create": True}'/>
+                            <field name="partner_id" readonly="1"/>
                             <field name="area_official"/>
                             <field name="area_official_m2"/>
-                            <field name="date"/>
-                            <field name="date_end"/>
                         </group>
+                        <group string="Date Ranges Ter">
+                            <field name="date_range_id" options='{"no_open": True, "no_create": True}'/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+
+                        </group>
+                        <group>
+                            <field name="use_type_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Attributes">
+                                <field name="attribute_value_ids">
+                                    <list editable="bottom">
+                                        <field name="attribute_id" readonly="1"/>
+                                        <field name="value_id"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_ter_unit_graph" model="ir.ui.view">
-        <field name="name">ter.unit.graph</field>
-        <field name="model">ter.unit</field>
-        <field name="arch" type="xml">
-            <graph string="Ter Unit" sample="1" js_class="analytic_graph">
-                <field name="account_id"/>
-                <field name="unit_amount" type="measure" widget="float_time"/>
-                <field name="amount" type="measure"/>
-            </graph>
-        </field>
-    </record>
-
-    <record id="view_ter_unit_pivot" model="ir.ui.view">
-        <field name="name">ter.unit.pivot</field>
-        <field name="model">ter.unit</field>
-        <field name="arch" type="xml">
-            <pivot string="Ter Unit Items" sample="1" js_class="analytic_pivot">
-                <field name="account_id"/>
-                <field name="date" interval="month" type="col"/>
-                <field name="amount" type="measure"/>
-            </pivot>
-        </field>
-    </record>
-
-    <record id="view_ter_unit_kanban" model="ir.ui.view">
-        <field name="name">ter.unit.kanban</field>
-        <field name="model">ter.unit</field>
-        <field name="arch" type="xml">
-            <kanban class="o_kanban_mobile" js_class="analytic_kanban">
-                <field name="account_id"/>
-                <field name="currency_id"/>
-                <templates>
-                    <t t-name="card">
-                        <div class="d-flex justify-content-between">
-                            <field class="fw-bold fs-5" name="name"/>
-                            <field class="text-end fw-bold fs-5" name="date"/>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <field class="text-muted" name="account_id"/>
-                            <field class="justify-content-end" name="amount" widget="monetary"/>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
-
     <record model="ir.actions.act_window" id="ter_unit_action_entrie">
         <field name="name">Ter Unit</field>
         <field name="res_model">ter.unit</field>
-        <field name="view_mode">kanban,list,form,graph,pivot</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_empty_folder">
                 No activity yet

@@ -11,21 +11,18 @@ class TerUnit(models.Model):
     _name = "ter.unit"
     _description = "Ter Unit"
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _inherits = {'account.analytic.line': 'line_id'}
 
-    @api.onchange('project_id')
-    def onchange_project_id(self):
-        if self.project_id:
-            self.account_id = self.project_id.account_id.id
-
-    project_id = fields.Many2one('ter.project')
-    line_id = fields.Many2one('account.analytic.line')
+    name = fields.Char(string="Name")
+    partner_id = fields.Many2one('res.partner')
     description = fields.Html(help="Description to provide more information and context about this ter_unit")
     active = fields.Boolean(default=True, copy=False, export_string_translation=False)
     sequence = fields.Integer(default=10, export_string_translation=False)
     parcel_id = fields.Many2one('ter.parcel', required=True)
+    date_start = fields.Date(string="Start date", required=True)
     date_end = fields.Date(string="End date", required=True)
-
+    #
+    date_range_id = fields.Many2one('date.range', domain=[('is_unit_use_type', '=', True)], required=True)
+    #
     area_official = fields.Float(
         string="Official Area",
         digits=(32, 4),
@@ -33,35 +30,67 @@ class TerUnit(models.Model):
         required=True,
         index=True,
     )
+    account_id = fields.Many2one('account.analytic.account', string='Analytic Account')
     area_official_m2 = fields.Integer(
         string="Official Area (m²)",
         compute="_compute_area_official_m2",
     )
-    categ_id = fields.Many2one('product.category', string='Product Category', required=True)
-    product_tmpl_id = fields.Many2one('product.template', string='Product Template', required=True)
+    use_type_id = fields.Many2one('ter.use_type')
+    attribute_value_ids = fields.One2many(
+        comodel_name="ter.unit.attribute.value",
+        inverse_name="unit_id",
+        string="Attributes",
+        copy=True,
+    )
 
-    @api.onchange('categ_id')
-    def onchange_categ_id(self):
-        if not self.categ_id:
-            self.product_tmpl_id = False
-            self.product_id = False
-        else:
-            if not self.product_tmpl_id:
-                self.product_id = False
-            else:
-                if self.product_tmpl_id.categ_id.id != self.categ_id.id:
-                    self.product_tmpl_id = False
-                    self.product_id = False
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records._ensure_attribute_lines()
+        return records
 
-    @api.onchange('product_tmpl_id')
-    def onchange_product_tmpl_id(self):
-        if not self.product_tmpl_id:
-            self.product_id = False
-        else:
-            if self.product_id:
-                if self.product_id.product_tmpl_id.id != self.product_tmpl_id.id:
-                    self.product_id = False
+    def _ensure_attribute_lines(self):
+        for unit in self:
+            if not unit.use_type_id:
+                continue
 
+            required_attrs = unit.use_type_id.all_attribute_ids
+            existing_attrs = unit.attribute_value_ids.mapped("attribute_id")
+
+            missing_attrs = required_attrs - existing_attrs
+
+            lines = []
+            for attr in missing_attrs:
+                lines.append((0, 0, {
+                    "attribute_id": attr.id,
+                }))
+
+            if lines:
+                unit.write({
+                    "attribute_value_ids": lines,
+                })
+
+    @api.onchange("use_type_id")
+    def _onchange_use_type_id(self):
+        if not self.use_type_id:
+            self.attribute_value_ids = [(5, 0, 0)]
+            return
+
+        lines = []
+        for attr in self.use_type_id.all_attribute_ids:
+            lines.append((0, 0, {
+                "attribute_id": attr.id,
+            }))
+        self.attribute_value_ids = lines
+
+    @api.constrains("attribute_value_ids")
+    def _check_required_attributes(self):
+        for unit in self:
+            for line in unit.attribute_value_ids:
+                if line.required and not line.value_id:
+                    raise ValidationError(
+                        _("Attribute '%s' is required.") % line.attribute_id.name
+                    )
 
     @api.depends("area_official")
     def _compute_area_official_m2(self):

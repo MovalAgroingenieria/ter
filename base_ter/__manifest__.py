@@ -23,7 +23,6 @@
         "base_report",
         "analytic",
         "date_range",
-        'account',
     ],
     "data": [
         "security/security.xml",
@@ -47,7 +46,9 @@
         "reports/parcel_report.xml",
         "reports/property_report.xml",
         "views/ter_unit_views.xml",
-        "views/ter_project_views.xml",
+        "views/date_range_view.xml",
+        "views/ter_use_type_views.xml",
+        "views/ter_use_type_attribute_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

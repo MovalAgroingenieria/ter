@@ -14,5 +14,11 @@ from . import (
     ter_property,
     ter_propertytag,
     ter_unit,
-    ter_project
+    date_range,
+    res_company,
+    date_range_type,
+    ter_use_type,
+    ter_use_type_attribute,
+    ter_use_type_attribute_value,
+    ter_unit_attribute_value
 )

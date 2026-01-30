@@ -198,6 +198,17 @@
                                     </div>
                                 </div>
                             </setting>
+                            <setting id="base_ter_ter_unit_sequence_id_args"
+                                     string="TER-UNIT"
+                            >
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="ter_unit_sequence_id" style="width: 100%;"/>
+                                    </div>
+                                </div>
+                            </setting>
+
+
                         </block>
 
                     </app>

@@ -1,0 +1,114 @@
+<odoo>
+    <record id="view_use_type_list" model="ir.ui.view">
+        <field name="name">ter.use_type.list</field>
+        <field name="model">ter.use_type</field>
+        <field name="arch" type="xml">
+            <list string="Use Types" default_order="parent_path, sequence, name" >
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="active" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_use_type_form" model="ir.ui.view">
+        <field name="name">ter.use_type.form</field>
+        <field name="model">ter.use_type</field>
+        <field name="arch" type="xml">
+            <form string="Use Type">
+                <header>
+                    <button name="action_view_descendants" type="object"
+                            string="Descendants" class="oe_highlight"
+                            />
+                    <button name="action_view_ancestors" type="object"
+                            string="Ancestors"
+                            />
+                    <field name="active" widget="boolean_toggle"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="e.g. Industrial vehicle"/>
+                        </h1>
+                        <div class="text-muted">
+                            <field name="complete_name" readonly="1"/>
+                        </div>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="parent_id" options="{'no_create': True}"/>
+                            <field name="sequence"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Children">
+                            <field name="child_ids" context="{'default_parent_id': id}">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="active" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Attributes">
+                            <field name="attribute_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="required"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_use_type_search" model="ir.ui.view">
+        <field name="name">ter.use_type.search</field>
+        <field name="model">ter.use_type</field>
+        <field name="arch" type="xml">
+            <search string="Search Use Types">
+                <field name="name" string="Name"/>
+                <field name="complete_name" string="Path"/>
+
+                <filter string="Active" name="active" domain="[('active','=',True)]"/>
+                <filter string="Archived" name="archived" domain="[('active','=',False)]"/>
+
+                <separator/>
+
+                <field name="parent_id"/>
+                <filter string="Top level" name="top_level" domain="[('parent_id','=',False)]"/>
+
+                <group expand="0" string="Group By">
+                    <filter string="Parent" name="group_by_parent" context="{'group_by': 'parent_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_use_type" model="ir.actions.act_window">
+        <field name="name">Use Types</field>
+        <field name="res_model">ter.use_type</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_use_type_search"/>
+        <field name="context">{'search_default_group_by_parent': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first use type
+            </p>
+            <p>
+                Use Types can be nested in a list. You can search by full path and browse children easily.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_use_type" name="Use Types" parent="base_ter.menu_configuration_general"
+              action="action_use_type" sequence="10"/>
+</odoo>

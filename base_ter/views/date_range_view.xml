@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_date_range_list" model="ir.ui.view">
+        <field name="name">date.range.list.ext</field>
+        <field name="model">date.range</field>
+        <field name="inherit_id" ref="date_range.view_date_range_list"/>
+        <field name="arch" type="xml">
+            <field name="type_id" position="before">
+                <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
+                <field name="use_type_id" invisible="not is_unit_use_type" required="is_unit_use_type" options="{'no_open': True, 'no_create': True}"/>
+            </field>
+            <field name="type_id" position="attributes">
+                <attribute name="domain">[('is_unit_use_type', '=', is_unit_use_type)]</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_date_range_form_view" model="ir.ui.view">
+        <field name="name">date.range.form.ext</field>
+        <field name="model">date.range</field>
+        <field name="inherit_id" ref="date_range.view_date_range_form_view"/>
+        <field name="arch" type="xml">
+            <field name="type_id" position="before">
+                <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
+            </field>
+            <field name="type_id" position="attributes">
+                <attribute name="domain">[('is_unit_use_type', '=', is_unit_use_type)]</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_date_range_search" model="ir.ui.view">
+        <field name="name">date.range.search.ext</field>
+        <field name="model">date.range</field>
+        <field name="inherit_id" ref="date_range.view_date_range_search"/>
+        <field name="arch" type="xml">
+            <filter name="date_end" position="after">
+                <filter name="type"/>
+                <separator/>
+            </filter>
+        </field>
+    </record>
+
+
+    <record id="view_date_range_type_list" model="ir.ui.view">
+        <field name="name">date.range.type.list.ext</field>
+        <field name="model">date.range.type</field>
+        <field name="inherit_id" ref="date_range.view_date_range_type_list"/>
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_date_range_type_form_view" model="ir.ui.view">
+        <field name="name">date.range.type.form.ext</field>
+        <field name="model">date.range.type</field>
+        <field name="inherit_id" ref="date_range.view_date_range_type_form_view"/>
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_date_range_type_search" model="ir.ui.view">
+        <field name="name">date.range.type.search.ext</field>
+        <field name="model">date.range.type</field>
+        <field name="inherit_id" ref="date_range.view_date_range_type_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="is_unit_use_type"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="date_range_action" model="ir.actions.act_window">
+        <field name="name">Date Ranges Ter</field>
+        <field name="res_model">date.range</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_date_range_list" />
+        <field name="domain">[('is_unit_use_type', '=', True)]</field>
+        <field name="context">{'default_is_unit_use_type': True}</field>
+    </record>
+    <record id="date_range_type_action" model="ir.actions.act_window">
+        <field name="name">Date Ranges Types Ter</field>
+        <field name="res_model">date.range.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_date_range_type_list" />
+        <field name="domain">[('is_unit_use_type', '=', True)]</field>
+        <field name="context">{'default_is_unit_use_type': True}</field>
+    </record>
+
+    <menuitem
+            action="date_range_action"
+            id="menu_date_range_action"
+            parent="base_ter.menu_territory"
+            sequence="102"
+    />
+    <menuitem
+            action="date_range_type_action"
+            id="menu_date_range_type_action"
+            parent="base_ter.menu_configuration_general"
+            sequence="103"
+    />
+</odoo>
