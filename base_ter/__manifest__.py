@@ -24,7 +24,6 @@
         "analytic",
         "date_range",
         'account',
-        "sale_product_matrix",
     ],
     "data": [
         "security/security.xml",
