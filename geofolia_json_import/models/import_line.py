@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import fields, models
-
+from odoo import _, models
+from odoo.exceptions import UserError
 
 class GeofoliaImportLine(models.Model):
     _name = "geofolia.import.line"
@@ -16,6 +17,21 @@ class GeofoliaImportLine(models.Model):
     name = fields.Char()
     raw_json = fields.Json()
     raw_json_text = fields.Text()
+
+    sync_state = fields.Selection(
+        selection=[
+            ("pending", "Pending"),
+            ("skipped", "Skipped"),
+            ("created", "Created"),
+            ("updated", "Updated"),
+            ("no_action", "No action"),
+            ("error", "Error"),
+        ],
+        default="pending",
+        index=True,
+        required=True,
+    )
+    sync_message = fields.Text()
 
     # Fields (plots)
     harvest_year = fields.Integer()
@@ -32,6 +48,12 @@ class GeofoliaImportLine(models.Model):
     botanical_species = fields.Char()
     variety_name = fields.Char()
 
+    def action_apply_selected(self):
+        for line in self:
+            if not line.job_id:
+                raise UserError(_("Missing job."))
+            line.job_id._apply_activity_line(line)
+            line.job_id._recompute_apply_state()
 
 class GeofoliaImportProductLine(models.Model):
     _name = "geofolia.import.product.line"
@@ -40,7 +62,7 @@ class GeofoliaImportProductLine(models.Model):
 
     job_id = fields.Many2one("geofolia.import.job", required=True, ondelete="cascade")
     farm_identification_code = fields.Char()
-    external_id = fields.Char()
+    external_id = fields.Char(index=True)  # SupplyId
     code = fields.Char()
     name = fields.Char()
     category_enum = fields.Integer()
@@ -49,6 +71,30 @@ class GeofoliaImportProductLine(models.Model):
     raw_json = fields.Json()
     raw_json_text = fields.Text()
 
+    sync_state = fields.Selection(
+        selection=[
+            ("pending", "Pending"),
+            ("skipped", "Skipped"),
+            ("created", "Created"),
+            ("updated", "Updated"),
+            ("no_action", "No action"),
+            ("error", "Error"),
+        ],
+        default="pending",
+        index=True,
+        required=True,
+    )
+    sync_message = fields.Text()
+    product_id = fields.Many2one("product.product", ondelete="set null")
+    def action_apply_selected(self):
+        for line in self:
+            if not line.job_id:
+                raise UserError(_("Missing job."))
+            if line.job_id.import_type != "full":
+                continue
+            line.job_id._apply_product_line(line, source="products")
+            line.job_id._recompute_apply_state()
+
 
 class GeofoliaImportEmployeeLine(models.Model):
     _name = "geofolia.import.employee.line"
@@ -56,13 +102,36 @@ class GeofoliaImportEmployeeLine(models.Model):
     _order = "id asc"
 
     job_id = fields.Many2one("geofolia.import.job", required=True, ondelete="cascade")
-    external_id = fields.Char()
+    external_id = fields.Char(index=True)
     code = fields.Char()
     name = fields.Char()
     email = fields.Char()
     phone = fields.Char()
     raw_json = fields.Json()
     raw_json_text = fields.Text()
+
+    sync_state = fields.Selection(
+        selection=[
+            ("pending", "Pending"),
+            ("skipped", "Skipped"),
+            ("created", "Created"),
+            ("updated", "Updated"),
+            ("no_action", "No action"),
+            ("error", "Error"),
+        ],
+        default="pending",
+        index=True,
+        required=True,
+    )
+    sync_message = fields.Text()
+    employee_id = fields.Many2one("hr.employee", ondelete="set null")
+
+    def action_apply_selected(self):
+        for line in self:
+            if not line.job_id:
+                raise UserError(_("Missing job."))
+            line.job_id._apply_employee_line(line)
+            line.job_id._recompute_apply_state()
 
 
 class GeofoliaImportPartnerLine(models.Model):
@@ -71,12 +140,27 @@ class GeofoliaImportPartnerLine(models.Model):
     _order = "id asc"
 
     job_id = fields.Many2one("geofolia.import.job", required=True, ondelete="cascade")
-    external_id = fields.Char()
+    external_id = fields.Char(index=True)
     code = fields.Char()
     name = fields.Char()
     vat = fields.Char()
     raw_json = fields.Json()
     raw_json_text = fields.Text()
+
+    sync_state = fields.Selection(
+        selection=[
+            ("pending", "Pending"),
+            ("skipped", "Skipped"),
+            ("created", "Created"),
+            ("updated", "Updated"),
+            ("no_action", "No action"),
+            ("error", "Error"),
+        ],
+        default="pending",
+        index=True,
+        required=True,
+    )
+    sync_message = fields.Text()
 
 
 class GeofoliaImportHarvestedProductLine(models.Model):
@@ -85,12 +169,28 @@ class GeofoliaImportHarvestedProductLine(models.Model):
     _order = "id asc"
 
     job_id = fields.Many2one("geofolia.import.job", required=True, ondelete="cascade")
-    external_id = fields.Char()
+    external_id = fields.Char(index=True)
     code = fields.Char()
     name = fields.Char()
     unit_symbol = fields.Char()
     raw_json = fields.Json()
     raw_json_text = fields.Text()
+
+    sync_state = fields.Selection(
+        selection=[
+            ("pending", "Pending"),
+            ("skipped", "Skipped"),
+            ("created", "Created"),
+            ("updated", "Updated"),
+            ("no_action", "No action"),
+            ("error", "Error"),
+        ],
+        default="pending",
+        index=True,
+        required=True,
+    )
+    sync_message = fields.Text()
+    product_id = fields.Many2one("product.product", ondelete="set null")
 
 
 class GeofoliaImportEquipmentLine(models.Model):
@@ -99,12 +199,28 @@ class GeofoliaImportEquipmentLine(models.Model):
     _order = "id asc"
 
     job_id = fields.Many2one("geofolia.import.job", required=True, ondelete="cascade")
-    external_id = fields.Char()
+    external_id = fields.Char(index=True)
     code = fields.Char()
     name = fields.Char()
     category = fields.Char()
     raw_json = fields.Json()
     raw_json_text = fields.Text()
+
+    sync_state = fields.Selection(
+        selection=[
+            ("pending", "Pending"),
+            ("skipped", "Skipped"),
+            ("created", "Created"),
+            ("updated", "Updated"),
+            ("no_action", "No action"),
+            ("error", "Error"),
+        ],
+        default="pending",
+        index=True,
+        required=True,
+    )
+    sync_message = fields.Text()
+    product_id = fields.Many2one("product.product", ondelete="set null")
 
 
 class GeofoliaImportActivityLine(models.Model):
@@ -115,7 +231,7 @@ class GeofoliaImportActivityLine(models.Model):
     job_id = fields.Many2one("geofolia.import.job", required=True, ondelete="cascade")
 
     farm_identification_code = fields.Char()
-    external_id = fields.Char()
+    external_id = fields.Char(index=True)  # ActionId
     harvest_year = fields.Integer()
 
     operation_name = fields.Char()
@@ -135,3 +251,28 @@ class GeofoliaImportActivityLine(models.Model):
 
     raw_json = fields.Json()
     raw_json_text = fields.Text()
+
+    sync_state = fields.Selection(
+        selection=[
+            ("pending", "Pending"),
+            ("skipped", "Skipped"),
+            ("created", "Created"),
+            ("updated", "Updated"),
+            ("no_action", "No action"),
+            ("error", "Error"),
+        ],
+        default="pending",
+        index=True,
+        required=True,
+    )
+    sync_message = fields.Text()
+
+    employee_id = fields.Many2one("hr.employee", ondelete="set null")
+    analytic_line_id = fields.Many2one("account.analytic.line", ondelete="set null")
+
+    def action_apply_selected(self):
+        for line in self:
+            if not line.job_id:
+                raise UserError(_("Missing job."))
+            line.job_id._apply_activity_line(line)
+            line.job_id._recompute_apply_state()

@@ -2,7 +2,7 @@
 
 import base64
 import json
-
+import re
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -149,12 +149,25 @@ class GeofoliaImportJob(models.Model):
     def _to_date(self, value):
         if not value:
             return False
-        return fields.Date.to_date(value)
+        v = str(value).strip()
+        if "T" in v:
+            v = v.split("T", 1)[0]
+        return fields.Date.to_date(v)
 
     def _to_datetime(self, value):
         if not value:
             return False
-        return fields.Datetime.to_datetime(value)
+
+        v = str(value).strip()
+        v = v.replace("T", " ")
+        v = re.sub(r"Z$", "", v)
+
+        # Si hay fracción, NO la conviertas a .xxxxxx: mejor recórtala a segundos
+        # para que nunca choque con parsers sin %f
+        if "." in v:
+            v = v.split(".", 1)[0]
+
+        return fields.Datetime.to_datetime(v)
 
     def _to_float(self, value):
         if value in (None, ""):
@@ -396,3 +409,362 @@ class GeofoliaImportJob(models.Model):
             )
         if vals_list:
             self.env["geofolia.import.activity.line"].create(vals_list)
+
+
+    def _apply_full_export(self, only_pending=False):
+        self.ensure_one()
+
+        def _todo(rs):
+            if not only_pending:
+                return rs.filtered(lambda l: l.sync_state in ("pending", "error"))
+            return rs.filtered(lambda l: l.sync_state == "pending")
+
+        for line in _todo(self.product_line_ids):
+            self._apply_product_line(line, source="products")
+
+        for line in _todo(self.employee_line_ids):
+            self._apply_employee_line(line)
+
+        for line in _todo(self.harvested_product_line_ids):
+            self._apply_harvested_product_line(line)
+
+        for line in _todo(self.equipment_line_ids):
+            self._apply_equipment_line(line)
+
+        for line in _todo(self.activity_line_ids):
+            self._apply_activity_line(line)
+
+    # -------------------------
+    # Products
+    # -------------------------
+    def _apply_product_line(self, line, source):
+        self.ensure_one()
+        try:
+            with self.env.cr.savepoint():
+                if line.product_id:
+                    line.write({"sync_state": "no_action", "sync_message": "Already linked."})
+                    return
+
+                Product = self.env["product.product"]
+                existing = Product.search(
+                    [
+                        ("geofolia_source", "=", source),
+                        ("geofolia_external_id", "=", line.external_id),
+                    ],
+                    limit=1,
+                )
+                vals = {
+                    "name": line.name or line.code or line.external_id,
+                    "default_code": line.code,
+                    "geofolia_source": source,
+                    "geofolia_external_id": line.external_id,
+                    "geofolia_job_id": self.id,
+                    "geofolia_source_line_ref": f"{line._name},{line.id}",
+                }
+
+                if existing:
+                    existing.write(vals)
+                    line.write(
+                        {
+                            "product_id": existing.id,
+                            "sync_state": "updated",
+                            "sync_message": "Updated product.",
+                        }
+                    )
+                else:
+                    rec = Product.create(vals)
+                    line.write(
+                        {
+                            "product_id": rec.id,
+                            "sync_state": "created",
+                            "sync_message": "Created product.",
+                        }
+                    )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+    def _apply_harvested_product_line(self, line):
+        # HarvestedProducts -> product.product
+        self._apply_generic_product_line(line, source="harvested")
+
+    def _apply_equipment_line(self, line):
+        # Equipments -> product.product (según tu requisito)
+        self._apply_generic_product_line(line, source="equipments")
+
+    def _apply_generic_product_line(self, line, source):
+        self.ensure_one()
+        try:
+            with self.env.cr.savepoint():
+                if line.product_id:
+                    line.write({"sync_state": "no_action", "sync_message": "Already linked."})
+                    return
+
+                Product = self.env["product.product"]
+                existing = Product.search(
+                    [
+                        ("geofolia_source", "=", source),
+                        ("geofolia_external_id", "=", line.external_id),
+                    ],
+                    limit=1,
+                )
+                vals = {
+                    "name": line.name or line.code or line.external_id,
+                    "default_code": line.code,
+                    "geofolia_source": source,
+                    "geofolia_external_id": line.external_id,
+                    "geofolia_job_id": self.id,
+                    "geofolia_source_line_ref": f"{line._name},{line.id}",
+                }
+                if existing:
+                    existing.write(vals)
+                    line.write(
+                        {
+                            "product_id": existing.id,
+                            "sync_state": "updated",
+                            "sync_message": "Updated product.",
+                        }
+                    )
+                else:
+                    rec = Product.create(vals)
+                    line.write(
+                        {
+                            "product_id": rec.id,
+                            "sync_state": "created",
+                            "sync_message": "Created product.",
+                        }
+                    )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+    # -------------------------
+    # Employees
+    # -------------------------
+    def _apply_employee_line(self, line):
+        self.ensure_one()
+        try:
+            with self.env.cr.savepoint():
+                if line.employee_id:
+                    line.write({"sync_state": "no_action", "sync_message": "Already linked."})
+                    return
+
+                Employee = self.env["hr.employee"]
+                existing = Employee.search([("geofolia_external_id", "=", line.external_id)], limit=1)
+
+                vals = {
+                    "name": line.name or line.external_id,
+                    "work_email": line.email,
+                    "work_phone": line.phone,
+                    "geofolia_external_id": line.external_id,
+                    "geofolia_job_id": self.id,
+                    "geofolia_source_line_ref": f"{line._name},{line.id}",
+                }
+
+                if existing:
+                    existing.write(vals)
+                    line.write(
+                        {
+                            "employee_id": existing.id,
+                            "sync_state": "updated",
+                            "sync_message": "Updated employee.",
+                        }
+                    )
+                else:
+                    rec = Employee.create(vals)
+                    line.write(
+                        {
+                            "employee_id": rec.id,
+                            "sync_state": "created",
+                            "sync_message": "Created employee.",
+                        }
+                    )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+    # -------------------------
+    # Activities -> analytic lines
+    # -------------------------
+    def _apply_activity_line(self, line):
+        """
+        Crea una account.analytic.line vinculada a un empleado.
+        - Dedup: por geofolia_external_id (ActionId) + constraint.
+        - Employee detection: por EmployeeId si existe en raw_json, si no por email/name.
+        """
+        self.ensure_one()
+        try:
+            with self.env.cr.savepoint():
+                if line.analytic_line_id:
+                    line.write({"sync_state": "no_action", "sync_message": "Already linked."})
+                    return
+
+                employee = self._find_employee_for_activity(line)
+                if not employee:
+                    line.write({"sync_state": "skipped", "sync_message": "Employee not found."})
+                    return
+
+                # si ya existe analytic line por ActionId, la reutilizamos
+                Analytic = self.env["account.analytic.line"]
+                existing = Analytic.search([("geofolia_external_id", "=", line.external_id)], limit=1)
+
+                unit_amount = (line.duration_minutes or 0) / 60.0
+                vals = {
+                    "name": line.operation_name or line.comment or f"Geofolia {line.external_id}",
+                    "date": line.starting_date,
+                    "unit_amount": unit_amount,
+                    "employee_id": employee.id,
+                    "geofolia_external_id": line.external_id,
+                    "geofolia_job_id": self.id,
+                    "geofolia_activity_line_id": line.id,
+                }
+
+                if existing:
+                    existing.write(vals)
+                    line.write(
+                        {
+                            "employee_id": employee.id,
+                            "analytic_line_id": existing.id,
+                            "sync_state": "updated",
+                            "sync_message": "Updated analytic line.",
+                        }
+                    )
+                else:
+                    rec = Analytic.create(vals)
+                    line.write(
+                        {
+                            "employee_id": employee.id,
+                            "analytic_line_id": rec.id,
+                            "sync_state": "created",
+                            "sync_message": "Created analytic line.",
+                        }
+                    )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+    def _find_employee_for_activity(self, line):
+        self.ensure_one()
+        data = line.raw_json or {}
+
+        # 1) Por EmployeeId si viene
+        emp_ext = data.get("EmployeeId") or data.get("EmployeeExternalId")
+        if emp_ext:
+            emp = self.env["hr.employee"].search([("geofolia_external_id", "=", emp_ext)], limit=1)
+            if emp:
+                return emp
+
+        # 2) Por email si viene
+        email = data.get("EmployeeEmail")
+        if email:
+            emp = self.env["hr.employee"].search([("work_email", "=", email)], limit=1)
+            if emp:
+                return emp
+
+        # 3) Por nombre si viene
+        name = data.get("EmployeeName")
+        if name:
+            emp = self.env["hr.employee"].search([("name", "=", name)], limit=1)
+            if emp:
+                return emp
+
+        # 4) fallback: el que ya tengas vinculado
+        return line.employee_id
+
+    apply_state = fields.Selection(
+        selection=[
+            ("draft", "Draft"),
+            ("ready", "Ready"),
+            ("partial", "Partial"),
+            ("done", "Done"),
+            ("error", "Error"),
+        ],
+        default="draft",
+        required=True,
+        index=True,
+    )
+
+    pending_count = fields.Integer(compute="_compute_apply_stats", store=False)
+    processed_count = fields.Integer(compute="_compute_apply_stats", store=False)
+    error_count = fields.Integer(compute="_compute_apply_stats", store=False)
+    total_count = fields.Integer(compute="_compute_apply_stats", store=False)
+
+    @api.depends(
+        "product_line_ids.sync_state",
+        "employee_line_ids.sync_state",
+        "partner_line_ids.sync_state",
+        "harvested_product_line_ids.sync_state",
+        "equipment_line_ids.sync_state",
+        "activity_line_ids.sync_state",
+        "import_type",
+    )
+    def _compute_apply_stats(self):
+        processed_states = ("created", "updated", "no_action", "skipped")
+        for job in self:
+            if job.import_type != "full":
+                job.total_count = 0
+                job.pending_count = 0
+                job.processed_count = 0
+                job.error_count = 0
+                continue
+
+            lines_by_block = job._get_full_lines_by_block()
+            total = pending = processed = errors = 0
+
+            for lines in lines_by_block.values():
+                total += len(lines)
+                pending += len(lines.filtered(lambda l: l.sync_state == "pending"))
+                errors += len(lines.filtered(lambda l: l.sync_state == "error"))
+                processed += len(lines.filtered(lambda l: l.sync_state in processed_states))
+
+            job.total_count = total
+            job.pending_count = pending
+            job.error_count = errors
+            job.processed_count = processed
+
+    def _get_full_lines_by_block(self):
+        self.ensure_one()
+        return {
+            "products": self.product_line_ids,
+            "employees": self.employee_line_ids,
+            "partners": self.partner_line_ids,
+            "harvested_products": self.harvested_product_line_ids,
+            "equipments": self.equipment_line_ids,
+            "activities": self.activity_line_ids,
+        }
+
+    def _recompute_apply_state(self):
+        self.ensure_one()
+        if self.import_type != "full":
+            self.apply_state = "done"
+            return
+
+        lines_by_block = self._get_full_lines_by_block()
+        total = sum(len(v) for v in lines_by_block.values())
+
+        if not total:
+            self.apply_state = "done"
+            return
+
+        pending = any(v.filtered(lambda l: l.sync_state == "pending") for v in lines_by_block.values())
+        errors = any(v.filtered(lambda l: l.sync_state == "error") for v in lines_by_block.values())
+
+        if errors:
+            # Si hay errores y todavía quedan pendientes => parcial; si no quedan pendientes => error
+            self.apply_state = "partial" if pending else "error"
+            return
+
+        self.apply_state = "ready" if pending else "done"
+
+    def action_apply(self):
+        for job in self:
+            if job.import_type != "full":
+                continue
+            job.apply_state = "ready"
+            job._apply_full_export()
+            job._recompute_apply_state()
+
+    def action_apply_pending(self):
+        """Procesa solo pending (útil si quieres reintentar sin tocar ya procesadas)."""
+        for job in self:
+            if job.import_type != "full":
+                continue
+            job.apply_state = "ready"
+            job._apply_full_export(only_pending=True)
+            job._recompute_apply_state()

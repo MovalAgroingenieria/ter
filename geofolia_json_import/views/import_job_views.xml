@@ -43,6 +43,26 @@
                             string="Parse"
                             class="btn-primary"
                             invisible="state == 'done'"/>
+                    <button name="action_apply"
+                            type="object"
+                            string="Apply"
+                            class="btn-primary"
+                            invisible="import_type != 'full' or state != 'done'"/>
+                    <button name="action_apply"
+                            type="object"
+                            string="Apply All"
+                            class="btn-primary"
+                            invisible="import_type != 'full' or state != 'done'"/>
+
+                    <button name="action_apply_pending"
+                            type="object"
+                            string="Apply Pending"
+                            invisible="import_type != 'full' or state != 'done'"/>
+
+                    <field name="apply_state" widget="statusbar"
+                           statusbar_visible="draft,ready,partial,done,error"
+                           invisible="import_type != 'full'"/>
+
                     <field name="state" widget="statusbar" statusbar_visible="draft,done,error"/>
                 </header>
 
@@ -52,6 +72,12 @@
                         <field name="import_type"/>
                         <field name="file_name" readonly="1"/>
                         <field name="file_data" filename="file_name"/>
+                    </group>
+                    <group invisible="import_type != 'full'">
+                        <field name="total_count" readonly="1"/>
+                        <field name="pending_count" readonly="1"/>
+                        <field name="processed_count" readonly="1"/>
+                        <field name="error_count" readonly="1"/>
                     </group>
 
                     <group string="Information">
@@ -84,35 +110,49 @@
                         <!-- FULL MODE -->
                         <page string="Products" invisible="import_type != 'full'">
                             <field name="product_line_ids">
-                                <list>
+                                <list
+                                        decoration-success="sync_state in ('created','updated')"
+                                        decoration-warning="sync_state in ('pending','skipped','no_action')"
+                                        decoration-danger="sync_state == 'error'"
+                                >
+                                    <header>
+                                        <button name="action_apply_selected"
+                                                type="object"
+                                                string="Apply selected"
+                                                class="btn-primary"/>
+                                    </header>
+                                    <field name="sync_state"/>
+                                    <field name="sync_message" optional="hide"/>
                                     <field name="farm_identification_code"/>
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
-                                    <field name="category_enum"/>
-                                    <field name="product_type_enum"/>
-                                    <field name="unit_symbol"/>
-
-                                    <!-- Debug -->
+                                    <field name="product_id" optional="hide"/>
                                     <field name="raw_json_text" invisible="1"/>
                                 </list>
                             </field>
                         </page>
+
 
                         <page string="Employees" invisible="import_type != 'full'">
                             <field name="employee_line_ids">
-                                <list>
+                                <list
+                                        decoration-success="sync_state in ('created','updated')"
+                                        decoration-warning="sync_state in ('pending','skipped','no_action')"
+                                        decoration-danger="sync_state == 'error'"
+                                >
+                                    <field name="sync_state"/>
+                                    <field name="sync_message" optional="hide"/>
                                     <field name="external_id"/>
-                                    <field name="code"/>
                                     <field name="name"/>
                                     <field name="email"/>
                                     <field name="phone"/>
-
-                                    <!-- Debug -->
+                                    <field name="employee_id" optional="hide"/>
                                     <field name="raw_json_text" invisible="1"/>
                                 </list>
                             </field>
                         </page>
+
 
                         <page string="Partners" invisible="import_type != 'full'">
                             <field name="partner_line_ids">
@@ -158,27 +198,25 @@
 
                         <page string="Activities" invisible="import_type != 'full'">
                             <field name="activity_line_ids">
-                                <list>
+                                <list
+                                        decoration-success="sync_state in ('created','updated')"
+                                        decoration-warning="sync_state in ('pending','skipped','no_action')"
+                                        decoration-danger="sync_state == 'error'"
+                                >
+                                    <field name="sync_state"/>
+                                    <field name="sync_message" optional="hide"/>
                                     <field name="starting_date"/>
                                     <field name="ending_date"/>
-                                    <field name="start_time"/>
-                                    <field name="finish_time"/>
                                     <field name="duration_minutes"/>
-
-                                    <field name="external_id"/>
-                                    <field name="farm_identification_code"/>
-                                    <field name="harvest_year"/>
-
                                     <field name="operation_name"/>
-                                    <field name="operation_category"/>
                                     <field name="status_name"/>
-                                    <field name="status_code"/>
-
-                                    <!-- Debug -->
+                                    <field name="employee_id" optional="hide"/>
+                                    <field name="analytic_line_id" optional="hide"/>
                                     <field name="raw_json_text" invisible="1"/>
                                 </list>
                             </field>
                         </page>
+
                     </notebook>
                 </sheet>
             </form>
