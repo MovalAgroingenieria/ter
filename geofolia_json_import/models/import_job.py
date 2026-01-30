@@ -3,6 +3,7 @@
 import base64
 import json
 import re
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -13,20 +14,31 @@ class GeofoliaImportJob(models.Model):
     _order = "id desc"
 
     name = fields.Char(required=True, default=lambda self: _("New"))
-
     import_type = fields.Selection(
         selection=[
             ("fields", "Fields (Plots)"),
             ("products", "Products (Supplies)"),
-            ("full", "Full export (multi-block)"),
+            ("full", "Full (All blocks)"),
         ],
         required=True,
+        default="full",
     )
-
     state = fields.Selection(
         selection=[("draft", "Draft"), ("done", "Done"), ("error", "Error")],
         default="draft",
         required=True,
+    )
+    apply_state = fields.Selection(
+        selection=[
+            ("draft", "Draft"),
+            ("ready", "Ready"),
+            ("partial", "Partial"),
+            ("done", "Done"),
+            ("error", "Error"),
+        ],
+        default="draft",
+        required=True,
+        index=True,
     )
 
     file_name = fields.Char()
@@ -37,22 +49,40 @@ class GeofoliaImportJob(models.Model):
 
     # simple mode
     line_ids = fields.One2many("geofolia.import.line", "job_id", string="Lines")
-    line_count = fields.Integer(compute="_compute_line_count", store=False)
 
-    # full blocks
-    product_line_ids = fields.One2many("geofolia.import.product.line", "job_id")
-    employee_line_ids = fields.One2many("geofolia.import.employee.line", "job_id")
-    partner_line_ids = fields.One2many("geofolia.import.partner.line", "job_id")
-    harvested_product_line_ids = fields.One2many(
-        "geofolia.import.harvested.product.line", "job_id"
+    # full mode
+    product_line_ids = fields.One2many(
+        "geofolia.import.product.line", "job_id", string="Products"
     )
-    equipment_line_ids = fields.One2many("geofolia.import.equipment.line", "job_id")
-    activity_line_ids = fields.One2many("geofolia.import.activity.line", "job_id")
+    employee_line_ids = fields.One2many(
+        "geofolia.import.employee.line", "job_id", string="Employees"
+    )
+    partner_line_ids = fields.One2many(
+        "geofolia.import.partner.line", "job_id", string="Partners"
+    )
+    harvested_product_line_ids = fields.One2many(
+        "geofolia.import.harvested.product.line",
+        "job_id",
+        string="Harvested Products",
+    )
+    equipment_line_ids = fields.One2many(
+        "geofolia.import.equipment.line", "job_id", string="Equipments"
+    )
+    activity_line_ids = fields.One2many(
+        "geofolia.import.activity.line", "job_id", string="Activities"
+    )
+    activity_employee_line_ids = fields.One2many(
+        "geofolia.import.activity.employee.line", "job_id", string="Activity Employees"
+    )
 
-    @api.depends("line_ids")
-    def _compute_line_count(self):
-        for job in self:
-            job.line_count = len(job.line_ids)
+    total_count = fields.Integer(compute="_compute_apply_stats")
+    pending_count = fields.Integer(compute="_compute_apply_stats")
+    processed_count = fields.Integer(compute="_compute_apply_stats")
+    error_count = fields.Integer(compute="_compute_apply_stats")
+
+    # ----------------------------
+    # Public actions
+    # ----------------------------
 
     def action_parse(self):
         for job in self:
@@ -60,10 +90,30 @@ class GeofoliaImportJob(models.Model):
                 payload = job._load_json_payload()
                 job._parse_payload(payload)
                 job.state = "done"
+                job.apply_state = "ready" if job.import_type == "full" else "done"
                 job.error = False
             except Exception as exc:  # noqa: BLE001
                 job.state = "error"
+                job.apply_state = "error"
                 job.error = str(exc)
+
+    def action_apply(self):
+        for job in self:
+            if job.import_type != "full":
+                continue
+            job._apply_full_export(only_pending=False)
+            job._recompute_apply_state()
+
+    def action_apply_pending(self):
+        for job in self:
+            if job.import_type != "full":
+                continue
+            job._apply_full_export(only_pending=True)
+            job._recompute_apply_state()
+
+    # ----------------------------
+    # Parsing
+    # ----------------------------
 
     def _load_json_payload(self):
         self.ensure_one()
@@ -94,8 +144,9 @@ class GeofoliaImportJob(models.Model):
             raise UserError(_("Missing or invalid 'Information' object."))
         self.info_json = info
 
+        self._clear_lines()
+
         if self.import_type == "fields":
-            self.line_ids.unlink()
             items = payload.get("Fields")
             if not isinstance(items, list):
                 raise UserError(_("Missing or invalid 'Fields' array."))
@@ -103,48 +154,60 @@ class GeofoliaImportJob(models.Model):
             return
 
         if self.import_type == "products":
-            self.line_ids.unlink()
             items = payload.get("Products")
             if not isinstance(items, list):
                 raise UserError(_("Missing or invalid 'Products' array."))
             self._create_lines_from_products(items)
             return
 
-        # full
-        self._clear_full_lines()
-        self._parse_full_payload(payload)
+        self._create_full_lines(payload)
 
-    def _clear_full_lines(self):
+    def _clear_lines(self):
+        self.line_ids.unlink()
         self.product_line_ids.unlink()
         self.employee_line_ids.unlink()
         self.partner_line_ids.unlink()
         self.harvested_product_line_ids.unlink()
         self.equipment_line_ids.unlink()
         self.activity_line_ids.unlink()
+        self.activity_employee_line_ids.unlink()
 
-    def _parse_full_payload(self, payload):
-        self._create_product_lines(payload.get("Products"))
-        self._create_employee_lines(payload.get("Employees"))
-        self._create_partner_lines(payload.get("Partners"))
-        self._create_harvested_product_lines(payload.get("HarvestedProducts"))
-        self._create_equipment_lines(payload.get("Equipments"))
-        self._create_activity_lines(payload.get("Activities"))
+    def _create_full_lines(self, payload):
+        self.ensure_one()
 
-        unsubs = payload.get("IEJsonUnsubscriptionElements")
-        if unsubs is not None:
-            info = dict(self.info_json or {})
-            info["IEJsonUnsubscriptionElements"] = unsubs
-            self.info_json = info
+        products = payload.get("Products") or []
+        employees = payload.get("Employees") or []
+        partners = payload.get("Partners") or []
+        harvested = payload.get("HarvestedProducts") or []
+        equipments = payload.get("Equipments") or []
+        activities = payload.get("Activities") or []
 
-    # -------------------------
+        if isinstance(products, list):
+            self._create_product_lines(products)
+        if isinstance(employees, list):
+            self._create_employee_lines(employees)
+        if isinstance(partners, list):
+            self._create_partner_lines(partners)
+        if isinstance(harvested, list):
+            self._create_harvested_product_lines(harvested)
+        if isinstance(equipments, list):
+            self._create_equipment_lines(equipments)
+        if isinstance(activities, list):
+            self._create_activity_lines(activities)
+
+    # ----------------------------
     # Helpers
-    # -------------------------
-    def _ensure_list(self, value, key_name):
-        if value in (None, False):
-            return []
-        if not isinstance(value, list):
-            raise UserError(_("Invalid '%s' array.") % key_name)
-        return value
+    # ----------------------------
+
+    def _to_datetime(self, value):
+        if not value:
+            return False
+        v = str(value).strip()
+        v = v.replace("T", " ")
+        v = re.sub(r"Z$", "", v)
+        if "." in v:
+            v = v.split(".", 1)[0]
+        return fields.Datetime.to_datetime(v)
 
     def _to_date(self, value):
         if not value:
@@ -154,49 +217,17 @@ class GeofoliaImportJob(models.Model):
             v = v.split("T", 1)[0]
         return fields.Date.to_date(v)
 
-    def _to_datetime(self, value):
-        if not value:
-            return False
-
-        v = str(value).strip()
-        v = v.replace("T", " ")
-        v = re.sub(r"Z$", "", v)
-
-        # Si hay fracción, NO la conviertas a .xxxxxx: mejor recórtala a segundos
-        # para que nunca choque con parsers sin %f
-        if "." in v:
-            v = v.split(".", 1)[0]
-
-        return fields.Datetime.to_datetime(v)
-
-    def _to_float(self, value):
-        if value in (None, ""):
-            return 0.0
+    def _json_text(self, value):
         try:
-            return float(value)
-        except (TypeError, ValueError):
-            return 0.0
-
-    def _to_int(self, value):
-        if value in (None, ""):
-            return 0
-        try:
-            return int(value)
-        except (TypeError, ValueError):
-            return 0
-
-    def _json_text(self, obj):
-        # siempre serializable a texto para debug/UI
-        try:
-            return json.dumps(obj, ensure_ascii=False, sort_keys=True)
+            return json.dumps(value, ensure_ascii=False)
         except Exception:  # noqa: BLE001
-            return "{}"
+            return str(value)
 
-    # -------------------------
-    # Simple mode (tu modelo original)
-    # -------------------------
+    # ----------------------------
+    # Simple mode
+    # ----------------------------
+
     def _create_lines_from_fields(self, items):
-        self.ensure_one()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
@@ -207,8 +238,8 @@ class GeofoliaImportJob(models.Model):
                     "external_uuid": it.get("Id"),
                     "code": it.get("Code"),
                     "name": it.get("Name"),
-                    "harvest_year": self._to_int(it.get("HarvestYear")),
-                    "area": self._to_float(it.get("Area")),
+                    "harvest_year": it.get("HarvestYear"),
+                    "area": it.get("Area"),
                     "city": it.get("City"),
                     "crop_name": it.get("CropName"),
                     "geography_wkt": it.get("Geography"),
@@ -220,7 +251,6 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.line"].create(vals_list)
 
     def _create_lines_from_products(self, items):
-        self.ensure_one()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
@@ -232,8 +262,8 @@ class GeofoliaImportJob(models.Model):
                     "code": it.get("Code"),
                     "name": it.get("SupplyName"),
                     "supply_id": it.get("SupplyId"),
-                    "category_enum": self._to_int(it.get("CategoryEnum")),
-                    "product_type_enum": self._to_int(it.get("ProductTypeEnum")),
+                    "category_enum": it.get("CategoryEnum"),
+                    "product_type_enum": it.get("ProductTypeEnum"),
                     "unit_symbol": it.get("UnitSymbol"),
                     "botanical_species": it.get("BotanicalSpecies"),
                     "variety_name": it.get("VarietyName"),
@@ -244,27 +274,24 @@ class GeofoliaImportJob(models.Model):
         if vals_list:
             self.env["geofolia.import.line"].create(vals_list)
 
-    # -------------------------
-    # Full blocks
-    # -------------------------
+    # ----------------------------
+    # Full mode: staging lines
+    # ----------------------------
+
     def _create_product_lines(self, items):
-        self.ensure_one()
-        items = self._ensure_list(items, "Products")
-        if not items:
-            return
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
                 continue
+            supply_id = it.get("SupplyId")
             vals_list.append(
                 {
                     "job_id": self.id,
-                    "farm_identification_code": it.get("FarmIdentificationCode"),
-                    "external_id": it.get("SupplyId"),
+                    "external_id": supply_id,
                     "code": it.get("Code"),
                     "name": it.get("SupplyName"),
-                    "category_enum": self._to_int(it.get("CategoryEnum")),
-                    "product_type_enum": self._to_int(it.get("ProductTypeEnum")),
+                    "category_enum": it.get("CategoryEnum"),
+                    "product_type_enum": it.get("ProductTypeEnum"),
                     "unit_symbol": it.get("UnitSymbol"),
                     "raw_json": it,
                     "raw_json_text": self._json_text(it),
@@ -274,20 +301,21 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.product.line"].create(vals_list)
 
     def _create_employee_lines(self, items):
-        self.ensure_one()
-        items = self._ensure_list(items, "Employees")
-        if not items:
-            return
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
                 continue
+            ext_id = it.get("EmployeeId") or it.get("Id")
+            name = it.get("Name") or it.get("EmployeeName") or it.get("LastName")
+            first_name = it.get("FirstName") or it.get("EmployeeFirstName")
+            if first_name and name and first_name not in name:
+                name = f"{first_name} {name}"
             vals_list.append(
                 {
                     "job_id": self.id,
-                    "external_id": it.get("Id") or it.get("EmployeeId"),
-                    "code": it.get("Code"),
-                    "name": it.get("Name") or it.get("FullName"),
+                    "external_id": ext_id,
+                    "code": it.get("Code") or it.get("EmployeeFarmIdentificationCode"),
+                    "name": name,
                     "email": it.get("Email"),
                     "phone": it.get("Phone"),
                     "raw_json": it,
@@ -298,21 +326,18 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.employee.line"].create(vals_list)
 
     def _create_partner_lines(self, items):
-        self.ensure_one()
-        items = self._ensure_list(items, "Partners")
-        if not items:
-            return
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
                 continue
+            ext_id = it.get("PartnerId") or it.get("Id")
             vals_list.append(
                 {
                     "job_id": self.id,
-                    "external_id": it.get("Id") or it.get("PartnerId"),
+                    "external_id": ext_id,
                     "code": it.get("Code"),
                     "name": it.get("Name"),
-                    "vat": it.get("VAT") or it.get("Vat"),
+                    "vat": it.get("Vat") or it.get("VAT"),
                     "raw_json": it,
                     "raw_json_text": self._json_text(it),
                 }
@@ -321,18 +346,15 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.partner.line"].create(vals_list)
 
     def _create_harvested_product_lines(self, items):
-        self.ensure_one()
-        items = self._ensure_list(items, "HarvestedProducts")
-        if not items:
-            return
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
                 continue
+            ext_id = it.get("HarvestedProductId") or it.get("Id")
             vals_list.append(
                 {
                     "job_id": self.id,
-                    "external_id": it.get("Id"),
+                    "external_id": ext_id,
                     "code": it.get("Code"),
                     "name": it.get("Name"),
                     "unit_symbol": it.get("UnitSymbol"),
@@ -344,21 +366,18 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.harvested.product.line"].create(vals_list)
 
     def _create_equipment_lines(self, items):
-        self.ensure_one()
-        items = self._ensure_list(items, "Equipments")
-        if not items:
-            return
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
                 continue
+            ext_id = it.get("EquipmentId") or it.get("Id")
             vals_list.append(
                 {
                     "job_id": self.id,
-                    "external_id": it.get("Id") or it.get("EquipmentId"),
+                    "external_id": ext_id,
                     "code": it.get("Code"),
-                    "name": it.get("Name"),
-                    "category": it.get("Category") or it.get("CategoryName"),
+                    "name": it.get("Name") or it.get("EquipmentName"),
+                    "category": it.get("Category"),
                     "raw_json": it,
                     "raw_json_text": self._json_text(it),
                 }
@@ -367,323 +386,80 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.equipment.line"].create(vals_list)
 
     def _create_activity_lines(self, items):
-        """
-        En Action.Json las activities vienen con:
-        - ActionId
-        - StartingDate / EndingDate
-        - StartTime / FinishTime
-        - OperationName, StatusName/StatusCode, etc.
-        """
-        self.ensure_one()
-        items = self._ensure_list(items, "Activities")
-        if not items:
-            return
-        vals_list = []
+        ActivityLine = self.env["geofolia.import.activity.line"]
+        EmpLine = self.env["geofolia.import.activity.employee.line"]
+
+        act_vals = []
+        emp_vals = []
+
         for it in items:
             if not isinstance(it, dict):
                 continue
 
-            starting_date = it.get("StartingDate")
-            ending_date = it.get("EndingDate")
-
-            vals_list.append(
+            action_id = it.get("ActionId") or it.get("Id")
+            act_vals.append(
                 {
                     "job_id": self.id,
+                    "external_id": action_id,
                     "farm_identification_code": it.get("FarmIdentificationCode"),
-                    "external_id": it.get("ActionId") or it.get("Id") or it.get("ActivityId"),
-                    "harvest_year": self._to_int(it.get("HarvestYear")),
+                    "harvest_year": it.get("HarvestYear"),
                     "operation_name": it.get("OperationName"),
                     "operation_category": it.get("OperationCategory"),
-                    "status_name": it.get("StatusName"),
                     "status_code": it.get("StatusCode"),
-                    "starting_date": self._to_date(starting_date),
-                    "ending_date": self._to_date(ending_date),
-                    "start_time": it.get("StartTime"),
-                    "finish_time": it.get("FinishTime"),
-                    "duration_minutes": self._to_int(it.get("Duration")),
-                    "last_modification_dt": self._to_datetime(it.get("LastModificationDate")),
+                    "status_name": it.get("StatusName"),
                     "comment": it.get("Comment"),
+                    "duration_minutes": it.get("Duration"),
+                    "starting_date": self._to_date(it.get("StartingDate")),
+                    "ending_date": self._to_date(it.get("EndingDate")),
+                    "last_modification_dt": self._to_datetime(it.get("LastModificationDate")),
                     "raw_json": it,
                     "raw_json_text": self._json_text(it),
                 }
             )
-        if vals_list:
-            self.env["geofolia.import.activity.line"].create(vals_list)
 
+        activities = ActivityLine.create(act_vals) if act_vals else ActivityLine
+        by_external = {a.external_id: a for a in activities}
 
-    def _apply_full_export(self, only_pending=False):
-        self.ensure_one()
+        for it in items:
+            if not isinstance(it, dict):
+                continue
+            action_id = it.get("ActionId") or it.get("Id")
+            activity = by_external.get(action_id)
+            if not activity:
+                continue
 
-        def _todo(rs):
-            if not only_pending:
-                return rs.filtered(lambda l: l.sync_state in ("pending", "error"))
-            return rs.filtered(lambda l: l.sync_state == "pending")
+            employees = it.get("ActionEmployees") or []
+            if not isinstance(employees, list):
+                continue
 
-        for line in _todo(self.product_line_ids):
-            self._apply_product_line(line, source="products")
-
-        for line in _todo(self.employee_line_ids):
-            self._apply_employee_line(line)
-
-        for line in _todo(self.harvested_product_line_ids):
-            self._apply_harvested_product_line(line)
-
-        for line in _todo(self.equipment_line_ids):
-            self._apply_equipment_line(line)
-
-        for line in _todo(self.activity_line_ids):
-            self._apply_activity_line(line)
-
-    # -------------------------
-    # Products
-    # -------------------------
-    def _apply_product_line(self, line, source):
-        self.ensure_one()
-        try:
-            with self.env.cr.savepoint():
-                if line.product_id:
-                    line.write({"sync_state": "no_action", "sync_message": "Already linked."})
-                    return
-
-                Product = self.env["product.product"]
-                existing = Product.search(
-                    [
-                        ("geofolia_source", "=", source),
-                        ("geofolia_external_id", "=", line.external_id),
-                    ],
-                    limit=1,
+            for emp in employees:
+                if not isinstance(emp, dict):
+                    continue
+                emp_vals.append(
+                    {
+                        "job_id": self.id,
+                        "activity_line_id": activity.id,
+                        "employee_action_id": emp.get("EmployeeActionId") or action_id,
+                        "employee_recognition_id": emp.get("EmployeeRecognitionId"),
+                        "employee_order": emp.get("EmployeeOrder"),
+                        "employee_farm_identification_code": emp.get(
+                            "EmployeeFarmIdentificationCode"
+                        ),
+                        "employee_first_name": emp.get("EmployeeFirstName"),
+                        "employee_name": emp.get("EmployeeName"),
+                        "employee_id_external": emp.get("EmployeeId"),
+                        "employee_time": emp.get("EmployeeTime"),
+                        "raw_json": emp,
+                        "raw_json_text": self._json_text(emp),
+                    }
                 )
-                vals = {
-                    "name": line.name or line.code or line.external_id,
-                    "default_code": line.code,
-                    "geofolia_source": source,
-                    "geofolia_external_id": line.external_id,
-                    "geofolia_job_id": self.id,
-                    "geofolia_source_line_ref": f"{line._name},{line.id}",
-                }
 
-                if existing:
-                    existing.write(vals)
-                    line.write(
-                        {
-                            "product_id": existing.id,
-                            "sync_state": "updated",
-                            "sync_message": "Updated product.",
-                        }
-                    )
-                else:
-                    rec = Product.create(vals)
-                    line.write(
-                        {
-                            "product_id": rec.id,
-                            "sync_state": "created",
-                            "sync_message": "Created product.",
-                        }
-                    )
-        except Exception as exc:  # noqa: BLE001
-            line.write({"sync_state": "error", "sync_message": str(exc)})
+        if emp_vals:
+            EmpLine.create(emp_vals)
 
-    def _apply_harvested_product_line(self, line):
-        # HarvestedProducts -> product.product
-        self._apply_generic_product_line(line, source="harvested")
-
-    def _apply_equipment_line(self, line):
-        # Equipments -> product.product (según tu requisito)
-        self._apply_generic_product_line(line, source="equipments")
-
-    def _apply_generic_product_line(self, line, source):
-        self.ensure_one()
-        try:
-            with self.env.cr.savepoint():
-                if line.product_id:
-                    line.write({"sync_state": "no_action", "sync_message": "Already linked."})
-                    return
-
-                Product = self.env["product.product"]
-                existing = Product.search(
-                    [
-                        ("geofolia_source", "=", source),
-                        ("geofolia_external_id", "=", line.external_id),
-                    ],
-                    limit=1,
-                )
-                vals = {
-                    "name": line.name or line.code or line.external_id,
-                    "default_code": line.code,
-                    "geofolia_source": source,
-                    "geofolia_external_id": line.external_id,
-                    "geofolia_job_id": self.id,
-                    "geofolia_source_line_ref": f"{line._name},{line.id}",
-                }
-                if existing:
-                    existing.write(vals)
-                    line.write(
-                        {
-                            "product_id": existing.id,
-                            "sync_state": "updated",
-                            "sync_message": "Updated product.",
-                        }
-                    )
-                else:
-                    rec = Product.create(vals)
-                    line.write(
-                        {
-                            "product_id": rec.id,
-                            "sync_state": "created",
-                            "sync_message": "Created product.",
-                        }
-                    )
-        except Exception as exc:  # noqa: BLE001
-            line.write({"sync_state": "error", "sync_message": str(exc)})
-
-    # -------------------------
-    # Employees
-    # -------------------------
-    def _apply_employee_line(self, line):
-        self.ensure_one()
-        try:
-            with self.env.cr.savepoint():
-                if line.employee_id:
-                    line.write({"sync_state": "no_action", "sync_message": "Already linked."})
-                    return
-
-                Employee = self.env["hr.employee"]
-                existing = Employee.search([("geofolia_external_id", "=", line.external_id)], limit=1)
-
-                vals = {
-                    "name": line.name or line.external_id,
-                    "work_email": line.email,
-                    "work_phone": line.phone,
-                    "geofolia_external_id": line.external_id,
-                    "geofolia_job_id": self.id,
-                    "geofolia_source_line_ref": f"{line._name},{line.id}",
-                }
-
-                if existing:
-                    existing.write(vals)
-                    line.write(
-                        {
-                            "employee_id": existing.id,
-                            "sync_state": "updated",
-                            "sync_message": "Updated employee.",
-                        }
-                    )
-                else:
-                    rec = Employee.create(vals)
-                    line.write(
-                        {
-                            "employee_id": rec.id,
-                            "sync_state": "created",
-                            "sync_message": "Created employee.",
-                        }
-                    )
-        except Exception as exc:  # noqa: BLE001
-            line.write({"sync_state": "error", "sync_message": str(exc)})
-
-    # -------------------------
-    # Activities -> analytic lines
-    # -------------------------
-    def _apply_activity_line(self, line):
-        """
-        Crea una account.analytic.line vinculada a un empleado.
-        - Dedup: por geofolia_external_id (ActionId) + constraint.
-        - Employee detection: por EmployeeId si existe en raw_json, si no por email/name.
-        """
-        self.ensure_one()
-        try:
-            with self.env.cr.savepoint():
-                if line.analytic_line_id:
-                    line.write({"sync_state": "no_action", "sync_message": "Already linked."})
-                    return
-
-                employee = self._find_employee_for_activity(line)
-                if not employee:
-                    line.write({"sync_state": "skipped", "sync_message": "Employee not found."})
-                    return
-
-                # si ya existe analytic line por ActionId, la reutilizamos
-                Analytic = self.env["account.analytic.line"]
-                existing = Analytic.search([("geofolia_external_id", "=", line.external_id)], limit=1)
-
-                unit_amount = (line.duration_minutes or 0) / 60.0
-                vals = {
-                    "name": line.operation_name or line.comment or f"Geofolia {line.external_id}",
-                    "date": line.starting_date,
-                    "unit_amount": unit_amount,
-                    "employee_id": employee.id,
-                    "geofolia_external_id": line.external_id,
-                    "geofolia_job_id": self.id,
-                    "geofolia_activity_line_id": line.id,
-                }
-
-                if existing:
-                    existing.write(vals)
-                    line.write(
-                        {
-                            "employee_id": employee.id,
-                            "analytic_line_id": existing.id,
-                            "sync_state": "updated",
-                            "sync_message": "Updated analytic line.",
-                        }
-                    )
-                else:
-                    rec = Analytic.create(vals)
-                    line.write(
-                        {
-                            "employee_id": employee.id,
-                            "analytic_line_id": rec.id,
-                            "sync_state": "created",
-                            "sync_message": "Created analytic line.",
-                        }
-                    )
-        except Exception as exc:  # noqa: BLE001
-            line.write({"sync_state": "error", "sync_message": str(exc)})
-
-    def _find_employee_for_activity(self, line):
-        self.ensure_one()
-        data = line.raw_json or {}
-
-        # 1) Por EmployeeId si viene
-        emp_ext = data.get("EmployeeId") or data.get("EmployeeExternalId")
-        if emp_ext:
-            emp = self.env["hr.employee"].search([("geofolia_external_id", "=", emp_ext)], limit=1)
-            if emp:
-                return emp
-
-        # 2) Por email si viene
-        email = data.get("EmployeeEmail")
-        if email:
-            emp = self.env["hr.employee"].search([("work_email", "=", email)], limit=1)
-            if emp:
-                return emp
-
-        # 3) Por nombre si viene
-        name = data.get("EmployeeName")
-        if name:
-            emp = self.env["hr.employee"].search([("name", "=", name)], limit=1)
-            if emp:
-                return emp
-
-        # 4) fallback: el que ya tengas vinculado
-        return line.employee_id
-
-    apply_state = fields.Selection(
-        selection=[
-            ("draft", "Draft"),
-            ("ready", "Ready"),
-            ("partial", "Partial"),
-            ("done", "Done"),
-            ("error", "Error"),
-        ],
-        default="draft",
-        required=True,
-        index=True,
-    )
-
-    pending_count = fields.Integer(compute="_compute_apply_stats", store=False)
-    processed_count = fields.Integer(compute="_compute_apply_stats", store=False)
-    error_count = fields.Integer(compute="_compute_apply_stats", store=False)
-    total_count = fields.Integer(compute="_compute_apply_stats", store=False)
+    # ----------------------------
+    # Apply stats/state
+    # ----------------------------
 
     @api.depends(
         "product_line_ids.sync_state",
@@ -691,7 +467,7 @@ class GeofoliaImportJob(models.Model):
         "partner_line_ids.sync_state",
         "harvested_product_line_ids.sync_state",
         "equipment_line_ids.sync_state",
-        "activity_line_ids.sync_state",
+        "activity_employee_line_ids.sync_state",
         "import_type",
     )
     def _compute_apply_stats(self):
@@ -704,10 +480,9 @@ class GeofoliaImportJob(models.Model):
                 job.error_count = 0
                 continue
 
-            lines_by_block = job._get_full_lines_by_block()
+            blocks = job._get_full_lines_by_block()
             total = pending = processed = errors = 0
-
-            for lines in lines_by_block.values():
+            for lines in blocks.values():
                 total += len(lines)
                 pending += len(lines.filtered(lambda l: l.sync_state == "pending"))
                 errors += len(lines.filtered(lambda l: l.sync_state == "error"))
@@ -715,8 +490,8 @@ class GeofoliaImportJob(models.Model):
 
             job.total_count = total
             job.pending_count = pending
-            job.error_count = errors
             job.processed_count = processed
+            job.error_count = errors
 
     def _get_full_lines_by_block(self):
         self.ensure_one()
@@ -726,7 +501,7 @@ class GeofoliaImportJob(models.Model):
             "partners": self.partner_line_ids,
             "harvested_products": self.harvested_product_line_ids,
             "equipments": self.equipment_line_ids,
-            "activities": self.activity_line_ids,
+            "activity_employees": self.activity_employee_line_ids,
         }
 
     def _recompute_apply_state(self):
@@ -735,36 +510,266 @@ class GeofoliaImportJob(models.Model):
             self.apply_state = "done"
             return
 
-        lines_by_block = self._get_full_lines_by_block()
-        total = sum(len(v) for v in lines_by_block.values())
-
+        blocks = self._get_full_lines_by_block()
+        total = sum(len(v) for v in blocks.values())
         if not total:
             self.apply_state = "done"
             return
 
-        pending = any(v.filtered(lambda l: l.sync_state == "pending") for v in lines_by_block.values())
-        errors = any(v.filtered(lambda l: l.sync_state == "error") for v in lines_by_block.values())
+        has_pending = any(v.filtered(lambda l: l.sync_state == "pending") for v in blocks.values())
+        has_error = any(v.filtered(lambda l: l.sync_state == "error") for v in blocks.values())
 
-        if errors:
-            # Si hay errores y todavía quedan pendientes => parcial; si no quedan pendientes => error
-            self.apply_state = "partial" if pending else "error"
+        if has_error:
+            self.apply_state = "partial" if has_pending else "error"
             return
 
-        self.apply_state = "ready" if pending else "done"
+        self.apply_state = "ready" if has_pending else "done"
 
-    def action_apply(self):
-        for job in self:
-            if job.import_type != "full":
-                continue
-            job.apply_state = "ready"
-            job._apply_full_export()
-            job._recompute_apply_state()
+    # ----------------------------
+    # Apply: create/update Odoo records
+    # ----------------------------
 
-    def action_apply_pending(self):
-        """Procesa solo pending (útil si quieres reintentar sin tocar ya procesadas)."""
-        for job in self:
-            if job.import_type != "full":
-                continue
-            job.apply_state = "ready"
-            job._apply_full_export(only_pending=True)
-            job._recompute_apply_state()
+    def _apply_full_export(self, only_pending=False):
+        self.ensure_one()
+
+        def _todo(rs):
+            if only_pending:
+                return rs.filtered(lambda l: l.sync_state == "pending")
+            return rs.filtered(lambda l: l.sync_state in ("pending", "error"))
+
+        for line in _todo(self.product_line_ids):
+            self._apply_product_line(line)
+
+        for line in _todo(self.employee_line_ids):
+            self._apply_employee_line(line)
+
+        for line in _todo(self.harvested_product_line_ids):
+            self._apply_product_like(line, label="harvested_products")
+
+        for line in _todo(self.equipment_line_ids):
+            self._apply_product_like(line, label="equipments")
+
+        for line in _todo(self.activity_employee_line_ids):
+            self._apply_activity_employee_line(line)
+
+    def _apply_product_line(self, line):
+        Product = self.env["product.product"]
+        try:
+            with self.env.cr.savepoint():
+                if not line.external_id:
+                    line.write({"sync_state": "skipped", "sync_message": _("Missing id.")})
+                    return
+
+                product = Product.search(
+                    [("geofolia_external_id", "=", line.external_id)], limit=1
+                )
+                vals = {
+                    "name": line.name or line.code or _("Geofolia product"),
+                    "default_code": line.code,
+                    "geofolia_external_id": line.external_id,
+                }
+
+                if product:
+                    changed = any(
+                        vals.get(k) and product[k] != vals[k] for k in ("name", "default_code")
+                    )
+                    if changed:
+                        product.write(vals)
+                        line.write(
+                            {
+                                "product_id": product.id,
+                                "sync_state": "updated",
+                                "sync_message": _("Updated product."),
+                            }
+                        )
+                    else:
+                        line.write(
+                            {
+                                "product_id": product.id,
+                                "sync_state": "no_action",
+                                "sync_message": _("Already up to date."),
+                            }
+                        )
+                    return
+
+                product = Product.create(vals)
+                line.write(
+                    {
+                        "product_id": product.id,
+                        "sync_state": "created",
+                        "sync_message": _("Created product."),
+                    }
+                )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+    def _apply_employee_line(self, line):
+        Employee = self.env["hr.employee"]
+        try:
+            with self.env.cr.savepoint():
+                if not line.external_id:
+                    line.write({"sync_state": "skipped", "sync_message": _("Missing id.")})
+                    return
+
+                emp = Employee.search(
+                    [("geofolia_external_id", "=", line.external_id)], limit=1
+                )
+                vals = {
+                    "name": line.name or line.code or _("Geofolia employee"),
+                    "work_email": line.email,
+                    "work_phone": line.phone,
+                    "geofolia_external_id": line.external_id,
+                }
+
+                if emp:
+                    emp.write({k: v for k, v in vals.items() if v})
+                    line.write(
+                        {
+                            "employee_id": emp.id,
+                            "sync_state": "updated",
+                            "sync_message": _("Updated employee."),
+                        }
+                    )
+                    return
+
+                emp = Employee.create(vals)
+                line.write(
+                    {
+                        "employee_id": emp.id,
+                        "sync_state": "created",
+                        "sync_message": _("Created employee."),
+                    }
+                )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+    def _apply_product_like(self, line, label):
+        Product = self.env["product.product"]
+        try:
+            with self.env.cr.savepoint():
+                if not line.external_id:
+                    line.write({"sync_state": "skipped", "sync_message": _("Missing id.")})
+                    return
+
+                product = Product.search(
+                    [("geofolia_external_id", "=", line.external_id)], limit=1
+                )
+                vals = {
+                    "name": line.name or line.code or _("Geofolia (%s)") % label,
+                    "default_code": line.code,
+                    "geofolia_external_id": line.external_id,
+                }
+
+                if product:
+                    product.write({k: v for k, v in vals.items() if v})
+                    line.write(
+                        {
+                            "product_id": product.id,
+                            "sync_state": "updated",
+                            "sync_message": _("Updated product."),
+                        }
+                    )
+                    return
+
+                product = Product.create(vals)
+                line.write(
+                    {
+                        "product_id": product.id,
+                        "sync_state": "created",
+                        "sync_message": _("Created product."),
+                    }
+                )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+    def _apply_activity_employee_line(self, line):
+        Analytic = self.env["account.analytic.line"]
+        Employee = self.env["hr.employee"]
+
+        try:
+            with self.env.cr.savepoint():
+                if line.analytic_line_id:
+                    line.write(
+                        {"sync_state": "no_action", "sync_message": _("Already linked.")}
+                    )
+                    return
+
+                emp = False
+                if line.employee_id_external:
+                    emp = Employee.search(
+                        [("geofolia_external_id", "=", line.employee_id_external)],
+                        limit=1,
+                    )
+                if not emp and line.employee_name:
+                    emp = Employee.search([("name", "=", line.employee_name)], limit=1)
+
+                if not emp:
+                    line.write(
+                        {"sync_state": "skipped", "sync_message": _("Employee not found.")}
+                    )
+                    return
+
+                ext_id = ":".join(
+                    [
+                        line.employee_action_id or "",
+                        line.employee_recognition_id or "",
+                        str(line.employee_order or 0),
+                    ]
+                )
+
+                existing = Analytic.search(
+                    [("geofolia_external_id", "=", ext_id)], limit=1
+                )
+
+                activity = line.activity_line_id
+                unit_amount = (line.employee_time or 0.0) / 60.0
+
+                vals = {
+                    "name": activity.operation_name or _("Geofolia activity"),
+                    "date": activity.starting_date or activity.ending_date,
+                    "unit_amount": unit_amount,
+                    "employee_id": emp.id,
+                    "geofolia_external_id": ext_id,
+                }
+
+                if existing:
+                    existing.write(vals)
+                    line.write(
+                        {
+                            "employee_id": emp.id,
+                            "analytic_line_id": existing.id,
+                            "sync_state": "updated",
+                            "sync_message": _("Updated analytic line."),
+                        }
+                    )
+                    return
+
+                rec = Analytic.create(vals)
+                line.write(
+                    {
+                        "employee_id": emp.id,
+                        "analytic_line_id": rec.id,
+                        "sync_state": "created",
+                        "sync_message": _("Created analytic line."),
+                    }
+                )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+
+class ProductProduct(models.Model):
+    _inherit = "product.product"
+
+    geofolia_external_id = fields.Char(index=True)
+
+
+class HrEmployee(models.Model):
+    _inherit = "hr.employee"
+
+    geofolia_external_id = fields.Char(index=True)
+
+
+class AccountAnalyticLine(models.Model):
+    _inherit = "account.analytic.line"
+
+    geofolia_external_id = fields.Char(index=True)
