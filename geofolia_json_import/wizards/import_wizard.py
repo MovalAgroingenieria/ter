@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from odoo import _, fields, models
 from odoo.exceptions import UserError
 
@@ -8,11 +10,13 @@ class GeofoliaImportWizard(models.TransientModel):
 
     file_name = fields.Char()
     file_data = fields.Binary(required=True)
+
     import_type = fields.Selection(
         selection=[
             ("auto", "Autodetect"),
             ("fields", "Fields (Plots)"),
             ("products", "Products (Supplies)"),
+            ("full", "Full export (multi-block)"),
         ],
         default="auto",
         required=True,
@@ -49,9 +53,23 @@ class GeofoliaImportWizard(models.TransientModel):
             {"file_data": self.file_data}
         )._load_json_payload()
 
-        if isinstance(payload, dict):
-            if isinstance(payload.get("Fields"), list):
-                return "fields"
-            if isinstance(payload.get("Products"), list):
-                return "products"
+        if not isinstance(payload, dict):
+            raise UserError(_("Cannot autodetect JSON type. Choose it manually."))
+
+        # "full" if it contains any of these multi-block keys
+        multi_keys = (
+            "Employees",
+            "Partners",
+            "HarvestedProducts",
+            "Equipments",
+            "Activities",
+        )
+        if any(k in payload for k in multi_keys):
+            return "full"
+
+        if isinstance(payload.get("Fields"), list):
+            return "fields"
+        if isinstance(payload.get("Products"), list):
+            return "products"
+
         raise UserError(_("Cannot autodetect JSON type. Choose it manually."))
