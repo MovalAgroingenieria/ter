@@ -1,0 +1,7 @@
+{
+  "Information": {"AppName": "Geofolia", "CountryCode": "ES"},
+  "Fields": [
+    {"Id": "uuid-1", "Code": "1216", "Name": "Parcela 1", "HarvestYear": 2026, "Area": 8000.0, "City": "Albesa", "CropName": "FESTUCA", "Geography": "POLYGON ((...))"},
+    {"Id": "uuid-2", "Code": "1217", "Name": "Parcela 2", "HarvestYear": 2026, "Area": 7700.0, "City": "Albesa", "CropName": "FESTUCA", "Geography": "POLYGON ((...))"}
+  ]
+}

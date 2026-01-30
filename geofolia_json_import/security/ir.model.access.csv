@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_geofolia_import_job_pro,geofolia.import.job,model_geofolia_import_job,group_geofolia_import,1,1,1,1
+access_geofolia_import_line_pro,geofolia.import.line,model_geofolia_import_line,group_geofolia_import,1,1,1,1
+access_geofolia_import_wizard_pro,geofolia.import.wizard,model_geofolia_import_wizard,group_geofolia_import,1,0,1,0

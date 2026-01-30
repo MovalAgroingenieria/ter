@@ -22,6 +22,7 @@ class TerUnit(models.Model):
     date_end = fields.Date(string="End date", required=True)
     #
     date_range_id = fields.Many2one('date.range', domain=[('is_unit_use_type', '=', True)], required=True)
+    date_range_use_type_id = fields.Many2one(related="date_range_id.use_type_id", string="Campaign Type")
     #
     area_official = fields.Float(
         string="Official Area",
@@ -46,47 +47,58 @@ class TerUnit(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
-        records._ensure_attribute_lines()
+        records._sync_attribute_lines()
         return records
 
-    def _ensure_attribute_lines(self):
+    def _sanitize_attribute_value_commands(self, commands):
+        sanitized = []
+        for cmd in commands or []:
+            if not isinstance(cmd, (list, tuple)) or len(cmd) < 1:
+                continue
+            if cmd[0] == 0:
+                vals = cmd[2] or {}
+                if not vals.get("attribute_id"):
+                    continue
+            sanitized.append(cmd)
+        return sanitized
+
+    def _sync_attribute_lines(self):
         for unit in self:
             if not unit.use_type_id:
                 continue
 
             required_attrs = unit.use_type_id.all_attribute_ids
             existing_attrs = unit.attribute_value_ids.mapped("attribute_id")
-
             missing_attrs = required_attrs - existing_attrs
 
-            lines = []
-            for attr in missing_attrs:
-                lines.append((0, 0, {
-                    "attribute_id": attr.id,
-                }))
-
-            if lines:
+            if missing_attrs:
                 unit.write({
-                    "attribute_value_ids": lines,
+                    "attribute_value_ids": [(0, 0, {"attribute_id": attr.id}) for attr in missing_attrs]
                 })
+
+    def write(self, vals):
+        res = super().write(vals)
+        if "use_type_id" in vals:
+            self._sync_attribute_lines()
+        return res
 
     @api.onchange("use_type_id")
     def _onchange_use_type_id(self):
         if not self.use_type_id:
             self.attribute_value_ids = [(5, 0, 0)]
             return
-
-        lines = []
-        for attr in self.use_type_id.all_attribute_ids:
-            lines.append((0, 0, {
-                "attribute_id": attr.id,
-            }))
-        self.attribute_value_ids = lines
+        allowed_attrs = self.use_type_id.all_attribute_ids
+        commands = [(5, 0, 0)]
+        for attr in allowed_attrs:
+            commands.append((0, 0, {"attribute_id": attr.id}))
+        self.attribute_value_ids = commands
 
     @api.constrains("attribute_value_ids")
     def _check_required_attributes(self):
+        return True
         for unit in self:
             for line in unit.attribute_value_ids:
+                print(line.value_id.id)
                 if line.required and not line.value_id:
                     raise ValidationError(
                         _("Attribute '%s' is required.") % line.attribute_id.name

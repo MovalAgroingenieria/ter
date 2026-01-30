@@ -1,0 +1,7 @@
+{
+  "Information": {"AppName": "Geofolia", "CountryCode": "ES"},
+  "Products": [
+    {"SupplyId": "sid-1", "SupplyName": "Halvetic", "Code": "ES-01378", "CategoryEnum": 19, "ProductTypeEnum": 1, "UnitSymbol": "L"},
+    {"SupplyId": "sid-2", "SupplyName": "raigras", "Code": null, "CategoryEnum": 29, "ProductTypeEnum": 2, "UnitSymbol": "kg", "BotanicalSpecies": "Ray grass de Italia", "VarietyName": "raigras"}
+  ]
+}
