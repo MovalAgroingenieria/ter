@@ -25,6 +25,8 @@ ter_propertytag_rule_group_ter_user,ter.propertytag.rule.group.ter.user,base_ter
 ter_propertytag_rule_group_ter_manager,ter.propertytag.rule.group.ter.manager,base_ter.model_ter_propertytag,base_ter.group_ter_manager,1,1,1,1
 ter_gis_parcel_model_rule_group_ter_user,ter.gis.parcel.model.rule.group.ter.user,base_ter.model_ter_gis_parcel_model,base_ter.group_ter_user,1,0,0,0
 access_wizard_show_gis_preview_user,wre.wizard.show.gis.preview.user,base_ter.model_wizard_show_gis_preview,base_ter.group_ter_user,1,0,0,0
+access_wizard_import_kml_user,wizard.import.kml.user,base_ter.model_wizard_import_kml,base_ter.group_ter_user,1,0,0,0
+access_wizard_import_kml_manager,wizard.import.kml.manager,base_ter.model_wizard_import_kml,base_ter.group_ter_manager,1,1,1,1
 access_ter_unit,access_ter_unit,base_ter.model_ter_unit,,1,1,1,1
 base_ter.access_ter_use_type,access_ter_use_type,base_ter.model_ter_use_type,base.group_user,1,1,1,1
 access_ter_use_type_user,ter.use_type user,model_ter_use_type,base.group_user,1,1,1,0

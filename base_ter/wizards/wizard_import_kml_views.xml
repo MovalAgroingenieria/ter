@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wizard_import_kml_view_form" model="ir.ui.view">
+        <field name="name">wizard.import.kml.form</field>
+        <field name="model">wizard.import.kml</field>
+        <field name="arch" type="xml">
+            <form string="Import KML">
+                <sheet>
+                    <group>
+                        <group string="File">
+                            <field name="kml_file" filename="kml_filename"/>
+                            <field name="kml_filename" invisible="1"/>
+                        </group>
+                        <group string="Options">
+                            <field name="target_model"/>
+                            <field name="municipality_id" options="{'no_create': True}"/>
+                            <field name="partner_id" options="{'no_create': True}"/>
+                            <field name="name_prefix" placeholder="e.g. PARCEL- or FINCA-"/>
+                        </group>
+                    </group>
+                    <group invisible="state != 'done'">
+                        <field name="state" invisible="1"/>
+                        <field name="result_message" readonly="1" nolabel="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_import" type="object" string="Import"
+                            class="btn-primary"
+                            invisible="state == 'done'"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="wizard_import_kml_action" model="ir.actions.act_window">
+        <field name="name">Import KML</field>
+        <field name="res_model">wizard.import.kml</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_target_model': 'ter.parcel'}</field>
+    </record>
+
+</odoo>

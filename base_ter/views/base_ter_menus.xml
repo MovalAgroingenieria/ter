@@ -84,6 +84,12 @@
               parent="menu_thecnicalactions"
               sequence="20"/>
 
+    <menuitem id="menu_import_kml"
+              name="Import KML"
+              parent="menu_territory"
+              action="wizard_import_kml_action"
+              sequence="50"/>
+
     <menuitem id="menu_thecnicalactions_detailmodels"
               name="Detail Models"
               parent="menu_thecnicalactions"
