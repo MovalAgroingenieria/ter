@@ -40,11 +40,11 @@ class AccountAnalyticLine(models.Model):
     )
     geofolia_operation_category = fields.Char(
         string="Geofolia Operation Category",
-        help="Operation category from Geofolia (e.g. Trabajo de suelo)",
+        help="Operation category from Geofolia (e.g. Soil work)",
     )
     geofolia_status_name = fields.Char(
         string="Geofolia Status",
-        help="Activity status from Geofolia (e.g. Realizado)",
+        help="Activity status from Geofolia (e.g. Done)",
     )
     geofolia_status_code = fields.Char(
         string="Geofolia Status Code",

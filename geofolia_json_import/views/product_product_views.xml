@@ -9,7 +9,7 @@
                 <page string="Geofolia" name="geofolia">
                     <group>
                         <group string="Identification">
-                            <field name="geofolia_external_id" readonly="1"/>
+                            <field name="geofolia_external_id"/>
                             <field name="geofolia_recognition_id" readonly="1"/>
                             <field name="geofolia_source" readonly="1"/>
                             <field name="geofolia_rn_reference_supply_name" readonly="1"/>

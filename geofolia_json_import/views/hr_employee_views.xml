@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
                 <group string="Geofolia" name="geofolia">
-                    <field name="geofolia_external_id" readonly="1"/>
+                    <field name="geofolia_external_id"/>
                     <field name="geofolia_first_name" readonly="1"/>
                     <field name="geofolia_national_identification_code" readonly="1"/>
                     <field name="geofolia_specific_number" readonly="1"/>

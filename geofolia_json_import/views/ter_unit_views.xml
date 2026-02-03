@@ -9,7 +9,7 @@
                 <page string="Geofolia" name="geofolia">
                     <group>
                         <group string="Identification">
-                            <field name="geofolia_uid" readonly="1"/>
+                            <field name="geofolia_uid"/>
                             <field name="geofolia_code"/>
                             <field name="geofolia_name"/>
                             <field name="geofolia_parent_id1"/>

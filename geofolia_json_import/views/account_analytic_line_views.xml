@@ -14,7 +14,7 @@
                     <field name="ter_use_type_id" options="{'no_create': True}"/>
                 </group>
                 <group string="Geofolia" name="geofolia">
-                    <field name="geofolia_external_id" readonly="1"/>
+                    <field name="geofolia_external_id"/>
                     <field name="geofolia_operation_category"/>
                     <field name="geofolia_status_name"/>
                     <field name="geofolia_status_code"/>

@@ -9,7 +9,7 @@
                 <page string="Geofolia" name="geofolia">
                     <group>
                         <group string="Identification">
-                            <field name="geofolia_partner_id" readonly="1"/>
+                            <field name="geofolia_partner_id"/>
                             <field name="geofolia_registration_number" readonly="1"/>
                             <field name="geofolia_national_identification_code" readonly="1"/>
                         </group>

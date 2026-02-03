@@ -9,7 +9,7 @@
                 <page string="Geofolia" name="geofolia">
                     <group>
                         <group string="Identification">
-                            <field name="geofolia_harvest_id" readonly="1"/>
+                            <field name="geofolia_harvest_id"/>
                             <field name="geofolia_botanical_species_name"/>
                             <field name="geofolia_botanical_species_id"/>
                             <field name="geofolia_harvested_product_kind_id"/>

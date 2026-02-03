@@ -24,7 +24,7 @@ exclude =
     __init__.py
 
 # Flake8-commas: Requiere trailing commas
-# C812: missing trailing comma (prohibido por defecto, pero lo queremos)
+# C812: missing trailing comma (disabled by default, but we want it)
 # C813: missing trailing comma in Python 3.5+
 # C814: missing trailing comma in Python 3.6+
 # C815: missing trailing comma in Python 2
