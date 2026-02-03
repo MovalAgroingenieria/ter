@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_task_view_form_inherit_geofolia" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.geofolia</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='description_page']" position="after">
+                <page string="Geofolia" name="geofolia">
+                    <group>
+                        <group string="Identification">
+                            <field name="geofolia_harvest_id" readonly="1"/>
+                            <field name="geofolia_botanical_species_name"/>
+                            <field name="geofolia_botanical_species_id"/>
+                            <field name="geofolia_harvested_product_kind_id"/>
+                            <field name="geofolia_unit_symbol"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

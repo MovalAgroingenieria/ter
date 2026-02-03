@@ -14,7 +14,9 @@ from . import (
     hr_employee,
     import_job,
     product_product,
+    project_task,
     res_company,
+    res_partner,
     res_config_settings,
     ter_unit,
 )

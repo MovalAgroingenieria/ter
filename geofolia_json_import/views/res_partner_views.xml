@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_view_form_inherit_geofolia" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.geofolia</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base_ter.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page string="Geofolia" name="geofolia">
+                    <group>
+                        <group string="Identification">
+                            <field name="geofolia_partner_id" readonly="1"/>
+                            <field name="geofolia_registration_number" readonly="1"/>
+                            <field name="geofolia_national_identification_code" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
