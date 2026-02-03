@@ -37,6 +37,18 @@ class UseType(models.Model):
     )
 
     color = fields.Integer(string="Color Index")
+    unit_count = fields.Integer(
+        string="Units",
+        compute="_compute_unit_count",
+    )
+    parcel_count = fields.Integer(
+        string="Parcels",
+        compute="_compute_parcel_count",
+    )
+    date_range_count = fields.Integer(
+        string="Date Ranges",
+        compute="_compute_date_range_count",
+    )
     attribute_ids = fields.One2many(
         comodel_name="ter.use_type.attribute",
         inverse_name="use_type_id",
@@ -54,6 +66,28 @@ class UseType(models.Model):
                 record.complete_name = f"{record.parent_id.complete_name} / {record.name}"
             else:
                 record.complete_name = record.name
+
+    @api.depends("id", "child_ids")
+    def _compute_unit_count(self):
+        Unit = self.env["ter.unit"]
+        for record in self:
+            domain = [("use_type_id", "child_of", record.id)]
+            record.unit_count = Unit.search_count(domain)
+
+    @api.depends("id", "child_ids")
+    def _compute_parcel_count(self):
+        Unit = self.env["ter.unit"]
+        for record in self:
+            units = Unit.search([("use_type_id", "child_of", record.id)])
+            parcels = units.mapped("parcel_id") | units.mapped("parcel_ids")
+            record.parcel_count = len(parcels)
+
+    @api.depends("id", "child_ids")
+    def _compute_date_range_count(self):
+        DateRange = self.env["date.range"]
+        for record in self:
+            domain = [("use_type_id", "child_of", record.id)]
+            record.date_range_count = DateRange.search_count(domain)
 
     @api.constrains("parent_id")
     def _check_parent_loop(self):
@@ -88,6 +122,54 @@ class UseType(models.Model):
             "view_mode": "list,form",
             "domain": [("id", "in", ancestors.ids)],
             "context": {"search_default_group_by_parent": 1},
+        }
+
+    def action_show_units(self):
+        self.ensure_one()
+        list_view = self.env.ref("base_ter.c")
+        form_view = self.env.ref("base_ter.view_ter_unit_form")
+        search_view = self.env.ref("base_ter.view_ter_unit_filter")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Territorial Units"),
+            "res_model": "ter.unit",
+            "view_mode": "list,form",
+            "views": [(list_view.id, "list"), (form_view.id, "form")],
+            "search_view_id": search_view.id,
+            "domain": [("use_type_id", "child_of", self.id)],
+        }
+
+    def action_show_parcels(self):
+        self.ensure_one()
+        Unit = self.env["ter.unit"]
+        units = Unit.search([("use_type_id", "child_of", self.id)])
+        parcel_ids = (units.mapped("parcel_id") | units.mapped("parcel_ids")).ids
+        tree_view = self.env.ref("base_ter.ter_parcel_view_tree")
+        form_view = self.env.ref("base_ter.ter_parcel_view_form")
+        search_view = self.env.ref("base_ter.ter_parcel_view_search")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Parcels"),
+            "res_model": "ter.parcel",
+            "view_mode": "list,form",
+            "views": [(tree_view.id, "list"), (form_view.id, "form")],
+            "search_view_id": search_view.id,
+            "domain": [("id", "in", parcel_ids)] if parcel_ids else [("id", "=", 0)],
+        }
+
+    def action_show_date_ranges(self):
+        self.ensure_one()
+        tree_view = self.env.ref("base_ter.view_date_range_list")
+        form_view = self.env.ref("base_ter.view_date_range_form_view")
+        search_view = self.env.ref("base_ter.view_date_range_search")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Date Ranges"),
+            "res_model": "date.range",
+            "view_mode": "list,form",
+            "views": [(tree_view.id, "list"), (form_view.id, "form")],
+            "search_view_id": search_view.id,
+            "domain": [("use_type_id", "child_of", self.id)],
         }
 
     all_attribute_ids = fields.Many2many(

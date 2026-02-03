@@ -1,4 +1,48 @@
 <odoo>
+    <record id="view_use_type_kanban" model="ir.ui.view">
+        <field name="name">ter.use_type.kanban</field>
+        <field name="model">ter.use_type</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="parent_id"
+                    group_create="false"
+                    class="o_kanban_small_column">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="complete_name"/>
+                <field name="color"/>
+                <field name="unit_count"/>
+                <field name="parcel_count"/>
+                <field name="date_range_count"/>
+                <field name="parent_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click oe_kanban_color_#{record.color.raw_value or 0}">
+                            <div class="oe_kanban_content">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div class="text-muted">
+                                    <field name="complete_name"/>
+                                </div>
+                                <div class="mt-2 d-flex justify-content-between">
+                                    <span>
+                                        <field name="unit_count"/> Units
+                                    </span>
+                                    <span>
+                                        <field name="parcel_count"/> Parcels
+                                    </span>
+                                    <span>
+                                        <field name="date_range_count"/> Date Ranges
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id="view_use_type_list" model="ir.ui.view">
         <field name="name">ter.use_type.list</field>
         <field name="model">ter.use_type</field>
@@ -28,6 +72,23 @@
                 </header>
 
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="unit_count" invisible="1"/>
+                        <field name="parcel_count" invisible="1"/>
+                        <field name="date_range_count" invisible="1"/>
+                        <button name="action_show_units" type="object"
+                                class="oe_stat_button" icon="fa-sitemap">
+                            <field name="unit_count" string="Units" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_parcels" type="object"
+                                class="oe_stat_button" icon="fa-ter-parcel">
+                            <field name="parcel_count" string="Parcels" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_date_ranges" type="object"
+                                class="oe_stat_button" icon="fa-calendar">
+                            <field name="date_range_count" string="Date Ranges" widget="statinfo"/>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="e.g. Industrial vehicle"/>
@@ -118,7 +179,11 @@
     <record id="action_use_type" model="ir.actions.act_window">
         <field name="name">Use Types</field>
         <field name="res_model">ter.use_type</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="view_ids" eval="[(5, 0),
+              (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_use_type_kanban')}),
+              (0, 0, {'view_mode': 'list', 'view_id': ref('view_use_type_list')}),
+              (0, 0, {'view_mode': 'form', 'view_id': ref('view_use_type_form')})]"/>
         <field name="search_view_id" ref="view_use_type_search"/>
         <field name="context">{'search_default_group_by_parent': 1}</field>
         <field name="help" type="html">

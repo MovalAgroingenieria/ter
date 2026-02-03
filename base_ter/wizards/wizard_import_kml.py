@@ -5,7 +5,7 @@ import base64
 import re
 import xml.etree.ElementTree as ET
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 KML_NS = "http://www.opengis.net/kml/2.2"

@@ -21,6 +21,21 @@ Functionality:
 * Management of a census of territories.
 * Management of a census of "owners".
 * Integration with GIS functionalities.
+* **Use Types** (ter.use_type): hierarchical classification for territorial units
+  (parcels, properties). Includes:
+  - Kanban view with color badges (from Color Index field).
+  - Stat-buttons to navigate to related Territorial Units (ter.unit),
+    Parcels (ter.parcel), and Date Ranges (date.range).
+* **Date Ranges** (date.range, when Usable for Unit Use): campaign periods for
+  territorial units. Includes:
+  - Kanban view with colors (from related Use Type).
+  - Form view with stat-buttons to navigate to Territorial Units (ter.unit)
+    and Parcels (ter.parcel).
+  - Non-editable list view (edit via form only).
+* **Territorial Units** (ter.unit): unit uses with chatter, notes, followers,
+  state (draft/validated), validity_state. Name auto-generated from sequence
+  (format: {type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}).
+  Kanban (default), list, form, pivot views. GIS viewer, archive, validate.
 * Etc.
 
 Installation

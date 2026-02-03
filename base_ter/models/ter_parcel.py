@@ -2,8 +2,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import base64
+import logging
+
+import requests
 
 from odoo import _, api, exceptions, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class TerParcel(models.Model):
@@ -170,6 +175,15 @@ class TerParcel(models.Model):
         comodel_name="ter.parcel.partnerlink",
         inverse_name="parcel_id",
     )
+    unit_ids = fields.One2many(
+        string="Territorial Units",
+        comodel_name="ter.unit",
+        inverse_name="parcel_id",
+    )
+    unit_count = fields.Integer(
+        string="Units",
+        compute="_compute_unit_count",
+    )
     partner_code = fields.Integer(
         string="Partner Code", compute="_compute_partner_code"
     )
@@ -246,6 +260,11 @@ class TerParcel(models.Model):
         for record in self:
             main = record.partnerlink_ids.filtered("is_main")[:1]
             record.partner_id = main.partner_id if main else False
+
+    @api.depends("unit_ids")
+    def _compute_unit_count(self):
+        for record in self:
+            record.unit_count = len(record.unit_ids)
 
     @api.depends("aerial_image", "mapped_to_polygon")
     def _compute_aerial_image_shown(self):
@@ -641,16 +660,48 @@ class TerParcel(models.Model):
 
 
     def reset_aerial_image(self):
-        if len(self) == 1:
-            self.aerial_image = False
-            self.aerial_image_key = False
-            self._compute_aerial_image_shown()
-            return
+        _WMS_ERRORS = (
+            requests.exceptions.ConnectionError,
+            requests.exceptions.Timeout,
+            OSError,
+        )
 
-        for record in self.with_progress(_("Getting the aerial images...")):
+        def _do_reset(record):
             record.aerial_image = False
             record.aerial_image_key = False
             record._compute_aerial_image_shown()
+
+        if len(self) == 1:
+            try:
+                _do_reset(self)
+                self.env.cr.commit()
+            except _WMS_ERRORS as e:
+                _logger.warning("WMS fetch failed for parcel %s: %s", self.alphanum_code, e)
+                raise exceptions.UserError(
+                    _(
+                        "Could not fetch aerial image from WMS (timeout or connection error). "
+                        "Try again later or check network/IGN service. Parcel: %s"
+                    )
+                    % self.alphanum_code
+                ) from e
+            return
+
+        failed = []
+        for record in self.with_progress(_("Getting the aerial images...")):
+            try:
+                _do_reset(record)
+                self.env.cr.commit()
+            except _WMS_ERRORS as e:
+                _logger.warning("WMS fetch failed for parcel %s: %s", record.alphanum_code, e)
+                failed.append(record.alphanum_code)
+        if failed:
+            raise exceptions.UserError(
+                _(
+                    "Could not fetch aerial images for %(count)s parcel(s) "
+                    "(timeout or connection error to WMS). Try again later: %(codes)s"
+                )
+                % {"count": len(failed), "codes": ", ".join(failed[:10])}
+            )
 
     @api.model
     def action_reset_all_aerial_images(self, from_backend=False):
@@ -680,6 +731,30 @@ class TerParcel(models.Model):
             "res_model": "wizard.set.parcel.code",
             "view_mode": "form",
             "target": "new",
+        }
+
+    def action_show_units(self):
+        self.ensure_one()
+        list_view = self.env.ref("base_ter.c")
+        form_view = self.env.ref("base_ter.view_ter_unit_form")
+        search_view = self.env.ref("base_ter.view_ter_unit_filter")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Territorial Units"),
+            "res_model": "ter.unit",
+            "view_mode": "list,form",
+            "views": [
+                (list_view.id, "list"),
+                (form_view.id, "form"),
+            ],
+            "search_view_id": search_view.id,
+            "target": "current",
+            "domain": [
+                "|",
+                ("parcel_id", "=", self.id),
+                ("parcel_ids", "in", [self.id]),
+            ],
+            "context": {"default_parcel_id": self.id},
         }
 
     @api.model

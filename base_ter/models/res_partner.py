@@ -92,6 +92,16 @@ class ResPartner(models.Model):
         compute="_compute_area_unit_name",
     )
 
+    unit_use_ids = fields.One2many(
+        string="Territorial Units",
+        comodel_name="ter.unit",
+        inverse_name="partner_id",
+    )
+    unit_use_count = fields.Integer(
+        string="Units",
+        compute="_compute_unit_use_count",
+    )
+
     _sql_constraints = [
         ("partner_code_ok", "CHECK (partner_code >= 0)", "Wrong partner code."),
     ]
@@ -143,6 +153,11 @@ class ResPartner(models.Model):
     def _compute_number_of_properties(self):
         for record in self:
             record.number_of_properties = len(record.property_ids)
+
+    @api.depends("unit_use_ids")
+    def _compute_unit_use_count(self):
+        for record in self:
+            record.unit_use_count = len(record.unit_use_ids)
 
     @api.depends("property_ids.area_official_parcels")
     def _compute_area_official_properties(self):
@@ -277,6 +292,26 @@ class ResPartner(models.Model):
                 (tree_view.id, "list"),
                 (form_view.id, "form"),
                 (kanban_view.id, "kanban"),
+            ],
+            "search_view_id": search_view.id,
+            "target": "current",
+            "domain": [("partner_id", "=", self.id)],
+            "context": {"default_partner_id": self.id},
+        }
+
+    def action_show_unit_uses(self):
+        self.ensure_one()
+        list_view = self.env.ref("base_ter.c")
+        form_view = self.env.ref("base_ter.view_ter_unit_form")
+        search_view = self.env.ref("base_ter.view_ter_unit_filter")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Territorial Units"),
+            "res_model": "ter.unit",
+            "view_mode": "list,form",
+            "views": [
+                (list_view.id, "list"),
+                (form_view.id, "form"),
             ],
             "search_view_id": search_view.id,
             "target": "current",

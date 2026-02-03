@@ -123,6 +123,10 @@ class TerProperty(models.Model):
         index=True,
         compute="_compute_number_of_parcels",
     )
+    unit_count = fields.Integer(
+        string="Units",
+        compute="_compute_unit_count",
+    )
     area_official_parcels = fields.Float(
         string="Parcel Area",
         digits=(32, 4),
@@ -321,6 +325,13 @@ class TerProperty(models.Model):
     def _compute_number_of_parcels(self):
         for record in self:
             record.number_of_parcels = len(record.parcel_ids)
+
+    @api.depends("parcel_ids.unit_ids")
+    def _compute_unit_count(self):
+        Unit = self.env["ter.unit"]
+        for record in self:
+            count = Unit.search_count([("farm_property_id", "=", record.id)])
+            record.unit_count = count
 
     @api.depends("parcel_ids.area_official")
     def _compute_area_official_parcels(self):
@@ -584,6 +595,26 @@ class TerProperty(models.Model):
                 "src_model": "ter.property",
                 "active_id": self.id,
             },
+        }
+
+    def action_show_units(self):
+        self.ensure_one()
+        list_view = self.env.ref("base_ter.c")
+        form_view = self.env.ref("base_ter.view_ter_unit_form")
+        search_view = self.env.ref("base_ter.view_ter_unit_filter")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Territorial Units"),
+            "res_model": "ter.unit",
+            "view_mode": "list,form",
+            "views": [
+                (list_view.id, "list"),
+                (form_view.id, "form"),
+            ],
+            "search_view_id": search_view.id,
+            "target": "current",
+            "domain": [("farm_property_id", "=", self.id)],
+            "context": {"default_parcel_id": self.parcel_ids[:1].id if self.parcel_ids else False},
         }
 
     def action_show_parcels(self):

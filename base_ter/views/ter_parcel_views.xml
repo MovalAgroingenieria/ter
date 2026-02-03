@@ -13,6 +13,16 @@
 
                 <sheet>
                     <div class="oe_button_box" name="button_box">
+                        <field name="unit_ids" invisible="1"/>
+                        <field name="unit_count" invisible="1"/>
+                        <button name="action_show_units"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-sitemap">
+                            <field string="Units"
+                                   name="unit_count"
+                                   widget="statinfo"/>
+                        </button>
                         <button name="action_set_parcel_code"
                                 type="object"
                                 class="oe_stat_button"

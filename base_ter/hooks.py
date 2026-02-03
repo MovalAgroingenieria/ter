@@ -226,10 +226,33 @@ def pre_init_hook(env: api.Environment) -> None:
     _ensure_postgis(env)
 
 
+def _ensure_ter_unit_sequences(env: api.Environment) -> None:
+    """Create default ter.unit sequence for each company that lacks one."""
+    env["res.company"].search([])._get_or_create_ter_unit_sequence()
+
+
+def _migrate_ter_unit_parcel_ids(env: api.Environment) -> None:
+    """Populate parcel_ids from parcel_id for existing ter.unit records."""
+    env.cr.execute(
+        """
+        INSERT INTO ter_unit_parcel_rel (unit_id, parcel_id)
+        SELECT u.id, u.parcel_id
+        FROM ter_unit u
+        WHERE u.parcel_id IS NOT NULL
+        AND NOT EXISTS (
+            SELECT 1 FROM ter_unit_parcel_rel r
+            WHERE r.unit_id = u.id AND r.parcel_id = u.parcel_id
+        )
+        """
+    )
+
+
 def post_init_hook(env: api.Environment, registry: Optional[object] = None) -> None:
     _ensure_postgis(env)
     _create_gis_structures(env)
     _init_params(env)
+    _ensure_ter_unit_sequences(env)
+    _migrate_ter_unit_parcel_ids(env)
     env.ref("base.module_base_ter")._update_translations(overwrite=True)
 
 

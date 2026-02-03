@@ -88,7 +88,8 @@
               name="Import KML"
               parent="menu_territory"
               action="wizard_import_kml_action"
-              sequence="50"/>
+              sequence="50"
+              groups="base_ter.group_ter_import_kml"/>
 
     <menuitem id="menu_thecnicalactions_detailmodels"
               name="Detail Models"

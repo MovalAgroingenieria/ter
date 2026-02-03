@@ -5,6 +5,9 @@
         <field name="model">date.range</field>
         <field name="inherit_id" ref="date_range.view_date_range_list"/>
         <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="editable">false</attribute>
+            </xpath>
             <field name="type_id" position="before">
                 <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
                 <field name="use_type_id" invisible="not is_unit_use_type" required="is_unit_use_type" options="{'no_open': True, 'no_create': True}"/>
@@ -15,11 +18,73 @@
         </field>
     </record>
 
+    <record id="view_date_range_kanban" model="ir.ui.view">
+        <field name="name">date.range.kanban.ter</field>
+        <field name="model">date.range</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="use_type_id"
+                    group_create="false"
+                    class="o_kanban_small_column">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="type_id"/>
+                <field name="use_type_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="color"/>
+                <field name="unit_count"/>
+                <field name="parcel_count"/>
+                <field name="active"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click oe_kanban_color_#{record.color.raw_value or 0}">
+                            <div class="oe_kanban_content">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div class="text-muted">
+                                    <field name="use_type_id"/>
+                                </div>
+                                <div class="mt-1">
+                                    <field name="date_start"/> — <field name="date_end"/>
+                                </div>
+                                <div class="mt-2 d-flex justify-content-between">
+                                    <span>
+                                        <field name="unit_count"/> Units
+                                    </span>
+                                    <span>
+                                        <field name="parcel_count"/> Parcels
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id="view_date_range_form_view" model="ir.ui.view">
         <field name="name">date.range.form.ext</field>
         <field name="model">date.range</field>
         <field name="inherit_id" ref="date_range.view_date_range_form_view"/>
         <field name="arch" type="xml">
+            <xpath expr="//form/group" position="before">
+                <field name="unit_count" invisible="1"/>
+                <field name="parcel_count" invisible="1"/>
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_show_units" type="object"
+                            class="oe_stat_button" icon="fa-sitemap"
+                            invisible="not is_unit_use_type">
+                        <field name="unit_count" string="Units" widget="statinfo"/>
+                    </button>
+                    <button name="action_show_parcels" type="object"
+                            class="oe_stat_button" icon="fa-ter-parcel"
+                            invisible="not is_unit_use_type">
+                        <field name="parcel_count" string="Parcels" widget="statinfo"/>
+                    </button>
+                </div>
+            </xpath>
             <field name="type_id" position="before">
                 <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
             </field>
@@ -78,8 +143,11 @@
     <record id="date_range_action" model="ir.actions.act_window">
         <field name="name">Date Ranges Ter</field>
         <field name="res_model">date.range</field>
-        <field name="view_mode">list,form</field>
-        <field name="view_id" ref="view_date_range_list" />
+        <field name="view_mode">kanban,list,form</field>
+        <field name="view_ids" eval="[(5, 0),
+              (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_date_range_kanban')}),
+              (0, 0, {'view_mode': 'list', 'view_id': ref('view_date_range_list')}),
+              (0, 0, {'view_mode': 'form', 'view_id': ref('view_date_range_form_view')})]"/>
         <field name="domain">[('is_unit_use_type', '=', True)]</field>
         <field name="context">{'default_is_unit_use_type': True}</field>
     </record>

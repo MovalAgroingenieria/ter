@@ -44,7 +44,34 @@ class ResCompany(models.Model):
     gis_viewer_previs_additional_args = fields.Char(
         string="GIS Preview: Additional URL arguments", size=255
     )
-    ter_unit_sequence_id = fields.Many2one("ir.sequence", string='Ter Unit Sequence')
+    ter_unit_sequence_id = fields.Many2one(
+        "ir.sequence",
+        string="Ter Unit Sequence",
+        help="Sequence used to generate ter.unit names. "
+        "Name format: {type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}.",
+    )
+
+    def _get_or_create_ter_unit_sequence(self):
+        """Create default ter.unit sequence for company if missing."""
+        for company in self:
+            if company.ter_unit_sequence_id:
+                continue
+            seq = self.env["ir.sequence"].create({
+                "name": _("%s – Ter Unit") % company.name,
+                "code": "ter.unit.%s" % company.id,
+                "prefix": "",
+                "padding": 5,
+                "number_increment": 1,
+                "number_next": 1,
+                "company_id": company.id,
+            })
+            company.ter_unit_sequence_id = seq
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        companies = super().create(vals_list)
+        companies._get_or_create_ter_unit_sequence()
+        return companies
 
     _sql_constraints = [
         (
