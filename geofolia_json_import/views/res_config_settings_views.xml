@@ -43,6 +43,16 @@
                                 </div>
                             </div>
                         </setting>
+
+                        <setting id="geofolia_maintenance_project"
+                                 string="Geofolia maintenance project"
+                                 help="Project for maintenance equipment and requests from Geofolia.">
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="geofolia_maintenance_project_id" options="{'no_create': False}"/>
+                                </div>
+                            </div>
+                        </setting>
                     </block>
                 </xpath>
             </field>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="maintenance_equipment_view_form_inherit_geofolia" model="ir.ui.view">
+        <field name="name">maintenance.equipment.form.inherit.geofolia</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="geofolia_equipment_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

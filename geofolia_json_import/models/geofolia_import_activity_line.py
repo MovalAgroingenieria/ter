@@ -32,6 +32,12 @@ class GeofoliaImportActivityLine(models.Model):
         "activity_line_id",
         string="Employees",
     )
+    maintenance_request_id = fields.Many2one(
+        "maintenance.request",
+        string="Maintenance Request",
+        ondelete="set null",
+        help="Target maintenance.request created from this activity.",
+    )
 
     _sql_constraints = [
         (

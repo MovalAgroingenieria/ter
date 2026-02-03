@@ -167,7 +167,7 @@
                                     <field name="code"/>
                                     <field name="name"/>
                                     <field name="category"/>
-                                    <field name="product_id" optional="hide"/>
+                                    <field name="equipment_id" optional="hide"/>
                                     <field name="raw_json_text" invisible="1"/>
                                 </list>
                             </field>
@@ -181,6 +181,7 @@
                                     <field name="duration_minutes"/>
                                     <field name="operation_name"/>
                                     <field name="status_name"/>
+                                    <field name="maintenance_request_id" optional="hide"/>
                                     <field name="comment" optional="hide"/>
                                     <field name="raw_json_text" invisible="1"/>
                                 </list>

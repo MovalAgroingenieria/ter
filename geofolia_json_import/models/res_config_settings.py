@@ -19,3 +19,7 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.geofolia_default_date_range_id",
         readonly=False,
     )
+    geofolia_maintenance_project_id = fields.Many2one(
+        related="company_id.geofolia_maintenance_project_id",
+        readonly=False,
+    )

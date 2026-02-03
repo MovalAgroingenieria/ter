@@ -1,5 +1,7 @@
 from . import (
     account_analytic_line,
+    maintenance_equipment,
+    maintenance_request,
     geofolia_import_base_line,
     geofolia_import_activity_employee_line,
     geofolia_import_activity_line,

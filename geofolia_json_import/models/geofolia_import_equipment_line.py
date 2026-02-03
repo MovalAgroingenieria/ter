@@ -16,11 +16,11 @@ class GeofoliaImportEquipmentLine(models.Model):
     name = fields.Char()
     category = fields.Char()
 
-    product_id = fields.Many2one(
-        "product.product",
-        string="Product",
+    equipment_id = fields.Many2one(
+        "maintenance.equipment",
+        string="Equipment",
         ondelete="set null",
-        help="Target product.product created/updated by this line.",
+        help="Target maintenance.equipment created/updated by this line.",
     )
 
     _sql_constraints = [
@@ -39,5 +39,5 @@ class GeofoliaImportEquipmentLine(models.Model):
         for line in self:
             if not line.job_id:
                 raise UserError(_("Missing job."))
-            line.job_id._apply_product_like(line, label="equipments")
+            line.job_id._apply_equipment_line(line)
             line.job_id._recompute_apply_state()
