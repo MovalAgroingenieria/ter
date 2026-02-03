@@ -9,6 +9,16 @@ class ProductProduct(models.Model):
 
     geofolia_external_id = fields.Char(index=True)
     geofolia_recognition_id = fields.Char(index=True)
+    geofolia_rn_reference_supply_name = fields.Char(
+        string="Geofolia RN Reference Supply Name",
+    )
+    geofolia_rn_reference_supply_code = fields.Char(
+        string="Geofolia RN Reference Supply Code",
+    )
+    geofolia_unit_symbol = fields.Char(string="Geofolia Unit Symbol")
+    geofolia_product_form_enum = fields.Char(
+        string="Geofolia Product Form",
+    )
     geofolia_product_component_n_total = fields.Float(
         string="Geofolia N Total (%)",
     )

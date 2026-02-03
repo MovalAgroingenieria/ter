@@ -91,7 +91,11 @@
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
-                                    <field name="product_id" optional="hide"/>
+                                    <field name="rn_reference_supply_name"/>
+                                    <field name="rn_reference_supply_code"/>
+                                    <field name="unit_symbol"/>
+                                    <field name="product_form_enum"/>
+                                    <field name="product_id"/>
                                     <field name="raw_json_text" invisible="1"/>
                                 </list>
                             </field>

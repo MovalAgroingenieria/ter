@@ -301,10 +301,15 @@ class GeofoliaImportJob(models.Model):
     def _create_product_lines(self, items):
         self.ensure_one()
         vals_list = []
+        seen = set()
         for it in items:
             if not isinstance(it, dict):
                 continue
             supply_id = it.get("SupplyId")
+            if supply_id and supply_id in seen:
+                continue
+            if supply_id:
+                seen.add(supply_id)
             vals_list.append(
                 {
                     "job_id": self.id,
@@ -312,9 +317,12 @@ class GeofoliaImportJob(models.Model):
                     "recognition_id": it.get("RecognitionId"),
                     "code": it.get("Code"),
                     "name": it.get("SupplyName"),
+                    "rn_reference_supply_name": it.get("RNReferenceSupplyName"),
+                    "rn_reference_supply_code": it.get("RNReferenceSupplyCode"),
+                    "unit_symbol": it.get("UnitSymbol"),
+                    "product_form_enum": it.get("ProductFormEnum"),
                     "category_enum": it.get("CategoryEnum"),
                     "product_type_enum": it.get("ProductTypeEnum"),
-                    "unit_symbol": it.get("UnitSymbol"),
                     "product_component_n_total": it.get("ProductComponentNTotal"),
                     "product_component_p2o5": it.get("ProductComponentP2O5"),
                     "product_component_k2o": it.get("ProductComponentK2O"),
@@ -767,22 +775,26 @@ class GeofoliaImportJob(models.Model):
                     return
 
                 product = Product.search(
-                    [("geofolia_external_id", "=", line.external_id)], limit=1
+                    [
+                        ("geofolia_source", "=", "products"),
+                        ("geofolia_external_id", "=", line.external_id),
+                    ],
+                    limit=1,
                 )
                 vals = {
                     "name": line.name or line.code or _("Geofolia product"),
                     "default_code": line.code,
                     "geofolia_external_id": line.external_id,
-                    "geofolia_recognition_id": getattr(line, "recognition_id", None),
-                    "geofolia_product_component_n_total": getattr(
-                        line, "product_component_n_total", None
-                    ),
-                    "geofolia_product_component_p2o5": getattr(
-                        line, "product_component_p2o5", None
-                    ),
-                    "geofolia_product_component_k2o": getattr(
-                        line, "product_component_k2o", None
-                    ),
+                    "geofolia_source": "products",
+                    "geofolia_recognition_id": line.recognition_id,
+                    "geofolia_rn_reference_supply_name": line.rn_reference_supply_name,
+                    "geofolia_rn_reference_supply_code": line.rn_reference_supply_code,
+                    "geofolia_unit_symbol": line.unit_symbol,
+                    "geofolia_product_form_enum": line.product_form_enum,
+                    "geofolia_product_component_n_total": line.product_component_n_total,
+                    "geofolia_product_component_p2o5": line.product_component_p2o5,
+                    "geofolia_product_component_k2o": line.product_component_k2o,
+                    "maintenance_ok": True,
                 }
 
                 if product:
@@ -790,6 +802,10 @@ class GeofoliaImportJob(models.Model):
                         "name",
                         "default_code",
                         "geofolia_recognition_id",
+                        "geofolia_rn_reference_supply_name",
+                        "geofolia_rn_reference_supply_code",
+                        "geofolia_unit_symbol",
+                        "geofolia_product_form_enum",
                         "geofolia_product_component_n_total",
                         "geofolia_product_component_p2o5",
                         "geofolia_product_component_k2o",

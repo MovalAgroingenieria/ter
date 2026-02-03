@@ -12,6 +12,10 @@
                             <field name="geofolia_external_id" readonly="1"/>
                             <field name="geofolia_recognition_id" readonly="1"/>
                             <field name="geofolia_source" readonly="1"/>
+                            <field name="geofolia_rn_reference_supply_name" readonly="1"/>
+                            <field name="geofolia_rn_reference_supply_code" readonly="1"/>
+                            <field name="geofolia_unit_symbol" readonly="1"/>
+                            <field name="geofolia_product_form_enum" readonly="1"/>
                         </group>
                         <group string="Components">
                             <field name="geofolia_product_component_n_total"/>

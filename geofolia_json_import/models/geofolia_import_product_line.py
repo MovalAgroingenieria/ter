@@ -15,9 +15,12 @@ class GeofoliaImportProductLine(models.Model):
     recognition_id = fields.Char(index=True)
     code = fields.Char()
     name = fields.Char()
+    rn_reference_supply_name = fields.Char(string="RN Reference Supply Name")
+    rn_reference_supply_code = fields.Char(string="RN Reference Supply Code")
+    unit_symbol = fields.Char()
+    product_form_enum = fields.Char(string="Product Form")
     category_enum = fields.Integer()
     product_type_enum = fields.Integer()
-    unit_symbol = fields.Char()
 
     product_component_n_total = fields.Float()
     product_component_p2o5 = fields.Float()
