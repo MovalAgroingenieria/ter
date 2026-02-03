@@ -523,6 +523,23 @@ class GeofoliaImportJob(models.Model):
         vals = {
             "geofolia_uid": line.external_uuid,
             "name": (line.name or line.code or "").strip() or f"GF-{line.external_uuid}",
+            "geofolia_code": raw.get("Code"),
+            "geofolia_name": raw.get("Name"),
+            "geofolia_parent_id1": raw.get("ParentId1"),
+            "geofolia_main_plot_id": raw.get("MainPlotId"),
+            "geofolia_irrigation_kind": raw.get("IrrigationKind"),
+            "geofolia_irrigation_kind_name": raw.get("IrrigationKindName"),
+            "geofolia_comment": raw.get("Comment"),
+            "geofolia_ferti_diary_comment": raw.get("FertiDiaryComment"),
+            "geofolia_phyto_diary_comment": raw.get("PhytoDiaryComment"),
+            "geofolia_plot_kind": raw.get("PlotKind"),
+            "geofolia_plot_kind_name": raw.get("PLotKindName") or raw.get(
+                "PlotKindName"
+            ),
+            "geofolia_crop_name": raw.get("CropName"),
+            "geofolia_botanical_species_code": raw.get("BotanicalSpeciesCode"),
+            "geofolia_variety_name": raw.get("VarietyName"),
+            "geofolia_unit": raw.get("Unit"),
         }
         if line.area is not None:
             area_val = float(line.area)
@@ -530,6 +547,7 @@ class GeofoliaImportJob(models.Model):
             vals["area_official"] = (
                 area_val if unit == "ha" else (area_val / 10000.0)
             )
+        vals["geofolia_area"] = line.area
         if line.geography_wkt:
             wkt = (line.geography_wkt or "").strip()
             if wkt and not wkt.upper().startswith("SRID="):
@@ -537,6 +555,13 @@ class GeofoliaImportJob(models.Model):
                 vals["geom_ewkt"] = "SRID=%s;" % srid + wkt
             else:
                 vals["geom_ewkt"] = wkt
+        vals["geofolia_geography"] = line.geography_wkt
+        vals["geofolia_last_modification_date"] = self._to_datetime(
+            raw.get("LastModificationDate")
+        )
+        vals["geofolia_last_modification_geometry_date"] = self._to_datetime(
+            raw.get("LastModificationGeometryDate")
+        )
         date_range = self._get_date_range_for_harvest_year(line.harvest_year)
         if date_range:
             vals["date_range_id"] = date_range.id
