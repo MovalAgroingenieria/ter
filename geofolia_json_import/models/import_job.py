@@ -45,6 +45,13 @@ class GeofoliaImportJob(models.Model):
     file_name = fields.Char()
     file_data = fields.Binary(required=True)
 
+    date_range_id = fields.Many2one(
+        comodel_name="date.range",
+        string="Campaign (Date Range)",
+        domain="[('is_unit_use_type', '=', True)]",
+        help="Campaign for ter.unit when importing Fields. From wizard.",
+    )
+
     info_json = fields.Json()
     error = fields.Text()
 
@@ -562,7 +569,9 @@ class GeofoliaImportJob(models.Model):
         vals["geofolia_last_modification_geometry_date"] = self._to_datetime(
             raw.get("LastModificationGeometryDate")
         )
-        date_range = self._get_date_range_for_harvest_year(line.harvest_year)
+        date_range = self.date_range_id or self._get_date_range_for_harvest_year(
+            line.harvest_year
+        )
         if date_range:
             vals["date_range_id"] = date_range.id
             vals["date_start"] = date_range.date_start

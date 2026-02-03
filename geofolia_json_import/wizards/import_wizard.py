@@ -10,6 +10,13 @@ class GeofoliaImportWizard(models.TransientModel):
 
     file_name = fields.Char()
     file_data = fields.Binary(required=True)
+    date_range_id = fields.Many2one(
+        comodel_name="date.range",
+        string="Campaign (Date Range)",
+        domain="[('is_unit_use_type', '=', True)]",
+        default=lambda self: self.env.company.geofolia_default_date_range_id,
+        help="Campaign used for ter.unit when importing Fields. Required for Fields/Full import.",
+    )
     import_type = fields.Selection(
         selection=[
             ("auto", "Autodetect"),
@@ -36,6 +43,7 @@ class GeofoliaImportWizard(models.TransientModel):
                 "import_type": itype,
                 "file_name": self.file_name,
                 "file_data": self.file_data,
+                "date_range_id": self.date_range_id.id if self.date_range_id else False,
             }
         )
         job.action_parse()

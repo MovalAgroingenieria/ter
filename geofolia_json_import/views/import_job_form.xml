@@ -37,6 +37,7 @@
                     <group>
                         <field name="name"/>
                         <field name="import_type"/>
+                        <field name="date_range_id" options="{'no_create': True}"/>
                         <field name="file_name" readonly="1"/>
                         <field name="file_data" filename="file_name"/>
                     </group>
