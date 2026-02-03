@@ -154,8 +154,11 @@
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
+                                    <field name="botanical_species_name"/>
+                                    <field name="botanical_species_id"/>
+                                    <field name="harvested_product_kind_id"/>
                                     <field name="unit_symbol"/>
-                                    <field name="product_id" optional="hide"/>
+                                    <field name="task_id"/>
                                     <field name="raw_json_text" invisible="1"/>
                                 </list>
                             </field>

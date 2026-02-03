@@ -11,16 +11,19 @@ class GeofoliaImportHarvestedProductLine(models.Model):
     _order = "id asc"
     _inherit = "geofolia.import.base.line"
 
-    external_id = fields.Char(index=True)
+    external_id = fields.Char(index=True)  # HarvestId
     code = fields.Char()
     name = fields.Char()
+    botanical_species_name = fields.Char(string="Botanical Species Name")
+    botanical_species_id = fields.Integer(string="Botanical Species ID")
+    harvested_product_kind_id = fields.Integer(string="Harvested Product Kind ID")
     unit_symbol = fields.Char()
 
-    product_id = fields.Many2one(
-        "product.product",
-        string="Product",
+    task_id = fields.Many2one(
+        "project.task",
+        string="Task",
         ondelete="set null",
-        help="Target product.product created/updated by this line.",
+        help="Target project.task created/updated by this line.",
     )
 
     _sql_constraints = [
@@ -39,5 +42,5 @@ class GeofoliaImportHarvestedProductLine(models.Model):
         for line in self:
             if not line.job_id:
                 raise UserError(_("Missing job."))
-            line.job_id._apply_product_like(line, label="harvested_products")
+            line.job_id._apply_harvested_product_line(line)
             line.job_id._recompute_apply_state()

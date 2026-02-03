@@ -391,16 +391,24 @@ class GeofoliaImportJob(models.Model):
     def _create_harvested_product_lines(self, items):
         self.ensure_one()
         vals_list = []
+        seen = set()
         for it in items:
             if not isinstance(it, dict):
                 continue
-            ext_id = it.get("HarvestedProductId") or it.get("Id")
+            ext_id = it.get("HarvestId") or it.get("HarvestedProductId") or it.get("Id")
+            if ext_id and ext_id in seen:
+                continue
+            if ext_id:
+                seen.add(ext_id)
             vals_list.append(
                 {
                     "job_id": self.id,
                     "external_id": ext_id,
                     "code": it.get("Code"),
                     "name": it.get("Name"),
+                    "botanical_species_name": it.get("BotanicalSpeciesName"),
+                    "botanical_species_id": it.get("BotanicalSpeciesId"),
+                    "harvested_product_kind_id": it.get("HarvestedProductKindId"),
                     "unit_symbol": it.get("UnitSymbol"),
                     "raw_json": it,
                     "raw_json_text": self._json_text(it),
@@ -756,7 +764,7 @@ class GeofoliaImportJob(models.Model):
             self._apply_employee_line(line)
 
         for line in _todo(self.harvested_product_line_ids):
-            self._apply_product_like(line, label="harvested_products")
+            self._apply_harvested_product_line(line)
 
         for line in _todo(self.equipment_line_ids):
             self._apply_equipment_line(line)
@@ -887,6 +895,79 @@ class GeofoliaImportJob(models.Model):
                         "employee_id": emp.id,
                         "sync_state": "created",
                         "sync_message": _("Created employee."),
+                    }
+                )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+    def _apply_harvested_product_line(self, line):
+        """Create or update project.task from Geofolia HarvestedProducts line."""
+        Task = self.env["project.task"]
+        try:
+            with self.env.cr.savepoint():
+                if not line.external_id:
+                    line.write(
+                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                    )
+                    return
+
+                project = self.env.company.geofolia_timesheet_project_id
+                if not project:
+                    line.write(
+                        {
+                            "sync_state": "error",
+                            "sync_message": _(
+                                "Geofolia timesheet project not configured."
+                            ),
+                        }
+                    )
+                    return
+
+                task = Task.search(
+                    [("geofolia_harvest_id", "=", line.external_id)], limit=1
+                )
+                vals = {
+                    "name": line.name or line.code or _("Geofolia harvested product"),
+                    "project_id": project.id,
+                    "geofolia_harvest_id": line.external_id,
+                    "geofolia_botanical_species_name": line.botanical_species_name,
+                    "geofolia_botanical_species_id": line.botanical_species_id,
+                    "geofolia_harvested_product_kind_id": line.harvested_product_kind_id,
+                    "geofolia_unit_symbol": line.unit_symbol,
+                }
+
+                if task:
+                    write_vals = {k: v for k, v in vals.items() if k != "project_id"}
+                    changed = any(
+                        write_vals.get(k) != task[k]
+                        for k in write_vals
+                        if k in task._fields
+                    )
+                    if changed:
+                        task.write(write_vals)
+                        line.write(
+                            {
+                                "task_id": task.id,
+                                "sync_state": "updated",
+                                "sync_message": _("Updated task."),
+                            }
+                        )
+                    else:
+                        line.write(
+                            {
+                                "task_id": task.id,
+                                "sync_state": "no_action",
+                                "sync_message": _("Already up to date."),
+                            }
+                        )
+                    return
+
+                task = Task.create(vals)
+                line.write(
+                    {
+                        "task_id": task.id,
+                        "sync_state": "created",
+                        "sync_message": _("Created task."),
                     }
                 )
         except Exception as exc:  # noqa: BLE001
