@@ -56,6 +56,7 @@
                         <group string="Location">
                             <field name="parcel_id" options='{"no_open": True, "no_create": True}'/>
                             <field name="partner_id" readonly="1"/>
+                            <field name="geom_ewkt" placeholder="SRID=25830;POLYGON((...))" widget="text"/>
                             <field name="area_official"/>
                             <field name="area_official_m2"/>
                         </group>

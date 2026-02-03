@@ -1,8 +1,8 @@
-# 2025 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2025 Moval Agro-engineering
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Territory: SIGPAC Integration",
+    "name": "Spain - Territory SIGPAC Integration",
     "summary": "In a territorial census, integration of the SIGPAC "
     "enclosures, and creation of a spatial link with the parcels.",
     "version": "18.0.1.0.0",

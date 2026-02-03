@@ -1,0 +1,42 @@
+{
+  "Information": {"AppName": "Geofolia", "CountryCode": "ES"},
+  "Products": [
+    {"SupplyId": "sid-1", "SupplyName": "Halvetic", "Code": "ES-01378", "CategoryEnum": 19}
+  ],
+  "Employees": [],
+  "Partners": [],
+  "HarvestedProducts": [],
+  "Equipments": [],
+  "Activities": [
+    {
+      "ActionId": "act-1",
+      "FarmIdentificationCode": "12587444G",
+      "HarvestYear": 2026,
+      "OperationName": "Laboreo",
+      "OperationCategory": "Trabajo de suelo",
+      "StatusCode": "ZK2",
+      "StatusName": "Realizado",
+      "StartingDate": "2026-01-10",
+      "EndingDate": "2026-01-10",
+      "Duration": 120,
+      "CropZoneIds": [
+        {
+          "RecognitionId": "zone-1",
+          "PlotCode": "1216",
+          "FarmIdentificationCode": "12587444G",
+          "WorkedSurface": 8000
+        }
+      ],
+      "ActionEmployees": [
+        {
+          "EmployeeActionId": "act-1",
+          "EmployeeRecognitionId": "zone-1",
+          "EmployeeId": "emp-1",
+          "EmployeeFarmIdentificationCode": "12587444G",
+          "EmployeeName": "Test Worker",
+          "EmployeeTime": 120
+        }
+      ]
+    }
+  ]
+}

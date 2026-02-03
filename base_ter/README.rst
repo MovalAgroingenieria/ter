@@ -3,7 +3,7 @@
    :alt: License: AGPL-3
 
 =====================
-Base-Territory Module
+Base Territory
 =====================
 
 **Table of contents**
@@ -42,7 +42,7 @@ ALTER ROLE  DB_USER SET search_path = public, postgis;
 Credits
 =======
 
-* Moval Agroingeniería S.L.
+* Moval Agro-engineering S.L.
 
 Contributors
 ------------
@@ -63,6 +63,6 @@ Maintainer
 
 .. image:: https://services.moval.es/static/images/logo_moval_small.png
    :target: http://moval.es
-   :alt: Moval Agroingeniería
+   :alt: Moval Agro-engineering
 
-This module is maintained by Moval Agroingeniería.
+This module is maintained by Moval Agro-engineering.

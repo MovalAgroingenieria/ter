@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_analytic_line_form_inherit_territory" model="ir.ui.view">
+        <field name="name">account.analytic.line.form.inherit.territory</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="after">
+                <group string="Territory" name="territory">
+                    <field name="ter_parcel_id" options="{'no_create': True}"/>
+                    <field name="ter_property_id" options="{'no_create': True}"/>
+                    <field name="ter_unit_id" options="{'no_create': True}"/>
+                    <field name="ter_use_type_id" options="{'no_create': True}"/>
+                    <field name="geofolia_operation_category" optional="hide"/>
+                    <field name="geofolia_status_name" optional="hide"/>
+                    <field name="geofolia_status_code" optional="hide"/>
+                    <field name="geofolia_worked_surface" optional="hide"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_analytic_line_tree_inherit_territory" model="ir.ui.view">
+        <field name="name">account.analytic.line.tree.inherit.territory</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+        <field name="priority">15</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='task_id']" position="after">
+                <field name="ter_parcel_id" optional="hide"/>
+                <field name="ter_property_id" optional="hide"/>
+                <field name="ter_unit_id" optional="hide"/>
+                <field name="ter_use_type_id" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_analytic_line_search_inherit_territory" model="ir.ui.view">
+        <field name="name">account.analytic.line.search.inherit.territory</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='task_id']" position="after">
+                <field name="ter_parcel_id"/>
+                <field name="ter_property_id"/>
+                <field name="ter_unit_id"/>
+                <field name="ter_use_type_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

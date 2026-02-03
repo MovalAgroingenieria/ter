@@ -1,8 +1,8 @@
-# 2024 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# Copyright 2024-2026 Moval Agro-engineering
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 {
-    "name": "Base-Territory (Spanish Localization)",
+    "name": "Spain - Territory",
     "summary": "Customization of the territorial base (base_ter module) "
     "to the administrative scope of Spain.",
     "version": "18.0.1.0.0",
@@ -27,4 +27,7 @@
         ]
     },
     "post_init_hook": "post_init_hook",
+    "external_dependencies": {
+        "python": ["requests"],
+    },
 }

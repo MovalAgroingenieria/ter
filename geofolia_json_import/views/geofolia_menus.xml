@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_geofolia_import"
+              name="Geofolia"
+              parent="base_ter.menu_configuration_general"
+              groups="group_geofolia_import"/>
+
+    <record id="action_geofolia_import_job" model="ir.actions.act_window">
+        <field name="name">Import Jobs</field>
+        <field name="res_model">geofolia.import.job</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_geofolia_import_jobs"
+              name="Jobs"
+              parent="menu_geofolia_import"
+              action="action_geofolia_import_job"
+              groups="group_geofolia_import"/>
+
+    <record id="action_geofolia_import_wizard_menu" model="ir.actions.act_window">
+        <field name="name">New Import</field>
+        <field name="res_model">geofolia.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_geofolia_import_new"
+              name="New Import"
+              parent="menu_geofolia_import"
+              action="action_geofolia_import_wizard_menu"
+              groups="group_geofolia_import"/>
+</odoo>

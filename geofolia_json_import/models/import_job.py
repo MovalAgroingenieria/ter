@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# Copyright 2024-2026 Moval Agroingeniería
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
 
 import base64
 import json
@@ -75,10 +76,10 @@ class GeofoliaImportJob(models.Model):
         "geofolia.import.activity.employee.line", "job_id", string="Activity Employees"
     )
 
-    total_count = fields.Integer(compute="_compute_apply_stats")
-    pending_count = fields.Integer(compute="_compute_apply_stats")
-    processed_count = fields.Integer(compute="_compute_apply_stats")
-    error_count = fields.Integer(compute="_compute_apply_stats")
+    total_count = fields.Integer(compute="_compute_apply_stats", store=False)
+    pending_count = fields.Integer(compute="_compute_apply_stats", store=False)
+    processed_count = fields.Integer(compute="_compute_apply_stats", store=False)
+    error_count = fields.Integer(compute="_compute_apply_stats", store=False)
 
     # ----------------------------
     # Public actions
@@ -110,6 +111,16 @@ class GeofoliaImportJob(models.Model):
                 continue
             job._apply_full_export(only_pending=True)
             job._recompute_apply_state()
+
+    def action_apply_fields(self):
+        for job in self:
+            if job.import_type != "fields":
+                continue
+            lines = job.line_ids.filtered(
+                lambda l: l.sync_state in ("pending", "error")
+            )
+            for line in lines:
+                job._apply_field_line_to_ter_unit(line)
 
     # ----------------------------
     # Parsing
@@ -224,10 +235,11 @@ class GeofoliaImportJob(models.Model):
             return str(value)
 
     # ----------------------------
-    # Simple mode
+    # Simple mode: staging lines
     # ----------------------------
 
     def _create_lines_from_fields(self, items):
+        self.ensure_one()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
@@ -251,6 +263,7 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.line"].create(vals_list)
 
     def _create_lines_from_products(self, items):
+        self.ensure_one()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
@@ -279,6 +292,7 @@ class GeofoliaImportJob(models.Model):
     # ----------------------------
 
     def _create_product_lines(self, items):
+        self.ensure_one()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
@@ -288,11 +302,15 @@ class GeofoliaImportJob(models.Model):
                 {
                     "job_id": self.id,
                     "external_id": supply_id,
+                    "recognition_id": it.get("RecognitionId"),
                     "code": it.get("Code"),
                     "name": it.get("SupplyName"),
                     "category_enum": it.get("CategoryEnum"),
                     "product_type_enum": it.get("ProductTypeEnum"),
                     "unit_symbol": it.get("UnitSymbol"),
+                    "product_component_n_total": it.get("ProductComponentNTotal"),
+                    "product_component_p2o5": it.get("ProductComponentP2O5"),
+                    "product_component_k2o": it.get("ProductComponentK2O"),
                     "raw_json": it,
                     "raw_json_text": self._json_text(it),
                 }
@@ -301,6 +319,7 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.product.line"].create(vals_list)
 
     def _create_employee_lines(self, items):
+        self.ensure_one()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
@@ -326,6 +345,7 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.employee.line"].create(vals_list)
 
     def _create_partner_lines(self, items):
+        self.ensure_one()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
@@ -346,6 +366,7 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.partner.line"].create(vals_list)
 
     def _create_harvested_product_lines(self, items):
+        self.ensure_one()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
@@ -366,6 +387,7 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.harvested.product.line"].create(vals_list)
 
     def _create_equipment_lines(self, items):
+        self.ensure_one()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
@@ -386,6 +408,7 @@ class GeofoliaImportJob(models.Model):
             self.env["geofolia.import.equipment.line"].create(vals_list)
 
     def _create_activity_lines(self, items):
+        self.ensure_one()
         ActivityLine = self.env["geofolia.import.activity.line"]
         EmpLine = self.env["geofolia.import.activity.employee.line"]
 
@@ -411,7 +434,9 @@ class GeofoliaImportJob(models.Model):
                     "duration_minutes": it.get("Duration"),
                     "starting_date": self._to_date(it.get("StartingDate")),
                     "ending_date": self._to_date(it.get("EndingDate")),
-                    "last_modification_dt": self._to_datetime(it.get("LastModificationDate")),
+                    "last_modification_dt": self._to_datetime(
+                        it.get("LastModificationDate")
+                    ),
                     "raw_json": it,
                     "raw_json_text": self._json_text(it),
                 }
@@ -423,6 +448,7 @@ class GeofoliaImportJob(models.Model):
         for it in items:
             if not isinstance(it, dict):
                 continue
+
             action_id = it.get("ActionId") or it.get("Id")
             activity = by_external.get(action_id)
             if not activity:
@@ -432,15 +458,23 @@ class GeofoliaImportJob(models.Model):
             if not isinstance(employees, list):
                 continue
 
+            zones = it.get("CropZoneIds") or []
+            zones_by_rec = {
+                z.get("RecognitionId"): z
+                for z in zones
+                if isinstance(z, dict) and z.get("RecognitionId")
+            }
             for emp in employees:
                 if not isinstance(emp, dict):
                     continue
+                rec_id = emp.get("EmployeeRecognitionId")
+                zone = zones_by_rec.get(rec_id) if rec_id else None
                 emp_vals.append(
                     {
                         "job_id": self.id,
                         "activity_line_id": activity.id,
                         "employee_action_id": emp.get("EmployeeActionId") or action_id,
-                        "employee_recognition_id": emp.get("EmployeeRecognitionId"),
+                        "employee_recognition_id": rec_id,
                         "employee_order": emp.get("EmployeeOrder"),
                         "employee_farm_identification_code": emp.get(
                             "EmployeeFarmIdentificationCode"
@@ -449,6 +483,8 @@ class GeofoliaImportJob(models.Model):
                         "employee_name": emp.get("EmployeeName"),
                         "employee_id_external": emp.get("EmployeeId"),
                         "employee_time": emp.get("EmployeeTime"),
+                        "plot_code": zone.get("PlotCode") if zone else None,
+                        "worked_surface": zone.get("WorkedSurface") if zone else None,
                         "raw_json": emp,
                         "raw_json_text": self._json_text(emp),
                     }
@@ -456,6 +492,126 @@ class GeofoliaImportJob(models.Model):
 
         if emp_vals:
             EmpLine.create(emp_vals)
+
+    # ----------------------------
+    # Apply: ter.unit mapping (Fields -> ter.unit)
+    # ----------------------------
+
+    def _get_date_range_for_harvest_year(self, harvest_year):
+        """Find date.range for harvest year."""
+        year = int(harvest_year or 0) or fields.Date.today().year
+        DateRange = self.env["date.range"]
+        default = self.env.company.geofolia_default_date_range_id
+        if default and default.is_unit_use_type:
+            return default
+        candidates = DateRange.search(
+            [
+                ("is_unit_use_type", "=", True),
+                ("date_start", "<=", "%d-12-31" % year),
+                ("date_end", ">=", "%d-01-01" % year),
+            ],
+            limit=1,
+        )
+        if candidates:
+            return candidates[0]
+        return DateRange.search([("is_unit_use_type", "=", True)], limit=1)
+
+    def _get_ter_unit_vals_from_field_line(self, line):
+        """Build ter.unit vals from Geofolia field line (Field = ter.unit)."""
+        self.ensure_one()
+        raw = line.raw_json or {}
+        vals = {
+            "geofolia_uid": line.external_uuid,
+            "name": (line.name or line.code or "").strip() or f"GF-{line.external_uuid}",
+        }
+        if line.area is not None:
+            area_val = float(line.area)
+            unit = (raw.get("Unit") or "").strip().lower()
+            vals["area_official"] = (
+                area_val if unit == "ha" else (area_val / 10000.0)
+            )
+        if line.geography_wkt:
+            wkt = (line.geography_wkt or "").strip()
+            if wkt and not wkt.upper().startswith("SRID="):
+                srid = self._get_geometry_srid_from_job()
+                vals["geom_ewkt"] = "SRID=%s;" % srid + wkt
+            else:
+                vals["geom_ewkt"] = wkt
+        date_range = self._get_date_range_for_harvest_year(line.harvest_year)
+        if date_range:
+            vals["date_range_id"] = date_range.id
+            vals["date_start"] = date_range.date_start
+            vals["date_end"] = date_range.date_end
+            if date_range.use_type_id:
+                vals["use_type_id"] = date_range.use_type_id.id
+        else:
+            year = int(line.harvest_year or 0) or self.env.context.get("date") or fields.Date.today().year
+            vals["date_start"] = "%d-01-01" % year
+            vals["date_end"] = "%d-12-31" % year
+        vals.setdefault("area_official", 0.0)
+        return vals
+
+    def _apply_field_line_to_ter_unit(self, line):
+        """Create or update ter.unit from Geofolia Field line."""
+        self.ensure_one()
+        Unit = self.env["ter.unit"]
+
+        ext_id = line.external_uuid
+        if not ext_id:
+            line.write({"sync_state": "skipped", "sync_message": _("Missing id.")})
+            return
+
+        vals = self._get_ter_unit_vals_from_field_line(line)
+        if not vals.get("date_range_id"):
+            line.write(
+                {
+                    "sync_state": "skipped",
+                    "sync_message": _(
+                        "No campaign (date range). Create one with "
+                        "'Usable for Unit Use' or set company default."
+                    ),
+                }
+            )
+            return
+        if not vals.get("geom_ewkt"):
+            line.write(
+                {
+                    "sync_state": "skipped",
+                    "sync_message": _(
+                        "Field has no geometry. ter.unit needs geometry to resolve parcel."
+                    ),
+                }
+            )
+            return
+
+        try:
+            with self.env.cr.savepoint():
+                unit = Unit.search([("geofolia_uid", "=", ext_id)], limit=1)
+                if unit:
+                    write_vals = {
+                        k: v for k, v in vals.items()
+                        if k in unit._fields and v not in (False, None, "")
+                    }
+                    if write_vals:
+                        unit.write(write_vals)
+                    line.write(
+                        {
+                            "ter_unit_id": unit.id,
+                            "sync_state": "updated",
+                            "sync_message": _("Updated unit."),
+                        }
+                    )
+                else:
+                    unit = Unit.create(vals)
+                    line.write(
+                        {
+                            "ter_unit_id": unit.id,
+                            "sync_state": "created",
+                            "sync_message": _("Created unit."),
+                        }
+                    )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
 
     # ----------------------------
     # Apply stats/state
@@ -486,7 +642,9 @@ class GeofoliaImportJob(models.Model):
                 total += len(lines)
                 pending += len(lines.filtered(lambda l: l.sync_state == "pending"))
                 errors += len(lines.filtered(lambda l: l.sync_state == "error"))
-                processed += len(lines.filtered(lambda l: l.sync_state in processed_states))
+                processed += len(
+                    lines.filtered(lambda l: l.sync_state in processed_states)
+                )
 
             job.total_count = total
             job.pending_count = pending
@@ -516,8 +674,12 @@ class GeofoliaImportJob(models.Model):
             self.apply_state = "done"
             return
 
-        has_pending = any(v.filtered(lambda l: l.sync_state == "pending") for v in blocks.values())
-        has_error = any(v.filtered(lambda l: l.sync_state == "error") for v in blocks.values())
+        has_pending = any(
+            v.filtered(lambda l: l.sync_state == "pending") for v in blocks.values()
+        )
+        has_error = any(
+            v.filtered(lambda l: l.sync_state == "error") for v in blocks.values()
+        )
 
         if has_error:
             self.apply_state = "partial" if has_pending else "error"
@@ -526,7 +688,7 @@ class GeofoliaImportJob(models.Model):
         self.apply_state = "ready" if has_pending else "done"
 
     # ----------------------------
-    # Apply: create/update Odoo records
+    # Apply: create/update Odoo records (full)
     # ----------------------------
 
     def _apply_full_export(self, only_pending=False):
@@ -557,7 +719,9 @@ class GeofoliaImportJob(models.Model):
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
-                    line.write({"sync_state": "skipped", "sync_message": _("Missing id.")})
+                    line.write(
+                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                    )
                     return
 
                 product = Product.search(
@@ -567,11 +731,31 @@ class GeofoliaImportJob(models.Model):
                     "name": line.name or line.code or _("Geofolia product"),
                     "default_code": line.code,
                     "geofolia_external_id": line.external_id,
+                    "geofolia_recognition_id": getattr(line, "recognition_id", None),
+                    "geofolia_product_component_n_total": getattr(
+                        line, "product_component_n_total", None
+                    ),
+                    "geofolia_product_component_p2o5": getattr(
+                        line, "product_component_p2o5", None
+                    ),
+                    "geofolia_product_component_k2o": getattr(
+                        line, "product_component_k2o", None
+                    ),
                 }
 
                 if product:
+                    check_keys = (
+                        "name",
+                        "default_code",
+                        "geofolia_recognition_id",
+                        "geofolia_product_component_n_total",
+                        "geofolia_product_component_p2o5",
+                        "geofolia_product_component_k2o",
+                    )
                     changed = any(
-                        vals.get(k) and product[k] != vals[k] for k in ("name", "default_code")
+                        vals.get(k) is not None and product[k] != vals[k]
+                        for k in check_keys
+                        if k in vals
                     )
                     if changed:
                         product.write(vals)
@@ -608,7 +792,9 @@ class GeofoliaImportJob(models.Model):
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
-                    line.write({"sync_state": "skipped", "sync_message": _("Missing id.")})
+                    line.write(
+                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                    )
                     return
 
                 emp = Employee.search(
@@ -648,16 +834,23 @@ class GeofoliaImportJob(models.Model):
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
-                    line.write({"sync_state": "skipped", "sync_message": _("Missing id.")})
+                    line.write(
+                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                    )
                     return
 
                 product = Product.search(
                     [("geofolia_external_id", "=", line.external_id)], limit=1
                 )
+                raw = line.raw_json or {}
                 vals = {
                     "name": line.name or line.code or _("Geofolia (%s)") % label,
                     "default_code": line.code,
                     "geofolia_external_id": line.external_id,
+                    "geofolia_recognition_id": raw.get("RecognitionId"),
+                    "geofolia_product_component_n_total": raw.get("ProductComponentNTotal"),
+                    "geofolia_product_component_p2o5": raw.get("ProductComponentP2O5"),
+                    "geofolia_product_component_k2o": raw.get("ProductComponentK2O"),
                 }
 
                 if product:
@@ -682,6 +875,193 @@ class GeofoliaImportJob(models.Model):
         except Exception as exc:  # noqa: BLE001
             line.write({"sync_state": "error", "sync_message": str(exc)})
 
+    def _resolve_parcel_from_farm_identification_code(self, farm_code):
+        """Resolve ter.parcel from Geofolia FarmIdentificationCode (Field Code or farm id)."""
+        if not farm_code:
+            return self.env["ter.parcel"]
+        farm_code = str(farm_code).strip()
+        Parcel = self.env["ter.parcel"]
+        # First: match alphanum_code (Field Code)
+        parcel = Parcel.search([("alphanum_code", "=", farm_code)], limit=1)
+        if parcel:
+            return parcel
+        # Second: match geofolia_farm_identification_code
+        return Parcel.search(
+            [("geofolia_farm_identification_code", "=", farm_code)], limit=1
+        )
+
+    def _resolve_unit_from_crop_zone(self, activity_raw, recognition_id):
+        """
+        Resolve ter.unit from Activity CropZoneIds. CropZone.RecognitionId may match
+        ter.unit.geofolia_uid (Field Id from Geofolia).
+        """
+        if not activity_raw or not recognition_id:
+            return self.env["ter.unit"]
+        zones = activity_raw.get("CropZoneIds") or []
+        if not isinstance(zones, list):
+            return self.env["ter.unit"]
+        zone = next(
+            (
+                z
+                for z in zones
+                if isinstance(z, dict) and z.get("RecognitionId") == recognition_id
+            ),
+            None,
+        )
+        if not zone:
+            return self.env["ter.unit"]
+        field_id = zone.get("FieldId") or zone.get("RecognitionId")
+        if field_id:
+            return self.env["ter.unit"].search(
+                [("geofolia_uid", "=", str(field_id))], limit=1
+            )
+        return self.env["ter.unit"]
+
+    def _resolve_parcel_from_crop_zone(self, activity_raw, recognition_id):
+        """
+        Resolve ter.parcel from Activity CropZoneIds.
+        First tries ter.unit (Fields) by geofolia_uid, then falls back to ter.parcel.
+        """
+        unit = self._resolve_unit_from_crop_zone(activity_raw, recognition_id)
+        if unit and unit.parcel_id:
+            return unit.parcel_id
+        if not activity_raw or not recognition_id:
+            return self.env["ter.parcel"]
+        zones = activity_raw.get("CropZoneIds") or []
+        if not isinstance(zones, list):
+            return self.env["ter.parcel"]
+        zone = next(
+            (
+                z
+                for z in zones
+                if isinstance(z, dict) and z.get("RecognitionId") == recognition_id
+            ),
+            None,
+        )
+        if not zone:
+            return self.env["ter.parcel"]
+        plot_code = (zone.get("PlotCode") or "").strip()
+        farm_code = (zone.get("FarmIdentificationCode") or "").strip()
+        Parcel = self.env["ter.parcel"]
+        if plot_code and farm_code:
+            parcel = Parcel.search(
+                [
+                    ("geofolia_farm_identification_code", "=", farm_code),
+                    ("alphanum_code", "=", plot_code),
+                ],
+                limit=1,
+            )
+            if parcel:
+                return parcel
+        if plot_code:
+            return Parcel.search([("alphanum_code", "=", plot_code)], limit=1)
+        if farm_code:
+            return self._resolve_parcel_from_farm_identification_code(farm_code)
+        return self.env["ter.parcel"]
+
+    def _resolve_ter_unit_for_parcel_date(self, parcel, activity_date):
+        """Find active ter.unit for parcel at activity date (begin_date <= date <= end_date)."""
+        if not parcel or not activity_date:
+            return self.env["ter.unit"]
+        return self.env["ter.unit"].search(
+            [
+                ("parcel_id", "=", parcel.id),
+                ("date_start", "<=", activity_date),
+                ("date_end", ">=", activity_date),
+                ("active", "=", True),
+            ],
+            order="sequence, id",
+            limit=1,
+        )
+
+    def _get_or_create_task_for_operation(
+        self, project, operation_name=None, operation_category=None
+    ):
+        """
+        Find or create project.task for the operation from the JSON.
+        Matches by operation_name first, then operation_category.
+        Creates the task if it does not exist.
+        Falls back to company default task when both are empty.
+        """
+        Task = self.env["project.task"]
+        name = (operation_name or operation_category or "").strip()
+        if not name:
+            default_task = self.env.company.geofolia_timesheet_task_id
+            if default_task and default_task.project_id == project:
+                return default_task
+            name = _("Geofolia activity")
+        task = Task.search(
+            [
+                ("project_id", "=", project.id),
+                ("name", "=", name),
+            ],
+            limit=1,
+        )
+        if task:
+            return task
+        return Task.create(
+            {
+                "project_id": project.id,
+                "name": name,
+            }
+        )
+
+    def _get_geometry_srid_from_job(self):
+        """Extract SRID from info_json CoordinateReferenceSystem. Default 25830 (ETRS89/UTM)."""
+        info = self.info_json or {}
+        crs = info.get("CoordinateReferenceSystem") or ""
+        if isinstance(crs, str) and "25830" in crs:
+            return 25830
+        if isinstance(crs, str) and "4326" in crs:
+            return 4326
+        return 25830
+
+    def _get_territory_vals_for_analytic_line(self, activity, employee_line=None):
+        """
+        Build territory-related vals for account.analytic.line from activity.
+        Uses CropZoneIds + EmployeeRecognitionId for precise ter.unit/parcel per employee,
+        else falls back to Activity FarmIdentificationCode.
+        """
+        vals = {}
+        parcel = self.env["ter.parcel"]
+        ter_unit = self.env["ter.unit"]
+        activity_raw = activity.raw_json or {}
+
+        if employee_line and employee_line.employee_recognition_id:
+            ter_unit = self._resolve_unit_from_crop_zone(
+                activity_raw, employee_line.employee_recognition_id
+            )
+            if ter_unit and ter_unit.parcel_id:
+                parcel = ter_unit.parcel_id
+            elif not ter_unit:
+                parcel = self._resolve_parcel_from_crop_zone(
+                    activity_raw, employee_line.employee_recognition_id
+                )
+        if not parcel and activity.farm_identification_code:
+            parcel = self._resolve_parcel_from_farm_identification_code(
+                activity.farm_identification_code
+            )
+        if not parcel and not ter_unit:
+            return vals
+
+        if parcel:
+            vals["ter_parcel_id"] = parcel.id
+            vals["ter_property_id"] = parcel.property_id.id if parcel.property_id else False
+
+        activity_date = activity.starting_date or activity.ending_date
+        if not ter_unit and parcel:
+            ter_unit = self._resolve_ter_unit_for_parcel_date(parcel, activity_date)
+        if ter_unit:
+            vals["ter_unit_id"] = ter_unit.id
+            vals["ter_use_type_id"] = ter_unit.use_type_id.id if ter_unit.use_type_id else False
+            if ter_unit.account_id:
+                vals["account_id"] = ter_unit.account_id.id
+        vals["geofolia_status_name"] = activity.status_name
+        vals["geofolia_status_code"] = activity.status_code
+        if employee_line and employee_line.worked_surface:
+            vals["geofolia_worked_surface"] = employee_line.worked_surface
+        return vals
+
     def _apply_activity_employee_line(self, line):
         Analytic = self.env["account.analytic.line"]
         Employee = self.env["hr.employee"]
@@ -705,9 +1085,32 @@ class GeofoliaImportJob(models.Model):
 
                 if not emp:
                     line.write(
-                        {"sync_state": "skipped", "sync_message": _("Employee not found.")}
+                        {
+                            "sync_state": "skipped",
+                            "sync_message": _("Employee not found."),
+                        }
                     )
                     return
+
+                company = self.env.company
+                project = company.geofolia_timesheet_project_id
+                if not project:
+                    line.write(
+                        {
+                            "sync_state": "error",
+                            "sync_message": _(
+                                "Missing Geofolia timesheet project in company settings."
+                            ),
+                        }
+                    )
+                    return
+
+                activity = line.activity_line_id
+                task = self._get_or_create_task_for_operation(
+                    project,
+                    operation_name=activity.operation_name,
+                    operation_category=activity.operation_category,
+                )
 
                 ext_id = ":".join(
                     [
@@ -717,21 +1120,26 @@ class GeofoliaImportJob(models.Model):
                     ]
                 )
 
+                vals = {
+                    "name": activity.operation_name or _("Geofolia activity"),
+                    "geofolia_operation_category": activity.operation_category,
+                    "date": activity.starting_date or activity.ending_date,
+                    "unit_amount": (line.employee_time or 0.0) / 60.0,
+                    "employee_id": emp.id,
+                    "geofolia_external_id": ext_id,
+                    "project_id": project.id,
+                    "task_id": task.id if task else False,
+                    "geofolia_activity_line_id": activity.id,
+                }
+
+                territory_vals = self._get_territory_vals_for_analytic_line(
+                    activity, employee_line=line
+                )
+                vals.update(territory_vals)
+
                 existing = Analytic.search(
                     [("geofolia_external_id", "=", ext_id)], limit=1
                 )
-
-                activity = line.activity_line_id
-                unit_amount = (line.employee_time or 0.0) / 60.0
-
-                vals = {
-                    "name": activity.operation_name or _("Geofolia activity"),
-                    "date": activity.starting_date or activity.ending_date,
-                    "unit_amount": unit_amount,
-                    "employee_id": emp.id,
-                    "geofolia_external_id": ext_id,
-                }
-
                 if existing:
                     existing.write(vals)
                     line.write(
@@ -757,19 +1165,3 @@ class GeofoliaImportJob(models.Model):
             line.write({"sync_state": "error", "sync_message": str(exc)})
 
 
-class ProductProduct(models.Model):
-    _inherit = "product.product"
-
-    geofolia_external_id = fields.Char(index=True)
-
-
-class HrEmployee(models.Model):
-    _inherit = "hr.employee"
-
-    geofolia_external_id = fields.Char(index=True)
-
-
-class AccountAnalyticLine(models.Model):
-    _inherit = "account.analytic.line"
-
-    geofolia_external_id = fields.Char(index=True)
