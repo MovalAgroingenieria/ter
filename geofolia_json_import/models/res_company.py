@@ -25,5 +25,6 @@ class ResCompany(models.Model):
     geofolia_maintenance_project_id = fields.Many2one(
         comodel_name="project.project",
         string="Geofolia Maintenance Project",
-        help="Maintenance project for equipment and requests from Geofolia imports.",
+        help="Maintenance project for equipment and requests from Geofolia. "
+        "Enable 'Timesheets' on this project for employee time tracking.",
     )
