@@ -22,9 +22,11 @@ class TerUnit(models.Model):
     description = fields.Html(help="Description to provide more information and context about this ter_unit")
     active = fields.Boolean(default=True, copy=False, export_string_translation=False)
     sequence = fields.Integer(default=10, export_string_translation=False)
-    parcel_id = fields.Many2one('ter.parcel', required=True)
-    date_start = fields.Date(string="Start date", required=True)
-    date_end = fields.Date(string="End date", required=True)
+    parcel_id = fields.Many2one(
+        "ter.parcel", required=True, index=True
+    )
+    date_start = fields.Date(string="Start date", required=True, index=True)
+    date_end = fields.Date(string="End date", required=True, index=True)
     #
     date_range_id = fields.Many2one('date.range', domain=[('is_unit_use_type', '=', True)], required=True)
     date_range_use_type_id = fields.Many2one(related="date_range_id.use_type_id", string="Campaign Type")
@@ -41,7 +43,14 @@ class TerUnit(models.Model):
         string="Official Area (m²)",
         compute="_compute_area_official_m2",
     )
-    use_type_id = fields.Many2one('ter.use_type')
+    use_type_id = fields.Many2one("ter.use_type", index=True)
+    is_current = fields.Boolean(
+        string="In Range",
+        compute="_compute_is_current",
+        store=True,
+        index=True,
+        help="True if today is within date_start and date_end.",
+    )
     attribute_value_ids = fields.One2many(
         comodel_name="ter.unit.attribute.value",
         inverse_name="unit_id",
@@ -169,6 +178,24 @@ class TerUnit(models.Model):
             self._sync_geom_to_gis_unit()
         return res
 
+    def _check_domain_specific_rules(self):
+        """
+        Hook for modules extending ter.unit to add domain-specific validations.
+        Override in inherited modules. Called before critical operations if needed.
+        """
+        pass
+
+    def unlink(self):
+        for unit in self:
+            if unit.geom_ewkt and unit.geom_ewkt.strip():
+                raise UserError(
+                    _(
+                        "Cannot delete a unit with GIS geometry. "
+                        "Clear the geometry first or archive the record."
+                    )
+                )
+        return super().unlink()
+
     @api.onchange("use_type_id")
     def _onchange_use_type_id(self):
         if not self.use_type_id:
@@ -190,6 +217,17 @@ class TerUnit(models.Model):
                     raise ValidationError(
                         _("Attribute '%s' is required.") % line.attribute_id.name
                     )
+
+    @api.depends("date_start", "date_end")
+    def _compute_is_current(self):
+        today = fields.Date.context_today(self)
+        for record in self:
+            if record.date_start and record.date_end:
+                record.is_current = (
+                    record.date_start <= today <= record.date_end
+                )
+            else:
+                record.is_current = False
 
     @api.depends("area_official")
     def _compute_area_official_m2(self):

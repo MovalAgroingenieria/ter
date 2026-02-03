@@ -26,6 +26,10 @@
                 <field name="date_range_id"/>
                 <field name="date_start"/>
                 <field name="date_end"/>
+                <field name="is_current"/>
+                <separator/>
+                <filter name="filter_is_current" string="In Range" domain="[('is_current', '=', True)]"/>
+                <filter name="filter_not_current" string="Not in Range" domain="[('is_current', '=', False)]"/>
                 <separator/>
                 <filter name="month" string="Date" date="date_start"/>
                 <group string="Group By..." expand="0" name="groupby">
@@ -64,7 +68,7 @@
                             <field name="date_range_id" options='{"no_open": True, "no_create": True}'/>
                             <field name="date_start"/>
                             <field name="date_end"/>
-
+                            <field name="is_current" readonly="1"/>
                         </group>
                         <group>
                             <field name="date_range_use_type_id" invisible="1"/>
