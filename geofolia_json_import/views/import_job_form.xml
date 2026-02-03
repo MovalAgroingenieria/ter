@@ -109,9 +109,12 @@
                                     <field name="sync_message" optional="hide"/>
                                     <field name="external_id"/>
                                     <field name="name"/>
+                                    <field name="first_name"/>
+                                    <field name="national_identification_code"/>
+                                    <field name="specific_number"/>
                                     <field name="email"/>
                                     <field name="phone"/>
-                                    <field name="employee_id" optional="hide"/>
+                                    <field name="employee_id"/>
                                     <field name="raw_json_text" invisible="1"/>
                                 </list>
                             </field>

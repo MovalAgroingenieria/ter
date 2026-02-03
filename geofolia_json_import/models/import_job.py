@@ -328,10 +328,15 @@ class GeofoliaImportJob(models.Model):
     def _create_employee_lines(self, items):
         self.ensure_one()
         vals_list = []
+        seen = set()
         for it in items:
             if not isinstance(it, dict):
                 continue
             ext_id = it.get("EmployeeId") or it.get("Id")
+            if ext_id and ext_id in seen:
+                continue
+            if ext_id:
+                seen.add(ext_id)
             name = it.get("Name") or it.get("EmployeeName") or it.get("LastName")
             first_name = it.get("FirstName") or it.get("EmployeeFirstName")
             if first_name and name and first_name not in name:
@@ -342,6 +347,9 @@ class GeofoliaImportJob(models.Model):
                     "external_id": ext_id,
                     "code": it.get("Code") or it.get("EmployeeFarmIdentificationCode"),
                     "name": name,
+                    "first_name": first_name,
+                    "national_identification_code": it.get("NationalIdentificationCode"),
+                    "specific_number": it.get("SpecificNumber"),
                     "email": it.get("Email"),
                     "phone": it.get("Phone"),
                     "raw_json": it,
@@ -839,6 +847,11 @@ class GeofoliaImportJob(models.Model):
                     "work_email": line.email,
                     "work_phone": line.phone,
                     "geofolia_external_id": line.external_id,
+                    "geofolia_first_name": line.first_name,
+                    "geofolia_national_identification_code": (
+                        line.national_identification_code
+                    ),
+                    "geofolia_specific_number": line.specific_number,
                 }
 
                 if emp:

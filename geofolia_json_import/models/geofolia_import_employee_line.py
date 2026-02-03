@@ -11,9 +11,14 @@ class GeofoliaImportEmployeeLine(models.Model):
     _order = "id asc"
     _inherit = "geofolia.import.base.line"
 
-    external_id = fields.Char(index=True)
+    external_id = fields.Char(index=True)  # EmployeeId
     code = fields.Char()
     name = fields.Char()
+    first_name = fields.Char(string="First Name")
+    national_identification_code = fields.Char(
+        string="National Identification Code"
+    )
+    specific_number = fields.Char(string="Specific Number")
     email = fields.Char()
     phone = fields.Char()
 
