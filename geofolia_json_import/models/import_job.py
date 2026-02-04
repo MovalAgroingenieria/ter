@@ -1462,6 +1462,24 @@ class GeofoliaImportJob(models.Model):
 
     _NIL_UUID = "00000000-0000-0000-0000-000000000000"
 
+    def _get_unique_parcel_alphanum_code(self, parcel_model, base_code, max_size=20):
+        """
+        Return an alphanum_code that does not conflict with existing parcels.
+        If base_code exists (by alphanum_code or name), try 'base - 1', 'base - 2'.
+        """
+        base_code = (str(base_code).strip() or "parcel")[:max_size]
+        candidate = base_code
+        suffix = 0
+        while True:
+            by_code = parcel_model.search([("alphanum_code", "=", candidate)], limit=1)
+            by_name = parcel_model.search([("name", "=", candidate)], limit=1)
+            if not by_code and not by_name:
+                return candidate
+            suffix += 1
+            candidate = f"{base_code} - {suffix}"
+            if len(candidate) > max_size:
+                candidate = f"{base_code[: max_size - len(str(suffix)) - 3]} - {suffix}"
+
     def _resolve_parcel_for_field_line(self, line, vals):
         """
         Resolve parcel_id for ter.unit from Geofolia Field line.
@@ -1490,9 +1508,13 @@ class GeofoliaImportJob(models.Model):
             if not mun:
                 return self.env["ter.parcel"]
             code = vals.get("geofolia_code") or uid
+            base_code = str(code).strip() or uid
+            alphanum_code = self._get_unique_parcel_alphanum_code(
+                Parcel, base_code, max_size=50
+            )
             area = vals.get("area_official") or 0.0
             return Parcel.create({
-                "alphanum_code": str(code).strip() or uid,
+                "alphanum_code": alphanum_code,
                 "municipality_id": mun.id,
                 "area_official": float(area),
                 "geofolia_farm_identification_code": uid,
