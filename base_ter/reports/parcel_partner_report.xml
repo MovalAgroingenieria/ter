@@ -143,7 +143,7 @@
 
                 <p style="page-break-after:always;"/>
 
-                <section name="aerial_images" style="margin-bottom: 20px; page-break-inside: avoid;">
+                <section name="aerial_images" style="margin-bottom: 20px;">
                     <div name="title_aerial_images">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-picture-o"/>
@@ -152,56 +152,60 @@
                         </h2>
                     </div>
 
-                    <t t-foreach="o.parcel_ids" t-as="parcel">
-                        <div style="width: 48%; float: left; display: table; border: 1px solid black; margin: 1.5% 0.5%; page-break-inside: avoid;">
-                            <div name="parcel_data" style="border-bottom: 1px solid black; padding: 2%;">
-                                <table style="width: 100%;" class="table-condensed table-borderless">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <strong>Parcel</strong>
-                                            </td>
-                                            <td class="text-end">
-                                                <span t-field="parcel.official_code"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>Property</strong>
-                                            </td>
-                                            <td class="text-end">
-                                                <span t-field="parcel.property_id"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>Area</strong>
-                                            </td>
-                                            <td class="text-end">
-                                                <span t-field="parcel.area_official"/>
-                                                <span t-out="area_unit_name"/>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div name="parcel_aerial_image" class="text-center">
-                                <t t-if="parcel.aerial_image_shown_b64">
-                                    <img t-attf-src="data:image/png;base64, #{parcel.aerial_image_shown_b64}"
-                                         style="width: 408px; height: 408px;"/>
+                    <table style="width: 100%; border-collapse: separate; border-spacing: 10px;">
+                        <tbody>
+                            <t t-foreach="o.parcel_ids" t-as="parcel">
+                                <t t-if="parcel_index % 2 == 0">
+                                    <tr t-att-style="'page-break-after: always;' if (parcel_index % 4 == 2) else ''">
                                 </t>
-                                <t t-else="">
-                                    <div class="text-center text-muted"
-                                         style="width: 408px; height: 408px; padding-top: 40%;">
-                                        <div class="fa fa-file-image-o" style="font-size: 4em;"/>
-                                        <br/>
-                                        <div>Aerial image not found</div>
+                                <td style="width: 50%; vertical-align: top; page-break-inside: avoid;">
+                                    <div style="border: 1px solid black; margin-bottom: 10px;">
+                                        <div name="parcel_data" style="border-bottom: 1px solid black; padding: 2%;">
+                                            <table style="width: 100%;" class="table-condensed table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Parcel</strong></td>
+                                                        <td class="text-end"><span t-field="parcel.official_code"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Property</strong></td>
+                                                        <td class="text-end"><span t-field="parcel.property_id"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Area</strong></td>
+                                                        <td class="text-end">
+                                                            <span t-field="parcel.area_official"/>
+                                                            <span t-out="area_unit_name"/>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div name="parcel_aerial_image" class="text-center">
+                                            <t t-if="parcel.aerial_image_shown_b64">
+                                                <img t-attf-src="data:image/png;base64, #{parcel.aerial_image_shown_b64}"
+                                                     style="max-width: 100%; height: 240px; object-fit: contain;"/>
+                                            </t>
+                                            <t t-else="">
+                                                <div class="text-center text-muted" style="height: 240px; padding-top: 40%;">
+                                                    <div class="fa fa-file-image-o" style="font-size: 4em;"/>
+                                                    <br/>
+                                                    <div>Aerial image not found</div>
+                                                </div>
+                                            </t>
+                                        </div>
                                     </div>
+                                </td>
+                                <t t-if="parcel_index % 2 == 1">
+                                    </tr>
                                 </t>
-                            </div>
-                        </div>
-                    </t>
+                                <t t-if="parcel_last and parcel_index % 2 == 0">
+                                    <td style="width: 50%;"></td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
                 </section>
 
             </div>
