@@ -477,11 +477,15 @@ class GeofoliaImportJob(models.Model):
 
     def _create_equipment_lines(self, items):
         self.ensure_one()
+        seen = set()
         vals_list = []
         for it in items:
             if not isinstance(it, dict):
                 continue
             ext_id = it.get("EquipmentId") or it.get("Id")
+            if not ext_id or ext_id in seen:
+                continue
+            seen.add(ext_id)
             vals_list.append(
                 {
                     "job_id": self.id,
