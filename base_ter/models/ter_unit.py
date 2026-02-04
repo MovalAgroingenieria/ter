@@ -510,6 +510,14 @@ class TerUnit(models.Model):
                     validity = "out_of_range"
             record.validity_state = validity
 
+    def _cron_recompute_validity_state(self):
+        """Recompute validity_state for all ter.unit records (run daily)."""
+        records = self.search(
+            [("date_start", "!=", False), ("date_end", "!=", False)]
+        )
+        records.invalidate_recordset(["validity_state"])
+        records.mapped("validity_state")
+
     @api.depends("date_start", "date_end")
     def _compute_is_current(self):
         today = fields.Date.context_today(self)
