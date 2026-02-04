@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="project.view_task_form2"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='description_page']" position="after">
-                <page string="Geofolia" name="geofolia">
+                <page string="Geofolia" name="geofolia" groups="geofolia_json_import.group_geofolia_import">
                     <group>
                         <group string="Identification">
                             <field name="geofolia_harvest_id"/>
@@ -27,7 +27,7 @@
         <field name="inherit_id" ref="project.view_task_tree2"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="geofolia_harvest_id" string="Geofolia Harvest ID" optional="show"/>
+                <field name="geofolia_harvest_id" string="Geofolia Harvest ID" optional="show" groups="geofolia_json_import.group_geofolia_import"/>
             </xpath>
         </field>
     </record>
@@ -38,7 +38,7 @@
         <field name="inherit_id" ref="project.view_task_search_form"/>
         <field name="arch" type="xml">
             <xpath expr="//search/field[@name='name']" position="after">
-                <field name="geofolia_harvest_id"/>
+                <field name="geofolia_harvest_id" groups="geofolia_json_import.group_geofolia_import"/>
             </xpath>
         </field>
     </record>

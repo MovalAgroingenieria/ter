@@ -5,6 +5,20 @@
         <field name="model">geofolia.import.job</field>
         <field name="arch" type="xml">
             <form>
+                <field name="import_type" invisible="1"/>
+                <field name="total_count" invisible="1"/>
+                <field name="pending_count" invisible="1"/>
+                <field name="processed_count" invisible="1"/>
+                <field name="error_count" invisible="1"/>
+                <field name="created_product_count" invisible="1"/>
+                <field name="created_employee_count" invisible="1"/>
+                <field name="created_partner_count" invisible="1"/>
+                <field name="created_harvested_product_count" invisible="1"/>
+                <field name="created_equipment_count" invisible="1"/>
+                <field name="created_maintenance_request_count" invisible="1"/>
+                <field name="created_analytic_line_count" invisible="1"/>
+                <field name="validated_unit_count" invisible="1"/>
+                <field name="linked_parcel_count" invisible="1"/>
                 <header>
                     <button name="action_apply_fields"
                             type="object"
@@ -34,6 +48,7 @@
                            statusbar_visible="draft,done,error"/>
                 </header>
                 <sheet>
+<<<<<<< Current (Your changes)
                     <group>
                         <field name="name"/>
                         <field name="import_type"/>
@@ -91,15 +106,82 @@
                         </button>
                     </div>
                     <div class="oe_button_box" name="button_box" invisible="import_type != 'fields'">
+=======
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_show_lines_total" type="object"
+                                class="oe_stat_button" icon="fa-list"
+                                invisible="import_type not in ('fields', 'full')">
+                            <field name="total_count" string="Total" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_lines_pending" type="object"
+                                class="oe_stat_button" icon="fa-clock-o"
+                                invisible="import_type not in ('fields', 'full')">
+                            <field name="pending_count" string="Pending" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_lines_processed" type="object"
+                                class="oe_stat_button" icon="fa-check"
+                                invisible="import_type not in ('fields', 'full')">
+                            <field name="processed_count" string="Processed" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_lines_error" type="object"
+                                class="oe_stat_button" icon="fa-exclamation-triangle"
+                                invisible="import_type not in ('fields', 'full')">
+                            <field name="error_count" string="Error" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_created_products" type="object"
+                                class="oe_stat_button" icon="fa-cube"
+                                invisible="import_type != 'full'">
+                            <field name="created_product_count" string="Products" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_created_employees" type="object"
+                                class="oe_stat_button" icon="fa-user"
+                                invisible="import_type != 'full'">
+                            <field name="created_employee_count" string="Employees" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_created_partners" type="object"
+                                class="oe_stat_button" icon="fa-users"
+                                invisible="import_type != 'full'">
+                            <field name="created_partner_count" string="Partners" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_created_harvested_products" type="object"
+                                class="oe_stat_button" icon="fa-tasks"
+                                invisible="import_type != 'full'">
+                            <field name="created_harvested_product_count" string="Harvested Products" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_created_equipments" type="object"
+                                class="oe_stat_button" icon="fa-wrench"
+                                invisible="import_type != 'full'">
+                            <field name="created_equipment_count" string="Equipments" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_created_maintenance_requests" type="object"
+                                class="oe_stat_button" icon="fa-toolbox"
+                                invisible="import_type != 'full'">
+                            <field name="created_maintenance_request_count" string="Maintenance" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_created_analytic_lines" type="object"
+                                class="oe_stat_button" icon="fa-clock-o"
+                                invisible="import_type != 'full'">
+                            <field name="created_analytic_line_count" string="Timesheets" widget="statinfo"/>
+                        </button>
+>>>>>>> Incoming (Background Agent changes)
                         <button name="action_show_validated_units" type="object"
-                                class="oe_stat_button" icon="fa-sitemap">
+                                class="oe_stat_button" icon="fa-sitemap"
+                                invisible="import_type != 'fields'">
                             <field name="validated_unit_count" string="Validated Units" widget="statinfo"/>
                         </button>
                         <button name="action_show_linked_parcels" type="object"
-                                class="oe_stat_button" icon="fa-ter-parcel">
+                                class="oe_stat_button" icon="fa-ter-parcel"
+                                invisible="import_type != 'fields'">
                             <field name="linked_parcel_count" string="Parcels" widget="statinfo"/>
                         </button>
                     </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="import_type"/>
+                        <field name="date_range_id" options="{'no_create': True}"/>
+                        <field name="file_name" readonly="1"/>
+                        <field name="file_data" filename="file_name"/>
+                    </group>
                     <group string="Information">
                         <field name="info_json" nolabel="1"/>
                     </group>

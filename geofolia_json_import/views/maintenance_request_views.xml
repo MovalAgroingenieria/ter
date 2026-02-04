@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
-                <group string="Geofolia" name="geofolia">
+                <group string="Geofolia" name="geofolia" groups="geofolia_json_import.group_geofolia_import">
                     <field name="geofolia_action_id"/>
                 </group>
             </xpath>
@@ -19,7 +19,7 @@
         <field name="inherit_id" ref="maintenance.hr_equipment_request_view_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="geofolia_action_id" string="Geofolia Action ID" optional="show"/>
+                <field name="geofolia_action_id" string="Geofolia Action ID" optional="show" groups="geofolia_json_import.group_geofolia_import"/>
             </xpath>
         </field>
     </record>
@@ -30,7 +30,7 @@
         <field name="inherit_id" ref="maintenance.hr_equipment_request_view_search"/>
         <field name="arch" type="xml">
             <xpath expr="//search/field[@name='name']" position="after">
-                <field name="geofolia_action_id"/>
+                <field name="geofolia_action_id" groups="geofolia_json_import.group_geofolia_import"/>
             </xpath>
         </field>
     </record>

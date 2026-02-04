@@ -13,7 +13,7 @@
                     <field name="ter_unit_id" options="{'no_create': True}"/>
                     <field name="ter_use_type_id" options="{'no_create': True}"/>
                 </group>
-                <group string="Geofolia" name="geofolia">
+                <group string="Geofolia" name="geofolia" groups="geofolia_json_import.group_geofolia_import">
                     <field name="geofolia_external_id"/>
                     <field name="geofolia_operation_category"/>
                     <field name="geofolia_status_name"/>
@@ -31,7 +31,7 @@
         <field name="priority">15</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='task_id']" position="after">
-                <field name="geofolia_external_id" string="Geofolia ID" optional="show"/>
+                <field name="geofolia_external_id" string="Geofolia ID" optional="show" groups="geofolia_json_import.group_geofolia_import"/>
                 <field name="ter_parcel_id" optional="hide"/>
                 <field name="ter_property_id" optional="hide"/>
                 <field name="ter_unit_id" optional="hide"/>
@@ -46,7 +46,7 @@
         <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='task_id']" position="after">
-                <field name="geofolia_external_id"/>
+                <field name="geofolia_external_id" groups="geofolia_json_import.group_geofolia_import"/>
                 <field name="ter_parcel_id"/>
                 <field name="ter_property_id"/>
                 <field name="ter_unit_id"/>

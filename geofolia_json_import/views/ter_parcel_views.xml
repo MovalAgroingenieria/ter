@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='page_notes']" position="before">
-                <page string="Geofolia" name="geofolia">
+                <page string="Geofolia" name="geofolia" groups="geofolia_json_import.group_geofolia_import">
                     <group>
                         <group>
                             <field name="geofolia_farm_identification_code"/>

@@ -3,10 +3,10 @@
     <record id="product_product_view_form_inherit_geofolia" model="ir.ui.view">
         <field name="name">product.product.form.inherit.geofolia</field>
         <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='general_information']" position="after">
-                <page string="Geofolia" name="geofolia">
+                <page string="Geofolia" name="geofolia" groups="geofolia_json_import.group_geofolia_import">
                     <group>
                         <group string="Identification">
                             <field name="geofolia_external_id"/>
@@ -34,7 +34,7 @@
         <field name="inherit_id" ref="product.product_product_tree_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='default_code']" position="after">
-                <field name="geofolia_external_id" string="Geofolia ID" optional="show"/>
+                <field name="geofolia_external_id" string="Geofolia ID" optional="show" groups="geofolia_json_import.group_geofolia_import"/>
             </xpath>
         </field>
     </record>
@@ -45,7 +45,7 @@
         <field name="inherit_id" ref="product.product_search_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="geofolia_external_id"/>
+                <field name="geofolia_external_id" groups="geofolia_json_import.group_geofolia_import"/>
             </xpath>
         </field>
     </record>

@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
-                <group string="Geofolia" name="geofolia">
+                <group string="Geofolia" name="geofolia" groups="geofolia_json_import.group_geofolia_import">
                     <field name="geofolia_external_id"/>
                     <field name="geofolia_first_name" readonly="1"/>
                     <field name="geofolia_national_identification_code" readonly="1"/>
@@ -22,7 +22,7 @@
         <field name="inherit_id" ref="hr.view_employee_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="geofolia_external_id" string="Geofolia ID" optional="show"/>
+                <field name="geofolia_external_id" string="Geofolia ID" optional="show" groups="geofolia_json_import.group_geofolia_import"/>
             </xpath>
         </field>
     </record>
@@ -33,7 +33,7 @@
         <field name="inherit_id" ref="hr.view_employee_filter"/>
         <field name="arch" type="xml">
             <xpath expr="//search/field[@name='name']" position="after">
-                <field name="geofolia_external_id"/>
+                <field name="geofolia_external_id" groups="geofolia_json_import.group_geofolia_import"/>
             </xpath>
         </field>
     </record>
