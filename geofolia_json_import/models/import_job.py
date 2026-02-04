@@ -1460,11 +1460,13 @@ class GeofoliaImportJob(models.Model):
             [("geofolia_farm_identification_code", "=", farm_code)], limit=1
         )
 
+    _NIL_UUID = "00000000-0000-0000-0000-000000000000"
+
     def _resolve_parcel_for_field_line(self, line, vals):
         """
         Resolve parcel_id for ter.unit from Geofolia Field line.
 
-        - If Geofolia UID == Geofolia Parent Id1 (root/farm):
+        - If Geofolia UID == Geofolia Parent Id1 (root/farm), or Parent Id1 is nil UUID:
           Search parcel by geofolia_farm_identification_code = UID.
           If not found, create parcel and link.
         - If Geofolia UID != Geofolia Parent Id1 (child):
@@ -1475,7 +1477,8 @@ class GeofoliaImportJob(models.Model):
         Parcel = self.env["ter.parcel"]
         Unit = self.env["ter.unit"]
 
-        if uid == parent_id1:
+        is_root = uid == parent_id1 or parent_id1 == self._NIL_UUID
+        if is_root:
             # Root: parcel by geofolia_farm_identification_code = UID
             parcel = Parcel.search(
                 [("geofolia_farm_identification_code", "=", uid)], limit=1
