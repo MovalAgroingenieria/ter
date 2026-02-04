@@ -3,7 +3,9 @@
 
 import base64
 import logging
+import time
 
+import psycopg2
 import requests
 
 from odoo import _, api, exceptions, fields, models
@@ -675,6 +677,7 @@ class TerParcel(models.Model):
             try:
                 _do_reset(self)
                 self.env.cr.commit()
+                self.env.invalidate_all()
             except _WMS_ERRORS as e:
                 _logger.warning("WMS fetch failed for parcel %s: %s", self.alphanum_code, e)
                 raise exceptions.UserError(
@@ -687,13 +690,29 @@ class TerParcel(models.Model):
             return
 
         failed = []
+        _MAX_SERIALIZATION_RETRIES = 3
         for record in self.with_progress(_("Getting the aerial images...")):
-            try:
-                _do_reset(record)
-                self.env.cr.commit()
-            except _WMS_ERRORS as e:
-                _logger.warning("WMS fetch failed for parcel %s: %s", record.alphanum_code, e)
-                failed.append(record.alphanum_code)
+            for attempt in range(_MAX_SERIALIZATION_RETRIES + 1):
+                try:
+                    _do_reset(record)
+                    self.env.cr.commit()
+                    self.env.invalidate_all()
+                    break
+                except psycopg2.errors.SerializationFailure:
+                    if attempt < _MAX_SERIALIZATION_RETRIES:
+                        self.env.cr.rollback()
+                        self.env.invalidate_all()
+                        time.sleep(0.5 * (attempt + 1))
+                    else:
+                        raise
+                except _WMS_ERRORS as e:
+                    _logger.warning(
+                        "WMS fetch failed for parcel %s: %s",
+                        record.alphanum_code,
+                        e,
+                    )
+                    failed.append(record.alphanum_code)
+                    break
         if failed:
             raise exceptions.UserError(
                 _(
