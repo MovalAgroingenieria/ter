@@ -96,6 +96,67 @@ class GeofoliaImportJob(models.Model):
         compute="_compute_linked_parcel_count",
         string="Linked Parcels",
     )
+    created_product_count = fields.Integer(
+        compute="_compute_created_counts",
+        string="Products",
+    )
+    created_employee_count = fields.Integer(
+        compute="_compute_created_counts",
+        string="Employees",
+    )
+    created_partner_count = fields.Integer(
+        compute="_compute_created_counts",
+        string="Partners",
+    )
+    created_harvested_product_count = fields.Integer(
+        compute="_compute_created_counts",
+        string="Harvested Products",
+    )
+    created_equipment_count = fields.Integer(
+        compute="_compute_created_counts",
+        string="Equipments",
+    )
+    created_maintenance_request_count = fields.Integer(
+        compute="_compute_created_counts",
+        string="Maintenance Requests",
+    )
+    created_analytic_line_count = fields.Integer(
+        compute="_compute_created_counts",
+        string="Timesheet Lines",
+    )
+
+    @api.depends(
+        "product_line_ids.product_id",
+        "employee_line_ids.employee_id",
+        "partner_line_ids.partner_id",
+        "harvested_product_line_ids.task_id",
+        "equipment_line_ids.equipment_id",
+        "activity_line_ids.maintenance_request_id",
+        "activity_employee_line_ids.analytic_line_id",
+    )
+    def _compute_created_counts(self):
+        for job in self:
+            job.created_product_count = len(
+                job.product_line_ids.mapped("product_id").filtered("id")
+            )
+            job.created_employee_count = len(
+                job.employee_line_ids.mapped("employee_id").filtered("id")
+            )
+            job.created_partner_count = len(
+                job.partner_line_ids.mapped("partner_id").filtered("id")
+            )
+            job.created_harvested_product_count = len(
+                job.harvested_product_line_ids.mapped("task_id").filtered("id")
+            )
+            job.created_equipment_count = len(
+                job.equipment_line_ids.mapped("equipment_id").filtered("id")
+            )
+            job.created_maintenance_request_count = len(
+                job.activity_line_ids.mapped("maintenance_request_id").filtered("id")
+            )
+            job.created_analytic_line_count = len(
+                job.activity_employee_line_ids.mapped("analytic_line_id").filtered("id")
+            )
 
     @api.depends("line_ids.ter_unit_id", "line_ids.ter_unit_id.parcel_id")
     def _compute_linked_parcel_count(self):
@@ -134,6 +195,127 @@ class GeofoliaImportJob(models.Model):
             "res_model": "ter.parcel",
             "view_mode": "list,form",
             "domain": [("id", "in", parcels.ids)],
+        }
+
+    def action_show_created_products(self):
+        self.ensure_one()
+        recs = self.product_line_ids.mapped("product_id").filtered("id")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Products"),
+            "res_model": "product.product",
+            "view_mode": "list,form",
+            "domain": [("id", "in", recs.ids)],
+        }
+
+    def action_show_created_employees(self):
+        self.ensure_one()
+        recs = self.employee_line_ids.mapped("employee_id").filtered("id")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Employees"),
+            "res_model": "hr.employee",
+            "view_mode": "list,form",
+            "domain": [("id", "in", recs.ids)],
+        }
+
+    def action_show_created_partners(self):
+        self.ensure_one()
+        recs = self.partner_line_ids.mapped("partner_id").filtered("id")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Partners"),
+            "res_model": "res.partner",
+            "view_mode": "list,form",
+            "domain": [("id", "in", recs.ids)],
+        }
+
+    def action_show_created_harvested_products(self):
+        self.ensure_one()
+        recs = self.harvested_product_line_ids.mapped("task_id").filtered("id")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Harvested Products"),
+            "res_model": "project.task",
+            "view_mode": "list,form",
+            "domain": [("id", "in", recs.ids)],
+        }
+
+    def action_show_created_equipments(self):
+        self.ensure_one()
+        recs = self.equipment_line_ids.mapped("equipment_id").filtered("id")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Equipments"),
+            "res_model": "maintenance.equipment",
+            "view_mode": "list,form",
+            "domain": [("id", "in", recs.ids)],
+        }
+
+    def action_show_created_maintenance_requests(self):
+        self.ensure_one()
+        recs = self.activity_line_ids.mapped("maintenance_request_id").filtered("id")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Maintenance Requests"),
+            "res_model": "maintenance.request",
+            "view_mode": "list,form",
+            "domain": [("id", "in", recs.ids)],
+        }
+
+    def action_show_created_analytic_lines(self):
+        self.ensure_one()
+        recs = self.activity_employee_line_ids.mapped("analytic_line_id").filtered("id")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Timesheet Lines"),
+            "res_model": "account.analytic.line",
+            "view_mode": "list,form",
+            "domain": [("id", "in", recs.ids)],
+        }
+
+
+    def action_show_lines_total(self):
+        return self._action_show_lines_by_state(None)
+
+    def action_show_lines_pending(self):
+        return self._action_show_lines_by_state("pending")
+
+    def action_show_lines_processed(self):
+        return self._action_show_lines_by_state("processed")
+
+    def action_show_lines_error(self):
+        return self._action_show_lines_by_state("error")
+
+    def _action_show_lines_by_state(self, state_filter):
+        """Open import lines filtered by sync_state. Works for Fields and Full."""
+        self.ensure_one()
+        processed_states = ("created", "updated", "no_action", "skipped")
+        domain = [("job_id", "=", self.id)]
+        if state_filter == "pending":
+            domain.append(("sync_state", "=", "pending"))
+        elif state_filter == "processed":
+            domain.append(("sync_state", "in", list(processed_states)))
+        elif state_filter == "error":
+            domain.append(("sync_state", "=", "error"))
+
+        if self.import_type == "fields":
+            return {
+                "type": "ir.actions.act_window",
+                "name": _("Field Lines") + (f" ({state_filter})" if state_filter else ""),
+                "res_model": "geofolia.import.line",
+                "view_mode": "list,form",
+                "domain": domain,
+                "context": {"default_job_id": self.id},
+            }
+        # Full: open product lines as representative block
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Product Lines") + (f" ({state_filter})" if state_filter else ""),
+            "res_model": "geofolia.import.product.line",
+            "view_mode": "list,form",
+            "domain": domain,
+            "context": {"default_job_id": self.id},
         }
 
     # ----------------------------
@@ -760,6 +942,7 @@ class GeofoliaImportJob(models.Model):
     # ----------------------------
 
     @api.depends(
+        "line_ids.sync_state",
         "product_line_ids.sync_state",
         "employee_line_ids.sync_state",
         "partner_line_ids.sync_state",
@@ -771,27 +954,33 @@ class GeofoliaImportJob(models.Model):
     def _compute_apply_stats(self):
         processed_states = ("created", "updated", "no_action", "skipped")
         for job in self:
-            if job.import_type != "full":
+            if job.import_type == "fields":
+                lines = job.line_ids
+                job.total_count = len(lines)
+                job.pending_count = len(lines.filtered(lambda l: l.sync_state == "pending"))
+                job.error_count = len(lines.filtered(lambda l: l.sync_state == "error"))
+                job.processed_count = len(
+                    lines.filtered(lambda l: l.sync_state in processed_states)
+                )
+            elif job.import_type == "full":
+                blocks = job._get_full_lines_by_block()
+                total = pending = processed = errors = 0
+                for line_set in blocks.values():
+                    total += len(line_set)
+                    pending += len(line_set.filtered(lambda l: l.sync_state == "pending"))
+                    errors += len(line_set.filtered(lambda l: l.sync_state == "error"))
+                    processed += len(
+                        line_set.filtered(lambda l: l.sync_state in processed_states)
+                    )
+                job.total_count = total
+                job.pending_count = pending
+                job.processed_count = processed
+                job.error_count = errors
+            else:
                 job.total_count = 0
                 job.pending_count = 0
                 job.processed_count = 0
                 job.error_count = 0
-                continue
-
-            blocks = job._get_full_lines_by_block()
-            total = pending = processed = errors = 0
-            for lines in blocks.values():
-                total += len(lines)
-                pending += len(lines.filtered(lambda l: l.sync_state == "pending"))
-                errors += len(lines.filtered(lambda l: l.sync_state == "error"))
-                processed += len(
-                    lines.filtered(lambda l: l.sync_state in processed_states)
-                )
-
-            job.total_count = total
-            job.pending_count = pending
-            job.processed_count = processed
-            job.error_count = errors
 
     def _get_full_lines_by_block(self):
         self.ensure_one()
