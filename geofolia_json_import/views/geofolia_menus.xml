@@ -11,6 +11,7 @@
         <field name="name">Timesheet Lines</field>
         <field name="res_model">account.analytic.line</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_from_geofolia': 1}</field>
     </record>
 
     <menuitem id="menu_geofolia_maintenance_timesheet_lines"
@@ -20,17 +21,31 @@
               sequence="10"
               groups="group_geofolia_import"/>
 
+    <record id="action_geofolia_maintenance_equipment" model="ir.actions.act_window">
+        <field name="name">Equipment</field>
+        <field name="res_model">maintenance.equipment</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_from_geofolia': 1}</field>
+    </record>
+
     <menuitem id="menu_geofolia_maintenance_equipment"
               name="Equipment"
               parent="menu_geofolia_maintenance"
-              action="maintenance.hr_equipment_action"
+              action="action_geofolia_maintenance_equipment"
               sequence="20"
               groups="group_geofolia_import"/>
+
+    <record id="action_geofolia_maintenance_request" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_from_geofolia': 1}</field>
+    </record>
 
     <menuitem id="menu_geofolia_maintenance_request"
               name="Maintenance Requests"
               parent="menu_geofolia_maintenance"
-              action="maintenance.hr_equipment_request_action"
+              action="action_geofolia_maintenance_request"
               sequence="30"
               groups="group_geofolia_import"/>
 
@@ -38,6 +53,7 @@
         <field name="name">Employees</field>
         <field name="res_model">hr.employee</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_from_geofolia': 1}</field>
     </record>
 
     <menuitem id="menu_geofolia_maintenance_employees"
@@ -51,6 +67,7 @@
         <field name="name">Products</field>
         <field name="res_model">product.product</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_from_geofolia': 1}</field>
     </record>
 
     <menuitem id="menu_geofolia_maintenance_products"
@@ -64,6 +81,7 @@
         <field name="name">Tasks</field>
         <field name="res_model">project.task</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_from_geofolia': 1}</field>
     </record>
 
     <menuitem id="menu_geofolia_maintenance_tasks"
@@ -77,6 +95,7 @@
         <field name="name">Contacts</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_from_geofolia': 1}</field>
     </record>
 
     <menuitem id="menu_geofolia_maintenance_partners"

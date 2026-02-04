@@ -38,6 +38,12 @@
             <xpath expr="//field[@name='partner_code']" position="after">
                 <field name="geofolia_partner_id" groups="geofolia_json_import.group_geofolia_import"/>
             </xpath>
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <filter name="from_geofolia" string="From Geofolia"
+                        domain="[('geofolia_partner_id', '!=', False)]"
+                        groups="geofolia_json_import.group_geofolia_import"/>
+            </xpath>
         </field>
     </record>
 </odoo>

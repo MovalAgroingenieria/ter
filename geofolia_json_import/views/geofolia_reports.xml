@@ -42,6 +42,7 @@
     <record id="action_report_geofolia_import_job" model="ir.actions.act_window">
         <field name="name">Import Jobs</field>
         <field name="res_model">geofolia.import.job</field>
+        <field name="groups_id" eval="[(4, ref('geofolia_json_import.group_geofolia_import'))]"/>
         <field name="view_mode">pivot,graph,calendar,list</field>
         <field name="view_ids"
                eval="[(5, 0),
@@ -96,6 +97,7 @@
     <record id="action_report_geofolia_timesheet" model="ir.actions.act_window">
         <field name="name">Timesheets (Geofolia)</field>
         <field name="res_model">account.analytic.line</field>
+        <field name="groups_id" eval="[(4, ref('geofolia_json_import.group_geofolia_import'))]"/>
         <field name="view_mode">pivot,graph,calendar,list</field>
         <field name="view_ids"
                eval="[(5, 0),
@@ -145,6 +147,7 @@
     <record id="action_report_geofolia_task" model="ir.actions.act_window">
         <field name="name">Tasks (Geofolia)</field>
         <field name="res_model">project.task</field>
+        <field name="groups_id" eval="[(4, ref('geofolia_json_import.group_geofolia_import'))]"/>
         <field name="view_mode">pivot,graph,calendar,list</field>
         <field name="view_ids"
                eval="[(5, 0),
@@ -194,6 +197,7 @@
     <record id="action_report_geofolia_maintenance" model="ir.actions.act_window">
         <field name="name">Maintenance (Geofolia)</field>
         <field name="res_model">maintenance.request</field>
+        <field name="groups_id" eval="[(4, ref('geofolia_json_import.group_geofolia_import'))]"/>
         <field name="view_mode">pivot,graph,calendar,list</field>
         <field name="view_ids"
                eval="[(5, 0),
@@ -203,38 +207,38 @@
         <field name="domain">[('geofolia_action_id', '!=', False)]</field>
     </record>
 
-    <!-- Geofolia Reports menu (under Maintenance) -->
+    <!-- Geofolia Reports menu (under base_ter Reports) -->
     <menuitem id="menu_geofolia_reports"
-              name="Reports"
-              parent="menu_geofolia_maintenance"
-              sequence="100"
-              groups="group_geofolia_import"/>
+              name="Geofolia"
+              parent="base_ter.menu_informes"
+              sequence="50"
+              groups="geofolia_json_import.group_geofolia_import"/>
 
     <menuitem id="menu_geofolia_reports_imports"
               name="Imports"
               parent="menu_geofolia_reports"
               action="action_report_geofolia_import_job"
               sequence="10"
-              groups="group_geofolia_import"/>
+              groups="geofolia_json_import.group_geofolia_import"/>
 
     <menuitem id="menu_geofolia_reports_timesheets"
               name="Timesheets"
               parent="menu_geofolia_reports"
               action="action_report_geofolia_timesheet"
               sequence="20"
-              groups="group_geofolia_import"/>
+              groups="geofolia_json_import.group_geofolia_import"/>
 
     <menuitem id="menu_geofolia_reports_tasks"
               name="Tasks"
               parent="menu_geofolia_reports"
               action="action_report_geofolia_task"
               sequence="30"
-              groups="group_geofolia_import"/>
+              groups="geofolia_json_import.group_geofolia_import"/>
 
     <menuitem id="menu_geofolia_reports_maintenance"
               name="Maintenance"
               parent="menu_geofolia_reports"
               action="action_report_geofolia_maintenance"
               sequence="40"
-              groups="group_geofolia_import"/>
+              groups="geofolia_json_import.group_geofolia_import"/>
 </odoo>
