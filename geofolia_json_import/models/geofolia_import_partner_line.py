@@ -1,7 +1,8 @@
 # Copyright 2024-2026 Moval Agroingeniería
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
 
-from odoo import fields, models
+from odoo import _, fields, models
+from odoo.exceptions import UserError
 
 
 class GeofoliaImportPartnerLine(models.Model):
@@ -31,5 +32,12 @@ class GeofoliaImportPartnerLine(models.Model):
     ]
 
     def action_transform(self):
-        """Transform / apply this line (called by Apply / Carga). Partner apply not yet implemented."""
-        pass
+        """Transform / apply this line (called by Apply / Carga)."""
+        return self.action_apply_selected()
+
+    def action_apply_selected(self):
+        for line in self:
+            if not line.job_id:
+                raise UserError(_("Missing job."))
+            line.job_id._apply_partner_line(line)
+            line.job_id._recompute_apply_state()

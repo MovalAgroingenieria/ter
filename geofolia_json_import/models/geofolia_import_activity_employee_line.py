@@ -16,6 +16,11 @@ class GeofoliaImportActivityEmployeeLine(models.Model):
         required=True,
         ondelete="cascade",
     )
+    activity_operation_name = fields.Char(
+        related="activity_line_id.operation_name",
+        string="Activity",
+        readonly=True,
+    )
 
     employee_action_id = fields.Char(index=True)
     employee_recognition_id = fields.Char(index=True)

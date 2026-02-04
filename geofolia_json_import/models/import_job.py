@@ -4,6 +4,7 @@
 import base64
 import json
 import re
+from datetime import datetime, time
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -124,6 +125,15 @@ class GeofoliaImportJob(models.Model):
         compute="_compute_created_counts",
         string="Timesheet Lines",
     )
+    activity_employee_count = fields.Integer(
+        compute="_compute_activity_employee_count",
+        string="Activity Employees",
+    )
+
+    @api.depends("activity_employee_line_ids")
+    def _compute_activity_employee_count(self):
+        for job in self:
+            job.activity_employee_count = len(job.activity_employee_line_ids)
 
     @api.depends(
         "product_line_ids.product_id",
@@ -272,6 +282,17 @@ class GeofoliaImportJob(models.Model):
             "res_model": "account.analytic.line",
             "view_mode": "list,form",
             "domain": [("id", "in", recs.ids)],
+        }
+
+    def action_show_activity_employee_lines(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Activity Employees"),
+            "res_model": "geofolia.import.activity.employee.line",
+            "view_mode": "list,form",
+            "domain": [("job_id", "=", self.id)],
+            "context": {"default_job_id": self.id},
         }
 
 
@@ -1042,6 +1063,14 @@ class GeofoliaImportJob(models.Model):
         for line in _todo(self.equipment_line_ids):
             self._apply_equipment_line(line)
 
+        for line in _todo(self.partner_line_ids):
+            self._apply_partner_line(line)
+
+        for activity in self.activity_line_ids.filtered(
+            lambda a: not a.maintenance_request_id
+        ):
+            self._get_or_create_maintenance_request_for_activity(activity)
+
         for line in _todo(self.activity_employee_line_ids):
             self._apply_activity_employee_line(line)
 
@@ -1168,6 +1197,72 @@ class GeofoliaImportJob(models.Model):
                         "employee_id": emp.id,
                         "sync_state": "created",
                         "sync_message": _("Created employee."),
+                    }
+                )
+        except Exception as exc:  # noqa: BLE001
+            line.write({"sync_state": "error", "sync_message": str(exc)})
+
+    def _apply_partner_line(self, line):
+        Partner = self.env["res.partner"]
+        try:
+            with self.env.cr.savepoint():
+                if not line.external_id:
+                    line.write(
+                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                    )
+                    return
+
+                partner = Partner.search(
+                    [("geofolia_partner_id", "=", line.external_id)],
+                    limit=1,
+                )
+                vals = {
+                    "name": line.name or line.code or _("Geofolia partner"),
+                    "vat": line.vat,
+                    "geofolia_partner_id": line.external_id,
+                }
+                raw = line.raw_json or {}
+                if raw.get("RegistrationNumber"):
+                    vals["geofolia_registration_number"] = str(
+                        raw["RegistrationNumber"]
+                    )
+                if raw.get("NationalIdentificationCode"):
+                    vals["geofolia_national_identification_code"] = str(
+                        raw["NationalIdentificationCode"]
+                    )
+
+                if partner:
+                    write_vals = {k: v for k, v in vals.items() if v}
+                    changed = any(
+                        write_vals.get(k) != partner[k]
+                        for k in write_vals
+                        if k in partner._fields
+                    )
+                    if changed:
+                        partner.write(write_vals)
+                        line.write(
+                            {
+                                "partner_id": partner.id,
+                                "sync_state": "updated",
+                                "sync_message": _("Updated partner."),
+                            }
+                        )
+                    else:
+                        line.write(
+                            {
+                                "partner_id": partner.id,
+                                "sync_state": "no_action",
+                                "sync_message": _("Already up to date."),
+                            }
+                        )
+                    return
+
+                partner = Partner.create(vals)
+                line.write(
+                    {
+                        "partner_id": partner.id,
+                        "sync_state": "created",
+                        "sync_message": _("Created partner."),
                     }
                 )
         except Exception as exc:  # noqa: BLE001
@@ -1571,6 +1666,8 @@ class GeofoliaImportJob(models.Model):
             vals["ter_use_type_id"] = ter_unit.use_type_id.id if ter_unit.use_type_id else False
             if ter_unit.account_id:
                 vals["account_id"] = ter_unit.account_id.id
+            if ter_unit.parcel_id and not vals.get("ter_parcel_id"):
+                vals["ter_parcel_id"] = ter_unit.parcel_id.id
         vals["geofolia_status_name"] = activity.status_name
         vals["geofolia_status_code"] = activity.status_code
         if employee_line and employee_line.worked_surface:
@@ -1588,11 +1685,21 @@ class GeofoliaImportJob(models.Model):
         )
         if existing:
             if not activity.maintenance_request_id:
-                activity.maintenance_request_id = existing.id
+                activity.write({
+                    "maintenance_request_id": existing.id,
+                    "sync_state": "created",
+                    "sync_message": _("Linked to existing maintenance request."),
+                })
             return existing
 
         project = self.env.company.geofolia_maintenance_project_id
         if not project:
+            activity.write({
+                "sync_state": "error",
+                "sync_message": _(
+                    "Geofolia maintenance project not configured."
+                ),
+            })
             return self.env["maintenance.request"]
 
         task = self._get_or_create_task_for_operation(
@@ -1603,8 +1710,8 @@ class GeofoliaImportJob(models.Model):
 
         schedule_date = None
         if activity.starting_date:
-            schedule_date = fields.Datetime.combine(
-                activity.starting_date, fields.Datetime.min.time()
+            schedule_date = datetime.combine(
+                activity.starting_date, time.min
             )
 
         vals = {
@@ -1622,7 +1729,11 @@ class GeofoliaImportJob(models.Model):
             )
 
         request = Request.create(vals)
-        activity.maintenance_request_id = request.id
+        activity.write({
+            "maintenance_request_id": request.id,
+            "sync_state": "created",
+            "sync_message": _("Created maintenance request."),
+        })
         return request
 
     def _apply_activity_employee_line(self, line):

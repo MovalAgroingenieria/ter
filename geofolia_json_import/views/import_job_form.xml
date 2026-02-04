@@ -17,6 +17,7 @@
                 <field name="created_equipment_count" invisible="1"/>
                 <field name="created_maintenance_request_count" invisible="1"/>
                 <field name="created_analytic_line_count" invisible="1"/>
+                <field name="activity_employee_count" invisible="1"/>
                 <field name="validated_unit_count" invisible="1"/>
                 <field name="linked_parcel_count" invisible="1"/>
                 <header>
@@ -48,7 +49,8 @@
                            statusbar_visible="draft,done,error"/>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
+                    <div class="d-flex flex-column align-items-end gap-1" name="button_boxes_wrapper">
+                    <div class="oe_button_box" name="button_box_row1">
                         <button name="action_show_lines_total" type="object"
                                 class="oe_stat_button" icon="fa-list"
                                 invisible="import_type not in ('fields', 'full')">
@@ -69,6 +71,18 @@
                                 invisible="import_type not in ('fields', 'full')">
                             <field name="error_count" string="Error" widget="statinfo"/>
                         </button>
+                        <button name="action_show_validated_units" type="object"
+                                class="oe_stat_button" icon="fa-sitemap"
+                                invisible="import_type != 'fields'">
+                            <field name="validated_unit_count" string="Validated Units" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_linked_parcels" type="object"
+                                class="oe_stat_button" icon="fa-ter-parcel"
+                                invisible="import_type != 'fields'">
+                            <field name="linked_parcel_count" string="Parcels" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_button_box" name="button_box_row2" invisible="import_type != 'full'">
                         <button name="action_show_created_products" type="object"
                                 class="oe_stat_button" icon="fa-cube"
                                 invisible="import_type != 'full'">
@@ -104,16 +118,12 @@
                                 invisible="import_type != 'full'">
                             <field name="created_analytic_line_count" string="Timesheets" widget="statinfo"/>
                         </button>
-                        <button name="action_show_validated_units" type="object"
-                                class="oe_stat_button" icon="fa-sitemap"
-                                invisible="import_type != 'fields'">
-                            <field name="validated_unit_count" string="Validated Units" widget="statinfo"/>
+                        <button name="action_show_activity_employee_lines" type="object"
+                                class="oe_stat_button" icon="fa-user-plus"
+                                invisible="import_type != 'full'">
+                            <field name="activity_employee_count" string="Activity Employees" widget="statinfo"/>
                         </button>
-                        <button name="action_show_linked_parcels" type="object"
-                                class="oe_stat_button" icon="fa-ter-parcel"
-                                invisible="import_type != 'fields'">
-                            <field name="linked_parcel_count" string="Parcels" widget="statinfo"/>
-                        </button>
+                    </div>
                     </div>
                     <group>
                         <field name="name"/>
@@ -139,7 +149,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="show"/>
+                                    <field name="sync_message"/>
                                     <field name="external_uuid"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -162,7 +172,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="show"/>
+                                    <field name="sync_message"/>
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -185,7 +195,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="show"/>
+                                    <field name="sync_message"/>
                                     <field name="external_id"/>
                                     <field name="name"/>
                                     <field name="first_name"/>
@@ -204,8 +214,11 @@
                                       decoration-warning="sync_state == 'pending'"
                                       decoration-muted="sync_state in ('skipped','no_action')"
                                       decoration-danger="sync_state == 'error'">
+                                    <header>
+                                        <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
+                                    </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="show"/>
+                                    <field name="sync_message"/>
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -225,7 +238,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="show"/>
+                                    <field name="sync_message"/>
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -248,7 +261,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="show"/>
+                                    <field name="sync_message"/>
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -260,7 +273,10 @@
                         </page>
                         <page string="Activities" invisible="import_type != 'full'">
                             <field name="activity_line_ids">
-                                <list>
+                                <list decoration-success="maintenance_request_id"
+                                      decoration-warning="not maintenance_request_id">
+                                    <field name="sync_state"/>
+                                    <field name="sync_message"/>
                                     <field name="external_id"/>
                                     <field name="starting_date"/>
                                     <field name="ending_date"/>
@@ -283,8 +299,9 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="show"/>
-                                    <field name="activity_line_id"/>
+                                    <field name="sync_message"/>
+                                    <field name="activity_operation_name"/>
+                                    <field name="activity_line_id" optional="hide"/>
                                     <field name="employee_id_external"/>
                                     <field name="employee_name"/>
                                     <field name="employee_farm_identification_code" optional="hide"/>

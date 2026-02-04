@@ -5,6 +5,16 @@
         <field name="model">ter.parcel</field>
         <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_show_timesheets" type="object"
+                        class="oe_stat_button" icon="fa-clock-o">
+                    <field name="timesheet_count" string="Timesheets" widget="statinfo"/>
+                </button>
+                <button name="action_show_tasks" type="object"
+                        class="oe_stat_button" icon="fa-tasks">
+                    <field name="task_count" string="Tasks" widget="statinfo"/>
+                </button>
+            </xpath>
             <xpath expr="//page[@name='page_notes']" position="before">
                 <page string="Geofolia" name="geofolia" groups="geofolia_json_import.group_geofolia_import">
                     <group>

@@ -1,7 +1,7 @@
 # Copyright 2024-2026 Moval Agroingeniería
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class AccountAnalyticLine(models.Model):
@@ -61,3 +61,9 @@ class AccountAnalyticLine(models.Model):
             "This Geofolia activity has already been imported.",
         ),
     ]
+
+    @api.onchange("ter_unit_id")
+    def _onchange_ter_unit_id_ter_parcel(self):
+        """When ter_unit_id is set, fill ter_parcel_id from ter_unit.parcel_id."""
+        if self.ter_unit_id and self.ter_unit_id.parcel_id and not self.ter_parcel_id:
+            self.ter_parcel_id = self.ter_unit_id.parcel_id

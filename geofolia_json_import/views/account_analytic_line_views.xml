@@ -8,9 +8,9 @@
         <field name="arch" type="xml">
             <xpath expr="//sheet/group" position="after">
                 <group string="Territory" name="territory">
+                    <field name="ter_unit_id" options="{'no_create': True}"/>
                     <field name="ter_parcel_id" options="{'no_create': True}"/>
                     <field name="ter_property_id" options="{'no_create': True}"/>
-                    <field name="ter_unit_id" options="{'no_create': True}"/>
                     <field name="ter_use_type_id" options="{'no_create': True}"/>
                 </group>
                 <group string="Geofolia" name="geofolia" groups="geofolia_json_import.group_geofolia_import">
@@ -32,9 +32,9 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='task_id']" position="after">
                 <field name="geofolia_external_id" string="Geofolia ID" optional="show" groups="geofolia_json_import.group_geofolia_import"/>
+                <field name="ter_unit_id" optional="hide"/>
                 <field name="ter_parcel_id" optional="hide"/>
                 <field name="ter_property_id" optional="hide"/>
-                <field name="ter_unit_id" optional="hide"/>
                 <field name="ter_use_type_id" optional="hide"/>
             </xpath>
         </field>
