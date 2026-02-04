@@ -12,4 +12,26 @@
             </xpath>
         </field>
     </record>
+
+    <record id="maintenance_equipment_view_list_inherit_geofolia" model="ir.ui.view">
+        <field name="name">maintenance.equipment.list.inherit.geofolia</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="geofolia_equipment_id" string="Geofolia ID" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="maintenance_equipment_view_search_inherit_geofolia" model="ir.ui.view">
+        <field name="name">maintenance.equipment.search.inherit.geofolia</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/field[@name='name']" position="after">
+                <field name="geofolia_equipment_id"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

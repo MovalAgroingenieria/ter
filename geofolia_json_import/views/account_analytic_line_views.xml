@@ -31,6 +31,7 @@
         <field name="priority">15</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='task_id']" position="after">
+                <field name="geofolia_external_id" string="Geofolia ID" optional="show"/>
                 <field name="ter_parcel_id" optional="hide"/>
                 <field name="ter_property_id" optional="hide"/>
                 <field name="ter_unit_id" optional="hide"/>
@@ -45,6 +46,7 @@
         <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='task_id']" position="after">
+                <field name="geofolia_external_id"/>
                 <field name="ter_parcel_id"/>
                 <field name="ter_property_id"/>
                 <field name="ter_unit_id"/>

@@ -27,4 +27,26 @@
             </xpath>
         </field>
     </record>
+
+    <record id="product_product_view_list_inherit_geofolia" model="ir.ui.view">
+        <field name="name">product.product.list.inherit.geofolia</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="after">
+                <field name="geofolia_external_id" string="Geofolia ID" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_product_view_search_inherit_geofolia" model="ir.ui.view">
+        <field name="name">product.product.search.inherit.geofolia</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="geofolia_external_id"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

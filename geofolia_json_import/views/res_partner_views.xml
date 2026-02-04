@@ -18,4 +18,26 @@
             </xpath>
         </field>
     </record>
+
+    <record id="res_partner_view_list_inherit_geofolia" model="ir.ui.view">
+        <field name="name">res.partner.list.inherit.geofolia</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base_ter.res_partner_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="geofolia_partner_id" string="Geofolia Partner ID" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_view_search_inherit_geofolia" model="ir.ui.view">
+        <field name="name">res.partner.search.inherit.geofolia</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base_ter.res_partner_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_code']" position="after">
+                <field name="geofolia_partner_id"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>
