@@ -52,6 +52,10 @@
                                 class="oe_stat_button" icon="fa-sitemap">
                             <field name="validated_unit_count" string="Validated Units" widget="statinfo"/>
                         </button>
+                        <button name="action_show_linked_parcels" type="object"
+                                class="oe_stat_button" icon="fa-ter-parcel">
+                            <field name="linked_parcel_count" string="Parcels" widget="statinfo"/>
+                        </button>
                     </div>
                     <group string="Information">
                         <field name="info_json" nolabel="1"/>

@@ -92,6 +92,16 @@ class GeofoliaImportJob(models.Model):
         compute="_compute_validated_unit_count",
         string="Validated Units",
     )
+    linked_parcel_count = fields.Integer(
+        compute="_compute_linked_parcel_count",
+        string="Linked Parcels",
+    )
+
+    @api.depends("line_ids.ter_unit_id", "line_ids.ter_unit_id.parcel_id")
+    def _compute_linked_parcel_count(self):
+        for job in self:
+            parcels = job.line_ids.mapped("ter_unit_id").mapped("parcel_id")
+            job.linked_parcel_count = len(parcels.filtered("id"))
 
     @api.depends("line_ids.ter_unit_id", "line_ids.ter_unit_id.state")
     def _compute_validated_unit_count(self):
@@ -112,6 +122,18 @@ class GeofoliaImportJob(models.Model):
             "res_model": "ter.unit",
             "view_mode": "list,form",
             "domain": [("id", "in", units.ids)],
+        }
+
+    def action_show_linked_parcels(self):
+        self.ensure_one()
+        parcels = self.line_ids.mapped("ter_unit_id").mapped("parcel_id")
+        parcels = parcels.filtered("id")
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Linked Parcels"),
+            "res_model": "ter.parcel",
+            "view_mode": "list,form",
+            "domain": [("id", "in", parcels.ids)],
         }
 
     # ----------------------------
@@ -152,7 +174,17 @@ class GeofoliaImportJob(models.Model):
             lines = job.line_ids.filtered(
                 lambda l: l.sync_state in ("pending", "error", "skipped")
             )
-            for line in lines:
+            # Process roots (UID == ParentId1) first, then children
+            def _is_root(l):
+                r = l.raw_json or {}
+                uid = (l.external_uuid or "").strip()
+                parent = (r.get("ParentId1") or "").strip()
+                return uid and uid == parent
+            roots = lines.filtered(_is_root)
+            children = lines - roots
+            for line in roots.sorted(key=lambda l: l.id):
+                job._apply_field_line_to_ter_unit(line)
+            for line in children.sorted(key=lambda l: l.id):
                 job._apply_field_line_to_ter_unit(line)
 
     # ----------------------------
@@ -658,22 +690,37 @@ class GeofoliaImportJob(models.Model):
                 }
             )
             return
-        if not vals.get("geom_ewkt"):
-            parcel = self._resolve_parcel_from_farm_identification_code(
-                vals.get("geofolia_code") or vals.get("geofolia_main_plot_id")
-            )
-            if parcel:
-                vals["parcel_id"] = parcel.id
+
+        # Resolve parcel: UID==ParentId1 -> by geofolia_farm_identification_code or create;
+        # UID!=ParentId1 -> from parent ter.unit's parcel_id
+        parcel = self._resolve_parcel_for_field_line(line, vals)
+        if not parcel:
+            uid = (line.external_uuid or "").strip()
+            parent_id1 = (vals.get("geofolia_parent_id1") or "").strip()
+            if uid == parent_id1:
+                line.write(
+                    {
+                        "sync_state": "skipped",
+                        "sync_message": _(
+                            "Root unit: configure Geofolia default municipality "
+                            "to create parcel, or create parcel with "
+                            "geofolia_farm_identification_code = %s."
+                        ) % uid,
+                    }
+                )
             else:
                 line.write(
                     {
                         "sync_state": "skipped",
                         "sync_message": _(
-                            "No geometry and no parcel matched by Code/MainPlotId."
-                        ),
+                            "Child unit: parent ter.unit (geofolia_uid=%s) not found "
+                            "or has no parcel. Process parent field first."
+                        ) % parent_id1,
                     }
                 )
-                return
+            return
+
+        vals["parcel_id"] = parcel.id
 
         try:
             with self.env.cr.savepoint():
@@ -1124,6 +1171,46 @@ class GeofoliaImportJob(models.Model):
         return Parcel.search(
             [("geofolia_farm_identification_code", "=", farm_code)], limit=1
         )
+
+    def _resolve_parcel_for_field_line(self, line, vals):
+        """
+        Resolve parcel_id for ter.unit from Geofolia Field line.
+
+        - If Geofolia UID == Geofolia Parent Id1 (root/farm):
+          Search parcel by geofolia_farm_identification_code = UID.
+          If not found, create parcel and link.
+        - If Geofolia UID != Geofolia Parent Id1 (child):
+          Search parent ter.unit by geofolia_uid = ParentId1, use its parcel_id.
+        """
+        uid = (line.external_uuid or "").strip()
+        parent_id1 = (vals.get("geofolia_parent_id1") or "").strip()
+        Parcel = self.env["ter.parcel"]
+        Unit = self.env["ter.unit"]
+
+        if uid == parent_id1:
+            # Root: parcel by geofolia_farm_identification_code = UID
+            parcel = Parcel.search(
+                [("geofolia_farm_identification_code", "=", uid)], limit=1
+            )
+            if parcel:
+                return parcel
+            # Create parcel
+            mun = self.env.company.geofolia_default_municipality_id
+            if not mun:
+                return self.env["ter.parcel"]
+            code = vals.get("geofolia_code") or uid
+            area = vals.get("area_official") or 0.0
+            return Parcel.create({
+                "alphanum_code": str(code).strip() or uid,
+                "municipality_id": mun.id,
+                "area_official": float(area),
+                "geofolia_farm_identification_code": uid,
+            })
+        # Child: parcel from parent ter.unit
+        parent_unit = Unit.search([("geofolia_uid", "=", parent_id1)], limit=1)
+        if parent_unit and parent_unit.parcel_id:
+            return parent_unit.parcel_id
+        return self.env["ter.parcel"]
 
     def _resolve_unit_from_crop_zone(self, activity_raw, recognition_id):
         """

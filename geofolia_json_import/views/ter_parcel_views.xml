@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ter_parcel_view_form_inherit_geofolia" model="ir.ui.view">
+        <field name="name">ter.parcel.form.inherit.geofolia</field>
+        <field name="model">ter.parcel</field>
+        <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='page_notes']" position="before">
+                <page string="Geofolia" name="geofolia">
+                    <group>
+                        <group>
+                            <field name="geofolia_farm_identification_code"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

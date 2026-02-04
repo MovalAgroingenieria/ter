@@ -44,6 +44,16 @@
                             </div>
                         </setting>
 
+                        <setting id="geofolia_default_municipality"
+                                 string="Geofolia default municipality"
+                                 help="Default municipality for ter.parcel created from Geofolia Fields (farm level).">
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="geofolia_default_municipality_id" options="{'no_create': False}"/>
+                                </div>
+                            </div>
+                        </setting>
+
                         <setting id="geofolia_maintenance_project"
                                  string="Geofolia maintenance project"
                                  help="Project for maintenance equipment and requests. Enable 'Timesheets' for employee time tracking.">

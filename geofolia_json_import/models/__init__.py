@@ -18,5 +18,6 @@ from . import (
     res_company,
     res_partner,
     res_config_settings,
+    ter_parcel,
     ter_unit,
 )

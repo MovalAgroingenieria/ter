@@ -33,6 +33,7 @@
         "views/maintenance_equipment_views.xml",
         "views/maintenance_request_views.xml",
         "views/ter_unit_views.xml",
+        "views/ter_parcel_views.xml",
         "views/res_partner_views.xml",
         "views/product_product_views.xml",
         "views/project_task_views.xml",

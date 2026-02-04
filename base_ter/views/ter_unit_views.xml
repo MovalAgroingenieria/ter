@@ -96,7 +96,7 @@
         <field name="name">ter.unit.kanban</field>
         <field name="model">ter.unit</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="validity_state" class="o_terunit_kanban">
+            <kanban class="o_terunit_kanban">
                 <field name="id"/>
                 <field name="name"/>
                 <field name="alphanum_code"/>

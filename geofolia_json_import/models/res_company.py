@@ -28,3 +28,9 @@ class ResCompany(models.Model):
         help="Maintenance project for equipment and requests from Geofolia. "
         "Enable 'Timesheets' on this project for employee time tracking.",
     )
+    geofolia_default_municipality_id = fields.Many2one(
+        comodel_name="res.municipality",
+        string="Geofolia Default Municipality",
+        help="Default municipality for ter.parcel created from Geofolia Fields "
+        "when UID == ParentId1 (farm level) and no parcel exists.",
+    )
