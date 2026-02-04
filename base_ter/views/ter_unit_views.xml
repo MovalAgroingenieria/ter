@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="view_ter_unit_attribute_value_list" model="ir.ui.view">
+        <field name="name">ter.unit.attribute.value.list</field>
+        <field name="model">ter.unit.attribute.value</field>
+        <field name="arch" type="xml">
+            <list string="Attribute Values" editable="bottom">
+                <field name="attribute_id"/>
+                <field name="value_id"/>
+                <field name="color" widget="color_picker"/>
+                <field name="required" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
     <record id="view_ter_unit_attribute_value_form" model="ir.ui.view">
         <field name="name">ter.unit.attribute.value.form</field>
         <field name="model">ter.unit.attribute.value</field>
@@ -56,8 +69,8 @@
         </field>
     </record>
 
-    <record id="c" model="ir.ui.view">
-        <field name="name">ter.unit.tree</field>
+    <record id="view_ter_unit_list" model="ir.ui.view">
+        <field name="name">ter.unit.list</field>
         <field name="model">ter.unit</field>
         <field name="arch" type="xml">
             <list string="Territorial Units" default_order="name">
@@ -278,7 +291,7 @@
         <field name="view_mode">kanban,list,form,pivot</field>
         <field name="view_ids" eval="[(5, 0),
               (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_ter_unit_kanban')}),
-              (0, 0, {'view_mode': 'list', 'view_id': ref('c')}),
+              (0, 0, {'view_mode': 'list', 'view_id': ref('view_ter_unit_list')}),
               (0, 0, {'view_mode': 'form', 'view_id': ref('view_ter_unit_form')}),
               (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_ter_unit_pivot')})]"/>
         <field name="search_view_id" ref="view_ter_unit_filter"/>
