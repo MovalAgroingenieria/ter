@@ -4,24 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-14 19:48+0000\n"
-"PO-Revision-Date: 2025-01-14 19:48+0000\n"
+"POT-Creation-Date: 2026-02-04 05:20+0000\n"
+"PO-Revision-Date: 2026-02-04 05:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
-msgid ""
-"<span name=\"cadastral_name\" class=\"o_form_label o_td_label\" attrs=\"{'invisible': [('parcel_type', '!=', '01_R')]}\">\n"
-"                    Sec / Pol / Par\n"
-"                </span>"
-msgstr ""
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
@@ -36,16 +28,6 @@ msgstr ""
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_15
 msgid "A Coruña"
-msgstr ""
-
-#. module: l10n_es_territory
-#: model:ir.model.constraint,message:l10n_es_territory.constraint_res_province_cadastral_code_positive
-msgid "A valid cadastral code of province is required."
-msgstr ""
-
-#. module: l10n_es_territory
-#: model:ir.model.constraint,message:l10n_es_territory.constraint_res_municipality_municipality_number_positive
-msgid "A valid municipality number is required."
 msgstr ""
 
 #. module: l10n_es_territory
@@ -99,6 +81,18 @@ msgid "Barcelona"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_company__base_ter_aerial_image_wmsbase_layers
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_config_settings__base_ter_aerial_image_wmsbase_layers
+msgid "Base Ter Aerial Image Wmsbase Layers"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_company__base_ter_aerial_image_wmsbase_url
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_config_settings__base_ter_aerial_image_wmsbase_url
+msgid "Base Ter Aerial Image Wmsbase Url"
+msgstr ""
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_48
 msgid "Bizkaia"
 msgstr ""
@@ -109,27 +103,14 @@ msgid "Burgos"
 msgstr ""
 
 #. module: l10n_es_territory
-#. odoo-python
-#: code:addons/l10n_es_territory/models/ter_gis_parcel_model.py:0
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_area
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
-#, python-format
-msgid "Cadastral Area (m²)"
+msgid "Cadastral Area"
 msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_municipality__cadastral_code
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_province__cadastral_code
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_municipality_view_form
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_municipality_view_search
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_province_view_form
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_province_view_search
 msgid "Cadastral Code"
-msgstr ""
-
-#. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
-msgid "Cadastral Form"
 msgstr ""
 
 #. module: l10n_es_territory
@@ -143,11 +124,6 @@ msgid "Cadastral Polygon"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
-msgid "Cadastral Ref."
-msgstr ""
-
-#. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_sector
 msgid "Cadastral Sector"
 msgstr ""
@@ -158,8 +134,13 @@ msgid "Cadastral Subparcel"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.province,alphanum_code:l10n_es_territory.res_province_39
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_list
+msgid "Cadastre"
+msgstr ""
+
+#. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_06
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_39
 msgid "Cantabria"
 msgstr ""
 
@@ -184,8 +165,8 @@ msgid "Cataluña"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.province,alphanum_code:l10n_es_territory.res_province_51
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_18
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_51
 msgid "Ceuta"
 msgstr ""
 
@@ -195,9 +176,8 @@ msgid "Ciudad Real"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_municipality_view_tree
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_province_view_tree
-msgid "Code"
+#: model:ir.model,name:l10n_es_territory.model_res_company
+msgid "Companies"
 msgstr ""
 
 #. module: l10n_es_territory
@@ -286,8 +266,10 @@ msgid "Illes Balears"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:ir.model.constraint,message:l10n_es_territory.constraint_ter_parcel_cadastral_area_ok
-msgid "Incorrect value for \"Cadastral Area (m²)\"."
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_municipality__image_128
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_place__image_128
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_province__image_128
+msgid "Image"
 msgstr ""
 
 #. module: l10n_es_territory
@@ -301,8 +283,8 @@ msgid "Jaén"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.province,alphanum_code:l10n_es_territory.res_province_26
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_17
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_26
 msgid "La Rioja"
 msgstr ""
 
@@ -332,19 +314,19 @@ msgid "Madrid"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:res.province,alphanum_code:l10n_es_territory.res_province_52
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_19
+#: model:res.province,alphanum_code:l10n_es_territory.res_province_52
 msgid "Melilla"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_admregion_view_form_inherit_l10n_es_territory
+msgid "Municipalities"
 msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_res_municipality
 msgid "Municipality"
-msgstr ""
-
-#. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_municipality_view_form
-msgid "Municipality N."
 msgstr ""
 
 #. module: l10n_es_territory
@@ -368,13 +350,29 @@ msgid "Navarra"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_admregion__number_of_municipalities
+msgid "Number of municipalities"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_admregion__number_of_places
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_province__number_of_places
+msgid "Number of places"
+msgstr ""
+
+#. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__official_code
 msgid "Official Code"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__official_code_urban
+msgid "Official Code Urban"
+msgstr ""
+
+#. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__official_code_with_subparcel
-msgid "Official Code with subparcel"
+msgid "Official Code With Subparcel"
 msgstr ""
 
 #. module: l10n_es_territory
@@ -414,6 +412,17 @@ msgid "País Vasco"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model:ir.model,name:l10n_es_territory.model_res_place
+msgid "Place"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_admregion_view_form_inherit_l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_province_view_form
+msgid "Places"
+msgstr ""
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_36
 msgid "Pontevedra"
 msgstr ""
@@ -429,29 +438,13 @@ msgid "Province"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model:ir.model,name:l10n_es_territory.model_res_admregion
+msgid "Region"
+msgstr ""
+
+#. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_14
 msgid "Región de Murcia"
-msgstr ""
-
-#. module: l10n_es_territory
-#. odoo-python
-#: code:addons/l10n_es_territory/models/ter_parcel.py:0
-#, python-format
-msgid "Repeated cadastral reference (with subparcel). Check archived parcels."
-msgstr ""
-
-#. module: l10n_es_territory
-#. odoo-python
-#: code:addons/l10n_es_territory/models/res_municipality.py:0
-#, python-format
-msgid "Repeated municipality code."
-msgstr ""
-
-#. module: l10n_es_territory
-#. odoo-python
-#: code:addons/l10n_es_territory/models/res_province.py:0
-#, python-format
-msgid "Repeated province code."
 msgstr ""
 
 #. module: l10n_es_territory
@@ -470,6 +463,11 @@ msgid "Santa Cruz de Tenerife"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+msgid "Sec / Pol / Par"
+msgstr ""
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_40
 msgid "Segovia"
 msgstr ""
@@ -485,13 +483,8 @@ msgid "Soria"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
-msgid "Subp."
-msgstr ""
-
-#. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
-msgid "Subparcel"
+#: model:ir.model,name:l10n_es_territory.model_res_config_settings
+msgid "Street type settings"
 msgstr ""
 
 #. module: l10n_es_territory
@@ -505,30 +498,13 @@ msgid "Teruel"
 msgstr ""
 
 #. module: l10n_es_territory
-#. odoo-python
-#: code:addons/l10n_es_territory/models/ter_parcel.py:0
-#, python-format
-msgid "The length of the cadastral reference is not correct."
-msgstr ""
-
-#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_45
 msgid "Toledo"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
-msgid "Type"
-msgstr ""
-
-#. module: l10n_es_territory
 #: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__parcel_type__02_u
 msgid "Urban"
-msgstr ""
-
-#. module: l10n_es_territory
-#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__official_code_urban
-msgid "Urban official code"
 msgstr ""
 
 #. module: l10n_es_territory
