@@ -48,65 +48,6 @@
                            statusbar_visible="draft,done,error"/>
                 </header>
                 <sheet>
-<<<<<<< Current (Your changes)
-                    <group>
-                        <field name="name"/>
-                        <field name="import_type"/>
-                        <field name="date_range_id" options="{'no_create': True}"/>
-                        <field name="file_name" readonly="1"/>
-                        <field name="file_data" filename="file_name"/>
-                    </group>
-
-                    <div class="oe_button_box" name="button_box_counts" invisible="import_type not in ('fields', 'full')">
-                        <button name="action_show_lines_total" type="object"
-                                class="oe_stat_button" icon="fa-list">
-                            <field name="total_count" string="Total" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_lines_pending" type="object"
-                                class="oe_stat_button" icon="fa-clock-o">
-                            <field name="pending_count" string="Pending" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_lines_processed" type="object"
-                                class="oe_stat_button" icon="fa-check">
-                            <field name="processed_count" string="Processed" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_lines_error" type="object"
-                                class="oe_stat_button" icon="fa-exclamation-triangle">
-                            <field name="error_count" string="Error" widget="statinfo"/>
-                        </button>
-                    </div>
-                    <div class="oe_button_box" name="button_box_full" invisible="import_type != 'full'">
-                        <button name="action_show_created_products" type="object"
-                                class="oe_stat_button" icon="fa-cube">
-                            <field name="created_product_count" string="Products" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_created_employees" type="object"
-                                class="oe_stat_button" icon="fa-user">
-                            <field name="created_employee_count" string="Employees" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_created_partners" type="object"
-                                class="oe_stat_button" icon="fa-users">
-                            <field name="created_partner_count" string="Partners" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_created_harvested_products" type="object"
-                                class="oe_stat_button" icon="fa-tasks">
-                            <field name="created_harvested_product_count" string="Harvested Products" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_created_equipments" type="object"
-                                class="oe_stat_button" icon="fa-wrench">
-                            <field name="created_equipment_count" string="Equipments" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_created_maintenance_requests" type="object"
-                                class="oe_stat_button" icon="fa-toolbox">
-                            <field name="created_maintenance_request_count" string="Maintenance" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_created_analytic_lines" type="object"
-                                class="oe_stat_button" icon="fa-clock-o">
-                            <field name="created_analytic_line_count" string="Timesheets" widget="statinfo"/>
-                        </button>
-                    </div>
-                    <div class="oe_button_box" name="button_box" invisible="import_type != 'fields'">
-=======
                     <div class="oe_button_box" name="button_box">
                         <button name="action_show_lines_total" type="object"
                                 class="oe_stat_button" icon="fa-list"
@@ -163,7 +104,6 @@
                                 invisible="import_type != 'full'">
                             <field name="created_analytic_line_count" string="Timesheets" widget="statinfo"/>
                         </button>
->>>>>>> Incoming (Background Agent changes)
                         <button name="action_show_validated_units" type="object"
                                 class="oe_stat_button" icon="fa-sitemap"
                                 invisible="import_type != 'fields'">
