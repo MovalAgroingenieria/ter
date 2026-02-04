@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Graph views for reports -->
+    <record id="ter_parcel_view_graph" model="ir.ui.view">
+        <field name="name">ter.parcel.view.graph</field>
+        <field name="model">ter.parcel</field>
+        <field name="arch" type="xml">
+            <graph string="Parcels" type="bar">
+                <field name="partner_id"/>
+                <field name="municipality_id"/>
+                <field name="area_official" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Report-specific pivot: only stored numeric fields (area_official) to avoid aggregate error -->
+    <record id="view_ter_unit_report_pivot" model="ir.ui.view">
+        <field name="name">ter.unit.report.pivot</field>
+        <field name="model">ter.unit</field>
+        <field name="arch" type="xml">
+            <pivot string="Territorial Units" display_quantity="true">
+                <field name="use_type_id" type="row"/>
+                <field name="partner_id" type="row"/>
+                <field name="municipality_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="validity_state" type="col"/>
+                <field name="date_range_id" type="col"/>
+                <field name="area_official" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_ter_unit_graph" model="ir.ui.view">
+        <field name="name">ter.unit.view.graph</field>
+        <field name="model">ter.unit</field>
+        <field name="arch" type="xml">
+            <graph string="Territorial Units" type="bar">
+                <field name="use_type_id"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+                <field name="area_official" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_ter_unit_calendar" model="ir.ui.view">
+        <field name="name">ter.unit.report.calendar</field>
+        <field name="model">ter.unit</field>
+        <field name="arch" type="xml">
+            <calendar string="Territorial Units" date_start="date_start" date_stop="date_end"
+                      color="use_type_id" mode="month">
+                <field name="alphanum_code"/>
+                <field name="use_type_id"/>
+                <field name="partner_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_date_range_pivot" model="ir.ui.view">
+        <field name="name">date.range.view.pivot</field>
+        <field name="model">date.range</field>
+        <field name="arch" type="xml">
+            <pivot string="Date Ranges" display_quantity="true">
+                <field name="use_type_id" type="row"/>
+                <field name="type_id" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_date_range_graph" model="ir.ui.view">
+        <field name="name">date.range.view.graph</field>
+        <field name="model">date.range</field>
+        <field name="arch" type="xml">
+            <graph string="Date Ranges" type="bar">
+                <field name="use_type_id"/>
+                <field name="type_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_date_range_calendar" model="ir.ui.view">
+        <field name="name">date.range.report.calendar</field>
+        <field name="model">date.range</field>
+        <field name="arch" type="xml">
+            <calendar string="Date Ranges" date_start="date_start" date_stop="date_end"
+                      color="use_type_id" mode="month">
+                <field name="name"/>
+                <field name="use_type_id"/>
+                <field name="type_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="ter_parcel_view_calendar" model="ir.ui.view">
+        <field name="name">ter.parcel.report.calendar</field>
+        <field name="model">ter.parcel</field>
+        <field name="arch" type="xml">
+            <calendar string="Parcels" date_start="create_date" date_stop="create_date"
+                      color="partner_id" mode="month">
+                <field name="alphanum_code"/>
+                <field name="partner_id"/>
+                <field name="municipality_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Report actions (pivot/graph/calendar with filters) -->
+    <record id="action_report_ter_parcel" model="ir.actions.act_window">
+        <field name="name">Parcels</field>
+        <field name="res_model">ter.parcel</field>
+        <field name="view_mode">pivot,graph,calendar,list</field>
+        <field name="view_ids"
+               eval="[(5, 0),
+                      (0, 0, {'view_mode': 'pivot', 'view_id': ref('base_ter.ter_parcel_view_pivot')}),
+                      (0, 0, {'view_mode': 'graph', 'view_id': ref('base_ter.ter_parcel_view_graph')}),
+                      (0, 0, {'view_mode': 'calendar', 'view_id': ref('base_ter.ter_parcel_view_calendar')}),
+                      (0, 0, {'view_mode': 'list', 'view_id': ref('base_ter.ter_parcel_view_tree')})]"/>
+        <field name="search_view_id" ref="ter_parcel_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No parcel data to analyze
+            </p>
+            <p>
+                Create parcels or use filters to analyze existing data.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_report_ter_unit" model="ir.actions.act_window">
+        <field name="name">Territorial Units</field>
+        <field name="res_model">ter.unit</field>
+        <field name="view_mode">pivot,graph,calendar,list</field>
+        <field name="view_ids"
+               eval="[(5, 0),
+                      (0, 0, {'view_mode': 'pivot', 'view_id': ref('base_ter.view_ter_unit_report_pivot')}),
+                      (0, 0, {'view_mode': 'graph', 'view_id': ref('base_ter.view_ter_unit_graph')}),
+                      (0, 0, {'view_mode': 'calendar', 'view_id': ref('base_ter.view_ter_unit_calendar')}),
+                      (0, 0, {'view_mode': 'list', 'view_id': ref('base_ter.view_ter_unit_list')})]"/>
+        <field name="search_view_id" ref="view_ter_unit_filter"/>
+    </record>
+
+    <record id="action_report_date_range" model="ir.actions.act_window">
+        <field name="name">Date Ranges</field>
+        <field name="res_model">date.range</field>
+        <field name="view_mode">pivot,graph,calendar,list</field>
+        <field name="view_ids"
+               eval="[(5, 0),
+                      (0, 0, {'view_mode': 'pivot', 'view_id': ref('base_ter.view_date_range_pivot')}),
+                      (0, 0, {'view_mode': 'graph', 'view_id': ref('base_ter.view_date_range_graph')}),
+                      (0, 0, {'view_mode': 'calendar', 'view_id': ref('base_ter.view_date_range_calendar')}),
+                      (0, 0, {'view_mode': 'list', 'view_id': ref('base_ter.view_date_range_list')})]"/>
+        <field name="domain">[('is_unit_use_type', '=', True)]</field>
+        <field name="context">{'search_default_is_unit_use_type': 1}</field>
+    </record>
+
+    <!-- Informes menu: next to Global Viewer -->
+    <menuitem id="menu_informes"
+              name="Reports"
+              parent="menu_census"
+              sequence="35"
+              groups="base_ter.group_ter_user"/>
+
+    <menuitem id="menu_informes_parcels"
+              name="Parcels"
+              parent="menu_informes"
+              action="action_report_ter_parcel"
+              sequence="10"/>
+
+    <menuitem id="menu_informes_ter_units"
+              name="Territorial Units"
+              parent="menu_informes"
+              action="action_report_ter_unit"
+              sequence="20"/>
+
+    <menuitem id="menu_informes_date_ranges"
+              name="Date Ranges"
+              parent="menu_informes"
+              action="action_report_date_range"
+              sequence="30"/>
+</odoo>
