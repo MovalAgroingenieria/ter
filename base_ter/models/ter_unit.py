@@ -3,6 +3,7 @@
 
 from odoo import _, api, exceptions, fields, models
 from odoo.exceptions import UserError, ValidationError
+from psycopg2 import sql
 
 from .. import hooks as base_ter_hooks
 
@@ -175,10 +176,13 @@ class TerUnit(models.Model):
             if record.geom_ewkt and record.geom_ewkt.strip():
                 try:
                     self.env.cr.execute(
-                        """
-                        SELECT ST_Area(ST_Transform(geom, 25830)) / 10000.0
-                        FROM ter_gis_unit WHERE unit_id = %s
-                        """,
+                        sql.SQL(
+                            "SELECT ST_Area(ST_Transform(geom, 25830)) / 10000.0 "
+                            "FROM {}.{} WHERE unit_id = %s"
+                        ).format(
+                            sql.Identifier(base_ter_hooks.GIS_SCHEMA),
+                            sql.Identifier(base_ter_hooks.UNIT_TABLE),
+                        ),
                         (record.id,),
                     )
                     row = self.env.cr.fetchone()
@@ -226,17 +230,20 @@ class TerUnit(models.Model):
             return self.env["ter.parcel"]
         Parcel = self.env["ter.parcel"]
         self.env.cr.execute(
-            """
-            SELECT tp.id
-            FROM ter_gis_parcel gp
-            INNER JOIN ter_parcel tp ON tp.name = gp.name
-            WHERE tp.active = true
-              AND gp.geom IS NOT NULL
-              AND ST_Intersects(ST_GeomFromEWKT(%s)::geometry, gp.geom)
-            ORDER BY ST_Area(ST_Intersection(ST_GeomFromEWKT(%s)::geometry, gp.geom))
-                     DESC NULLS LAST
-            LIMIT 1
-            """,
+            sql.SQL(
+                "SELECT tp.id "
+                "FROM {}.{} gp "
+                "INNER JOIN ter_parcel tp ON tp.name = gp.name "
+                "WHERE tp.active = true "
+                "  AND gp.geom IS NOT NULL "
+                "  AND ST_Intersects(ST_GeomFromEWKT(%s)::geometry, gp.geom) "
+                "ORDER BY ST_Area(ST_Intersection(ST_GeomFromEWKT(%s)::geometry, gp.geom)) "
+                "         DESC NULLS LAST "
+                "LIMIT 1"
+            ).format(
+                sql.Identifier(base_ter_hooks.GIS_SCHEMA),
+                sql.Identifier(base_ter_hooks.PARCEL_TABLE),
+            ),
             (ewkt, ewkt),
         )
         row = self.env.cr.fetchone()
@@ -246,22 +253,25 @@ class TerUnit(models.Model):
 
     def _sync_geom_to_gis_unit(self):
         """Sync geom_ewkt to ter_gis_unit table for PostGIS operations."""
-        UnitTable = base_ter_hooks.UNIT_TABLE
+        base_ter_hooks._ensure_gis_unit_table(self.env)
+        qual = sql.SQL("{}.{}").format(
+            sql.Identifier(base_ter_hooks.GIS_SCHEMA),
+            sql.Identifier(base_ter_hooks.UNIT_TABLE),
+        )
         for unit in self:
             if not unit.geom_ewkt or not unit.geom_ewkt.strip():
                 self.env.cr.execute(
-                    "DELETE FROM %s WHERE unit_id = %%s" % UnitTable,
+                    sql.SQL("DELETE FROM {} WHERE unit_id = %s").format(qual),
                     (unit.id,),
                 )
                 continue
             ewkt = unit._ensure_ewkt_srid(unit.geom_ewkt)
             self.env.cr.execute(
-                """
-                INSERT INTO %s (unit_id, geom)
-                VALUES (%%s, ST_Multi(ST_GeomFromEWKT(%%s)::geometry)::geometry(MultiPolygon, 25830))
-                ON CONFLICT (unit_id) DO UPDATE SET geom = EXCLUDED.geom
-                """  # noqa: S608
-                % UnitTable,
+                sql.SQL(
+                    "INSERT INTO {} (unit_id, geom) "
+                    "VALUES (%s, ST_Multi(ST_GeomFromEWKT(%s)::geometry)::geometry(MultiPolygon, 25830)) "
+                    "ON CONFLICT (unit_id) DO UPDATE SET geom = EXCLUDED.geom"
+                ).format(qual),
                 (unit.id, ewkt),
             )
 

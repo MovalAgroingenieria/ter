@@ -190,7 +190,7 @@
                     <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
                     <div class="oe_button_box" name="button_box">
                         <field name="parcel_ids" invisible="1"/>
-                        <button name="action_show_parcels" type="object" class="oe_stat_button" icon="fa-map-marker">
+                        <button name="action_show_parcels" type="object" class="oe_stat_button" icon="fa-ter-parcel">
                             <field name="parcel_count" string="Parcels" widget="statinfo"/>
                         </button>
                     </div>
@@ -256,7 +256,7 @@
                                 </div>
                             </div>
                             <field name="geom_ewkt" placeholder="SRID=25830;POLYGON((...))"
-                                   widget="text" readonly="state == 'validated'"/>
+                                   widget="text" readonly="state == 'validated'" invisible="1"/>
                         </group>
                         <group>
                             <field name="municipality_id" readonly="1"/>
@@ -307,6 +307,24 @@
               parent="base_ter.menu_territory"
               action="ter_unit_action_entrie"
               sequence="101"/>
+
+    <record id="ter_unit_action_mass_validate" model="ir.actions.server">
+        <field name="name">Validate</field>
+        <field name="model_id" ref="base_ter.model_ter_unit"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_unit"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">records.action_validate()</field>
+    </record>
+
+    <record id="ter_unit_action_mass_set_to_draft" model="ir.actions.server">
+        <field name="name">Set to Draft</field>
+        <field name="model_id" ref="base_ter.model_ter_unit"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_unit"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">records.action_set_to_draft()</field>
+    </record>
 
     <record id="ter_unit_reset_all_aerial_images_serveraction" model="ir.actions.server">
         <field name="name">Images of territorial units (all)</field>

@@ -47,6 +47,12 @@
                         <field name="processed_count" readonly="1"/>
                         <field name="error_count" readonly="1"/>
                     </group>
+                    <div class="oe_button_box" name="button_box" invisible="import_type != 'fields'">
+                        <button name="action_show_validated_units" type="object"
+                                class="oe_stat_button" icon="fa-sitemap">
+                            <field name="validated_unit_count" string="Validated Units" widget="statinfo"/>
+                        </button>
+                    </div>
                     <group string="Information">
                         <field name="info_json" nolabel="1"/>
                     </group>
@@ -64,7 +70,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="hide"/>
+                                    <field name="sync_message" optional="show"/>
                                     <field name="external_uuid"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -87,7 +93,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="hide"/>
+                                    <field name="sync_message" optional="show"/>
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -110,7 +116,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="hide"/>
+                                    <field name="sync_message" optional="show"/>
                                     <field name="external_id"/>
                                     <field name="name"/>
                                     <field name="first_name"/>
@@ -130,7 +136,7 @@
                                       decoration-muted="sync_state in ('skipped','no_action')"
                                       decoration-danger="sync_state == 'error'">
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="hide"/>
+                                    <field name="sync_message" optional="show"/>
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -150,7 +156,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="hide"/>
+                                    <field name="sync_message" optional="show"/>
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -173,7 +179,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="hide"/>
+                                    <field name="sync_message" optional="show"/>
                                     <field name="external_id"/>
                                     <field name="code"/>
                                     <field name="name"/>
@@ -208,7 +214,7 @@
                                         <button name="action_transform" type="object" string="Apply selected" class="btn-primary"/>
                                     </header>
                                     <field name="sync_state"/>
-                                    <field name="sync_message" optional="hide"/>
+                                    <field name="sync_message" optional="show"/>
                                     <field name="activity_line_id"/>
                                     <field name="employee_id_external"/>
                                     <field name="employee_name"/>

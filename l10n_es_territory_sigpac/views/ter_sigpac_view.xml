@@ -22,7 +22,7 @@
                         <button name="action_get_parcels"
                                 type="object"
                                 class="oe_stat_button"
-                                icon="fa-moval-parcel"
+                                icon="fa-ter-parcel"
                                 invisible="number_of_sigpaclinks == 0">
                             <div class="o_form_field o_stat_info">
                                 <span class="o_stat_value">

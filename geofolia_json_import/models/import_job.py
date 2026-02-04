@@ -88,6 +88,32 @@ class GeofoliaImportJob(models.Model):
     processed_count = fields.Integer(compute="_compute_apply_stats", store=False)
     error_count = fields.Integer(compute="_compute_apply_stats", store=False)
 
+    validated_unit_count = fields.Integer(
+        compute="_compute_validated_unit_count",
+        string="Validated Units",
+    )
+
+    @api.depends("line_ids.ter_unit_id", "line_ids.ter_unit_id.state")
+    def _compute_validated_unit_count(self):
+        for job in self:
+            units = job.line_ids.mapped("ter_unit_id").filtered(
+                lambda u: u and u.state == "validated"
+            )
+            job.validated_unit_count = len(units)
+
+    def action_show_validated_units(self):
+        self.ensure_one()
+        units = self.line_ids.mapped("ter_unit_id").filtered(
+            lambda u: u and u.state == "validated"
+        )
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Validated Territorial Units"),
+            "res_model": "ter.unit",
+            "view_mode": "list,form",
+            "domain": [("id", "in", units.ids)],
+        }
+
     # ----------------------------
     # Public actions
     # ----------------------------
@@ -124,7 +150,7 @@ class GeofoliaImportJob(models.Model):
             if job.import_type != "fields":
                 continue
             lines = job.line_ids.filtered(
-                lambda l: l.sync_state in ("pending", "error")
+                lambda l: l.sync_state in ("pending", "error", "skipped")
             )
             for line in lines:
                 job._apply_field_line_to_ter_unit(line)
@@ -607,6 +633,7 @@ class GeofoliaImportJob(models.Model):
             vals["date_start"] = "%d-01-01" % year
             vals["date_end"] = "%d-12-31" % year
         vals.setdefault("area_official", 0.0)
+        vals.setdefault("state", "validated")
         return vals
 
     def _apply_field_line_to_ter_unit(self, line):
@@ -632,15 +659,21 @@ class GeofoliaImportJob(models.Model):
             )
             return
         if not vals.get("geom_ewkt"):
-            line.write(
-                {
-                    "sync_state": "skipped",
-                    "sync_message": _(
-                        "Field has no geometry. ter.unit needs geometry to resolve parcel."
-                    ),
-                }
+            parcel = self._resolve_parcel_from_farm_identification_code(
+                vals.get("geofolia_code") or vals.get("geofolia_main_plot_id")
             )
-            return
+            if parcel:
+                vals["parcel_id"] = parcel.id
+            else:
+                line.write(
+                    {
+                        "sync_state": "skipped",
+                        "sync_message": _(
+                            "No geometry and no parcel matched by Code/MainPlotId."
+                        ),
+                    }
+                )
+                return
 
         try:
             with self.env.cr.savepoint():
@@ -755,7 +788,7 @@ class GeofoliaImportJob(models.Model):
         def _todo(rs):
             if only_pending:
                 return rs.filtered(lambda l: l.sync_state == "pending")
-            return rs.filtered(lambda l: l.sync_state in ("pending", "error"))
+            return rs.filtered(lambda l: l.sync_state in ("pending", "error", "skipped"))
 
         for line in _todo(self.product_line_ids):
             self._apply_product_line(line)
