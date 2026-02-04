@@ -3,6 +3,8 @@
 
 import logging
 
+from psycopg2 import sql
+
 _logger = logging.getLogger(__name__)
 
 
@@ -15,14 +17,30 @@ def migrate(cr, version):
         try:
             cr.execute(
                 """
-                DELETE FROM %s a
-                USING %s b
-                WHERE a.job_id = b.job_id
-                  AND (a.external_id = b.external_id
-                       OR (a.external_id IS NULL AND b.external_id IS NULL))
-                  AND a.id > b.id
-                """
-                % (table, table)
+                SELECT EXISTS (
+                    SELECT 1 FROM information_schema.tables
+                    WHERE table_schema = 'public' AND table_name = %s
+                )
+                """,
+                (table,),
+            )
+            if not cr.fetchone()[0]:
+                _logger.info(
+                    "geofolia_json_import: Table %s does not exist, skipping duplicate cleanup",
+                    table,
+                )
+                continue
+            cr.execute(
+                sql.SQL(
+                    """
+                    DELETE FROM {t} a
+                    USING {t} b
+                    WHERE a.job_id = b.job_id
+                      AND (a.external_id = b.external_id
+                           OR (a.external_id IS NULL AND b.external_id IS NULL))
+                      AND a.id > b.id
+                    """
+                ).format(t=sql.Identifier(table))
             )
             deleted = cr.rowcount
             if deleted:
