@@ -2,6 +2,27 @@
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
  */
 
+/* Smaller kanban cards for territory views */
+.o_l10n_es_territory_kanban_small {
+    .oe_kanban_card {
+        width: 140px;
+        min-width: 140px;
+    }
+    .o_kanban_image {
+        height: 80px;
+        min-height: 80px;
+        .o_kanban_image_inner {
+            max-width: 100%;
+            max-height: 80px;
+            object-fit: contain;
+        }
+    }
+    .oe_kanban_details {
+        padding: 4px 8px;
+        font-size: 0.85rem;
+    }
+}
+
 .o_base_adi_res_province [data-name="cadastral_code"],
 .o_base_adi_res_municipality [data-name="cadastral_code"] {
     text-align: center;

@@ -66,6 +66,29 @@
         </field>
     </record>
 
+    <record id="ter_sigpac_view_kanban" model="ir.ui.view">
+        <field name="name">l10n_es_territory_sigpac.ter_sigpac_view_kanban</field>
+        <field name="model">ter.sigpac</field>
+        <field name="arch" type="xml">
+            <kanban class="o_l10n_es_territory_sigpac_kanban_small" create="false" delete="false">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="dn_surface_ha"/>
+                <field name="uso_sigpac"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                <div><field name="uso_sigpac"/> - <field name="dn_surface_ha"/> ha</div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id="ter_sigpac_view_tree" model="ir.ui.view">
         <field name="name">l10n_es_territory_sigpac.ter_sigpac_view_list</field>
         <field name="model">ter.sigpac</field>
@@ -128,9 +151,10 @@
     <record id="ter_sigpac_action" model="ir.actions.act_window">
         <field name="name">SIGPAC enclosures</field>
         <field name="res_model">ter.sigpac</field>
-        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="view_mode">kanban,list,form,pivot,graph</field>
         <field name="view_ids"
                eval="[(5, 0),
+                      (0, 0, {'view_mode': 'kanban', 'view_id': ref('ter_sigpac_view_kanban')}),
                       (0, 0, {'view_mode': 'list', 'view_id': ref('ter_sigpac_view_tree')}),
                       (0, 0, {'view_mode': 'form', 'view_id': ref('ter_sigpac_view_form')}),
                       (0, 0, {'view_mode': 'pivot', 'view_id': ref('ter_sigpac_view_pivot')}),

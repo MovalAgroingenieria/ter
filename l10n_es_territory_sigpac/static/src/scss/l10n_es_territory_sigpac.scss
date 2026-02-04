@@ -1,6 +1,16 @@
 /**/
 /* ter.sigpac */
 /**/
+.o_l10n_es_territory_sigpac_kanban_small {
+    .oe_kanban_card {
+        width: 140px;
+        min-width: 140px;
+    }
+    .oe_kanban_details {
+        padding: 4px 8px;
+        font-size: 0.85rem;
+    }
+}
 .o_l10n_es_territory_sigpac_sigpac_view_tree [data-name="name"] {
     text-align: center;
 }

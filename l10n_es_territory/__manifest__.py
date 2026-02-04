@@ -11,13 +11,17 @@
     "website": "https://moval.es",
     "category": "Territory Management",
     "depends": [
+        "base_adi",
         "base_ter",
     ],
     "data": [
         "data/res_admregion_data.xml",
         "data/res_province_data.xml",
+        "views/res_admregion_views.xml",
         "views/res_province_views.xml",
         "views/res_municipality_views.xml",
+        "views/res_place_views.xml",
+        "views/res_adi_actions.xml",
         "views/ter_parcel_views.xml",
         "views/res_config_settings_views.xml",
     ],

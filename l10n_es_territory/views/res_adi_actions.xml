@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="base_adi.res_admregion_action" model="ir.actions.act_window">
+        <field name="view_mode">kanban,list,form</field>
+        <field name="views" eval="[
+            (ref('l10n_es_territory.res_admregion_view_kanban'), 'kanban'),
+            (ref('base_adi.res_admregion_view_tree'), 'list'),
+            (ref('base_adi.res_admregion_view_form'), 'form')
+        ]"/>
+    </record>
+
+    <record id="base_adi.res_province_action" model="ir.actions.act_window">
+        <field name="view_mode">kanban,list,form</field>
+        <field name="views" eval="[
+            (ref('l10n_es_territory.res_province_view_kanban'), 'kanban'),
+            (ref('base_adi.res_province_view_tree'), 'list'),
+            (ref('base_adi.res_province_view_form'), 'form')
+        ]"/>
+    </record>
+
+    <record id="base_adi.res_municipality_action" model="ir.actions.act_window">
+        <field name="view_mode">kanban,list,form</field>
+        <field name="views" eval="[
+            (ref('l10n_es_territory.res_municipality_view_kanban'), 'kanban'),
+            (ref('base_adi.res_municipality_view_tree'), 'list'),
+            (ref('base_adi.res_municipality_view_form'), 'form')
+        ]"/>
+    </record>
+
+    <record id="base_adi.res_place_action" model="ir.actions.act_window">
+        <field name="view_mode">kanban,list,form</field>
+        <field name="views" eval="[
+            (ref('l10n_es_territory.res_place_view_kanban'), 'kanban'),
+            (ref('base_adi.res_place_view_tree'), 'list'),
+            (ref('base_adi.res_place_view_form'), 'form')
+        ]"/>
+    </record>
+
+</odoo>
