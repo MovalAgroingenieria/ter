@@ -35,6 +35,7 @@
         "wizards/wizard_set_partner_code_views.xml",
         "wizards/wizard_show_gis_preview_views.xml",
         "views/base_ter_menus.xml",
+        "views/base_ter_reports.xml",
         "views/res_config_settings_views.xml",
         "views/ter_parcel_views.xml",
         "views/ter_property_views.xml",

@@ -25,6 +25,7 @@
         "security/security.xml",
         "security/ir.model.access.csv",
         "views/geofolia_menus.xml",
+        "views/geofolia_reports.xml",
         "views/import_job_list.xml",
         "views/import_job_form.xml",
         "views/import_wizard_views.xml",

@@ -50,27 +50,7 @@
                 </header>
                 <sheet>
                     <div class="d-flex flex-column align-items-end gap-1" name="button_boxes_wrapper">
-                    <div class="oe_button_box" name="button_box_row1">
-                        <button name="action_show_lines_total" type="object"
-                                class="oe_stat_button" icon="fa-list"
-                                invisible="import_type not in ('fields', 'full')">
-                            <field name="total_count" string="Total" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_lines_pending" type="object"
-                                class="oe_stat_button" icon="fa-clock-o"
-                                invisible="import_type not in ('fields', 'full')">
-                            <field name="pending_count" string="Pending" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_lines_processed" type="object"
-                                class="oe_stat_button" icon="fa-check"
-                                invisible="import_type not in ('fields', 'full')">
-                            <field name="processed_count" string="Processed" widget="statinfo"/>
-                        </button>
-                        <button name="action_show_lines_error" type="object"
-                                class="oe_stat_button" icon="fa-exclamation-triangle"
-                                invisible="import_type not in ('fields', 'full')">
-                            <field name="error_count" string="Error" widget="statinfo"/>
-                        </button>
+                    <div class="oe_button_box" name="button_box_objects">
                         <button name="action_show_validated_units" type="object"
                                 class="oe_stat_button" icon="fa-sitemap"
                                 invisible="import_type != 'fields'">
@@ -81,8 +61,6 @@
                                 invisible="import_type != 'fields'">
                             <field name="linked_parcel_count" string="Parcels" widget="statinfo"/>
                         </button>
-                    </div>
-                    <div class="oe_button_box" name="button_box_row2" invisible="import_type != 'full'">
                         <button name="action_show_created_products" type="object"
                                 class="oe_stat_button" icon="fa-cube"
                                 invisible="import_type != 'full'">
@@ -117,6 +95,24 @@
                                 class="oe_stat_button" icon="fa-clock-o"
                                 invisible="import_type != 'full'">
                             <field name="created_analytic_line_count" string="Timesheets" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_button_box" name="button_box_lines" invisible="import_type not in ('fields', 'full')">
+                        <button name="action_show_lines_total" type="object"
+                                class="oe_stat_button" icon="fa-list">
+                            <field name="total_count" string="Total" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_lines_pending" type="object"
+                                class="oe_stat_button" icon="fa-clock-o">
+                            <field name="pending_count" string="Pending" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_lines_processed" type="object"
+                                class="oe_stat_button" icon="fa-check">
+                            <field name="processed_count" string="Processed" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_lines_error" type="object"
+                                class="oe_stat_button" icon="fa-exclamation-triangle">
+                            <field name="error_count" string="Error" widget="statinfo"/>
                         </button>
                         <button name="action_show_activity_employee_lines" type="object"
                                 class="oe_stat_button" icon="fa-user-plus"
