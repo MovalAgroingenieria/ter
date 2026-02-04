@@ -37,6 +37,16 @@ class UseType(models.Model):
     )
 
     color = fields.Integer(string="Color Index")
+    unit_ids = fields.One2many(
+        "ter.unit",
+        "use_type_id",
+        string="Units",
+    )
+    date_range_ids = fields.One2many(
+        "date.range",
+        "use_type_id",
+        string="Date Ranges",
+    )
     unit_count = fields.Integer(
         string="Units",
         compute="_compute_unit_count",
@@ -67,14 +77,34 @@ class UseType(models.Model):
             else:
                 record.complete_name = record.name
 
-    @api.depends("id", "child_ids")
+    @api.depends(
+        "unit_ids",
+        "child_ids.unit_ids",
+        "child_ids.child_ids.unit_ids",
+        "child_ids.child_ids.child_ids.unit_ids",
+        "child_ids.child_ids.child_ids.child_ids.unit_ids",
+    )
     def _compute_unit_count(self):
         Unit = self.env["ter.unit"]
         for record in self:
-            domain = [("use_type_id", "child_of", record.id)]
-            record.unit_count = Unit.search_count(domain)
+            record.unit_count = Unit.search_count(
+                [("use_type_id", "child_of", record.id)]
+            )
 
-    @api.depends("id", "child_ids")
+    @api.depends(
+        "unit_ids",
+        "unit_ids.parcel_id",
+        "unit_ids.parcel_ids",
+        "child_ids.unit_ids",
+        "child_ids.unit_ids.parcel_id",
+        "child_ids.unit_ids.parcel_ids",
+        "child_ids.child_ids.unit_ids",
+        "child_ids.child_ids.unit_ids.parcel_id",
+        "child_ids.child_ids.unit_ids.parcel_ids",
+        "child_ids.child_ids.child_ids.unit_ids",
+        "child_ids.child_ids.child_ids.unit_ids.parcel_id",
+        "child_ids.child_ids.child_ids.unit_ids.parcel_ids",
+    )
     def _compute_parcel_count(self):
         Unit = self.env["ter.unit"]
         for record in self:
@@ -82,12 +112,19 @@ class UseType(models.Model):
             parcels = units.mapped("parcel_id") | units.mapped("parcel_ids")
             record.parcel_count = len(parcels)
 
-    @api.depends("id", "child_ids")
+    @api.depends(
+        "date_range_ids",
+        "child_ids.date_range_ids",
+        "child_ids.child_ids.date_range_ids",
+        "child_ids.child_ids.child_ids.date_range_ids",
+        "child_ids.child_ids.child_ids.child_ids.date_range_ids",
+    )
     def _compute_date_range_count(self):
         DateRange = self.env["date.range"]
         for record in self:
-            domain = [("use_type_id", "child_of", record.id)]
-            record.date_range_count = DateRange.search_count(domain)
+            record.date_range_count = DateRange.search_count(
+                [("use_type_id", "child_of", record.id)]
+            )
 
     @api.constrains("parent_id")
     def _check_parent_loop(self):

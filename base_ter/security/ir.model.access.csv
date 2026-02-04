@@ -33,4 +33,5 @@ access_ter_use_type_user,ter.use_type user,model_ter_use_type,base.group_user,1,
 access_ter_use_type_attribute_user,ter.use_type.attribute user,model_ter_use_type_attribute,base.group_user,1,1,1,0
 access_ter_use_type_attribute_value_user,ter.use_type.attribute.value user,model_ter_use_type_attribute_value,base.group_user,1,1,1,0
 access_ter_unit_user,ter.unit user,model_ter_unit,base.group_user,1,1,1,0
+access_ter_unit_portal,ter.unit portal,base_ter.model_ter_unit,base.group_portal,1,0,0,0
 access_ter_unit_attribute_value_user,ter.unit.attribute.value user,model_ter_unit_attribute_value,base.group_user,1,1,1,1

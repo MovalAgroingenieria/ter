@@ -12,6 +12,14 @@ class TerUnit(models.Model):
     _description = "Ter Unit"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
+    _sql_constraints = [
+        (
+            "area_official_non_negative",
+            "CHECK (area_official >= 0)",
+            "Official area must be greater than or equal to 0.",
+        ),
+    ]
+
     name = fields.Char(
         string="Name",
         copy=False,
@@ -28,7 +36,7 @@ class TerUnit(models.Model):
         compute="_compute_partner_id",
         store=True,
         readonly=False,
-        required=True,
+        required=False  ,
         index=True,
         tracking=True,
     )
@@ -404,12 +412,42 @@ class TerUnit(models.Model):
         for record in self:
             if record.partner_id and record.parcel_id:
                 if record.partner_id != record.parcel_id.partner_id:
-                    raise exceptions.ValidationError(
+                    raise ValidationError(
                         _(
                             "The holder must be the manager (main contact) "
-                            "of the parcel."
+                            "of the main parcel."
                         )
                     )
+
+    @api.constrains("date_start", "date_end")
+    def _check_date_start_before_date_end(self):
+        for record in self:
+            if record.date_start and record.date_end:
+                if record.date_start > record.date_end:
+                    raise ValidationError(
+                        _("Start date must be before or equal to end date.")
+                    )
+
+    @api.constrains("date_start", "date_end", "date_range_id")
+    def _check_dates_within_date_range(self):
+        for record in self:
+            if not record.date_range_id:
+                continue
+            dr = record.date_range_id
+            if record.date_start and dr.date_start and record.date_start < dr.date_start:
+                raise ValidationError(
+                    _(
+                        "Start date must be within the date range (%(start)s – %(end)s)."
+                    )
+                    % {"start": dr.date_start, "end": dr.date_end}
+                )
+            if record.date_end and dr.date_end and record.date_end > dr.date_end:
+                raise ValidationError(
+                    _(
+                        "End date must be within the date range (%(start)s – %(end)s)."
+                    )
+                    % {"start": dr.date_start, "end": dr.date_end}
+                )
 
     @api.onchange("parcel_id")
     def _onchange_parcel_id(self):
@@ -530,6 +568,14 @@ class TerUnit(models.Model):
         self.ensure_one()
         if self.parcel_id:
             self.parcel_id.reset_aerial_image()
+
+    @api.model
+    def action_reset_all_aerial_images(self, from_backend=False):
+        """Reset aerial images for all parcels linked to territorial units."""
+        parcels = self.search([]).mapped("parcel_id") | self.search([]).mapped("parcel_ids")
+        parcels.reset_aerial_image()
+        if from_backend:
+            return {"type": "ir.actions.client", "tag": "reload"}
 
     def action_show_parcels(self):
         """Open parcels linked to this unit."""

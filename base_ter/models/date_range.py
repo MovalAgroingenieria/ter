@@ -17,6 +17,8 @@ _logger = logging.getLogger(__name__)
 class DateRange(models.Model):
     _inherit = "date.range"
 
+    note = fields.Html(string="Notes")
+
     is_unit_use_type = fields.Boolean(
         string="Usable for Unit Use",
         default=False,
@@ -91,3 +93,15 @@ class DateRange(models.Model):
             "search_view_id": search_view.id,
             "domain": [("id", "in", parcel_ids)] if parcel_ids else [("id", "=", 0)],
         }
+
+    def action_show_use_type(self):
+        """Open the use type and its related territorial units."""
+        self.ensure_one()
+        if not self.use_type_id:
+            return None
+        use_type = self.use_type_id
+        return use_type.action_show_units()
+
+    @api.model
+    def _get_thread_with_access(self, thread_id, mode="read", **kwargs):
+        pass

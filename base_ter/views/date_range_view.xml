@@ -5,13 +5,24 @@
         <field name="model">date.range</field>
         <field name="inherit_id" ref="date_range.view_date_range_list"/>
         <field name="arch" type="xml">
-            <xpath expr="//list" position="attributes">
-                <attribute name="editable">false</attribute>
-            </xpath>
+
             <field name="type_id" position="before">
                 <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
                 <field name="use_type_id" invisible="not is_unit_use_type" required="is_unit_use_type" options="{'no_open': True, 'no_create': True}"/>
             </field>
+            <xpath expr="//list" position="replace">
+                <list string="Date Ranges">
+                    <field name="name"/>
+                    <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
+                    <field name="use_type_id" invisible="not is_unit_use_type" required="is_unit_use_type" options="{'no_open': True, 'no_create': True}"/>
+                    <field name="type_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="company_id" column_invisible="1"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </list>
+            </xpath>
             <field name="type_id" position="attributes">
                 <attribute name="domain">[('is_unit_use_type', '=', is_unit_use_type)]</attribute>
             </field>
@@ -83,6 +94,14 @@
                             invisible="not is_unit_use_type">
                         <field name="parcel_count" string="Parcels" widget="statinfo"/>
                     </button>
+                    <button name="action_show_use_type" type="object"
+                            class="oe_stat_button" icon="fa-leaf"
+                            invisible="not is_unit_use_type or not use_type_id">
+                        <div class="o_stat_info">
+                            <span class="o_stat_value"/>
+                            <span class="o_stat_text">Use Type</span>
+                        </div>
+                    </button>
                 </div>
             </xpath>
             <field name="type_id" position="before">
@@ -91,6 +110,13 @@
             <field name="type_id" position="attributes">
                 <attribute name="domain">[('is_unit_use_type', '=', is_unit_use_type)]</attribute>
             </field>
+            <xpath expr="//form" position="inside">
+                <notebook invisible="not is_unit_use_type">
+                    <page string="Notes" name="notes">
+                        <field name="note" placeholder="Internal notes..."/>
+                    </page>
+                </notebook>
+            </xpath>
         </field>
     </record>
 

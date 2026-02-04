@@ -1,10 +1,11 @@
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class TerUnitAttributeValue(models.Model):
     _name = "ter.unit.attribute.value"
     _description = "Ter Unit Attribute Value"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _rec_name = "attribute_id"
     _order = "attribute_id, id"
 
@@ -35,10 +36,22 @@ class TerUnitAttributeValue(models.Model):
         comodel_name="ter.use_type.attribute.value",
         string="Value",
         domain="[('attribute_id', '=', attribute_id)]",
-        readonly=False
+        readonly=False,
     )
-
+    color = fields.Integer(string="Color Index")
     required = fields.Boolean(related="attribute_id.required", readonly=True)
+
+    def name_get(self):
+        result = []
+        for rec in self:
+            parts = []
+            if rec.attribute_id:
+                parts.append(rec.attribute_id.name)
+            if rec.value_id:
+                parts.append(rec.value_id.name)
+            name = ": ".join(parts) if parts else str(rec.id)
+            result.append((rec.id, name))
+        return result
 
     _sql_constraints = [
         (

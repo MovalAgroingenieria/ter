@@ -33,5 +33,10 @@
         <field name="domain_force">[(1,'=',1)]</field>
         <field name="perm_unlink" eval="False"/>
     </record>
-
+     <record id="ter_unit_rule_portal" model="ir.rule">
+        <field name="name">Territorial Unit: Portal Users - Own Records Only</field>
+        <field name="model_id" ref="base_ter.model_ter_unit"/>
+        <field name="domain_force">[('partner_id', '=', user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
 </odoo>
