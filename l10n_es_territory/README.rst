@@ -48,6 +48,6 @@ Maintainer
 
 .. image:: https://services.moval.es/static/images/logo_moval_small.png
    :target: http://moval.es
-   :alt: Moval Agroingeniería
+   :alt: Moval Agroingeniería S.L.
 
-This module is maintained by Moval Agroingeniería.
+This module is maintained by Moval Agroingeniería S.L.

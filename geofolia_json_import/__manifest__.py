@@ -5,7 +5,7 @@
     "summary": "JSON importer for Geofolia (Fields / Products / Maintenance)",
     "license": "LGPL-3",
     "website": "https://www.moval.es",
-    "author": "Moval Agroingeniería",
+    "author": "Moval Agroingeniería S.L.",
     "depends": [
         "base",
         "account",

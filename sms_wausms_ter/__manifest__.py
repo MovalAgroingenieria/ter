@@ -7,7 +7,7 @@
     "version": "18.0.1.0.0",
     "category": "Tools",
     "website": "https://www.moval.es",
-    "author": "Moval Agroingeniería",
+    "author": "Moval Agroingeniería S.L.",
     "license": "AGPL-3",
     "depends": [
         "base_ter",

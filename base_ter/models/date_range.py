@@ -1,4 +1,4 @@
-# 2024-2026 Moval Agroingenieria
+# 2024-2026 Moval Agroingeniería S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import base64

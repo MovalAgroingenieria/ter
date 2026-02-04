@@ -23,7 +23,7 @@ Features
 Credits
 =======
 
-* Moval Agroingenieria S.L.
+* Moval Agroingeniería S.L.
 
 Contributors
 ------------
@@ -45,6 +45,6 @@ Maintainer
 
 .. image:: https://services.moval.es/static/images/logo_moval_small.png
    :target: https://moval.es
-   :alt: Moval Agroingenieria
+   :alt: Moval Agroingeniería S.L.
 
-This module is maintained by Moval Agroingenieria.
+This module is maintained by Moval Agroingeniería S.L.

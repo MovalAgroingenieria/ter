@@ -1,4 +1,4 @@
-# Copyright 2024-2026 Moval Agro-engineering
+# Copyright 2024-2026 Moval Agroingeniería S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 {
@@ -7,7 +7,7 @@
     "version": "18.0.1.0.0",
     "category": "Territory Management",
     "website": "https://www.moval.es",
-    "author": "Moval Agroingeniería",
+    "author": "Moval Agroingeniería S.L.",
     "license": "AGPL-3",
     "application": False,
     "installable": True,

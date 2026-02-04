@@ -57,7 +57,7 @@ ALTER ROLE  DB_USER SET search_path = public, postgis;
 Credits
 =======
 
-* Moval Agro-engineering S.L.
+* Moval Agroingeniería S.L.
 
 Contributors
 ------------
@@ -72,12 +72,13 @@ Contributors
 * Juanu Sandoval <jsandoval@moval.es>
 * Salvador Sánchez <ssanchez@moval.es>
 * Jorge Vera <jvera@moval.es>
+* César Andrés <candres@moval.es>
 
 Maintainer
 ----------
 
 .. image:: https://services.moval.es/static/images/logo_moval_small.png
    :target: http://moval.es
-   :alt: Moval Agro-engineering
+   :alt: Moval Agroingeniería S.L.
 
-This module is maintained by Moval Agro-engineering.
+This module is maintained by Moval Agroingeniería S.L.

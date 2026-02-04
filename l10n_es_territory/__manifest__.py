@@ -1,4 +1,4 @@
-# Copyright 2024-2026 Moval Agro-engineering
+# Copyright 2024-2026 Moval Agroingeniería S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 {
@@ -6,7 +6,7 @@
     "summary": "Customization of the territorial base (base_ter module) "
     "to the administrative scope of Spain.",
     "version": "18.0.1.0.0",
-    "author": "Moval Agroingeniería",
+    "author": "Moval Agroingeniería S.L.",
     "license": "AGPL-3",
     "website": "https://moval.es",
     "category": "Territory Management",
