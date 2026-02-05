@@ -4,7 +4,8 @@
 
 import base64
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
+from odoo.http import request
 
 
 class TerProperty(models.Model):
@@ -42,14 +43,12 @@ class TerProperty(models.Model):
     alphanum_code = fields.Char(string="Property Name", required=True)
 
     municipality_id = fields.Many2one(
-        string="Municipality",
         comodel_name="res.municipality",
         required=True,
         index=True,
         ondelete="restrict",
     )
     place_id = fields.Many2one(
-        string="Place",
         comodel_name="res.place",
         index=True,
         ondelete="restrict",
@@ -62,21 +61,20 @@ class TerProperty(models.Model):
     )
 
     aerial_image = fields.Image(
-        string="Aerial Image",
         max_width=_aerial_image_size_big,
         max_height=_aerial_image_size_big,
     )
     aerial_image_key = fields.Char(index=True, readonly=True)
 
     aerial_image_medium = fields.Image(
-        string="Aerial Image (medium size)",
+        string="Aerial Image (medium)",
         max_width=_aerial_image_size_medium,
         max_height=_aerial_image_size_medium,
         store=True,
         related="aerial_image",
     )
     aerial_image_small = fields.Image(
-        string="Aerial Image (small size)",
+        string="Aerial Image (small)",
         max_width=_aerial_image_size_small,
         max_height=_aerial_image_size_small,
         store=True,
@@ -144,14 +142,12 @@ class TerProperty(models.Model):
     )
 
     province_id = fields.Many2one(
-        string="Province",
         comodel_name="res.province",
         store=True,
         index=True,
         compute="_compute_province_id",
     )
     region_id = fields.Many2one(
-        string="Region",
         comodel_name="res.admregion",
         store=True,
         index=True,
@@ -161,37 +157,39 @@ class TerProperty(models.Model):
     area_unit_name = fields.Char(
         string="Area unit name", compute="_compute_area_unit_name"
     )
-    address_data = fields.Char(string="Address Data", compute="_compute_address_data")
+    address_data = fields.Char(compute="_compute_address_data")
 
-    def _aerial_cache_key(
-        self,
-        *,
-        wms,
-        layers,
-        styles,
-        image_height,
-        image_width,
-        zoom,
-        force_square_shape,
-        apply_filter,
-        extra="",
-    ):
+    def _aerial_cache_key(self, params):
+        """Generate cache key for aerial image.
+
+        Args:
+            params (dict): Dictionary with keys:
+                - wms: WMS URL
+                - layers: WMS layers
+                - styles: WMS styles
+                - image_height: Image height
+                - image_width: Image width
+                - zoom: Zoom level
+                - force_square_shape: Force square shape
+                - apply_filter: Apply filter
+                - extra: Extra parameters
+        """
         self.ensure_one()
         return self._make_wms_key(
             self.geom_ewkt or "",
-            wms or "",
-            layers or "",
-            styles or "",
-            int(image_height or 0),
-            int(image_width or 0),
-            float(zoom or 0.0),
-            bool(force_square_shape),
-            bool(apply_filter),
-            extra or "",
+            params.get("wms", ""),
+            params.get("layers", ""),
+            params.get("styles", ""),
+            int(params.get("image_height", 0)),
+            int(params.get("image_width", 0)),
+            float(params.get("zoom", 0.0)),
+            bool(params.get("force_square_shape", False)),
+            bool(params.get("apply_filter", False)),
+            params.get("extra", ""),
         )
 
     @api.depends("aerial_image", "mapped_to_polygon")
-    def _compute_aerial_image_shown(self):
+    def _compute_aerial_image_shown(self):  # pylint: disable=too-many-branches
         config = self.env["ir.config_parameter"].sudo()
 
         wmsbase_url = config.get_param("base_ter.aerial_image_wmsbase_url", False)
@@ -229,8 +227,8 @@ class TerProperty(models.Model):
 
             stored_b64 = None
             key = None
-
             if not use_vec:
+                # pylint: disable=protected-access
                 key = record._aerial_cache_key(
                     wms=wmsbase_url,
                     layers=wmsbase_layers,
@@ -254,6 +252,7 @@ class TerProperty(models.Model):
                         force_square_shape=self._force_square_shape,
                     )
             else:
+                # pylint: disable=protected-access
                 key = record._aerial_cache_key(
                     wms=wmsbase_url,
                     layers=wmsbase_layers,
@@ -308,7 +307,10 @@ class TerProperty(models.Model):
                     else (stored_b64 or "")
                 )
                 self.env["common.log"].register_in_log(
-                    _("Aerial image OK. Property: %s") % (record.name,),
+                    self.env._(
+                        "Aerial image OK. Property: %(name)s",
+                        name=record.name,
+                    ),
                     source=self._name,
                     message_type="INFO",
                 )
@@ -316,7 +318,7 @@ class TerProperty(models.Model):
                 record.aerial_image_shown = False
                 record.aerial_image_shown_b64 = ""
                 self.env["common.log"].register_in_log(
-                    _("Error getting aerial image (is the WMS url correct?)"),
+                    self.env._("Error getting aerial image (is the WMS url correct?)"),
                     source=self._name,
                     message_type="WARNING",
                 )
@@ -328,9 +330,9 @@ class TerProperty(models.Model):
 
     @api.depends("parcel_ids.unit_ids")
     def _compute_unit_count(self):
-        Unit = self.env["ter.unit"]
+        unit_model = self.env["ter.unit"]
         for record in self:
-            count = Unit.search_count([("farm_property_id", "=", record.id)])
+            count = unit_model.search_count([("farm_property_id", "=", record.id)])
             record.unit_count = count
 
     @api.depends("parcel_ids.area_official")
@@ -401,11 +403,10 @@ class TerProperty(models.Model):
     def _compute_area_unit_name(self):
         config = self.env["ir.config_parameter"].sudo()
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        unit_name = (
-            _("ha")
-            if area_unit_is_ha
-            else (config.get_param("base_ter.area_unit_name", "") or "")
-        )
+        if area_unit_is_ha:
+            unit_name = self.env._("ha")
+        else:
+            unit_name = config.get_param("base_ter.area_unit_name", "") or ""
         for record in self:
             record.area_unit_name = unit_name
 
@@ -437,7 +438,7 @@ class TerProperty(models.Model):
                 and record.place_id.municipality_id != record.municipality_id
             ):
                 raise exceptions.ValidationError(
-                    _("The place is not in the municipality.")
+                    self.env._("The place is not in the municipality.")
                 )
 
     @api.model
@@ -450,14 +451,14 @@ class TerProperty(models.Model):
         if not area_fields:
             return arch, view
 
-        area_map = {field_name: label for field_name, label in area_fields}
+        area_map = dict(area_fields)
 
         config = self.env["ir.config_parameter"].sudo()
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
         area_unit_name = config.get_param("base_ter.area_unit_name", "") or ""
         value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
 
-        measure_name = _(self._ha_name)
+        measure_name = self.env._(self._ha_name)
         if (
             not area_unit_is_ha
             and area_unit_name
@@ -469,7 +470,10 @@ class TerProperty(models.Model):
 
         for field_name, label in area_map.items():
             for node in arch.xpath(f"//field[@name='{field_name}']"):
-                node.set("string", "%s (%s)" % (_(label), measure_name))
+                node.set(
+                    "string",
+                    "%s (%s)" % (self.env._(label), measure_name),
+                )
 
         return arch, view
 
@@ -488,7 +492,7 @@ class TerProperty(models.Model):
         for prop in self:
             for parcel in prop.parcel_ids:
                 links = parcel.partnerlink_ids.filtered(
-                    lambda l: l.partner_id == old_partner
+                    lambda link: link.partner_id == old_partner
                 )
                 links.write({"partner_id": new_partner.id})
                 parcel.partner_id = new_partner
@@ -501,7 +505,7 @@ class TerProperty(models.Model):
         epsg = int(config.get_param("base_ter.gis_viewer_epsg", 0) or 0) or 25830
 
         message_type = "INFO"
-        message = _("ter_gis_property layer recreated.")
+        message = self.env._("ter_gis_property layer recreated.")
         module = model = method = ""
 
         try:
@@ -509,15 +513,20 @@ class TerProperty(models.Model):
             self.env.cr.execute(
                 """
                 CREATE TABLE ter_gis_property AS
-                SELECT ROW_NUMBER() OVER (ORDER BY terpro.name) AS gid, terpro.name,
+                SELECT ROW_NUMBER() OVER (ORDER BY terpro.name) AS gid,
+                       terpro.name,
                        ST_Multi(
                                ST_Union(
-                                       ST_Transform(tergispar.geom::geometry, %s)
+                                       ST_Transform(
+                                           tergispar.geom::geometry, %s
+                                       )
                                )
                        ) ::geometry(MultiPolygon,%s) AS geom
                 FROM ter_gis_parcel tergispar
-                         INNER JOIN ter_parcel terpar ON tergispar.name = terpar.name
-                         INNER JOIN ter_property terpro ON terpro.id = terpar.property_id
+                    INNER JOIN ter_parcel terpar
+                        ON tergispar.name = terpar.name
+                    INNER JOIN ter_property terpro
+                        ON terpro.id = terpar.property_id
                 WHERE terpar.active = TRUE
                 GROUP BY terpro.name
                 """,
@@ -528,15 +537,19 @@ class TerProperty(models.Model):
                 "ALTER TABLE ter_gis_property ALTER COLUMN name SET NOT NULL"
             )
             self.env.cr.execute(
-                "ALTER TABLE ter_gis_property ADD CONSTRAINT ter_gis_property_name_key UNIQUE(name)"
+                "ALTER TABLE ter_gis_property "
+                "ADD CONSTRAINT ter_gis_property_name_key UNIQUE(name)"
             )
             self.env.cr.execute(
-                "ALTER TABLE ter_gis_property ADD CONSTRAINT ter_gis_property_name_check CHECK (name <> '')"
+                "ALTER TABLE ter_gis_property "
+                "ADD CONSTRAINT ter_gis_property_name_check "
+                "CHECK (name <> '')"
             )
             self.env.cr.execute(
-                "CREATE INDEX IF NOT EXISTS ter_gis_property_idx ON public.ter_gis_property USING gist (geom)"
+                "CREATE INDEX IF NOT EXISTS ter_gis_property_idx "
+                "ON public.ter_gis_property USING gist (geom)"
             )
-        except Exception as err:
+        except RuntimeError as err:
             message_type = "ERROR"
             message = str(err)
             module = "base_ter"
@@ -553,6 +566,7 @@ class TerProperty(models.Model):
         )
         if from_backend:
             return {"type": "ir.actions.client", "tag": "reload"}
+        return None
 
     def delete_aerial_image(self):
         for record in self:
@@ -569,25 +583,38 @@ class TerProperty(models.Model):
         if len(self) == 1:
             self.aerial_image = False
             self.aerial_image_key = False
-            self._compute_aerial_image_shown()
+            self._compute_aerial_image_shown()  # pylint: disable=protected-access
             return
 
-        for record in self.with_progress(_("Getting the aerial images...")):
+        progress_msg = request.env._("Getting the aerial images...")
+        for record in self.with_progress(progress_msg):
             record.aerial_image = False
             record.aerial_image_key = False
-            record._compute_aerial_image_shown()
+            record._compute_aerial_image_shown()  # pylint: disable=protected-access
 
     @api.model
     def action_reset_all_aerial_images(self, from_backend=False):
-        self.search([]).reset_aerial_image()
+        batch_size = 100
+        offset = 0
+        while True:
+            batch = self.search([], limit=batch_size, offset=offset)
+            if not batch:
+                break
+            batch.reset_aerial_image()
+            offset += batch_size
         if from_backend:
             return {"type": "ir.actions.client", "tag": "reload"}
+        return None
 
     def action_gis_preview(self):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": "%s : %s" % (_("Property on the map"), self.alphanum_code),
+            "name": "%s : %s"
+            % (
+                self.env._("Property on the map"),
+                self.alphanum_code,
+            ),
             "res_model": "wizard.show.gis.preview",
             "view_mode": "form",
             "target": "new",
@@ -602,9 +629,10 @@ class TerProperty(models.Model):
         list_view = self.env.ref("base_ter.c")
         form_view = self.env.ref("base_ter.view_ter_unit_form")
         search_view = self.env.ref("base_ter.view_ter_unit_filter")
+        default_parcel = self.parcel_ids[:1].id if self.parcel_ids else False
         return {
             "type": "ir.actions.act_window",
-            "name": _("Territorial Units"),
+            "name": self.env._("Territorial Units"),
             "res_model": "ter.unit",
             "view_mode": "list,form",
             "views": [
@@ -614,7 +642,7 @@ class TerProperty(models.Model):
             "search_view_id": search_view.id,
             "target": "current",
             "domain": [("farm_property_id", "=", self.id)],
-            "context": {"default_parcel_id": self.parcel_ids[:1].id if self.parcel_ids else False},
+            "context": {"default_parcel_id": default_parcel},
         }
 
     def action_show_parcels(self):
@@ -626,7 +654,7 @@ class TerProperty(models.Model):
 
         return {
             "type": "ir.actions.act_window",
-            "name": _("Parcels"),
+            "name": self.env._("Parcels"),
             "res_model": "ter.parcel",
             "view_mode": "list,form,kanban",
             "views": [

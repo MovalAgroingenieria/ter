@@ -1,7 +1,7 @@
 # Copyright 2024-2026 Moval Agroingeniería S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from psycopg2 import sql
 
@@ -22,7 +22,6 @@ class TerUnit(models.Model):
     ]
 
     name = fields.Char(
-        string="Name",
         copy=False,
         help="Auto-generated from company sequence when left empty.",
     )
@@ -37,15 +36,17 @@ class TerUnit(models.Model):
         compute="_compute_partner_id",
         store=True,
         readonly=False,
-        required=False  ,
+        required=False,
         index=True,
         tracking=True,
     )
     partner_code = fields.Integer(
-        string="Partner Code",
         related="partner_id.partner_code",
     )
-    description = fields.Html(help="Description to provide more information and context about this ter_unit")
+    description = fields.Html(
+        help="Description to provide more information "
+        "and context about this ter_unit"
+    )
     active = fields.Boolean(default=True, copy=False, export_string_translation=False)
     sequence = fields.Integer(default=10, export_string_translation=False)
     state = fields.Selection(
@@ -53,7 +54,6 @@ class TerUnit(models.Model):
             ("draft", "Unlocked"),
             ("validated", "Locked"),
         ],
-        string="State",
         default="draft",
         required=True,
         copy=False,
@@ -65,7 +65,6 @@ class TerUnit(models.Model):
             ("in_range", "In Range"),
             ("out_of_range", "Out of Range"),
         ],
-        string="Validity State",
         compute="_compute_validity_state",
         store=True,
         search="_search_validity_state",
@@ -81,10 +80,8 @@ class TerUnit(models.Model):
         "ter_unit_parcel_rel",
         "unit_id",
         "parcel_id",
-        string="Parcels",
     )
     parcel_count = fields.Integer(
-        string="Parcels",
         compute="_compute_parcel_count",
     )
     farm_property_id = fields.Many2one(
@@ -95,26 +92,30 @@ class TerUnit(models.Model):
     )
     municipality_id = fields.Many2one(
         "res.municipality",
-        string="Municipality",
         related="parcel_id.municipality_id",
         readonly=True,
     )
     area_gis_ha = fields.Float(
-        string="Area GIS (ha)",
+        string="Area GIS",
         digits=(32, 4),
         compute="_compute_area_gis_ha",
     )
     area_parcels = fields.Float(
-        string="Area Parcels",
         digits=(32, 4),
         compute="_compute_area_parcels",
     )
-    note = fields.Html(string="Notes")
+    note = fields.Html()
     date_start = fields.Date(string="Start date", required=True, index=True)
     date_end = fields.Date(string="End date", required=True, index=True)
     #
-    date_range_id = fields.Many2one('date.range', domain=[('is_unit_use_type', '=', True)], required=True)
-    date_range_use_type_id = fields.Many2one(related="date_range_id.use_type_id", string="Campaign Type")
+    date_range_id = fields.Many2one(
+        "date.range",
+        domain=[("is_unit_use_type", "=", True)],
+        required=True,
+    )
+    date_range_use_type_id = fields.Many2one(
+        related="date_range_id.use_type_id", string="Campaign Type"
+    )
     #
     area_official = fields.Float(
         string="Official Area",
@@ -123,7 +124,7 @@ class TerUnit(models.Model):
         required=True,
         index=True,
     )
-    account_id = fields.Many2one('account.analytic.account', string='Analytic Account')
+    account_id = fields.Many2one("account.analytic.account", string="Analytic Account")
     area_official_m2 = fields.Integer(
         string="Official Area (m²)",
         compute="_compute_area_official_m2",
@@ -187,8 +188,8 @@ class TerUnit(models.Model):
                     )
                     row = self.env.cr.fetchone()
                     area = float(row[0]) if row and row[0] else 0.0
-                except Exception:
-                    pass
+                except RuntimeError:
+                    area = 0.0
             record.area_gis_ha = area
 
     @api.depends("parcel_ids.area_official", "parcel_id.area_official")
@@ -203,11 +204,10 @@ class TerUnit(models.Model):
     def _compute_area_unit_name(self):
         config = self.env["ir.config_parameter"].sudo()
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        unit_name = (
-            _("ha")
-            if area_unit_is_ha
-            else (config.get_param("base_ter.area_unit_name", "") or "")
-        )
+        if area_unit_is_ha:
+            unit_name = self.env._("ha")
+        else:
+            unit_name = config.get_param("base_ter.area_unit_name", "") or ""
         for record in self:
             record.area_unit_name = unit_name
 
@@ -228,7 +228,7 @@ class TerUnit(models.Model):
         ewkt = self._ensure_ewkt_srid(geom_ewkt, srid)
         if not ewkt:
             return self.env["ter.parcel"]
-        Parcel = self.env["ter.parcel"]
+        parcel_model = self.env["ter.parcel"]
         self.env.cr.execute(
             sql.SQL(
                 "SELECT tp.id "
@@ -237,8 +237,9 @@ class TerUnit(models.Model):
                 "WHERE tp.active = true "
                 "  AND gp.geom IS NOT NULL "
                 "  AND ST_Intersects(ST_GeomFromEWKT(%s)::geometry, gp.geom) "
-                "ORDER BY ST_Area(ST_Intersection(ST_GeomFromEWKT(%s)::geometry, gp.geom)) "
-                "         DESC NULLS LAST "
+                "ORDER BY ST_Area("
+                "ST_Intersection(ST_GeomFromEWKT(%s)::geometry, gp.geom)"
+                ") DESC NULLS LAST "
                 "LIMIT 1"
             ).format(
                 sql.Identifier(base_ter_hooks.GIS_SCHEMA),
@@ -248,12 +249,14 @@ class TerUnit(models.Model):
         )
         row = self.env.cr.fetchone()
         if row:
-            return Parcel.browse(row[0])
-        return Parcel
+            return parcel_model.browse(row[0])
+        return parcel_model
 
     def _sync_geom_to_gis_unit(self):
         """Sync geom_ewkt to ter_gis_unit table for PostGIS operations."""
-        base_ter_hooks._ensure_gis_unit_table(self.env)
+        base_ter_hooks._ensure_gis_unit_table(  # pylint: disable=protected-access
+            self.env
+        )
         qual = sql.SQL("{}.{}").format(
             sql.Identifier(base_ter_hooks.GIS_SCHEMA),
             sql.Identifier(base_ter_hooks.UNIT_TABLE),
@@ -265,18 +268,37 @@ class TerUnit(models.Model):
                     (unit.id,),
                 )
                 continue
-            ewkt = unit._ensure_ewkt_srid(unit.geom_ewkt)
+            ewkt = unit._ensure_ewkt_srid(  # pylint: disable=protected-access
+                unit.geom_ewkt
+            )
             self.env.cr.execute(
                 sql.SQL(
                     "INSERT INTO {} (unit_id, geom) "
-                    "VALUES (%s, ST_Multi(ST_GeomFromEWKT(%s)::geometry)::geometry(MultiPolygon, 25830)) "
-                    "ON CONFLICT (unit_id) DO UPDATE SET geom = EXCLUDED.geom"
+                    "VALUES (%s, ST_Multi("
+                    "ST_GeomFromEWKT(%s)::geometry"
+                    ")::geometry(MultiPolygon, 25830)) "
+                    "ON CONFLICT (unit_id) DO UPDATE "
+                    "SET geom = EXCLUDED.geom"
                 ).format(qual),
                 (unit.id, ewkt),
             )
 
-    def _build_ter_unit_name(self, type_code, date_start, date_end, parcel_code, seq):
-        """Build name as {type_code}-{date_start}-{date_end}-{parcel_code}-{seq}."""
+    def _build_ter_unit_name(self, params):
+        """Build name as {type_code}-{date_start}-{date_end}-{parcel_code}-{seq}.
+
+        Args:
+            params (dict): Dictionary with keys:
+                - type_code: Type code
+                - date_start: Start date
+                - date_end: End date
+                - parcel_code: Parcel code
+                - seq: Sequence number
+        """
+        type_code = params.get("type_code", "")
+        date_start = params.get("date_start")
+        date_end = params.get("date_end")
+        parcel_code = params.get("parcel_code", "")
+        seq = params.get("seq", "")
         parts = [
             (type_code or "").strip() or "?",
             str(date_start) if date_start else "?",
@@ -291,39 +313,39 @@ class TerUnit(models.Model):
         """Build name from type_code, dates, parcel_code and sequence."""
         company = company or self.env.company
         if not company.ter_unit_sequence_id:
-            company._get_or_create_ter_unit_sequence()
-        seq = self.env["ir.sequence"].next_by_id(
-            company.ter_unit_sequence_id.id
-        )
+            company._get_or_create_ter_unit_sequence()  # pylint: disable=protected-access
+        seq = self.env["ir.sequence"].next_by_id(company.ter_unit_sequence_id.id)
 
-        parcel_id = vals.get("parcel_id")
         parcel_code = ""
-        if parcel_id:
-            parcel = self.env["ter.parcel"].browse(parcel_id)
+        if vals.get("parcel_id"):
+            parcel = self.env["ter.parcel"].browse(vals["parcel_id"])
             if parcel.exists():
                 parcel_code = parcel.alphanum_code or ""
 
-        date_start = vals.get("date_start")
-        date_end = vals.get("date_end")
-
         type_code = ""
-        use_type_id = vals.get("use_type_id")
-        date_range_id = vals.get("date_range_id")
-        if use_type_id:
-            ut = self.env["ter.use_type"].browse(use_type_id)
+        if vals.get("use_type_id"):
+            ut = self.env["ter.use_type"].browse(vals["use_type_id"])
             if ut.exists():
-                type_code = "".join(c for c in (ut.name or "") if c.isalnum())[:10].upper() or "X"
-        elif date_range_id:
-            dr = self.env["date.range"].browse(date_range_id)
+                type_code = (
+                    "".join(c for c in (ut.name or "") if c.isalnum())[:10].upper()
+                    or "X"
+                )
+        elif vals.get("date_range_id"):
+            dr = self.env["date.range"].browse(vals["date_range_id"])
             if dr.exists():
-                type_code = "".join(c for c in (dr.name or "") if c.isalnum())[:10].upper() or "X"
+                type_code = (
+                    "".join(c for c in (dr.name or "") if c.isalnum())[:10].upper()
+                    or "X"
+                )
 
-        return self._build_ter_unit_name(
-            type_code or "X",
-            date_start,
-            date_end,
-            parcel_code,
-            seq,
+        return self._build_ter_unit_name(  # pylint: disable=protected-access
+            {
+                "type_code": type_code or "X",
+                "date_start": vals.get("date_start"),
+                "date_end": vals.get("date_end"),
+                "parcel_code": parcel_code,
+                "seq": seq,
+            }
         )
 
     @api.model_create_multi
@@ -340,16 +362,16 @@ class TerUnit(models.Model):
                     vals["parcel_id"] = parcel.id
                 else:
                     raise UserError(
-                        _(
+                        self.env._(
                             "No parcel found intersecting the unit geometry. "
                             "Ensure parcels exist with geometry in the same area."
                         )
                     )
         records = super().create(vals_list)
-        records._sync_attribute_lines()
+        records._sync_attribute_lines()  # pylint: disable=protected-access
         to_sync = records.filtered(lambda r: r.geom_ewkt)
         if to_sync:
-            to_sync._sync_geom_to_gis_unit()
+            to_sync._sync_geom_to_gis_unit()  # pylint: disable=protected-access
         return records
 
     def _sanitize_attribute_value_commands(self, commands):
@@ -374,41 +396,41 @@ class TerUnit(models.Model):
             missing_attrs = required_attrs - existing_attrs
 
             if missing_attrs:
-                unit.write({
-                    "attribute_value_ids": [(0, 0, {"attribute_id": attr.id}) for attr in missing_attrs]
-                })
+                cmds = [(0, 0, {"attribute_id": attr.id}) for attr in missing_attrs]
+                unit.write({"attribute_value_ids": cmds})
 
     def write(self, vals):
         if "geom_ewkt" in vals and "parcel_id" not in vals:
             geom = vals.get("geom_ewkt")
             if geom:
-                parcel = self._get_parcel_from_geometry(geom)
+                parcel = self._get_parcel_from_geometry(
+                    geom
+                )  # pylint: disable=protected-access
                 if parcel:
                     vals["parcel_id"] = parcel.id
         res = super().write(vals)
         if "use_type_id" in vals:
-            self._sync_attribute_lines()
+            self._sync_attribute_lines()  # pylint: disable=protected-access
         if "geom_ewkt" in vals:
-            self._sync_geom_to_gis_unit()
+            self._sync_geom_to_gis_unit()  # pylint: disable=protected-access
         return res
 
     def _check_domain_specific_rules(self):
-        """
-        Hook for modules extending ter.unit to add domain-specific validations.
+        """Hook for modules extending ter.unit to add domain-specific validations.
+
         Override in inherited modules. Called before critical operations if needed.
         """
-        pass
 
-    def unlink(self):
+    @api.ondelete(at_uninstall=False)
+    def _unlink_check_geometry(self):
         for unit in self:
             if unit.geom_ewkt and unit.geom_ewkt.strip():
                 raise UserError(
-                    _(
+                    self.env._(
                         "Cannot delete a unit with GIS geometry. "
                         "Clear the geometry first or archive the record."
                     )
                 )
-        return super().unlink()
 
     @api.depends("parcel_id", "parcel_id.partner_id")
     def _compute_partner_id(self):
@@ -423,7 +445,7 @@ class TerUnit(models.Model):
             if record.partner_id and record.parcel_id:
                 if record.partner_id != record.parcel_id.partner_id:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "The holder must be the manager (main contact) "
                             "of the main parcel."
                         )
@@ -435,7 +457,7 @@ class TerUnit(models.Model):
             if record.date_start and record.date_end:
                 if record.date_start > record.date_end:
                     raise ValidationError(
-                        _("Start date must be before or equal to end date.")
+                        self.env._("Start date must be before or equal to end date.")
                     )
 
     @api.constrains("date_start", "date_end", "date_range_id")
@@ -444,29 +466,40 @@ class TerUnit(models.Model):
             if not record.date_range_id:
                 continue
             dr = record.date_range_id
-            if record.date_start and dr.date_start and record.date_start < dr.date_start:
+            if (
+                record.date_start
+                and dr.date_start
+                and record.date_start < dr.date_start
+            ):
                 raise ValidationError(
-                    _(
-                        "Start date must be within the date range (%(start)s – %(end)s)."
+                    self.env._(
+                        "Start date must be within the date range "
+                        "(%(start)s – %(end)s).",
+                        start=dr.date_start,
+                        end=dr.date_end,
                     )
-                    % {"start": dr.date_start, "end": dr.date_end}
                 )
             if record.date_end and dr.date_end and record.date_end > dr.date_end:
                 raise ValidationError(
-                    _(
-                        "End date must be within the date range (%(start)s – %(end)s)."
+                    self.env._(
+                        "End date must be within the date range "
+                        "(%(start)s – %(end)s).",
+                        start=dr.date_start,
+                        end=dr.date_end,
                     )
-                    % {"start": dr.date_start, "end": dr.date_end}
                 )
 
     @api.onchange("parcel_id")
     def _onchange_parcel_id(self):
         if self.parcel_id and self.parcel_id not in self.parcel_ids:
-            self.parcel_ids = [(6, 0, (self.parcel_ids.ids or []) + [self.parcel_id.id])]
+            parcel_ids = (self.parcel_ids.ids or []) + [self.parcel_id.id]
+            self.parcel_ids = [(6, 0, parcel_ids)]
 
     @api.onchange("parcel_ids")
     def _onchange_parcel_ids(self):
-        if self.parcel_ids and (not self.parcel_id or self.parcel_id not in self.parcel_ids):
+        if self.parcel_ids and (
+            not self.parcel_id or self.parcel_id not in self.parcel_ids
+        ):
             self.parcel_id = self.parcel_ids[0]
 
     @api.onchange("use_type_id")
@@ -486,7 +519,10 @@ class TerUnit(models.Model):
             for line in unit.attribute_value_ids:
                 if line.required and not line.value_id:
                     raise ValidationError(
-                        _("Attribute '%s' is required.") % line.attribute_id.name
+                        self.env._(
+                            "Attribute '%(attr)s' is required.",
+                            attr=line.attribute_id.name,
+                        )
                     )
 
     def _search_validity_state(self, operator, value):
@@ -522,9 +558,7 @@ class TerUnit(models.Model):
 
     def _cron_recompute_validity_state(self):
         """Recompute validity_state for all ter.unit records (run daily)."""
-        records = self.search(
-            [("date_start", "!=", False), ("date_end", "!=", False)]
-        )
+        records = self.search([("date_start", "!=", False), ("date_end", "!=", False)])
         records.invalidate_recordset(["validity_state"])
         records.mapped("validity_state")
 
@@ -533,9 +567,7 @@ class TerUnit(models.Model):
         today = fields.Date.context_today(self)
         for record in self:
             if record.date_start and record.date_end:
-                record.is_current = (
-                    record.date_start <= today <= record.date_end
-                )
+                record.is_current = record.date_start <= today <= record.date_end
             else:
                 record.is_current = False
 
@@ -558,9 +590,9 @@ class TerUnit(models.Model):
         """Validate the unit use."""
         for record in self:
             if not record.parcel_id:
-                raise UserError(_("Cannot validate: Main parcel is required."))
+                raise UserError(self.env._("Cannot validate: Main parcel is required."))
             if not record.date_start or not record.date_end:
-                raise UserError(_("Cannot validate: Date range is required."))
+                raise UserError(self.env._("Cannot validate: Date range is required."))
         return self.write({"state": "validated"})
 
     def action_set_to_draft(self):
@@ -590,10 +622,18 @@ class TerUnit(models.Model):
     @api.model
     def action_reset_all_aerial_images(self, from_backend=False):
         """Reset aerial images for all parcels linked to territorial units."""
-        parcels = self.search([]).mapped("parcel_id") | self.search([]).mapped("parcel_ids")
-        parcels.reset_aerial_image()
+        batch_size = 100
+        offset = 0
+        while True:
+            batch = self.search([], limit=batch_size, offset=offset)
+            if not batch:
+                break
+            parcels = batch.mapped("parcel_id") | batch.mapped("parcel_ids")
+            parcels.reset_aerial_image()
+            offset += batch_size
         if from_backend:
             return {"type": "ir.actions.client", "tag": "reload"}
+        return None
 
     def action_show_parcels(self):
         """Open parcels linked to this unit."""
@@ -606,11 +646,10 @@ class TerUnit(models.Model):
         search_view = self.env.ref("base_ter.ter_parcel_view_search")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Parcels"),
+            "name": self.env._("Parcels"),
             "res_model": "ter.parcel",
             "view_mode": "list,form",
             "views": [(tree_view.id, "list"), (form_view.id, "form")],
             "search_view_id": search_view.id,
             "domain": [("id", "in", parcel_ids)],
         }
-

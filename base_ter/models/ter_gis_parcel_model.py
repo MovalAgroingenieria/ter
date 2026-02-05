@@ -1,7 +1,7 @@
 # Copyright 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from psycopg2 import sql
 
 
@@ -16,6 +16,7 @@ def _view_has_column(env, view_name, column_name):
         (view_name, column_name),
     )
     return bool(env.cr.fetchone()[0])
+
 
 class TerGisParcelModel(models.Model):
     _name = "ter.gis.parcel.model"
@@ -61,7 +62,6 @@ class TerGisParcelModel(models.Model):
 
     parcel_id = fields.Many2one(
         comodel_name="ter.parcel",
-        string="Parcel",
         readonly=True,
     )
     partner_id = fields.Many2one(
@@ -102,7 +102,9 @@ class TerGisParcelModel(models.Model):
                 continue
 
             record.diff_areas_threshold_exceeded_str = (
-                _("CHECK") if record.diff_areas_threshold_exceeded else _("ok")
+                self.env.__("CHECK")
+                if record.diff_areas_threshold_exceeded
+                else self.env._("ok")
             )
 
     @api.depends(
@@ -127,17 +129,17 @@ class TerGisParcelModel(models.Model):
                 [
                     "⸰ %s: %s"
                     % (
-                        _("Official Area (m²)"),
+                        self.env._("Official Area (m²)"),
                         formatter.transform_integer_to_locale(parcel.area_official_m2),
                     ),
                     "⸰ %s: %s"
                     % (
-                        _("GIS Area (m²)"),
+                        self.env._("GIS Area (m²)"),
                         formatter.transform_integer_to_locale(parcel.area_gis),
                     ),
                     "⸰ %s: %s"
                     % (
-                        _("GIS Perimeter (m)"),
+                        self.env._("GIS Perimeter (m)"),
                         formatter.transform_integer_to_locale(parcel.perimeter_gis),
                     ),
                     "⸰ %s" % bbox,

@@ -5,7 +5,7 @@ import base64
 import re
 import xml.etree.ElementTree as ET
 
-from odoo import _, api, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 KML_NS = "http://www.opengis.net/kml/2.2"
@@ -88,7 +88,6 @@ class WizardImportKml(models.TransientModel):
     )
     municipality_id = fields.Many2one(
         "res.municipality",
-        string="Municipality",
         required=True,
         help="Municipality assigned to all imported records.",
     )
@@ -98,7 +97,6 @@ class WizardImportKml(models.TransientModel):
         help="Optional: assign as manager (property) or use for parcel partner link.",
     )
     name_prefix = fields.Char(
-        string="Name prefix",
         help="Optional prefix for record names (e.g. 'PARCEL-' or 'FINCA-').",
     )
     state = fields.Selection(
@@ -112,15 +110,20 @@ class WizardImportKml(models.TransientModel):
     result_message = fields.Text(readonly=True)
 
     def _parse_kml_placemarks(self):
-        """Parse KML file and yield (name, description, polygon_wkt_4326) for each Placemark."""
+        """Parse KML file and yield placemark data.
+
+        Yields (name, description, polygon_wkt_4326) for each Placemark.
+        """
         self.ensure_one()
         if not self.kml_file:
             return
         raw = base64.b64decode(self.kml_file)
         try:
             root = ET.fromstring(raw)
-        except ET.ParseError as e:
-            raise UserError(_("Invalid KML XML: %s") % str(e)) from e
+        except ET.ParseError as parse_err:
+            raise UserError(
+                self.env._("Invalid KML XML: %(error)s", error=str(parse_err))
+            ) from parse_err
 
         def iter_placemarks(node):
             tag = node.tag.split("}")[-1] if "}" in node.tag else node.tag
@@ -131,92 +134,127 @@ class WizardImportKml(models.TransientModel):
 
         for pm in iter_placemarks(root):
             name_elem = _find_recursive(pm, "name")
-            desc_elem = _find_recursive(pm, "description")
             name = (name_elem.text or "").strip() if name_elem is not None else ""
-            description = (desc_elem.text or "").strip() if desc_elem is not None else ""
 
             poly = _find_recursive(pm, "Polygon")
             if poly is None:
                 continue
-            outer = _find_recursive(poly, "outerBoundaryIs") or _find_recursive(poly, "outerBoundary")
+            outer = _find_recursive(poly, "outerBoundaryIs") or _find_recursive(
+                poly, "outerBoundary"
+            )
             if outer is None:
                 continue
-            ring = _find_recursive(outer, "LinearRing") or _find_recursive(outer, "linearRing")
+            ring = _find_recursive(outer, "LinearRing") or _find_recursive(
+                outer, "linearRing"
+            )
             if ring is None:
                 continue
             coords_elem = _find_recursive(ring, "coordinates")
-            if coords_elem is None or not (coords_elem.text or "").strip():
+            coords_text = coords_elem.text or "" if coords_elem else ""
+            if not coords_text.strip():
                 continue
 
-            coords = _parse_kml_coordinates(coords_elem.text or "")
+            coords = _parse_kml_coordinates(coords_text)
             if len(coords) < 3:
                 continue
             wkt = _wkt_4326_to_ewkt_25830(self.env, _coords_to_wkt_polygon(coords))
             if not wkt:
                 continue
-            yield (name or _("Unnamed"), description, wkt)
+            yield (name or self.env._("Unnamed"), "", wkt)
+
+    def _build_result_message(self, created, errors):
+        """Build result message from created records and errors."""
+        msg_parts = []
+        if created:
+            records_str = ", ".join(created[:10])
+            msg_parts.append(
+                self.env._(
+                    "Created %(count)s record(s): %(names)s",
+                    count=len(created),
+                    names=records_str,
+                )
+            )
+            if len(created) > 10:
+                msg_parts.append(
+                    self.env._("... and %(more)s more.", more=len(created) - 10)
+                )
+        if errors:
+            errors_str = "; ".join(errors[:5])
+            msg_parts.append(self.env._("Errors: %(errors)s", errors=errors_str))
+            if len(errors) > 5:
+                msg_parts.append(
+                    self.env._("... and %(more)s more errors.", more=len(errors) - 5)
+                )
+        return (
+            "\n".join(msg_parts)
+            if msg_parts
+            else self.env._("No polygons found in KML.")
+        )
+
+    def _generate_unique_code(self, name, prefix, index, used_codes):
+        """Generate unique code for imported record."""
+        base = (prefix + name) if prefix else (name or "KML-%s" % (index + 1))
+        base = (base or "KML-%s" % (index + 1))[:45]
+        code = base
+        suffix = 1
+        while code in used_codes:
+            code = "%s-%s" % (base[:40], suffix)
+            suffix += 1
+        used_codes.add(code)
+        return code[:50]
+
+    def _create_record(self, code, ewkt):
+        """Create parcel or property record and return display name."""
+        if self.target_model == "ter.parcel":
+            vals = {
+                "alphanum_code": code,
+                "municipality_id": self.municipality_id.id,
+                "area_official": 0,
+                "geom_ewkt": ewkt,
+            }
+            if self.partner_id and self.partner_id.is_holder:
+                profile = self.env.ref("base_ter.ter_profile_01")
+                vals["partnerlink_ids"] = [
+                    (
+                        0,
+                        0,
+                        {
+                            "partner_id": self.partner_id.id,
+                            "is_main": True,
+                            "percentage": 100,
+                            "profile_id": profile.id,
+                        },
+                    )
+                ]
+            record = self.env["ter.parcel"].create(vals)
+        else:
+            vals = {
+                "alphanum_code": code,
+                "municipality_id": self.municipality_id.id,
+                "partner_id": self.partner_id.id if self.partner_id else False,
+                "geom_ewkt": ewkt,
+            }
+            record = self.env["ter.property"].create(vals)
+        return record.display_name
 
     def action_import(self):
         self.ensure_one()
         if not self.municipality_id:
-            raise UserError(_("Municipality is required."))
+            raise UserError(self.env._("Municipality is required."))
         prefix = (self.name_prefix or "").strip()
         created = []
         errors = []
         used_codes = set()
         for i, (name, _desc, ewkt) in enumerate(self._parse_kml_placemarks()):
-            base_code = (prefix + name) if prefix else (name or "KML-%s" % (i + 1))
-            base_code = (base_code or "KML-%s" % (i + 1))[:45]
-            code = base_code
-            suffix = 1
-            while code in used_codes:
-                code = "%s-%s" % (base_code[:40], suffix)
-                suffix += 1
-            used_codes.add(code)
-            code = code[:50]
+            code = self._generate_unique_code(name, prefix, i, used_codes)
             try:
-                if self.target_model == "ter.parcel":
-                    vals = {
-                        "alphanum_code": code,
-                        "municipality_id": self.municipality_id.id,
-                        "area_official": 0,
-                        "geom_ewkt": ewkt,
-                    }
-                    if self.partner_id and self.partner_id.is_holder:
-                        profile = self.env.ref("base_ter.ter_profile_01")
-                        vals["partnerlink_ids"] = [
-                            (0, 0, {
-                                "partner_id": self.partner_id.id,
-                                "is_main": True,
-                                "percentage": 100,
-                                "profile_id": profile.id,
-                            })
-                        ]
-                    parcel = self.env["ter.parcel"].create(vals)
-                    created.append(parcel.display_name)
-                else:
-                    prop = self.env["ter.property"].create({
-                        "alphanum_code": code,
-                        "municipality_id": self.municipality_id.id,
-                        "partner_id": self.partner_id.id if self.partner_id else False,
-                        "geom_ewkt": ewkt,
-                    })
-                    created.append(prop.display_name)
-            except Exception as e:
-                errors.append("%s: %s" % (code, str(e)))
-        msg_parts = []
-        if created:
-            msg_parts.append(_("Created %s record(s): %s") % (len(created), ", ".join(created[:10])))
-            if len(created) > 10:
-                msg_parts.append(_("... and %s more.") % (len(created) - 10))
-        if errors:
-            msg_parts.append(_("Errors: %s") % "; ".join(errors[:5]))
-            if len(errors) > 5:
-                msg_parts.append(_("... and %s more errors.") % (len(errors) - 5))
-        self.write({
-            "state": "done",
-            "result_message": "\n".join(msg_parts) if msg_parts else _("No polygons found in KML."),
-        })
+                display_name = self._create_record(code, ewkt)
+                created.append(display_name)
+            except (ValueError, RuntimeError) as err:
+                errors.append("%s: %s" % (code, str(err)))
+
+        result_msg = self._build_result_message(created, errors)
+        self.write({"state": "done", "result_message": result_msg})
         return {
             "type": "ir.actions.act_window",
             "res_model": self._name,

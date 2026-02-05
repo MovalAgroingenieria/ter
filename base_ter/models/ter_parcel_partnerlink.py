@@ -1,7 +1,7 @@
 # 2024-2026 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, fields, models
 
 
 class TerParcelPartnerlink(models.Model):
@@ -18,7 +18,6 @@ class TerParcelPartnerlink(models.Model):
         return [] if self._allow_all_contacts else [("is_holder", "=", True)]
 
     parcel_id = fields.Many2one(
-        string="Parcel",
         comodel_name="ter.parcel",
         index=True,
         ondelete="cascade",
@@ -29,7 +28,8 @@ class TerParcelPartnerlink(models.Model):
         required=True,
         index=True,
         ondelete="restrict",
-        domain=_domain_partner_id,
+        # pylint: disable=protected-access
+        domain=lambda self: self._domain_partner_id(),
     )
     name = fields.Char(
         string="Identifier of partnerlink",
@@ -39,17 +39,15 @@ class TerParcelPartnerlink(models.Model):
         compute="_compute_name",
     )
     profile_id = fields.Many2one(
-        string="Profile",
         comodel_name="ter.profile",
-        default=_default_profile_id,
+        # pylint: disable=protected-access
+        default=lambda self: self._default_profile_id(),
         required=True,
         index=True,
         ondelete="restrict",
     )
     is_main = fields.Boolean(default=False)
-    percentage = fields.Float(
-        string="Percentage", digits=(32, 2), default=0, required=True
-    )
+    percentage = fields.Float(digits=(32, 2), default=0, required=True)
     active = fields.Boolean(store=True, related="parcel_id.active")
 
     _sql_constraints = [
@@ -62,6 +60,7 @@ class TerParcelPartnerlink(models.Model):
 
     @api.depends("parcel_id.alphanum_code", "partner_id.partner_code_asstr")
     def _compute_name(self):
+        # pylint: disable=protected-access
         size = self.env["res.partner"]._size_partner_code
         for record in self:
             if not record.parcel_id:

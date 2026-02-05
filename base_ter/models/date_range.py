@@ -1,15 +1,9 @@
 # 2024-2026 Moval Agroingeniería S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-import base64
-import datetime
 import logging
 
-import pytz
-from Crypto.Cipher import AES
-from Crypto.Util.Padding import pad
-from odoo import _, api, fields, models
-from odoo.http import request
+from odoo import fields, models, api
 
 _logger = logging.getLogger(__name__)
 
@@ -25,11 +19,7 @@ class DateRange(models.Model):
         help="If enabled, date ranges of this type can be used "
         "to define periods for territorial unit uses.",
     )
-    use_type_id = fields.Many2one(
-        "ter.use_type",
-        string="Use Type",
-        domain=[("parent_id", "=", False)],
-    )
+    use_type_id = fields.Many2one("ter.use_type", domain=[("parent_id", "=", False)])
     color = fields.Integer(
         string="Color Index",
         related="use_type_id.color",
@@ -63,12 +53,12 @@ class DateRange(models.Model):
 
     def action_show_units(self):
         self.ensure_one()
-        list_view = self.env.ref("base_ter.c")
+        list_view = self.env.ref("base_ter.ter_unit_view_tree")
         form_view = self.env.ref("base_ter.view_ter_unit_form")
         search_view = self.env.ref("base_ter.view_ter_unit_filter")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Territorial Units"),
+            "name": self.env._("Territorial Units"),
             "res_model": "ter.unit",
             "view_mode": "list,form",
             "views": [(list_view.id, "list"), (form_view.id, "form")],
@@ -78,15 +68,14 @@ class DateRange(models.Model):
 
     def action_show_parcels(self):
         self.ensure_one()
-        Unit = self.env["ter.unit"]
-        units = Unit.search([("date_range_id", "=", self.id)])
+        units = self.env["ter.unit"].search([("date_range_id", "=", self.id)])
         parcel_ids = (units.mapped("parcel_id") | units.mapped("parcel_ids")).ids
         tree_view = self.env.ref("base_ter.ter_parcel_view_tree")
         form_view = self.env.ref("base_ter.ter_parcel_view_form")
         search_view = self.env.ref("base_ter.ter_parcel_view_search")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Parcels"),
+            "name": self.env._("Parcels"),
             "res_model": "ter.parcel",
             "view_mode": "list,form",
             "views": [(tree_view.id, "list"), (form_view.id, "form")],

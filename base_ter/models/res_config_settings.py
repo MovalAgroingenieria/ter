@@ -1,30 +1,39 @@
 # 2024-2026 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
+from psycopg2 import Error as PsycopgError
 from psycopg2 import sql
 
 
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
-    _inherit = "res.config.settings"
-
-    area_unit_is_ha = fields.Boolean(related="company_id.area_unit_is_ha", readonly=False)
+    area_unit_is_ha = fields.Boolean(
+        related="company_id.area_unit_is_ha", readonly=False
+    )
     area_unit_name = fields.Char(related="company_id.area_unit_name", readonly=False)
     area_unit_value_in_ha = fields.Float(
         related="company_id.area_unit_value_in_ha",
         readonly=False,
         digits=(32, 4),
     )
-    warning_diff_areas = fields.Integer(related="company_id.warning_diff_areas", readonly=False)
+    warning_diff_areas = fields.Integer(
+        related="company_id.warning_diff_areas", readonly=False
+    )
     same_parcelmanager_propertyowner = fields.Boolean(
         related="company_id.same_parcelmanager_propertyowner",
         readonly=False,
     )
-    aerial_image_wmsbase_url = fields.Char(related="company_id.aerial_image_wmsbase_url", readonly=False)
-    aerial_image_wmsbase_layers = fields.Char(related="company_id.aerial_image_wmsbase_layers", readonly=False)
-    aerial_image_wmsvec_url = fields.Char(related="company_id.aerial_image_wmsvec_url", readonly=False)
+    aerial_image_wmsbase_url = fields.Char(
+        related="company_id.aerial_image_wmsbase_url", readonly=False
+    )
+    aerial_image_wmsbase_layers = fields.Char(
+        related="company_id.aerial_image_wmsbase_layers", readonly=False
+    )
+    aerial_image_wmsvec_url = fields.Char(
+        related="company_id.aerial_image_wmsvec_url", readonly=False
+    )
     aerial_image_wmsvec_parcel_name = fields.Char(
         related="company_id.aerial_image_wmsvec_parcel_name",
         readonly=False,
@@ -41,22 +50,31 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.aerial_image_wmsvec_property_filter",
         readonly=False,
     )
-    aerial_image_height = fields.Integer(related="company_id.aerial_image_height", readonly=False)
+    aerial_image_height = fields.Integer(
+        related="company_id.aerial_image_height", readonly=False
+    )
     aerial_image_zoom = fields.Float(
         related="company_id.aerial_image_zoom",
         readonly=False,
         digits=(32, 4),
     )
     gis_viewer_url = fields.Char(related="company_id.gis_viewer_url", readonly=False)
-    gis_viewer_username = fields.Char(related="company_id.gis_viewer_username", readonly=False)
-    gis_viewer_password = fields.Char(related="company_id.gis_viewer_password", readonly=False)
-    gis_viewer_epsg = fields.Integer(related="company_id.gis_viewer_epsg", readonly=False)
+    gis_viewer_username = fields.Char(
+        related="company_id.gis_viewer_username", readonly=False
+    )
+    gis_viewer_password = fields.Char(
+        related="company_id.gis_viewer_password", readonly=False
+    )
+    gis_viewer_epsg = fields.Integer(
+        related="company_id.gis_viewer_epsg", readonly=False
+    )
     gis_viewer_previs_additional_args = fields.Char(
         related="company_id.gis_viewer_previs_additional_args",
         readonly=False,
     )
-    ter_unit_sequence_id = fields.Many2one(related="company_id.ter_unit_sequence_id", readonly=False)
-
+    ter_unit_sequence_id = fields.Many2one(
+        related="company_id.ter_unit_sequence_id", readonly=False
+    )
 
     def set_values(self):
         self.ensure_one()
@@ -69,7 +87,11 @@ class ResConfigSettings(models.TransientModel):
         if prev_epsg and new_epsg and prev_epsg != new_epsg:
             ok, details = self.update_geometry(prev_epsg, new_epsg)
             if not ok:
-                raise exceptions.UserError(_("Unable to update geometry: %s") % details)
+                raise exceptions.UserError(
+                    self.env._(
+                        "Unable to update geometry: %(details)s", details=details
+                    )
+                )
 
         return res
 
@@ -111,7 +133,7 @@ class ResConfigSettings(models.TransientModel):
                 ORDER BY tgp.name)
                 """
             )
-        except Exception as err:
+        except PsycopgError as err:
             return False, f"{layer}\n\nERROR:\n\n{err}"
         return True, ""
 

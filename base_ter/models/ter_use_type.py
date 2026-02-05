@@ -1,4 +1,7 @@
-from odoo import _, api, fields, models
+# 2026 Moval Agroingeniería
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -16,7 +19,6 @@ class UseType(models.Model):
 
     parent_id = fields.Many2one(
         comodel_name="ter.use_type",
-        string="Parent",
         index=True,
         ondelete="restrict",
         domain="[('id', '!=', id), ('id', 'not child_of', id)]",
@@ -73,7 +75,9 @@ class UseType(models.Model):
     def _compute_complete_name(self):
         for record in self:
             if record.parent_id:
-                record.complete_name = f"{record.parent_id.complete_name} / {record.name}"
+                record.complete_name = (
+                    f"{record.parent_id.complete_name} / {record.name}"
+                )
             else:
                 record.complete_name = record.name
 
@@ -85,9 +89,9 @@ class UseType(models.Model):
         "child_ids.child_ids.child_ids.child_ids.unit_ids",
     )
     def _compute_unit_count(self):
-        Unit = self.env["ter.unit"]
+        unit_model = self.env["ter.unit"]
         for record in self:
-            record.unit_count = Unit.search_count(
+            record.unit_count = unit_model.search_count(
                 [("use_type_id", "child_of", record.id)]
             )
 
@@ -106,9 +110,9 @@ class UseType(models.Model):
         "child_ids.child_ids.child_ids.unit_ids.parcel_ids",
     )
     def _compute_parcel_count(self):
-        Unit = self.env["ter.unit"]
+        unit_model = self.env["ter.unit"]
         for record in self:
-            units = Unit.search([("use_type_id", "child_of", record.id)])
+            units = unit_model.search([("use_type_id", "child_of", record.id)])
             parcels = units.mapped("parcel_id") | units.mapped("parcel_ids")
             record.parcel_count = len(parcels)
 
@@ -120,9 +124,9 @@ class UseType(models.Model):
         "child_ids.child_ids.child_ids.child_ids.date_range_ids",
     )
     def _compute_date_range_count(self):
-        DateRange = self.env["date.range"]
+        date_range_model = self.env["date.range"]
         for record in self:
-            record.date_range_count = DateRange.search_count(
+            record.date_range_count = date_range_model.search_count(
                 [("use_type_id", "child_of", record.id)]
             )
 
@@ -133,16 +137,18 @@ class UseType(models.Model):
                 continue
             # Prevent cycles: parent cannot be a child of the record
             if record.parent_id in record.child_ids:
-                raise ValidationError(_("You cannot set a child as parent."))
+                raise ValidationError(self.env._("You cannot set a child as parent."))
             if record.parent_id in record.search([("id", "child_of", record.id)]):
                 # This is a safe generic check; ensures no descendant becomes parent
-                raise ValidationError(_("You cannot create recursive hierarchies (loops)."))
+                raise ValidationError(
+                    self.env._("You cannot create recursive hierarchies (loops).")
+                )
 
     def action_view_descendants(self):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Descendants of %s") % self.display_name,
+            "name": self.env._("Descendants of %(name)s", name=self.display_name),
             "res_model": "ter.use_type",
             "view_mode": "list,form",
             "domain": [("id", "child_of", self.id), ("id", "!=", self.id)],
@@ -154,7 +160,7 @@ class UseType(models.Model):
         ancestors = self.search([("id", "parent_of", self.id)])
         return {
             "type": "ir.actions.act_window",
-            "name": _("Ancestors of %s") % self.display_name,
+            "name": self.env._("Ancestors of %(name)s", name=self.display_name),
             "res_model": "ter.use_type",
             "view_mode": "list,form",
             "domain": [("id", "in", ancestors.ids)],
@@ -168,7 +174,7 @@ class UseType(models.Model):
         search_view = self.env.ref("base_ter.view_ter_unit_filter")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Territorial Units"),
+            "name": self.env._("Territorial Units"),
             "res_model": "ter.unit",
             "view_mode": "list,form",
             "views": [(list_view.id, "list"), (form_view.id, "form")],
@@ -178,15 +184,15 @@ class UseType(models.Model):
 
     def action_show_parcels(self):
         self.ensure_one()
-        Unit = self.env["ter.unit"]
-        units = Unit.search([("use_type_id", "child_of", self.id)])
+        unit_model = self.env["ter.unit"]
+        units = unit_model.search([("use_type_id", "child_of", self.id)])
         parcel_ids = (units.mapped("parcel_id") | units.mapped("parcel_ids")).ids
         tree_view = self.env.ref("base_ter.ter_parcel_view_tree")
         form_view = self.env.ref("base_ter.ter_parcel_view_form")
         search_view = self.env.ref("base_ter.ter_parcel_view_search")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Parcels"),
+            "name": self.env._("Parcels"),
             "res_model": "ter.parcel",
             "view_mode": "list,form",
             "views": [(tree_view.id, "list"), (form_view.id, "form")],
@@ -201,7 +207,7 @@ class UseType(models.Model):
         search_view = self.env.ref("base_ter.view_date_range_search")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Date Ranges"),
+            "name": self.env._("Date Ranges"),
             "res_model": "date.range",
             "view_mode": "list,form",
             "views": [(tree_view.id, "list"), (form_view.id, "form")],
@@ -218,10 +224,11 @@ class UseType(models.Model):
 
     def _compute_all_attribute_ids(self):
         for record in self:
-            ancestors = self.search([
-                ("id", "parent_of", record.id),
-            ])
+            ancestors = self.search(
+                [
+                    ("id", "parent_of", record.id),
+                ]
+            )
             record.all_attribute_ids = (
-                    ancestors.mapped("attribute_ids")
-                    | record.attribute_ids
+                ancestors.mapped("attribute_ids") | record.attribute_ids
             )

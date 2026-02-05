@@ -39,14 +39,17 @@ class GisViewer(models.AbstractModel):
 
     def _compute_gis_link_public(self):
         for record in self:
+            # pylint: disable=protected-access
             record.gis_link_public = record._get_gis_link(public=True)
 
     def _compute_gis_link_technical(self):
         for record in self:
+            # pylint: disable=protected-access
             record.gis_link_technical = record._get_gis_link(public=False)
 
     def _compute_gis_link_minimal(self):
         for record in self:
+            # pylint: disable=protected-access
             record.gis_link_minimal = record._get_gis_link(minimal=True)
 
     def action_gis_viewer(self):
@@ -93,7 +96,7 @@ class GisViewer(models.AbstractModel):
     def _get_session_sid(self):
         try:
             return str(getattr(request.session, "sid", "") or "")
-        except Exception:
+        except (AttributeError, RuntimeError):
             return ""
 
     def _get_encrypted_credentials(self):

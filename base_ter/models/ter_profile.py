@@ -1,7 +1,7 @@
 # 2024 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 
 
 class TerProfile(models.Model):
@@ -27,9 +27,9 @@ class TerProfile(models.Model):
 
     active = fields.Boolean(default=True)
 
-    def unlink(self):
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_standard(self):
         if any(self.mapped("is_standard")):
             raise exceptions.UserError(
-                _("It is not possible to remove a 'STANDARD' partner profile.")
+                self.env._("It is not possible to remove a 'STANDARD' partner profile.")
             )
-        return super().unlink()

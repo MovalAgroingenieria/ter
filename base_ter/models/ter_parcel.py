@@ -8,7 +8,7 @@ import time
 import psycopg2
 import requests
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -48,14 +48,12 @@ class TerParcel(models.Model):
     alphanum_code = fields.Char(string="Parcel Code", required=True)
 
     municipality_id = fields.Many2one(
-        string="Municipality",
         comodel_name="res.municipality",
         required=True,
         index=True,
         ondelete="restrict",
     )
     place_id = fields.Many2one(
-        string="Place",
         comodel_name="res.place",
         index=True,
         ondelete="restrict",
@@ -78,9 +76,7 @@ class TerParcel(models.Model):
         compute="_compute_diff_areas_threshold_exceeded",
     )
 
-    official_code = fields.Char(
-        string="Official Code", size=MAX_SIZE_OFFICIAL_CODE, index=True
-    )
+    official_code = fields.Char(size=MAX_SIZE_OFFICIAL_CODE, index=True)
 
     partner_id = fields.Many2one(
         string="Parcel Manager",
@@ -92,14 +88,12 @@ class TerParcel(models.Model):
     )
 
     property_id = fields.Many2one(
-        string="Property",
         comodel_name="ter.property",
         index=True,
         ondelete="restrict",
     )
 
     aerial_image = fields.Image(
-        string="Aerial Image",
         max_width=_aerial_image_size_big,
         max_height=_aerial_image_size_big,
     )
@@ -149,14 +143,12 @@ class TerParcel(models.Model):
     )
 
     province_id = fields.Many2one(
-        string="Province",
         comodel_name="res.province",
         store=True,
         index=True,
         compute="_compute_province_id",
     )
     region_id = fields.Many2one(
-        string="Region",
         comodel_name="res.admregion",
         store=True,
         index=True,
@@ -167,10 +159,8 @@ class TerParcel(models.Model):
         string="Area unit name", compute="_compute_area_unit_name"
     )
 
-    property_data = fields.Char(
-        string="Property Data", compute="_compute_property_data"
-    )
-    address_data = fields.Char(string="Address Data", compute="_compute_address_data")
+    property_data = fields.Char(compute="_compute_property_data")
+    address_data = fields.Char(compute="_compute_address_data")
 
     partnerlink_ids = fields.One2many(
         string="Contacts of parcel",
@@ -186,9 +176,7 @@ class TerParcel(models.Model):
         string="Units",
         compute="_compute_unit_count",
     )
-    partner_code = fields.Integer(
-        string="Partner Code", compute="_compute_partner_code"
-    )
+    partner_code = fields.Integer(compute="_compute_partner_code")
 
     active = fields.Boolean(default=True)
 
@@ -200,31 +188,33 @@ class TerParcel(models.Model):
         ),
     ]
 
-    def _aerial_cache_key(
-        self,
-        *,
-        wms,
-        layers,
-        styles,
-        image_height,
-        image_width,
-        zoom,
-        force_square_shape,
-        apply_filter,
-        extra="",
-    ):
+    def _aerial_cache_key(self, params):
+        """Generate cache key for aerial image.
+
+        Args:
+            params (dict): Dictionary with keys:
+                - wms: WMS URL
+                - layers: WMS layers
+                - styles: WMS styles
+                - image_height: Image height
+                - image_width: Image width
+                - zoom: Zoom level
+                - force_square_shape: Force square shape
+                - apply_filter: Apply filter
+                - extra: Extra parameters (optional)
+        """
         self.ensure_one()
         return self._make_wms_key(
             self.geom_ewkt or "",
-            wms or "",
-            layers or "",
-            styles or "",
-            int(image_height or 0),
-            int(image_width or 0),
-            float(zoom or 0.0),
-            bool(force_square_shape),
-            bool(apply_filter),
-            extra or "",
+            params.get("wms") or "",
+            params.get("layers") or "",
+            params.get("styles") or "",
+            int(params.get("image_height") or 0),
+            int(params.get("image_width") or 0),
+            float(params.get("zoom") or 0.0),
+            bool(params.get("force_square_shape")),
+            bool(params.get("apply_filter")),
+            params.get("extra") or "",
         )
 
     @api.depends("area_official")
@@ -268,34 +258,46 @@ class TerParcel(models.Model):
         for record in self:
             record.unit_count = len(record.unit_ids)
 
+    def _get_wms_config(self):
+        """Load WMS configuration parameters."""
+        config = self.env["ir.config_parameter"].sudo()
+        return {
+            "wmsbase_url": config.get_param("base_ter.aerial_image_wmsbase_url", False),
+            "wmsbase_layers": config.get_param(
+                "base_ter.aerial_image_wmsbase_layers", False
+            ),
+            "wmsvec_url": config.get_param("base_ter.aerial_image_wmsvec_url", False),
+            "wmsvec_parcel_layer": config.get_param(
+                "base_ter.aerial_image_wmsvec_parcel_name", False
+            ),
+            "wmsvec_filter": bool(
+                config.get_param("base_ter.aerial_image_wmsvec_parcel_filter", False)
+            ),
+            "image_height": int(
+                config.get_param("base_ter.aerial_image_height", 0) or 0
+            ),
+            "image_zoom": float(config.get_param("base_ter.aerial_image_zoom", 0) or 0),
+        }
+
     @api.depends("aerial_image", "mapped_to_polygon")
     def _compute_aerial_image_shown(self):
-        config = self.env["ir.config_parameter"].sudo()
+        wms_cfg = self._get_wms_config()  # pylint: disable=protected-access
 
-        wmsbase_url = config.get_param("base_ter.aerial_image_wmsbase_url", False)
-        wmsbase_layers = config.get_param("base_ter.aerial_image_wmsbase_layers", False)
-        wmsvec_url = config.get_param("base_ter.aerial_image_wmsvec_url", False)
-        wmsvec_parcel_layer = config.get_param(
-            "base_ter.aerial_image_wmsvec_parcel_name", False
-        )
-        wmsvec_filter = bool(
-            config.get_param("base_ter.aerial_image_wmsvec_parcel_filter", False)
-        )
-        image_height = int(config.get_param("base_ter.aerial_image_height", 0) or 0)
-        image_zoom = float(config.get_param("base_ter.aerial_image_zoom", 0) or 0)
+        image_height = wms_cfg["image_height"] or self._aerial_image_size_big
+        image_zoom = wms_cfg["image_zoom"] or self._aerial_image_zoom
 
-        ogc_ok = bool(
-            wmsbase_url and wmsbase_layers and image_height >= 0 and image_zoom >= 0
+        is_ogc_ok = bool(
+            wms_cfg["wmsbase_url"]
+            and wms_cfg["wmsbase_layers"]
+            and image_height >= 0
+            and image_zoom >= 0
         )
-        if image_height == 0:
-            image_height = self._aerial_image_size_big
-        if image_zoom == 0:
-            image_zoom = self._aerial_image_zoom
-
-        use_vec = bool(ogc_ok and wmsvec_url and wmsvec_parcel_layer)
+        use_vector = bool(
+            is_ogc_ok and wms_cfg["wmsvec_url"] and wms_cfg["wmsvec_parcel_layer"]
+        )
 
         for record in self:
-            if not (ogc_ok and record.mapped_to_polygon):
+            if not (is_ogc_ok and record.mapped_to_polygon):
                 record.aerial_image_shown = record.aerial_image or False
                 record.aerial_image_shown_b64 = (
                     (record.aerial_image or b"").decode("ascii", errors="ignore")
@@ -304,50 +306,58 @@ class TerParcel(models.Model):
                 )
                 continue
 
-            stored_b64 = None
+            stored_base64 = None
 
-            if not use_vec:
-                key = record._aerial_cache_key(
-                    wms=wmsbase_url,
-                    layers=wmsbase_layers,
-                    styles="default",
-                    image_height=image_height,
-                    image_width=0,
-                    zoom=image_zoom,
-                    force_square_shape=self._force_square_shape,
-                    apply_filter=False,
-                    extra="base",
+            if not use_vector:
+                key = record._aerial_cache_key(  # pylint: disable=protected-access
+                    {  # pylint: disable=protected-access
+                        "wms": wms_cfg["wmsbase_url"],
+                        "layers": wms_cfg["wmsbase_layers"],
+                        "styles": "default",
+                        "image_height": image_height,
+                        "image_width": 0,
+                        "zoom": image_zoom,
+                        "force_square_shape": self._force_square_shape,
+                        "apply_filter": False,
+                        "extra": "base",
+                    }
                 )
                 if record.aerial_image and record.aerial_image_key == key:
-                    stored_b64 = record.aerial_image
+                    stored_base64 = record.aerial_image
                 else:
-                    stored_b64 = record.get_aerial_image(
-                        wms=wmsbase_url,
-                        layers=wmsbase_layers,
+                    stored_base64 = record.get_aerial_image(
+                        wms=wms_cfg["wmsbase_url"],
+                        layers=wms_cfg["wmsbase_layers"],
                         image_height=image_height,
                         image_format="png",
                         zoom=image_zoom,
                         force_square_shape=self._force_square_shape,
                     )
             else:
-                key = record._aerial_cache_key(
-                    wms=wmsbase_url,
-                    layers=wmsbase_layers,
-                    styles="default",
-                    image_height=image_height,
-                    image_width=0,
-                    zoom=image_zoom,
-                    force_square_shape=self._force_square_shape,
-                    apply_filter=False,
-                    extra="base+vec:%s:%s:%s"
-                    % (wmsvec_url or "", wmsvec_parcel_layer or "", int(wmsvec_filter)),
+                key = record._aerial_cache_key(  # pylint: disable=protected-access
+                    {  # pylint: disable=protected-access
+                        "wms": wms_cfg["wmsbase_url"],
+                        "layers": wms_cfg["wmsbase_layers"],
+                        "styles": "default",
+                        "image_height": image_height,
+                        "image_width": 0,
+                        "zoom": image_zoom,
+                        "force_square_shape": self._force_square_shape,
+                        "apply_filter": False,
+                        "extra": "base+vec:%s:%s:%s"
+                        % (
+                            wms_cfg["wmsvec_url"] or "",
+                            wms_cfg["wmsvec_parcel_layer"] or "",
+                            int(wms_cfg["wmsvec_filter"]),
+                        ),
+                    }
                 )
                 if record.aerial_image and record.aerial_image_key == key:
-                    stored_b64 = record.aerial_image
+                    stored_base64 = record.aerial_image
                 else:
-                    base_raw = record.get_aerial_image(
-                        wms=wmsbase_url,
-                        layers=wmsbase_layers,
+                    base_image_raw = record.get_aerial_image(
+                        wms=wms_cfg["wmsbase_url"],
+                        layers=wms_cfg["wmsbase_layers"],
                         image_height=image_height,
                         image_format="png",
                         zoom=image_zoom,
@@ -355,36 +365,36 @@ class TerParcel(models.Model):
                         apply_filter=False,
                         force_square_shape=self._force_square_shape,
                     )
-                    vec_raw = record.get_aerial_image(
-                        wms=wmsvec_url,
-                        layers=wmsvec_parcel_layer,
+                    vector_image_raw = record.get_aerial_image(
+                        wms=wms_cfg["wmsvec_url"],
+                        layers=wms_cfg["wmsvec_parcel_layer"],
                         image_height=image_height,
                         image_format="png",
                         zoom=image_zoom,
                         get_raw=True,
-                        apply_filter=wmsvec_filter,
+                        apply_filter=wms_cfg["wmsvec_filter"],
                         force_square_shape=self._force_square_shape,
                     )
-                    if base_raw and vec_raw:
+                    if base_image_raw and vector_image_raw:
                         merged_bytes = self.env["common.image"].merge_img(
-                            base_raw,
-                            vec_raw,
+                            base_image_raw,
+                            vector_image_raw,
                             return_base64=False,
                         )
                         if merged_bytes:
-                            stored_b64 = base64.b64encode(merged_bytes)
+                            stored_base64 = base64.b64encode(merged_bytes)
 
-            if stored_b64:
-                record.aerial_image = stored_b64
+            if stored_base64:
+                record.aerial_image = stored_base64
                 record.aerial_image_key = key
-                record.aerial_image_shown = stored_b64
+                record.aerial_image_shown = stored_base64
                 record.aerial_image_shown_b64 = (
-                    stored_b64.decode("ascii", errors="ignore")
-                    if isinstance(stored_b64, (bytes, bytearray))
-                    else (stored_b64 or "")
+                    stored_base64.decode("ascii", errors="ignore")
+                    if isinstance(stored_base64, (bytes, bytearray))
+                    else (stored_base64 or "")
                 )
                 self.env["common.log"].register_in_log(
-                    _("Aerial image OK. Parcel: %s") % (record.name,),
+                    self.env._("Aerial image OK. Parcel: %(name)s", name=record.name),
                     source=self._name,
                     message_type="INFO",
                 )
@@ -392,7 +402,7 @@ class TerParcel(models.Model):
                 record.aerial_image_shown = False
                 record.aerial_image_shown_b64 = ""
                 self.env["common.log"].register_in_log(
-                    _("Error getting aerial image (is the WMS url correct?)"),
+                    self.env._("Error getting aerial image (is the WMS url correct?)"),
                     source=self._name,
                     message_type="WARNING",
                 )
@@ -416,7 +426,7 @@ class TerParcel(models.Model):
         config = self.env["ir.config_parameter"].sudo()
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
         unit_name = (
-            _("ha")
+            self.env._("ha")
             if area_unit_is_ha
             else (config.get_param("base_ter.area_unit_name", "") or "")
         )
@@ -427,7 +437,9 @@ class TerParcel(models.Model):
     def _compute_property_data(self):
         for record in self:
             record.property_data = (
-                record.property_id.name if record.property_id else _("not assigned")
+                record.property_id.name
+                if record.property_id
+                else self.env._("not assigned")
             )
 
     @api.depends("municipality_id", "place_id", "municipality_id.province_id")
@@ -467,7 +479,7 @@ class TerParcel(models.Model):
                 and record.place_id.municipality_id != record.municipality_id
             ):
                 raise exceptions.ValidationError(
-                    _("The place is not in the municipality.")
+                    self.env._("The place is not in the municipality.")
                 )
 
     @api.constrains("partner_id", "property_id")
@@ -486,8 +498,9 @@ class TerParcel(models.Model):
                 and record.partner_id != record.property_id.partner_id
             ):
                 raise exceptions.ValidationError(
-                    _(
-                        "The parcel manager and the property manager must be the same person."
+                    self.env._(
+                        "The parcel manager and the property manager must be "
+                        "the same person."
                     )
                 )
 
@@ -497,20 +510,22 @@ class TerParcel(models.Model):
             if record.partner_id:
                 if not record.partner_id.is_holder:
                     raise exceptions.ValidationError(
-                        _("The contact chosen as main is not a manager.")
+                        self.env._("The contact chosen as main is not a manager.")
                     )
                 if not record.partnerlink_ids:
                     raise exceptions.ValidationError(
-                        _(
-                            "If a manager is assigned to the parcel, it is mandatory to configure the contact list."
+                        self.env._(
+                            "If a manager is assigned to the parcel, it is "
+                            "mandatory to configure the contact list."
                         )
                     )
 
             main = record.partnerlink_ids.filtered("is_main")[:1]
             if main and record.partner_id and main.partner_id != record.partner_id:
                 raise exceptions.ValidationError(
-                    _(
-                        "The parcel manager and the main contact must be the same person."
+                    self.env._(
+                        "The parcel manager and the main contact must be "
+                        "the same person."
                     )
                 )
 
@@ -520,37 +535,40 @@ class TerParcel(models.Model):
             if not record.partnerlink_ids:
                 if record.partner_id:
                     raise exceptions.ValidationError(
-                        _(
-                            "The main contact exists, but the contact list of the parcel is empty."
+                        self.env._(
+                            "The main contact exists, but the contact list of "
+                            "the parcel is empty."
                         )
                     )
                 continue
 
             if not record.partner_id:
                 raise exceptions.ValidationError(
-                    _("It is mandatory to enter the parcel manager.")
+                    self.env._("It is mandatory to enter the parcel manager.")
                 )
 
             mains = record.partnerlink_ids.filtered("is_main")
             if len(mains) != 1:
                 raise exceptions.ValidationError(
-                    _(
-                        "It is mandatory to enter the main contact of the parcel (only one)."
+                    self.env._(
+                        "It is mandatory to enter the main contact of the "
+                        "parcel (only one)."
                     )
                 )
 
             profiles = record.partnerlink_ids.mapped("profile_id")
-            for profile in profiles:
-                if not profile or not profile.requires_total:
+            for prof in profiles:
+                if not prof or not prof.requires_total:
                     continue
-                links = record.partnerlink_ids.filtered(
-                    lambda l: l.profile_id == profile
+                links = record.partnerlink_ids.filtered_domain(
+                    [("profile_id", "=", prof.id)]
                 )
                 total = sum(links.mapped("percentage"))
                 if total != 100:
                     raise exceptions.ValidationError(
-                        _(
-                            "Review the profile percentages: there is a percentage profile that does not add up to 100%."
+                        self.env._(
+                            "Review the profile percentages: there is a "
+                            "percentage profile that does not add up to 100%."
                         )
                     )
 
@@ -589,17 +607,19 @@ class TerParcel(models.Model):
             "percentage": percentage,
         }
 
-    def name_get(self):
+    @api.depends("active", "name")
+    @api.depends_context("show_archived_in_parcel_code")
+    def _compute_display_name(self):
         show_archived = bool(
             self.env.context.get("show_archived_in_parcel_code", False)
         )
-        res = []
         for record in self:
             name = record.name
             if show_archived:
-                name = _("Available") if record.active else _("ARCHIVED")
-            res.append((record.id, name))
-        return res
+                name = (
+                    self.env._("Available") if record.active else self.env._("ARCHIVED")
+                )
+            record.display_name = name
 
     def write(self, vals):
         res = super().write(vals)
@@ -608,30 +628,20 @@ class TerParcel(models.Model):
 
         partners = self.mapped("partnerlink_ids.partner_id").filtered("is_holder")
         for record in self.filtered("property_id"):
-            record.property_id._refresh_computed_fields()
+            record.property_id._refresh_computed_fields()  # pylint: disable=protected-access
 
         if partners:
-            partners._refresh_computed_fields()
+            partners._refresh_computed_fields()  # pylint: disable=protected-access
         return res
 
-    @api.model
-    def _get_view(self, view_id=None, view_type="form", **options):
-        arch, view = super()._get_view(view_id, view_type, **options)
-        if view_type not in ("form", "tree"):
-            return arch, view
-
-        area_fields = self._add_area_fields() or []
-        if not area_fields:
-            return arch, view
-
-        area_map = {field_name: label for field_name, label in area_fields}
-
+    def _get_measure_name_for_view(self):
+        """Get area measure name from config for view."""
         config = self.env["ir.config_parameter"].sudo()
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
         area_unit_name = config.get_param("base_ter.area_unit_name", "") or ""
         value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
 
-        measure_name = _(self._ha_name)
+        measure_name = self.env._(self._ha_name)
         if (
             not area_unit_is_ha
             and area_unit_name
@@ -640,10 +650,24 @@ class TerParcel(models.Model):
             and area_unit_name != measure_name
         ):
             measure_name = area_unit_name
+        return measure_name
+
+    @api.model
+    def _get_view(self, view_id=None, view_type="form", **options):
+        arch, view = super()._get_view(view_id, view_type, **options)
+        if view_type not in ("form", "tree"):
+            return arch, view
+        area_fields = self._add_area_fields() or []
+        if not area_fields:
+            return arch, view
+        area_map = dict(area_fields)
+        measure_name = (
+            self._get_measure_name_for_view()
+        )  # pylint: disable=protected-access
 
         for field_name, label in area_map.items():
             for node in arch.xpath(f"//field[@name='{field_name}']"):
-                node.set("string", "%s (%s)" % (_(label), measure_name))
+                node.set("string", "%s (%s)" % (self.env._(label), measure_name))
 
         return arch, view
 
@@ -658,54 +682,56 @@ class TerParcel(models.Model):
             record.aerial_image_shown_b64 = False
             record.image_1920 = False
 
-
-
+    def _reset_single_aerial_image(self):
+        """Reset aerial image for a single parcel record."""
+        self.ensure_one()
+        self.aerial_image = False
+        self.aerial_image_key = False
+        self._compute_aerial_image_shown()  # pylint: disable=protected-access
 
     def reset_aerial_image(self):
-        _WMS_ERRORS = (
+        wms_errors = (
             requests.exceptions.ConnectionError,
             requests.exceptions.Timeout,
             OSError,
         )
 
-        def _do_reset(record):
-            record.aerial_image = False
-            record.aerial_image_key = False
-            record._compute_aerial_image_shown()
-
         if len(self) == 1:
             try:
-                _do_reset(self)
-                self.env.cr.commit()
+                self._reset_single_aerial_image()  # pylint: disable=protected-access
+                self.env.cr.commit()  # pylint: disable=invalid-commit
                 self.env.invalidate_all()
-            except _WMS_ERRORS as e:
-                _logger.warning("WMS fetch failed for parcel %s: %s", self.alphanum_code, e)
+            except wms_errors as e:
+                _logger.warning(
+                    "WMS fetch failed for parcel %s: %s", self.alphanum_code, e
+                )
                 raise exceptions.UserError(
-                    _(
-                        "Could not fetch aerial image from WMS (timeout or connection error). "
-                        "Try again later or check network/IGN service. Parcel: %s"
+                    self.env._(
+                        "Could not fetch aerial image from WMS (timeout or "
+                        "connection error). Try again later or check "
+                        "network/IGN service. Parcel: %(code)s",
+                        code=self.alphanum_code,
                     )
-                    % self.alphanum_code
                 ) from e
             return
 
         failed = []
-        _MAX_SERIALIZATION_RETRIES = 3
-        for record in self.with_progress(_("Getting the aerial images...")):
-            for attempt in range(_MAX_SERIALIZATION_RETRIES + 1):
+        max_serialization_retries = 3
+        for record in self.with_progress(self.env._("Getting the aerial images...")):
+            for attempt in range(max_serialization_retries + 1):
                 try:
-                    _do_reset(record)
-                    self.env.cr.commit()
+                    record._reset_single_aerial_image()  # pylint: disable=protected-access
+                    self.env.cr.commit()  # pylint: disable=invalid-commit
                     self.env.invalidate_all()
                     break
                 except psycopg2.errors.SerializationFailure:
-                    if attempt < _MAX_SERIALIZATION_RETRIES:
+                    if attempt < max_serialization_retries:
                         self.env.cr.rollback()
                         self.env.invalidate_all()
                         time.sleep(0.5 * (attempt + 1))
                     else:
                         raise
-                except _WMS_ERRORS as e:
+                except wms_errors as e:
                     _logger.warning(
                         "WMS fetch failed for parcel %s: %s",
                         record.alphanum_code,
@@ -715,24 +741,33 @@ class TerParcel(models.Model):
                     break
         if failed:
             raise exceptions.UserError(
-                _(
+                self.env._(
                     "Could not fetch aerial images for %(count)s parcel(s) "
-                    "(timeout or connection error to WMS). Try again later: %(codes)s"
+                    "(timeout or connection error to WMS). Try again later: %(codes)s",
+                    count=len(failed),
+                    codes=", ".join(failed[:10]),
                 )
-                % {"count": len(failed), "codes": ", ".join(failed[:10])}
             )
 
     @api.model
     def action_reset_all_aerial_images(self, from_backend=False):
-        self.search([]).reset_aerial_image()
+        batch_size = 100
+        offset = 0
+        while True:
+            batch = self.search([], limit=batch_size, offset=offset)
+            if not batch:
+                break
+            batch.reset_aerial_image()
+            offset += batch_size
         if from_backend:
             return {"type": "ir.actions.client", "tag": "reload"}
+        return None
 
     def action_gis_preview(self):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": "%s : %s" % (_("Parcel on the map"), self.alphanum_code),
+            "name": "%s : %s" % (self.env._("Parcel on the map"), self.alphanum_code),
             "res_model": "wizard.show.gis.preview",
             "view_mode": "form",
             "target": "new",
@@ -746,7 +781,7 @@ class TerParcel(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": "%s : %s" % (_("Parcel"), self.alphanum_code),
+            "name": "%s : %s" % (self.env._("Parcel"), self.alphanum_code),
             "res_model": "wizard.set.parcel.code",
             "view_mode": "form",
             "target": "new",
@@ -759,7 +794,7 @@ class TerParcel(models.Model):
         search_view = self.env.ref("base_ter.view_ter_unit_filter")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Territorial Units"),
+            "name": self.env._("Territorial Units"),
             "res_model": "ter.unit",
             "view_mode": "list,form",
             "views": [

@@ -1,7 +1,7 @@
 # 2024-2026 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 
 
 class ResPartner(models.Model):
@@ -24,8 +24,8 @@ class ResPartner(models.Model):
         return (max_code or 0) + 1 if max_code is not None else 0
 
     partner_code = fields.Integer(
-        string="Partner Code",
-        default=_default_partner_code,
+        # pylint: disable=protected-access
+        default=lambda self: self._default_partner_code(),
         required=False,
         index=True,
     )
@@ -188,7 +188,7 @@ class ResPartner(models.Model):
         config = self.env["ir.config_parameter"].sudo()
         area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
         unit_name = (
-            _("ha")
+            self.env._("ha")
             if area_unit_is_ha
             else (config.get_param("base_ter.area_unit_name", "") or "")
         )
@@ -204,7 +204,25 @@ class ResPartner(models.Model):
                 [("partner_code", "=", record.partner_code), ("id", "!=", record.id)]
             )
             if count:
-                raise exceptions.ValidationError(_("Repeated partner code."))
+                raise exceptions.ValidationError(self.env._("Repeated partner code."))
+
+    def _get_measure_name_for_view(self):
+        """Get area measure name from config for view."""
+        config = self.env["ir.config_parameter"].sudo()
+        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        area_unit_name = config.get_param("base_ter.area_unit_name", "") or ""
+        value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
+
+        measure_name = self.env._(self._ha_name)
+        if (
+            not area_unit_is_ha
+            and area_unit_name
+            and value_in_ha
+            and value_in_ha != 1
+            and area_unit_name != measure_name
+        ):
+            measure_name = area_unit_name
+        return measure_name
 
     @api.model
     def _get_view(self, view_id=None, view_type="form", **options):
@@ -221,24 +239,13 @@ class ResPartner(models.Model):
         for field_name, label in area_fields:
             seen[field_name] = label
 
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        area_unit_name = config.get_param("base_ter.area_unit_name", "") or ""
-        value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
-
-        measure_name = _(self._ha_name)
-        if (
-            not area_unit_is_ha
-            and area_unit_name
-            and value_in_ha
-            and value_in_ha != 1
-            and area_unit_name != measure_name
-        ):
-            measure_name = area_unit_name
+        measure_name = (
+            self._get_measure_name_for_view()
+        )  # pylint: disable=protected-access
 
         for field_name, label in seen.items():
             for node in arch.xpath(f"//field[@name='{field_name}']"):
-                node.set("string", "%s (%s)" % (_(label), measure_name))
+                node.set("string", "%s (%s)" % (self.env._(label), measure_name))
 
         return arch, view
 
@@ -246,11 +253,12 @@ class ResPartner(models.Model):
 
     @api.depends("partner_code")
     def _compute_display_name(self):
-        super()._compute_display_name()
+        result = super()._compute_display_name()
         for rec in self.filtered(lambda r: r.partner_code and r.partner_code > 0):
             parts = (rec.display_name or "").split("\n")
             parts[0] = "%s [%s]" % (parts[0], rec.partner_code)
             rec.display_name = "\n".join(parts)
+        return result
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -285,7 +293,7 @@ class ResPartner(models.Model):
         search_view = self.env.ref("base_ter.ter_parcel_view_search")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Parcels"),
+            "name": self.env._("Parcels"),
             "res_model": "ter.parcel",
             "view_mode": "list,form,kanban",
             "views": [
@@ -306,7 +314,7 @@ class ResPartner(models.Model):
         search_view = self.env.ref("base_ter.view_ter_unit_filter")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Territorial Units"),
+            "name": self.env._("Territorial Units"),
             "res_model": "ter.unit",
             "view_mode": "list,form",
             "views": [
@@ -327,7 +335,7 @@ class ResPartner(models.Model):
         search_view = self.env.ref("base_ter.ter_property_view_search")
         return {
             "type": "ir.actions.act_window",
-            "name": _("Properties"),
+            "name": self.env._("Properties"),
             "res_model": "ter.property",
             "view_mode": "list,form,kanban",
             "views": [

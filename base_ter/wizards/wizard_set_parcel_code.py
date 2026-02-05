@@ -8,7 +8,7 @@ class WizardSetParcelCode(models.TransientModel):
     _name = "wizard.set.parcel.code"
     _description = "Dialog box to set a parcel code"
 
-    parcel_code = fields.Char(string="Parcel Code")
+    parcel_code = fields.Char()
 
     @api.model
     def default_get(self, fields_list):
