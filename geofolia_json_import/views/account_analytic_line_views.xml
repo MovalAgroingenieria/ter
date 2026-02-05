@@ -44,6 +44,7 @@
         <field name="name">account.analytic.line.search.inherit.territory</field>
         <field name="model">account.analytic.line</field>
         <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='task_id']" position="after">
                 <field name="geofolia_external_id" groups="geofolia_json_import.group_geofolia_import"/>
