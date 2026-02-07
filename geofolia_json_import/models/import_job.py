@@ -956,7 +956,11 @@ class GeofoliaImportJob(models.Model):
                         }
                     )
         except Exception as exc:  # noqa: BLE001
-            line.write({"sync_state": "error", "sync_message": str(exc)})
+            try:
+                line.write({"sync_state": "error", "sync_message": str(exc)})
+            except Exception:  # noqa: BLE001
+                self.env.cr.rollback()
+                raise exc from None
 
     # ----------------------------
     # Apply stats/state
@@ -1464,15 +1468,20 @@ class GeofoliaImportJob(models.Model):
 
     def _get_unique_parcel_alphanum_code(self, parcel_model, base_code, max_size=20):
         """
-        Return an alphanum_code that does not conflict with existing parcels.
+        Return an alphanum_code/name that does not conflict with existing parcels.
         If base_code exists (by alphanum_code or name), try 'base - 1', 'base - 2'.
         """
         base_code = (str(base_code).strip() or "parcel")[:max_size]
         candidate = base_code
         suffix = 0
+        search_ctx = parcel_model.with_context(active_test=False)
         while True:
-            by_code = parcel_model.search([("alphanum_code", "=", candidate)], limit=1)
-            by_name = parcel_model.search([("name", "=", candidate)], limit=1)
+            by_code = search_ctx.search(
+                [("alphanum_code", "=", candidate)], limit=1
+            )
+            by_name = search_ctx.search(
+                [("name", "=", candidate)], limit=1
+            )
             if not by_code and not by_name:
                 return candidate
             suffix += 1
@@ -1509,16 +1518,19 @@ class GeofoliaImportJob(models.Model):
                 return self.env["ter.parcel"]
             code = vals.get("geofolia_code") or uid
             base_code = str(code).strip() or uid
-            alphanum_code = self._get_unique_parcel_alphanum_code(
+            unique_code = self._get_unique_parcel_alphanum_code(
                 Parcel, base_code, max_size=50
             )
             area = vals.get("area_official") or 0.0
-            return Parcel.create({
-                "alphanum_code": alphanum_code,
+            create_vals = {
+                "alphanum_code": unique_code,
                 "municipality_id": mun.id,
                 "area_official": float(area),
                 "geofolia_farm_identification_code": uid,
-            })
+            }
+            if "name" in Parcel._fields:
+                create_vals["name"] = unique_code
+            return Parcel.create(create_vals)
         # Child: parcel from parent ter.unit
         parent_unit = Unit.search([("geofolia_uid", "=", parent_id1)], limit=1)
         if parent_unit and parent_unit.parcel_id:

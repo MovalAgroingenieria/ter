@@ -71,7 +71,7 @@ class TerParcel(models.Model):
 
     def action_show_move_lines(self):
         self.ensure_one()
-        list_view = self.env.ref("base_ter_invoicing.account_move_line_view_tree")
+        list_view = self.env.ref("base_ter_invoicing.account_move_line_view_list")
         search_view = self.env.ref("base_ter_invoicing.account_move_line_view_search")
         return {
             "type": "ir.actions.act_window",
