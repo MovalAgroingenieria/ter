@@ -40,7 +40,10 @@ class ProductProduct(models.Model):
     geofolia_source_line_ref = fields.Reference(
         selection=[
             ("geofolia.import.product.line", "Geofolia Product line"),
-            ("geofolia.import.harvested.product.line", "Geofolia Harvested Product line"),
+            (
+                "geofolia.import.harvested.product.line",
+                "Geofolia Harvested Product line",
+            ),
             ("geofolia.import.equipment.line", "Geofolia Equipment line"),
         ],
         string="Geofolia Source Line",
@@ -53,4 +56,3 @@ class ProductProduct(models.Model):
             "This Geofolia product has already been imported.",
         ),
     ]
-

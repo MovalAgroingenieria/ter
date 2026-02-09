@@ -4,7 +4,6 @@
 from xml.etree import ElementTree
 
 import requests
-
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -152,7 +151,11 @@ class TerParcel(models.Model):
                 continue
             if self.search_count(
                 [
-                    ("official_code_with_subparcel", "=", record.official_code_with_subparcel),
+                    (
+                        "official_code_with_subparcel",
+                        "=",
+                        record.official_code_with_subparcel,
+                    ),
                     ("id", "!=", record.id),
                 ]
             ):

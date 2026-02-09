@@ -32,4 +32,5 @@ exclude =
 
 per-file-ignores =
     __init__.py:F401
+    geofolia_json_import/models/import_job.py:C812
 

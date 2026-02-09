@@ -143,12 +143,12 @@ msgstr "<span>Tipo:</span>"
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
 msgid "<span>[</span>"
-msgstr "<span>[</span>"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
 msgid "<span>]</span>"
-msgstr "<span>]</span>"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
@@ -169,7 +169,7 @@ msgstr "<strong>Identidad y información catastral</strong>"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ag
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ag
 msgid "AG - CORRIENTES Y SUPERFICIES DE AGUA"
-msgstr "AG - CORRIENTES Y SUPERFICIES DE AGUA"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #. odoo-python
@@ -243,13 +243,13 @@ msgstr "INFORMACIÓN BÁSICA"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ca
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ca
 msgid "CA - VIALES"
-msgstr "CA - VIALES"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__cf
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__cf
 msgid "CF - ASOCIACIÓN CÍTRICOS-FRUTALES"
-msgstr "CF - ASOCIACIÓN CÍTRICOS-FRUTALES"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ci
@@ -261,13 +261,13 @@ msgstr "CI - CÍTRICOS"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__cs
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__cs
 msgid "CS - ASOCIACIÓN CÍTRICOS-FRUTALES DE CÁSCARA"
-msgstr "CS - ASOCIACIÓN CÍTRICOS-FRUTALES DE CÁSCARA"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__cv
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__cv
 msgid "CV - ASOCIACIÓN CÍTRICOS-VIÑEDO"
-msgstr "CV - ASOCIACIÓN CÍTRICOS-VIÑEDO"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_sigpac_view_search
@@ -305,13 +305,13 @@ msgstr "Nombre a mostrar"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ed
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ed
 msgid "ED - EDIFICACIONES"
-msgstr "ED - EDIFICACIONES"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ep
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ep
 msgid "EP - ELEMENTO DEL PAISAJE"
-msgstr "EP - ELEMENTO DEL PAISAJE"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_sigpac__recinto
@@ -336,37 +336,37 @@ msgstr "Error obteniendo la imagen aérea (¿Es la url WMS correcta?)"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ff
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ff
 msgid "FF - ASOCIACIÓN FRUTALES-FRUTALES DE CÁSCARA"
-msgstr "FF - ASOCIACIÓN FRUTALES-FRUTALES DE CÁSCARA"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__fl
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__fl
 msgid "FL - FRUTOS SECOS Y OLIVAR"
-msgstr "FL - FRUTOS SECOS Y OLIVAR"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__fo
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__fo
 msgid "FO - FORESTAL"
-msgstr "FO - FORESTAL"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__fs
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__fs
 msgid "FS - FRUTOS SECOS"
-msgstr "FS - FRUTOS SECOS"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__fv
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__fv
 msgid "FV - FRUTOS SECOS Y VIÑEDO"
-msgstr "FV - FRUTOS SECOS Y VIÑEDO"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__fy
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__fy
 msgid "FY - FRUTALES"
-msgstr "FY - FRUTALES"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_view_form
@@ -431,7 +431,7 @@ msgstr "Agrupar por"
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel_sigpaclink__id
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_sigpac__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_sigpac_view_form
@@ -442,7 +442,7 @@ msgstr "IDENTIFICACIÓN"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__im
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__im
 msgid "IM - IMPRODUCTIVOS"
-msgstr "IM - IMPRODUCTIVOS"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
@@ -553,7 +553,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__mt
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__mt
 msgid "MT - MATORRAL"
-msgstr "MT - MATORRAL"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_view_form
@@ -576,9 +576,9 @@ msgstr "Pendiente media (por mil)"
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
 msgid "Minimal Intersection (%)"
-msgstr "Intersección mínima (%)"
-"Porcentaje de intersección mínima entre recinto SIGPAC y parcela para "
-"considerar válida esta intersección"
+msgstr ""
+"Intersección mínima (%)Porcentaje de intersección mínima entre recinto "
+"SIGPAC y parcela para considerar válida esta intersección"
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
@@ -630,8 +630,9 @@ msgstr "Nombres de los archivos shp SIGPAC"
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,help:l10n_es_territory_sigpac.field_res_config_settings__sigpac_names
 msgid "Names of the official shapefiles of SIGPAC (separated by commas)"
-msgstr "Nombres de los shapefiles oficiales de SIGPAC (separados por comas)"
-"Nombres de los archivos shp oficiales del SIGPAC (separados por comas)"
+msgstr ""
+"Nombres de los shapefiles oficiales de SIGPAC (separados por comas)Nombres "
+"de los archivos shp oficiales del SIGPAC (separados por comas)"
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
@@ -641,9 +642,10 @@ msgstr "Nombre de los archivos shp"
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
 msgid "Names of the shapefiles that contains SIGPAC"
-msgstr "Nombres de los shapefiles que contienen SIGPAC"
-"Nombre de los archivos shp que contienen el SIGPAC de los municipios a "
-"considerar. Utilizar la ',' como separador"
+msgstr ""
+"Nombres de los shapefiles que contienen SIGPACNombre de los archivos shp que"
+" contienen el SIGPAC de los municipios a considerar. Utilizar la ',' como "
+"separador"
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
@@ -664,19 +666,19 @@ msgstr "Número de parcelas asociadas"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__oc
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__oc
 msgid "OC - ASOCIACIÓN OLIVAR-CÍTRICOS"
-msgstr "OC - ASOCIACIÓN OLIVAR-CÍTRICOS"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__of
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__of
 msgid "OF - OLIVAR - FRUTAL"
-msgstr "OF - OLIVAR - FRUTAL"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ov
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ov
 msgid "OV - OLIVAR"
-msgstr "OV - OLIVAR"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_view_form
@@ -695,7 +697,7 @@ msgstr "Uno o más archivos shp no encontrados"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__pa
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__pa
 msgid "PA - PASTO CON ARBOLADO"
-msgstr "PA - PASTO CON ARBOLADO"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #. odoo-python
@@ -713,13 +715,13 @@ msgstr "DATOS PARCELA"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__pr
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__pr
 msgid "PR - PASTO ARBUSTIVO"
-msgstr "PR - PASTO ARBUSTIVO"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ps
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ps
 msgid "PS - PASTIZAL"
-msgstr "PS - PASTIZAL"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model,name:l10n_es_territory_sigpac.model_ter_parcel
@@ -792,9 +794,9 @@ msgstr "Ruta de los archivos shp"
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
 msgid "Path of the shapefiles that contains SIGPAC"
-msgstr "Ruta de los shapefiles que contienen SIGPAC"
-"Ruta de los archivos shp que contienen el SIGPAC de los municipios a "
-"considerar"
+msgstr ""
+"Ruta de los shapefiles que contienen SIGPACRuta de los archivos shp que "
+"contienen el SIGPAC de los municipios a considerar"
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_sigpac__dn_perim
@@ -963,13 +965,13 @@ msgstr "Pendiente %"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__ta
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__ta
 msgid "TA - TIERRAS ARABLES"
-msgstr "TA - TIERRAS ARABLES"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__th
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__th
 msgid "TH - HUERTA"
-msgstr "TH - HUERTA"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.actions.report,name:l10n_es_territory_sigpac.ter_parcel_sigpac_report
@@ -1006,19 +1008,19 @@ msgstr "Plantilla para la url del visor SIGPAC"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__vf
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__vf
 msgid "VF - VIÑEDO - FRUTAL"
-msgstr "VF - VIÑEDO - FRUTAL"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__vi
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__vi
 msgid "VI - VIÑEDO"
-msgstr "VI - VIÑEDO"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__vo
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__vo
 msgid "VO - VIÑEDO - OLIVAR"
-msgstr "VO - VIÑEDO - OLIVAR"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_res_config_settings__wms_sigpac_layer
@@ -1039,19 +1041,19 @@ msgstr "Capa del servicio WMS usado para obtener imágenes SIGPAC"
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__zc
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__zc
 msgid "ZC - ZONA CONCENTRADA NO INCLUIDA EN LA ORTOFOTO"
-msgstr "ZC - ZONA CONCENTRADA NO INCLUIDA EN LA ORTOFOTO"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__zu
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__zu
 msgid "ZU - ZONA URBANA"
-msgstr "ZU - ZONA URBANA"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_parcel_sigpaclink__uso_sigpac__zv
 #: model:ir.model.fields.selection,name:l10n_es_territory_sigpac.selection__ter_sigpac__uso_sigpac__zv
 msgid "ZV - ZONA CENSURADA"
-msgstr "ZV - ZONA CENSURADA"
+msgstr ""
 
 #. module: l10n_es_territory_sigpac
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_sigpac__zona

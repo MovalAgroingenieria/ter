@@ -36,4 +36,4 @@ class ResCompany(models.Model):
     )
     irrigation_model_type = fields.Integer()
 
-    url_gis_viewer_epsg_code = fields.Integer('URL Gist viewer', default=25830)
+    url_gis_viewer_epsg_code = fields.Integer("URL Gist viewer", default=25830)

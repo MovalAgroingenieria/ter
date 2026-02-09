@@ -58,18 +58,22 @@ class TerParcel(models.Model):
         params = self.env["ir.config_parameter"].sudo()
 
         wmsbase_url = params.get_param("base_ter.aerial_image_wmsbase_url") or False
-        wmsbase_layers = params.get_param("base_ter.aerial_image_wmsbase_layers") or False
+        wmsbase_layers = (
+            params.get_param("base_ter.aerial_image_wmsbase_layers") or False
+        )
         wmsvec_url = params.get_param("base_ter.aerial_image_wmsvec_url") or False
         wmsvec_parcel_layer = (
             params.get_param("base_ter.aerial_image_wmsvec_parcel_name") or False
         )
         wmsvec_filter = bool(
-            params.get_param("base_ter.aerial_image_wmsvec_parcel_filter") or False
+            params.get_param("base_ter.aerial_image_wmsvec_parcel_filter")
         )
         image_height = int(params.get_param("base_ter.aerial_image_height", 0) or 0)
         image_zoom = float(params.get_param("base_ter.aerial_image_zoom", 0) or 0)
 
-        wmssigpac_url = params.get_param("l10n_es_territory_sigpac.wms_sigpac_url") or False
+        wmssigpac_url = (
+            params.get_param("l10n_es_territory_sigpac.wms_sigpac_url") or False
+        )
         wmssigpac_layers = (
             params.get_param("l10n_es_territory_sigpac.wms_sigpac_layer") or False
         )
@@ -116,14 +120,16 @@ class TerParcel(models.Model):
                 )
             else:
                 self.env["common.log"].register_in_log(
-                    record.env._("Error getting aerial image (is the WMS url correct?)"),
+                    record.env._(
+                        "Error getting aerial image (is the WMS url correct?)"
+                    ),
                     source=record._name,
                     message_type="WARNING",
                 )
 
             record.aerial_img_sigpac_shown = shown or False
 
-    def _get_aerial_img_sigpac_from_wms(
+    def _get_aerial_img_sigpac_from_wms(  # pylint: disable=too-many-arguments
         self,
         *,
         wmsbase_url,
@@ -173,7 +179,9 @@ class TerParcel(models.Model):
                 )
 
         if not merged_bytes:
-            merged_bytes = base_raw.getvalue() if hasattr(base_raw, "getvalue") else False
+            merged_bytes = (
+                base_raw.getvalue() if hasattr(base_raw, "getvalue") else False
+            )
 
         if use_vec:
             vec_raw = self.get_aerial_image(
@@ -187,19 +195,26 @@ class TerParcel(models.Model):
                 force_square_shape=force_square_shape,
             )
             if vec_raw:
-                merged_bytes = self.env["common.image"].merge_img(
-                    merged_bytes, vec_raw, return_base64=False
-                ) or merged_bytes
+                merged_bytes = (
+                    self.env["common.image"].merge_img(
+                        merged_bytes, vec_raw, return_base64=False
+                    )
+                    or merged_bytes
+                )
 
         if not merged_bytes:
             return False
 
         return base64.b64encode(merged_bytes)
 
-    def _get_aerial_image_sigpac_layers(self, parcel):
+    def _get_aerial_image_sigpac_layers(
+        self, parcel
+    ):  # pylint: disable=unused-argument
         return self._aerial_img_sigpac_layers
 
-    def _get_aerial_image_sigpac_layers_styles(self, parcel):
+    def _get_aerial_image_sigpac_layers_styles(
+        self, parcel
+    ):  # pylint: disable=unused-argument
         return self._aerial_img_sigpac_layers_styles
 
     def action_get_enclosures(self):
@@ -322,7 +337,7 @@ class TerParcelSigpaclink(models.Model):
             record.irrigation_model_type = value
 
     @api.model
-    def read_group(
+    def read_group(  # pylint: disable=too-many-arguments,too-many-positional-arguments,redefined-outer-name
         self,
         domain,
         fields,
@@ -332,9 +347,10 @@ class TerParcelSigpaclink(models.Model):
         orderby=False,
         lazy=True,
     ):
+        fields_list = fields
         reduced_fields = [
             f
-            for f in fields
+            for f in fields_list
             if f not in {"intersection_percentage", "pend_media_porc", "coef_rega"}
         ]
         return super().read_group(

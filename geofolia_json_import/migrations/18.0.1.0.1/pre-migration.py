@@ -26,7 +26,8 @@ def migrate(cr, version):
             )
             if not cr.fetchone()[0]:
                 _logger.info(
-                    "geofolia_json_import: Table %s does not exist, skipping duplicate cleanup",
+                    "geofolia_json_import: Table %s does not exist, "
+                    "skipping duplicate cleanup",
                     table,
                 )
                 continue

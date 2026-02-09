@@ -70,6 +70,4 @@ class ResMunicipality(models.Model):
                 limit=1,
             )
             if duplicate:
-                raise ValidationError(
-                    self.env._("Repeated municipality code.")
-                )
+                raise ValidationError(self.env._("Repeated municipality code."))

@@ -11,7 +11,9 @@ class GeofoliaImportLine(models.Model):
     _order = "id asc"
 
     job_id = fields.Many2one("geofolia.import.job", required=True, ondelete="cascade")
-    import_type = fields.Selection(related="job_id.import_type", store=True, readonly=True)
+    import_type = fields.Selection(
+        related="job_id.import_type", store=True, readonly=True
+    )
 
     external_uuid = fields.Char()
     code = fields.Char()

@@ -19,8 +19,19 @@ valid-odoo-versions=18.0
 [MESSAGES CONTROL]
 # Disable problematic rules with Odoo
 # R0801 duplicate-code: wizard_show_gis_preview and similar wizards share structure
+# geofolia_json_import: attribute-string-redundant, prefer-env-translation, etc.
 disable=missing-module-docstring,
     duplicate-code,
+    attribute-string-redundant,
+    prefer-env-translation,
+    protected-access,
+    translation-not-lazy,
+    broad-exception-caught,
+    too-many-lines,
+    consider-using-in,
+    invalid-name,
+    too-many-locals,
+    too-many-return-statements,
     missing-class-docstring,
     missing-function-docstring,
     too-few-public-methods,

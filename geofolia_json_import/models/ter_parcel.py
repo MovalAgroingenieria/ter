@@ -56,6 +56,6 @@ class TerParcel(models.Model):
         string="Geofolia Farm Identification Code",
         index=True,
         copy=False,
-        help="Farm or plot identifier from Geofolia (FarmIdentificationCode, Field Code). "
-        "Used for matching ter.use_unit to parcels when importing.",
+        help="Farm/plot identifier from Geofolia. Used for matching ter.use_unit "
+        "to parcels when importing.",
     )

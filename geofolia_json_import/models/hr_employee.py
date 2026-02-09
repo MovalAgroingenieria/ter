@@ -28,4 +28,3 @@ class HrEmployee(models.Model):
             "This Geofolia employee has already been imported.",
         ),
     ]
-

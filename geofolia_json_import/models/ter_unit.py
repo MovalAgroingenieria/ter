@@ -71,16 +71,10 @@ class TerUnit(models.Model):
     geofolia_geography = fields.Text(string="Geofolia Geography (WKT)")
     geofolia_main_plot_id = fields.Char(string="Geofolia Main Plot Id")
     geofolia_irrigation_kind = fields.Integer(string="Geofolia Irrigation Kind")
-    geofolia_irrigation_kind_name = fields.Char(
-        string="Geofolia Irrigation Kind Name"
-    )
+    geofolia_irrigation_kind_name = fields.Char(string="Geofolia Irrigation Kind Name")
     geofolia_comment = fields.Text(string="Geofolia Comment")
-    geofolia_ferti_diary_comment = fields.Text(
-        string="Geofolia Ferti Diary Comment"
-    )
-    geofolia_phyto_diary_comment = fields.Text(
-        string="Geofolia Phyto Diary Comment"
-    )
+    geofolia_ferti_diary_comment = fields.Text(string="Geofolia Ferti Diary Comment")
+    geofolia_phyto_diary_comment = fields.Text(string="Geofolia Phyto Diary Comment")
     geofolia_plot_kind = fields.Integer(string="Geofolia Plot Kind")
     geofolia_plot_kind_name = fields.Char(string="Geofolia Plot Kind Name")
     geofolia_crop_name = fields.Char(string="Geofolia Crop Name")
@@ -97,4 +91,3 @@ class TerUnit(models.Model):
             "Geofolia UID must be unique.",
         ),
     ]
-

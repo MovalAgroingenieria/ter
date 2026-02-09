@@ -42,6 +42,7 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.url_gis_viewer_epsg_code",
         readonly=False,
     )
+
     @api.constrains("sigpac_minimum_intersection_percentage")
     def _check_sigpac_minimum_intersection_percentage(self):
         for record in self:

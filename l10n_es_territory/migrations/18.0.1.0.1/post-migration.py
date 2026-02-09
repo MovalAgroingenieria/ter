@@ -11,6 +11,8 @@ this migration adds it.
 
 import logging
 
+from psycopg2 import sql
+
 _logger = logging.getLogger(__name__)
 
 
@@ -31,8 +33,9 @@ def migrate(cr, version):
             if cr.fetchone():
                 continue
             cr.execute(
-                'ALTER TABLE "%s" ADD COLUMN mapped_to_polygon BOOLEAN DEFAULT FALSE'
-                % table
+                sql.SQL(
+                    "ALTER TABLE {} ADD COLUMN mapped_to_polygon BOOLEAN DEFAULT FALSE"
+                ).format(sql.Identifier(table))
             )
             _logger.info(
                 "l10n_es_territory: Added mapped_to_polygon column to %s", table

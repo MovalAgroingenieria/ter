@@ -40,7 +40,4 @@
         "views/project_task_views.xml",
         "views/hr_employee_views.xml",
     ],
-    "demo": [],
-    "installable": True,
-    "application": False,
 }

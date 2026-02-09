@@ -18,7 +18,7 @@ msgstr ""
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
 msgid "<span>/</span>"
-msgstr "<span>/</span>"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
@@ -28,57 +28,57 @@ msgstr "<span>Catastro</span>"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_15
 msgid "A Coruña"
-msgstr "A Coruña"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_02
 msgid "Albacete"
-msgstr "Albacete"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_03
 msgid "Alicante/Alacant"
-msgstr "Alicante/Alacant"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_04
 msgid "Almería"
-msgstr "Almería"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_01
 msgid "Andalucía"
-msgstr "Andalucía"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_01
 msgid "Araba/Álava"
-msgstr "Araba/Álava"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_02
 msgid "Aragón"
-msgstr "Aragón"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_33
 msgid "Asturias"
-msgstr "Asturias"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_06
 msgid "Badajoz"
-msgstr "Badajoz"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_07
 msgid "Baleares"
-msgstr "Baleares"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_08
 msgid "Barcelona"
-msgstr "Barcelona"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_company__base_ter_aerial_image_wmsbase_layers
@@ -95,12 +95,12 @@ msgstr "URL WMS de imagen aérea Base Ter"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_48
 msgid "Bizkaia"
-msgstr "Bizkaia"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_09
 msgid "Burgos"
-msgstr "Burgos"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_area
@@ -142,38 +142,38 @@ msgstr "Catastro"
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_06
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_39
 msgid "Cantabria"
-msgstr "Cantabria"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_12
 msgid "Castellón/Castelló"
-msgstr "Castellón/Castelló"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_08
 msgid "Castilla - La Mancha"
-msgstr "Castilla - La Mancha"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_07
 msgid "Castilla y León"
-msgstr "Castilla y León"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_09
 msgid "Cataluña"
-msgstr "Cataluña"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_18
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_51
 msgid "Ceuta"
-msgstr "Ceuta"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_13
 msgid "Ciudad Real"
-msgstr "Ciudad Real"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_res_company
@@ -183,12 +183,12 @@ msgstr "Compañías"
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_15
 msgid "Comunidad Foral de Navarra"
-msgstr "Comunidad Foral de Navarra"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_13
 msgid "Comunidad de Madrid"
-msgstr "Comunidad de Madrid"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_10
@@ -198,27 +198,27 @@ msgstr "Comunitat Valenciana"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_16
 msgid "Cuenca"
-msgstr "Cuenca"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_10
 msgid "Cáceres"
-msgstr "Cáceres"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_11
 msgid "Cádiz"
-msgstr "Cádiz"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_14
 msgid "Córdoba"
-msgstr "Córdoba"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_11
 msgid "Extremadura"
-msgstr "Extremadura"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_ter_gis_parcel_model
@@ -228,22 +228,22 @@ msgstr "Parcela GIS"
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_12
 msgid "Galicia"
-msgstr "Galicia"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_17
 msgid "Girona"
-msgstr "Girona"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_18
 msgid "Granada"
-msgstr "Granada"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_19
 msgid "Guadalajara"
-msgstr "Guadalajara"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_20
@@ -253,17 +253,17 @@ msgstr "Gipuzkoa"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_21
 msgid "Huelva"
-msgstr "Huelva"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_22
 msgid "Huesca"
-msgstr "Huesca"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_04
 msgid "Illes Balears"
-msgstr "Illes Balears"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_municipality__image_128
@@ -275,49 +275,49 @@ msgstr "Imagen"
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_05
 msgid "Islas Canarias"
-msgstr "Islas Canarias"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_23
 msgid "Jaén"
-msgstr "Jaén"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_17
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_26
 msgid "La Rioja"
-msgstr "La Rioja"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_35
 msgid "Las Palmas"
-msgstr "Las Palmas"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_24
 msgid "León"
-msgstr "León"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_25
 msgid "Lleida"
-msgstr "Lleida"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_27
 msgid "Lugo"
-msgstr "Lugo"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_28
 msgid "Madrid"
-msgstr "Madrid"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_19
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_52
 msgid "Melilla"
-msgstr "Melilla"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_admregion_view_form_inherit_l10n_es_territory
@@ -337,17 +337,17 @@ msgstr "Número de municipio"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_30
 msgid "Murcia"
-msgstr "Murcia"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_29
 msgid "Málaga"
-msgstr "Málaga"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_31
 msgid "Navarra"
-msgstr "Navarra"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_admregion__number_of_municipalities
@@ -378,12 +378,12 @@ msgstr "Referencia catastral con subparcela"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_32
 msgid "Ourense"
-msgstr "Ourense"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_34
 msgid "Palencia"
-msgstr "Palencia"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_ter_parcel
@@ -409,7 +409,7 @@ msgstr "Tipo de parcela: Urbana"
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_16
 msgid "País Vasco"
-msgstr "País Vasco"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_res_place
@@ -425,12 +425,12 @@ msgstr "Localidades"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_36
 msgid "Pontevedra"
-msgstr "Pontevedra"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_03
 msgid "Principado de Asturias"
-msgstr "Principado de Asturias"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_res_province
@@ -445,7 +445,7 @@ msgstr "Región"
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_14
 msgid "Región de Murcia"
-msgstr "Región de Murcia"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__parcel_type__01_r
@@ -455,32 +455,32 @@ msgstr "Rústica"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_37
 msgid "Salamanca"
-msgstr "Salamanca"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_38
 msgid "Santa Cruz de Tenerife"
-msgstr "Santa Cruz de Tenerife"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
 msgid "Sec / Pol / Par"
-msgstr "Sec / Pol / Par"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_40
 msgid "Segovia"
-msgstr "Segovia"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_41
 msgid "Sevilla"
-msgstr "Sevilla"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_42
 msgid "Soria"
-msgstr "Soria"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_res_config_settings
@@ -490,17 +490,17 @@ msgstr "Ajustes de Configuración"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_43
 msgid "Tarragona"
-msgstr "Tarragona"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_44
 msgid "Teruel"
-msgstr "Teruel"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_45
 msgid "Toledo"
-msgstr "Toledo"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__parcel_type__02_u
@@ -510,24 +510,24 @@ msgstr "Urbana"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_46
 msgid "Valencia/València"
-msgstr "Valencia/València"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_47
 msgid "Valladolid"
-msgstr "Valladolid"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_49
 msgid "Zamora"
-msgstr "Zamora"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_50
 msgid "Zaragoza"
-msgstr "Zaragoza"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_05
 msgid "Ávila"
-msgstr "Ávila"
+msgstr ""

@@ -15,7 +15,7 @@ class GeofoliaImportWizard(models.TransientModel):
         string="Campaign (Date Range)",
         domain="[('is_unit_use_type', '=', True)]",
         default=lambda self: self.env.company.geofolia_default_date_range_id,
-        help="Campaign used for ter.use_unit when importing Fields. Required for Fields/Full import.",
+        help="Campaign for ter.use_unit. Required for Fields/Full import.",
     )
     import_type = fields.Selection(
         selection=[
@@ -56,14 +56,18 @@ class GeofoliaImportWizard(models.TransientModel):
         }
 
     def _autodetect_type(self):
-        payload = self.env["geofolia.import.job"].new(
-            {"file_data": self.file_data}
-        )._load_json_payload()
+        payload = (
+            self.env["geofolia.import.job"]
+            .new({"file_data": self.file_data})
+            ._load_json_payload()
+        )
 
         if isinstance(payload, dict):
             if isinstance(payload.get("Fields"), list):
                 return "fields"
-            if isinstance(payload.get("Products"), list) and isinstance(payload.get("Employees"), list):
+            if isinstance(payload.get("Products"), list) and isinstance(
+                payload.get("Employees"), list
+            ):
                 return "full"
             if isinstance(payload.get("Products"), list):
                 return "products"

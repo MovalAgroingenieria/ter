@@ -295,7 +295,6 @@ class GeofoliaImportJob(models.Model):
             "context": {"default_job_id": self.id},
         }
 
-
     def action_show_lines_total(self):
         return self._action_show_lines_by_state(None)
 
@@ -323,7 +322,8 @@ class GeofoliaImportJob(models.Model):
         if self.import_type == "fields":
             return {
                 "type": "ir.actions.act_window",
-                "name": _("Field Lines") + (f" ({state_filter})" if state_filter else ""),
+                "name": _("Field Lines")
+                + (f" ({state_filter})" if state_filter else ""),
                 "res_model": "geofolia.import.line",
                 "view_mode": "list,form",
                 "domain": domain,
@@ -375,19 +375,21 @@ class GeofoliaImportJob(models.Model):
             if job.import_type != "fields":
                 continue
             lines = job.line_ids.filtered(
-                lambda l: l.sync_state in ("pending", "error", "skipped")
+                lambda line: line.sync_state in ("pending", "error", "skipped")
             )
+
             # Process roots (UID == ParentId1) first, then children
-            def _is_root(l):
-                r = l.raw_json or {}
-                uid = (l.external_uuid or "").strip()
+            def _is_root(rec):
+                r = rec.raw_json or {}
+                uid = (rec.external_uuid or "").strip()
                 parent = (r.get("ParentId1") or "").strip()
                 return uid and uid == parent
+
             roots = lines.filtered(_is_root)
             children = lines - roots
-            for line in roots.sorted(key=lambda l: l.id):
+            for line in roots.sorted(key=lambda line: line.id):
                 job._apply_field_line_to_ter_unit(line)
-            for line in children.sorted(key=lambda l: l.id):
+            for line in children.sorted(key=lambda line: line.id):
                 job._apply_field_line_to_ter_unit(line)
 
     # ----------------------------
@@ -617,7 +619,9 @@ class GeofoliaImportJob(models.Model):
                     "code": it.get("Code") or it.get("EmployeeFarmIdentificationCode"),
                     "name": name,
                     "first_name": first_name,
-                    "national_identification_code": it.get("NationalIdentificationCode"),
+                    "national_identification_code": it.get(
+                        "NationalIdentificationCode"
+                    ),
                     "specific_number": it.get("SpecificNumber"),
                     "email": it.get("Email"),
                     "phone": it.get("Phone"),
@@ -818,7 +822,8 @@ class GeofoliaImportJob(models.Model):
         raw = line.raw_json or {}
         vals = {
             "geofolia_uid": line.external_uuid,
-            "name": (line.name or line.code or "").strip() or f"GF-{line.external_uuid}",
+            "name": (line.name or line.code or "").strip()
+            or f"GF-{line.external_uuid}",
             "geofolia_code": raw.get("Code"),
             "geofolia_name": raw.get("Name"),
             "geofolia_parent_id1": raw.get("ParentId1"),
@@ -829,9 +834,8 @@ class GeofoliaImportJob(models.Model):
             "geofolia_ferti_diary_comment": raw.get("FertiDiaryComment"),
             "geofolia_phyto_diary_comment": raw.get("PhytoDiaryComment"),
             "geofolia_plot_kind": raw.get("PlotKind"),
-            "geofolia_plot_kind_name": raw.get("PLotKindName") or raw.get(
-                "PlotKindName"
-            ),
+            "geofolia_plot_kind_name": raw.get("PLotKindName")
+            or raw.get("PlotKindName"),
             "geofolia_crop_name": raw.get("CropName"),
             "geofolia_botanical_species_code": raw.get("BotanicalSpeciesCode"),
             "geofolia_variety_name": raw.get("VarietyName"),
@@ -840,9 +844,7 @@ class GeofoliaImportJob(models.Model):
         if line.area is not None:
             area_val = float(line.area)
             unit = (raw.get("Unit") or "").strip().lower()
-            vals["area_official"] = (
-                area_val if unit == "ha" else (area_val / 10000.0)
-            )
+            vals["area_official"] = area_val if unit == "ha" else (area_val / 10000.0)
         vals["geofolia_area"] = line.area
         if line.geography_wkt:
             wkt = (line.geography_wkt or "").strip()
@@ -868,7 +870,11 @@ class GeofoliaImportJob(models.Model):
             if date_range.use_type_id:
                 vals["use_type_id"] = date_range.use_type_id.id
         else:
-            year = int(line.harvest_year or 0) or self.env.context.get("date") or fields.Date.today().year
+            year = (
+                int(line.harvest_year or 0)
+                or self.env.context.get("date")
+                or fields.Date.today().year
+            )
             vals["date_start"] = "%d-01-01" % year
             vals["date_end"] = "%d-12-31" % year
         vals.setdefault("area_official", 0.0)
@@ -898,7 +904,7 @@ class GeofoliaImportJob(models.Model):
             )
             return
 
-        # Resolve parcel: UID==ParentId1 -> by geofolia_farm_identification_code or create;
+        # Resolve parcel: UID==ParentId1 -> by farm_identification_code or create;
         # UID!=ParentId1 -> from parent ter.use_unit's parcel_id
         parcel = self._resolve_parcel_for_field_line(line, vals)
         if not parcel:
@@ -910,9 +916,10 @@ class GeofoliaImportJob(models.Model):
                         "sync_state": "skipped",
                         "sync_message": _(
                             "Root unit: configure Geofolia default municipality "
-                            "to create parcel, or create parcel with "
-                            "geofolia_farm_identification_code = %s."
-                        ) % uid,
+                            "or create parcel with geofolia_farm_identification_code "
+                            "= %s."
+                        )
+                        % uid,
                     }
                 )
             else:
@@ -920,9 +927,10 @@ class GeofoliaImportJob(models.Model):
                     {
                         "sync_state": "skipped",
                         "sync_message": _(
-                            "Child unit: parent ter.use_unit (geofolia_uid=%s) not found "
-                            "or has no parcel. Process parent field first."
-                        ) % parent_id1,
+                            "Child unit: parent ter.use_unit (geofolia_uid=%s) "
+                            "not found or has no parcel. Process parent first."
+                        )
+                        % parent_id1,
                     }
                 )
             return
@@ -934,7 +942,8 @@ class GeofoliaImportJob(models.Model):
                 unit = Unit.search([("geofolia_uid", "=", ext_id)], limit=1)
                 if unit:
                     write_vals = {
-                        k: v for k, v in vals.items()
+                        k: v
+                        for k, v in vals.items()
                         if k in unit._fields and v not in (False, None, "")
                     }
                     if write_vals:
@@ -982,20 +991,30 @@ class GeofoliaImportJob(models.Model):
             if job.import_type == "fields":
                 lines = job.line_ids
                 job.total_count = len(lines)
-                job.pending_count = len(lines.filtered(lambda l: l.sync_state == "pending"))
-                job.error_count = len(lines.filtered(lambda l: l.sync_state == "error"))
+                job.pending_count = len(
+                    lines.filtered(lambda line: line.sync_state == "pending")
+                )
+                job.error_count = len(
+                    lines.filtered(lambda line: line.sync_state == "error")
+                )
                 job.processed_count = len(
-                    lines.filtered(lambda l: l.sync_state in processed_states)
+                    lines.filtered(lambda line: line.sync_state in processed_states)
                 )
             elif job.import_type == "full":
                 blocks = job._get_full_lines_by_block()
                 total = pending = processed = errors = 0
                 for line_set in blocks.values():
                     total += len(line_set)
-                    pending += len(line_set.filtered(lambda l: l.sync_state == "pending"))
-                    errors += len(line_set.filtered(lambda l: l.sync_state == "error"))
+                    pending += len(
+                        line_set.filtered(lambda line: line.sync_state == "pending")
+                    )
+                    errors += len(
+                        line_set.filtered(lambda line: line.sync_state == "error")
+                    )
                     processed += len(
-                        line_set.filtered(lambda l: l.sync_state in processed_states)
+                        line_set.filtered(
+                            lambda line: line.sync_state in processed_states
+                        )
                     )
                 job.total_count = total
                 job.pending_count = pending
@@ -1031,10 +1050,11 @@ class GeofoliaImportJob(models.Model):
             return
 
         has_pending = any(
-            v.filtered(lambda l: l.sync_state == "pending") for v in blocks.values()
+            v.filtered(lambda line: line.sync_state == "pending")
+            for v in blocks.values()
         )
         has_error = any(
-            v.filtered(lambda l: l.sync_state == "error") for v in blocks.values()
+            v.filtered(lambda line: line.sync_state == "error") for v in blocks.values()
         )
 
         if has_error:
@@ -1052,8 +1072,10 @@ class GeofoliaImportJob(models.Model):
 
         def _todo(rs):
             if only_pending:
-                return rs.filtered(lambda l: l.sync_state == "pending")
-            return rs.filtered(lambda l: l.sync_state in ("pending", "error", "skipped"))
+                return rs.filtered(lambda line: line.sync_state == "pending")
+            return rs.filtered(
+                lambda line: line.sync_state in ("pending", "error", "skipped")
+            )
 
         for line in _todo(self.product_line_ids):
             self._apply_product_line(line)
@@ -1105,7 +1127,9 @@ class GeofoliaImportJob(models.Model):
                     "geofolia_rn_reference_supply_code": line.rn_reference_supply_code,
                     "geofolia_unit_symbol": line.unit_symbol,
                     "geofolia_product_form_enum": line.product_form_enum,
-                    "geofolia_product_component_n_total": line.product_component_n_total,
+                    "geofolia_product_component_n_total": (
+                        line.product_component_n_total
+                    ),
                     "geofolia_product_component_p2o5": line.product_component_p2o5,
                     "geofolia_product_component_k2o": line.product_component_k2o,
                     "maintenance_ok": True,
@@ -1304,7 +1328,9 @@ class GeofoliaImportJob(models.Model):
                     "geofolia_harvest_id": line.external_id,
                     "geofolia_botanical_species_name": line.botanical_species_name,
                     "geofolia_botanical_species_id": line.botanical_species_id,
-                    "geofolia_harvested_product_kind_id": line.harvested_product_kind_id,
+                    "geofolia_harvested_product_kind_id": (
+                        line.harvested_product_kind_id
+                    ),
                     "geofolia_unit_symbol": line.unit_symbol,
                 }
 
@@ -1422,7 +1448,9 @@ class GeofoliaImportJob(models.Model):
                     "default_code": line.code,
                     "geofolia_external_id": line.external_id,
                     "geofolia_recognition_id": raw.get("RecognitionId"),
-                    "geofolia_product_component_n_total": raw.get("ProductComponentNTotal"),
+                    "geofolia_product_component_n_total": raw.get(
+                        "ProductComponentNTotal"
+                    ),
                     "geofolia_product_component_p2o5": raw.get("ProductComponentP2O5"),
                     "geofolia_product_component_k2o": raw.get("ProductComponentK2O"),
                 }
@@ -1450,7 +1478,7 @@ class GeofoliaImportJob(models.Model):
             line.write({"sync_state": "error", "sync_message": str(exc)})
 
     def _resolve_parcel_from_farm_identification_code(self, farm_code):
-        """Resolve ter.parcel from Geofolia FarmIdentificationCode (Field Code or farm id)."""
+        """Resolve ter.parcel from Geofolia FarmIdentificationCode (Field/farm id)."""
         if not farm_code:
             return self.env["ter.parcel"]
         farm_code = str(farm_code).strip()
@@ -1476,12 +1504,8 @@ class GeofoliaImportJob(models.Model):
         suffix = 0
         search_ctx = parcel_model.with_context(active_test=False)
         while True:
-            by_code = search_ctx.search(
-                [("alphanum_code", "=", candidate)], limit=1
-            )
-            by_name = search_ctx.search(
-                [("name", "=", candidate)], limit=1
-            )
+            by_code = search_ctx.search([("alphanum_code", "=", candidate)], limit=1)
+            by_name = search_ctx.search([("name", "=", candidate)], limit=1)
             if not by_code and not by_name:
                 return candidate
             suffix += 1
@@ -1567,7 +1591,7 @@ class GeofoliaImportJob(models.Model):
     def _resolve_parcel_from_crop_zone(self, activity_raw, recognition_id):
         """
         Resolve ter.parcel from Activity CropZoneIds.
-        First tries ter.use_unit (Fields) by geofolia_uid, then falls back to ter.parcel.
+        First tries ter.use_unit (Fields) by geofolia_uid, then ter.parceline.
         """
         unit = self._resolve_unit_from_crop_zone(activity_raw, recognition_id)
         if unit and unit.parcel_id:
@@ -1607,7 +1631,7 @@ class GeofoliaImportJob(models.Model):
         return self.env["ter.parcel"]
 
     def _resolve_ter_unit_for_parcel_date(self, parcel, activity_date):
-        """Find active ter.use_unit for parcel at activity date (begin_date <= date <= end_date)."""
+        """Find active ter.use_unit for parcel at activity date (in date range)."""
         if not parcel or not activity_date:
             return self.env["ter.use_unit"]
         return self.env["ter.use_unit"].search(
@@ -1654,7 +1678,7 @@ class GeofoliaImportJob(models.Model):
         )
 
     def _get_geometry_srid_from_job(self):
-        """Extract SRID from info_json CoordinateReferenceSystem. Default 25830 (ETRS89/UTM)."""
+        """Extract SRID from info_json CoordinateReferenceSystem. Default 25830."""
         info = self.info_json or {}
         crs = info.get("CoordinateReferenceSystem") or ""
         if isinstance(crs, str) and "25830" in crs:
@@ -1666,7 +1690,7 @@ class GeofoliaImportJob(models.Model):
     def _get_territory_vals_for_analytic_line(self, activity, employee_line=None):
         """
         Build territory-related vals for account.analytic.line from activity.
-        Uses CropZoneIds + EmployeeRecognitionId for precise ter.use_unit/parcel per employee,
+        Uses CropZoneIds + EmployeeRecognitionId for ter.use_unit/parcel per employee,
         else falls back to Activity FarmIdentificationCode.
         """
         vals = {}
@@ -1693,14 +1717,18 @@ class GeofoliaImportJob(models.Model):
 
         if parcel:
             vals["ter_parcel_id"] = parcel.id
-            vals["ter_property_id"] = parcel.property_id.id if parcel.property_id else False
+            vals["ter_property_id"] = (
+                parcel.property_id.id if parcel.property_id else False
+            )
 
         activity_date = activity.starting_date or activity.ending_date
         if not ter_unit and parcel:
             ter_unit = self._resolve_ter_unit_for_parcel_date(parcel, activity_date)
         if ter_unit:
             vals["ter_unit_id"] = ter_unit.id
-            vals["ter_use_type_id"] = ter_unit.use_type_id.id if ter_unit.use_type_id else False
+            vals["ter_use_type_id"] = (
+                ter_unit.use_type_id.id if ter_unit.use_type_id else False
+            )
             if ter_unit.account_id:
                 vals["account_id"] = ter_unit.account_id.id
             if ter_unit.parcel_id and not vals.get("ter_parcel_id"):
@@ -1712,7 +1740,7 @@ class GeofoliaImportJob(models.Model):
         return vals
 
     def _get_or_create_maintenance_request_for_activity(self, activity):
-        """Get or create maintenance.request for Geofolia activity. Idempotent by geofolia_action_id."""
+        """Get or create maintenance.request for activity (by geofolia_action_id)."""
         self.ensure_one()
         if not activity.external_id:
             return self.env["maintenance.request"]
@@ -1722,21 +1750,23 @@ class GeofoliaImportJob(models.Model):
         )
         if existing:
             if not activity.maintenance_request_id:
-                activity.write({
-                    "maintenance_request_id": existing.id,
-                    "sync_state": "created",
-                    "sync_message": _("Linked to existing maintenance request."),
-                })
+                activity.write(
+                    {
+                        "maintenance_request_id": existing.id,
+                        "sync_state": "created",
+                        "sync_message": _("Linked to existing maintenance request."),
+                    }
+                )
             return existing
 
         project = self.env.company.geofolia_maintenance_project_id
         if not project:
-            activity.write({
-                "sync_state": "error",
-                "sync_message": _(
-                    "Geofolia maintenance project not configured."
-                ),
-            })
+            activity.write(
+                {
+                    "sync_state": "error",
+                    "sync_message": _("Geofolia maintenance project not configured."),
+                }
+            )
             return self.env["maintenance.request"]
 
         task = self._get_or_create_task_for_operation(
@@ -1747,9 +1777,7 @@ class GeofoliaImportJob(models.Model):
 
         schedule_date = None
         if activity.starting_date:
-            schedule_date = datetime.combine(
-                activity.starting_date, time.min
-            )
+            schedule_date = datetime.combine(activity.starting_date, time.min)
 
         vals = {
             "name": activity.operation_name or _("Geofolia activity"),
@@ -1766,11 +1794,13 @@ class GeofoliaImportJob(models.Model):
             )
 
         request = Request.create(vals)
-        activity.write({
-            "maintenance_request_id": request.id,
-            "sync_state": "created",
-            "sync_message": _("Created maintenance request."),
-        })
+        activity.write(
+            {
+                "maintenance_request_id": request.id,
+                "sync_state": "created",
+                "sync_message": _("Created maintenance request."),
+            }
+        )
         return request
 
     def _apply_activity_employee_line(self, line):
@@ -1781,7 +1811,10 @@ class GeofoliaImportJob(models.Model):
             with self.env.cr.savepoint():
                 if line.analytic_line_id:
                     line.write(
-                        {"sync_state": "no_action", "sync_message": _("Already linked.")}
+                        {
+                            "sync_state": "no_action",
+                            "sync_message": _("Already linked."),
+                        }
                     )
                     return
 
@@ -1827,14 +1860,16 @@ class GeofoliaImportJob(models.Model):
                     line.write(
                         {
                             "sync_state": "error",
-                            "sync_message": _(
-                                "Could not create maintenance request."
-                            ),
+                            "sync_message": _("Could not create maintenance request."),
                         }
                     )
                     return
 
-                if emp and maint_request.employee_ids and emp not in maint_request.employee_ids:
+                if (
+                    emp
+                    and maint_request.employee_ids
+                    and emp not in maint_request.employee_ids
+                ):
                     maint_request.employee_ids = [(4, emp.id)]
                 elif emp and not maint_request.employee_ids:
                     maint_request.employee_ids = [(4, emp.id)]
@@ -1897,5 +1932,3 @@ class GeofoliaImportJob(models.Model):
                 )
         except Exception as exc:  # noqa: BLE001
             line.write({"sync_state": "error", "sync_message": str(exc)})
-
-

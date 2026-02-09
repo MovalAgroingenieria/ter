@@ -9,7 +9,7 @@ class TerGisParcelModel(models.Model):
 
     @api.depends("parcel_id.cadastral_area")
     def _compute_gis_data(self):
-        super()._compute_gis_data()
+        result = super()._compute_gis_data()
         formatter = self.env["common.format"]
         label = self.env._("Cadastral Area (m²)")
 
@@ -22,3 +22,4 @@ class TerGisParcelModel(models.Model):
                 value=formatted_area,
             )
             record.gis_data = (record.gis_data or "") + extra
+        return result

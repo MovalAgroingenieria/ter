@@ -57,7 +57,8 @@ class GeofoliaImportActivityEmployeeLine(models.Model):
     _sql_constraints = [
         (
             "geofolia_act_emp_uniq",
-            "unique(job_id, employee_action_id, employee_recognition_id, employee_order)",
+            "unique(job_id, employee_action_id, employee_recognition_id, "
+            "employee_order)",
             "This activity employee entry has already been imported in this job.",
         ),
     ]

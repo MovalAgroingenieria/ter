@@ -15,9 +15,7 @@ class GeofoliaImportEmployeeLine(models.Model):
     code = fields.Char()
     name = fields.Char()
     first_name = fields.Char(string="First Name")
-    national_identification_code = fields.Char(
-        string="National Identification Code"
-    )
+    national_identification_code = fields.Char(string="National Identification Code")
     specific_number = fields.Char(string="Specific Number")
     email = fields.Char()
     phone = fields.Char()
