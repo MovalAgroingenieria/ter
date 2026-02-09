@@ -43,7 +43,7 @@ class TerParcel(models.Model):
 
     @api.constrains("partner_id", "partnerlink_ids")
     def _check_partnerlink_ids(self):
-        super()._check_partnerlink_ids()
+        result = super()._check_partnerlink_ids()
         for record in self:
             if not record.partnerlink_ids:
                 continue
@@ -55,6 +55,7 @@ class TerParcel(models.Model):
                         "Review the overhead percentages: the total must be 100%."
                     )
                 )
+        return result
 
     def _get_default_first_partnerlink_vals(self, partner_id, profile_id, percentage):
         vals = super()._get_default_first_partnerlink_vals(
@@ -147,7 +148,8 @@ class TerParcelPartnerlink(models.Model):
             if record.percentage_overhead < 0 or record.percentage_overhead > 100:
                 raise exceptions.ValidationError(
                     record.env._(
-                        "Incorrect value of overhead percentage. It must be between 0 and 100."
+                        "Incorrect value of overhead percentage. "
+                        "It must be between 0 and 100."
                     )
                 )
 
