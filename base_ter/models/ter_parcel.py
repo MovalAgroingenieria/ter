@@ -7,7 +7,6 @@ import time
 
 import psycopg2
 import requests
-
 from odoo import api, exceptions, fields, models
 
 _logger = logging.getLogger(__name__)

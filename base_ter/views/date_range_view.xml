@@ -189,7 +189,7 @@
     <menuitem
             action="date_range_action"
             id="menu_date_range_action"
-            parent="base_ter.menu_territory"
+            parent="base_ter.menu_configuration_general"
             sequence="102"
     />
     <menuitem

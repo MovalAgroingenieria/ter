@@ -479,8 +479,6 @@ class TerUnit(models.Model):
                     )
                 )
 
-
-
     @api.onchange("use_type_id")
     def _onchange_use_type_id(self):
         if not self.use_type_id:

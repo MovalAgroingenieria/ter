@@ -4,7 +4,6 @@
 import logging
 
 import psycopg2
-
 from odoo import http
 from odoo.http import request
 from odoo.osv import expression
