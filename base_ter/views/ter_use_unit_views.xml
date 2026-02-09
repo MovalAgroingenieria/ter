@@ -208,7 +208,7 @@
                         <group string="Dates">
                             <field name="date_range_id"
                                    domain="[('is_unit_use_type', '=', True)]"
-                                   options="{'no_open': True, 'no_create': True}"
+                                   options="{'no_create': True}"
                                    readonly="state == 'validated'"/>
                             <field name="date_start" readonly="state == 'validated'"/>
                             <field name="date_end" readonly="state == 'validated'"/>
@@ -272,9 +272,9 @@
         <field name="res_model">ter.use_unit</field>
         <field name="view_mode">list,form,kanban,pivot</field>
         <field name="view_ids" eval="[(5, 0),
-              (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_ter_unit_kanban')}),
               (0, 0, {'view_mode': 'list', 'view_id': ref('view_ter_unit_list')}),
               (0, 0, {'view_mode': 'form', 'view_id': ref('view_ter_unit_form')}),
+              (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_ter_unit_kanban')}),
               (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_ter_unit_pivot')})]"/>
         <field name="search_view_id" ref="view_ter_unit_filter"/>
         <field name="context">{'search_default_filter_validated': 1, 'search_default_filter_validity_in_range': 1}</field>
