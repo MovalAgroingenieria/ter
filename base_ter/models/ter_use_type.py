@@ -109,7 +109,7 @@ class UseType(models.Model):
         unit_model = self.env["ter.use_unit"]
         for record in self:
             units = unit_model.search([("use_type_id", "child_of", record.id)])
-            parcels = units.mapped("parcel_id") | units.mapped("parcel_ids")
+            parcels = units.mapped("parcel_id")
             record.parcel_count = len(parcels)
 
     @api.depends(

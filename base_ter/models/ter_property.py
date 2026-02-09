@@ -252,8 +252,7 @@ class TerProperty(models.Model):
                         force_square_shape=self._force_square_shape,
                     )
             else:
-                # pylint: disable=protected-access
-                key = record._aerial_cache_key(
+                key = record._aerial_cache_key(  # pylint: disable=protected-access
                     wms=wmsbase_url,
                     layers=wmsbase_layers,
                     styles="default",

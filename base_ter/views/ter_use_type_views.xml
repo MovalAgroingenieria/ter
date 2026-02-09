@@ -179,10 +179,10 @@
     <record id="action_use_type" model="ir.actions.act_window">
         <field name="name">Use Types</field>
         <field name="res_model">ter.use_type</field>
-        <field name="view_mode">kanban,list,form</field>
+        <field name="view_mode">list,kanban,form</field>
         <field name="view_ids" eval="[(5, 0),
-              (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_use_type_kanban')}),
               (0, 0, {'view_mode': 'list', 'view_id': ref('view_use_type_list')}),
+              (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_use_type_kanban')}),
               (0, 0, {'view_mode': 'form', 'view_id': ref('view_use_type_form')})]"/>
         <field name="search_view_id" ref="view_use_type_search"/>
         <field name="context">{'search_default_group_by_parent': 1}</field>

@@ -1,3 +1,4 @@
+# pylint: disable=invalid-name
 from odoo.tests.common import TransactionCase, tagged
 
 

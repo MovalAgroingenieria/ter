@@ -1,3 +1,4 @@
+# pylint: disable=invalid-name,protected-access
 from unittest.mock import patch
 
 from odoo.tests.common import TransactionCase, tagged
@@ -19,7 +20,8 @@ class TestGisViewer(TransactionCase):
         """Create an in-memory parcel record for GIS viewer tests.
 
         We use `new()` to avoid creating the full administrative chain
-        (admregion/province/municipality) which is not relevant for the viewer URL logic.
+        (admregion/province/municipality) which is not relevant for the
+        viewer URL logic.
         """
         defaults = {
             "name": "P-001",

@@ -1,3 +1,4 @@
+# pylint: disable=invalid-name
 from unittest.mock import patch
 
 from odoo import exceptions
