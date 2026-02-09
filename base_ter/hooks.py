@@ -251,12 +251,12 @@ def pre_init_hook(env: api.Environment) -> None:
 
 
 def _ensure_ter_unit_sequences(env: api.Environment) -> None:
-    """Create default ter.unit sequence for each company that lacks one."""
+    """Create default ter.use_unit sequence for each company that lacks one."""
     env["res.company"].search([])._get_or_create_ter_unit_sequence()
 
 
 def _migrate_ter_unit_parcel_ids(env: api.Environment) -> None:
-    """Populate parcel_ids from parcel_id for existing ter.unit records."""
+    """Populate parcel_ids from parcel_id for existing ter.use_unit records."""
     env.cr.execute(
         """
         INSERT INTO ter_unit_parcel_rel (unit_id, parcel_id)

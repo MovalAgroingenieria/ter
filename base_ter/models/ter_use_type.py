@@ -40,7 +40,7 @@ class UseType(models.Model):
 
     color = fields.Integer(string="Color Index")
     unit_ids = fields.One2many(
-        "ter.unit",
+        "ter.use_unit",
         "use_type_id",
         string="Units",
     )
@@ -89,7 +89,7 @@ class UseType(models.Model):
         "child_ids.child_ids.child_ids.child_ids.unit_ids",
     )
     def _compute_unit_count(self):
-        unit_model = self.env["ter.unit"]
+        unit_model = self.env["ter.use_unit"]
         for record in self:
             record.unit_count = unit_model.search_count(
                 [("use_type_id", "child_of", record.id)]
@@ -98,19 +98,15 @@ class UseType(models.Model):
     @api.depends(
         "unit_ids",
         "unit_ids.parcel_id",
-        "unit_ids.parcel_ids",
         "child_ids.unit_ids",
         "child_ids.unit_ids.parcel_id",
-        "child_ids.unit_ids.parcel_ids",
         "child_ids.child_ids.unit_ids",
         "child_ids.child_ids.unit_ids.parcel_id",
-        "child_ids.child_ids.unit_ids.parcel_ids",
         "child_ids.child_ids.child_ids.unit_ids",
         "child_ids.child_ids.child_ids.unit_ids.parcel_id",
-        "child_ids.child_ids.child_ids.unit_ids.parcel_ids",
     )
     def _compute_parcel_count(self):
-        unit_model = self.env["ter.unit"]
+        unit_model = self.env["ter.use_unit"]
         for record in self:
             units = unit_model.search([("use_type_id", "child_of", record.id)])
             parcels = units.mapped("parcel_id") | units.mapped("parcel_ids")
@@ -175,7 +171,7 @@ class UseType(models.Model):
         return {
             "type": "ir.actions.act_window",
             "name": self.env._("Territorial Units"),
-            "res_model": "ter.unit",
+            "res_model": "ter.use_unit",
             "view_mode": "list,form",
             "views": [(list_view.id, "list"), (form_view.id, "form")],
             "search_view_id": search_view.id,
@@ -184,7 +180,7 @@ class UseType(models.Model):
 
     def action_show_parcels(self):
         self.ensure_one()
-        unit_model = self.env["ter.unit"]
+        unit_model = self.env["ter.use_unit"]
         units = unit_model.search([("use_type_id", "child_of", self.id)])
         parcel_ids = (units.mapped("parcel_id") | units.mapped("parcel_ids")).ids
         tree_view = self.env.ref("base_ter.ter_parcel_view_tree")

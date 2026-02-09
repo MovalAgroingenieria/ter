@@ -37,9 +37,9 @@
         <field name="is_base_ter" eval="True"/>
     </record>
 
-    <record id="ter_unit_cron_recompute_validity_state" model="ir.cron">
+    <record id="ter_use_unit_cron_recompute_validity_state" model="ir.cron">
         <field name="name">Territorial Base: Recompute ter.unit validity state</field>
-        <field name="model_id" ref="base_ter.model_ter_unit"/>
+        <field name="model_id" ref="base_ter.model_ter_use_unit"/>
         <field name="state">code</field>
         <field name="code">model._cron_recompute_validity_state()</field>
         <field name="user_id" ref="base.user_root"/>

@@ -26,7 +26,7 @@ class DateRange(models.Model):
         readonly=True,
     )
     unit_ids = fields.One2many(
-        "ter.unit",
+        "ter.use_unit",
         "date_range_id",
         string="Units",
     )
@@ -44,11 +44,11 @@ class DateRange(models.Model):
         for record in self:
             record.unit_count = len(record.unit_ids)
 
-    @api.depends("unit_ids", "unit_ids.parcel_id", "unit_ids.parcel_ids")
+    @api.depends("unit_ids", "unit_ids.parcel_id")
     def _compute_parcel_count(self):
         for record in self:
             units = record.unit_ids
-            parcels = units.mapped("parcel_id") | units.mapped("parcel_ids")
+            parcels = units.mapped("parcel_id")
             record.parcel_count = len(parcels)
 
     def action_show_units(self):
@@ -59,7 +59,7 @@ class DateRange(models.Model):
         return {
             "type": "ir.actions.act_window",
             "name": self.env._("Territorial Units"),
-            "res_model": "ter.unit",
+            "res_model": "ter.use_unit",
             "view_mode": "list,form",
             "views": [(list_view.id, "list"), (form_view.id, "form")],
             "search_view_id": search_view.id,
@@ -68,8 +68,8 @@ class DateRange(models.Model):
 
     def action_show_parcels(self):
         self.ensure_one()
-        units = self.env["ter.unit"].search([("date_range_id", "=", self.id)])
-        parcel_ids = (units.mapped("parcel_id") | units.mapped("parcel_ids")).ids
+        units = self.env["ter.use_unit"].search([("date_range_id", "=", self.id)])
+        parcel_ids = units.mapped("parcel_id").ids
         tree_view = self.env.ref("base_ter.ter_parcel_view_tree")
         form_view = self.env.ref("base_ter.ter_parcel_view_form")
         search_view = self.env.ref("base_ter.ter_parcel_view_search")

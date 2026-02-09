@@ -37,7 +37,7 @@
 
     <record id="view_ter_unit_filter" model="ir.ui.view">
         <field name="name">ter.unit.search</field>
-        <field name="model">ter.unit</field>
+        <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
             <search string="Search Territorial Units">
                 <field name="alphanum_code"/>
@@ -71,7 +71,7 @@
 
     <record id="view_ter_unit_list" model="ir.ui.view">
         <field name="name">ter.unit.list</field>
-        <field name="model">ter.unit</field>
+        <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
             <list string="Territorial Units" default_order="name">
                 <field name="alphanum_code"/>
@@ -85,7 +85,6 @@
                 <field name="date_end"/>
                 <field name="state"/>
                 <field name="validity_state"/>
-                <field name="parcel_count"/>
                 <field name="area_gis_ha"/>
                 <field name="area_official"/>
             </list>
@@ -94,7 +93,7 @@
 
     <record id="view_ter_unit_kanban" model="ir.ui.view">
         <field name="name">ter.unit.kanban</field>
-        <field name="model">ter.unit</field>
+        <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
             <kanban class="o_terunit_kanban">
                 <field name="id"/>
@@ -104,7 +103,6 @@
                 <field name="use_type_id"/>
                 <field name="state"/>
                 <field name="validity_state"/>
-                <field name="parcel_count"/>
                 <field name="area_gis_ha"/>
                 <field name="parcel_aerial_image_shown_256"/>
                 <field name="attribute_value_ids"/>
@@ -139,7 +137,6 @@
                                     <span class="badge text-bg-info ms-1"><field name="validity_state"/></span>
                                 </div>
                                 <div class="mt-1">
-                                    <field name="parcel_count"/> Parcels |
                                     <field name="area_gis_ha"/> ha
                                 </div>
                             </div>
@@ -152,7 +149,7 @@
 
     <record id="view_ter_unit_pivot" model="ir.ui.view">
         <field name="name">ter.unit.pivot</field>
-        <field name="model">ter.unit</field>
+        <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
             <pivot string="Territorial Units" display_quantity="true">
                 <field name="use_type_id" type="row"/>
@@ -161,7 +158,6 @@
                 <field name="state" type="col"/>
                 <field name="validity_state" type="col"/>
                 <field name="date_range_id" type="col"/>
-                <field name="parcel_count" type="measure"/>
                 <field name="area_gis_ha" type="measure"/>
                 <field name="area_official" type="measure"/>
                 <field name="area_parcels" type="measure"/>
@@ -171,7 +167,7 @@
 
     <record id="view_ter_unit_form" model="ir.ui.view">
         <field name="name">ter.unit.form</field>
-        <field name="model">ter.unit</field>
+        <field name="model">ter.use_unit</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <form string="Territorial Unit">
@@ -189,10 +185,7 @@
                 <sheet>
                     <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
                     <div class="oe_button_box" name="button_box">
-                        <field name="parcel_ids" invisible="1"/>
-                        <button name="action_show_parcels" type="object" class="oe_stat_button" icon="fa-ter-parcel">
-                            <field name="parcel_count" string="Parcels" widget="statinfo"/>
-                        </button>
+
                     </div>
                     <field name="state" widget="statusbar" statusbar_visible="draft,validated"/>
                     <group>
@@ -232,18 +225,7 @@
                             <field name="area_unit_name" invisible="1"/>
                         </group>
                     </group>
-                    <group string="Parcels">
-                        <field name="parcel_ids" nolabel="1"
-                               domain="[('property_id', '=', farm_property_id)]"
-                               options="{'no_open': True}"
-                               readonly="state == 'validated'">
-                            <list editable="bottom">
-                                <field name="alphanum_code"/>
-                                <field name="municipality_id"/>
-                                <field name="area_official"/>
-                            </list>
-                        </field>
-                    </group>
+
                     <group string="GIS">
                         <group>
                             <div class="text-center mb-3">
@@ -287,8 +269,8 @@
 
     <record id="ter_unit_action_entrie" model="ir.actions.act_window">
         <field name="name">Territorial Units</field>
-        <field name="res_model">ter.unit</field>
-        <field name="view_mode">kanban,list,form,pivot</field>
+        <field name="res_model">ter.use_unit</field>
+        <field name="view_mode">list,form,kanban,pivot</field>
         <field name="view_ids" eval="[(5, 0),
               (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_ter_unit_kanban')}),
               (0, 0, {'view_mode': 'list', 'view_id': ref('view_ter_unit_list')}),
@@ -310,8 +292,8 @@
 
     <record id="ter_unit_action_mass_validate" model="ir.actions.server">
         <field name="name">Validate</field>
-        <field name="model_id" ref="base_ter.model_ter_unit"/>
-        <field name="binding_model_id" ref="base_ter.model_ter_unit"/>
+        <field name="model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_use_unit"/>
         <field name="binding_view_types">list,form</field>
         <field name="state">code</field>
         <field name="code">records.action_validate()</field>
@@ -319,16 +301,16 @@
 
     <record id="ter_unit_action_mass_set_to_draft" model="ir.actions.server">
         <field name="name">Set to Draft</field>
-        <field name="model_id" ref="base_ter.model_ter_unit"/>
-        <field name="binding_model_id" ref="base_ter.model_ter_unit"/>
+        <field name="model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_use_unit"/>
         <field name="binding_view_types">list,form</field>
         <field name="state">code</field>
         <field name="code">records.action_set_to_draft()</field>
     </record>
 
     <record id="ter_unit_reset_all_aerial_images_serveraction" model="ir.actions.server">
-        <field name="name">Images of territorial units (all)</field>
-        <field name="model_id" ref="base_ter.model_ter_unit"/>
+        <field name="name">Images of territorial use units (all)</field>
+        <field name="model_id" ref="base_ter.model_ter_use_unit"/>
         <field name="state">code</field>
         <field name="groups_id" eval="[(4, ref('base_ter.group_ter_director'))]"/>
         <field name="code">

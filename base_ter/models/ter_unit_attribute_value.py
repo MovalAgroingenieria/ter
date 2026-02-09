@@ -13,7 +13,7 @@ class TerUnitAttributeValue(models.Model):
     _order = "attribute_id, id"
 
     unit_id = fields.Many2one(
-        comodel_name="ter.unit",
+        comodel_name="ter.use_unit",
         required=True,
         ondelete="cascade",
         index=True,

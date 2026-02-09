@@ -45,7 +45,7 @@
         "reports/parcel_partner_report.xml",
         "reports/parcel_report.xml",
         "reports/property_report.xml",
-        "views/ter_unit_views.xml",
+        "views/ter_use_unit_views.xml",
         "views/date_range_view.xml",
         "views/base_ter_reports.xml",
         "views/ter_use_type_views.xml",

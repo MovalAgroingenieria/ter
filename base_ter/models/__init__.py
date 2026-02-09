@@ -17,7 +17,7 @@ from . import (
     ter_profile,
     ter_property,
     ter_propertytag,
-    ter_unit,
+    ter_use_unit,
     ter_unit_attribute_value,
     ter_use_type_attribute,
     ter_use_type_attribute_value,

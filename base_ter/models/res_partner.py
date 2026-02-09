@@ -94,7 +94,7 @@ class ResPartner(models.Model):
 
     unit_use_ids = fields.One2many(
         string="Territorial Units",
-        comodel_name="ter.unit",
+        comodel_name="ter.use_unit",
         inverse_name="partner_id",
     )
     unit_use_count = fields.Integer(
@@ -315,7 +315,7 @@ class ResPartner(models.Model):
         return {
             "type": "ir.actions.act_window",
             "name": self.env._("Territorial Units"),
-            "res_model": "ter.unit",
+            "res_model": "ter.use_unit",
             "view_mode": "list,form",
             "views": [
                 (list_view.id, "list"),

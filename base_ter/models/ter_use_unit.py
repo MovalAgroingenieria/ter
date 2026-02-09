@@ -9,8 +9,8 @@ from .. import hooks as base_ter_hooks
 
 
 class TerUnit(models.Model):
-    _name = "ter.unit"
-    _description = "Ter Unit"
+    _name = "ter.use_unit"
+    _description = "Ter Use Unit"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     _sql_constraints = [
@@ -75,15 +75,7 @@ class TerUnit(models.Model):
         required=True,
         index=True,
     )
-    parcel_ids = fields.Many2many(
-        "ter.parcel",
-        "ter_unit_parcel_rel",
-        "unit_id",
-        "parcel_id",
-    )
-    parcel_count = fields.Integer(
-        compute="_compute_parcel_count",
-    )
+
     farm_property_id = fields.Many2one(
         "ter.property",
         string="Farm/Property",
@@ -164,10 +156,10 @@ class TerUnit(models.Model):
         compute="_compute_area_unit_name",
     )
 
-    @api.depends("parcel_ids", "parcel_id")
+    @api.depends("parcel_id")
     def _compute_parcel_count(self):
         for record in self:
-            parcels = record.parcel_ids if record.parcel_ids else record.parcel_id
+            parcels = record.parcel_id
             record.parcel_count = len(parcels) if parcels else 0
 
     @api.depends("geom_ewkt")
@@ -192,10 +184,10 @@ class TerUnit(models.Model):
                     area = 0.0
             record.area_gis_ha = area
 
-    @api.depends("parcel_ids.area_official", "parcel_id.area_official")
+    @api.depends("parcel_id.area_official")
     def _compute_area_parcels(self):
         for record in self:
-            parcels = record.parcel_ids if record.parcel_ids else record.parcel_id
+            parcels = record.parcel_id
             record.area_parcels = (
                 sum(parcels.mapped("area_official")) if parcels else 0.0
             )
@@ -353,8 +345,6 @@ class TerUnit(models.Model):
         for vals in vals_list:
             if not vals.get("name"):
                 vals["name"] = self._get_next_ter_unit_name(vals)
-            if vals.get("parcel_id") and not vals.get("parcel_ids"):
-                vals["parcel_ids"] = [(6, 0, [vals["parcel_id"]])]
             geom = vals.get("geom_ewkt")
             if geom and not vals.get("parcel_id"):
                 parcel = self._get_parcel_from_geometry(geom)
@@ -416,7 +406,7 @@ class TerUnit(models.Model):
         return res
 
     def _check_domain_specific_rules(self):
-        """Hook for modules extending ter.unit to add domain-specific validations.
+        """Hook for modules extending ter.use_unit to add domain-specific validations.
 
         Override in inherited modules. Called before critical operations if needed.
         """
@@ -489,18 +479,7 @@ class TerUnit(models.Model):
                     )
                 )
 
-    @api.onchange("parcel_id")
-    def _onchange_parcel_id(self):
-        if self.parcel_id and self.parcel_id not in self.parcel_ids:
-            parcel_ids = (self.parcel_ids.ids or []) + [self.parcel_id.id]
-            self.parcel_ids = [(6, 0, parcel_ids)]
 
-    @api.onchange("parcel_ids")
-    def _onchange_parcel_ids(self):
-        if self.parcel_ids and (
-            not self.parcel_id or self.parcel_id not in self.parcel_ids
-        ):
-            self.parcel_id = self.parcel_ids[0]
 
     @api.onchange("use_type_id")
     def _onchange_use_type_id(self):
@@ -628,7 +607,7 @@ class TerUnit(models.Model):
             batch = self.search([], limit=batch_size, offset=offset)
             if not batch:
                 break
-            parcels = batch.mapped("parcel_id") | batch.mapped("parcel_ids")
+            parcels = batch.mapped("parcel_id")
             parcels.reset_aerial_image()
             offset += batch_size
         if from_backend:
@@ -638,7 +617,7 @@ class TerUnit(models.Model):
     def action_show_parcels(self):
         """Open parcels linked to this unit."""
         self.ensure_one()
-        parcel_ids = (self.parcel_ids | self.parcel_id).ids if self.parcel_id else []
+        parcel_ids = self.parcel_id
         if not parcel_ids:
             return None
         tree_view = self.env.ref("base_ter.ter_parcel_view_tree")

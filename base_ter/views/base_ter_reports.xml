@@ -16,7 +16,7 @@
     <!-- Report-specific pivot: only stored numeric fields (area_official) to avoid aggregate error -->
     <record id="view_ter_unit_report_pivot" model="ir.ui.view">
         <field name="name">ter.unit.report.pivot</field>
-        <field name="model">ter.unit</field>
+        <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
             <pivot string="Territorial Units" display_quantity="true">
                 <field name="use_type_id" type="row"/>
@@ -32,7 +32,7 @@
 
     <record id="view_ter_unit_graph" model="ir.ui.view">
         <field name="name">ter.unit.view.graph</field>
-        <field name="model">ter.unit</field>
+        <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
             <graph string="Territorial Units" type="bar">
                 <field name="use_type_id"/>
@@ -45,7 +45,7 @@
 
     <record id="view_ter_unit_calendar" model="ir.ui.view">
         <field name="name">ter.unit.report.calendar</field>
-        <field name="model">ter.unit</field>
+        <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
             <calendar string="Territorial Units" date_start="date_start" date_stop="date_end"
                       color="use_type_id" mode="month">
@@ -128,7 +128,7 @@
 
     <record id="action_report_ter_unit" model="ir.actions.act_window">
         <field name="name">Territorial Units</field>
-        <field name="res_model">ter.unit</field>
+        <field name="res_model">ter.use_unit</field>
         <field name="view_mode">pivot,graph,calendar,list</field>
         <field name="view_ids"
                eval="[(5, 0),

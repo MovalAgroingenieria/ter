@@ -330,7 +330,7 @@ class TerProperty(models.Model):
 
     @api.depends("parcel_ids.unit_ids")
     def _compute_unit_count(self):
-        unit_model = self.env["ter.unit"]
+        unit_model = self.env["ter.use_unit"]
         for record in self:
             count = unit_model.search_count([("farm_property_id", "=", record.id)])
             record.unit_count = count
@@ -633,7 +633,7 @@ class TerProperty(models.Model):
         return {
             "type": "ir.actions.act_window",
             "name": self.env._("Territorial Units"),
-            "res_model": "ter.unit",
+            "res_model": "ter.use_unit",
             "view_mode": "list,form",
             "views": [
                 (list_view.id, "list"),

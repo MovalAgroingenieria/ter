@@ -56,12 +56,12 @@ class ResCompany(models.Model):
     )
     ter_unit_sequence_id = fields.Many2one(
         "ir.sequence",
-        help="Sequence used to generate ter.unit names. "
+        help="Sequence used to generate ter.use_unit names. "
         "Name format: {type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}.",
     )
 
     def _get_or_create_ter_unit_sequence(self):
-        """Create default ter.unit sequence for company if missing."""
+        """Create default ter.use_unit sequence for company if missing."""
         for company in self:
             if company.ter_unit_sequence_id:
                 continue
@@ -70,7 +70,7 @@ class ResCompany(models.Model):
                     "name": self.env._(
                         "%(company_name)s – Ter Unit", company_name=company.name
                     ),
-                    "code": "ter.unit.%s" % company.id,
+                    "code": "ter.use_unit.%s" % company.id,
                     "prefix": "",
                     "padding": 6,
                     "implementation": "no_gap",
