@@ -18,7 +18,9 @@ valid-odoo-versions=18.0
 
 [MESSAGES CONTROL]
 # Disable problematic rules with Odoo
+# R0801 duplicate-code: wizard_show_gis_preview and similar wizards share structure
 disable=missing-module-docstring,
+    duplicate-code,
     missing-class-docstring,
     missing-function-docstring,
     too-few-public-methods,
