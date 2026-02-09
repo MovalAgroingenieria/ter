@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 class WizardSetParcelCode(models.TransientModel):
     _name = "wizard.set.parcel.code"
+    _inherit = ["wizard.active.record.mixin"]
     _description = "Dialog box to set a parcel code"
 
     parcel_code = fields.Char()
@@ -13,22 +14,14 @@ class WizardSetParcelCode(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         res = super().default_get(fields_list)
-        active_id = self.env.context.get("active_id")
-        if not active_id:
-            return res
-
-        parcel = self.env["ter.parcel"].browse(active_id)
+        parcel = self._get_active_record_or_empty("ter.parcel")
         if parcel.exists():
             res["parcel_code"] = parcel.alphanum_code
         return res
 
     def set_parcel_code(self):
         self.ensure_one()
-        active_id = self.env.context.get("active_id")
-        if not active_id:
-            return
-
-        parcel = self.env["ter.parcel"].browse(active_id)
+        parcel = self._get_active_record_or_empty("ter.parcel")
         if not parcel.exists():
             return
 

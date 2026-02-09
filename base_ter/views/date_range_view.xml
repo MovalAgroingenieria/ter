@@ -3,6 +3,7 @@
     <record id="view_date_range_list" model="ir.ui.view">
         <field name="name">date.range.list.ext</field>
         <field name="model">date.range</field>
+        <field name="priority" eval="99"/>
         <field name="inherit_id" ref="date_range.view_date_range_list"/>
         <field name="arch" type="xml">
 

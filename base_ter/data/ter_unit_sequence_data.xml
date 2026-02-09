@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
-        <record id="seq_ter_unit_default" model="ir.sequence">
-            <field name="name">Default Ter Unit Sequence</field>
-            <field name="code">base_ter.ter.unit</field>
-            <field name="prefix"/>
-            <field name="padding">6</field>
-            <field name="implementation">no_gap</field>
-            <field name="number_increment">1</field>
-            <field name="number_next">1</field>
-            <field name="company_id" ref="base.main_company"/>
-        </record>
+<odoo noupdate="1">
+    <record id="seq_ter_unit_default" model="ir.sequence">
+        <field name="name">Default Ter Unit Sequence</field>
+        <field name="code">base_ter.ter.unit</field>
+        <field name="prefix"/>
+        <field name="padding">6</field>
+        <field name="implementation">no_gap</field>
+        <field name="number_increment">1</field>
+        <field name="number_next">1</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
 
-        <record id="base.main_company" model="res.company">
-            <field name="ter_unit_sequence_id" ref="base_ter.seq_ter_unit_default"/>
-        </record>
-    </data>
+    <record id="base.main_company" model="res.company">
+        <field name="ter_unit_sequence_id" ref="base_ter.seq_ter_unit_default"/>
+    </record>
 </odoo>
