@@ -8,8 +8,6 @@
     "website": "https://www.moval.es",
     "author": "Moval Agroingeniería S.L.",
     "license": "AGPL-3",
-    "application": False,
-    "installable": True,
     "uninstall_hook": "uninstall_hook",
     "depends": [
         "base_ter",

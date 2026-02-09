@@ -1,3 +1,4 @@
+# pylint: disable=protected-access
 from unittest import mock
 
 from odoo.exceptions import UserError, ValidationError
@@ -7,7 +8,7 @@ from odoo.tests.common import TransactionCase, tagged
 @tagged("post_install", "-at_install")
 class TestResPartnerMapping(TransactionCase):
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(cls):  # pylint: disable=invalid-name
         super().setUpClass()
         cls.partner = cls.env["res.partner"].create(
             {
@@ -27,17 +28,17 @@ class TestResPartnerMapping(TransactionCase):
         partner = self.env["res.partner"].create({"name": "No scheme"})
         with self.assertRaises(ValidationError):
             partner.base_connection_host = "example.test"
-            partner._check_base_connection_host()
+            partner._check_base_connection_host()  # pylint: disable=protected-access
 
     def test_host_constraint_strips_trailing_slash(self):
         self.partner.base_connection_host = "https://example.test/"
-        self.partner._check_base_connection_host()
+        self.partner._check_base_connection_host()  # pylint: disable=protected-access
         self.assertEqual(self.partner.base_connection_host, "https://example.test")
 
     def test_port_constraint_range(self):
         with self.assertRaises(ValidationError):
             self.partner.base_connection_port = 70000
-            self.partner._check_base_connection_port()
+            self.partner._check_base_connection_port()  # pylint: disable=protected-access
 
     def test_get_port_defaults(self):
         self.assertEqual(self.partner._get_port("http://a", 0), 80)
@@ -56,15 +57,19 @@ class TestResPartnerMapping(TransactionCase):
             }
         )
         with self.assertRaises(UserError):
-            partner._get_connection_params()
+            partner._get_connection_params()  # pylint: disable=protected-access
 
     def test_check_odoo_rpc_connection_handles_oserror(self):
         with mock.patch("socket.create_connection", side_effect=OSError("no route")):
             with self.assertRaises(ValidationError):
-                self.partner._check_odoo_rpc_connection("https://example.test", 443)
+                self.partner._check_odoo_rpc_connection(  # pylint: disable=protected-access
+                    "https://example.test", 443
+                )
 
     def test_check_connection_success(self):
-        def fake_execute_kw(database, uid, password, model, method, args, kwargs=None):
+        def fake_execute_kw(  # pylint: disable=too-many-arguments,too-many-positional-arguments,unused-argument
+            database, uid, password, model, method, args, kwargs=None
+        ):
             kwargs = kwargs or {}
             if (model, method) == ("res.company", "fields_get"):
                 return {"general_code": {"type": "char"}}
@@ -73,11 +78,13 @@ class TestResPartnerMapping(TransactionCase):
             return []
 
         class FakeCommon:
-            def authenticate(self, database, username, password, context):
+            def authenticate(  # pylint: disable=unused-argument
+                self, database, username, password, context=None
+            ):
                 return 7
 
         class FakeModels:
-            def execute_kw(
+            def execute_kw(  # pylint: disable=too-many-arguments,too-many-positional-arguments
                 self, database, uid, password, model, method, args, kwargs=None
             ):
                 return fake_execute_kw(
@@ -94,7 +101,7 @@ class TestResPartnerMapping(TransactionCase):
         ):
             m_conn.return_value.__enter__.return_value = True
             rpc_models, uid, password, database, company_id = (
-                self.partner._check_connection()
+                self.partner._check_connection()  # pylint: disable=protected-access
             )
             self.assertEqual(uid, 7)
             self.assertEqual(database, "db_test")

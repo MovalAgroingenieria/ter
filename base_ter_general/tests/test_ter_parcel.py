@@ -5,7 +5,7 @@ from odoo.tests.common import TransactionCase, tagged
 @tagged("post_install", "-at_install")
 class TestTerParcel(TransactionCase):
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(cls):  # pylint: disable=invalid-name
         super().setUpClass()
         region = cls.env["res.admregion"].create({"name": "R1"})
         province = cls.env["res.province"].create(

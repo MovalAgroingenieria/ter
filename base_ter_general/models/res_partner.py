@@ -1,11 +1,12 @@
 # 2024-2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
+# pylint: disable=translation-not-lazy
 
 import logging
 import socket
 import xmlrpc.client
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -54,8 +55,10 @@ class ResPartner(models.Model):
             host = record.base_connection_host.strip()
             if not (host.startswith("http://") or host.startswith("https://")):
                 raise ValidationError(
-                    _("The host must start with 'http://' or 'https://' [%s]")
-                    % (record.base_connection_database or "")
+                    record.env._(
+                        "The host must start with 'http://' or 'https://' [%(db)s]"
+                    )
+                    % {"db": record.base_connection_database or ""}
                 )
 
     def write(self, vals):
@@ -71,8 +74,8 @@ class ResPartner(models.Model):
                 1 <= record.base_connection_port <= 65535
             ):
                 raise ValidationError(
-                    _("The port must be between 1 and 65535 [%s]")
-                    % (record.base_connection_database or "")
+                    record.env._("The port must be between 1 and 65535 [%(db)s]")
+                    % {"db": record.base_connection_database or ""}
                 )
 
     def _get_port(self, host, port):
@@ -96,8 +99,10 @@ class ResPartner(models.Model):
         password = self.base_connection_password
         if not all([host, database, username, password]):
             raise UserError(
-                _("Connection parameters to %s are not fully configured.")
-                % self.display_name.strip()
+                self.env._(
+                    "Connection parameters to %(name)s are not fully configured."
+                )
+                % {"name": self.display_name.strip()}
             )
         return host, port, company_id, database, username, password
 
@@ -109,7 +114,8 @@ class ResPartner(models.Model):
                 return True
         except OSError as exc:
             raise ValidationError(
-                _("There is no connection to %s.") % self.display_name.strip()
+                self.env._("There is no connection to %(name)s.")
+                % {"name": self.display_name.strip()}
             ) from exc
 
     def _check_connection(self):
@@ -128,12 +134,15 @@ class ResPartner(models.Model):
             uid = common.authenticate(database, username, password, {})
         except Exception as exc:
             raise UserError(
-                _("The database %s does not exist [%s]")
-                % (database, self.display_name.strip())
+                self.env._("The database %(database)s does not exist [%(name)s]")
+                % {"database": database, "name": self.display_name.strip()}
             ) from exc
 
         if not uid:
-            raise UserError(_("Authentication into database %s failed.") % database)
+            raise UserError(
+                self.env._("Authentication into database %(database)s failed.")
+                % {"database": database}
+            )
 
         rpc_models = xmlrpc.client.ServerProxy(f"{url}/xmlrpc/2/object")
 
@@ -148,8 +157,11 @@ class ResPartner(models.Model):
         )
         if "general_code" not in company_fields:
             raise UserError(
-                _("The base module does not appear to be installed in the database %s.")
-                % database
+                self.env._(
+                    "The base module does not appear to be installed "
+                    "in the database %(database)s."
+                )
+                % {"database": database}
             )
 
         company_ids = rpc_models.execute_kw(
@@ -163,38 +175,47 @@ class ResPartner(models.Model):
         )
         if not company_ids:
             raise UserError(
-                _("The company ID %s was not found in the database %s.")
-                % (company_id, database)
+                self.env._(
+                    "The company ID %(company_id)s was not found "
+                    "in the database %(database)s."
+                )
+                % {"company_id": company_id, "database": database}
             )
 
         return rpc_models, uid, password, database, company_ids[0]
 
-    def map_base_entity(self, cronjob=False):
+    def map_base_entity(  # noqa: C901
+        self, cronjob=False
+    ):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
         for record in self:
             if record.mapped_to_base:
-                record._check_connection()
+                record._check_connection()  # pylint: disable=protected-access
 
         notification_message = ""
-        notification_title = _("Mapping results")
+        notification_title = self.env._("Mapping results")
         notification_type = "info"
         notification_sticky = len(self) > 1
 
-        TerParcel = self.env["ter.parcel"]
+        ter_parcel_model = self.env["ter.parcel"]
         config = self.env["ir.config_parameter"].sudo()
 
         for record in self:
             if not record.mapped_to_base:
                 continue
 
-            rpc_models, uid, password, database, company_id = record._check_connection()
+            rpc_models, uid, password, database, company_id = (
+                record._check_connection()  # pylint: disable=protected-access
+            )
 
             partner_code = record.partner_code
             if not partner_code:
-                raise UserError(_("Partner code is not set. It cannot be mapped."))
+                raise UserError(
+                    record.env._("Partner code is not set. It cannot be mapped.")
+                )
 
             jinja2_template = config.get_param("base_ter_general.jinja2_template") or ""
             if not jinja2_template:
-                raise UserError(_("Jinja2 template is not configured."))
+                raise UserError(record.env._("Jinja2 template is not configured."))
 
             rpc_models.execute_kw(
                 database,
@@ -229,7 +250,7 @@ class ResPartner(models.Model):
                 [("partner_id", "=", record.id)]
             )
             general_partner_parcels = set(
-                TerParcel.search(
+                ter_parcel_model.search(
                     [("property_id", "in", general_partner_properties.ids)]
                 ).mapped("name")
             )
@@ -245,7 +266,7 @@ class ResPartner(models.Model):
                     failed_mapped += 1
                     continue
 
-                existing_parcel = TerParcel.search(
+                existing_parcel = ter_parcel_model.search(
                     [("name", "=", parcel_code)], limit=1
                 )
                 if not existing_parcel:
@@ -281,7 +302,7 @@ class ResPartner(models.Model):
             if failed_mapped:
                 _logger.info("Mapping parcels failed: %d", failed_mapped)
 
-            success_mapped_parcels = TerParcel.search(
+            success_mapped_parcels = ter_parcel_model.search(
                 [
                     ("property_id", "in", general_partner_properties.ids),
                     ("mapped_from_base", "=", True),
@@ -314,37 +335,35 @@ class ResPartner(models.Model):
                     failed_mapped_in_base,
                 )
 
-            message_log = _("<b>Scan results</b>")
-            message_log += (
-                _("<br/>· Parcels found in base entity: %d") % num_of_parcels_found
-            )
+            message_log = record.env._("<b>Scan results</b>")
+            message_log += record.env._(
+                "<br/>· Parcels found in base entity: %(n)d"
+            ) % {"n": num_of_parcels_found}
             if success_mapped:
-                message_log += (
-                    _("<br/>· Parcels successfully mapped: %d") % success_mapped
-                )
+                message_log += record.env._(
+                    "<br/>· Parcels successfully mapped: %(n)d"
+                ) % {"n": success_mapped}
             if success_mapped_property_mismatch:
-                message_log += (
-                    _("<br/>· Parcels property mismatch: %d")
-                    % success_mapped_property_mismatch
-                )
+                message_log += record.env._(
+                    "<br/>· Parcels property mismatch: %(n)d"
+                ) % {"n": success_mapped_property_mismatch}
             if parcel_not_found:
-                message_log += (
-                    _("<br/>· Parcels not found in general entity: %d")
-                    % parcel_not_found
-                )
+                message_log += record.env._(
+                    "<br/>· Parcels not found in general entity: %(n)d"
+                ) % {"n": parcel_not_found}
             if failed_mapped:
-                message_log += _("<br/>· Parcels failed to scan: %d") % failed_mapped
-            message_log += _("<br/><br/><b>Mapping results</b>")
+                message_log += record.env._("<br/>· Parcels failed to scan: %(n)d") % {
+                    "n": failed_mapped
+                }
+            message_log += record.env._("<br/><br/><b>Mapping results</b>")
             if success_mapped_in_base:
-                message_log += (
-                    _("<br/>· Parcels mapped in base entity: %d")
-                    % success_mapped_in_base
-                )
+                message_log += record.env._(
+                    "<br/>· Parcels mapped in base entity: %(n)d"
+                ) % {"n": success_mapped_in_base}
             if failed_mapped_in_base:
-                message_log += (
-                    _("<br/>· Parcels failed to map in base entity: %d")
-                    % failed_mapped_in_base
-                )
+                message_log += record.env._(
+                    "<br/>· Parcels failed to map in base entity: %(n)d"
+                ) % {"n": failed_mapped_in_base}
             record.message_post(body=message_log)
 
             if not cronjob:
@@ -374,7 +393,8 @@ class ResPartner(models.Model):
         partners = self.search([("mapped_to_base", "=", True)])
         admin_lang = self.env.ref("base.user_admin").lang or "en_US"
         for partner in partners:
-            job_description = _("Mapping %s") % partner.display_name
+            job_desc_tpl = partner.env._("Mapping %(name)s")
+            job_description = job_desc_tpl % {"name": partner.display_name}
             partner.with_context(lang=admin_lang).with_delay(
                 description=job_description
             ).map_base_entity(cronjob=True)
