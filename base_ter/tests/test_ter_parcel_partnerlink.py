@@ -1,4 +1,5 @@
-from odoo import exceptions
+# pylint: disable=invalid-name
+# pylint: disable=invalid-name
 from odoo.tests.common import TransactionCase, tagged
 
 

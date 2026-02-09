@@ -1,3 +1,5 @@
+# pylint: disable=invalid-name,protected-access
+# pylint: disable=invalid-name,protected-access
 from odoo.tests.common import TransactionCase, tagged
 
 

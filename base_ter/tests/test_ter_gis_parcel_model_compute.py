@@ -1,5 +1,3 @@
-from unittest.mock import Mock, patch
-
 from odoo.tests.common import TransactionCase, tagged
 
 
@@ -10,10 +8,10 @@ class TestTerGisParcelModelCompute(TransactionCase):
 
     def test_compute_threshold_str_empty_without_parcel(self):
         rec = self._new_record()
-        rec._compute_diff_areas_threshold_exceeded_str()
+        # Reading the field triggers the compute
         self.assertEqual(rec.diff_areas_threshold_exceeded_str, "")
 
     def test_compute_gis_data_empty_without_parcel(self):
         rec = self._new_record()
-        rec._compute_gis_data()
+        # Reading the field triggers the compute
         self.assertEqual(rec.gis_data, "")
