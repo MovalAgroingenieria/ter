@@ -188,15 +188,13 @@
         <field name="context">{'default_is_unit_use_type': True}</field>
     </record>
 
-    <menuitem
+    <menuitem id="menu_date_range_action"
             action="date_range_action"
-            id="menu_date_range_action"
             parent="base_ter.menu_configuration_general"
             sequence="102"
     />
-    <menuitem
+    <menuitem id="menu_date_range_type_action"
             action="date_range_type_action"
-            id="menu_date_range_type_action"
             parent="base_ter.menu_configuration_general"
             sequence="103"
     />

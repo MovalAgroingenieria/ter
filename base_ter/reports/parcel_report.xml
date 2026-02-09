@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
     <record id="action_parcel_report" model="ir.actions.report">
@@ -82,7 +83,7 @@
                                                 <span>Printing date</span>
                                             </td>
                                             <td class="text-end">
-                                                <span t-esc="printing_date"/>
+                                                <span t-out="printing_date"/>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -243,7 +244,7 @@
                         <div style="width: 40%; display: table-cell; vertical-align: top;">
                             <div class="text-end" style="padding: 2%;">
                                 Printing date
-                                <span t-esc="printing_date"/>
+                                <span t-out="printing_date"/>
                             </div>
                         </div>
                     </div>

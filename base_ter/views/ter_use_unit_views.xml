@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="view_ter_unit_attribute_value_list" model="ir.ui.view">
         <field name="name">ter.unit.attribute.value.list</field>
@@ -168,7 +168,7 @@
     <record id="view_ter_unit_form" model="ir.ui.view">
         <field name="name">ter.unit.form</field>
         <field name="model">ter.use_unit</field>
-        <field name="priority">1</field>
+        <field name="priority" eval="1" />
         <field name="arch" type="xml">
             <form string="Territorial Unit">
                 <header>
