@@ -20,7 +20,7 @@ class ResCompany(models.Model):
         comodel_name="date.range",
         string="Geofolia Default Campaign",
         domain="[('is_unit_use_type', '=', True)]",
-        help="Default campaign (date range) for ter.unit created from Geofolia Fields.",
+        help="Default campaign (date range) for ter.use_unit created from Geofolia Fields.",
     )
     geofolia_maintenance_project_id = fields.Many2one(
         comodel_name="project.project",

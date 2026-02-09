@@ -15,7 +15,7 @@ class AccountAnalyticLine(models.Model):
         index=True,
     )
     ter_unit_id = fields.Many2one(
-        "ter.unit",
+        "ter.use_unit",
         string="Ter Unit",
         index=True,
         ondelete="set null",

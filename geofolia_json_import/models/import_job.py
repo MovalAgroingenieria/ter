@@ -50,7 +50,7 @@ class GeofoliaImportJob(models.Model):
         comodel_name="date.range",
         string="Campaign (Date Range)",
         domain="[('is_unit_use_type', '=', True)]",
-        help="Campaign for ter.unit when importing Fields. From wizard.",
+        help="Campaign for ter.use_unit when importing Fields. From wizard.",
     )
 
     info_json = fields.Json()
@@ -190,7 +190,7 @@ class GeofoliaImportJob(models.Model):
         return {
             "type": "ir.actions.act_window",
             "name": _("Validated Territorial Units"),
-            "res_model": "ter.unit",
+            "res_model": "ter.use_unit",
             "view_mode": "list,form",
             "domain": [("id", "in", units.ids)],
         }
@@ -790,7 +790,7 @@ class GeofoliaImportJob(models.Model):
             EmpLine.create(emp_vals)
 
     # ----------------------------
-    # Apply: ter.unit mapping (Fields -> ter.unit)
+    # Apply: ter.use_unit mapping (Fields -> ter.use_unit)
     # ----------------------------
 
     def _get_date_range_for_harvest_year(self, harvest_year):
@@ -813,7 +813,7 @@ class GeofoliaImportJob(models.Model):
         return DateRange.search([("is_unit_use_type", "=", True)], limit=1)
 
     def _get_ter_unit_vals_from_field_line(self, line):
-        """Build ter.unit vals from Geofolia field line (Field = ter.unit)."""
+        """Build ter.use_unit vals from Geofolia field line (Field = ter.use_unit)."""
         self.ensure_one()
         raw = line.raw_json or {}
         vals = {
@@ -876,9 +876,9 @@ class GeofoliaImportJob(models.Model):
         return vals
 
     def _apply_field_line_to_ter_unit(self, line):
-        """Create or update ter.unit from Geofolia Field line."""
+        """Create or update ter.use_unit from Geofolia Field line."""
         self.ensure_one()
-        Unit = self.env["ter.unit"]
+        Unit = self.env["ter.use_unit"]
 
         ext_id = line.external_uuid
         if not ext_id:
@@ -899,7 +899,7 @@ class GeofoliaImportJob(models.Model):
             return
 
         # Resolve parcel: UID==ParentId1 -> by geofolia_farm_identification_code or create;
-        # UID!=ParentId1 -> from parent ter.unit's parcel_id
+        # UID!=ParentId1 -> from parent ter.use_unit's parcel_id
         parcel = self._resolve_parcel_for_field_line(line, vals)
         if not parcel:
             uid = (line.external_uuid or "").strip()
@@ -920,7 +920,7 @@ class GeofoliaImportJob(models.Model):
                     {
                         "sync_state": "skipped",
                         "sync_message": _(
-                            "Child unit: parent ter.unit (geofolia_uid=%s) not found "
+                            "Child unit: parent ter.use_unit (geofolia_uid=%s) not found "
                             "or has no parcel. Process parent field first."
                         ) % parent_id1,
                     }
@@ -1491,18 +1491,18 @@ class GeofoliaImportJob(models.Model):
 
     def _resolve_parcel_for_field_line(self, line, vals):
         """
-        Resolve parcel_id for ter.unit from Geofolia Field line.
+        Resolve parcel_id for ter.use_unit from Geofolia Field line.
 
         - If Geofolia UID == Geofolia Parent Id1 (root/farm), or Parent Id1 is nil UUID:
           Search parcel by geofolia_farm_identification_code = UID.
           If not found, create parcel and link.
         - If Geofolia UID != Geofolia Parent Id1 (child):
-          Search parent ter.unit by geofolia_uid = ParentId1, use its parcel_id.
+          Search parent ter.use_unit by geofolia_uid = ParentId1, use its parcel_id.
         """
         uid = (line.external_uuid or "").strip()
         parent_id1 = (vals.get("geofolia_parent_id1") or "").strip()
         Parcel = self.env["ter.parcel"]
-        Unit = self.env["ter.unit"]
+        Unit = self.env["ter.use_unit"]
 
         is_root = uid == parent_id1 or parent_id1 == self._NIL_UUID
         if is_root:
@@ -1531,7 +1531,7 @@ class GeofoliaImportJob(models.Model):
             if "name" in Parcel._fields:
                 create_vals["name"] = unique_code
             return Parcel.create(create_vals)
-        # Child: parcel from parent ter.unit
+        # Child: parcel from parent ter.use_unit
         parent_unit = Unit.search([("geofolia_uid", "=", parent_id1)], limit=1)
         if parent_unit and parent_unit.parcel_id:
             return parent_unit.parcel_id
@@ -1539,14 +1539,14 @@ class GeofoliaImportJob(models.Model):
 
     def _resolve_unit_from_crop_zone(self, activity_raw, recognition_id):
         """
-        Resolve ter.unit from Activity CropZoneIds. CropZone.RecognitionId may match
-        ter.unit.geofolia_uid (Field Id from Geofolia).
+        Resolve ter.use_unit from Activity CropZoneIds. CropZone.RecognitionId may match
+        ter.use_unit.geofolia_uid (Field Id from Geofolia).
         """
         if not activity_raw or not recognition_id:
-            return self.env["ter.unit"]
+            return self.env["ter.use_unit"]
         zones = activity_raw.get("CropZoneIds") or []
         if not isinstance(zones, list):
-            return self.env["ter.unit"]
+            return self.env["ter.use_unit"]
         zone = next(
             (
                 z
@@ -1556,18 +1556,18 @@ class GeofoliaImportJob(models.Model):
             None,
         )
         if not zone:
-            return self.env["ter.unit"]
+            return self.env["ter.use_unit"]
         field_id = zone.get("FieldId") or zone.get("RecognitionId")
         if field_id:
-            return self.env["ter.unit"].search(
+            return self.env["ter.use_unit"].search(
                 [("geofolia_uid", "=", str(field_id))], limit=1
             )
-        return self.env["ter.unit"]
+        return self.env["ter.use_unit"]
 
     def _resolve_parcel_from_crop_zone(self, activity_raw, recognition_id):
         """
         Resolve ter.parcel from Activity CropZoneIds.
-        First tries ter.unit (Fields) by geofolia_uid, then falls back to ter.parcel.
+        First tries ter.use_unit (Fields) by geofolia_uid, then falls back to ter.parcel.
         """
         unit = self._resolve_unit_from_crop_zone(activity_raw, recognition_id)
         if unit and unit.parcel_id:
@@ -1607,10 +1607,10 @@ class GeofoliaImportJob(models.Model):
         return self.env["ter.parcel"]
 
     def _resolve_ter_unit_for_parcel_date(self, parcel, activity_date):
-        """Find active ter.unit for parcel at activity date (begin_date <= date <= end_date)."""
+        """Find active ter.use_unit for parcel at activity date (begin_date <= date <= end_date)."""
         if not parcel or not activity_date:
-            return self.env["ter.unit"]
-        return self.env["ter.unit"].search(
+            return self.env["ter.use_unit"]
+        return self.env["ter.use_unit"].search(
             [
                 ("parcel_id", "=", parcel.id),
                 ("date_start", "<=", activity_date),
@@ -1666,12 +1666,12 @@ class GeofoliaImportJob(models.Model):
     def _get_territory_vals_for_analytic_line(self, activity, employee_line=None):
         """
         Build territory-related vals for account.analytic.line from activity.
-        Uses CropZoneIds + EmployeeRecognitionId for precise ter.unit/parcel per employee,
+        Uses CropZoneIds + EmployeeRecognitionId for precise ter.use_unit/parcel per employee,
         else falls back to Activity FarmIdentificationCode.
         """
         vals = {}
         parcel = self.env["ter.parcel"]
-        ter_unit = self.env["ter.unit"]
+        ter_unit = self.env["ter.use_unit"]
         activity_raw = activity.raw_json or {}
 
         if employee_line and employee_line.employee_recognition_id:

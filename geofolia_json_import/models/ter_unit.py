@@ -5,7 +5,7 @@ from odoo import _, fields, models
 
 
 class TerUnit(models.Model):
-    _inherit = "ter.unit"
+    _inherit = "ter.use_unit"
 
     timesheet_count = fields.Integer(
         string="Timesheets",

@@ -15,7 +15,7 @@ class GeofoliaImportWizard(models.TransientModel):
         string="Campaign (Date Range)",
         domain="[('is_unit_use_type', '=', True)]",
         default=lambda self: self.env.company.geofolia_default_date_range_id,
-        help="Campaign used for ter.unit when importing Fields. Required for Fields/Full import.",
+        help="Campaign used for ter.use_unit when importing Fields. Required for Fields/Full import.",
     )
     import_type = fields.Selection(
         selection=[

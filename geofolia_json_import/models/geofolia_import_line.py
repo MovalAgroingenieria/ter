@@ -48,10 +48,10 @@ class GeofoliaImportLine(models.Model):
     sync_message = fields.Text()
 
     ter_unit_id = fields.Many2one(
-        "ter.unit",
+        "ter.use_unit",
         string="Ter Unit",
         ondelete="set null",
-        help="Target ter.unit created/updated by this line.",
+        help="Target ter.use_unit created/updated by this line.",
     )
 
     def action_transform(self):

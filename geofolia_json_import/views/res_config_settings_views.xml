@@ -36,7 +36,7 @@
 
                         <setting id="geofolia_default_date_range"
                                  string="Geofolia default campaign"
-                                 help="Default campaign (date range) for ter.unit created from Geofolia Fields.">
+                                 help="Default campaign (date range) for ter.use_unit created from Geofolia Fields.">
                             <div class="content-group">
                                 <div class="mt16">
                                     <field name="geofolia_default_date_range_id" options="{'no_create': False}"/>
