@@ -19,7 +19,6 @@
         "base_gis",
         "base_adi",
         "base_report",
-        "analytic",
         "date_range",
     ],
     "data": [

@@ -13,7 +13,6 @@
             <form string="Import Geofolia JSON">
                 <group>
                     <field name="import_type"/>
-                    <field name="date_range_id" options="{'no_create': True}"/>
                     <field name="file_name"/>
                     <field name="file_data" filename="file_name"/>
                 </group>

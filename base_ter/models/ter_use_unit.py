@@ -116,7 +116,6 @@ class TerUnit(models.Model):
         required=True,
         index=True,
     )
-    account_id = fields.Many2one("account.analytic.account", string="Analytic Account")
     area_official_m2 = fields.Integer(
         string="Official Area (m²)",
         compute="_compute_area_official_m2",
