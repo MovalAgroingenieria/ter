@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 Moval Agroingenieria S.L. -->
 <!-- Cultivation system attribute on Farming: values from Sistema de cultivo.csv (active only). -->
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="ter_attr_cultivation_system_farming" model="ter.use_type.attribute" >
             <field name="name">Cultivation system</field>
@@ -142,5 +141,4 @@
             <field name="attribute_id" ref="ter_attr_cultivation_system_farming"/>
         </record>
 
-    </data>
 </odoo>

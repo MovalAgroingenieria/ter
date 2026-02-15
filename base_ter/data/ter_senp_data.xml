@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 Moval Agroingenieria S.L. -->
 <!-- SENP attribute on Farming: values from Superficies y elementos no productivos (SENP).csv (active only). -->
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="ter_attr_senp_farming" model="ter.use_type.attribute" >
             <field name="name">Non-productive surfaces and elements (SENP)</field>
@@ -142,5 +141,4 @@
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
 
-    </data>
 </odoo>

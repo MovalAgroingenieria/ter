@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 Moval Agroingeniería S.L. -->
-<odoo>
-
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="ter_profile_01" model="ter.profile">
             <field name="alphanum_code">Owner</field>
@@ -16,7 +14,5 @@
             <field name="requires_total">False</field>
             <field name="is_standard">False</field>
         </record>
-
-    </data>
 
 </odoo>

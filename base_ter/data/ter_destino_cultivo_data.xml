@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 Moval Agroingenieria S.L. -->
 <!-- Crop destination attribute on Farming: values from Destino del cultivo.csv (active only). -->
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="ter_attr_crop_destination_farming" model="ter.use_type.attribute" >
             <field name="name">Crop destination</field>
@@ -126,5 +125,4 @@
             <field name="attribute_id" ref="ter_attr_crop_destination_farming"/>
         </record>
 
-    </data>
 </odoo>

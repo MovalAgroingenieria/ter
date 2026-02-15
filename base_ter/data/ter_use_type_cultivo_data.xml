@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 Moval Agroingenieria S.L. -->
 <!-- Crops under Farming: each crop has its own attributes with only its row values. -->
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <!-- Crops under their crop family (Farming -> Family -> Crop). -->
 
@@ -141306,5 +141305,4 @@
             <field name="attribute_id" ref="ter_attr_cultivo_997_integrated"/>
         </record>
 
-    </data>
 </odoo>

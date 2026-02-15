@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 Moval Agroingenieria S.L. -->
 <!-- Part 10/10: attributes Variedad/Especie/Tipo, Admisible, Vinificable, Integrado (from Variedad CSV). -->
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="ter_attr_cultivo_906_variedad__especie__tipo" model="ter.use_type.attribute" >
             <field name="name">Variedad/ Especie/ Tipo</field>
@@ -4576,5 +4575,4 @@
             <field name="attribute_id" ref="ter_attr_cultivo_997_integrado"/>
         </record>
 
-    </data>
 </odoo>

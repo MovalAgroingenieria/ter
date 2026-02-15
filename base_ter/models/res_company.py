@@ -119,6 +119,8 @@ class ResCompany(models.Model):
         surface-related computed fields must be recomputed (m² and unit label).
         Each user will then see values in their current company's unit on next read.
         """
+        # pylint: disable=no-search-all
+        # We need to invalidate all records so computed surface fields are recomputed
         area_fields_parcel = [
             "area_official_m2",
             "area_unit_name",
@@ -135,19 +137,10 @@ class ResCompany(models.Model):
             "area_unit_name",
         ]
         area_fields_unit = ["area_official_m2", "area_unit_name"]
-        # Invalidate all records so surface-related computed fields are recomputed
-        self.env["ter.parcel"].search([]).invalidate_recordset(
-            area_fields_parcel
-        )  # noqa: W8163
-        self.env["ter.property"].search([]).invalidate_recordset(
-            area_fields_property
-        )  # noqa: W8163
-        self.env["res.partner"].search([]).invalidate_recordset(
-            area_fields_partner
-        )  # noqa: W8163
-        self.env["ter.use_unit"].search([]).invalidate_recordset(
-            area_fields_unit
-        )  # noqa: W8163
+        self.env["ter.parcel"].search([]).invalidate_recordset(area_fields_parcel)
+        self.env["ter.property"].search([]).invalidate_recordset(area_fields_property)
+        self.env["res.partner"].search([]).invalidate_recordset(area_fields_partner)
+        self.env["ter.use_unit"].search([]).invalidate_recordset(area_fields_unit)
 
     _sql_constraints = [
         (

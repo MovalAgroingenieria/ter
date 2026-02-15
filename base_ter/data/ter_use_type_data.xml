@@ -3,8 +3,7 @@
 <!-- First-level use types (parent_id = False). Data from wua.subparceltype. -->
 <!-- Cultivable as attribute (not boolean): each type has attribute "Cultivable" with values Yes/No. -->
 <!-- noupdate="1" = always load/update this data on module upgrade. -->
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="ter_use_type_farming" model="ter.use_type" >
             <field name="name">Farming</field>
@@ -78,5 +77,4 @@
             <field name="attribute_id" ref="ter_attr_cultivable_water_reservoir"/>
         </record>
 
-    </data>
 </odoo>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <!-- Crop families under Farming (from wua.cropfamily). Each family has kc_a, kc_b, kc_c for water use. -->
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="ter_use_type_familia_cereals" model="ter.use_type" >
             <field name="name">Cereals</field>
@@ -613,5 +612,4 @@
             <field name="attribute_id" ref="ter_attr_familia_berries_kc_c"/>
         </record>
 
-    </data>
 </odoo>

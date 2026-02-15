@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2026 Moval Agroingenieria S.L. -->
 <!-- Soil cover type attribute on Farming: values from Tipo de cobertura del suelo.csv (active only). -->
-<odoo>
-    <data noupdate="1">
+<odoo noupdate="1">
 
         <record id="ter_attr_soil_cover_type_farming" model="ter.use_type.attribute" >
             <field name="name">Soil cover type</field>
@@ -34,5 +33,4 @@
             <field name="attribute_id" ref="ter_attr_soil_cover_type_farming"/>
         </record>
 
-    </data>
 </odoo>
