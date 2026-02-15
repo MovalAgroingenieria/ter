@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
 
     <record id="gisviewer_global_serveraction" model="ir.actions.server">
@@ -67,6 +68,11 @@
               name="General"
               parent="menu_configuration"
               sequence="20"/>
+
+    <menuitem id="menu_configuration_dates"
+              name="Date Range Periods"
+              parent="menu_configuration"
+              sequence="25"/>
 
     <menuitem id="menu_thecnicalactions"
               name="Technical Actions"

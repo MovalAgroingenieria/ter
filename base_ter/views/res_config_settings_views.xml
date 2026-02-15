@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
 
     <record id="res_config_settings_view_form" model="ir.ui.view">
@@ -182,6 +183,16 @@
                                 <div class="content-group">
                                     <div class="mt16">
                                         <field name="gis_viewer_password" style="width: 90px;"/>
+                                    </div>
+                                </div>
+                            </setting>
+
+                            <setting id="base_ter_gis_viewer_cipher_key"
+                                     string="Cipher key"
+                                     help="AES key for encrypting technical credentials (16, 24 or 32 bytes).">
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="gis_viewer_cipher_key" password="True" style="width: 90px;"/>
                                     </div>
                                 </div>
                             </setting>

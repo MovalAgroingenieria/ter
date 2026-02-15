@@ -1,5 +1,5 @@
-# Copyright 2024-2026 Moval Agroingeniería S.L.
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# Copyright 2026 Moval Agroingeniería S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -115,6 +115,7 @@ class TerUnit(models.Model):
         default=0,
         required=True,
         index=True,
+        help="Official area of the territorial use unit, always in hectares (ha).",
     )
     area_official_m2 = fields.Integer(
         string="Official Area (m²)",
@@ -193,12 +194,10 @@ class TerUnit(models.Model):
 
     @api.depends_context("lang")
     def _compute_area_unit_name(self):
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        if area_unit_is_ha:
+        company = self.env.company
+        is_ha, unit_name, _ = company._get_area_unit_params()
+        if is_ha:
             unit_name = self.env._("ha")
-        else:
-            unit_name = config.get_param("base_ter.area_unit_name", "") or ""
         for record in self:
             record.area_unit_name = unit_name
 
@@ -425,7 +424,7 @@ class TerUnit(models.Model):
     def _compute_partner_id(self):
         """Set holder from parcel's manager (partner_id)."""
         for record in self:
-            if record.parcel_id and not record.partner_id:
+            if record.parcel_id and record.parcel_id.partner_id:
                 record.partner_id = record.parcel_id.partner_id
 
     @api.constrains("partner_id", "parcel_id")
@@ -549,16 +548,9 @@ class TerUnit(models.Model):
 
     @api.depends("area_official")
     def _compute_area_official_m2(self):
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        # Official area in ter.use_unit is always in hectares (company area_unit_is_ha).
+        # 1 ha = 10000 m².
         factor = 10000.0
-        if not area_unit_is_ha:
-            value_in_ha = float(
-                config.get_param("base_ter.area_unit_value_in_ha", 0) or 0
-            )
-            if value_in_ha and value_in_ha != 1:
-                factor = value_in_ha * 10000.0
-
         for record in self:
             record.area_official_m2 = round((record.area_official or 0.0) * factor)
 

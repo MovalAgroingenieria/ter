@@ -1,3 +1,5 @@
+# Copyright 2026 Moval Agroingeniería S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 # pylint: disable=invalid-name
 from unittest.mock import patch
 
@@ -9,8 +11,7 @@ from odoo.tests.common import TransactionCase, tagged
 class TestResConfigSettingsGeometry(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.config = self.env["ir.config_parameter"].sudo()
-        self.config.set_param("base_ter.gis_viewer_epsg", "4326")
+        self.env.company.write({"gis_viewer_epsg": 4326})
 
     def test_set_values_calls_update_geometry_on_epsg_change(self):
         settings = self.env["res.config.settings"].create({"gis_viewer_epsg": 25830})

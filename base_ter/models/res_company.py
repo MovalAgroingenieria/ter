@@ -1,5 +1,5 @@
-# 2024-2026 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# Copyright 2026 Moval Agroingeniería S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 from odoo import api, fields, models
 
@@ -50,6 +50,9 @@ class ResCompany(models.Model):
     gis_viewer_password = fields.Char(
         string="GIS Viewer: Password for the technical mode", size=255
     )
+    gis_viewer_cipher_key = fields.Char(
+        string="GIS Viewer: Cipher key for technical mode", size=255
+    )
     gis_viewer_epsg = fields.Integer(string="GIS Viewer: Spatial Reference")
     gis_viewer_previs_additional_args = fields.Char(
         string="GIS Preview: Additional URL arguments", size=255
@@ -59,6 +62,17 @@ class ResCompany(models.Model):
         help="Sequence used to generate ter.use_unit names. "
         "Name format: {type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}.",
     )
+
+    def _get_area_unit_params(self):
+        """
+        Return area unit settings for this company: (is_ha, unit_name, value_in_ha).
+        Used so that area_unit_is_ha and area_unit_value_in_ha come from current company.
+        """
+        self.ensure_one()
+        is_ha = bool(self.area_unit_is_ha)
+        unit_name = (self.area_unit_name or "").strip() or "ha"
+        value_in_ha = float(self.area_unit_value_in_ha or 0) or 1.0
+        return (is_ha, unit_name, value_in_ha)
 
     def _get_or_create_ter_unit_sequence(self):
         """Create default ter.use_unit sequence for company if missing."""
@@ -86,6 +100,37 @@ class ResCompany(models.Model):
         companies = super().create(vals_list)
         companies._get_or_create_ter_unit_sequence()  # pylint: disable=protected-access
         return companies
+
+    def write(self, vals):
+        res = super().write(vals)
+        area_unit_fields = {"area_unit_is_ha", "area_unit_value_in_ha", "area_unit_name"}
+        if area_unit_fields & set(vals):
+            self._invalidate_area_unit_dependent()
+        return res
+
+    def _invalidate_area_unit_dependent(self):
+        """Invalidate computed fields that depend on company area unit settings.
+
+        When area_unit_is_ha, area_unit_value_in_ha or area_unit_name change,
+        surface-related computed fields must be recomputed (m² and unit label).
+        Each user will then see values in their current company's unit on next read.
+        """
+        area_fields_parcel = ["area_official_m2", "area_unit_name", "diff_areas_threshold_exceeded"]
+        area_fields_property = [
+            "area_official_parcels_m2",
+            "area_unit_name",
+            "diff_areas_threshold_exceeded",
+        ]
+        area_fields_partner = [
+            "area_official_parcels_m2",
+            "area_official_properties_m2",
+            "area_unit_name",
+        ]
+        area_fields_unit = ["area_official_m2", "area_unit_name"]
+        self.env["ter.parcel"].search([]).invalidate_recordset(area_fields_parcel)
+        self.env["ter.property"].search([]).invalidate_recordset(area_fields_property)
+        self.env["res.partner"].search([]).invalidate_recordset(area_fields_partner)
+        self.env["ter.use_unit"].search([]).invalidate_recordset(area_fields_unit)
 
     _sql_constraints = [
         (

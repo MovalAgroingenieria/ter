@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo noupdate="1">
     <record id="seq_ter_unit_default" model="ir.sequence">
         <field name="name">Default Ter Unit Sequence</field>

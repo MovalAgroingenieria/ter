@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
 
     <record id="action_property_report" model="ir.actions.report">
@@ -28,10 +29,10 @@
         <t t-call="web.external_layout">
 
             <!-- Vars -->
-            <t t-set="config" t-value="o.env['ir.config_parameter'].sudo()"/>
-            <t t-set="area_unit_is_ha" t-value="config.get_param('base_ter.area_unit_is_ha', False)"/>
+            <t t-set="company" t-value="o.env.company"/>
+            <t t-set="area_unit_is_ha" t-value="company.area_unit_is_ha"/>
             <t t-set="area_unit_name"
-               t-value="('ha' if area_unit_is_ha else (config.get_param('base_ter.area_unit_name', '') or ''))"/>
+               t-value="o.env._('ha') if company.area_unit_is_ha else (company.area_unit_name or 'ha')"/>
 
             <t t-set="printing_date"
                t-value="o.env['common.format'].transform_date_to_locale(datetime.datetime.now(), lang=lang)"/>

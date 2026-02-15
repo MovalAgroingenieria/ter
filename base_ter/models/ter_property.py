@@ -1,5 +1,5 @@
-# 2024 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# Copyright 2026 Moval Agroingeniería S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 # pylint: disable=too-many-locals
 
 import base64
@@ -190,19 +190,14 @@ class TerProperty(models.Model):
 
     @api.depends("aerial_image", "mapped_to_polygon")
     def _compute_aerial_image_shown(self):  # pylint: disable=too-many-branches
-        config = self.env["ir.config_parameter"].sudo()
-
-        wmsbase_url = config.get_param("base_ter.aerial_image_wmsbase_url", False)
-        wmsbase_layers = config.get_param("base_ter.aerial_image_wmsbase_layers", False)
-        wmsvec_url = config.get_param("base_ter.aerial_image_wmsvec_url", False)
-        wmsvec_layer = config.get_param(
-            "base_ter.aerial_image_wmsvec_property_name", False
-        )
-        wmsvec_filter = bool(
-            config.get_param("base_ter.aerial_image_wmsvec_property_filter", False)
-        )
-        image_height = int(config.get_param("base_ter.aerial_image_height", 0) or 0)
-        image_zoom = float(config.get_param("base_ter.aerial_image_zoom", 0) or 0)
+        company = self.env.company
+        wmsbase_url = company.aerial_image_wmsbase_url or False
+        wmsbase_layers = company.aerial_image_wmsbase_layers or False
+        wmsvec_url = company.aerial_image_wmsvec_url or False
+        wmsvec_layer = company.aerial_image_wmsvec_property_name or False
+        wmsvec_filter = bool(company.aerial_image_wmsvec_property_filter)
+        image_height = int(company.aerial_image_height or 0)
+        image_zoom = float(company.aerial_image_zoom or 0)
 
         ogc_ok = bool(
             wmsbase_url and wmsbase_layers and image_height >= 0 and image_zoom >= 0
@@ -343,16 +338,11 @@ class TerProperty(models.Model):
 
     @api.depends("area_official_parcels")
     def _compute_area_official_parcels_m2(self):
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        company = self.env.company
+        is_ha, _, value_in_ha = company._get_area_unit_params()
         factor = 10000.0
-        if not area_unit_is_ha:
-            value_in_ha = float(
-                config.get_param("base_ter.area_unit_value_in_ha", 0) or 0
-            )
-            if value_in_ha and value_in_ha != 1:
-                factor = value_in_ha * 10000.0
-
+        if not is_ha and value_in_ha and value_in_ha != 1:
+            factor = value_in_ha * 10000.0
         for record in self:
             record.area_official_parcels_m2 = round(
                 (record.area_official_parcels or 0.0) * factor
@@ -365,9 +355,8 @@ class TerProperty(models.Model):
         "area_official_parcels",
     )
     def _compute_diff_areas_threshold_exceeded(self):
-        config = self.env["ir.config_parameter"].sudo()
-        warning = int(config.get_param("base_ter.warning_diff_areas", 0) or 0)
-
+        company = self.env.company
+        warning = int(company.warning_diff_areas or 0)
         for record in self:
             exceeded = False
             if (
@@ -400,12 +389,10 @@ class TerProperty(models.Model):
 
     @api.depends_context("lang")
     def _compute_area_unit_name(self):
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        if area_unit_is_ha:
+        company = self.env.company
+        is_ha, unit_name, _ = company._get_area_unit_params()
+        if is_ha:
             unit_name = self.env._("ha")
-        else:
-            unit_name = config.get_param("base_ter.area_unit_name", "") or ""
         for record in self:
             record.area_unit_name = unit_name
 
@@ -452,14 +439,11 @@ class TerProperty(models.Model):
 
         area_map = dict(area_fields)
 
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        area_unit_name = config.get_param("base_ter.area_unit_name", "") or ""
-        value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
-
+        company = self.env.company
+        is_ha, area_unit_name, value_in_ha = company._get_area_unit_params()
         measure_name = self.env._(self._ha_name)
         if (
-            not area_unit_is_ha
+            not is_ha
             and area_unit_name
             and value_in_ha
             and value_in_ha != 1
@@ -480,10 +464,8 @@ class TerProperty(models.Model):
         old_partner = self.partner_id if len(self) == 1 else self.env["res.partner"]
         res = super().write(vals)
 
-        config = self.env["ir.config_parameter"].sudo()
-        same_owner = bool(
-            config.get_param("base_ter.same_parcelmanager_propertyowner", False)
-        )
+        company = self.env.company
+        same_owner = bool(company.same_parcelmanager_propertyowner)
         if not (same_owner and old_partner and vals.get("partner_id")):
             return res
 
@@ -500,8 +482,8 @@ class TerProperty(models.Model):
 
     @api.model
     def action_refresh_properties_layer(self, from_backend=False):
-        config = self.env["ir.config_parameter"].sudo()
-        epsg = int(config.get_param("base_ter.gis_viewer_epsg", 0) or 0) or 25830
+        company = self.env.company
+        epsg = int(company.gis_viewer_epsg or 0) or 25830
 
         message_type = "INFO"
         message = self.env._("ter_gis_property layer recreated.")

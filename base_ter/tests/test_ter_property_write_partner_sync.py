@@ -1,3 +1,5 @@
+# Copyright 2026 Moval Agroingeniería S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 # pylint: disable=invalid-name
 from odoo.tests.common import TransactionCase, tagged
 
@@ -7,8 +9,7 @@ class TestTerPropertyWritePartnerSync(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.config = cls.env["ir.config_parameter"].sudo()
-        cls.config.set_param("base_ter.same_parcelmanager_propertyowner", "True")
+        cls.env.company.write({"same_parcelmanager_propertyowner": True})
 
         cls.old_partner = cls.env["res.partner"].create(
             {"name": "Old", "partner_code": 12}

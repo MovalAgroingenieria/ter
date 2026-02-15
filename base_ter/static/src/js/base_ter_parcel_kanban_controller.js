@@ -1,4 +1,6 @@
 /** @odoo-module **/
+// Copyright 2026 Moval Agroingeniería S.L.
+// License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 import {registry} from "@web/core/registry";
 import {KanbanController} from "@web/views/kanban/kanban_controller";

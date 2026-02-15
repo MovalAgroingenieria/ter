@@ -1,5 +1,5 @@
-# 2024-2026 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# Copyright 2026 Moval Agroingeniería S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 from odoo import api, exceptions, fields, models
 
@@ -134,16 +134,11 @@ class ResPartner(models.Model):
 
     @api.depends("area_official_parcels")
     def _compute_area_official_parcels_m2(self):
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        company = self.env.company
+        is_ha, _, value_in_ha = company._get_area_unit_params()
         factor = 10000.0
-        if not area_unit_is_ha:
-            value_in_ha = float(
-                config.get_param("base_ter.area_unit_value_in_ha", 0) or 0
-            )
-            if value_in_ha and value_in_ha != 1:
-                factor = value_in_ha * 10000.0
-
+        if not is_ha and value_in_ha and value_in_ha != 1:
+            factor = value_in_ha * 10000.0
         for record in self:
             record.area_official_parcels_m2 = round(
                 (record.area_official_parcels or 0.0) * factor
@@ -168,16 +163,11 @@ class ResPartner(models.Model):
 
     @api.depends("area_official_properties")
     def _compute_area_official_properties_m2(self):
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        company = self.env.company
+        is_ha, _, value_in_ha = company._get_area_unit_params()
         factor = 10000.0
-        if not area_unit_is_ha:
-            value_in_ha = float(
-                config.get_param("base_ter.area_unit_value_in_ha", 0) or 0
-            )
-            if value_in_ha and value_in_ha != 1:
-                factor = value_in_ha * 10000.0
-
+        if not is_ha and value_in_ha and value_in_ha != 1:
+            factor = value_in_ha * 10000.0
         for record in self:
             record.area_official_properties_m2 = round(
                 (record.area_official_properties or 0.0) * factor
@@ -185,13 +175,10 @@ class ResPartner(models.Model):
 
     @api.depends_context("lang")
     def _compute_area_unit_name(self):
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        unit_name = (
-            self.env._("ha")
-            if area_unit_is_ha
-            else (config.get_param("base_ter.area_unit_name", "") or "")
-        )
+        company = self.env.company
+        is_ha, unit_name, _ = company._get_area_unit_params()
+        if is_ha:
+            unit_name = self.env._("ha")
         for record in self:
             record.area_unit_name = unit_name
 
@@ -207,15 +194,12 @@ class ResPartner(models.Model):
                 raise exceptions.ValidationError(self.env._("Repeated partner code."))
 
     def _get_measure_name_for_view(self):
-        """Get area measure name from config for view."""
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        area_unit_name = config.get_param("base_ter.area_unit_name", "") or ""
-        value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
-
+        """Get area measure name from current company for view."""
+        company = self.env.company
+        is_ha, area_unit_name, value_in_ha = company._get_area_unit_params()
         measure_name = self.env._(self._ha_name)
         if (
-            not area_unit_is_ha
+            not is_ha
             and area_unit_name
             and value_in_ha
             and value_in_ha != 1

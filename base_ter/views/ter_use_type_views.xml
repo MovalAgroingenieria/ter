@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
     <record id="view_use_type_kanban" model="ir.ui.view">
         <field name="name">ter.use_type.kanban</field>
@@ -51,6 +52,7 @@
             <list string="Use Types" default_order="parent_path, sequence, name">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
+                <field name="complete_name" optional="show"/>
                 <field name="parent_id"/>
                 <field name="active" optional="hide"/>
             </list>
@@ -186,7 +188,7 @@
               (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_use_type_kanban')}),
               (0, 0, {'view_mode': 'form', 'view_id': ref('view_use_type_form')})]"/>
         <field name="search_view_id" ref="view_use_type_search"/>
-        <field name="context">{'search_default_group_by_parent': 1}</field>
+        <field name="context">{}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create your first use type

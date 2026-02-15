@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
     <!-- Graph views for reports -->
     <record id="ter_parcel_view_graph" model="ir.ui.view">
@@ -153,7 +154,7 @@
         <field name="context">{'search_default_is_unit_use_type': 1}</field>
     </record>
 
-    <!-- Informes menu: next to Global Viewer -->
+    <!-- Reports menu: next to Global Viewer -->
     <menuitem id="menu_informes"
               name="Reports"
               parent="menu_census"

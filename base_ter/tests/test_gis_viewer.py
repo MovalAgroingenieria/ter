@@ -1,3 +1,5 @@
+# Copyright 2026 Moval Agroingeniería S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 # pylint: disable=invalid-name,protected-access
 from unittest.mock import patch
 
@@ -8,13 +10,15 @@ from odoo.tests.common import TransactionCase, tagged
 class TestGisViewer(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.config = self.env["ir.config_parameter"].sudo()
-
-        self.config.set_param("base_ter.gis_viewer_url", "https://example.test/gis")
-        self.config.set_param("base_ter.gis_viewer_username", "user")
-        self.config.set_param("base_ter.gis_viewer_password", "pass")
-        self.config.set_param("base_ter.gis_viewer_cipher_key", "z%C*F-JaNdRgUkXp")
-        self.config.set_param("base_ter.gis_viewer_previs_additional_args", "mode=min")
+        self.env.company.write(
+            {
+                "gis_viewer_url": "https://example.test/gis",
+                "gis_viewer_username": "user",
+                "gis_viewer_password": "pass",
+                "gis_viewer_cipher_key": "z%C*F-JaNdRgUkXp",
+                "gis_viewer_previs_additional_args": "mode=min",
+            }
+        )
 
     def _new_parcel(self, **vals):
         """Create an in-memory parcel record for GIS viewer tests.
@@ -57,6 +61,5 @@ class TestGisViewer(TransactionCase):
 
     def test_get_encrypted_credentials_empty_without_config(self):
         rec = self._new_parcel(name="P-001", mapped_to_polygon=True)
-        self.config.set_param("base_ter.gis_viewer_username", "")
-        self.config.set_param("base_ter.gis_viewer_password", "")
+        self.env.company.write({"gis_viewer_username": "", "gis_viewer_password": ""})
         self.assertEqual(rec._get_encrypted_credentials(), "")

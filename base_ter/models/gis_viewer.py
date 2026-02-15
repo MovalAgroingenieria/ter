@@ -1,5 +1,5 @@
-# 2024-2026 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# Copyright 2026 Moval Agroingeniería S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 import base64
 import datetime
@@ -53,10 +53,8 @@ class GisViewer(models.AbstractModel):
             record.gis_link_minimal = record._get_gis_link(minimal=True)
 
     def action_gis_viewer(self):
-        config = self.env["ir.config_parameter"].sudo()
-        base_url = (
-            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
-        )
+        company = self.env.company
+        base_url = company.gis_viewer_url or self.DEFAULT_GIS_VIEWER
         codes = ",".join(rec.gis_code for rec in self if rec.gis_code)
 
         url = (
@@ -72,23 +70,21 @@ class GisViewer(models.AbstractModel):
 
     @api.model
     def action_gis_viewer_global(self):
-        config = self.env["ir.config_parameter"].sudo()
-        base_url = (
-            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
-        )
+        company = self.env.company
+        base_url = company.gis_viewer_url or self.DEFAULT_GIS_VIEWER
         url = f"{base_url}?arg={self._get_encrypted_credentials()}"
         return {"type": "ir.actions.act_url", "url": url, "target": "new"}
 
     def _get_cipher_key(self):
-        config = self.env["ir.config_parameter"].sudo()
-        key = config.get_param("base_ter.gis_viewer_cipher_key") or "z%C*F-JaNdRgUkXp"
+        company = self.env.company
+        key = (company.gis_viewer_cipher_key or "").strip() or "z%C*F-JaNdRgUkXp"
         raw = key.encode("utf-8")
 
         if len(raw) in (16, 24, 32):
             return raw
 
         _logger.warning(
-            "Invalid AES key length (%s) for base_ter.gis_viewer_cipher_key",
+            "Invalid AES key length (%s) for company gis_viewer_cipher_key",
             len(raw),
         )
         return (raw + b"0" * 32)[:32]
@@ -100,9 +96,9 @@ class GisViewer(models.AbstractModel):
             return ""
 
     def _get_encrypted_credentials(self):
-        config = self.env["ir.config_parameter"].sudo()
-        username = config.get_param("base_ter.gis_viewer_username")
-        password = config.get_param("base_ter.gis_viewer_password")
+        company = self.env.company
+        username = company.gis_viewer_username
+        password = company.gis_viewer_password
         if not (username and password):
             return ""
 
@@ -150,12 +146,10 @@ class GisViewer(models.AbstractModel):
         if not getattr(self, "mapped_to_polygon", False):
             return ""
 
-        config = self.env["ir.config_parameter"].sudo()
-        base_url = (
-            config.get_param("base_ter.gis_viewer_url") or self.DEFAULT_GIS_VIEWER
-        )
+        company = self.env.company
+        base_url = company.gis_viewer_url or self.DEFAULT_GIS_VIEWER
         additional_args = (
-            config.get_param("base_ter.gis_viewer_previs_additional_args") or "mode=min"
+            (company.gis_viewer_previs_additional_args or "").strip() or "mode=min"
         )
 
         url = f"{base_url}?{self._param_gis_selection}={self.gis_code}"

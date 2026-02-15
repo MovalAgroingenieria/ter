@@ -1,5 +1,5 @@
-# 2024 Moval Agroingeniería
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
+# Copyright 2026 Moval Agroingeniería S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 import base64
 import logging
@@ -218,24 +218,18 @@ class TerParcel(models.Model):
 
     @api.depends("area_official")
     def _compute_area_official_m2(self):
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
+        company = self.env.company
+        is_ha, _, value_in_ha = company._get_area_unit_params()
         factor = 10000.0
-        if not area_unit_is_ha:
-            value_in_ha = float(
-                config.get_param("base_ter.area_unit_value_in_ha", 0) or 0
-            )
-            if value_in_ha and value_in_ha != 1:
-                factor = value_in_ha * 10000.0
-
+        if not is_ha and value_in_ha and value_in_ha != 1:
+            factor = value_in_ha * 10000.0
         for record in self:
             record.area_official_m2 = round((record.area_official or 0.0) * factor)
 
     @api.depends("mapped_to_polygon", "area_official_m2", "area_gis")
     def _compute_diff_areas_threshold_exceeded(self):
-        config = self.env["ir.config_parameter"].sudo()
-        warning = int(config.get_param("base_ter.warning_diff_areas", 0) or 0)
-
+        company = self.env.company
+        warning = int(company.warning_diff_areas or 0)
         for record in self:
             exceeded = False
             if warning > 0 and record.mapped_to_polygon:
@@ -258,24 +252,16 @@ class TerParcel(models.Model):
             record.unit_count = len(record.unit_ids)
 
     def _get_wms_config(self):
-        """Load WMS configuration parameters."""
-        config = self.env["ir.config_parameter"].sudo()
+        """Load WMS configuration from current company."""
+        company = self.env.company
         return {
-            "wmsbase_url": config.get_param("base_ter.aerial_image_wmsbase_url", False),
-            "wmsbase_layers": config.get_param(
-                "base_ter.aerial_image_wmsbase_layers", False
-            ),
-            "wmsvec_url": config.get_param("base_ter.aerial_image_wmsvec_url", False),
-            "wmsvec_parcel_layer": config.get_param(
-                "base_ter.aerial_image_wmsvec_parcel_name", False
-            ),
-            "wmsvec_filter": bool(
-                config.get_param("base_ter.aerial_image_wmsvec_parcel_filter", False)
-            ),
-            "image_height": int(
-                config.get_param("base_ter.aerial_image_height", 0) or 0
-            ),
-            "image_zoom": float(config.get_param("base_ter.aerial_image_zoom", 0) or 0),
+            "wmsbase_url": company.aerial_image_wmsbase_url or False,
+            "wmsbase_layers": company.aerial_image_wmsbase_layers or False,
+            "wmsvec_url": company.aerial_image_wmsvec_url or False,
+            "wmsvec_parcel_layer": company.aerial_image_wmsvec_parcel_name or False,
+            "wmsvec_filter": bool(company.aerial_image_wmsvec_parcel_filter),
+            "image_height": int(company.aerial_image_height or 0),
+            "image_zoom": float(company.aerial_image_zoom or 0),
         }
 
     @api.depends("aerial_image", "mapped_to_polygon")
@@ -422,13 +408,10 @@ class TerParcel(models.Model):
 
     @api.depends_context("lang")
     def _compute_area_unit_name(self):
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        unit_name = (
-            self.env._("ha")
-            if area_unit_is_ha
-            else (config.get_param("base_ter.area_unit_name", "") or "")
-        )
+        company = self.env.company
+        is_ha, unit_name, _ = company._get_area_unit_params()
+        if is_ha:
+            unit_name = self.env._("ha")
         for record in self:
             record.area_unit_name = unit_name
 
@@ -483,10 +466,8 @@ class TerParcel(models.Model):
 
     @api.constrains("partner_id", "property_id")
     def _check_property_id(self):
-        config = self.env["ir.config_parameter"].sudo()
-        same_owner = bool(
-            config.get_param("base_ter.same_parcelmanager_propertyowner", False)
-        )
+        company = self.env.company
+        same_owner = bool(company.same_parcelmanager_propertyowner)
         if not same_owner:
             return
 
@@ -634,15 +615,12 @@ class TerParcel(models.Model):
         return res
 
     def _get_measure_name_for_view(self):
-        """Get area measure name from config for view."""
-        config = self.env["ir.config_parameter"].sudo()
-        area_unit_is_ha = bool(config.get_param("base_ter.area_unit_is_ha", False))
-        area_unit_name = config.get_param("base_ter.area_unit_name", "") or ""
-        value_in_ha = float(config.get_param("base_ter.area_unit_value_in_ha", 0) or 0)
-
+        """Get area measure name from current company for view."""
+        company = self.env.company
+        is_ha, area_unit_name, value_in_ha = company._get_area_unit_params()
         measure_name = self.env._(self._ha_name)
         if (
-            not area_unit_is_ha
+            not is_ha
             and area_unit_name
             and value_in_ha
             and value_in_ha != 1
