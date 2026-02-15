@@ -374,6 +374,20 @@ class TerUnit(models.Model):
             sanitized.append(cmd)
         return sanitized
 
+    def _get_cultivable_default_value_id(self, attribute):
+        """Return default value_id for the 'Cultivable' attribute: Yes for Farming use type, No otherwise."""
+        if not attribute or attribute.name != "Cultivable":
+            return False
+        farming_type = self.env.ref(
+            "base_ter.ter_use_type_farming", raise_if_not_found=False
+        )
+        use_type = attribute.use_type_id
+        if farming_type and use_type and use_type == farming_type:
+            yes_val = attribute.value_ids.filtered(lambda v: v.name == "Yes")
+            return yes_val[:1].id if yes_val else False
+        no_val = attribute.value_ids.filtered(lambda v: v.name == "No")
+        return no_val[:1].id if no_val else False
+
     def _sync_attribute_lines(self):
         for unit in self:
             if not unit.use_type_id:
@@ -384,7 +398,13 @@ class TerUnit(models.Model):
             missing_attrs = required_attrs - existing_attrs
 
             if missing_attrs:
-                cmds = [(0, 0, {"attribute_id": attr.id}) for attr in missing_attrs]
+                cmds = []
+                for attr in missing_attrs:
+                    line_vals = {"attribute_id": attr.id}
+                    value_id = unit._get_cultivable_default_value_id(attr)
+                    if value_id:
+                        line_vals["value_id"] = value_id
+                    cmds.append((0, 0, line_vals))
                 unit.write({"attribute_value_ids": cmds})
 
     def write(self, vals):
@@ -485,7 +505,11 @@ class TerUnit(models.Model):
         allowed_attrs = self.use_type_id.all_attribute_ids
         commands = [(5, 0, 0)]
         for attr in allowed_attrs:
-            commands.append((0, 0, {"attribute_id": attr.id}))
+            line_vals = {"attribute_id": attr.id}
+            value_id = self._get_cultivable_default_value_id(attr)
+            if value_id:
+                line_vals["value_id"] = value_id
+            commands.append((0, 0, line_vals))
         self.attribute_value_ids = commands
 
     @api.constrains("attribute_value_ids")

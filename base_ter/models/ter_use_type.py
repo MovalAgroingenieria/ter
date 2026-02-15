@@ -13,7 +13,7 @@ class UseType(models.Model):
     _order = "parent_path, sequence, name"
     _rec_name = "complete_name"
 
-    name = fields.Char(required=True, index=True)
+    name = fields.Char(required=True, index=True, translate=True)
     sequence = fields.Integer(default=10, index=True)
     active = fields.Boolean(default=True)
 
@@ -91,6 +91,9 @@ class UseType(models.Model):
     def _compute_unit_count(self):
         unit_model = self.env["ter.use_unit"]
         for record in self:
+            if not isinstance(record.id, int):
+                record.unit_count = 0
+                continue
             record.unit_count = unit_model.search_count(
                 [("use_type_id", "child_of", record.id)]
             )
@@ -108,6 +111,9 @@ class UseType(models.Model):
     def _compute_parcel_count(self):
         unit_model = self.env["ter.use_unit"]
         for record in self:
+            if not isinstance(record.id, int):
+                record.parcel_count = 0
+                continue
             units = unit_model.search([("use_type_id", "child_of", record.id)])
             parcels = units.mapped("parcel_id")
             record.parcel_count = len(parcels)
@@ -122,6 +128,9 @@ class UseType(models.Model):
     def _compute_date_range_count(self):
         date_range_model = self.env["date.range"]
         for record in self:
+            if not isinstance(record.id, int):
+                record.date_range_count = 0
+                continue
             record.date_range_count = date_range_model.search_count(
                 [("use_type_id", "child_of", record.id)]
             )
@@ -134,6 +143,8 @@ class UseType(models.Model):
             # Prevent cycles: parent cannot be a child of the record
             if record.parent_id in record.child_ids:
                 raise ValidationError(self.env._("You cannot set a child as parent."))
+            if not isinstance(record.id, int):
+                continue
             if record.parent_id in record.search([("id", "child_of", record.id)]):
                 # This is a safe generic check; ensures no descendant becomes parent
                 raise ValidationError(
@@ -182,7 +193,7 @@ class UseType(models.Model):
         self.ensure_one()
         unit_model = self.env["ter.use_unit"]
         units = unit_model.search([("use_type_id", "child_of", self.id)])
-        parcel_ids = (units.mapped("parcel_id") | units.mapped("parcel_ids")).ids
+        parcel_ids = units.mapped("parcel_id").ids
         tree_view = self.env.ref("base_ter.ter_parcel_view_tree")
         form_view = self.env.ref("base_ter.ter_parcel_view_form")
         search_view = self.env.ref("base_ter.ter_parcel_view_search")
@@ -220,6 +231,9 @@ class UseType(models.Model):
 
     def _compute_all_attribute_ids(self):
         for record in self:
+            if not isinstance(record.id, int):
+                record.all_attribute_ids = record.attribute_ids
+                continue
             ancestors = self.search(
                 [
                     ("id", "parent_of", record.id),

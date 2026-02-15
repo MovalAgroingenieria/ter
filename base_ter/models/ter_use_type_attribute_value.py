@@ -9,7 +9,7 @@ class UseTypeAttributeValue(models.Model):
     _description = "Use Type Attribute Value"
     _order = "sequence, name"
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, translate=True)
     sequence = fields.Integer(default=10)
 
     attribute_id = fields.Many2one(

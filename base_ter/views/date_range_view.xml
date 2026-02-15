@@ -108,6 +108,10 @@
             </xpath>
             <field name="type_id" position="before">
                 <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
+                <field name="use_type_id" string="Territorial use type"
+                       invisible="not is_unit_use_type"
+                       required="is_unit_use_type"
+                       options="{'no_open': True, 'no_create': True}"/>
             </field>
             <field name="type_id" position="attributes">
                 <attribute name="domain">[('is_unit_use_type', '=', is_unit_use_type)]</attribute>

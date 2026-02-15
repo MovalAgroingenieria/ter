@@ -811,6 +811,21 @@ msgid "Color Index"
 msgstr "Índice de color"
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute__name
+msgid "Crop destination"
+msgstr "Destino del cultivo"
+
+#. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute__name
+msgid "Plant material provenance"
+msgstr "Procedencia del material vegetal"
+
+#. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute__name
+msgid "Cultivable"
+msgstr "Cultivable"
+
+#. module: base_ter
 #: model:ir.model,name:base_ter.model_res_company
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_search
 msgid "Companies"
@@ -2900,6 +2915,11 @@ msgid "Ter-unit sequence"
 msgstr "Secuencia ter-unit"
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_date_range__use_type_id
+msgid "Territorial use type"
+msgstr "Tipo de uso territorial"
+
+#. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_use_unit_cron_recompute_validity_state_ir_actions_server
 msgid "Territorial Base: Recompute ter.unit validity state"
 msgstr "Base territorial: Recalcular estado de validez de unidades"
@@ -3154,6 +3174,36 @@ msgstr "Uso de visores SIG"
 #: model:ter.profile,alphanum_code:base_ter.ter_profile_02
 msgid "Usufructuary"
 msgstr "Usufructuario"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_farming
+msgid "Farming"
+msgstr "En cultivo"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_water_reservoir
+msgid "Water reservoir"
+msgstr "Balsa"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_livestock
+msgid "Livestock"
+msgstr "Ganadero"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_industrial
+msgid "Industrial"
+msgstr "Industrial"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_recreational
+msgid "Recreational"
+msgstr "Recreativo"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_urban
+msgid "Urban"
+msgstr "Urbano"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
