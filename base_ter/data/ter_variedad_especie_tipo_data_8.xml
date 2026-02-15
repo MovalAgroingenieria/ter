@@ -1,0 +1,3608 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingenieria S.L. -->
+<!-- Part 8/10: attributes Variedad/Especie/Tipo, Admisible, Vinificable, Integrado (from Variedad CSV). -->
+<odoo>
+    <data noupdate="0">
+
+        <record id="ter_attr_cultivo_720_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_720"/>
+        </record>
+
+        <record id="ter_attr_cultivo_720_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_720_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_720_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_720"/>
+        </record>
+
+        <record id="ter_attr_cultivo_720_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_720_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_720_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_720"/>
+        </record>
+
+        <record id="ter_attr_cultivo_720_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_720_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_720_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_720"/>
+        </record>
+
+        <record id="ter_attr_cultivo_720_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_720_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_721_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_721"/>
+        </record>
+
+        <record id="ter_attr_cultivo_721_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_721_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_721_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_721"/>
+        </record>
+
+        <record id="ter_attr_cultivo_721_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_721_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_721_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_721"/>
+        </record>
+
+        <record id="ter_attr_cultivo_721_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_721_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_721_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_721"/>
+        </record>
+
+        <record id="ter_attr_cultivo_721_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_721_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_722_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_722"/>
+        </record>
+
+        <record id="ter_attr_cultivo_722_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_722_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_722_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_722"/>
+        </record>
+
+        <record id="ter_attr_cultivo_722_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_722_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_722_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_722"/>
+        </record>
+
+        <record id="ter_attr_cultivo_722_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_722_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_722_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_722"/>
+        </record>
+
+        <record id="ter_attr_cultivo_722_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_722_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_723_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_723"/>
+        </record>
+
+        <record id="ter_attr_cultivo_723_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_723_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_723_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_723"/>
+        </record>
+
+        <record id="ter_attr_cultivo_723_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_723_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_723_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_723"/>
+        </record>
+
+        <record id="ter_attr_cultivo_723_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_723_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_723_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_723"/>
+        </record>
+
+        <record id="ter_attr_cultivo_723_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_723_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_724_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_724"/>
+        </record>
+
+        <record id="ter_attr_cultivo_724_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_724_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_724_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_724"/>
+        </record>
+
+        <record id="ter_attr_cultivo_724_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_724_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_724_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_724"/>
+        </record>
+
+        <record id="ter_attr_cultivo_724_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_724_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_724_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_724"/>
+        </record>
+
+        <record id="ter_attr_cultivo_724_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_724_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_725_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_725"/>
+        </record>
+
+        <record id="ter_attr_cultivo_725_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_725_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_725_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_725"/>
+        </record>
+
+        <record id="ter_attr_cultivo_725_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_725_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_725_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_725"/>
+        </record>
+
+        <record id="ter_attr_cultivo_725_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_725_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_725_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_725"/>
+        </record>
+
+        <record id="ter_attr_cultivo_725_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_725_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_726_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_726"/>
+        </record>
+
+        <record id="ter_attr_cultivo_726_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_726_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_726_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_726"/>
+        </record>
+
+        <record id="ter_attr_cultivo_726_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_726_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_726_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_726"/>
+        </record>
+
+        <record id="ter_attr_cultivo_726_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_726_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_726_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_726"/>
+        </record>
+
+        <record id="ter_attr_cultivo_726_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_726_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_727_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_727"/>
+        </record>
+
+        <record id="ter_attr_cultivo_727_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_727_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_727_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_727"/>
+        </record>
+
+        <record id="ter_attr_cultivo_727_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_727_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_727_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_727"/>
+        </record>
+
+        <record id="ter_attr_cultivo_727_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_727_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_727_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_727"/>
+        </record>
+
+        <record id="ter_attr_cultivo_727_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_727_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_728_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_728"/>
+        </record>
+
+        <record id="ter_attr_cultivo_728_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_728_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_728_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_728"/>
+        </record>
+
+        <record id="ter_attr_cultivo_728_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_728_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_728_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_728"/>
+        </record>
+
+        <record id="ter_attr_cultivo_728_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_728_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_728_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_728"/>
+        </record>
+
+        <record id="ter_attr_cultivo_728_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_728_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_729_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_729"/>
+        </record>
+
+        <record id="ter_attr_cultivo_729_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_729_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_729_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_729"/>
+        </record>
+
+        <record id="ter_attr_cultivo_729_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_729_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_729_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_729"/>
+        </record>
+
+        <record id="ter_attr_cultivo_729_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_729_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_729_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_729"/>
+        </record>
+
+        <record id="ter_attr_cultivo_729_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_729_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_730_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_730"/>
+        </record>
+
+        <record id="ter_attr_cultivo_730_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_730_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_730_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_730"/>
+        </record>
+
+        <record id="ter_attr_cultivo_730_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_730_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_730_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_730"/>
+        </record>
+
+        <record id="ter_attr_cultivo_730_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_730_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_730_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_730"/>
+        </record>
+
+        <record id="ter_attr_cultivo_730_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_730_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_731_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_731"/>
+        </record>
+
+        <record id="ter_attr_cultivo_731_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_731_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_731_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_731"/>
+        </record>
+
+        <record id="ter_attr_cultivo_731_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_731_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_731_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_731"/>
+        </record>
+
+        <record id="ter_attr_cultivo_731_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_731_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_731_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_731"/>
+        </record>
+
+        <record id="ter_attr_cultivo_731_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_731_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_732_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_732"/>
+        </record>
+
+        <record id="ter_attr_cultivo_732_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_732_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_732_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_732"/>
+        </record>
+
+        <record id="ter_attr_cultivo_732_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_732_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_732_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_732"/>
+        </record>
+
+        <record id="ter_attr_cultivo_732_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_732_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_732_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_732"/>
+        </record>
+
+        <record id="ter_attr_cultivo_732_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_732_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_733_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_733"/>
+        </record>
+
+        <record id="ter_attr_cultivo_733_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_733_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_733_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_733"/>
+        </record>
+
+        <record id="ter_attr_cultivo_733_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_733_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_733_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_733"/>
+        </record>
+
+        <record id="ter_attr_cultivo_733_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_733_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_733_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_733"/>
+        </record>
+
+        <record id="ter_attr_cultivo_733_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_733_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_734_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_734"/>
+        </record>
+
+        <record id="ter_attr_cultivo_734_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_734_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_734_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_734"/>
+        </record>
+
+        <record id="ter_attr_cultivo_734_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_734_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_734_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_734"/>
+        </record>
+
+        <record id="ter_attr_cultivo_734_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_734_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_734_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_734"/>
+        </record>
+
+        <record id="ter_attr_cultivo_734_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_734_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_735_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_735"/>
+        </record>
+
+        <record id="ter_attr_cultivo_735_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_735_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_735_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_735"/>
+        </record>
+
+        <record id="ter_attr_cultivo_735_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_735_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_735_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_735"/>
+        </record>
+
+        <record id="ter_attr_cultivo_735_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_735_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_735_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_735"/>
+        </record>
+
+        <record id="ter_attr_cultivo_735_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_735_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_736_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_736"/>
+        </record>
+
+        <record id="ter_attr_cultivo_736_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_736_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_736_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_736"/>
+        </record>
+
+        <record id="ter_attr_cultivo_736_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_736_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_736_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_736"/>
+        </record>
+
+        <record id="ter_attr_cultivo_736_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_736_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_736_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_736"/>
+        </record>
+
+        <record id="ter_attr_cultivo_736_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_736_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_737_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_737"/>
+        </record>
+
+        <record id="ter_attr_cultivo_737_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_737_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_737_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_737"/>
+        </record>
+
+        <record id="ter_attr_cultivo_737_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_737_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_737_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_737"/>
+        </record>
+
+        <record id="ter_attr_cultivo_737_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_737_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_737_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_737"/>
+        </record>
+
+        <record id="ter_attr_cultivo_737_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_737_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_738_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_738"/>
+        </record>
+
+        <record id="ter_attr_cultivo_738_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_738_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_738_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_738"/>
+        </record>
+
+        <record id="ter_attr_cultivo_738_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_738_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_738_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_738"/>
+        </record>
+
+        <record id="ter_attr_cultivo_738_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_738_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_738_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_738"/>
+        </record>
+
+        <record id="ter_attr_cultivo_738_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_738_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_739_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_739"/>
+        </record>
+
+        <record id="ter_attr_cultivo_739_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_739_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_739_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_739"/>
+        </record>
+
+        <record id="ter_attr_cultivo_739_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_739_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_739_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_739"/>
+        </record>
+
+        <record id="ter_attr_cultivo_739_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_739_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_739_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_739"/>
+        </record>
+
+        <record id="ter_attr_cultivo_739_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_739_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_740_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_740"/>
+        </record>
+
+        <record id="ter_attr_cultivo_740_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_740_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_740_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_740"/>
+        </record>
+
+        <record id="ter_attr_cultivo_740_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_740_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_740_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_740"/>
+        </record>
+
+        <record id="ter_attr_cultivo_740_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_740_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_740_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_740"/>
+        </record>
+
+        <record id="ter_attr_cultivo_740_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_740_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_741_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_741"/>
+        </record>
+
+        <record id="ter_attr_cultivo_741_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_741_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_741_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_741"/>
+        </record>
+
+        <record id="ter_attr_cultivo_741_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_741_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_741_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_741"/>
+        </record>
+
+        <record id="ter_attr_cultivo_741_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_741_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_741_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_741"/>
+        </record>
+
+        <record id="ter_attr_cultivo_741_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_741_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_742_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_742"/>
+        </record>
+
+        <record id="ter_attr_cultivo_742_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_742_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_742_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_742"/>
+        </record>
+
+        <record id="ter_attr_cultivo_742_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_742_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_742_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_742"/>
+        </record>
+
+        <record id="ter_attr_cultivo_742_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_742_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_742_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_742"/>
+        </record>
+
+        <record id="ter_attr_cultivo_742_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_742_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_743_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_743"/>
+        </record>
+
+        <record id="ter_attr_cultivo_743_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_743_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_743_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_743"/>
+        </record>
+
+        <record id="ter_attr_cultivo_743_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_743_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_743_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_743"/>
+        </record>
+
+        <record id="ter_attr_cultivo_743_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_743_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_743_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_743"/>
+        </record>
+
+        <record id="ter_attr_cultivo_743_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_743_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_744_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_744"/>
+        </record>
+
+        <record id="ter_attr_cultivo_744_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_744_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_744_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_744"/>
+        </record>
+
+        <record id="ter_attr_cultivo_744_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_744_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_744_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_744"/>
+        </record>
+
+        <record id="ter_attr_cultivo_744_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_744_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_744_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_744"/>
+        </record>
+
+        <record id="ter_attr_cultivo_744_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_744_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_745_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_745"/>
+        </record>
+
+        <record id="ter_attr_cultivo_745_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_745_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_745_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_745"/>
+        </record>
+
+        <record id="ter_attr_cultivo_745_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_745_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_745_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_745"/>
+        </record>
+
+        <record id="ter_attr_cultivo_745_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_745_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_745_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_745"/>
+        </record>
+
+        <record id="ter_attr_cultivo_745_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_745_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_746_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_746"/>
+        </record>
+
+        <record id="ter_attr_cultivo_746_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_746_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_746_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_746"/>
+        </record>
+
+        <record id="ter_attr_cultivo_746_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_746_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_746_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_746"/>
+        </record>
+
+        <record id="ter_attr_cultivo_746_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_746_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_746_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_746"/>
+        </record>
+
+        <record id="ter_attr_cultivo_746_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_746_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_747_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_747"/>
+        </record>
+
+        <record id="ter_attr_cultivo_747_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_747_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_747_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_747"/>
+        </record>
+
+        <record id="ter_attr_cultivo_747_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_747_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_747_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_747"/>
+        </record>
+
+        <record id="ter_attr_cultivo_747_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_747_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_747_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_747"/>
+        </record>
+
+        <record id="ter_attr_cultivo_747_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_747_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_748_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_748"/>
+        </record>
+
+        <record id="ter_attr_cultivo_748_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_748_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_748_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_748"/>
+        </record>
+
+        <record id="ter_attr_cultivo_748_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_748_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_748_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_748"/>
+        </record>
+
+        <record id="ter_attr_cultivo_748_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_748_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_748_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_748"/>
+        </record>
+
+        <record id="ter_attr_cultivo_748_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_748_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_749_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_749"/>
+        </record>
+
+        <record id="ter_attr_cultivo_749_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_749_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_749_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_749"/>
+        </record>
+
+        <record id="ter_attr_cultivo_749_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_749_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_749_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_749"/>
+        </record>
+
+        <record id="ter_attr_cultivo_749_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_749_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_749_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_749"/>
+        </record>
+
+        <record id="ter_attr_cultivo_749_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_749_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_751_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_751"/>
+        </record>
+
+        <record id="ter_attr_cultivo_751_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_751_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_751_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_751"/>
+        </record>
+
+        <record id="ter_attr_cultivo_751_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_751_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_751_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_751"/>
+        </record>
+
+        <record id="ter_attr_cultivo_751_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_751_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_751_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_751"/>
+        </record>
+
+        <record id="ter_attr_cultivo_751_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_751_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_752_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_752"/>
+        </record>
+
+        <record id="ter_attr_cultivo_752_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_752_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_752_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_752"/>
+        </record>
+
+        <record id="ter_attr_cultivo_752_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_752_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_752_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_752"/>
+        </record>
+
+        <record id="ter_attr_cultivo_752_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_752_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_752_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_752"/>
+        </record>
+
+        <record id="ter_attr_cultivo_752_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_752_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_753_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_753"/>
+        </record>
+
+        <record id="ter_attr_cultivo_753_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_753_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_753_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_753"/>
+        </record>
+
+        <record id="ter_attr_cultivo_753_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_753_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_753_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_753"/>
+        </record>
+
+        <record id="ter_attr_cultivo_753_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_753_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_753_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_753"/>
+        </record>
+
+        <record id="ter_attr_cultivo_753_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_753_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_754_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_754"/>
+        </record>
+
+        <record id="ter_attr_cultivo_754_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_754_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_754_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_754"/>
+        </record>
+
+        <record id="ter_attr_cultivo_754_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_754_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_754_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_754"/>
+        </record>
+
+        <record id="ter_attr_cultivo_754_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_754_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_754_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_754"/>
+        </record>
+
+        <record id="ter_attr_cultivo_754_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_754_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_755_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_755"/>
+        </record>
+
+        <record id="ter_attr_cultivo_755_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_755_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_755_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_755"/>
+        </record>
+
+        <record id="ter_attr_cultivo_755_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_755_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_755_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_755"/>
+        </record>
+
+        <record id="ter_attr_cultivo_755_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_755_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_755_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_755"/>
+        </record>
+
+        <record id="ter_attr_cultivo_755_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_755_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_756_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_756"/>
+        </record>
+
+        <record id="ter_attr_cultivo_756_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_756_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_756_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_756"/>
+        </record>
+
+        <record id="ter_attr_cultivo_756_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_756_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_756_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_756"/>
+        </record>
+
+        <record id="ter_attr_cultivo_756_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_756_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_756_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_756"/>
+        </record>
+
+        <record id="ter_attr_cultivo_756_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_756_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_757_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_757"/>
+        </record>
+
+        <record id="ter_attr_cultivo_757_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_757_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_757_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_757"/>
+        </record>
+
+        <record id="ter_attr_cultivo_757_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_757_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_757_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_757"/>
+        </record>
+
+        <record id="ter_attr_cultivo_757_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_757_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_757_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_757"/>
+        </record>
+
+        <record id="ter_attr_cultivo_757_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_757_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_758_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_758"/>
+        </record>
+
+        <record id="ter_attr_cultivo_758_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_758_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_758_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_758"/>
+        </record>
+
+        <record id="ter_attr_cultivo_758_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_758_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_758_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_758"/>
+        </record>
+
+        <record id="ter_attr_cultivo_758_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_758_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_758_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_758"/>
+        </record>
+
+        <record id="ter_attr_cultivo_758_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_758_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_759_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_759"/>
+        </record>
+
+        <record id="ter_attr_cultivo_759_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_759_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_759_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_759"/>
+        </record>
+
+        <record id="ter_attr_cultivo_759_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_759_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_759_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_759"/>
+        </record>
+
+        <record id="ter_attr_cultivo_759_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_759_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_759_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_759"/>
+        </record>
+
+        <record id="ter_attr_cultivo_759_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_759_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_760_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_760"/>
+        </record>
+
+        <record id="ter_attr_cultivo_760_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_760_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_760_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_760"/>
+        </record>
+
+        <record id="ter_attr_cultivo_760_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_760_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_760_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_760"/>
+        </record>
+
+        <record id="ter_attr_cultivo_760_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_760_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_760_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_760"/>
+        </record>
+
+        <record id="ter_attr_cultivo_760_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_760_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_761_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_761"/>
+        </record>
+
+        <record id="ter_attr_cultivo_761_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_761_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_761_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_761"/>
+        </record>
+
+        <record id="ter_attr_cultivo_761_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_761_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_761_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_761"/>
+        </record>
+
+        <record id="ter_attr_cultivo_761_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_761_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_761_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_761"/>
+        </record>
+
+        <record id="ter_attr_cultivo_761_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_761_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_762_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_762"/>
+        </record>
+
+        <record id="ter_attr_cultivo_762_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_762_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_762_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_762"/>
+        </record>
+
+        <record id="ter_attr_cultivo_762_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_762_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_762_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_762"/>
+        </record>
+
+        <record id="ter_attr_cultivo_762_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_762_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_762_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_762"/>
+        </record>
+
+        <record id="ter_attr_cultivo_762_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_762_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_763_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_763"/>
+        </record>
+
+        <record id="ter_attr_cultivo_763_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_763_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_763_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_763"/>
+        </record>
+
+        <record id="ter_attr_cultivo_763_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_763_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_763_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_763"/>
+        </record>
+
+        <record id="ter_attr_cultivo_763_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_763_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_763_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_763"/>
+        </record>
+
+        <record id="ter_attr_cultivo_763_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_763_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_764_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_764"/>
+        </record>
+
+        <record id="ter_attr_cultivo_764_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_764_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_764_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_764"/>
+        </record>
+
+        <record id="ter_attr_cultivo_764_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_764_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_764_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_764"/>
+        </record>
+
+        <record id="ter_attr_cultivo_764_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_764_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_764_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_764"/>
+        </record>
+
+        <record id="ter_attr_cultivo_764_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_764_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_765_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_765"/>
+        </record>
+
+        <record id="ter_attr_cultivo_765_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_765_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_765_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_765"/>
+        </record>
+
+        <record id="ter_attr_cultivo_765_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_765_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_765_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_765"/>
+        </record>
+
+        <record id="ter_attr_cultivo_765_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_765_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_765_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_765"/>
+        </record>
+
+        <record id="ter_attr_cultivo_765_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_765_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_766_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_766"/>
+        </record>
+
+        <record id="ter_attr_cultivo_766_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_766_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_766_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_766"/>
+        </record>
+
+        <record id="ter_attr_cultivo_766_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_766_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_766_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_766"/>
+        </record>
+
+        <record id="ter_attr_cultivo_766_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_766_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_766_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_766"/>
+        </record>
+
+        <record id="ter_attr_cultivo_766_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_766_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_767_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_767"/>
+        </record>
+
+        <record id="ter_attr_cultivo_767_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_767_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_767_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_767"/>
+        </record>
+
+        <record id="ter_attr_cultivo_767_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_767_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_767_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_767"/>
+        </record>
+
+        <record id="ter_attr_cultivo_767_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_767_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_767_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_767"/>
+        </record>
+
+        <record id="ter_attr_cultivo_767_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_767_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_768_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_768"/>
+        </record>
+
+        <record id="ter_attr_cultivo_768_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_768_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_768_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_768"/>
+        </record>
+
+        <record id="ter_attr_cultivo_768_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_768_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_768_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_768"/>
+        </record>
+
+        <record id="ter_attr_cultivo_768_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_768_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_768_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_768"/>
+        </record>
+
+        <record id="ter_attr_cultivo_768_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_768_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_769_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_769"/>
+        </record>
+
+        <record id="ter_attr_cultivo_769_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_769_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_769_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_769"/>
+        </record>
+
+        <record id="ter_attr_cultivo_769_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_769_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_769_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_769"/>
+        </record>
+
+        <record id="ter_attr_cultivo_769_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_769_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_769_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_769"/>
+        </record>
+
+        <record id="ter_attr_cultivo_769_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_769_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_770_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_770"/>
+        </record>
+
+        <record id="ter_attr_cultivo_770_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_770_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_770_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_770"/>
+        </record>
+
+        <record id="ter_attr_cultivo_770_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_770_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_770_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_770"/>
+        </record>
+
+        <record id="ter_attr_cultivo_770_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_770_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_770_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_770"/>
+        </record>
+
+        <record id="ter_attr_cultivo_770_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_770_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_771_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_771"/>
+        </record>
+
+        <record id="ter_attr_cultivo_771_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_771_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_771_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_771"/>
+        </record>
+
+        <record id="ter_attr_cultivo_771_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_771_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_771_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_771"/>
+        </record>
+
+        <record id="ter_attr_cultivo_771_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_771_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_771_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_771"/>
+        </record>
+
+        <record id="ter_attr_cultivo_771_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_771_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_772_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_772"/>
+        </record>
+
+        <record id="ter_attr_cultivo_772_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_772_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_772_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_772"/>
+        </record>
+
+        <record id="ter_attr_cultivo_772_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_772_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_772_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_772"/>
+        </record>
+
+        <record id="ter_attr_cultivo_772_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_772_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_772_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_772"/>
+        </record>
+
+        <record id="ter_attr_cultivo_772_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_772_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_773_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_773"/>
+        </record>
+
+        <record id="ter_attr_cultivo_773_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_773_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_773_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_773"/>
+        </record>
+
+        <record id="ter_attr_cultivo_773_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_773_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_773_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_773"/>
+        </record>
+
+        <record id="ter_attr_cultivo_773_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_773_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_773_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_773"/>
+        </record>
+
+        <record id="ter_attr_cultivo_773_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_773_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_774_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_774"/>
+        </record>
+
+        <record id="ter_attr_cultivo_774_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_774_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_774_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_774"/>
+        </record>
+
+        <record id="ter_attr_cultivo_774_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_774_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_774_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_774"/>
+        </record>
+
+        <record id="ter_attr_cultivo_774_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_774_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_774_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_774"/>
+        </record>
+
+        <record id="ter_attr_cultivo_774_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_774_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_775_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_775"/>
+        </record>
+
+        <record id="ter_attr_cultivo_775_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_775_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_775_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_775"/>
+        </record>
+
+        <record id="ter_attr_cultivo_775_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_775_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_775_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_775"/>
+        </record>
+
+        <record id="ter_attr_cultivo_775_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_775_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_775_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_775"/>
+        </record>
+
+        <record id="ter_attr_cultivo_775_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_775_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_776_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_776"/>
+        </record>
+
+        <record id="ter_attr_cultivo_776_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_776_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_776_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_776"/>
+        </record>
+
+        <record id="ter_attr_cultivo_776_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_776_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_776_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_776"/>
+        </record>
+
+        <record id="ter_attr_cultivo_776_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_776_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_776_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_776"/>
+        </record>
+
+        <record id="ter_attr_cultivo_776_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_776_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_777_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_777"/>
+        </record>
+
+        <record id="ter_attr_cultivo_777_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_777_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_777_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_777"/>
+        </record>
+
+        <record id="ter_attr_cultivo_777_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_777_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_777_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_777"/>
+        </record>
+
+        <record id="ter_attr_cultivo_777_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_777_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_777_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_777"/>
+        </record>
+
+        <record id="ter_attr_cultivo_777_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_777_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_778_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_778"/>
+        </record>
+
+        <record id="ter_attr_cultivo_778_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_778_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_778_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_778"/>
+        </record>
+
+        <record id="ter_attr_cultivo_778_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_778_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_778_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_778"/>
+        </record>
+
+        <record id="ter_attr_cultivo_778_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_778_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_778_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_778"/>
+        </record>
+
+        <record id="ter_attr_cultivo_778_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_778_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_779_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_779"/>
+        </record>
+
+        <record id="ter_attr_cultivo_779_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_779_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_779_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_779"/>
+        </record>
+
+        <record id="ter_attr_cultivo_779_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_779_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_779_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_779"/>
+        </record>
+
+        <record id="ter_attr_cultivo_779_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_779_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_779_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_779"/>
+        </record>
+
+        <record id="ter_attr_cultivo_779_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_779_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_780_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_780"/>
+        </record>
+
+        <record id="ter_attr_cultivo_780_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_780_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_780_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_780"/>
+        </record>
+
+        <record id="ter_attr_cultivo_780_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_780_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_780_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_780"/>
+        </record>
+
+        <record id="ter_attr_cultivo_780_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_780_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_780_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_780"/>
+        </record>
+
+        <record id="ter_attr_cultivo_780_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_780_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_781_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_781"/>
+        </record>
+
+        <record id="ter_attr_cultivo_781_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_781_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_781_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_781"/>
+        </record>
+
+        <record id="ter_attr_cultivo_781_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_781_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_781_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_781"/>
+        </record>
+
+        <record id="ter_attr_cultivo_781_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_781_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_781_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_781"/>
+        </record>
+
+        <record id="ter_attr_cultivo_781_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_781_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_782_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_782"/>
+        </record>
+
+        <record id="ter_attr_cultivo_782_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_782_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_782_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_782"/>
+        </record>
+
+        <record id="ter_attr_cultivo_782_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_782_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_782_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_782"/>
+        </record>
+
+        <record id="ter_attr_cultivo_782_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_782_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_782_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_782"/>
+        </record>
+
+        <record id="ter_attr_cultivo_782_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_782_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_783_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_783"/>
+        </record>
+
+        <record id="ter_attr_cultivo_783_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_783_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_783_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_783"/>
+        </record>
+
+        <record id="ter_attr_cultivo_783_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_783_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_783_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_783"/>
+        </record>
+
+        <record id="ter_attr_cultivo_783_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_783_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_783_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_783"/>
+        </record>
+
+        <record id="ter_attr_cultivo_783_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_783_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_784_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_784"/>
+        </record>
+
+        <record id="ter_attr_cultivo_784_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_784_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_784_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_784"/>
+        </record>
+
+        <record id="ter_attr_cultivo_784_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_784_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_784_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_784"/>
+        </record>
+
+        <record id="ter_attr_cultivo_784_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_784_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_784_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_784"/>
+        </record>
+
+        <record id="ter_attr_cultivo_784_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_784_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_785_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_785"/>
+        </record>
+
+        <record id="ter_attr_cultivo_785_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_785_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_785_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_785"/>
+        </record>
+
+        <record id="ter_attr_cultivo_785_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_785_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_785_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_785"/>
+        </record>
+
+        <record id="ter_attr_cultivo_785_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_785_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_785_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_785"/>
+        </record>
+
+        <record id="ter_attr_cultivo_785_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_785_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_786_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_786"/>
+        </record>
+
+        <record id="ter_attr_cultivo_786_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_786_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_786_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_786"/>
+        </record>
+
+        <record id="ter_attr_cultivo_786_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_786_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_786_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_786"/>
+        </record>
+
+        <record id="ter_attr_cultivo_786_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_786_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_786_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_786"/>
+        </record>
+
+        <record id="ter_attr_cultivo_786_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_786_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_787_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_787"/>
+        </record>
+
+        <record id="ter_attr_cultivo_787_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_787_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_787_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_787"/>
+        </record>
+
+        <record id="ter_attr_cultivo_787_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_787_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_787_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_787"/>
+        </record>
+
+        <record id="ter_attr_cultivo_787_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_787_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_787_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_787"/>
+        </record>
+
+        <record id="ter_attr_cultivo_787_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_787_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_788_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_788"/>
+        </record>
+
+        <record id="ter_attr_cultivo_788_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_788_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_788_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_788"/>
+        </record>
+
+        <record id="ter_attr_cultivo_788_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_788_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_788_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_788"/>
+        </record>
+
+        <record id="ter_attr_cultivo_788_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_788_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_788_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_788"/>
+        </record>
+
+        <record id="ter_attr_cultivo_788_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_788_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_789_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_789"/>
+        </record>
+
+        <record id="ter_attr_cultivo_789_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_789_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_789_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_789"/>
+        </record>
+
+        <record id="ter_attr_cultivo_789_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_789_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_789_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_789"/>
+        </record>
+
+        <record id="ter_attr_cultivo_789_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_789_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_789_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_789"/>
+        </record>
+
+        <record id="ter_attr_cultivo_789_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_789_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_790_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_790"/>
+        </record>
+
+        <record id="ter_attr_cultivo_790_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_790_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_790_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_790"/>
+        </record>
+
+        <record id="ter_attr_cultivo_790_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_790_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_790_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_790"/>
+        </record>
+
+        <record id="ter_attr_cultivo_790_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_790_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_790_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_790"/>
+        </record>
+
+        <record id="ter_attr_cultivo_790_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_790_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_791_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_791"/>
+        </record>
+
+        <record id="ter_attr_cultivo_791_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_791_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_791_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_791"/>
+        </record>
+
+        <record id="ter_attr_cultivo_791_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_791_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_791_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_791"/>
+        </record>
+
+        <record id="ter_attr_cultivo_791_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_791_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_791_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_791"/>
+        </record>
+
+        <record id="ter_attr_cultivo_791_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_791_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_792_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_792"/>
+        </record>
+
+        <record id="ter_attr_cultivo_792_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_792_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_792_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_792"/>
+        </record>
+
+        <record id="ter_attr_cultivo_792_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_792_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_792_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_792"/>
+        </record>
+
+        <record id="ter_attr_cultivo_792_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_792_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_792_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_792"/>
+        </record>
+
+        <record id="ter_attr_cultivo_792_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_792_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_793_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_793"/>
+        </record>
+
+        <record id="ter_attr_cultivo_793_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_793_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_793_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_793"/>
+        </record>
+
+        <record id="ter_attr_cultivo_793_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_793_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_793_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_793"/>
+        </record>
+
+        <record id="ter_attr_cultivo_793_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_793_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_793_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_793"/>
+        </record>
+
+        <record id="ter_attr_cultivo_793_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_793_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_794_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_794"/>
+        </record>
+
+        <record id="ter_attr_cultivo_794_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_794_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_794_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_794"/>
+        </record>
+
+        <record id="ter_attr_cultivo_794_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_794_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_794_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_794"/>
+        </record>
+
+        <record id="ter_attr_cultivo_794_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_794_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_794_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_794"/>
+        </record>
+
+        <record id="ter_attr_cultivo_794_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_794_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_795_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_795"/>
+        </record>
+
+        <record id="ter_attr_cultivo_795_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_795_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_795_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_795"/>
+        </record>
+
+        <record id="ter_attr_cultivo_795_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_795_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_795_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_795"/>
+        </record>
+
+        <record id="ter_attr_cultivo_795_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_795_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_795_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_795"/>
+        </record>
+
+        <record id="ter_attr_cultivo_795_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_795_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_796_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_796"/>
+        </record>
+
+        <record id="ter_attr_cultivo_796_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_796_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_796_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_796"/>
+        </record>
+
+        <record id="ter_attr_cultivo_796_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_796_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_796_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_796"/>
+        </record>
+
+        <record id="ter_attr_cultivo_796_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_796_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_796_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_796"/>
+        </record>
+
+        <record id="ter_attr_cultivo_796_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_796_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_797_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_797"/>
+        </record>
+
+        <record id="ter_attr_cultivo_797_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_797_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_797_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_797"/>
+        </record>
+
+        <record id="ter_attr_cultivo_797_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_797_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_797_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_797"/>
+        </record>
+
+        <record id="ter_attr_cultivo_797_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_797_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_797_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_797"/>
+        </record>
+
+        <record id="ter_attr_cultivo_797_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_797_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_798_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_798"/>
+        </record>
+
+        <record id="ter_attr_cultivo_798_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_798_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_798_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_798"/>
+        </record>
+
+        <record id="ter_attr_cultivo_798_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_798_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_798_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_798"/>
+        </record>
+
+        <record id="ter_attr_cultivo_798_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_798_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_798_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_798"/>
+        </record>
+
+        <record id="ter_attr_cultivo_798_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_798_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_799_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_799"/>
+        </record>
+
+        <record id="ter_attr_cultivo_799_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_799_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_799_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_799"/>
+        </record>
+
+        <record id="ter_attr_cultivo_799_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_799_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_799_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_799"/>
+        </record>
+
+        <record id="ter_attr_cultivo_799_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_799_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_799_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_799"/>
+        </record>
+
+        <record id="ter_attr_cultivo_799_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_799_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_801_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_801"/>
+        </record>
+
+        <record id="ter_attr_cultivo_801_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_801_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_801_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_801"/>
+        </record>
+
+        <record id="ter_attr_cultivo_801_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_801_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_801_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_801"/>
+        </record>
+
+        <record id="ter_attr_cultivo_801_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_801_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_801_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_801"/>
+        </record>
+
+        <record id="ter_attr_cultivo_801_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_801_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_802_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_802"/>
+        </record>
+
+        <record id="ter_attr_cultivo_802_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_802_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_802_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_802"/>
+        </record>
+
+        <record id="ter_attr_cultivo_802_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_802_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_802_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_802"/>
+        </record>
+
+        <record id="ter_attr_cultivo_802_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_802_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_802_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_802"/>
+        </record>
+
+        <record id="ter_attr_cultivo_802_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_802_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_803_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_803"/>
+        </record>
+
+        <record id="ter_attr_cultivo_803_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_803_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_803_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_803"/>
+        </record>
+
+        <record id="ter_attr_cultivo_803_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_803_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_803_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_803"/>
+        </record>
+
+        <record id="ter_attr_cultivo_803_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_803_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_803_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_803"/>
+        </record>
+
+        <record id="ter_attr_cultivo_803_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_803_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_804_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_804"/>
+        </record>
+
+        <record id="ter_attr_cultivo_804_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_804_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_804_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_804"/>
+        </record>
+
+        <record id="ter_attr_cultivo_804_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_804_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_804_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_804"/>
+        </record>
+
+        <record id="ter_attr_cultivo_804_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_804_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_804_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_804"/>
+        </record>
+
+        <record id="ter_attr_cultivo_804_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_804_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_805_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_805"/>
+        </record>
+
+        <record id="ter_attr_cultivo_805_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_805_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_805_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_805"/>
+        </record>
+
+        <record id="ter_attr_cultivo_805_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_805_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_805_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_805"/>
+        </record>
+
+        <record id="ter_attr_cultivo_805_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_805_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_805_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_805"/>
+        </record>
+
+        <record id="ter_attr_cultivo_805_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_805_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_806_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_806"/>
+        </record>
+
+        <record id="ter_attr_cultivo_806_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_806_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_806_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_806"/>
+        </record>
+
+        <record id="ter_attr_cultivo_806_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_806_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_806_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_806"/>
+        </record>
+
+        <record id="ter_attr_cultivo_806_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_806_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_806_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_806"/>
+        </record>
+
+        <record id="ter_attr_cultivo_806_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_806_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_807_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_807"/>
+        </record>
+
+        <record id="ter_attr_cultivo_807_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_807_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_807_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_807"/>
+        </record>
+
+        <record id="ter_attr_cultivo_807_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_807_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_807_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_807"/>
+        </record>
+
+        <record id="ter_attr_cultivo_807_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_807_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_807_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_807"/>
+        </record>
+
+        <record id="ter_attr_cultivo_807_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_807_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_808_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_808"/>
+        </record>
+
+        <record id="ter_attr_cultivo_808_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_808_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_808_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_808"/>
+        </record>
+
+        <record id="ter_attr_cultivo_808_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_808_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_808_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_808"/>
+        </record>
+
+        <record id="ter_attr_cultivo_808_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_808_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_808_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_808"/>
+        </record>
+
+        <record id="ter_attr_cultivo_808_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_808_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_809_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_809"/>
+        </record>
+
+        <record id="ter_attr_cultivo_809_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_809_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_809_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_809"/>
+        </record>
+
+        <record id="ter_attr_cultivo_809_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_809_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_809_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_809"/>
+        </record>
+
+        <record id="ter_attr_cultivo_809_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_809_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_809_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_809"/>
+        </record>
+
+        <record id="ter_attr_cultivo_809_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_809_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_810_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_810"/>
+        </record>
+
+        <record id="ter_attr_cultivo_810_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_810_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_810_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_810"/>
+        </record>
+
+        <record id="ter_attr_cultivo_810_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_810_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_810_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_810"/>
+        </record>
+
+        <record id="ter_attr_cultivo_810_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_810_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_810_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_810"/>
+        </record>
+
+        <record id="ter_attr_cultivo_810_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_810_integrado"/>
+        </record>
+
+        <record id="ter_attr_cultivo_811_variedad__especie__tipo" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Variedad/ Especie/ Tipo</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_811"/>
+        </record>
+
+        <record id="ter_attr_cultivo_811_variedad__especie__tipo_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">SIN VARIEDAD</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_811_variedad__especie__tipo"/>
+        </record>
+
+        <record id="ter_attr_cultivo_811_admisible_ayudas_asociada" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Admisible Ayudas Asociadas</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_811"/>
+        </record>
+
+        <record id="ter_attr_cultivo_811_admisible_ayudas_asociada_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_811_admisible_ayudas_asociada"/>
+        </record>
+
+        <record id="ter_attr_cultivo_811_vinificable" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Vinificable</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_811"/>
+        </record>
+
+        <record id="ter_attr_cultivo_811_vinificable_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_811_vinificable"/>
+        </record>
+
+        <record id="ter_attr_cultivo_811_integrado" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Integrado</field>
+            <field name="use_type_id" ref="ter_use_type_cultivo_811"/>
+        </record>
+
+        <record id="ter_attr_cultivo_811_integrado_val_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">NO</field>
+            <field name="attribute_id" ref="ter_attr_cultivo_811_integrado"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingenieria S.L. -->
+<!-- Production method attribute on Farming. -->
+<odoo>
+    <data noupdate="0">
+
+        <record id="ter_attr_production_method_farming" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Production method</field>
+            <field name="use_type_id" ref="ter_use_type_farming"/>
+        </record>
+
+        <record id="ter_attr_production_method_farming_convencional" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Convencional</field>
+            <field name="attribute_id" ref="ter_attr_production_method_farming"/>
+        </record>
+        <record id="ter_attr_production_method_farming_ecologica" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Ecológica</field>
+            <field name="attribute_id" ref="ter_attr_production_method_farming"/>
+        </record>
+        <record id="ter_attr_production_method_farming_integrada" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Integrada</field>
+            <field name="attribute_id" ref="ter_attr_production_method_farming"/>
+        </record>
+
+    </data>
+</odoo>

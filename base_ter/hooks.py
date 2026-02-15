@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
 from typing import Optional
 
 from odoo import api
@@ -279,6 +281,26 @@ def _migrate_ter_unit_parcel_ids(env: api.Environment) -> None:
     )
 
 
+def _load_attribute_translations_es(env: api.Environment) -> None:
+    """Load es_ES translations for ter.use_type.attribute and .value name fields."""
+    path = Path(__file__).resolve().parent / "data" / "attribute_translations_es.json"
+    if not path.exists():
+        return
+    with open(path, encoding="utf-8") as f:
+        translations = json.load(f)
+    for xmlid, es_value in translations.items():
+        try:
+            record = env.ref(xmlid, raise_if_not_found=False)
+            if (
+                record
+                and record._name
+                in ("ter.use_type.attribute", "ter.use_type.attribute.value")
+            ):
+                record.sudo().update_field_translations("name", {"es_ES": es_value})
+        except Exception:
+            continue
+
+
 def post_init_hook(env: api.Environment, _registry: Optional[object] = None) -> None:
     _ensure_postgis(env)
     _create_gis_structures(env)
@@ -286,6 +308,7 @@ def post_init_hook(env: api.Environment, _registry: Optional[object] = None) -> 
     _ensure_ter_unit_sequences(env)
     _migrate_ter_unit_parcel_ids(env)
     env.ref("base.module_base_ter")._update_translations(overwrite=True)
+    _load_attribute_translations_es(env)
 
 
 def uninstall_hook(env: api.Environment, _registry: Optional[object] = None) -> None:

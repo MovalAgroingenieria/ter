@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingenieria S.L. -->
+<!-- Labor type attribute on Farming: values from Tipo de labor.csv (active only). -->
+<odoo>
+    <data noupdate="0">
+
+        <record id="ter_attr_labor_type_farming" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Labor type</field>
+            <field name="use_type_id" ref="ter_use_type_farming"/>
+        </record>
+
+        <record id="ter_attr_labor_type_farming_0" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Sin laboreo</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_1" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Laboreo</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_2" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Nivelación en cultivos bajo agua</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_3" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Caballones y tablas en cultivos bajo agua</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_4" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Escarda (Eliminación de vegetación por medios mecánicos)</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_5" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Desbroce y siega</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_6" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Mantenimiento del drenaje</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_7" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Poda</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_8" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Aclareo</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_9" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Entutorado</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+        <record id="ter_attr_labor_type_farming_10" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Injerto</field>
+            <field name="attribute_id" ref="ter_attr_labor_type_farming"/>
+        </record>
+
+    </data>
+</odoo>
