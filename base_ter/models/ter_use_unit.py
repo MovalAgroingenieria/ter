@@ -375,7 +375,10 @@ class TerUnit(models.Model):
         return sanitized
 
     def _get_cultivable_default_value_id(self, attribute):
-        """Return default value_id for the 'Cultivable' attribute: Yes for Farming use type, No otherwise."""
+        """
+        Return default value_id for the 'Cultivable' attribute.
+        Yes for Farming use type, No otherwise.
+        """
         if not attribute or attribute.name != "Cultivable":
             return False
         farming_type = self.env.ref(

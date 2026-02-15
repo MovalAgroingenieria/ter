@@ -2587,17 +2587,17 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "<span class=\"oe_inline\">%</span>"
-msgstr "<span class=\"oe_inline\">%</span>"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "<span class=\"oe_inline\">EPSG:</span>"
-msgstr "<span class=\"oe_inline\">EPSG:</span>"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "<span class=\"oe_inline\">ha</span>"
-msgstr "<span class=\"oe_inline\">ha</span>"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
@@ -2702,13 +2702,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
 msgid "<span>m</span>"
-msgstr "<span>m</span>"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
 msgid "<span>m²</span>"
-msgstr "<span>m²</span>"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_kanban_view
@@ -66763,7 +66763,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_census
 msgid "Census"
-msgstr "Censo"
+msgstr "Censo y Territorio"
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_323_latin_val
@@ -68433,7 +68433,7 @@ msgstr ""
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivable_urban
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivable_water_reservoir
 msgid "Cultivable"
-msgstr "Cultivable"
+msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivation_system_farming
@@ -89187,7 +89187,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "EPSG"
-msgstr "EPSG"
+msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_123_variedad__especie__tipo_val_12
@@ -128946,7 +128946,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_250
@@ -135325,7 +135325,7 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type,name:base_ter.ter_use_type_industrial
 msgid "Industrial"
-msgstr "Industrial"
+msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type,name:base_ter.ter_use_type_familia_industrial
@@ -279634,7 +279634,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
 msgid "SRID=25830;POLYGON((...))"
-msgstr "SRID=25830;POLYGON((...))"
+msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_2373
@@ -327441,7 +327441,7 @@ msgstr "p. ej. PARCELA- o FINCA-"
 #: code:addons/base_ter/models/ter_use_unit.py:0
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_kanban
 msgid "ha"
-msgstr "ha"
+msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_familia_berries_kc_a
@@ -327533,7 +327533,7 @@ msgstr "no asignado"
 #. odoo-python
 #: code:addons/base_ter/models/ter_gis_parcel_model.py:0
 msgid "ok"
-msgstr "ok"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
@@ -327554,32 +327554,32 @@ msgstr "capa ter_gis_property recreada."
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_kanban
 msgid "ter_parcel_256"
-msgstr "ter_parcel_256"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_kanban
 msgid "ter_parcel_avatar"
-msgstr "ter_parcel_avatar"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_kanban
 msgid "ter_property_256"
-msgstr "ter_property_256"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_kanban
 msgid "ter_property_avatar"
-msgstr "ter_property_avatar"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_kanban
 msgid "ter_unit_256"
-msgstr "ter_unit_256"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_kanban
 msgid "ter_unit_avatar"
-msgstr "ter_unit_avatar"
+msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_561_latin_val

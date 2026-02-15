@@ -291,10 +291,9 @@ def _load_attribute_translations_es(env: api.Environment) -> None:
     for xmlid, es_value in translations.items():
         try:
             record = env.ref(xmlid, raise_if_not_found=False)
-            if (
-                record
-                and record._name
-                in ("ter.use_type.attribute", "ter.use_type.attribute.value")
+            if record and record._name in (
+                "ter.use_type.attribute",
+                "ter.use_type.attribute.value",
             ):
                 record.sudo().update_field_translations("name", {"es_ES": es_value})
         except Exception:

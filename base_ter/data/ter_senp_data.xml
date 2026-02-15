@@ -2,142 +2,142 @@
 <!-- Copyright 2026 Moval Agroingenieria S.L. -->
 <!-- SENP attribute on Farming: values from Superficies y elementos no productivos (SENP).csv (active only). -->
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
 
-        <record id="ter_attr_senp_farming" model="ter.use_type.attribute" forcecreate="True">
+        <record id="ter_attr_senp_farming" model="ter.use_type.attribute" >
             <field name="name">Non-productive surfaces and elements (SENP)</field>
             <field name="use_type_id" ref="ter_use_type_farming"/>
         </record>
 
-        <record id="ter_attr_senp_farming_1" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_1" model="ter.use_type.attribute.value" >
             <field name="name">Zonas de no cosechado de cereales, oleaginosas y leguminosas (por 1m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_2" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_2" model="ter.use_type.attribute.value" >
             <field name="name">Islas de biodiversidad (por 1 m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_3" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_3" model="ter.use_type.attribute.value" >
             <field name="name">Márgenes o franjas de biodiversidad (por 1 m)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_4" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_4" model="ter.use_type.attribute.value" >
             <field name="name">Lindes forestales (por 1 m)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_5" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_5" model="ter.use_type.attribute.value" >
             <field name="name">Franjas de protección (por 1 m)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_6" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_6" model="ter.use_type.attribute.value" >
             <field name="name">Setos/franjas arboladas (por 1 m)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_7" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_7" model="ter.use_type.attribute.value" >
             <field name="name">Árbol aislado</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_8" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_8" model="ter.use_type.attribute.value" >
             <field name="name">Árboles en hilera</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_9" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_9" model="ter.use_type.attribute.value" >
             <field name="name">Grupo de Árboles</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_10" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_10" model="ter.use_type.attribute.value" >
             <field name="name">Lindes de campo (1 m)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_11" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_11" model="ter.use_type.attribute.value" >
             <field name="name">Charcas (charcas, lagunas, estanques y abrevaderos naturales) (por 1 m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_12" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_12" model="ter.use_type.attribute.value" >
             <field name="name">Islas o Enclaves (Islas o enclaves de vegetación natural o roca) y majanos (por 1 m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_13" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_13" model="ter.use_type.attribute.value" >
             <field name="name">Terrazas (terrazas de retención, bancales, ribazos) (por 1 m)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_14" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_14" model="ter.use_type.attribute.value" >
             <field name="name">Muros de piedra</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_15" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_15" model="ter.use_type.attribute.value" >
             <field name="name">Pequeñas construcciones de arquitectura tradicional</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_16" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_16" model="ter.use_type.attribute.value" >
             <field name="name">Tierras en barbecho de biodiversidad (incluidos los barbechos melíferos) (por 1 m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_17" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_17" model="ter.use_type.attribute.value" >
             <field name="name">Tierras en barbecho (por 1 m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_18" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_18" model="ter.use_type.attribute.value" >
             <field name="name">Áreas de no siega</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_19" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_19" model="ter.use_type.attribute.value" >
             <field name="name">Zonas de no cosechado de aromáticas (por 1m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_20" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_20" model="ter.use_type.attribute.value" >
             <field name="name">Cultivo fijador de nitrógeno sin aplicación de fitosanitarios (m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_21" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_21" model="ter.use_type.attribute.value" >
             <field name="name">Superficies con vegetación (m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_22" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_22" model="ter.use_type.attribute.value" >
             <field name="name">Zonas yermas (m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_23" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_23" model="ter.use_type.attribute.value" >
             <field name="name">Márgenes florales de más de 0,5 m de ancho de especies autóctonas y/o naturalizadas (m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_24" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_24" model="ter.use_type.attribute.value" >
             <field name="name">Márgenes multifuncionales de más de 2 m de ancho de especies autóctonas y/o naturalizadas (m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_25" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_25" model="ter.use_type.attribute.value" >
             <field name="name">Bandas y zonas florales de especies autóctonas y/o naturalizadas (m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_26" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_26" model="ter.use_type.attribute.value" >
             <field name="name">Siembra o promoción de gramíneas para favorecer la presencia de fitoseidos (m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_27" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_27" model="ter.use_type.attribute.value" >
             <field name="name">Siega parcial del cultivo (forrajeras) (m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_28" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_28" model="ter.use_type.attribute.value" >
             <field name="name">Nidos para abejas solitarias (uds.)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_29" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_29" model="ter.use_type.attribute.value" >
             <field name="name">Otros tipos de nidos o refugios (uds.)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_30" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_30" model="ter.use_type.attribute.value" >
             <field name="name">Troncos de árboles muertos con cavidades siempre que no representen un peligro (uds.)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_31" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_31" model="ter.use_type.attribute.value" >
             <field name="name">Cubierta vegetal florida en calle de la finca. En el año sup. esp. flores más de 20 por ciento (m2)</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_32" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_32" model="ter.use_type.attribute.value" >
             <field name="name">Árbol aislado</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>
-        <record id="ter_attr_senp_farming_33" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_senp_farming_33" model="ter.use_type.attribute.value" >
             <field name="name">Árboles en hilera</field>
             <field name="attribute_id" ref="ter_attr_senp_farming"/>
         </record>

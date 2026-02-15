@@ -2,7 +2,7 @@
 <!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
 
-    <data>
+    <data noupdate="1">
 
         <record id="ter_profile_01" model="ter.profile">
             <field name="alphanum_code">Owner</field>
@@ -10,9 +10,6 @@
             <field name="is_standard">True</field>
         </record>
 
-    </data>
-
-    <data noupdate="1">
 
         <record id="ter_profile_02" model="ter.profile">
             <field name="alphanum_code">Usufructuary</field>

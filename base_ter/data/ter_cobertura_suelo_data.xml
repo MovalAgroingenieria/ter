@@ -2,34 +2,34 @@
 <!-- Copyright 2026 Moval Agroingenieria S.L. -->
 <!-- Soil cover type attribute on Farming: values from Tipo de cobertura del suelo.csv (active only). -->
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
 
-        <record id="ter_attr_soil_cover_type_farming" model="ter.use_type.attribute" forcecreate="True">
+        <record id="ter_attr_soil_cover_type_farming" model="ter.use_type.attribute" >
             <field name="name">Soil cover type</field>
             <field name="use_type_id" ref="ter_use_type_farming"/>
         </record>
 
-        <record id="ter_attr_soil_cover_type_farming_1" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_soil_cover_type_farming_1" model="ter.use_type.attribute.value" >
             <field name="name">Suelo desnudo</field>
             <field name="attribute_id" ref="ter_attr_soil_cover_type_farming"/>
         </record>
-        <record id="ter_attr_soil_cover_type_farming_2" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_soil_cover_type_farming_2" model="ter.use_type.attribute.value" >
             <field name="name">Cubierta vegetal sembrada</field>
             <field name="attribute_id" ref="ter_attr_soil_cover_type_farming"/>
         </record>
-        <record id="ter_attr_soil_cover_type_farming_3" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_soil_cover_type_farming_3" model="ter.use_type.attribute.value" >
             <field name="name">Cubierta vegetal espontánea.</field>
             <field name="attribute_id" ref="ter_attr_soil_cover_type_farming"/>
         </record>
-        <record id="ter_attr_soil_cover_type_farming_4" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_soil_cover_type_farming_4" model="ter.use_type.attribute.value" >
             <field name="name">Cubierta inerte de restos de poda</field>
             <field name="attribute_id" ref="ter_attr_soil_cover_type_farming"/>
         </record>
-        <record id="ter_attr_soil_cover_type_farming_5" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_soil_cover_type_farming_5" model="ter.use_type.attribute.value" >
             <field name="name">Cubierta inerte de otros materiales (cáscaras de frutos secos, piedras, otros restos vegetales, etc.)</field>
             <field name="attribute_id" ref="ter_attr_soil_cover_type_farming"/>
         </record>
-        <record id="ter_attr_soil_cover_type_farming_6" model="ter.use_type.attribute.value" forcecreate="True">
+        <record id="ter_attr_soil_cover_type_farming_6" model="ter.use_type.attribute.value" >
             <field name="name">Regeneración Pastos permanentes</field>
             <field name="attribute_id" ref="ter_attr_soil_cover_type_farming"/>
         </record>

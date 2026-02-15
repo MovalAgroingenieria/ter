@@ -149,8 +149,8 @@ class GisViewer(models.AbstractModel):
         company = self.env.company
         base_url = company.gis_viewer_url or self.DEFAULT_GIS_VIEWER
         additional_args = (
-            (company.gis_viewer_previs_additional_args or "").strip() or "mode=min"
-        )
+            company.gis_viewer_previs_additional_args or ""
+        ).strip() or "mode=min"
 
         url = f"{base_url}?{self._param_gis_selection}={self.gis_code}"
 
