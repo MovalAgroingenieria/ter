@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingenieria S.L. -->
+<!-- Irrigation system attribute on Farming. -->
+<odoo>
+    <data noupdate="0">
+
+        <record id="ter_attr_irrigation_system_farming" model="ter.use_type.attribute" forcecreate="True">
+            <field name="name">Irrigation system</field>
+            <field name="use_type_id" ref="ter_use_type_farming"/>
+        </record>
+
+        <record id="ter_attr_irrigation_system_farming_aspersion" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Aspersión</field>
+            <field name="attribute_id" ref="ter_attr_irrigation_system_farming"/>
+        </record>
+        <record id="ter_attr_irrigation_system_farming_goteo" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Goteo</field>
+            <field name="attribute_id" ref="ter_attr_irrigation_system_farming"/>
+        </record>
+        <record id="ter_attr_irrigation_system_farming_gravedad" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Gravedad</field>
+            <field name="attribute_id" ref="ter_attr_irrigation_system_farming"/>
+        </record>
+        <record id="ter_attr_irrigation_system_farming_pivot" model="ter.use_type.attribute.value" forcecreate="True">
+            <field name="name">Pivot</field>
+            <field name="attribute_id" ref="ter_attr_irrigation_system_farming"/>
+        </record>
+
+    </data>
+</odoo>
