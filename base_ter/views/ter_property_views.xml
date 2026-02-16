@@ -207,7 +207,7 @@
                 <field name="area_official_parcels"/>
                 <field name="area_unit_name"/>
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_global_click">
                             <div class="o_terproperty_kanban_image">
                                 <t t-if="record.aerial_image_shown_256 and record.aerial_image_shown_256.raw_value">

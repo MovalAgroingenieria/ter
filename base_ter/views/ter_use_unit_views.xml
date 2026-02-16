@@ -108,7 +108,7 @@
                 <field name="parcel_aerial_image_shown_256"/>
                 <field name="attribute_value_ids"/>
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_global_click">
                             <div class="o_terunit_kanban_image d-flex justify-content-center">
                                 <t t-if="record.parcel_aerial_image_shown_256 and record.parcel_aerial_image_shown_256.raw_value">

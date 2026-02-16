@@ -42,12 +42,12 @@ class UseType(models.Model):
     unit_ids = fields.One2many(
         "ter.use_unit",
         "use_type_id",
-        string="Units",
+        string="Territorial Units",
     )
     date_range_ids = fields.One2many(
         "date.range",
         "use_type_id",
-        string="Date Ranges",
+        string="Assigned Date Ranges",
     )
     unit_count = fields.Integer(
         string="Units",

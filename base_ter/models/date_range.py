@@ -28,7 +28,7 @@ class DateRange(models.Model):
     unit_ids = fields.One2many(
         "ter.use_unit",
         "date_range_id",
-        string="Units",
+        string="Territorial Units",
     )
     unit_count = fields.Integer(
         string="Units",
