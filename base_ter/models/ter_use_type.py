@@ -67,10 +67,6 @@ class UseType(models.Model):
         string="Attributes",
     )
 
-    _sql_constraints = [
-        ("name_not_empty", "CHECK(name <> '')", "Name cannot be empty."),
-    ]
-
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
         for record in self:
