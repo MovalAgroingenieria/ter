@@ -240,7 +240,7 @@
                                 </div>
                             </div>
                             <field name="geom_ewkt" placeholder="SRID=25830;POLYGON((...))"
-                                   widget="text" readonly="state == 'validated'" invisible="1"/>
+                                   widget="text" readonly="state == 'validated'"/>
                         </group>
                         <group>
                             <field name="municipality_id" readonly="1"/>
