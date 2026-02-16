@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-15 23:00+0000\n"
-"PO-Revision-Date: 2026-02-15 23:00+0000\n"
+"POT-Creation-Date: 2026-02-16 05:34+0000\n"
+"PO-Revision-Date: 2026-02-16 05:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -12294,7 +12294,6 @@ msgid "AMARANT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_21
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_177_variedad__especie__tipo_val_7
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_29
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_50
@@ -13211,11 +13210,6 @@ msgid "AMISTI CS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_22
-msgid "AMITY"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_178_variedad__especie__tipo_val_9
 msgid "AMIVA"
 msgstr ""
@@ -14050,11 +14044,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_69_variedad__especie__tipo_val_52
 msgid "ANDENA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_23
-msgid "ANDENKEN AN PAUL CAMENZIND"
 msgstr ""
 
 #. module: base_ter
@@ -14969,7 +14958,6 @@ msgid "ANNALUCA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_24
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_2_variedad__especie__tipo_val_7
 msgid "ANNAMARIA"
 msgstr ""
@@ -16053,7 +16041,6 @@ msgid "AP9194"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_25
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_151
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_50
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_190_variedad__especie__tipo_val_10
@@ -16106,11 +16093,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_72_variedad__especie__tipo_val_9
 msgid "APELSVOLL"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_26
-msgid "APEMA"
 msgstr ""
 
 #. module: base_ter
@@ -16171,36 +16153,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_1_variedad__especie__tipo_val_202
 msgid "APEXUS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_27
-msgid "APF 122"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_28
-msgid "APF 153T"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_29
-msgid "APF 190T"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_30
-msgid "APF 238T"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_31
-msgid "APF 45"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_32
-msgid "APF236T"
 msgstr ""
 
 #. module: base_ter
@@ -17052,7 +17004,6 @@ msgid "ARANZA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_33
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_58
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_347_variedad__especie__tipo_val_1
 msgid "ARAPAHO"
@@ -18003,7 +17954,6 @@ msgid "ARIA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_34
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_27
 msgid "ARIADNE"
 msgstr ""
@@ -18974,7 +18924,6 @@ msgid "AROMATE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_35
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_31
 msgid "AROMQUEE"
 msgstr ""
@@ -19351,11 +19300,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_20
 msgid "ART1016"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_36
-msgid "ARTA"
 msgstr ""
 
 #. module: base_ter
@@ -20217,13 +20161,11 @@ msgid "ASEO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_37
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_32
 msgid "ASF1754"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_38
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_33
 msgid "ASF1960"
 msgstr ""
@@ -20349,11 +20291,6 @@ msgid "ASHTON"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_39
-msgid "ASHTON CROSS"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_511
 msgid "ASHUR"
 msgstr ""
@@ -20429,11 +20366,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_73_variedad__especie__tipo_val_5
 msgid "ASKEL"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_40
-msgid "ASKER"
 msgstr ""
 
 #. module: base_ter
@@ -20766,18 +20698,12 @@ msgid "ASTERIA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_41
-msgid "ASTERINA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_382
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_8_variedad__especie__tipo_val_21
 msgid "ASTERION"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_42
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_100
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_518
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_34_variedad__especie__tipo_val_70
@@ -21260,7 +21186,6 @@ msgid "ATEMPO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_43
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_182
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_32
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_38
@@ -22092,7 +22017,6 @@ msgid "AUGUST YUMMY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_44
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_37
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_68
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_35_variedad__especie__tipo_val_119
@@ -22558,16 +22482,6 @@ msgid "AUTUMN BARON"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_45
-msgid "AUTUMN BLISS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_46
-msgid "AUTUMN CASCADE"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_185_variedad__especie__tipo_val_9
 msgid "AUTUMN CUP"
 msgstr ""
@@ -22609,7 +22523,6 @@ msgid "AUTUMN STAR"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_47
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_40
 msgid "AUTUMN TREASURE"
 msgstr ""
@@ -24291,7 +24204,6 @@ msgstr ""
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_142_admisible_ayudas_asociada
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_143_admisible_ayudas_asociada
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_147_admisible_ayudas_asociada
-#: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_149_admisible_ayudas_asociada
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_14_admisible_ayudas_asociada
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_151_admisible_ayudas_asociada
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_152_admisible_ayudas_asociada
@@ -27066,21 +26978,6 @@ msgid "BAA 1B"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_48
-msgid "BAB-211"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_49
-msgid "BAB-213"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_50
-msgid "BAB-223"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_590_variedad__especie__tipo_val_109
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_82_variedad__especie__tipo_val_128
 msgid "BABARC"
@@ -28046,7 +27943,6 @@ msgid "BALCONI YELLOW"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_51
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_162_variedad__especie__tipo_val_33
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_133
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_91
@@ -30302,11 +30198,6 @@ msgid "BARON"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_52
-msgid "BARON DE WAVRE"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_112_variedad__especie__tipo_val_7
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_85
 msgid "BARONA"
@@ -31449,16 +31340,6 @@ msgid "BATUTA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_53
-msgid "BAUER 26"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_54
-msgid "BAUER 61"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_50
 msgid "BAUGENE"
 msgstr ""
@@ -31466,11 +31347,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_2_variedad__especie__tipo_val_18
 msgid "BAULÄNDER SPELZ"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_55
-msgid "BAUMFORTH'S SEEDLING"
 msgstr ""
 
 #. module: base_ter
@@ -31800,11 +31676,6 @@ msgid "BB SEG 0741"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_56
-msgid "BB17"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_765
 msgid "BB2"
 msgstr ""
@@ -32105,12 +31976,6 @@ msgid "BC747"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_57
-msgid "BC893384"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_58
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_42
 msgid "BC92915"
 msgstr ""
@@ -32191,7 +32056,6 @@ msgid "BEAS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_59
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_265
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_534
 msgid "BEATA"
@@ -32469,11 +32333,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_60_variedad__especie__tipo_val_52
 msgid "BEDA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_60
-msgid "BEDFORD GIANT"
 msgstr ""
 
 #. module: base_ter
@@ -33047,7 +32906,6 @@ msgid "BELL BOY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_61
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_160
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_43
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_332_variedad__especie__tipo_val_34
@@ -33807,11 +33665,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_189_variedad__especie__tipo_val_20
 msgid "BENEFINE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_62
-msgid "BENEFIS"
 msgstr ""
 
 #. module: base_ter
@@ -34693,11 +34546,6 @@ msgid "BERÉNYI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_63
-msgid "BESKID"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_555_variedad__especie__tipo_val_16
 msgid "BESKYD"
 msgstr ""
@@ -35509,11 +35357,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_590_variedad__especie__tipo_val_174
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_82_variedad__especie__tipo_val_207
 msgid "BIFORT"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_64
-msgid "BIFORZA"
 msgstr ""
 
 #. module: base_ter
@@ -36777,11 +36620,6 @@ msgid "BLACK JACK"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_65
-msgid "BLACK JEWEL"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_162_variedad__especie__tipo_val_65
 msgid "BLACK KING"
 msgstr ""
@@ -36803,7 +36641,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_102_variedad__especie__tipo_val_97
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_66
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_581_variedad__especie__tipo_val_1
 msgid "BLACK MAGIC"
 msgstr ""
@@ -36852,11 +36689,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_102_variedad__especie__tipo_val_98
 msgid "BLACK ROSE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_67
-msgid "BLACK SATIN"
 msgstr ""
 
 #. module: base_ter
@@ -37835,11 +37667,6 @@ msgid "BLIZZARD"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_68
-msgid "BLKCAS202"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_183_variedad__especie__tipo_val_44
 msgid "BLOBFISH"
 msgstr ""
@@ -38249,41 +38076,6 @@ msgid "BNF 347"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_69
-msgid "BNO-212"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_70
-msgid "BNO-213"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_71
-msgid "BNO-222"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_72
-msgid "BNOASTER"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_73
-msgid "BNOEQUA 02"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_74
-msgid "BNOFURIA 01"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_75
-msgid "BNOINDRA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_105_variedad__especie__tipo_val_73
 msgid "BO 02024028"
 msgstr ""
@@ -38656,11 +38448,6 @@ msgid "BOHDANA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_76
-msgid "BOHEME"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_375
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_159_variedad__especie__tipo_val_20
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_189
@@ -38740,18 +38527,8 @@ msgid "BOIRO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_77
-msgid "BOIS BLANC"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_35_variedad__especie__tipo_val_175
 msgid "BOJAN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_78
-msgid "BOJANA"
 msgstr ""
 
 #. module: base_ter
@@ -40024,11 +39801,6 @@ msgid "BORGIA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_79
-msgid "BORGUND"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_160_variedad__especie__tipo_val_95
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_1029
 msgid "BORIS"
@@ -40650,7 +40422,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_81
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_80
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_44
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_1046
 msgid "BOUNTIFUL"
@@ -40875,11 +40646,6 @@ msgid "BOYNE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_81
-msgid "BOYSEN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_218_variedad__especie__tipo_val_35
 msgid "BOYUNA"
 msgstr ""
@@ -40905,13 +40671,11 @@ msgid "BOZON"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_82
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_45
 msgid "BP 1522"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_83
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_46
 msgid "BP1"
 msgstr ""
@@ -41198,7 +40962,6 @@ msgid "BRANDY RED"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_84
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_1064
 msgid "BRANDYWINE"
 msgstr ""
@@ -42072,7 +41835,6 @@ msgid "BRILLANTINO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_85
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_47
 msgid "BRILLIANCE"
 msgstr ""
@@ -42246,7 +42008,6 @@ msgid "BRISKA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_86
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_140
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_304_variedad__especie__tipo_val_12
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_33_variedad__especie__tipo_val_166
@@ -42448,11 +42209,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_176_variedad__especie__tipo_val_18
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_1_variedad__especie__tipo_val_451
 msgid "BROLIN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_87
-msgid "BROMBA DELIKADO"
 msgstr ""
 
 #. module: base_ter
@@ -43063,11 +42819,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_82_variedad__especie__tipo_val_276
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_307
 msgid "BRYZA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_88
-msgid "BRZEZINA"
 msgstr ""
 
 #. module: base_ter
@@ -44306,11 +44057,6 @@ msgid "BULGARSKI 12"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_89
-msgid "BULGARSKI RUBIN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_33_variedad__especie__tipo_val_169
 msgid "BULI"
 msgstr ""
@@ -44983,17 +44729,6 @@ msgid "BWM 01"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_90
-msgid "BWP FNZ6VB"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_91
-msgid "BWP FNZ8VB"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_92
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_55
 msgid "BWPRASP01"
 msgstr ""
@@ -47880,11 +47615,6 @@ msgid "CALIBELLO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_93
-msgid "CALIBER"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_163
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_178_variedad__especie__tipo_val_62
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_1205
@@ -49010,11 +48740,6 @@ msgid "CANBERRA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_94
-msgid "CANBY"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_391
 msgid "CANCAN"
 msgstr ""
@@ -49646,7 +49371,6 @@ msgid "CAPITOL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_95
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_1277
 msgid "CAPITOU"
 msgstr ""
@@ -50366,7 +50090,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_102_variedad__especie__tipo_val_156
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_105_variedad__especie__tipo_val_138
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_100
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_96
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_480
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_164_variedad__especie__tipo_val_20
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_1308
@@ -50914,11 +50637,6 @@ msgid "CARMELIAN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_97
-msgid "CARMELINA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_409
 msgid "CARMELINAS"
 msgstr ""
@@ -50951,7 +50669,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_108_variedad__especie__tipo_val_29
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_51
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_98
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_411
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_102
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_249
@@ -51182,7 +50899,6 @@ msgid "CAROLINA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_99
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_35_variedad__especie__tipo_val_207
 msgid "CAROLINE"
 msgstr ""
@@ -52355,7 +52071,6 @@ msgid "CASTILLE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_100
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_58
 msgid "CASTION"
 msgstr ""
@@ -54900,7 +54615,6 @@ msgid "CHAMBO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_101
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_160_variedad__especie__tipo_val_135
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_59
 msgid "CHAMBORD"
@@ -55866,11 +55580,6 @@ msgid "CHESTER"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_102
-msgid "CHESTER THORNLESS"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_154_variedad__especie__tipo_val_34
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_1_variedad__especie__tipo_val_546
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_590_variedad__especie__tipo_val_404
@@ -56136,11 +55845,6 @@ msgid "CHIKO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_103
-msgid "CHILCOTIN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_1534
 msgid "CHILE VERDE"
 msgstr ""
@@ -56163,11 +55867,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_550
 msgid "CHILLINA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_104
-msgid "CHILLIWACK"
 msgstr ""
 
 #. module: base_ter
@@ -56490,11 +56189,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_1547
 msgid "CHOCOTINI"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_105
-msgid "CHOCTAW"
 msgstr ""
 
 #. module: base_ter
@@ -59137,11 +58831,6 @@ msgid "CLUJANA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_106
-msgid "CLUTHA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_107_variedad__especie__tipo_val_68
 msgid "CLUTHAGOLD"
 msgstr ""
@@ -60145,11 +59834,6 @@ msgid "COLA DE ZORRA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_107
-msgid "COLA I"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_481_c_upov_val
 msgid "COLAA_ACU"
 msgstr ""
@@ -60672,21 +60356,6 @@ msgid "COLUMBIA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_108
-msgid "COLUMBIA GIANT"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_109
-msgid "COLUMBIA STAR"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_110
-msgid "COLUMBIA SUNRISE"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_69_variedad__especie__tipo_val_293
 msgid "COLUMBINE"
 msgstr ""
@@ -60963,11 +60632,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_63
 msgid "COMOSA GROSSA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_111
-msgid "COMOX"
 msgstr ""
 
 #. module: base_ter
@@ -68865,7 +68529,6 @@ msgid "DAFILA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_112
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_241
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_162_variedad__especie__tipo_val_105
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_313
@@ -71477,7 +71140,6 @@ msgid "DEANGELIA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_113
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_63
 msgid "DEAUVILLE"
 msgstr ""
@@ -71732,7 +71394,6 @@ msgid "DEENA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_114
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_178_variedad__especie__tipo_val_125
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_508_variedad__especie__tipo_val_48
 msgid "DEEP PURPLE"
@@ -72414,12 +72075,6 @@ msgid "DELMAR"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_115
-msgid "DELMES"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_116
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_64
 msgid "DELNIWA"
 msgstr ""
@@ -73238,16 +72893,6 @@ msgid "DEUTERON"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_117
-msgid "DEUTSCHLAND"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_118
-msgid "DEUTSCHLAND 43"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_33_variedad__especie__tipo_val_252
 msgid "DEVEDA"
 msgstr ""
@@ -73705,7 +73350,6 @@ msgid "DIAMOND JEWEL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_119
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_65
 msgid "DIAMOND JUBILEE"
 msgstr ""
@@ -73727,7 +73371,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_84
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_120
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_706
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_163_variedad__especie__tipo_val_172
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_190_variedad__especie__tipo_val_55
@@ -74096,11 +73739,6 @@ msgid "DIM 601"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_121
-msgid "DIMA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_60_variedad__especie__tipo_val_98
 msgid "DIMANA"
 msgstr ""
@@ -74270,11 +73908,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_2_variedad__especie__tipo_val_31
 msgid "DINKATOU"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_122
-msgid "DINKUM"
 msgstr ""
 
 #. module: base_ter
@@ -74462,11 +74095,6 @@ msgid "DIRK"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_123
-msgid "DIRKSEN THORNLESS"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_466
 msgid "DIROSSO"
 msgstr ""
@@ -74531,7 +74159,6 @@ msgid "DISTRICT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_124
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_172_variedad__especie__tipo_val_155
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_49_variedad__especie__tipo_val_297
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_590_variedad__especie__tipo_val_486
@@ -77802,12 +77429,6 @@ msgid "DOLMY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_125
-msgid "DOLOMIA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_126
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_66
 msgid "DOLOMIA PLUS"
 msgstr ""
@@ -78563,11 +78184,6 @@ msgid "DOONGARA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_127
-msgid "DOPPELERNTE"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_2147
 msgid "DOPPIA"
 msgstr ""
@@ -78891,7 +78507,6 @@ msgid "DORITTA KWS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_128
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_60_variedad__especie__tipo_val_104
 msgid "DORKA"
 msgstr ""
@@ -78914,11 +78529,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_1435
 msgid "DORLISKA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_129
-msgid "DORMAN RED"
 msgstr ""
 
 #. module: base_ter
@@ -79142,7 +78752,6 @@ msgid "DOUFU"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_130
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_160_variedad__especie__tipo_val_209
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_2162
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_35_variedad__especie__tipo_val_488
@@ -79762,106 +79371,6 @@ msgid "DRIFTER"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_131
-msgid "DRISBLACKEIGHTEEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_132
-msgid "DRISBLACKELEVEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_133
-msgid "DRISBLACKFOUR"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_134
-msgid "DRISBLACKFOURTEEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_135
-msgid "DRISBLACKNINE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_136
-msgid "DRISBLACKNINETEEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_137
-msgid "DRISBLACKSEVENTEEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_138
-msgid "DRISBLACKSIX"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_139
-msgid "DRISBLACKSIXTEEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_140
-msgid "DRISBLACKTEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_141
-msgid "DRISBLACKTHIRTEEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_142
-msgid "DRISBLACKTHIRTY"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_143
-msgid "DRISBLACKTWELVE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_144
-msgid "DRISBLACKTWENTY"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_145
-msgid "DRISBLACKTWENTYFIVE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_146
-msgid "DRISBLACKTWENTYFOUR"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_147
-msgid "DRISBLACKTWENTYSIX"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_148
-msgid "DRISBLACKTWENTYTHREE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_149
-msgid "DRISBLACKTWENTYTWO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_150
-msgid "DRISBLACKTWO"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_216_variedad__especie__tipo_val_41
 msgid "DRISBLUEEIGHTEEN"
 msgstr ""
@@ -79997,28 +79506,11 @@ msgid "DRISCOLL AGOURA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_151
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_67
 msgid "DRISCOLL CARDINAL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_152
-msgid "DRISCOLL CARMEL"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_153
-msgid "DRISCOLL CARMELINA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_154
-msgid "DRISCOLL COWLES"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_155
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_68
 msgid "DRISCOLL DULCITA"
 msgstr ""
@@ -80029,19 +79521,8 @@ msgid "DRISCOLL EL DORADO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_156
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_69
 msgid "DRISCOLL ESTRELLA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_157
-msgid "DRISCOLL EUREKA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_158
-msgid "DRISCOLL FRANCESCA"
 msgstr ""
 
 #. module: base_ter
@@ -80055,13 +79536,11 @@ msgid "DRISCOLL LANAI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_159
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_70
 msgid "DRISCOLL MADONNA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_160
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_71
 msgid "DRISCOLL MARAVILLA"
 msgstr ""
@@ -80072,7 +79551,6 @@ msgid "DRISCOLL OSCEOLA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_161
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_72
 msgid "DRISCOLL PACIFICA"
 msgstr ""
@@ -80083,13 +79561,11 @@ msgid "DRISCOLL SAN JUAN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_162
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_73
 msgid "DRISCOLL SEVILLANA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_163
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_74
 msgid "DRISRASPEIGHT"
 msgstr ""
@@ -80100,43 +79576,36 @@ msgid "DRISRASPEIGHTEEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_164
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_76
 msgid "DRISRASPELEVEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_165
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_77
 msgid "DRISRASPFIFTEEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_166
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_78
 msgid "DRISRASPFIVE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_167
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_79
 msgid "DRISRASPFOURTEEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_168
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_80
 msgid "DRISRASPNINE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_169
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_81
 msgid "DRISRASPONE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_170
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_82
 msgid "DRISRASPSEVEN"
 msgstr ""
@@ -80147,31 +79616,26 @@ msgid "DRISRASPSEVENTEEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_171
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_84
 msgid "DRISRASPSIX"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_172
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_85
 msgid "DRISRASPTEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_173
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_86
 msgid "DRISRASPTHIRTEEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_174
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_87
 msgid "DRISRASPTHREE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_175
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_88
 msgid "DRISRASPTWELVE"
 msgstr ""
@@ -80192,7 +79656,6 @@ msgid "DRISRASPTWENTYTWO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_176
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_92
 msgid "DRISRASPTWO"
 msgstr ""
@@ -81417,7 +80880,6 @@ msgid "DULCISUITE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_177
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_663
 msgid "DULCITA"
 msgstr ""
@@ -85893,7 +85355,6 @@ msgid "ELEGANA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_178
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_178_variedad__especie__tipo_val_140
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_2345
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_219_variedad__especie__tipo_val_219
@@ -85959,7 +85420,6 @@ msgid "ELEKSIR"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_179
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_817
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_1_variedad__especie__tipo_val_681
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_219_variedad__especie__tipo_val_220
@@ -86967,11 +86427,6 @@ msgid "EM 1 12 99"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_180
-msgid "EM 6544-80"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_34_variedad__especie__tipo_val_173
 msgid "EM BREZZA"
 msgstr ""
@@ -87412,7 +86867,6 @@ msgid "EMON"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_181
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_172_variedad__especie__tipo_val_180
 msgid "EMONA"
 msgstr ""
@@ -87487,19 +86941,16 @@ msgid "EMPRESS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_182
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_93
 msgid "EMR 201201"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_183
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_94
 msgid "EMR 20171"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_184
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_95
 msgid "EMR 20172"
 msgstr ""
@@ -87946,7 +87397,6 @@ msgid "ENRIKA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_185
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_97
 msgid "ENROSADIRA"
 msgstr ""
@@ -89478,7 +88928,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_108_variedad__especie__tipo_val_66
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_186
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_98
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_41_variedad__especie__tipo_val_81
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_517_variedad__especie__tipo_val_96
@@ -92066,11 +91515,6 @@ msgid "ESPAÑOLO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_187
-msgid "ESPE"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type,name:base_ter.ter_use_type_cultivo_96
 msgid "ESPECIES AROMÁTICAS HERBÁCEAS"
 msgstr ""
@@ -93740,7 +93184,6 @@ msgid "EVIONAS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_188
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_878
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_99
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_2535
@@ -96493,16 +95936,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_525_variedad__especie__tipo_val_87
 msgid "FALLADINO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_189
-msgid "FALLGOLD"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_190
-msgid "FALLRED"
 msgstr ""
 
 #. module: base_ter
@@ -99813,16 +99246,6 @@ msgid "FERTISTRITKA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_191
-msgid "FERTODI ARANYFÜRT"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_192
-msgid "FERTODI BOTERMO"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_324
 msgid "FERTODI EZÜSTFEHÉR"
 msgstr ""
@@ -99835,21 +99258,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_178_variedad__especie__tipo_val_152
 msgid "FERTODI VOROS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_193
-msgid "FERTODI ZAMATOS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_194
-msgid "FERTÖDI KARMIN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_195
-msgid "FERTÖDI VENUS"
 msgstr ""
 
 #. module: base_ter
@@ -99941,7 +99349,6 @@ msgid "FESTIVA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_196
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_352
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_226
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_2662
@@ -104505,11 +103912,6 @@ msgid "FRAMBUESA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_197
-msgid "FRAMITA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_105_variedad__especie__tipo_val_255
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_623
 msgid "FRANCA"
@@ -104547,7 +103949,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_122
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_198
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_821
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_2801
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_219_variedad__especie__tipo_val_299
@@ -105614,7 +105015,6 @@ msgid "FROST NYC NAVEL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_199
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_561_variedad__especie__tipo_val_20
 msgid "FROSTA"
 msgstr ""
@@ -105640,17 +105040,11 @@ msgid "FROSTY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_200
-msgid "FROUEZRUIG"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_108
 msgid "FRP-17"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_201
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_109
 msgid "FRUATFRI"
 msgstr ""
@@ -109080,7 +108474,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_311
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_202
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_989
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_239
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_162_variedad__especie__tipo_val_146
@@ -109111,11 +108504,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_849
 msgid "GAITERA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_203
-msgid "GAJ"
 msgstr ""
 
 #. module: base_ter
@@ -109339,7 +108727,6 @@ msgid "GALANT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_204
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_69_variedad__especie__tipo_val_430
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_638
 msgid "GALANTE"
@@ -111213,11 +110600,6 @@ msgid "GELADA DELS MASOS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_205
-msgid "GELBE ANTWERPEN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_178_variedad__especie__tipo_val_169
 msgid "GELBE GOCHSHEIMER"
 msgstr ""
@@ -111230,11 +110612,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_349
 msgid "GELBE LAAER"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_206
-msgid "GELBE SIEBENKUGEL"
 msgstr ""
 
 #. module: base_ter
@@ -111306,11 +110683,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_127
 msgid "GELOSA DE MÈRLERA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_207
-msgid "GELOY"
 msgstr ""
 
 #. module: base_ter
@@ -111471,7 +110843,6 @@ msgid "GENESIS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_208
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_346
 msgid "GENEVA"
 msgstr ""
@@ -111718,7 +111089,6 @@ msgid "GEORGE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_209
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_481
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_2939
 msgid "GEORGIA"
@@ -112052,11 +111422,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_486
 msgid "GETTY"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_210
-msgid "GEVALO"
 msgstr ""
 
 #. module: base_ter
@@ -114257,7 +113622,6 @@ msgid "GLAZE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_211
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_111
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_1_variedad__especie__tipo_val_911
 msgid "GLEAM"
@@ -114299,40 +113663,21 @@ msgid "GLEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_212
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_112
 msgid "GLEN AMPLE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_213
-msgid "GLEN CALLY"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_214
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_113
 msgid "GLEN CARRON"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_215
-msgid "GLEN CLOVA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_216
-msgid "GLEN COE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_217
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_114
 msgid "GLEN DEE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_218
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_115
 msgid "GLEN DOLL"
 msgstr ""
@@ -114343,37 +113688,23 @@ msgid "GLEN EDEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_219
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_117
 msgid "GLEN ERICHT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_220
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_118
 msgid "GLEN FYNE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_221
-msgid "GLEN LYON"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_222
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_119
 msgid "GLEN MAGNA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_223
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_120
 msgid "GLEN MOR"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_224
-msgid "GLEN MOY"
 msgstr ""
 
 #. module: base_ter
@@ -114382,24 +113713,8 @@ msgid "GLEN ORA LATE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_225
-msgid "GLEN PROSEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_226
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_121
 msgid "GLEN ROCIO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_227
-msgid "GLEN ROSA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_228
-msgid "GLEN SHEE"
 msgstr ""
 
 #. module: base_ter
@@ -114583,7 +113898,6 @@ msgid "GLORANGA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_229
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_1043
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_256
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_162_variedad__especie__tipo_val_159
@@ -114690,11 +114004,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_356
 msgid "GLORIVERT"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_230
-msgid "GLORNIWA"
 msgstr ""
 
 #. module: base_ter
@@ -115179,11 +114488,6 @@ msgid "GOLDEN BANTAM"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_231
-msgid "GOLDEN BLISS"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_80_variedad__especie__tipo_val_222
 msgid "GOLDEN BON (ant. GOLDEN)"
 msgstr ""
@@ -115226,11 +114530,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_353
 msgid "GOLDEN DREAM"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_232
-msgid "GOLDEN EVEREST"
 msgstr ""
 
 #. module: base_ter
@@ -115378,7 +114677,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_105_variedad__especie__tipo_val_278
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_106_variedad__especie__tipo_val_115
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_233
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_122
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_201_variedad__especie__tipo_val_31
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_202_variedad__especie__tipo_val_54
@@ -115766,7 +115064,6 @@ msgid "GOLIAT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_234
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_420_variedad__especie__tipo_val_6
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_497_variedad__especie__tipo_val_34
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_2104
@@ -116522,7 +115819,6 @@ msgid "GRACIUS GLADKI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_235
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3074
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_332_variedad__especie__tipo_val_84
 msgid "GRACJA"
@@ -116556,11 +115852,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_368
 msgid "GRADIGOLD"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_236
-msgid "GRADINA"
 msgstr ""
 
 #. module: base_ter
@@ -116850,7 +116141,6 @@ msgid "GRANDES LAGOS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_237
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_123
 msgid "GRANDEUR"
 msgstr ""
@@ -120615,11 +119905,6 @@ msgid "HAGRID"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_238
-msgid "HAIDA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_556_variedad__especie__tipo_val_53
 msgid "HAIFA"
 msgstr ""
@@ -122811,11 +122096,6 @@ msgid "HEITI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_239
-msgid "HEJA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_3_variedad__especie__tipo_val_286
 msgid "HEKABE"
 msgstr ""
@@ -123047,11 +122327,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_8_variedad__especie__tipo_val_135
 msgid "HELJÄ"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_240
-msgid "HELKAL"
 msgstr ""
 
 #. module: base_ter
@@ -123307,7 +122582,6 @@ msgid "HERBAL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_241
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_521_variedad__especie__tipo_val_130
 msgid "HERBERT"
 msgstr ""
@@ -123395,7 +122669,6 @@ msgid "HERFSTREUZEN 3"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_242
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_544
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3378
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_512_variedad__especie__tipo_val_15
@@ -124278,16 +123551,6 @@ msgid "HIMALIA CL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_243
-msgid "HIMBEERKÖNIGIN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_244
-msgid "HIMBEERQUELLE"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3403
 msgid "HIMILCE"
 msgstr ""
@@ -124612,11 +123875,6 @@ msgid "HITOBIA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_245
-msgid "HITRA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_108_variedad__especie__tipo_val_89
 msgid "HIVERN DE CORRUNCUI"
 msgstr ""
@@ -124639,11 +123897,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_1145
 msgid "HIZIR"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_246
-msgid "HJ7"
 msgstr ""
 
 #. module: base_ter
@@ -124939,7 +124192,6 @@ msgid "HOLYNA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_247
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_126
 msgid "HOLYOKE"
 msgstr ""
@@ -125690,11 +124942,6 @@ msgid "HOZA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_248
-msgid "HPB19"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_414
 msgid "HRABIA"
 msgstr ""
@@ -125914,11 +125161,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3439
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_418
 msgid "HULK"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_249
-msgid "HULL THORNLESS"
 msgstr ""
 
 #. module: base_ter
@@ -128909,7 +128151,6 @@ msgid "ID"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_250
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_428
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_60_variedad__especie__tipo_val_169
 msgid "IDA"
@@ -129894,7 +129135,6 @@ msgid "IMAGE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_251
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_128
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_723
 msgid "IMAGINE"
@@ -130011,11 +129251,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1040
 msgid "IMMENSAL"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_252
-msgid "IMMTERTRAGENDE VON FELDBRUNN"
 msgstr ""
 
 #. module: base_ter
@@ -130191,7 +129426,6 @@ msgid "IN7011"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_253
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_158_variedad__especie__tipo_val_56
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_52_variedad__especie__tipo_val_46
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_69_variedad__especie__tipo_val_511
@@ -130251,11 +129485,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_570
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3519
 msgid "INCAS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_254
-msgid "INCENTIVE"
 msgstr ""
 
 #. module: base_ter
@@ -131363,7 +130592,6 @@ msgid "INTRED"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_255
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_426
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_129
 msgid "INTREPID"
@@ -132592,7 +131820,6 @@ msgid "ISA TD"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_256
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_1212
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_130
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3571
@@ -135320,7 +134547,6 @@ msgstr ""
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_142_integrado
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_143_integrado
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_147_integrado
-#: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_149_integrado
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_14_integrado
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_151_integrado
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_152_integrado
@@ -137500,7 +136726,6 @@ msgid "JACUZI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_257
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_1236
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_131
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3624
@@ -137916,12 +137141,6 @@ msgid "JANDERO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_258
-msgid "JANDRIE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_259
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_132
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_2392
 msgid "JANEEN"
@@ -138081,7 +137300,6 @@ msgid "JANTARKA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_260
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_134
 msgid "JANTWEE"
 msgstr ""
@@ -138102,11 +137320,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3647
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_450
 msgid "JANUS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_261
-msgid "JANVIER"
 msgstr ""
 
 #. module: base_ter
@@ -138399,11 +137612,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type,name:base_ter.ter_use_type_cultivo_235
 msgid "JATROPHA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_262
-msgid "JATSI"
 msgstr ""
 
 #. module: base_ter
@@ -138718,13 +137926,11 @@ msgid "JD28"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_263
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_137
 msgid "JDEBOER005"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_264
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_138
 msgid "JDEBOER19"
 msgstr ""
@@ -139050,11 +138256,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_2405
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_545_variedad__especie__tipo_val_77
 msgid "JERSEY"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_265
-msgid "JERSEY BLACK"
 msgstr ""
 
 #. module: base_ter
@@ -139447,7 +138648,6 @@ msgid "JMECH"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_266
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_139
 msgid "JOAN J"
 msgstr ""
@@ -139455,11 +138655,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_206_variedad__especie__tipo_val_48
 msgid "JOAN POTETA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_267
-msgid "JOAN SQUIRE"
 msgstr ""
 
 #. module: base_ter
@@ -139526,11 +138721,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_219_variedad__especie__tipo_val_347
 msgid "JOCELYNE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_268
-msgid "JOCHEMS ROEM"
 msgstr ""
 
 #. module: base_ter
@@ -140195,7 +139385,6 @@ msgid "JOWISZ"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_269
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3721
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_2418
 msgid "JOY"
@@ -140555,11 +139744,6 @@ msgid "JULAXINE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_270
-msgid "JULCSI"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_167_variedad__especie__tipo_val_32
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_773
 msgid "JULE"
@@ -140577,7 +139761,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_105_variedad__especie__tipo_val_307
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_271
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3734
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_35_variedad__especie__tipo_val_862
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_390_variedad__especie__tipo_val_67
@@ -140713,7 +139896,6 @@ msgid "JUMAY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_272
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_612
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3740
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_212_variedad__especie__tipo_val_50
@@ -142832,11 +142014,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_3801
 msgid "KARADAN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_273
-msgid "KARAKA BLACK"
 msgstr ""
 
 #. module: base_ter
@@ -146130,7 +145307,6 @@ msgid "KIOTO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_274
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_183_variedad__especie__tipo_val_169
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_2530
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_517_variedad__especie__tipo_val_162
@@ -146550,11 +145726,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1179
 msgid "KITSCH"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_275
-msgid "KITTATINIE"
 msgstr ""
 
 #. module: base_ter
@@ -147976,7 +147147,6 @@ msgid "KORAI NYAR"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_276
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_555
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_178_variedad__especie__tipo_val_228
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_482_variedad__especie__tipo_val_17
@@ -147997,11 +147167,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_34_variedad__especie__tipo_val_311
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_521_variedad__especie__tipo_val_162
 msgid "KORANA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_277
-msgid "KORBFÜLLER"
 msgstr ""
 
 #. module: base_ter
@@ -148063,11 +147228,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_159_variedad__especie__tipo_val_54
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_2617
 msgid "KORFU"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_278
-msgid "KORFU WONDER"
 msgstr ""
 
 #. module: base_ter
@@ -148185,11 +147345,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_73_variedad__especie__tipo_val_46
 msgid "KORPA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_279
-msgid "KORPIKO"
 msgstr ""
 
 #. module: base_ter
@@ -148927,11 +148082,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_590_variedad__especie__tipo_val_911
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_82_variedad__especie__tipo_val_1068
 msgid "KRONOT"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_280
-msgid "KRONPRINZ"
 msgstr ""
 
 #. module: base_ter
@@ -153043,11 +152193,6 @@ msgid "KÉRO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_281
-msgid "KÖSTLICHE SELITA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_835
 msgid "KÖTTPOTATIS"
 msgstr ""
@@ -153843,12 +152988,6 @@ msgid "LAGOPESOLE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_282
-msgid "LAGORAI"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_283
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_144
 msgid "LAGORAI PLUS"
 msgstr ""
@@ -154996,11 +154135,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1238
 msgid "LASTRA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_284
-msgid "LASZKA"
 msgstr ""
 
 #. module: base_ter
@@ -157429,7 +156563,6 @@ msgid "LEVÍSTICO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_285
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_1435
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_146
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_767_c_upov_val
@@ -161992,11 +161125,6 @@ msgid "LIEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_286
-msgid "LIENE"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_576
 msgid "LIENZO"
 msgstr ""
@@ -162662,7 +161790,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_13_variedad__especie__tipo_val_157
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_287
 msgid "LINA"
 msgstr ""
 
@@ -162742,7 +161869,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_164
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_288
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_162_variedad__especie__tipo_val_219
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_701
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_4152
@@ -163363,11 +162489,6 @@ msgid "LISZT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_289
-msgid "LITACZ"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_556_variedad__especie__tipo_val_74
 msgid "LITAGO"
 msgstr ""
@@ -163681,11 +162802,6 @@ msgid "LJUBLJANSKO RUMENO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_290
-msgid "LJULIN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_478_variedad__especie__tipo_val_23
 msgid "LJUNGSTORP"
 msgstr ""
@@ -163808,16 +162924,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_165
 msgid "LLOSETINA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_291
-msgid "LLOYD GEORGE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_292
-msgid "LLOYD GEORGES"
 msgstr ""
 
 #. module: base_ter
@@ -164055,19 +163161,8 @@ msgid "LOCATELLI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_293
-msgid "LOCH MAREE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_294
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_347_variedad__especie__tipo_val_3
 msgid "LOCH NESS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_295
-msgid "LOCH TAY"
 msgstr ""
 
 #. module: base_ter
@@ -164136,11 +163231,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_3_variedad__especie__tipo_val_359
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_570
 msgid "LOGAN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_296
-msgid "LOGANLIKE"
 msgstr ""
 
 #. module: base_ter
@@ -165312,11 +164402,6 @@ msgid "LOVÁSZPATONAI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_297
-msgid "LOWDEN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_521_variedad__especie__tipo_val_171
 msgid "LOXIA"
 msgstr ""
@@ -165709,16 +164794,6 @@ msgid "LUARCA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_298
-msgid "LUB MB223"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_299
-msgid "LUB MB333"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_4236
 msgid "LUBA?"
 msgstr ""
@@ -165756,11 +164831,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_516_variedad__especie__tipo_val_3
 msgid "LUBRO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_300
-msgid "LUBROMPRIMONE"
 msgstr ""
 
 #. module: base_ter
@@ -166828,7 +165898,6 @@ msgid "LUPIN_LUT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_301
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_147
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_4272
 msgid "LUPITA"
@@ -169826,7 +168895,6 @@ msgid "M98CL88"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_302
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_153
 msgid "MA 2920"
 msgstr ""
@@ -170204,11 +169272,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_49_variedad__especie__tipo_val_615
 msgid "MADARASENI"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_303
-msgid "MADAWASKA"
 msgstr ""
 
 #. module: base_ter
@@ -171418,7 +170481,6 @@ msgid "MAJESTEE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_304
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_154
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_219_variedad__especie__tipo_val_396
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_947
@@ -171768,7 +170830,6 @@ msgid "MALAGUTI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_305
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_155
 msgid "MALAHAT"
 msgstr ""
@@ -172080,11 +171141,6 @@ msgid "MALLING ACE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_306
-msgid "MALLING ADMIRAL"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_219_variedad__especie__tipo_val_399
 msgid "MALLING ALLURE"
 msgstr ""
@@ -172100,29 +171156,13 @@ msgid "MALLING CHAMPION"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_307
-msgid "MALLING DELIGHT"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_111_variedad__especie__tipo_val_136
 msgid "MALLING EARLY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_308
-msgid "MALLING EXPLOIT"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_309
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_156
 msgid "MALLING FREYA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_310
-msgid "MALLING GIGANT"
 msgstr ""
 
 #. module: base_ter
@@ -172131,49 +171171,13 @@ msgid "MALLING GLOW"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_311
-msgid "MALLING JEWEL"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_312
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_157
 msgid "MALLING JUNO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_313
-msgid "MALLING LANDMARK"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_314
-msgid "MALLING LEO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_315
-msgid "MALLING ORION"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_316
-msgid "MALLING PROMISE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_317
-msgid "MALLING SEEDLING"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_219_variedad__especie__tipo_val_403
 msgid "MALLING SILK"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_318
-msgid "MALLING SIRIUS"
 msgstr ""
 
 #. module: base_ter
@@ -173640,11 +172644,6 @@ msgid "MAR 507"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_319
-msgid "MAR 901"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_4427
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_1_variedad__especie__tipo_val_1505
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_69_variedad__especie__tipo_val_603
@@ -173876,7 +172875,6 @@ msgid "MARAVILHA DOS MERCADOS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_320
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_590_variedad__especie__tipo_val_998
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_82_variedad__especie__tipo_val_1167
 msgid "MARAVILLA"
@@ -175946,7 +174944,6 @@ msgid "MARWAN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_321
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_165
 msgid "MARWE"
 msgstr ""
@@ -175995,11 +174992,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_4544
 msgid "MARYLU"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_322
-msgid "MARYMAR"
 msgstr ""
 
 #. module: base_ter
@@ -177690,11 +176682,6 @@ msgid "MATTEO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_323
-msgid "MATTERHORN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_60_variedad__especie__tipo_val_244
 msgid "MATTEUS"
 msgstr ""
@@ -177846,11 +176833,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_644
 msgid "MAURILIO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_324
-msgid "MAURIN MAKEA"
 msgstr ""
 
 #. module: base_ter
@@ -178362,7 +177344,6 @@ msgid "MAYEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_325
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_160_variedad__especie__tipo_val_380
 msgid "MAYFAIR"
 msgstr ""
@@ -178875,7 +177856,6 @@ msgid "MEDALISTKA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_326
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_163_variedad__especie__tipo_val_415
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_4619
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_80_variedad__especie__tipo_val_298
@@ -179255,11 +178235,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_304_variedad__especie__tipo_val_77
 msgid "MEEHO 70 DAYS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_327
-msgid "MEEKER"
 msgstr ""
 
 #. module: base_ter
@@ -181317,11 +180292,6 @@ msgid "MESEMBRINE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_328
-msgid "MESERAU"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_4676
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_832
 msgid "MESETA"
@@ -182474,7 +181444,6 @@ msgid "MICHELLA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_329
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1442
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_838
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_1036
@@ -183213,7 +182182,6 @@ msgid "MILSEI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_330
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_590_variedad__especie__tipo_val_1050
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_82_variedad__especie__tipo_val_1226
 msgid "MILTON"
@@ -183989,11 +182957,6 @@ msgid "MIRAKO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_331
-msgid "MIRAL"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_189_variedad__especie__tipo_val_118
 msgid "MIRALETA"
 msgstr ""
@@ -184497,11 +183460,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_49_variedad__especie__tipo_val_693
 msgid "MISTIK"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_332
-msgid "MISTIKA"
 msgstr ""
 
 #. module: base_ter
@@ -187043,7 +186001,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_527
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_333
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_163_variedad__especie__tipo_val_441
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_579_variedad__especie__tipo_val_29
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_1066
@@ -187975,7 +186932,6 @@ msgid "MOTTO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_334
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_1069
 msgid "MOTUEKA"
 msgstr ""
@@ -188220,16 +187176,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_535
 msgid "MP 13005 7"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_335
-msgid "MPI 53.412.1"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_336
-msgid "MPI 53.430.3"
 msgstr ""
 
 #. module: base_ter
@@ -188905,11 +187851,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_4961
 msgid "MULTIPLO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_337
-msgid "MULTIRASPA"
 msgstr ""
 
 #. module: base_ter
@@ -191100,11 +190041,6 @@ msgid "Myrtus spp."
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_338
-msgid "MÁJA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_3729
 msgid "MÁLIA"
 msgstr ""
@@ -191939,11 +190875,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_1686
 msgid "NAGYKÚTI"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_339
-msgid "NAGYMAROSI"
 msgstr ""
 
 #. module: base_ter
@@ -192910,11 +191841,6 @@ msgid "NATA¿A"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_340
-msgid "NATCHEZ"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_5044
 msgid "NATERO"
 msgstr ""
@@ -193108,7 +192034,6 @@ msgid "NAVACERRADA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_341
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_347_variedad__especie__tipo_val_4
 msgid "NAVAHO"
 msgstr ""
@@ -193351,7 +192276,6 @@ msgid "NAWIGATOR"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_342
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1546
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_521_variedad__especie__tipo_val_201
 msgid "NAWOJKA"
@@ -195188,11 +194112,6 @@ msgid "NEUFINA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_343
-msgid "NEUHEIT II"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1562
 msgid "NEURITA"
 msgstr ""
@@ -195396,11 +194315,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_548
 msgid "NEWAPHOUGH"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_344
-msgid "NEWBURGH"
 msgstr ""
 
 #. module: base_ter
@@ -196579,13 +195493,11 @@ msgid "NMB1101"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_345
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_172
 msgid "NN08002"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_346
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_173
 msgid "NN12026"
 msgstr ""
@@ -197064,7 +195976,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_147_shortcycle_forestry_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_147_unharvested_zone_cereals_legumes_oilseed_v
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_147_vinificable_val_1
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_admisible_ayudas_asociada_val_1
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_aromatic_condiment_medicinal_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_cropland_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_direct_sowing_val
@@ -197078,7 +195989,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_shell_fruits_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_shortcycle_forestry_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_unharvested_zone_cereals_legumes_oilseed_v
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_vinificable_val_1
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_14_admisible_ayudas_asociada_val_1
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_14_aromatic_condiment_medicinal_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_14_forest_val
@@ -211159,7 +210069,6 @@ msgid "NOBILIS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_347
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_174
 msgid "NOBILITY"
 msgstr ""
@@ -211547,11 +210456,6 @@ msgid "NOORSUN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_348
-msgid "NOOTKA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_5180
 msgid "NOPI"
 msgstr ""
@@ -211672,11 +210576,6 @@ msgid "NORDLYS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_349
-msgid "NORDMARK"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_86_variedad__especie__tipo_val_83
 msgid "NORDRIA 3"
 msgstr ""
@@ -211710,11 +210609,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_484_variedad__especie__tipo_val_70
 msgid "NORFOLK CUELLO VIOLETA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_350
-msgid "NORFOLK GIANT"
 msgstr ""
 
 #. module: base_ter
@@ -211845,18 +210739,8 @@ msgid "NORMY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_351
-msgid "NORNA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_689
 msgid "NOROIT"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_352
-msgid "NORPRINS"
 msgstr ""
 
 #. module: base_ter
@@ -212550,7 +211434,6 @@ msgid "NR. 120"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_353
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_176
 msgid "NR7"
 msgstr ""
@@ -213967,7 +212850,6 @@ msgid "NXH213CLS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_354
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_178
 msgid "NY ONE"
 msgstr ""
@@ -214044,7 +212926,6 @@ msgid "NYSTED"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_355
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_179
 msgid "NYTWO"
 msgstr ""
@@ -214052,11 +212933,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_49_variedad__especie__tipo_val_752
 msgid "NYÍREGYHÁZI TARKA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_356
-msgid "NZEH"
 msgstr ""
 
 #. module: base_ter
@@ -214851,7 +213727,6 @@ msgid "OCTAVE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_357
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_1744
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1601
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_581
@@ -215515,11 +214390,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_3828
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_69_variedad__especie__tipo_val_704
 msgid "OLAF"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_358
-msgid "OLALLIE"
 msgstr ""
 
 #. module: base_ter
@@ -216388,7 +215258,6 @@ msgid "ONTARA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_359
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_174_variedad__especie__tipo_val_101
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_5304
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_49_variedad__especie__tipo_val_763
@@ -216466,7 +215335,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_138_variedad__especie__tipo_val_46
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_360
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_163_variedad__especie__tipo_val_484
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_164_variedad__especie__tipo_val_43
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_183_variedad__especie__tipo_val_232
@@ -217016,11 +215884,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_5337
 msgid "ORANGE MAKO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_361
-msgid "ORANGE MARIE"
 msgstr ""
 
 #. module: base_ter
@@ -218403,7 +217266,6 @@ msgid "OSADO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_362
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_724
 msgid "OSAGE"
 msgstr ""
@@ -219031,7 +217893,6 @@ msgid "OTÍ­K"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_363
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_347_variedad__especie__tipo_val_5
 msgid "OUACHITA"
 msgstr ""
@@ -219195,7 +218056,6 @@ msgid "OVATIO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_364
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_1814
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1646
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_424
@@ -222589,13 +221449,11 @@ msgid "PACIFIC 2000"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_365
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_185
 msgid "PACIFIC DELUXE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_366
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_186
 msgid "PACIFIC GEMA"
 msgstr ""
@@ -222611,18 +221469,8 @@ msgid "PACIFIC GRAZE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_367
-msgid "PACIFIC MAJESTY"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_202
 msgid "PACIFIC RED"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_368
-msgid "PACIFIC ROYALE"
 msgstr ""
 
 #. module: base_ter
@@ -224373,7 +223221,6 @@ msgid "PARAFIN MIX"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_369
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_1876
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_431
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_187
@@ -224631,7 +223478,6 @@ msgid "PARIPA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_370
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_188
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_1_variedad__especie__tipo_val_1770
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_958
@@ -225803,23 +224649,11 @@ msgid "PBB 1473"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_371
-msgid "PBB 1616T"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_372
-msgid "PBBLACK2215-60"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_373
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_190
 msgid "PBBRSP1348"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_374
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_191
 msgid "PBBRSP1381"
 msgstr ""
@@ -225940,7 +224774,6 @@ msgid "PEARDROPS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_375
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_190_variedad__especie__tipo_val_174
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_192
 msgid "PEARL"
@@ -226024,21 +224857,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_218_variedad__especie__tipo_val_129
 msgid "PECHO DE REINA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_376
-msgid "PECHTS GIGANT"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_377
-msgid "PECHTS HERBSTFREUDE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_378
-msgid "PECHTS RECORD"
 msgstr ""
 
 #. module: base_ter
@@ -228157,11 +226975,6 @@ msgid "PHICO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_379
-msgid "PHILADELPHIA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_35_variedad__especie__tipo_val_1266
 msgid "PHILAE"
 msgstr ""
@@ -228430,11 +227243,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_7_variedad__especie__tipo_val_226
 msgid "PHYLLIS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_380
-msgid "PHYLLIS KING"
 msgstr ""
 
 #. module: base_ter
@@ -230799,16 +229607,6 @@ msgid "PL 700"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_381
-msgid "PLABLACK 1401"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_382
-msgid "PLABLACK 15157"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_106_variedad__especie__tipo_val_325
 msgid "PLABLANEC"
 msgstr ""
@@ -231041,19 +229839,16 @@ msgid "PLANTUS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_383
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_193
 msgid "PLAPINK 0740"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_384
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_194
 msgid "PLAPINK 1004"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_385
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_195
 msgid "PLAPINK 1304"
 msgstr ""
@@ -232211,7 +231006,6 @@ msgid "POEM"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_386
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_199
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_991
 msgid "POEMAT"
@@ -232325,7 +231119,6 @@ msgid "POKORA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_387
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_933
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_200
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_5772
@@ -232345,7 +231138,6 @@ msgid "POLAN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_388
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_512_variedad__especie__tipo_val_26
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_555_variedad__especie__tipo_val_158
 msgid "POLANA"
@@ -232373,7 +231165,6 @@ msgid "POLANOWSKA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_389
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_169_variedad__especie__tipo_val_103
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_172_variedad__especie__tipo_val_452
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_484_variedad__especie__tipo_val_81
@@ -232465,11 +231256,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_60_variedad__especie__tipo_val_319
 msgid "POLESANA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_390
-msgid "POLESIE"
 msgstr ""
 
 #. module: base_ter
@@ -232576,7 +231362,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_593
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_219
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_391
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_158_variedad__especie__tipo_val_89
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_162_variedad__especie__tipo_val_305
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_201
@@ -232702,7 +231487,6 @@ msgid "POLONAIS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_392
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_938
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_202
 msgid "POLONEZ"
@@ -233351,7 +232135,6 @@ msgid "PORANEK"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_393
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_203
 msgid "PORANNA ROSA"
 msgstr ""
@@ -234027,11 +232810,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_5826
 msgid "POZZANO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_394
-msgid "PPBLACK1832-16"
 msgstr ""
 
 #. module: base_ter
@@ -235497,11 +234275,6 @@ msgid "PRETTY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_395
-msgid "PREUßEN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_520_variedad__especie__tipo_val_64
 msgid "PREVAL"
 msgstr ""
@@ -235802,7 +234575,6 @@ msgid "PRIMAMOUR"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_396
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_778
 msgid "PRIMANA"
 msgstr ""
@@ -237507,11 +236279,6 @@ msgid "PROLYCO 2"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_397
-msgid "PROMA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_69_variedad__especie__tipo_val_756
 msgid "PROMED"
 msgstr ""
@@ -237563,11 +236330,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_4499
 msgid "PROMI"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_398
-msgid "PROMILOY"
 msgstr ""
 
 #. module: base_ter
@@ -238112,11 +236874,6 @@ msgid "PROXY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_399
-msgid "PRPLOP936"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_863_c_upov_val
 msgid "PRTNC"
 msgstr ""
@@ -238507,11 +237264,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_205
 msgid "PS-15.031-85"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_400
-msgid "PS-BK3-17.006-13"
 msgstr ""
 
 #. module: base_ter
@@ -239038,11 +237790,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_1254
 msgid "PUIKULA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_401
-msgid "PUJALLUP"
 msgstr ""
 
 #. module: base_ter
@@ -240196,11 +238943,6 @@ msgid "Parcel Partner"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.model,name:base_ter.model_ter_parcel_partnerlink
-msgid "Parcel Partner Link"
-msgstr ""
-
-#. module: base_ter
 #: model:ir.actions.report,name:base_ter.action_parcel_partner_report
 msgid "Parcel Partner Report"
 msgstr ""
@@ -240323,6 +239065,11 @@ msgstr ""
 #: model:ir.model,name:base_ter.model_ter_profile
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 msgid "Partner Profile"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.model,name:base_ter.model_ter_parcel_partnerlink
+msgid "Partner of parcel"
 msgstr ""
 
 #. module: base_ter
@@ -243540,11 +242287,6 @@ msgid "QUALI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_402
-msgid "QUALICUM"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_3_variedad__especie__tipo_val_490
 msgid "QUALIDOU"
 msgstr ""
@@ -244465,19 +243207,16 @@ msgid "R.S.B. 1"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_403
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_206
 msgid "R1307"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_404
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_207
 msgid "R1316"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_405
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_208
 msgid "R1318"
 msgstr ""
@@ -244488,13 +243227,11 @@ msgid "R1377"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_406
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_210
 msgid "R1413"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_407
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_211
 msgid "R1490"
 msgstr ""
@@ -244849,7 +243586,6 @@ msgid "RADIAN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_408
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_216
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_6022
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_512_variedad__especie__tipo_val_28
@@ -244984,7 +243720,6 @@ msgid "RADVILIAI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_409
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_217
 msgid "RADZIEJOWA"
 msgstr ""
@@ -245086,7 +243821,6 @@ msgid "RAFIKA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_410
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_218
 msgid "RAFIKI"
 msgstr ""
@@ -245124,24 +243858,8 @@ msgid "RAFTING"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_411
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_219
 msgid "RAFZAQU"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_412
-msgid "RAFZELSA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_413
-msgid "RAFZETER"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_414
-msgid "RAFZMACH"
 msgstr ""
 
 #. module: base_ter
@@ -247116,7 +245834,6 @@ msgid "RED ALERT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_415
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_667
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_221
 msgid "RED ANGEL"
@@ -248530,7 +247247,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_105_variedad__especie__tipo_val_717
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_416
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_2101
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_720
 msgid "REDWING"
@@ -248589,11 +247305,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_6180
 msgid "REFERANCE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_417
-msgid "REFLAMBA"
 msgstr ""
 
 #. module: base_ter
@@ -248833,7 +247544,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_102_variedad__especie__tipo_val_593
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_240
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_418
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_474
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_163_variedad__especie__tipo_val_555
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_994
@@ -249320,7 +248030,6 @@ msgid "RELAXX"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_419
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_521_variedad__especie__tipo_val_229
 msgid "RELEVANT"
 msgstr ""
@@ -249786,11 +248495,6 @@ msgid "REQUIN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_420
-msgid "RESA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_6216
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_815
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_557_variedad__especie__tipo_val_24
@@ -250089,11 +248793,6 @@ msgid "RETZER GOLD"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_421
-msgid "REUBEN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_6230
 msgid "REUS"
 msgstr ""
@@ -250112,11 +248811,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_508_variedad__especie__tipo_val_118
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_1042
 msgid "REVANCHE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_422
-msgid "REVEILLE"
 msgstr ""
 
 #. module: base_ter
@@ -253922,11 +252616,6 @@ msgid "RIEL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_423
-msgid "RIESEN INDUSTRIE"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_190_variedad__especie__tipo_val_204
 msgid "RIESEN VON ASPERN"
 msgstr ""
@@ -255281,11 +253970,6 @@ msgid "ROCIGALGO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_424
-msgid "ROCINA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1851
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_741
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_216_variedad__especie__tipo_val_209
@@ -255434,11 +254118,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_99_variedad__especie__tipo_val_1320
 msgid "RODE PIPO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_425
-msgid "RODE RADBOUD"
 msgstr ""
 
 #. module: base_ter
@@ -256319,7 +254998,6 @@ msgid "ROME"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_426
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_226
 msgid "ROME BRIGHT"
 msgstr ""
@@ -257258,11 +255936,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_321_variedad__especie__tipo_val_73
 msgid "ROSE D'HIVER DE CHINE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_427
-msgid "ROSE DE CÔTE D'OR"
 msgstr ""
 
 #. module: base_ter
@@ -258364,11 +257037,6 @@ msgid "ROYAL ROUSSILLON"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_428
-msgid "ROYAL SCOTT"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_105_variedad__especie__tipo_val_730
 msgid "ROYAL SUMMER"
 msgstr ""
@@ -258429,7 +257097,6 @@ msgid "ROYALTON"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_429
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_6450
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_326_variedad__especie__tipo_val_193
 msgid "ROYALTY"
@@ -258782,11 +257449,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_1015
 msgid "RUBA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_430
-msgid "RUBACA"
 msgstr ""
 
 #. module: base_ter
@@ -259265,7 +257927,6 @@ msgid "RUBY VALENCIA SL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_431
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_228
 msgid "RUBYFALL"
 msgstr ""
@@ -259321,11 +257982,6 @@ msgid "RUCA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_432
-msgid "RUCAMI"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_4804
 msgid "RUCANO"
 msgstr ""
@@ -259348,11 +258004,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_4805
 msgid "RUCOW"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_433
-msgid "RUCZAJ"
 msgstr ""
 
 #. module: base_ter
@@ -259752,16 +258403,6 @@ msgid "RUMEX_ATS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_434
-msgid "RUMILO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_435
-msgid "RUMILOBA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1919
 msgid "RUMINA"
 msgstr ""
@@ -259769,11 +258410,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_13_variedad__especie__tipo_val_285
 msgid "RUMIX"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_436
-msgid "RUMLA"
 msgstr ""
 
 #. module: base_ter
@@ -259862,7 +258498,6 @@ msgid "RUSA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_437
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_1_variedad__especie__tipo_val_2074
 msgid "RUSALKA"
 msgstr ""
@@ -259885,11 +258520,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_2192
 msgid "RUSH"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_438
-msgid "RUSILVA"
 msgstr ""
 
 #. module: base_ter
@@ -260086,11 +258716,6 @@ msgid "RUTOBI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_439
-msgid "RUTRAGO"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_6507
 msgid "RUTULIAI"
 msgstr ""
@@ -260264,14 +258889,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_321_latin_val
 msgid "Raphanus sativus var. niger"
-msgstr ""
-
-#. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__rating_ids
-#: model:ir.model.fields,field_description:base_ter.field_ter_property__rating_ids
-#: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__rating_ids
-#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__rating_ids
-msgid "Ratings"
 msgstr ""
 
 #. module: base_ter
@@ -260845,7 +259462,6 @@ msgid "SAANA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_440
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_229
 msgid "SAANICH"
 msgstr ""
@@ -261533,11 +260149,6 @@ msgid "SAJAMA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_441
-msgid "SAJANA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_218_variedad__especie__tipo_val_146
 msgid "SAJOLA DE L´ANOIA"
 msgstr ""
@@ -262112,11 +260723,6 @@ msgid "SALVIO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_442
-msgid "SALVIRASPA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_1101
 msgid "SALVIS"
 msgstr ""
@@ -262642,7 +261248,6 @@ msgid "SAN PIERO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_443
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_230
 msgid "SAN RAFAEL"
 msgstr ""
@@ -262859,7 +261464,6 @@ msgid "SANDPIPER SMART"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_444
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_2218
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_783
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_1041
@@ -263243,7 +261847,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_744
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_445
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_231
 msgid "SANTA CATALINA"
 msgstr ""
@@ -263254,7 +261857,6 @@ msgid "SANTA CHIARA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_446
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_232
 msgid "SANTA CLARA"
 msgstr ""
@@ -263327,7 +261929,6 @@ msgid "SANTA ROSA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_447
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_233
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_207_variedad__especie__tipo_val_45
 msgid "SANTA TERESA"
@@ -263774,7 +262375,6 @@ msgid "SAPORRO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_448
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_792
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_235
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_859
@@ -263840,7 +262440,6 @@ msgid "SARAEN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_449
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_236
 msgid "SARAFINA"
 msgstr ""
@@ -264277,7 +262876,6 @@ msgid "SATINA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_450
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1962
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_237
 msgid "SATINE"
@@ -264715,18 +263313,8 @@ msgid "SAXA 3"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_451
-msgid "SAXA BLISS"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_190_variedad__especie__tipo_val_243
 msgid "SAXA POLANA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_452
-msgid "SAXA REKORD"
 msgstr ""
 
 #. module: base_ter
@@ -265253,11 +263841,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_1_variedad__especie__tipo_val_2113
 msgid "SCHWÄBISCHER VEIT DICKKOPF"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_453
-msgid "SCHÖNEMANN"
 msgstr ""
 
 #. module: base_ter
@@ -266008,11 +264591,6 @@ msgid "SELECTIE AKELEI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_454
-msgid "SELECTIE EVERSDIJK"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_2247
 msgid "SELECTO"
 msgstr ""
@@ -266477,7 +265055,6 @@ msgid "SENDERO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_455
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_1980
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_6757
 msgid "SENECA"
@@ -266698,11 +265275,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_172_variedad__especie__tipo_val_519
 msgid "SEPTDOR"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_456
-msgid "SEPTEMBER"
 msgstr ""
 
 #. module: base_ter
@@ -267937,7 +266509,6 @@ msgid "SHANGORE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_457
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_172_variedad__especie__tipo_val_521
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_239
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_6801
@@ -268800,7 +267371,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_147_integrated_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_147_permanent_crops_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_147_woody_val
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_integrado_val_1
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_integrated_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_permanent_crops_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_woody_val
@@ -272085,7 +270655,6 @@ msgid "SILVA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_458
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_76_variedad__especie__tipo_val_8
 msgid "SILVAN"
 msgstr ""
@@ -272532,7 +271101,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_142_variedad__especie__tipo_val_1
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_143_variedad__especie__tipo_val_1
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_147_variedad__especie__tipo_val_8
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_459
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_14_variedad__especie__tipo_val_1
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_151_variedad__especie__tipo_val_150
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_2288
@@ -274197,7 +272765,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_261
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_460
 msgid "SKEENA"
 msgstr ""
 
@@ -274361,7 +272928,6 @@ msgid "SKYDANCER"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_461
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_242
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_33_variedad__especie__tipo_val_1686
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_35_variedad__especie__tipo_val_1509
@@ -274593,11 +273159,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_172_variedad__especie__tipo_val_530
 msgid "SLAWDENA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_462
-msgid "SLEEPING BEAUTY"
 msgstr ""
 
 #. module: base_ter
@@ -276587,7 +275148,6 @@ msgid "SOKINTO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_463
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_243
 msgid "SOKOLICA"
 msgstr ""
@@ -278797,7 +277357,6 @@ msgid "SPI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_464
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_183_variedad__especie__tipo_val_336
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_7015
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_590_variedad__especie__tipo_val_1411
@@ -280000,18 +278559,8 @@ msgid "ST. ANDREAS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_465
-msgid "ST. JOHAN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_111_variedad__especie__tipo_val_200
 msgid "ST. JULIEN A"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_466
-msgid "ST. PETER"
 msgstr ""
 
 #. module: base_ter
@@ -281314,11 +279863,6 @@ msgid "STINGRAY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_467
-msgid "STIORA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type,name:base_ter.ter_use_type_cultivo_810
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_810_c_upov_val
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_932_variedad__especie__tipo_val_153
@@ -281574,7 +280118,6 @@ msgid "STREGONTA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_468
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_246
 msgid "STREIB 2A"
 msgstr ""
@@ -281905,11 +280448,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_860
 msgid "STUTGARTSKÁ"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_469
-msgid "STUTTGART"
 msgstr ""
 
 #. module: base_ter
@@ -282936,11 +281474,6 @@ msgid "SUCRINE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_470
-msgid "SUCRÉE DE METZ"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_109_variedad__especie__tipo_val_783
 msgid "SUCU"
 msgstr ""
@@ -283066,7 +281599,6 @@ msgid "SUFIA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_471
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_247
 msgid "SUGANA"
 msgstr ""
@@ -283826,7 +282358,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_286
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_472
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_865
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_7120
 msgid "SUMMIT"
@@ -283852,11 +282383,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_946
 msgid "SUMO"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_473
-msgid "SUMO 2"
 msgstr ""
 
 #. module: base_ter
@@ -284041,11 +282567,6 @@ msgid "SUNBELT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_474
-msgid "SUNBERRY"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_5196
 msgid "SUNBIRD"
 msgstr ""
@@ -284209,7 +282730,6 @@ msgid "SUNGOAL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_475
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_248
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_7132
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_212_variedad__especie__tipo_val_81
@@ -284668,11 +283188,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_105_variedad__especie__tipo_val_803
 msgid "SUPERIOR GOLDEN CREST"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_476
-msgid "SUPERLATIV"
 msgstr ""
 
 #. module: base_ter
@@ -292838,7 +291353,6 @@ msgid "SÜßE DICKE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_477
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_249
 msgid "T 07 L6"
 msgstr ""
@@ -293101,7 +291615,6 @@ msgid "TADEUS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_478
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_250
 msgid "TADMOR"
 msgstr ""
@@ -293748,11 +292261,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_971
 msgid "TAMARON"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_479
-msgid "TAMBAR"
 msgstr ""
 
 #. module: base_ter
@@ -294968,17 +293476,11 @@ msgid "TAYBA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_480
-msgid "TAYBERRY"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_7324
 msgid "TAYGETE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_481
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_578
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_163_variedad__especie__tipo_val_651
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_7325
@@ -294989,11 +293491,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_49_variedad__especie__tipo_val_1061
 msgid "TAYLOR'S HORTICULTURAL"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_482
-msgid "TAYLORS FRUCHTBARE"
 msgstr ""
 
 #. module: base_ter
@@ -295128,7 +293625,6 @@ msgid "TDE 3 (TAHOE GOLD)"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_483
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_1259
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_80_variedad__especie__tipo_val_429
 msgid "TEA"
@@ -297129,11 +295625,6 @@ msgid "THE CZAR"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_484
-msgid "THE LAFAN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_41_variedad__especie__tipo_val_239
 msgid "THE SUTTON"
 msgstr ""
@@ -297206,11 +295697,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_72_variedad__especie__tipo_val_139
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_916_variedad__especie__tipo_val_43
 msgid "THEODOR"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_485
-msgid "THEODOR REIMERS"
 msgstr ""
 
 #. module: base_ter
@@ -297448,21 +295934,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_183_variedad__especie__tipo_val_361
 msgid "THORIN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_486
-msgid "THORNFREE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_487
-msgid "THORNLESS EVERGREEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_488
-msgid "THORNLESS SLEEPING BEAUTY"
 msgstr ""
 
 #. module: base_ter
@@ -298704,7 +297175,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_104_variedad__especie__tipo_val_185
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_138_variedad__especie__tipo_val_65
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_13_variedad__especie__tipo_val_328
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_489
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_163_variedad__especie__tipo_val_667
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_7454
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_502_variedad__especie__tipo_val_27
@@ -298724,7 +297194,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_13_variedad__especie__tipo_val_329
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_490
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_156_variedad__especie__tipo_val_585
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_252
 msgid "TITANIA"
@@ -299214,11 +297683,6 @@ msgid "TOKYOGOSHO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_491
-msgid "TOLA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_111_variedad__especie__tipo_val_217
 msgid "TOLAR"
 msgstr ""
@@ -299690,11 +298154,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_344_variedad__especie__tipo_val_12
 msgid "TOMMY ATKINS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_492
-msgid "TOMO"
 msgstr ""
 
 #. module: base_ter
@@ -301581,11 +300040,6 @@ msgid "TRAGIANOS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_493
-msgid "TRAGILO"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_183_variedad__especie__tipo_val_365
 msgid "TRAGOPAN"
 msgstr ""
@@ -302174,11 +300628,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_123_variedad__especie__tipo_val_48
 msgid "TRENET"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_494
-msgid "TRENT"
 msgstr ""
 
 #. module: base_ter
@@ -302863,7 +301312,6 @@ msgid "TRINI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_495
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_152_variedad__especie__tipo_val_2578
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_253
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_7709
@@ -302969,11 +301417,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_7713
 msgid "TRIPLE CROP"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_496
-msgid "TRIPLE CROWN"
 msgstr ""
 
 #. module: base_ter
@@ -304387,16 +302830,6 @@ msgid "TUKUMA-5"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_497
-msgid "TULAMEEN"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_498
-msgid "TULAMEEN PLUS"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_110_variedad__especie__tipo_val_300
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_111_variedad__especie__tipo_val_228
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_112_variedad__especie__tipo_val_56
@@ -304503,11 +302936,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_1234
 msgid "TUMI"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_499
-msgid "TUMMELBERRY"
 msgstr ""
 
 #. module: base_ter
@@ -307144,11 +305572,6 @@ msgid "UNE DE MAI"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_500
-msgid "UNERMÜDLICHE"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_7948
 msgid "UNIARCO"
 msgstr ""
@@ -309240,7 +307663,6 @@ msgid "VAJAI 1"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_501
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_254
 msgid "VAJOLET"
 msgstr ""
@@ -309571,7 +307993,6 @@ msgid "VALENTHIA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_502
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_1039
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_1251
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_8001
@@ -309581,7 +308002,6 @@ msgid "VALENTIN"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_503
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_162_variedad__especie__tipo_val_385
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_5616
 msgid "VALENTINA"
@@ -310521,11 +308941,6 @@ msgid "VARMONA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_504
-msgid "VARNES"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_397_variedad__especie__tipo_val_49
 msgid "VARNUS"
 msgstr ""
@@ -311184,11 +309599,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_153_variedad__especie__tipo_val_1049
 msgid "VENDÔME"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_505
-msgid "VENE"
 msgstr ""
 
 #. module: base_ter
@@ -312345,7 +310755,6 @@ msgid "VERSAILLE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_506
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_256
 msgid "VERSAILLES"
 msgstr ""
@@ -312729,11 +311138,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_80_variedad__especie__tipo_val_450
 msgid "VETA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_507
-msgid "VETEN"
 msgstr ""
 
 #. module: base_ter
@@ -313637,7 +312041,6 @@ msgid "VIKI ZEL"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_508
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_5649
 msgid "VIKING"
 msgstr ""
@@ -313673,11 +312076,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_165_variedad__especie__tipo_val_1287
 msgid "VIKTORIE"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_509
-msgid "VIKTORIJA"
 msgstr ""
 
 #. module: base_ter
@@ -314578,7 +312976,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_111_variedad__especie__tipo_val_246
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_510
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_157_variedad__especie__tipo_val_962
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_259
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_8149
@@ -315225,11 +313622,6 @@ msgid "VIZCAINO"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_511
-msgid "VIZIJA"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_155_variedad__especie__tipo_val_2302
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_524_variedad__especie__tipo_val_228
 msgid "VIZIR"
@@ -315770,11 +314162,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_151_variedad__especie__tipo_val_167
 msgid "VOLUTUS"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_512
-msgid "VON"
 msgstr ""
 
 #. module: base_ter
@@ -317292,7 +315679,6 @@ msgstr ""
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_142_vinificable
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_143_vinificable
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_147_vinificable
-#: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_149_vinificable
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_14_vinificable
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_151_vinificable
 #: model:ter.use_type.attribute,name:base_ter.ter_attr_cultivo_152_vinificable
@@ -318392,7 +316778,6 @@ msgid "WAINWRIGHT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_513
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_262
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_5683
 msgid "WAKEFIELD"
@@ -318750,7 +317135,6 @@ msgid "WATERWORKS"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_514
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_8229
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_1325
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_69_variedad__especie__tipo_val_997
@@ -318833,11 +317217,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_111_variedad__especie__tipo_val_257
 msgid "WAZONOVA RENKLÓDA"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_515
-msgid "WCA-V2"
 msgstr ""
 
 #. module: base_ter
@@ -318982,7 +317361,6 @@ msgid "WEIROOT 720"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_516
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_263
 msgid "WEIRULA"
 msgstr ""
@@ -319075,7 +317453,6 @@ msgid "WENER WITTE"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_517
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_264
 msgid "WENGI"
 msgstr ""
@@ -319727,18 +318104,8 @@ msgid "WILKING"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_518
-msgid "WILKRAN"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_556_variedad__especie__tipo_val_124
 msgid "WILL"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_519
-msgid "WILLAMETTE"
 msgstr ""
 
 #. module: base_ter
@@ -319760,11 +318127,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_4_variedad__especie__tipo_val_5703
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_5_variedad__especie__tipo_val_1329
 msgid "WILLIAM"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_520
-msgid "WILLIAMETTE"
 msgstr ""
 
 #. module: base_ter
@@ -319812,11 +318174,6 @@ msgstr ""
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_590_variedad__especie__tipo_val_1599
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_82_variedad__especie__tipo_val_1866
 msgid "WILSON"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_521
-msgid "WILSONS FRÜHE"
 msgstr ""
 
 #. module: base_ter
@@ -320956,13 +319313,11 @@ msgid "WSTEGA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_522
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_265
 msgid "WSU 1507"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_523
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_192_variedad__especie__tipo_val_266
 msgid "WSU 1605"
 msgstr ""
@@ -323879,11 +322234,6 @@ msgid "ZAG?OBA"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_524
-msgid "ZAGAJNIK"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_8358
 msgid "ZAGALA"
 msgstr ""
@@ -325047,21 +323397,6 @@ msgid "ZEE LADY"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_525
-msgid "ZEFA 1"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_526
-msgid "ZEFA 2"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_527
-msgid "ZEFA 3"
-msgstr ""
-
-#. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_197_variedad__especie__tipo_val_8384
 msgid "ZEFFIRO"
 msgstr ""
@@ -325233,7 +323568,6 @@ msgid "ZENIT"
 msgstr ""
 
 #. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_528
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_60_variedad__especie__tipo_val_433
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_81_variedad__especie__tipo_val_224
 msgid "ZENITH"
@@ -325522,11 +323856,6 @@ msgstr ""
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_40_variedad__especie__tipo_val_1082
 msgid "ZEUSZ"
-msgstr ""
-
-#. module: base_ter
-#: model:ter.use_type.attribute.value,name:base_ter.ter_attr_cultivo_149_variedad__especie__tipo_val_529
-msgid "ZEVA"
 msgstr ""
 
 #. module: base_ter

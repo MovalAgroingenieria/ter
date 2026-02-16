@@ -305774,12 +305774,12 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
 msgid "Territorial Use"
-msgstr ""
+msgstr "Ús territorial"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_form_view
 msgid "Territorial use type"
-msgstr ""
+msgstr "Tipus d'ús territorial"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_territory
@@ -308909,7 +308909,7 @@ msgstr "Ús de visors GIS"
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_list
 msgid "Use type"
-msgstr ""
+msgstr "Tipus d'ús"
 
 #. module: base_ter
 #: model:ter.use_type.attribute.value,name:base_ter.ter_attr_crop_destination_farming_25
