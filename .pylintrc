@@ -1,6 +1,7 @@
 [MASTER]
 load-plugins=pylint_odoo
 score=n
+ignore=base_ter/data,base_ter/i18n
 init-hook=
     import os, sys;
     here = os.path.dirname(os.path.abspath(__file__));
@@ -22,6 +23,7 @@ valid-odoo-versions=18.0
 # geofolia_json_import: attribute-string-redundant, prefer-env-translation, etc.
 disable=missing-module-docstring,
     duplicate-code,
+    too-complex,
     attribute-string-redundant,
     prefer-env-translation,
     protected-access,

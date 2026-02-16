@@ -53,7 +53,7 @@
                 <field name="region_id"/>
                 <field name="image_128"/>
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_global_click">
                             <div class="o_kanban_image">
                                 <field name="image_128" widget="image" class="o_kanban_image_inner"/>

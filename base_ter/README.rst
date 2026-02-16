@@ -23,11 +23,14 @@ Functionality:
 * Integration with GIS functionalities.
 * **Use Types** (ter.use_type): hierarchical classification for territorial units
   (parcels, properties). Includes:
+
   - Kanban view with color badges (from Color Index field).
   - Stat-buttons to navigate to related Territorial Units (ter.unit),
     Parcels (ter.parcel), and Date Ranges (date.range).
+
 * **Date Ranges** (date.range, when Usable for Unit Use): campaign periods for
   territorial units. Includes:
+
   - Kanban view with colors (from related Use Type).
   - Form view with stat-buttons to navigate to Territorial Units (ter.unit)
     and Parcels (ter.parcel).

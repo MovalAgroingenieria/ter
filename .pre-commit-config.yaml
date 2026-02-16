@@ -40,3 +40,4 @@ repos:
         entry: pylint
         language: system
         types: [ python ]
+        exclude: ^base_ter/data/|^base_ter/i18n/

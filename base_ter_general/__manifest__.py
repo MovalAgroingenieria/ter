@@ -9,10 +9,10 @@
     "author": "Moval Agroingeniería S.L.",
     "license": "AGPL-3",
     "uninstall_hook": "uninstall_hook",
-        "depends": [
-            "base_ter",
-            "queue_job",
-        ],
+    "depends": [
+        "base_ter",
+        "queue_job",
+    ],
     "data": [
         "data/base_ter_general_cron.xml",
         "views/res_config_settings_views.xml",

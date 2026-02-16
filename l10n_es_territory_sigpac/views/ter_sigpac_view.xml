@@ -76,7 +76,7 @@
                 <field name="dn_surface_ha"/>
                 <field name="uso_sigpac"/>
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_global_click">
                             <div class="oe_kanban_details">
                                 <strong class="o_kanban_record_title"><field name="name"/></strong>
@@ -151,11 +151,11 @@
     <record id="ter_sigpac_action" model="ir.actions.act_window">
         <field name="name">SIGPAC enclosures</field>
         <field name="res_model">ter.sigpac</field>
-        <field name="view_mode">kanban,list,form,pivot,graph</field>
+        <field name="view_mode">list,kanban,form,pivot,graph</field>
         <field name="view_ids"
                eval="[(5, 0),
-                      (0, 0, {'view_mode': 'kanban', 'view_id': ref('ter_sigpac_view_kanban')}),
                       (0, 0, {'view_mode': 'list', 'view_id': ref('ter_sigpac_view_tree')}),
+                      (0, 0, {'view_mode': 'kanban', 'view_id': ref('ter_sigpac_view_kanban')}),
                       (0, 0, {'view_mode': 'form', 'view_id': ref('ter_sigpac_view_form')}),
                       (0, 0, {'view_mode': 'pivot', 'view_id': ref('ter_sigpac_view_pivot')}),
                       (0, 0, {'view_mode': 'graph', 'view_id': ref('ter_sigpac_view_graph')})]"/>

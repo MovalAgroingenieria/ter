@@ -44,7 +44,7 @@
                 <field name="alphanum_code"/>
                 <field name="flag_image_64"/>
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_global_click">
                             <div class="o_kanban_image">
                                 <field name="flag_image_64" widget="image" class="o_kanban_image_inner"/>
