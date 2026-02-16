@@ -281,23 +281,25 @@ def _migrate_ter_unit_parcel_ids(env: api.Environment) -> None:
     )
 
 
-def _load_attribute_translations_es(env: api.Environment) -> None:
-    """Load es_ES translations for ter.use_type.attribute and .value name fields."""
-    path = Path(__file__).resolve().parent / "data" / "attribute_translations_es.json"
+def _load_data_translations_es(env: api.Environment) -> None:
+    """Load es_ES translations for all translatable data (use_type, attribute, value, profile)."""
+    path = Path(__file__).resolve().parent / "data" / "data_translations_es.json"
     if not path.exists():
         return
     with open(path, encoding="utf-8") as f:
-        translations = json.load(f)
-    for xmlid, es_value in translations.items():
-        try:
-            record = env.ref(xmlid, raise_if_not_found=False)
-            if record and record._name in (
-                "ter.use_type.attribute",
-                "ter.use_type.attribute.value",
-            ):
-                record.sudo().update_field_translations("name", {"es_ES": es_value})
-        except Exception:
-            continue
+        data = json.load(f)
+    for model_name, block in data.items():
+        field_name = block.get("field", "name")
+        entries = block.get("entries", {})
+        for xmlid, es_value in entries.items():
+            try:
+                record = env.ref(xmlid, raise_if_not_found=False)
+                if record and record._name == model_name:
+                    record.sudo().update_field_translations(
+                        field_name, {"es_ES": es_value}
+                    )
+            except Exception:
+                continue
 
 
 def post_init_hook(env: api.Environment, _registry: Optional[object] = None) -> None:
@@ -307,7 +309,7 @@ def post_init_hook(env: api.Environment, _registry: Optional[object] = None) -> 
     _ensure_ter_unit_sequences(env)
     _migrate_ter_unit_parcel_ids(env)
     env.ref("base.module_base_ter")._update_translations(overwrite=True)
-    _load_attribute_translations_es(env)
+    _load_data_translations_es(env)
 
 
 def uninstall_hook(env: api.Environment, _registry: Optional[object] = None) -> None:
