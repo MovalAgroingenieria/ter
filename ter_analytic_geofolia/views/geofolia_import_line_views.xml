@@ -43,8 +43,7 @@
                   default_order="job_id desc, id asc">
                 <header>
                     <button name="action_apply_selected" type="object"
-                            string="Apply selected" class="btn-primary"
-                            invisible="import_type != 'fields'"/>
+                            string="Apply selected" class="btn-primary"/>
                 </header>
                 <field name="sync_state"/>
                 <field name="sync_message" string="Error / message"/>
