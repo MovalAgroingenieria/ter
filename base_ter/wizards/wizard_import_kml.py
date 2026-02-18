@@ -1,6 +1,13 @@
 # Copyright 2026 Moval Agroingeniería S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
 
+"""
+KML import wizard for cadastral parcels and properties.
+
+Parses KML 2.2 Placemarks with Polygon geometries (WGS84), reprojects to
+EPSG:25830 via PostGIS, and creates ter.parcel or ter.property records.
+"""
+
 import base64
 import re
 import xml.etree.ElementTree as ET
@@ -8,11 +15,20 @@ import xml.etree.ElementTree as ET
 from odoo import fields, models
 from odoo.exceptions import UserError
 
+# KML 2.2 namespace (used for optional namespace-aware parsing).
 KML_NS = "http://www.opengis.net/kml/2.2"
 
 
+# ---------------------------------------------------------------------------
+# KML parsing helpers (namespace-agnostic, robust to whitespace)
+# ---------------------------------------------------------------------------
+
+
 def _find_recursive(parent, local_name):
-    """Find first descendant with given local name (ignoring namespace)."""
+    """Return the first descendant element whose local tag equals `local_name`.
+
+    Namespace is stripped from tags (handles both KML 2.2 prefixed and bare tags).
+    """
     if parent is None:
         return None
     for child in parent.iter():
@@ -23,7 +39,11 @@ def _find_recursive(parent, local_name):
 
 
 def _parse_kml_coordinates(text):
-    """Parse KML coordinates string (lon,lat[,alt] tuples) into list of (lon, lat)."""
+    """Parse KML <coordinates> text into a list of (lon, lat) pairs.
+
+    Expects whitespace/newline-separated "lon,lat[,alt]" tuples; altitude
+    is ignored. Invalid tokens are skipped.
+    """
     if not text or not text.strip():
         return []
     coords = []
@@ -42,7 +62,11 @@ def _parse_kml_coordinates(text):
 
 
 def _coords_to_wkt_polygon(coords):
-    """Build WKT POLYGON from list of (lon, lat) - must be closed (first == last)."""
+    """Build a WKT POLYGON from a list of (lon, lat) vertices.
+
+    If the ring is not closed (first != last), the first point is appended.
+    Returns None if fewer than 3 points.
+    """
     if len(coords) < 3:
         return None
     if coords[0] != coords[-1]:
@@ -52,7 +76,11 @@ def _coords_to_wkt_polygon(coords):
 
 
 def _wkt_4326_to_ewkt_25830(env, wkt_4326):
-    """Convert WKT in EPSG:4326 to EWKT in EPSG:25830 using PostGIS."""
+    """Reproject WKT geometry from EPSG:4326 (WGS84) to EPSG:25830 (ETRS89 / UTM 30N).
+
+    Uses PostGIS ST_Transform. Returns EWKT string including SRID=25830, or None
+    on empty input or transform failure.
+    """
     if not wkt_4326 or not wkt_4326.strip():
         return None
     env.cr.execute(
@@ -67,7 +95,14 @@ def _wkt_4326_to_ewkt_25830(env, wkt_4326):
     return "SRID=25830;%s" % row[0]
 
 
+# ---------------------------------------------------------------------------
+# Transient model: wizard form and import logic
+# ---------------------------------------------------------------------------
+
+
 class WizardImportKml(models.TransientModel):
+    """Import cadastral geometries from KML into Parcels or Properties."""
+
     _name = "wizard.import.kml"
     _description = "Import KML file to Parcels or Properties"
 
@@ -110,9 +145,10 @@ class WizardImportKml(models.TransientModel):
     result_message = fields.Text(readonly=True)
 
     def _parse_kml_placemarks(self):
-        """Parse KML file and yield placemark data.
+        """Parse the uploaded KML and yield one tuple per Placemark with a Polygon.
 
-        Yields (name, description, polygon_wkt_4326) for each Placemark.
+        Yields: (name, description, ewkt_25830) for each valid Placemark.
+        Skips Placemarks without Polygon or with invalid coordinates.
         """
         self.ensure_one()
         if not self.kml_file:
@@ -163,7 +199,10 @@ class WizardImportKml(models.TransientModel):
             yield (name or self.env._("Unnamed"), "", wkt)
 
     def _build_result_message(self, created, errors):
-        """Build result message from created records and errors."""
+        """Build a user-facing summary from created record names and error strings.
+
+        Truncates long lists (first 10 names, first 5 errors) and appends counts.
+        """
         msg_parts = []
         if created:
             records_str = ", ".join(created[:10])
@@ -192,7 +231,11 @@ class WizardImportKml(models.TransientModel):
         )
 
     def _generate_unique_code(self, name, prefix, index, used_codes):
-        """Generate unique code for imported record."""
+        """Generate a unique alphanumeric code for the record, avoiding collisions.
+
+        Uses prefix + name (or fallback), trims to 45 chars, then appends -1, -2, …
+        until the code is not in `used_codes`. Mutates `used_codes` in place.
+        """
         base = (prefix + name) if prefix else (name or "KML-%s" % (index + 1))
         base = (base or "KML-%s" % (index + 1))[:45]
         code = base
@@ -204,7 +247,11 @@ class WizardImportKml(models.TransientModel):
         return code[:50]
 
     def _create_record(self, code, ewkt):
-        """Create parcel or property record and return display name."""
+        """Create one ter.parcel or ter.property from `code` and `ewkt` (EPSG:25830).
+
+        Returns the display_name of the created record. For parcels, optionally
+        sets partner link when partner_id is a holder.
+        """
         if self.target_model == "ter.parcel":
             vals = {
                 "alphanum_code": code,
@@ -238,6 +285,7 @@ class WizardImportKml(models.TransientModel):
         return record.display_name
 
     def action_import(self):
+        """Parse KML, create records, re-open wizard in done state with result."""
         self.ensure_one()
         if not self.municipality_id:
             raise UserError(self.env._("Municipality is required."))

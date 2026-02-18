@@ -92,7 +92,7 @@
 
     <menuitem id="menu_import_kml"
               name="Import KML"
-              parent="menu_territory"
+              parent="menu_configuration"
               action="wizard_import_kml_action"
               sequence="50"
               groups="base_ter.group_ter_import_kml"/>

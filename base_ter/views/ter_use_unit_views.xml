@@ -173,6 +173,11 @@
         <field name="arch" type="xml">
             <form string="Territorial Unit">
                 <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,validated"/>
+                    <button name="action_validate" type="object" string="Lock"
+                            class="btn-primary" invisible="state != 'draft'" title="Lock unit"/>
+                    <button name="action_set_to_draft" type="object" string="Unlock"
+                            class="btn-secondary" invisible="state != 'validated'" title="Unlock unit"/>
                     <button name="action_gis_viewer" type="object" string="GIS Viewer"
                             class="btn-link" invisible="not parcel_id"/>
                     <button name="action_regenerate_image" type="object" string="Regenerate Image"
@@ -181,19 +186,6 @@
                 </header>
                 <sheet>
                     <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="action_validate" type="object"
-                                class="oe_stat_button btn-danger" icon="fa-lock"
-                                invisible="state != 'draft'" title="Lock">
-                            <span>Lock</span>
-                        </button>
-                        <button name="action_set_to_draft" type="object"
-                                class="oe_stat_button btn-success" icon="fa-unlock-alt"
-                                invisible="state != 'validated'" title="Unlock">
-                            <span>Unlock</span>
-                        </button>
-                    </div>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,validated"/>
                     <group>
                         <group string="Identification">
                             <field name="alphanum_code"/>
@@ -206,6 +198,7 @@
                                    readonly="state == 'validated'"/>
                             <field name="farm_property_id" readonly="1"/>
                             <field name="partner_id" readonly="1"/>
+                            <field name="municipality_id" readonly="1"/>
                         </group>
                         <group string="Dates">
                             <field name="date_range_id"
@@ -216,20 +209,7 @@
                             <field name="date_end" readonly="state == 'validated'"/>
                             <field name="validity_state" readonly="1"/>
                         </group>
-                    </group>
-                    <group string="Areas">
-                        <group>
-                            <field name="area_gis_ha"/>
-                            <field name="area_official"/>
-                        </group>
-                        <group>
-                            <field name="area_parcels"/>
-                            <field name="area_unit_name" invisible="1"/>
-                        </group>
-                    </group>
-
-                    <group string="GIS">
-                        <group>
+                        <group string="Aerial image and GIS">
                             <div class="text-center mb-3">
                                 <field name="parcel_image_1920" widget="image"
                                        options="{'preview_image': 'parcel_aerial_image_shown_256', 'zoom': true}"/>
@@ -242,8 +222,15 @@
                             <field name="geom_ewkt" placeholder="SRID=25830;POLYGON((...))"
                                    widget="text" readonly="state == 'validated'"/>
                         </group>
+                    </group>
+                    <group string="Areas">
                         <group>
-                            <field name="municipality_id" readonly="1"/>
+                            <field name="area_gis_ha"/>
+                            <field name="area_official"/>
+                        </group>
+                        <group>
+                            <field name="area_parcels"/>
+                            <field name="area_unit_name" invisible="1"/>
                         </group>
                     </group>
                     <notebook>
