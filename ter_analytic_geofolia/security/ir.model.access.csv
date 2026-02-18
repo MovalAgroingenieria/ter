@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_geofolia_import_job,geofolia.import.job,model_geofolia_import_job,group_geofolia_import,1,1,1,1
+access_geofolia_import_line,geofolia.import.line,model_geofolia_import_line,group_geofolia_import,1,1,1,1
+access_geofolia_import_wizard,geofolia.import.wizard,model_geofolia_import_wizard,group_geofolia_import,1,0,1,0
+access_geofolia_import_product_line,geofolia.import.product.line,model_geofolia_import_product_line,base.group_user,1,1,1,1
+access_geofolia_import_employee_line,geofolia.import.employee.line,model_geofolia_import_employee_line,base.group_user,1,1,1,1
+access_geofolia_import_partner_line,geofolia.import.partner.line,model_geofolia_import_partner_line,base.group_user,1,1,1,1
+access_geofolia_import_harvested_product_line,geofolia.import.harvested.product.line,model_geofolia_import_harvested_product_line,base.group_user,1,1,1,1
+access_geofolia_import_equipment_line,geofolia.import.equipment.line,model_geofolia_import_equipment_line,base.group_user,1,1,1,1
+access_geofolia_import_activity_line,geofolia.import.activity.line,model_geofolia_import_activity_line,base.group_user,1,1,1,1
+access_geofolia_import_activity_employee_line,geofolia.import.activity.employee.line,model_geofolia_import_activity_employee_line,base.group_user,1,1,1,1

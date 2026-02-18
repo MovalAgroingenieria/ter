@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_geofolia_import_activity_line_search" model="ir.ui.view">
+        <field name="name">geofolia.import.activity.line.search</field>
+        <field name="model">geofolia.import.activity.line</field>
+        <field name="arch" type="xml">
+            <search string="Activity Lines">
+                <field name="operation_name"/>
+                <field name="external_id"/>
+                <field name="job_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_job" string="Job" context="{'group_by': 'job_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_geofolia_import_activity_line_list" model="ir.ui.view">
+        <field name="name">geofolia.import.activity.line.list</field>
+        <field name="model">geofolia.import.activity.line</field>
+        <field name="arch" type="xml">
+            <list decoration-success="sync_state in ('created', 'updated')"
+                  decoration-warning="sync_state in ('pending', 'skipped', 'no_action')"
+                  decoration-danger="sync_state == 'error'"
+                  default_order="job_id desc, id asc">
+                <field name="sync_state"/>
+                <field name="sync_message" optional="show"/>
+                <field name="job_id"/>
+                <field name="external_id"/>
+                <field name="operation_name"/>
+                <field name="status_name"/>
+                <field name="starting_date"/>
+                <field name="ending_date"/>
+                <field name="duration_minutes"/>
+                <field name="fsm_order_id" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_geofolia_import_activity_line_form" model="ir.ui.view">
+        <field name="name">geofolia.import.activity.line.form</field>
+        <field name="model">geofolia.import.activity.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="job_id" readonly="1"/>
+                            <field name="sync_state"/>
+                            <field name="sync_message"/>
+                            <field name="external_id"/>
+                            <field name="operation_name"/>
+                            <field name="operation_category"/>
+                            <field name="status_name"/>
+                            <field name="status_code"/>
+                        </group>
+                        <group>
+                            <field name="harvest_year"/>
+                            <field name="starting_date"/>
+                            <field name="ending_date"/>
+                            <field name="duration_minutes"/>
+                            <field name="fsm_order_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_geofolia_import_activity_line" model="ir.actions.act_window">
+        <field name="name">Activity Lines</field>
+        <field name="res_model">geofolia.import.activity.line</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_geofolia_import_activity_line_search"/>
+    </record>
+
+    <menuitem id="menu_geofolia_import_activity_lines"
+              name="Activity Lines"
+              parent="ter_analytic_geofolia.menu_geofolia_import"
+              action="action_geofolia_import_activity_line"
+              groups="group_geofolia_import"
+              sequence="21"/>
+</odoo>

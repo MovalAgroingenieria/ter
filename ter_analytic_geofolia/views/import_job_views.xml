@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_geofolia_import"
+              name="Geofolia"
+              parent="base_ter.menu_configuration_general"
+              groups="group_geofolia_import"/>
+
+    <record id="action_geofolia_import_job" model="ir.actions.act_window">
+        <field name="name">Import Jobs</field>
+        <field name="res_model">geofolia.import.job</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <menuitem id="menu_geofolia_import_jobs"
+              name="Jobs"
+              parent="menu_geofolia_import"
+              action="action_geofolia_import_job"
+              groups="group_geofolia_import"/>
+
+    <record id="view_geofolia_import_job_list" model="ir.ui.view">
+        <field name="name">geofolia.import.job.list</field>
+        <field name="model">geofolia.import.job</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'done' and apply_state == 'done'"
+                  decoration-warning="state == 'done' and apply_state in ('ready', 'partial')"
+                  decoration-danger="state == 'error' or apply_state == 'error'">
+                <field name="name"/>
+                <field name="import_type"/>
+                <field name="state"/>
+                <field name="apply_state" optional="show"/>
+                <field name="line_count"/>
+                <field name="file_name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_geofolia_import_job_kanban" model="ir.ui.view">
+        <field name="name">geofolia.import.job.kanban</field>
+        <field name="model">geofolia.import.job</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column" default_group_by="import_type"
+                    decoration-success="state == 'done' and apply_state == 'done'"
+                    decoration-warning="state == 'done' and apply_state in ('ready', 'partial')"
+                    decoration-danger="state == 'error' or apply_state == 'error'"
+                    decoration-info="state == 'done' and apply_state == 'draft'"
+                    decoration-muted="state == 'draft'">
+                <field name="name"/>
+                <field name="import_type"/>
+                <field name="state"/>
+                <field name="apply_state"/>
+                <field name="file_name"/>
+                <field name="create_date"/>
+                <field name="write_date"/>
+                <field name="line_count"/>
+                <field name="total_count"/>
+                <field name="processed_count"/>
+                <field name="pending_count"/>
+                <field name="error_count"/>
+                <field name="timesheet_count"/>
+                <field name="fsm_order_count"/>
+                <progressbar field="apply_state"
+                             colors='{"done": "success", "ready": "warning", "partial": "warning", "error": "danger", "draft": "muted"}'/>
+                <templates>
+                    <div t-name="card" class="oe_kanban_global_click">
+                        <div class="d-flex flex-column p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <span t-if="record.import_type.raw_value === 'full'" class="badge rounded-pill text-bg-primary">
+                                    <field name="import_type"/>
+                                </span>
+                                <span t-elif="record.import_type.raw_value === 'fields'" class="badge rounded-pill text-bg-info">
+                                    <field name="import_type"/>
+                                </span>
+                                <span t-else="" class="badge rounded-pill text-bg-success">
+                                    <field name="import_type"/>
+                                </span>
+                            </div>
+                            <div class="text-muted small mb-2">
+                                <i class="fa fa-file-o" title="File"/> <field name="file_name"/>
+                            </div>
+                            <div class="d-flex gap-2 flex-wrap mb-2">
+                                <span class="badge text-bg-light border">
+                                    <i class="fa fa-code" title="State"/> <field name="state"/>
+                                </span>
+                                <span class="badge text-bg-light border">
+                                    <i class="fa fa-check-circle" title="Apply state"/> <field name="apply_state"/>
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-between small text-muted mb-2">
+                                <span><i class="fa fa-calendar" title="Create date"/> <field name="create_date" widget="date"/></span>
+                                <span><i class="fa fa-pencil" title="Modification date"/> <field name="write_date" widget="relative"/></span>
+                            </div>
+                            <div class="d-flex gap-2 flex-wrap small">
+                                <span t-if="record.import_type.raw_value === 'full'" class="text-nowrap">
+                                    <i class="fa fa-pie-chart" title="Progress"/> <field name="processed_count"/> / <field name="total_count"/>
+                                </span>
+                                <span t-if="record.timesheet_count.raw_value" class="text-nowrap text-success">
+                                    <i class="fa fa-clock-o" title="Timesheets"/> <field name="timesheet_count"/>
+                                </span>
+                                <span t-if="record.fsm_order_count.raw_value" class="text-nowrap text-info">
+                                    <i class="fa fa-tasks" title="FSM Orders"/> <field name="fsm_order_count"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_geofolia_import_job_form" model="ir.ui.view">
+        <field name="name">geofolia.import.job.form</field>
+        <field name="model">geofolia.import.job</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_parse"
+                            type="object"
+                            string="Parse"
+                            class="btn-primary"
+                            invisible="state == 'done'"/>
+                    <button name="action_apply"
+                            type="object"
+                            string="Apply Fields"
+                            class="btn-primary"
+                            invisible="import_type != 'fields' or state != 'done'"/>
+                    <button name="action_apply"
+                            type="object"
+                            string="Apply All"
+                            class="btn-primary"
+                            invisible="import_type != 'full' or state != 'done'"/>
+                    <button name="action_apply_pending"
+                            type="object"
+                            string="Apply Pending"
+                            invisible="import_type != 'full' or state != 'done'"/>
+                    <button name="action_reprocess"
+                            type="object"
+                            string="Reprocess"
+                            class="btn-secondary"
+                            title="Re-apply pending and error lines. Existing records are updated, not duplicated."
+                            invisible="state != 'done'"/>
+
+                    <label for="state" string="Parse (file → lines)"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,done,error"
+                           options="{'clickable': 1}"/>
+
+                    <label for="apply_state" string="Apply (lines → Odoo)"
+                           invisible="import_type not in ('full', 'fields')"/>
+                    <field name="apply_state" widget="statusbar"
+                           statusbar_visible="draft,ready,partial,done,error"
+                           invisible="import_type not in ('full', 'fields')"
+                           options="{'clickable': 1}"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_created_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-circle"
+                                invisible="import_type != 'fields'">
+                            <field name="processed_count" widget="statinfo" string="Created"/>
+                        </button>
+                        <button name="action_view_error_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exclamation-triangle"
+                                invisible="import_type != 'fields'">
+                            <field name="error_count" widget="statinfo" string="Errors"/>
+                        </button>
+                        <button name="action_view_created_product_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-circle"
+                                invisible="import_type != 'full'">
+                            <field name="product_processed_count" widget="statinfo" string="Products"/>
+                        </button>
+                        <button name="action_view_error_product_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exclamation-triangle"
+                                invisible="import_type != 'full'">
+                            <field name="product_error_count" widget="statinfo" string="Prod err"/>
+                        </button>
+                        <button name="action_view_created_partner_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-circle"
+                                invisible="import_type != 'full'">
+                            <field name="partner_processed_count" widget="statinfo" string="Partners"/>
+                        </button>
+                        <button name="action_view_error_partner_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exclamation-triangle"
+                                invisible="import_type != 'full'">
+                            <field name="partner_error_count" widget="statinfo" string="Part err"/>
+                        </button>
+                        <button name="action_view_created_employee_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-circle"
+                                invisible="import_type != 'full'">
+                            <field name="employee_processed_count" widget="statinfo" string="Employees"/>
+                        </button>
+                        <button name="action_view_error_employee_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exclamation-triangle"
+                                invisible="import_type != 'full'">
+                            <field name="employee_error_count" widget="statinfo" string="Emp err"/>
+                        </button>
+                        <button name="action_view_created_harvested_product_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-circle"
+                                invisible="import_type != 'full'">
+                            <field name="harvested_processed_count" widget="statinfo" string="Harvested"/>
+                        </button>
+                        <button name="action_view_error_harvested_product_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exclamation-triangle"
+                                invisible="import_type != 'full'">
+                            <field name="harvested_error_count" widget="statinfo" string="Harv err"/>
+                        </button>
+                        <button name="action_view_created_equipment_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-circle"
+                                invisible="import_type != 'full'">
+                            <field name="equipment_processed_count" widget="statinfo" string="Equip"/>
+                        </button>
+                        <button name="action_view_error_equipment_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exclamation-triangle"
+                                invisible="import_type != 'full'">
+                            <field name="equipment_error_count" widget="statinfo" string="Equip err"/>
+                        </button>
+                        <button name="action_view_created_activity_employee_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-circle"
+                                invisible="import_type != 'full'">
+                            <field name="activity_employee_processed_count" widget="statinfo" string="Act emp"/>
+                        </button>
+                        <button name="action_view_error_activity_employee_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exclamation-triangle"
+                                invisible="import_type != 'full'">
+                            <field name="activity_employee_error_count" widget="statinfo" string="Act err"/>
+                        </button>
+                        <button name="action_view_timesheet_lines"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-clock-o"
+                                invisible="import_type != 'full'">
+                            <field name="timesheet_count" widget="statinfo" string="Timesheets"/>
+                        </button>
+                        <button name="action_view_fsm_orders"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-tasks"
+                                invisible="import_type != 'full'">
+                            <field name="fsm_order_count" widget="statinfo" string="FSM Orders"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="import_type"/>
+                        <field name="file_name" readonly="1"/>
+                        <field name="file_data" filename="file_name"/>
+                    </group>
+                    <group string="Apply stats" invisible="import_type != 'full'">
+                        <field name="total_count" readonly="1"/>
+                        <field name="pending_count" readonly="1"/>
+                        <field name="processed_count" readonly="1"/>
+                        <field name="error_count" readonly="1"/>
+                    </group>
+
+                    <group string="Information">
+                        <field name="info_json" nolabel="1"/>
+                    </group>
+
+                    <group string="Error" invisible="state != 'error'">
+                        <field name="error" nolabel="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Lines" invisible="import_type == 'full'">
+                            <field name="line_ids"/>
+                        </page>
+                        <page string="Products" invisible="import_type != 'full'">
+                            <field name="product_line_ids"/>
+                        </page>
+                        <page string="Employees" invisible="import_type != 'full'">
+                            <field name="employee_line_ids"/>
+                        </page>
+                        <page string="Partners" invisible="import_type != 'full'">
+                            <field name="partner_line_ids"/>
+                        </page>
+                        <page string="Harvested Products" invisible="import_type != 'full'">
+                            <field name="harvested_product_line_ids"/>
+                        </page>
+                        <page string="Equipments" invisible="import_type != 'full'">
+                            <field name="equipment_line_ids"/>
+                        </page>
+                        <page string="Activities" invisible="import_type != 'full'">
+                            <field name="activity_line_ids"/>
+                            <label for="activity_employee_line_ids" string="Activity employees (apply from here)"/>
+                            <field name="activity_employee_line_ids" nolabel="1"/>
+                        </page>
+                        <page string="Timesheets" invisible="import_type != 'full'">
+                            <field name="timesheet_line_ids" nolabel="1">
+                                <list create="0" delete="0" edit="0">
+                                    <field name="date"/>
+                                    <field name="name"/>
+                                    <field name="unit_amount"/>
+                                    <field name="amount"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_geofolia_import_wizard_menu" model="ir.actions.act_window">
+        <field name="name">New Import</field>
+        <field name="res_model">geofolia.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_geofolia_import_new"
+              name="New Import"
+              parent="menu_geofolia_import"
+              action="action_geofolia_import_wizard_menu"
+              groups="group_geofolia_import"/>
+</odoo>

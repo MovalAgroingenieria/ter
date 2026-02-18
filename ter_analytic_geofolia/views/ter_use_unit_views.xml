@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ter_unit_form_geofolia" model="ir.ui.view">
+        <field name="name">ter.use_unit.form.geofolia</field>
+        <field name="model">ter.use_unit</field>
+        <field name="inherit_id" ref="base_ter.view_ter_unit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="geofolia_external_id" string="Geofolia ID"/>
+                <field name="fsm_location_id" options="{'no_create': True}"/>
+            </xpath>
+            <xpath expr="//page[@name='territorial_use']" position="after">
+                <page string="Geofolia" name="geofolia">
+                    <group string="Geofolia imported data">
+                        <group>
+                            <field name="geofolia_external_id" readonly="1"/>
+                            <field name="geofolia_code"/>
+                            <field name="geofolia_harvest_year"/>
+                            <field name="geofolia_crop_name"/>
+                            <field name="geofolia_city"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_ter_unit_list_geofolia" model="ir.ui.view">
+        <field name="name">ter.use_unit.list.geofolia</field>
+        <field name="model">ter.use_unit</field>
+        <field name="inherit_id" ref="base_ter.view_ter_unit_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="geofolia_external_id" string="Geofolia ID" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_ter_unit_filter_geofolia" model="ir.ui.view">
+        <field name="name">ter.use_unit.search.geofolia</field>
+        <field name="model">ter.use_unit</field>
+        <field name="inherit_id" ref="base_ter.view_ter_unit_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="geofolia_external_id" string="Geofolia ID"/>
+                <filter name="filter_from_geofolia" string="From Geofolia"
+                        domain="[('geofolia_external_id', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

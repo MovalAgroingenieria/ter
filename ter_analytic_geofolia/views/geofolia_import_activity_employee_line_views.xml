@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_geofolia_import_activity_employee_line_search" model="ir.ui.view">
+        <field name="name">geofolia.import.activity.employee.line.search</field>
+        <field name="model">geofolia.import.activity.employee.line</field>
+        <field name="arch" type="xml">
+            <search string="Activity Employee Lines">
+                <field name="employee_name"/>
+                <field name="employee_id_external"/>
+                <field name="job_id"/>
+                <filter name="filter_error" string="Error" domain="[('sync_state', '=', 'error')]"/>
+                <filter name="filter_created" string="Created / Updated" domain="[('sync_state', 'in', ['created', 'updated'])]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_job" string="Job" context="{'group_by': 'job_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_geofolia_import_activity_employee_line_list" model="ir.ui.view">
+        <field name="name">geofolia.import.activity.employee.line.list</field>
+        <field name="model">geofolia.import.activity.employee.line</field>
+        <field name="arch" type="xml">
+            <list decoration-success="sync_state in ('created', 'updated')"
+                  decoration-warning="sync_state in ('pending', 'skipped', 'no_action')"
+                  decoration-danger="sync_state == 'error'"
+                  default_order="job_id desc, id asc">
+                <header>
+                    <button name="action_apply_selected" type="object"
+                            string="Apply selected" class="btn-primary"/>
+                </header>
+                <field name="sync_state"/>
+                <field name="sync_message" optional="show"/>
+                <field name="job_id"/>
+                <field name="activity_line_id" column_invisible="1"/>
+                <field name="employee_name"/>
+                <field name="employee_id_external"/>
+                <field name="employee_time"/>
+                <field name="person_id" optional="hide"/>
+                <field name="analytic_line_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_geofolia_import_activity_employee_line_form" model="ir.ui.view">
+        <field name="name">geofolia.import.activity.employee.line.form</field>
+        <field name="model">geofolia.import.activity.employee.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="job_id" readonly="1"/>
+                            <field name="activity_line_id" readonly="1"/>
+                            <field name="sync_state"/>
+                            <field name="sync_message"/>
+                            <field name="employee_name"/>
+                            <field name="employee_id_external"/>
+                            <field name="employee_time"/>
+                            <field name="person_id"/>
+                            <field name="analytic_line_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_geofolia_import_activity_employee_line" model="ir.actions.act_window">
+        <field name="name">Activity Employee Lines</field>
+        <field name="res_model">geofolia.import.activity.employee.line</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_geofolia_import_activity_employee_line_search"/>
+    </record>
+
+    <menuitem id="menu_geofolia_import_activity_employee_lines"
+              name="Activity Employees"
+              parent="ter_analytic_geofolia.menu_geofolia_import"
+              action="action_geofolia_import_activity_employee_line"
+              groups="group_geofolia_import"
+              sequence="22"/>
+</odoo>
