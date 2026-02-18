@@ -1296,6 +1296,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 }
                 if location:
                     self._field_line_apply_existing_location(location, line, ctx)
+                elif unit:
+                    self._field_line_apply_new_location(line, ctx)
                 else:
                     candidates = FsmLocation.search(
                         [
