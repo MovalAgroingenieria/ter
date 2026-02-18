@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_ter_analytic
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-18 11:19+0000\n"
+"PO-Revision-Date: 2026-02-18 11:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: base_ter_analytic
+#: model:ir.model.fields,field_description:base_ter_analytic.field_ter_use_unit__account_id
+#: model_terms:ir.ui.view,arch_db:base_ter_analytic.view_ter_unit_filter_analytic
+msgid "Analytic Account"
+msgstr "Cuenta analítica"
+
+#. module: base_ter_analytic
+#: model:ir.model.fields,help:base_ter_analytic.field_ter_use_unit__account_id
+msgid "Analytic account for cost/revenue tracking of this territorial unit."
+msgstr ""
+"Cuenta analítica para el seguimiento de costes e ingresos de esta unidad "
+"territorial."
+
+#. module: base_ter_analytic
+#: model:ir.model,name:base_ter_analytic.model_ter_use_unit
+msgid "Ter Use Unit"
+msgstr "Unidad de Uso Territorial"

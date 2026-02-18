@@ -1,0 +1,185 @@
+.o_base_ter_ter_parcel [data-name="alphanum_code"] {
+  text-align: center;
+  width: 140px;
+  min-width: 140px;
+}
+
+.o_base_ter_ter_parcel [data-name="municipality_id"] {
+  width: 135px;
+  min-width: 135px;
+}
+
+.o_base_ter_ter_parcel [data-name="property_id"] {
+  width: 180px;
+  min-width: 180px;
+}
+
+.o_base_ter_ter_parcel [data-name="official_code"] {
+  text-align: center;
+  width: 140px;
+  min-width: 140px;
+}
+
+.o_base_ter_ter_parcel [data-name="area_official"] {
+  text-align: right;
+  width: 160px;
+  min-width: 160px;
+}
+
+.o_list_button {
+  text-align: center;
+  width: 30px;
+}
+
+.o_terparcel_kanban_image {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.o_terunit_kanban_image {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.o_base_ter_res_partner [data-name="partner_code"] {
+  text-align: right;
+  width: 80px;
+  min-width: 80px;
+}
+
+.o_base_ter_res_partner [data-name="vat"] {
+  text-align: center;
+  width: 130px;
+  min-width: 130px;
+}
+
+.o_base_ter_res_partner [data-name="number_of_properties"] {
+  text-align: right;
+  width: 100px;
+  min-width: 100px;
+}
+
+.o_base_ter_res_partner [data-name="number_of_parcels"] {
+  text-align: right;
+  width: 100px;
+  min-width: 100px;
+}
+
+.o_base_ter_res_partner [data-name="area_official_parcels"] {
+  text-align: right;
+  width: 160px;
+  min-width: 160px;
+}
+
+.o_base_ter_ter_profile [data-name="requires_total"] {
+  text-align: center;
+  width: 150px;
+  min-width: 150px;
+}
+
+.o_base_ter_ter_parcel_partnerlink [data-name="is_main"] {
+  text-align: center;
+  width: 150px;
+  min-width: 150px;
+}
+
+.o_base_ter_ter_parcel_partnerlink [data-name="profile_id"] {
+  text-align: center;
+  width: 150px;
+  min-width: 150px;
+}
+
+.o_base_ter_ter_parcel_partnerlink [data-name="percentage"] {
+  text-align: right;
+  width: 160px;
+  min-width: 160px;
+}
+
+.o_base_ter_ter_property [data-name="alphanum_code"] {
+  text-align: left;
+  width: 260px;
+  min-width: 260px;
+}
+
+.o_base_ter_ter_property [data-name="municipality_id"] {
+  width: 180px;
+  min-width: 180px;
+}
+
+.o_base_ter_ter_property [data-name="number_of_parcels"] {
+  text-align: right;
+  width: 100px;
+  min-width: 100px;
+}
+
+.o_base_ter_ter_property [data-name="area_official_parcels"] {
+  text-align: right;
+  width: 160px;
+  min-width: 160px;
+}
+
+.o_terproperty_kanban_image {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.o_base_ter_ter_gis_parcel_model [data-name="aerial_image_small"] {
+  text-align: center;
+  width: 128px;
+  min-width: 128px;
+}
+
+.o_base_ter_ter_gis_parcel_model [data-name="name"] {
+  text-align: center;
+  width: 160px;
+  min-width: 160px;
+}
+
+.o_base_ter_ter_gis_parcel_model [data-name="parcel_id"] {
+  text-align: center;
+  width: 130px;
+  min-width: 130px;
+}
+
+.o_base_ter_ter_gis_parcel_model [data-name="gis_data"] {
+  text-align: center;
+  width: 300px;
+  min-width: 300px;
+}
+
+.o_base_ter_ter_gis_parcel_model [data-name="diff_areas_threshold_exceeded_str"] {
+  text-align: center;
+  width: 100px;
+  min-width: 100px;
+}
+
+.table-no-border-header table {
+  border-top: none !important;
+}
+
+.o_base_ter_ter_parcel_partnerlink_technical [data-name="parcel_id"] {
+  width: 160px;
+  min-width: 160px;
+}
+
+.o_base_ter_ter_parcel_partnerlink_technical [data-name="is_main"] {
+  text-align: center;
+  width: 160px;
+  min-width: 160px;
+}
+
+.o_base_ter_ter_parcel_partnerlink_technical [data-name="profile_id"] {
+  text-align: center;
+  width: 160px;
+  min-width: 160px;
+}
+
+.o_base_ter_ter_parcel_partnerlink_technical [data-name="percentage"] {
+  text-align: center;
+  width: 160px;
+  min-width: 160px;
+}
+
+.o_dialog_container .modal-dialog:has(.o_wizard_set_parcel_code) {
+  max-width: 300px;
+}
