@@ -1683,13 +1683,29 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             )
         return account
 
+    def _get_fsm_location_for_activity(self, activity):
+        """Return fsm.location for activity: from first CropZone PlotId, else company default."""
+        TerUnit = self.env["ter.use_unit"]
+        raw = activity.raw_json or {}
+        crop_zones = raw.get("CropZoneIds") or []
+        if crop_zones and isinstance(crop_zones[0], dict):
+            plot_id = crop_zones[0].get("PlotId")
+            if plot_id:
+                unit = TerUnit.search(
+                    [("geofolia_external_id", "=", str(plot_id))], limit=1
+                )
+                if unit and unit.fsm_location_id:
+                    return unit.fsm_location_id
+        company = getattr(self, "company_id", None) or self.env.company
+        return company.geofolia_default_fsm_location_id
+
     def _get_or_create_fsm_order_for_activity(self, activity):
         """Return or create fsm.order for this activity.
-        Stored on activity.fsm_order_id."""
+        Stored on activity.fsm_order_id.
+        Location: from first CropZone PlotId (if Fields imported) or company default."""
         if activity.fsm_order_id:
             return activity.fsm_order_id
-        company = getattr(self, "company_id", None) or self.env.company
-        location = company.geofolia_default_fsm_location_id
+        location = self._get_fsm_location_for_activity(activity)
         if not location:
             return self.env["fsm.order"]
         order_vals = {

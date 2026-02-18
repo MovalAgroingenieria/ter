@@ -52,6 +52,12 @@ orders, timesheets, or equipment can be linked to the same geography and campaig
 * **fieldservice_timesheet** — Timesheet on FSM orders. Complements our current
   mapping of activity employees → ``account.analytic.line``; could also post
   time to an order linked to the field/location.
+
+**fsm.order creation (Activities):** One fsm.order per activity when applying
+Full import. Location is resolved as: (1) first plot from activity CropZoneIds
+(PlotId → ter.use_unit → fsm.location, requires Fields imported first), or
+(2) company default ``geofolia_default_fsm_location_id``. Configure the default
+in Configuration → Territory → Geofolia if plots are not yet imported.
 * **fieldservice_equipment_*** — If Geofolia Equipments are to be tracked as
   FSM equipment on locations, adding one of these modules allows linking
   equipment to the same ``fsm.location`` we create from Fields.

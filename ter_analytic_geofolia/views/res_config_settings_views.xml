@@ -19,7 +19,7 @@
                     </setting>
                     <setting id="geofolia_default_fsm_location_id"
                              string="Default FSM location (Activities)"
-                             help="Default location for fsm.order created from Geofolia Activities when fieldservice_timesheet is installed.">
+                             help="Fallback location for fsm.order when the activity's plot (CropZoneIds) is not yet imported. If Fields are imported first, the order uses the plot's fsm.location.">
                         <field name="geofolia_default_fsm_location_id" options="{'no_create': True}"/>
                     </setting>
                     <setting id="geofolia_default_harvested_product_id"
