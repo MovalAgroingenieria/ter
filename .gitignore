@@ -9,3 +9,4 @@ __pycache__
 .pydevproject
 
 /base_ter/data/*.py
+/ter_analytic_geofolia/i18n/*.py
