@@ -510,6 +510,16 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return f"{msg}\n\n{tb}"
         return msg
 
+    def _write_line_error_state(self, line, exc):
+        """Write error state to line. On failure (e.g. aborted transaction), rollback and re-raise."""
+        try:
+            line.write(
+                {"sync_state": "error", "sync_message": self._format_exception(exc)}
+            )
+        except Exception:  # noqa: BLE001
+            self.env.cr.rollback()
+            raise exc from None
+
     def _safe_scalar_str(self, val):
         """Coerce value to string for product/partner fields. Avoids tuples/lists
         that cause 'dictionary update sequence element #0 has length 1' errors."""
@@ -1111,23 +1121,47 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 }
             )
             return
-        unit_vals = {
-            "parcel_id": parcel.id,
-            "date_range_id": date_range.id,
-            "date_start": ctx["date_start"],
-            "date_end": ctx["date_end"],
-            "area_official": ctx["area_official"],
-            "name": loc_name,
-            "geofolia_external_id": ctx["ext_id"],
-            "fsm_location_id": location.id,
-            "geofolia_code": ctx.get("geofolia_code"),
-            "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
-            "geofolia_crop_name": ctx.get("geofolia_crop_name"),
-            "geofolia_city": ctx.get("geofolia_city"),
-        }
-        if ctx.get("geom_ewkt"):
-            unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
-        unit = TerUnit.create(unit_vals)
+        ext_id = ctx.get("ext_id")
+        unit = TerUnit.search([("geofolia_external_id", "=", ext_id)], limit=1)
+        if not unit:
+            unit_vals = {
+                "parcel_id": parcel.id,
+                "date_range_id": date_range.id,
+                "date_start": ctx["date_start"],
+                "date_end": ctx["date_end"],
+                "area_official": ctx["area_official"],
+                "name": loc_name,
+                "geofolia_external_id": ext_id,
+                "fsm_location_id": location.id,
+                "geofolia_code": ctx.get("geofolia_code"),
+                "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
+                "geofolia_crop_name": ctx.get("geofolia_crop_name"),
+                "geofolia_city": ctx.get("geofolia_city"),
+            }
+            if ctx.get("geom_ewkt"):
+                unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
+            unit = TerUnit.create(unit_vals)
+        else:
+            unit_vals = {
+                "fsm_location_id": location.id,
+                "area_official": ctx["area_official"],
+                "name": loc_name,
+                "geofolia_code": ctx.get("geofolia_code"),
+                "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
+                "geofolia_crop_name": ctx.get("geofolia_crop_name"),
+                "geofolia_city": ctx.get("geofolia_city"),
+            }
+            if ctx.get("geom_ewkt"):
+                unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
+            if ctx.get("date_start"):
+                unit_vals["date_start"] = ctx["date_start"]
+            if ctx.get("date_end"):
+                unit_vals["date_end"] = ctx["date_end"]
+            if date_range:
+                unit_vals["date_range_id"] = date_range.id
+            if parcel:
+                unit_vals["parcel_id"] = parcel.id
+            unit.write(unit_vals)
         location.ter_use_unit_id = unit.id
         line.write(
             {
@@ -1157,22 +1191,41 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 }
             )
             return
-        unit_vals = {
-            "parcel_id": parcel.id,
-            "date_range_id": date_range.id,
-            "date_start": ctx["date_start"],
-            "date_end": ctx["date_end"],
-            "area_official": ctx["area_official"],
-            "name": loc_name,
-            "geofolia_external_id": ctx["ext_id"],
-            "geofolia_code": ctx.get("geofolia_code"),
-            "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
-            "geofolia_crop_name": ctx.get("geofolia_crop_name"),
-            "geofolia_city": ctx.get("geofolia_city"),
-        }
-        if ctx.get("geom_ewkt"):
-            unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
-        unit = TerUnit.create(unit_vals)
+        ext_id = ctx["ext_id"]
+        unit = TerUnit.search([("geofolia_external_id", "=", ext_id)], limit=1)
+        if not unit:
+            unit_vals = {
+                "parcel_id": parcel.id,
+                "date_range_id": date_range.id,
+                "date_start": ctx["date_start"],
+                "date_end": ctx["date_end"],
+                "area_official": ctx["area_official"],
+                "name": loc_name,
+                "geofolia_external_id": ext_id,
+                "geofolia_code": ctx.get("geofolia_code"),
+                "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
+                "geofolia_crop_name": ctx.get("geofolia_crop_name"),
+                "geofolia_city": ctx.get("geofolia_city"),
+            }
+            if ctx.get("geom_ewkt"):
+                unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
+            unit = TerUnit.create(unit_vals)
+        else:
+            unit_vals = {
+                "parcel_id": parcel.id,
+                "date_range_id": date_range.id,
+                "date_start": ctx["date_start"],
+                "date_end": ctx["date_end"],
+                "area_official": ctx["area_official"],
+                "name": loc_name,
+                "geofolia_code": ctx.get("geofolia_code"),
+                "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
+                "geofolia_crop_name": ctx.get("geofolia_crop_name"),
+                "geofolia_city": ctx.get("geofolia_city"),
+            }
+            if ctx.get("geom_ewkt"):
+                unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
+            unit.write(unit_vals)
         partner_vals = {
             "name": loc_name,
             "city": line.city or False,
@@ -1199,6 +1252,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         """Create or update fsm.location and ter.use_unit (1:1) from Field line."""
         self.ensure_one()
         FsmLocation = self.env["fsm.location"]
+        TerUnit = self.env["ter.use_unit"]
         ext_id = (line.external_uuid or "").strip() or False
         if not ext_id:
             line.write(
@@ -1207,9 +1261,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return
         try:
             with self.env.cr.savepoint():
-                location = FsmLocation.search(
-                    [("geofolia_external_id", "=", ext_id)], limit=1
-                )
+                unit = TerUnit.search([("geofolia_external_id", "=", ext_id)], limit=1)
+                location = unit.fsm_location_id if unit else FsmLocation.browse()
                 company = self.env.company
                 default_parcel = company.geofolia_default_parcel_id
                 default_date_range = company.geofolia_default_date_range_id
@@ -1261,9 +1314,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     else:
                         self._field_line_apply_new_location(line, ctx)
         except Exception as exc:  # noqa: BLE001
-            line.write(
-                {"sync_state": "error", "sync_message": self._format_exception(exc)}
-            )
+            self._write_line_error_state(line, exc)
 
     def _apply_full_export(self, only_pending=False):
         self.ensure_one()
@@ -1353,9 +1404,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     }
                 )
         except Exception as exc:  # noqa: BLE001
-            line.write(
-                {"sync_state": "error", "sync_message": self._format_exception(exc)}
-            )
+            self._write_line_error_state(line, exc)
 
     def _apply_partner_line(self, line):
         """Create or update res.partner from partner line."""
@@ -1407,9 +1456,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     }
                 )
         except Exception as exc:  # noqa: BLE001
-            line.write(
-                {"sync_state": "error", "sync_message": self._format_exception(exc)}
-            )
+            self._write_line_error_state(line, exc)
 
     def _apply_employee_line(self, line):
         """Create or update fsm.person (Field Service worker) from employee line."""
@@ -1470,9 +1517,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     }
                 )
         except Exception as exc:  # noqa: BLE001
-            line.write(
-                {"sync_state": "error", "sync_message": self._format_exception(exc)}
-            )
+            self._write_line_error_state(line, exc)
 
     def _apply_equipment_line(self, line):
         """Create or update fsm.equipment from equipment line (not product.product)."""
@@ -1519,9 +1564,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     }
                 )
         except Exception as exc:  # noqa: BLE001
-            line.write(
-                {"sync_state": "error", "sync_message": self._format_exception(exc)}
-            )
+            self._write_line_error_state(line, exc)
 
     def _apply_product_like(self, line, label):
         Product = self.env["product.product"]
@@ -1595,9 +1638,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     }
                 )
         except Exception as exc:  # noqa: BLE001
-            line.write(
-                {"sync_state": "error", "sync_message": self._format_exception(exc)}
-            )
+            self._write_line_error_state(line, exc)
 
     def _get_analytic_account_for_activity(self, _activity):
         """Return analytic account: from parcel use_unit or company default."""
@@ -1833,9 +1874,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     )
                 self._link_person_to_locations_by_farm(line, person)
         except Exception as exc:  # noqa: BLE001
-            line.write(
-                {"sync_state": "error", "sync_message": self._format_exception(exc)}
-            )
+            self._write_line_error_state(line, exc)
 
     def _link_person_to_locations_by_farm(self, activity_employee_line, person):
         """Link person to fsm.locations whose field has same FarmIdentificationCode."""
