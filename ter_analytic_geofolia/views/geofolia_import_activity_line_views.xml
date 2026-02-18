@@ -33,6 +33,7 @@
                 <field name="ending_date"/>
                 <field name="duration_minutes"/>
                 <field name="fsm_order_id" optional="show"/>
+                <field name="raw_json_text" optional="hide" string="JSON"/>
             </list>
         </field>
     </record>
@@ -61,6 +62,9 @@
                             <field name="duration_minutes"/>
                             <field name="fsm_order_id" options="{'no_create': True}"/>
                         </group>
+                    </group>
+                    <group string="JSON" colspan="2">
+                        <field name="raw_json_text" nolabel="1" readonly="1"/>
                     </group>
                 </sheet>
             </form>

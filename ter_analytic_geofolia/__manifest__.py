@@ -17,6 +17,7 @@
         "fieldservice_activity",
         "fieldservice_account",
         "fieldservice_vehicle",
+        "fieldservice_timesheet",
         "account",
         "analytic",
         "hr",

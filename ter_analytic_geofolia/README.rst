@@ -63,8 +63,8 @@ in Configuration → Territory → Geofolia if plots are not yet imported.
   equipment to the same ``fsm.location`` we create from Fields.
 
 The module depends on **fieldservice**, **fieldservice_activity**,
-**fieldservice_account**, and **fieldservice_vehicle**. Optional:
-**fieldservice_timesheet** (for fsm.order timesheet linking).
+**fieldservice_account**, **fieldservice_vehicle**, and
+**fieldservice_timesheet** (timesheet lines linked to fsm.order).
 
 Import modes:
 

@@ -39,6 +39,7 @@
                 <field name="email"/>
                 <field name="phone"/>
                 <field name="person_id" optional="hide"/>
+                <field name="raw_json_text" optional="hide" string="JSON"/>
             </list>
         </field>
     </record>
@@ -63,6 +64,9 @@
                             <field name="email"/>
                             <field name="phone"/>
                         </group>
+                    </group>
+                    <group string="JSON" colspan="2">
+                        <field name="raw_json_text" nolabel="1" readonly="1"/>
                     </group>
                 </sheet>
             </form>

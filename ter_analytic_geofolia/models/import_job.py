@@ -1864,12 +1864,21 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     )
                     return
                 company = getattr(self, "company_id", None) or self.env.company
-                if company.geofolia_default_fsm_location_id:
-                    fsm_order = self._get_or_create_fsm_order_for_activity(activity)
-                    if fsm_order:
-                        fsm_order.sudo().write({"person_id": person.id})
-                        if has_fsm_order:
-                            vals["fsm_order_id"] = fsm_order.id
+                fsm_order = self._get_or_create_fsm_order_for_activity(activity)
+                if fsm_order:
+                    fsm_order.sudo().write({"person_id": person.id})
+                    if has_fsm_order:
+                        vals["fsm_order_id"] = fsm_order.id
+                        if (
+                            "project_id" in Analytic._fields
+                            and fsm_order.project_id
+                        ):
+                            vals["project_id"] = fsm_order.project_id.id
+                        if (
+                            "task_id" in Analytic._fields
+                            and fsm_order.project_task_id
+                        ):
+                            vals["task_id"] = fsm_order.project_task_id.id
                 if existing:
                     existing.write(vals)
                     line.write(
