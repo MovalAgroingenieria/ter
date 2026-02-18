@@ -248,7 +248,8 @@ msgstr "No se puede autodetectar el tipo JSON. Elíjalo manualmente."
 msgid "Cannot create location: parcel/date range required for ter.use_unit."
 msgstr ""
 "No se puede crear ubicación: parcela/rango de fechas requerido para "
-"ter.use_unit."
+"ter.use_unit.No se puede crear ubicación: parcela/rango de fechas requerido "
+"para ter.use_unit."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_equipment_line__category
@@ -439,7 +440,9 @@ msgid ""
 "fieldservice_timesheet is installed."
 msgstr ""
 "Ubicación por defecto para fsm.order creado desde Actividades Geofolia "
-"cuando fieldservice_timesheet está instalado."
+"cuando fieldservice_timesheet está instalado.Ubicación por defecto para "
+"fsm.order creado desde Actividades Geofolia cuando fieldservice_timesheet "
+"está instalado."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
@@ -452,7 +455,8 @@ msgstr "Parcela por defecto (Parcelas sin geometría)"
 msgid "Default parcel for ter.use_unit when Fields have no geometry."
 msgstr ""
 "Parcela por defecto para ter.use_unit cuando las Parcelas no tienen "
-"geometría."
+"geometría.Parcela por defecto para ter.use_unit cuando las Parcelas no "
+"tienen geometría."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
@@ -461,7 +465,8 @@ msgid ""
 "geometry."
 msgstr ""
 "Parcela por defecto para ter.use_unit al importar Parcelas Geofolia sin "
-"geometría."
+"geometría.Parcela por defecto para ter.use_unit al importar Parcelas "
+"Geofolia sin geometría."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__display_name
@@ -647,7 +652,8 @@ msgid ""
 "missing)."
 msgstr ""
 "Ubicación existente pero no se puede crear ter.use_unit (falta parcela/rango"
-" de fechas)."
+" de fechas).Ubicación existente pero no se puede crear ter.use_unit (falta "
+"parcela/rango de fechas)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_line__external_id
@@ -665,7 +671,8 @@ msgid ""
 "External ID from Geofolia (Employees) import. Prevents duplicate imports."
 msgstr ""
 "ID externo de importación Geofolia (Empleados). Evita importaciones "
-"duplicadas."
+"duplicadas.ID externo de importación Geofolia (Empleados). Evita "
+"importaciones duplicadas."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_equipment__geofolia_external_id
@@ -685,7 +692,8 @@ msgid ""
 "External ID from Geofolia (Partners) import. Prevents duplicate imports."
 msgstr ""
 "ID externo de importación Geofolia (Contactos). Evita importaciones "
-"duplicadas."
+"duplicadas.ID externo de importación Geofolia (Contactos). Evita "
+"importaciones duplicadas."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_account_analytic_line__geofolia_external_id
@@ -746,7 +754,8 @@ msgid ""
 "locations."
 msgstr ""
 "Identificación de finca de Geofolia (Parcelas). Se usa para enlazar "
-"trabajadores a ubicaciones."
+"trabajadores a ubicaciones.Identificación de finca de Geofolia (Parcelas). "
+"Se usa para enlazar trabajadores a ubicaciones."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_equipment_line__farm_identification_code
@@ -754,7 +763,8 @@ msgid ""
 "Farm identification from Geofolia; same EquipmentId can appear per farm."
 msgstr ""
 "Identificación de finca de Geofolia; el mismo EquipmentId puede aparecer por"
-" finca."
+" finca.Identificación de finca de Geofolia; el mismo EquipmentId puede "
+"aparecer por finca."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_product_line__farm_identification_code
@@ -1357,7 +1367,8 @@ msgid ""
 "range."
 msgstr ""
 "Sin rango de fechas. Configure año de cosecha en los datos o el rango de "
-"fechas por defecto de Geofolia."
+"fechas por defecto de Geofolia.Sin rango de fechas. Configure año de cosecha"
+" en los datos o el rango de fechas por defecto de Geofolia."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -1535,7 +1546,8 @@ msgid ""
 "Product to assign to Harvested product lines when Geofolia sends no id."
 msgstr ""
 "Producto a asignar a líneas de producto cosechado cuando Geofolia no envía "
-"id."
+"id.Producto a asignar a líneas de producto cosechado cuando Geofolia no "
+"envía id."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
@@ -1587,7 +1599,8 @@ msgid ""
 "duplicated."
 msgstr ""
 "Re-aplicar líneas pendientes y con error. Los registros existentes se "
-"actualizan, no se duplican."
+"actualizan, no se duplican.Re-aplicar líneas pendientes y con error. Los "
+"registros existentes se actualizan, no se duplican."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields.selection,name:ter_analytic_geofolia.selection__geofolia_import_job__apply_state__ready

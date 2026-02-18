@@ -56,11 +56,9 @@ orders, timesheets, or equipment can be linked to the same geography and campaig
   FSM equipment on locations, adding one of these modules allows linking
   equipment to the same ``fsm.location`` we create from Fields.
 
-The current module only **depends on fieldservice** (core). Adding
-fieldservice_activity, fieldservice_timesheet, or fieldservice_equipment is
-optional and would allow future enhancements (e.g. create fsm.order per
-activity, or link equipment to location) without changing the existing JSON
-import flow.
+The module depends on **fieldservice**, **fieldservice_activity**,
+**fieldservice_account**, and **fieldservice_vehicle**. Optional:
+**fieldservice_timesheet** (for fsm.order timesheet linking).
 
 Import modes:
 
@@ -153,25 +151,22 @@ are: stable view xpath for FSM location form, optional municipality and
 partner mapping from Geofolia, and possible use of IdentificationCodes for
 partners or filtering.
 
-Structure (one file per class)
-==============================
+Structure
+=========
 
 **Python**
 
 * **models**
   * ``import_job.py`` — ``geofolia.import.job`` (parse + apply).
-  * ``geofolia_import_base_line.py`` — Abstract base for full-mode lines.
+  * ``geofolia_import_base_line.py`` — Base and full-mode line models: product, employee,
+    partner, harvested product, equipment, activity, activity employee.
   * ``geofolia_import_line.py`` — Field/Product simple lines (Fields mode).
-  * ``geofolia_import_product_line.py`` — Product line (Full mode).
-  * ``geofolia_import_employee_line.py`` — Employee line.
-  * ``geofolia_import_partner_line.py`` — Partner line.
-  * ``geofolia_import_harvested_product_line.py`` — Harvested product line.
-  * ``geofolia_import_equipment_line.py`` — Equipment line.
-  * ``geofolia_import_activity_line.py`` — Activity line.
-  * ``geofolia_import_activity_employee_line.py`` — Activity employee → analytic line.
   * ``geofolia_product_product.py`` — ``product.product`` + ``geofolia_external_id``.
   * ``geofolia_hr_employee.py`` — ``hr.employee`` + ``geofolia_external_id``.
+  * ``geofolia_res_partner.py`` — ``res.partner`` + ``geofolia_external_id``.
   * ``geofolia_fsm_person.py`` — ``fsm.person`` + ``geofolia_external_id`` (activity workers).
+  * ``geofolia_fsm_equipment.py`` — ``fsm.equipment`` + ``geofolia_external_id``.
+  * ``geofolia_fsm_order.py`` — ``fsm.order`` extensions for activities.
   * ``geofolia_account_analytic_line.py`` — ``account.analytic.line`` + ``geofolia_external_id``.
   * ``geofolia_fsm_location.py`` — ``fsm.location`` + ``ter_use_unit_id`` (required),
     ``geofolia_external_id`` (related from ter.use_unit).
@@ -181,14 +176,19 @@ Structure (one file per class)
 * **wizards**
   * ``import_wizard.py`` — ``geofolia.import.wizard`` (upload JSON, create job, parse).
 
-**XML (by model / feature)**
+**XML**
 
 * ``security/security.xml`` — Group Geofolia Import.
 * ``security/ir.model.access.csv`` — Access rights.
 * ``views/import_job_views.xml`` — Job list/form, menus, wizard action.
+* ``views/geofolia_import_line_views.xml`` — Field/Product line views.
+* ``views/geofolia_import_*_line_views.xml`` — Full-mode line views (product, employee,
+  partner, harvested product, equipment, activity, activity employee).
 * ``views/import_wizard_views.xml`` — Wizard form.
 * ``views/fsm_location_views.xml`` — fsm.location form inheritance (Geofolia ID, ter.use_unit).
+* ``views/geofolia_fsm_equipment_views.xml`` — fsm.equipment form inheritance.
 * ``views/ter_use_unit_views.xml`` — ter.use_unit form inheritance (Geofolia ID, FSM location).
+* ``views/geofolia_external_id_views.xml`` — Geofolia external ID field views.
 * ``views/res_config_settings_views.xml`` — Geofolia defaults block in settings.
 
 Installation

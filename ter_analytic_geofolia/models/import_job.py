@@ -1703,10 +1703,59 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     {"location_id": loc_id, "person_id": person_id}
                 )
 
+    def _find_person_for_activity_employee(self, line):
+        """Find fsm.person by employee_id_external or employee_name."""
+        FsmPerson = self.env["fsm.person"]
+        if line.employee_id_external:
+            person = FsmPerson.search(
+                [("geofolia_external_id", "=", line.employee_id_external)],
+                limit=1,
+            )
+            if person:
+                return person
+        if line.employee_name:
+            return FsmPerson.search([("name", "=", line.employee_name)], limit=1)
+        return FsmPerson.browse()
+
+    def _build_analytic_vals_for_activity_employee(self, line, person, activity):
+        """Build vals dict for account.analytic.line create/update."""
+        Analytic = self.env["account.analytic.line"]
+        ext_id = ":".join(
+            [
+                line.employee_action_id or "",
+                line.employee_recognition_id or "",
+                str(line.employee_order or 0),
+            ]
+        )
+        line_date = activity.starting_date or activity.ending_date
+        unit_amount = (line.employee_time or 0.0) / 60.0
+        vals = {
+            "name": activity.operation_name or _("Geofolia activity"),
+            "date": line_date,
+            "unit_amount": unit_amount,
+            "amount": 0.0,
+            "geofolia_external_id": ext_id,
+        }
+        if "employee_id" in Analytic._fields:
+            emp = self.env["hr.employee"].search([("name", "=", person.name)], limit=1)
+            if emp:
+                vals["employee_id"] = emp.id
+        account = self._get_analytic_account_for_activity(activity)
+        if account:
+            col = (
+                account.plan_id._column_name()
+                if getattr(account, "plan_id", None)
+                else "account_id"
+            )
+            if col in Analytic._fields:
+                vals[col] = account.id
+            elif "account_id" in Analytic._fields:
+                vals["account_id"] = account.id
+        return vals, account
+
     def _apply_activity_employee_line(self, line):
         """Create/update analytic line and assign fsm.person to fsm.order."""
         Analytic = self.env["account.analytic.line"]
-        FsmPerson = self.env["fsm.person"]
         has_fsm_order = "fsm_order_id" in Analytic._fields
 
         try:
@@ -1719,16 +1768,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         }
                     )
                     return
-                person = False
-                if line.employee_id_external:
-                    person = FsmPerson.search(
-                        [("geofolia_external_id", "=", line.employee_id_external)],
-                        limit=1,
-                    )
-                if not person and line.employee_name:
-                    person = FsmPerson.search(
-                        [("name", "=", line.employee_name)], limit=1
-                    )
+                person = self._find_person_for_activity_employee(line)
                 if not person:
                     line.write(
                         {
@@ -1737,19 +1777,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         }
                     )
                     return
-                ext_id = ":".join(
-                    [
-                        line.employee_action_id or "",
-                        line.employee_recognition_id or "",
-                        str(line.employee_order or 0),
-                    ]
-                )
-                existing = Analytic.search(
-                    [("geofolia_external_id", "=", ext_id)], limit=1
-                )
                 activity = line.activity_line_id
-                unit_amount = (line.employee_time or 0.0) / 60.0
-                company = getattr(self, "company_id", None) or self.env.company
                 line_date = activity.starting_date or activity.ending_date
                 if not line_date:
                     line.write(
@@ -1759,30 +1787,13 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         }
                     )
                     return
-                vals = {
-                    "name": activity.operation_name or _("Geofolia activity"),
-                    "date": line_date,
-                    "unit_amount": unit_amount,
-                    "amount": 0.0,
-                    "geofolia_external_id": ext_id,
-                }
-                if "employee_id" in Analytic._fields:
-                    emp = self.env["hr.employee"].search(
-                        [("name", "=", person.name)], limit=1
-                    )
-                    if emp:
-                        vals["employee_id"] = emp.id
-                account = self._get_analytic_account_for_activity(activity)
-                if account:
-                    col = (
-                        account.plan_id._column_name()
-                        if getattr(account, "plan_id", None)
-                        else "account_id"
-                    )
-                    if col in Analytic._fields:
-                        vals[col] = account.id
-                    elif "account_id" in Analytic._fields:
-                        vals["account_id"] = account.id
+                vals, account = self._build_analytic_vals_for_activity_employee(
+                    line, person, activity
+                )
+                ext_id = vals["geofolia_external_id"]
+                existing = Analytic.search(
+                    [("geofolia_external_id", "=", ext_id)], limit=1
+                )
                 if not existing and not account:
                     line.write(
                         {
@@ -1793,6 +1804,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         }
                     )
                     return
+                company = getattr(self, "company_id", None) or self.env.company
                 if company.geofolia_default_fsm_location_id:
                     fsm_order = self._get_or_create_fsm_order_for_activity(activity)
                     if fsm_order:
@@ -1809,17 +1821,16 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                             "sync_message": _("Updated analytic line."),
                         }
                     )
-                    self._link_person_to_locations_by_farm(line, person)
-                    return
-                rec = Analytic.create(vals)
-                line.write(
-                    {
-                        "person_id": person.id,
-                        "analytic_line_id": rec.id,
-                        "sync_state": "created",
-                        "sync_message": _("Created analytic line."),
-                    }
-                )
+                else:
+                    rec = Analytic.create(vals)
+                    line.write(
+                        {
+                            "person_id": person.id,
+                            "analytic_line_id": rec.id,
+                            "sync_state": "created",
+                            "sync_message": _("Created analytic line."),
+                        }
+                    )
                 self._link_person_to_locations_by_farm(line, person)
         except Exception as exc:  # noqa: BLE001
             line.write(
