@@ -58,6 +58,7 @@ Full import. Location is resolved as: (1) first plot from activity CropZoneIds
 (PlotId → ter.use_unit → fsm.location, requires Fields imported first), or
 (2) company default ``geofolia_default_fsm_location_id``. Configure the default
 in Configuration → Territory → Geofolia if plots are not yet imported.
+
 * **fieldservice_equipment_*** — If Geofolia Equipments are to be tracked as
   FSM equipment on locations, adding one of these modules allows linking
   equipment to the same ``fsm.location`` we create from Fields.
@@ -84,15 +85,18 @@ Linkage to OCA Field Service and base_ter
 
 * **Geofolia Field** (one JSON object with Id, Code, Name, Area, City,
   Geography, HarvestYear, …) →
+
   * **fsm.location** (OCA `fieldservice <https://github.com/OCA/field-service>`_):
     ``partner_id`` / ``owner_id`` from a created ``res.partner`` (name, city),
     ``ter_use_unit_id`` (required, 1:1). ``geofolia_external_id`` is related from
     ``ter_use_unit_id.geofolia_external_id``.
+
   * **ter.use_unit** (base_ter): ``parcel_id`` (from geometry via
     ``_get_parcel_from_geometry`` or company default),
     ``date_range_id`` (from HarvestYear or company default),
     ``date_start`` / ``date_end``, ``area_official``, ``name``, ``geom_ewkt``,
     ``geofolia_external_id``, ``fsm_location_id``.
+
   * Bidirectional link: ``fsm.location.ter_use_unit_id`` ↔ ``ter.use_unit.fsm_location_id`` (1:1).
 
 **What is correct**
@@ -125,7 +129,9 @@ Linkage to OCA Field Service and base_ter
   this module can create one **fsm.order** per activity (using the default
   location set in Geofolia settings) and link each analytic line to that order.
 * **Flow with fieldservice_timesheet**:
+
   * Activity (Geofolia) → **fsm.order** (work order), one per activity.
+
   * Activity employee (hours) → **account.analytic.line** with **fsm_order_id**
     set so time appears on the order’s Timesheet tab.
 
@@ -163,6 +169,7 @@ Structure
 **Python**
 
 * **models**
+
   * ``import_job.py`` — ``geofolia.import.job`` (parse + apply).
   * ``geofolia_import_base_line.py`` — Base and full-mode line models: product, employee,
     partner, harvested product, equipment, activity, activity employee.
