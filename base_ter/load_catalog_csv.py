@@ -5,10 +5,13 @@
 Load territory catalogs (ter.profile, ter.use_type, ter.use_type.attribute,
 ter.use_type.attribute.value) from CSV files in the module's catalogos_csv folder.
 CSV format: UTF-8, separator ";", quote "\"".
-- ter_profile.csv: alphanum_code;requires_total;is_standard
-- ter_use_type.csv: name;parent_path;sequence (parent_path empty for root)
-- ter_use_type_attribute.csv: use_type_path;attribute_name
-- ter_use_type_attribute_value.csv: use_type_path;attribute_name;value_name
+- ter_profile.csv: alphanum_code;requires_total;is_standard;external_id (optional)
+- ter_use_type.csv: name;parent_path;sequence;external_id (optional)
+- ter_use_type_attribute.csv: use_type_path;attribute_name;external_id (optional)
+- ter_use_type_attribute_value.csv: use_type_path;attribute_name;value_name;external_id (optional)
+
+When external_id is present, ir.model.data is created so env.ref("base_ter.<external_id>")
+works (e.g. for data_translations_es.json).
 """
 
 from __future__ import annotations
@@ -19,6 +22,43 @@ from pathlib import Path
 from odoo import api
 
 BOOL_TRUE = ("1", "true", "yes", "sí", "si")
+MODULE_NAME = "base_ter"
+
+
+def _set_external_id(
+    env: api.Environment,
+    model_name: str,
+    res_id: int,
+    external_id: str,
+) -> None:
+    """Ensure ir.model.data exists so env.ref('base_ter.<external_id>') finds the record."""
+    if not external_id or not res_id:
+        return
+    name = (external_id or "").strip()
+    if not name:
+        return
+    IrModelData = env["ir.model.data"].sudo()
+    existing = IrModelData.search(
+        [
+            ("module", "=", MODULE_NAME),
+            ("name", "=", name),
+            ("model", "=", model_name),
+        ],
+        limit=1,
+    )
+    if existing:
+        if existing.res_id != res_id:
+            existing.write({"res_id": res_id})
+    else:
+        IrModelData.create(
+            {
+                "module": MODULE_NAME,
+                "name": name,
+                "model": model_name,
+                "res_id": res_id,
+                "noupdate": True,
+            }
+        )
 
 
 def _module_csv_dir(env: api.Environment) -> Path:
@@ -47,17 +87,21 @@ def _load_profiles(env: api.Environment, base_dir: Path) -> int:
             continue
         requires = _parse_bool(row.get("requires_total") or "")
         is_std = _parse_bool(row.get("is_standard") or "")
+        external_id = (row.get("external_id") or "").strip()
         existing = Profile.search([("alphanum_code", "=", code)], limit=1)
         if existing:
             existing.write({"requires_total": requires, "is_standard": is_std})
+            rec = existing
         else:
-            Profile.create(
+            rec = Profile.create(
                 {
                     "alphanum_code": code,
                     "requires_total": requires,
                     "is_standard": is_std,
                 }
             )
+        if external_id:
+            _set_external_id(env, "ter.profile", rec.id, external_id)
     return len(rows)
 
 
@@ -100,6 +144,9 @@ def _load_use_types(env: api.Environment, base_dir: Path) -> tuple[int, dict]:
             rec = UseType.create(
                 {"name": name, "parent_id": parent_id, "sequence": seq}
             )
+        external_id = (row.get("external_id") or "").strip()
+        if external_id:
+            _set_external_id(env, "ter.use_type", rec.id, external_id)
         path_to_ut[full_path] = rec
     return len(filtered), path_to_ut
 
@@ -129,10 +176,14 @@ def _load_attributes(
             limit=1,
         )
         if existing:
+            rec = existing
             attr_cache[(ut_path, attr_name)] = existing
         else:
             rec = Attribute.create({"use_type_id": use_type.id, "name": attr_name})
             attr_cache[(ut_path, attr_name)] = rec
+        external_id = (row.get("external_id") or "").strip()
+        if external_id:
+            _set_external_id(env, "ter.use_type.attribute", rec.id, external_id)
     return len(rows), attr_cache
 
 
@@ -174,8 +225,17 @@ def _load_attribute_values(
             ],
             limit=1,
         )
-        if not existing:
-            AttributeValue.create({"attribute_id": attr_rec.id, "name": val_name})
+        if existing:
+            rec = existing
+        else:
+            rec = AttributeValue.create(
+                {"attribute_id": attr_rec.id, "name": val_name}
+            )
+        external_id = (row.get("external_id") or "").strip()
+        if external_id:
+            _set_external_id(
+                env, "ter.use_type.attribute.value", rec.id, external_id
+            )
     return len(rows)
 
 
