@@ -18,6 +18,8 @@ from pathlib import Path
 
 from odoo import api
 
+BOOL_TRUE = ("1", "true", "yes", "sí", "si")
+
 
 def _module_csv_dir(env: api.Environment) -> Path:
     path = Path(env["ir.module.module"]._get_module_path("base_ter") or "")
@@ -31,41 +33,20 @@ def _read_csv(path: Path, encoding: str = "utf-8"):
         return list(csv.DictReader(f, delimiter=";", quotechar='"'))
 
 
-def load_catalogs_from_csv(env: api.Environment) -> dict:
-    """
-    Load all catalog data from CSV files in base_ter/catalogos_csv/.
-    Returns a dict with counts: profiles, use_types, attributes, values.
-    """
-    base_dir = _module_csv_dir(env)
-    if not base_dir.exists():
-        return {"profiles": 0, "use_types": 0, "attributes": 0, "values": 0}
+def _parse_bool(val: str) -> bool:
+    return (val or "").strip().lower() in BOOL_TRUE
 
+
+def _load_profiles(env: api.Environment, base_dir: Path) -> int:
     Profile = env["ter.profile"].sudo()
-    UseType = env["ter.use_type"].sudo()
-    Attribute = env["ter.use_type.attribute"].sudo()
-    AttributeValue = env["ter.use_type.attribute.value"].sudo()
-
-    # 1) Profiles
-    profile_path = base_dir / "ter_profile.csv"
-    rows = _read_csv(profile_path)
+    path = base_dir / "ter_profile.csv"
+    rows = _read_csv(path)
     for row in rows:
         code = (row.get("alphanum_code") or "").strip()
         if not code:
             continue
-        requires = (row.get("requires_total") or "").strip().lower() in (
-            "1",
-            "true",
-            "yes",
-            "sí",
-            "si",
-        )
-        is_std = (row.get("is_standard") or "").strip().lower() in (
-            "1",
-            "true",
-            "yes",
-            "sí",
-            "si",
-        )
+        requires = _parse_bool(row.get("requires_total") or "")
+        is_std = _parse_bool(row.get("is_standard") or "")
         existing = Profile.search([("alphanum_code", "=", code)], limit=1)
         if existing:
             existing.write({"requires_total": requires, "is_standard": is_std})
@@ -77,27 +58,25 @@ def load_catalogs_from_csv(env: api.Environment) -> dict:
                     "is_standard": is_std,
                 }
             )
-    profile_count = len(rows)
+    return len(rows)
 
-    # 2) Use types: need to create in order of path depth (root first)
-    use_type_path = base_dir / "ter_use_type.csv"
-    ut_rows = _read_csv(use_type_path)
-    path_to_ut = {}  # use_type_path -> record
 
-    # sort by path depth so parent exists when creating child
-    def path_depth(r):
-        p = (r.get("parent_path") or "").strip()
-        n = (r.get("name") or "").strip()
-        if not n:
-            return -1, ""
-        full = f"{p}/{n}" if p else n
-        return full.count("/"), full
+def _use_type_path_depth(row: dict) -> tuple:
+    parent_path = (row.get("parent_path") or "").strip()
+    name = (row.get("name") or "").strip()
+    if not name:
+        return -1, ""
+    full = f"{parent_path}/{name}" if parent_path else name
+    return full.count("/"), full
 
-    ut_rows_sorted = sorted(
-        [r for r in ut_rows if (r.get("name") or "").strip()],
-        key=path_depth,
-    )
-    for row in ut_rows_sorted:
+
+def _load_use_types(env: api.Environment, base_dir: Path) -> tuple[int, dict]:
+    UseType = env["ter.use_type"].sudo()
+    path = base_dir / "ter_use_type.csv"
+    rows = _read_csv(path)
+    path_to_ut = {}
+    filtered = [r for r in rows if (r.get("name") or "").strip()]
+    for row in sorted(filtered, key=_use_type_path_depth):
         name = (row.get("name") or "").strip()
         parent_path = (row.get("parent_path") or "").strip()
         try:
@@ -115,20 +94,26 @@ def load_catalogs_from_csv(env: api.Environment) -> dict:
             limit=1,
         )
         if existing:
+            existing.write({"sequence": seq})
             rec = existing
-            rec.write({"sequence": seq})
         else:
             rec = UseType.create(
                 {"name": name, "parent_id": parent_id, "sequence": seq}
             )
         path_to_ut[full_path] = rec
-    use_type_count = len(ut_rows_sorted)
+    return len(filtered), path_to_ut
 
-    # 3) Attributes
-    attr_path = base_dir / "ter_use_type_attribute.csv"
-    attr_rows = _read_csv(attr_path)
-    attr_cache = {}  # (use_type_path, attribute_name) -> attribute record
-    for row in attr_rows:
+
+def _load_attributes(
+    env: api.Environment,
+    base_dir: Path,
+    path_to_ut: dict,
+) -> tuple[int, dict]:
+    Attribute = env["ter.use_type.attribute"].sudo()
+    path = base_dir / "ter_use_type_attribute.csv"
+    rows = _read_csv(path)
+    attr_cache = {}
+    for row in rows:
         ut_path = (row.get("use_type_path") or "").strip()
         attr_name = (row.get("attribute_name") or "").strip()
         if not ut_path or not attr_name:
@@ -146,14 +131,22 @@ def load_catalogs_from_csv(env: api.Environment) -> dict:
         if existing:
             attr_cache[(ut_path, attr_name)] = existing
         else:
-            attr_rec = Attribute.create({"use_type_id": use_type.id, "name": attr_name})
-            attr_cache[(ut_path, attr_name)] = attr_rec
-    attr_count = len(attr_rows)
+            rec = Attribute.create({"use_type_id": use_type.id, "name": attr_name})
+            attr_cache[(ut_path, attr_name)] = rec
+    return len(rows), attr_cache
 
-    # 4) Attribute values
-    val_path = base_dir / "ter_use_type_attribute_value.csv"
-    val_rows = _read_csv(val_path)
-    for row in val_rows:
+
+def _load_attribute_values(
+    env: api.Environment,
+    base_dir: Path,
+    path_to_ut: dict,
+    attr_cache: dict,
+) -> int:
+    Attribute = env["ter.use_type.attribute"].sudo()
+    AttributeValue = env["ter.use_type.attribute.value"].sudo()
+    path = base_dir / "ter_use_type_attribute_value.csv"
+    rows = _read_csv(path)
+    for row in rows:
         ut_path = (row.get("use_type_path") or "").strip()
         attr_name = (row.get("attribute_name") or "").strip()
         val_name = (row.get("value_name") or "").strip()
@@ -183,7 +176,22 @@ def load_catalogs_from_csv(env: api.Environment) -> dict:
         )
         if not existing:
             AttributeValue.create({"attribute_id": attr_rec.id, "name": val_name})
-    value_count = len(val_rows)
+    return len(rows)
+
+
+def load_catalogs_from_csv(env: api.Environment) -> dict:
+    """
+    Load all catalog data from CSV files in base_ter/catalogos_csv/.
+    Returns a dict with counts: profiles, use_types, attributes, values.
+    """
+    base_dir = _module_csv_dir(env)
+    if not base_dir.exists():
+        return {"profiles": 0, "use_types": 0, "attributes": 0, "values": 0}
+
+    profile_count = _load_profiles(env, base_dir)
+    use_type_count, path_to_ut = _load_use_types(env, base_dir)
+    attr_count, attr_cache = _load_attributes(env, base_dir, path_to_ut)
+    value_count = _load_attribute_values(env, base_dir, path_to_ut, attr_cache)
 
     return {
         "profiles": profile_count,

@@ -39,7 +39,12 @@ Functionality:
   state (draft/validated), validity_state. Name auto-generated from sequence
   (format: {type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}).
   Kanban (default), list, form, pivot views. GIS viewer, archive, validate.
-* Etc.
+* **Catalog data** (profiles, use types, attributes, attribute values): loaded
+  from **CSV files** in the module's ``catalogos_csv/`` folder (UTF-8, semicolon
+  separator). On install/upgrade, data is imported automatically; you can
+  re-import or run the import via **Configuration > Import Territory
+  Catalogs from CSV** (wizard). After an upgrade, the Territory settings screen
+  may show a notice to run the import.
 
 Installation
 ============
@@ -60,7 +65,7 @@ ALTER ROLE  DB_USER SET search_path = public, postgis;
 Credits
 =======
 
-* Moval Agroingeniería S.L.
+* Moval Agroengineering S.L.
 
 Contributors
 ------------
@@ -82,6 +87,6 @@ Maintainer
 
 .. image:: https://services.moval.es/static/images/logo_moval_small.png
    :target: http://moval.es
-   :alt: Moval Agroingeniería S.L.
+   :alt: Moval Agroengineering S.L.
 
-This module is maintained by Moval Agroingeniería S.L.
+This module is maintained by Moval Agroengineering S.L.

@@ -22,13 +22,13 @@ class WizardImportCatalogCsv(models.TransientModel):
     def _compute_message(self):
         for wiz in self:
             wiz.message = _(
-                "<p>Los catálogos del territorio (perfiles, tipos de uso, "
-                "atributos y valores) se importan desde <strong>ficheros CSV "
-                "locales</strong> incluidos en el módulo <em>Base Territory</em>.</p>"
-                "<p>Los ficheros deben estar en la carpeta <code>catalogos_csv</code> "
-                "del módulo, con codificación UTF-8 y separador punto y coma (;).</p>"
-                "<p>Pulse <strong>Importar ahora</strong> para cargar o actualizar "
-                "los datos desde esos ficheros.</p>"
+                "<p>Territory catalogs (profiles, use types, attributes and "
+                "values) are imported from <strong>local CSV files</strong> "
+                "included in the <em>Base Territory</em> module.</p>"
+                "<p>Files must be in the module's <code>catalogos_csv</code> "
+                "folder, with UTF-8 encoding and semicolon (;) as separator.</p>"
+                "<p>Click <strong>Import now</strong> to load or update data "
+                "from those files.</p>"
             )
 
     def action_import(self):
@@ -38,30 +38,32 @@ class WizardImportCatalogCsv(models.TransientModel):
             counts = load_catalogs_from_csv(env)
         except Exception as exc:
             self.result_message = _(
-                "<p class='text-danger'><strong>Error al importar:</strong></p><pre>%s</pre>"
+                "<p class='text-danger'><strong>Import error:</strong></p>"
+                "<pre>%s</pre>"
             ) % (exc,)
             self.state = "done"
-            return
+            return self._reopen_wizard()
 
-        # Clear "show wizard" flag so banner is hidden after user runs import
         env["ir.config_parameter"].sudo().set_param(
             "base_ter.show_catalog_import_wizard",
             "False",
         )
-
         self.result_message = (
             _(
-                "<p class='text-success'><strong>Importación completada.</strong></p>"
+                "<p class='text-success'><strong>Import completed.</strong></p>"
                 "<ul>"
-                "<li>Perfiles: %(profiles)s</li>"
-                "<li>Tipos de uso: %(use_types)s</li>"
-                "<li>Atributos: %(attributes)s</li>"
-                "<li>Valores de atributos: %(values)s</li>"
+                "<li>Profiles: %(profiles)s</li>"
+                "<li>Use types: %(use_types)s</li>"
+                "<li>Attributes: %(attributes)s</li>"
+                "<li>Attribute values: %(values)s</li>"
                 "</ul>"
             )
             % counts
         )
         self.state = "done"
+        return self._reopen_wizard()
+
+    def _reopen_wizard(self):
         return {
             "type": "ir.actions.act_window",
             "res_model": self._name,
