@@ -44,7 +44,7 @@ class TerParcelPartnerlink(models.Model):
         default=lambda self: self._default_profile_id(),
         required=True,
         index=True,
-        ondelete="restrict",
+        ondelete="CASCADE",
     )
     is_main = fields.Boolean(default=False)
     percentage = fields.Float(digits=(32, 2), default=0, required=True)

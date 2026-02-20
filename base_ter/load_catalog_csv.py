@@ -7,11 +7,12 @@ ter.use_type.attribute.value) from CSV files in the module's catalogos_csv folde
 CSV format: UTF-8, separator ";", quote "\"".
 - ter_profile.csv: alphanum_code;requires_total;is_standard;external_id (optional)
 - ter_use_type.csv: name;parent_path;sequence;external_id (optional)
-- ter_use_type_attribute.csv: use_type_path;attribute_name;external_id (optional)
-- ter_use_type_attribute_value.csv: use_type_path;attribute_name;value_name;external_id (optional)
+- ter_use_type_attribute.csv: use_type_path;attribute_name;external_id (opt.)
+- ter_use_type_attribute_value.csv: use_type_path;attribute_name;value_name;
+  external_id (opt.)
 
-When external_id is present, ir.model.data is created so env.ref("base_ter.<external_id>")
-works (e.g. for data_translations_es.json).
+When external_id is present, ir.model.data is created so
+env.ref("base_ter.<external_id>") works (e.g. data_translations_es.json).
 """
 
 from __future__ import annotations
@@ -31,7 +32,7 @@ def _set_external_id(
     res_id: int,
     external_id: str,
 ) -> None:
-    """Ensure ir.model.data exists so env.ref('base_ter.<external_id>') finds the record."""
+    """Set ir.model.data so env.ref('base_ter.<external_id>') finds the record."""
     if not external_id or not res_id:
         return
     name = (external_id or "").strip()
@@ -228,14 +229,10 @@ def _load_attribute_values(
         if existing:
             rec = existing
         else:
-            rec = AttributeValue.create(
-                {"attribute_id": attr_rec.id, "name": val_name}
-            )
+            rec = AttributeValue.create({"attribute_id": attr_rec.id, "name": val_name})
         external_id = (row.get("external_id") or "").strip()
         if external_id:
-            _set_external_id(
-                env, "ter.use_type.attribute.value", rec.id, external_id
-            )
+            _set_external_id(env, "ter.use_type.attribute.value", rec.id, external_id)
     return len(rows)
 
 
