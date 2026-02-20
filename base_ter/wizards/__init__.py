@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 from . import (
+    wizard_import_catalog_csv,
     wizard_import_kml,
     wizard_mixins,
     wizard_set_parcel_code,

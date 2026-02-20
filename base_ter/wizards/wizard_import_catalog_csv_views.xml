@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Moval Agroingeniería S.L. -->
+<odoo>
+
+    <record id="wizard_import_catalog_csv_view_form" model="ir.ui.view">
+        <field name="name">wizard.import.catalog.csv.form</field>
+        <field name="model">wizard.import.catalog.csv</field>
+        <field name="arch" type="xml">
+            <form string="Import Territory Catalogs from CSV">
+                <sheet>
+                    <group>
+                        <field name="state" invisible="1"/>
+                        <field name="message" widget="html" nolabel="1" colspan="2"/>
+                    </group>
+                    <group invisible="state != 'done'">
+                        <field name="result_message" widget="html" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_import"
+                            string="Import now"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state == 'done'"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="wizard_import_catalog_csv_action" model="ir.actions.act_window">
+        <field name="name">Import Territory Catalogs from CSV</field>
+        <field name="res_model">wizard.import.catalog.csv</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

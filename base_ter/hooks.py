@@ -5,12 +5,17 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Optional
 
 from odoo import api
 from odoo.exceptions import ValidationError
 from psycopg2 import sql
+
+from .load_catalog_csv import load_catalogs_from_csv as _load_catalogs_from_csv_impl
+
+_logger = logging.getLogger(__name__)
 
 POSTGIS_EXT = "postgis"
 POSTGIS_SCHEMA = "postgis"
@@ -281,6 +286,25 @@ def _migrate_ter_unit_parcel_ids(env: api.Environment) -> None:
     )
 
 
+def _load_catalogs_from_csv(env: api.Environment) -> None:
+    """Load territory catalogs from CSV files in the module (post_install style)."""
+    try:
+        _load_catalogs_from_csv_impl(env)
+    except Exception as exc:
+        _logger.warning(
+            "Could not load territory catalogs from CSV (dir may be missing): %s",
+            exc,
+        )
+
+
+def _set_show_catalog_import_wizard(env: api.Environment) -> None:
+    """Set flag so the user is prompted to open the import wizard (e.g. after upgrade)."""
+    env["ir.config_parameter"].sudo().set_param(
+        "base_ter.show_catalog_import_wizard",
+        "True",
+    )
+
+
 def _load_data_translations_es(env: api.Environment) -> None:
     """Load es_ES translations for all translatable data (use_type, attribute, value, profile)."""
     path = Path(__file__).resolve().parent / "data" / "data_translations_es.json"
@@ -308,6 +332,8 @@ def post_init_hook(env: api.Environment, _registry: Optional[object] = None) -> 
     _init_params(env)
     _ensure_ter_unit_sequences(env)
     _migrate_ter_unit_parcel_ids(env)
+    _load_catalogs_from_csv(env)
+    _set_show_catalog_import_wizard(env)
     env.ref("base.module_base_ter")._update_translations(overwrite=True)
     _load_data_translations_es(env)
 

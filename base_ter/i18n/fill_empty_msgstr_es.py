@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """Fill empty msgstr in es.po with msgid (identity). Use for numeric/data entries."""
+import logging
 from pathlib import Path
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+
+_logger = logging.getLogger(__name__)
 
 PO = Path(__file__).resolve().parent / "es.po"
 lines = PO.read_text(encoding="utf-8").split("\n")
@@ -21,11 +27,13 @@ while i < len(lines):
                     out.append('msgstr "' + value + '"')
                     i += 1
                     filled += 1
-                elif lines[i].strip() == '' and (i + 1 >= len(lines) or lines[i + 1].startswith('#. module')):
+                elif lines[i].strip() == "" and (
+                    i + 1 >= len(lines) or lines[i + 1].startswith("#. module")
+                ):
                     # msgid followed by blank then next entry: insert msgstr
                     out.append('msgstr "' + value + '"')
                     filled += 1
     i += 1
 
 PO.write_text("\n".join(out), encoding="utf-8")
-print(f"Filled {filled} empty msgstr in es.po")
+_logger.info("Filled %s empty msgstr in es.po", filled)

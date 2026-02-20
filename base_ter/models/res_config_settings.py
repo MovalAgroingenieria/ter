@@ -78,6 +78,29 @@ class ResConfigSettings(models.TransientModel):
     ter_unit_sequence_id = fields.Many2one(
         related="company_id.ter_unit_sequence_id", readonly=False
     )
+    show_catalog_import_wizard = fields.Boolean(
+        string="Show catalog import wizard",
+        compute="_compute_show_catalog_import_wizard",
+    )
+
+    def _compute_show_catalog_import_wizard(self):
+        val = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("base_ter.show_catalog_import_wizard", "False")
+        )
+        for rec in self:
+            rec.show_catalog_import_wizard = val == "True"
+
+    def action_open_import_catalog_csv_wizard(self):
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Import Territory Catalogs from CSV"),
+            "res_model": "wizard.import.catalog.csv",
+            "view_mode": "form",
+            "target": "new",
+        }
 
     def set_values(self):
         self.ensure_one()
