@@ -1,5 +1,11 @@
 name: Automerge
 
+# Default token permissions (required for add-label; org may override in Settings → Actions → General).
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 # status + check_suite + workflow_run: re-run when CI finishes so merge runs after all checks pass.
 # workflow_run ensures we run once "Tests" workflow has completed successfully.
 # Branch protection: require only status checks. Do NOT require "Pull request reviews" or the bot cannot merge.
@@ -26,6 +32,7 @@ jobs:
     steps:
       - name: Add automerge label
         uses: actions/github-script@v7
+        continue-on-error: true
         with:
           script: |
             try {
@@ -36,8 +43,13 @@ jobs:
                 labels: ['automerge'],
               });
             } catch (err) {
-              if (err.status !== 404) throw err;
-              console.log('Label "automerge" not found. Create it in Settings → Labels.');
+              if (err.status === 404) {
+                console.log('Label "automerge" not found. Create it in Settings → Labels.');
+              } else if (err.status === 403) {
+                console.log('Cannot add label: enable "Read and write permissions" in Settings → Actions → General → Workflow permissions.');
+              } else {
+                throw err;
+              }
             }
 
       - name: Add informatica@moval.es as reviewer
