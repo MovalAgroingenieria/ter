@@ -39,3 +39,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           MERGE_LABELS: ""
           MERGE_METHOD: squash
+
