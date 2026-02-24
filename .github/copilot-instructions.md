@@ -1,37 +1,37 @@
-# Instrucciones para Copilot / AI
+# Instructions for Copilot / AI
 
-Este repositorio contiene addons de Odoo 18.0 (Moval). Sigue estas directrices al sugerir o generar código.
+This repository contains Odoo 18.0 addons (Moval). Follow these guidelines when suggesting or generating code.
 
-## Idioma
+## Language
 
-- **Respuestas al usuario**: en español.
-- **Código fuente**: inglés (docstrings, comentarios, nombres de variables y funciones).
-- **Cadenas de interfaz** (vistas, ayudas, mensajes): en inglés en Python/XML. Las traducciones (español, catalán) van solo en `i18n/` (`es.po`, `ca_ES.po`). No poner texto visible en español fuera de `i18n/`.
+- **Replies to the user**: in Spanish.
+- **Source code**: English (docstrings, comments, variable and function names).
+- **UI strings** (views, help texts, messages): English in Python/XML. Translations (Spanish, Catalan) go only in `i18n/` (`es.po`, `ca_ES.po`). Do not put visible text in Spanish outside `i18n/`.
 
-## Proyecto y convenciones
+## Project and conventions
 
-- **Odoo**: 18.0. Módulos del repositorio: addons de territorio (`base_ter`, `base_ter_analytic`, `l10n_es_territory`, etc.).
-- **Estilo código**: convenciones tipo OCA (OCA-style).
-- **XML (vistas, datos)**: comentarios solo cuando expliquen comportamiento no obvio. Evitar comentarios redundantes en cada árbol/formulario/acción.
-- **Cabeceras de archivo**: `# 2026 Moval Agroingeniería` (o año y “Moval Agroingeniería” según el módulo).
-- Evitar en comentarios y ayudas: referencias a personas (p. ej. “jvera”), “legacy” innecesario, nombres propios que no sean el de la empresa.
+- **Odoo**: 18.0. Repository modules: territory addons (`base_ter`, `base_ter_analytic`, `l10n_es_territory`, etc.).
+- **Code style**: OCA-style conventions.
+- **XML (views, data)**: comments only when they explain non-obvious behaviour. Avoid redundant comments on every tree/form/action.
+- **File headers**: `# 2026 Moval Agroingeniería` (or year and “Moval Agroingeniería” as per the module).
+- In comments and help texts, avoid: references to people (e.g. “jvera”), unnecessary “legacy”, proper names other than the company name.
 
 ## Code review
 
-Cuando hagas o sugieras una revisión de código:
+When doing or suggesting a code review:
 
-1. **Legibilidad**: código claro; evitar ternarios anidados y lógica excesivamente densa.
-2. **Seguridad**:
-   - No construir SQL con concatenación de strings; usar parámetros (ej. `cursor.execute(sql, (param,))`).
-   - Contraseñas y datos sensibles: usar cifrado (AES) y no exponer en logs ni en UI sin permiso.
-   - Acciones de servidor y botones operativos (start/stop instancia, odoorc, Restore in Demo, etc.) suelen estar restringidos por grupos (p. ej. SYS-ADMIN/Manager); no dar permisos de más.
-3. **Consistencia**: mantener el mismo estilo que el resto del módulo (nombres, estructura de vistas, permisos).
+1. **Readability**: clear code; avoid nested ternaries and overly dense logic.
+2. **Security**:
+   - Do not build SQL by concatenating strings; use parameters (e.g. `cursor.execute(sql, (param,))`).
+   - Passwords and sensitive data: use encryption (AES) and do not expose in logs or UI without permission.
+   - Server actions and operational buttons (start/stop instance, odoorc, Restore in Demo, etc.) are usually restricted by groups (e.g. SYS-ADMIN/Manager); do not grant excess permissions.
+3. **Consistency**: keep the same style as the rest of the module (names, view structure, permissions).
 
-## Testing y calidad
+## Testing and quality
 
-- Los tests están en `tests/` de cada addon; usar `TransactionCase`, mockear `AES_KEY`/`AES_IV` cuando el código use cifrado.
-- Pre-commit: pylint, black, isort, flake8, oca-checks (incl. `oca-checks-po` para `.po`/`.pot`). No dejar mensajes duplicados en i18n.
+- Tests live in each addon’s `tests/`; use `TransactionCase`, mock `AES_KEY`/`AES_IV` when the code uses encryption.
+- Pre-commit: pylint, black, isort, flake8, oca-checks (incl. `oca-checks-po` for `.po`/`.pot`). Do not leave duplicate messages in i18n.
 
-## Referencias útiles
+## Useful references
 
-- Convenciones y permisos: ver README de cada addon (p. ej. `base_ter`) y `security/` cuando aplique.
+- Conventions and permissions: see each addon’s README (e.g. `base_ter`) and `security/` when applicable.

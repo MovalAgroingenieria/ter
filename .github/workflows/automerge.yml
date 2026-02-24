@@ -7,8 +7,28 @@ on:
   status: {}
 
 jobs:
+  # Set repository variable PR_REVIEWER_USERNAME to the GitHub username for informatica@moval.es (Settings → Secrets and variables → Actions → Variables).
+  add-reviewer:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Add informatica@moval.es as reviewer
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const reviewer = '${{ vars.PR_REVIEWER_USERNAME }}';
+            if (!reviewer) return;
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              reviewers: [reviewer],
+            });
+
+  # Runs after add-reviewer; merges only when branch protection is satisfied (tests + coverage OK).
   automerge:
     runs-on: ubuntu-latest
+    needs: [add-reviewer]
     steps:
       - uses: pascalgn/automerge-action@v0.15.3
         env:
