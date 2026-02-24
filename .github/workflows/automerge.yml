@@ -35,6 +35,7 @@ jobs:
     steps:
       - uses: pascalgn/automerge-action@v0.15.3
         env:
-          TOKEN: ${{ secrets.TOKEN }}
+          # Secret name must be TOKEN (GitHub forbids secrets starting with GITHUB). Action reads env var GITHUB_TOKEN.
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
           MERGE_LABELS: ""
           MERGE_METHOD: squash
