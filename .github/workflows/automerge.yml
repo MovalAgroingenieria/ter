@@ -1,6 +1,7 @@
 name: Automerge
 
-# status + check_suite: re-run when CI finishes so merge runs after all checks pass.
+# status + check_suite + workflow_run: re-run when CI finishes so merge runs after all checks pass.
+# workflow_run ensures we run once "Tests" workflow has completed successfully.
 # Branch protection: require only status checks. Do NOT require "Pull request reviews" or the bot cannot merge.
 on:
   pull_request:
@@ -8,6 +9,10 @@ on:
   status: {}
   check_suite:
     types: [completed]
+  workflow_run:
+    workflows: ["Tests"]
+    types: [completed]
+    branches: [18.0, main, master]
 
 jobs:
   # Set repository variable PR_REVIEWER_USERNAME to the GitHub username for informatica@moval.es (Settings → Secrets and variables → Actions → Variables).
@@ -28,10 +33,11 @@ jobs:
               reviewers: [reviewer],
             });
 
-  # Merge when mergeable. Runs on pull_request and again on status/check_suite when CI finishes.
+  # Merge when mergeable. When triggered by workflow_run, only run if Tests succeeded.
   # Do NOT use secrets.TOKEN: use github.token (or secrets.GITHUB_TOKEN). Token is auto-injected by GitHub.
   automerge:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     permissions:
       contents: write
       pull-requests: write
