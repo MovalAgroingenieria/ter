@@ -142,7 +142,7 @@ jobs:
           PGPASSWORD: odoo
         timeout-minutes: 15
 
-      # base_ter also needs base_gen, base_gis, base_adi, base_report (set ADDONS_EXTRA_PATH secret to a path that contains them).
+      # base_ter also needs base_gen, base_gis, base_adi, base_report (set EXTRA_ADDONS_REPO secret to clone URL).
       - name: Run base_ter tests with coverage
         run: |
           coverage run --source=base_ter,base_ter_analytic,base_ter_general,l10n_es_territory,l10n_es_territory_sigpac,ter_analytic_geofolia \

@@ -1,15 +1,51 @@
 name: Automerge
 
-# status: re-runs when CI checks complete, so merge only happens after tests pass
+# status + check_suite + workflow_run: re-run when CI finishes so merge runs after all checks pass.
+# workflow_run ensures we run once "Tests" workflow has completed successfully.
+# Branch protection: require only status checks. Do NOT require "Pull request reviews" or the bot cannot merge.
 on:
   pull_request:
     types: [opened, synchronize, reopened]
   status: {}
+  check_suite:
+    types: [completed]
+  workflow_run:
+    workflows: ["Tests"]
+    types: [completed]
+    branches: [18.0, main, master]
 
 jobs:
+  # Set repository variable PR_REVIEWER_USERNAME to the GitHub username for informatica@moval.es (Settings → Secrets and variables → Actions → Variables).
+  add-reviewer:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Add informatica@moval.es as reviewer
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const reviewer = '${{ vars.PR_REVIEWER_USERNAME }}';
+            if (!reviewer) return;
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              reviewers: [reviewer],
+            });
+
+  # Merge when mergeable. When triggered by workflow_run, only run if Tests succeeded.
+  # Do NOT use secrets.TOKEN: use github.token (or secrets.GITHUB_TOKEN). Token is auto-injected by GitHub.
   automerge:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
     steps:
       - uses: pascalgn/automerge-action@v0.15.3
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          MERGE_LABELS: ""
+          MERGE_METHOD: squash

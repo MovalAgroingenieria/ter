@@ -1,9 +1,11 @@
 # Copyright 2026 Moval Agroingeniería S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
+# pylint: disable=import-self
 
 from . import (
     gis_viewer_test_model,
     test_gis_viewer,
+    test_ir_cron_default,
     test_ir_cron_extension,
     test_menus_and_actions,
     test_res_config_settings_geometry,
@@ -24,5 +26,6 @@ from . import (
     test_ter_property_write_partner_sync,
     test_ter_propertytag_m2m,
     test_ter_propertytag_views,
+    test_ter_use_type,
     test_wizard_set_parcel_code,
 )
