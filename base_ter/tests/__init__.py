@@ -4,6 +4,7 @@
 from . import (
     gis_viewer_test_model,
     test_gis_viewer,
+    test_ir_cron_default,
     test_ir_cron_extension,
     test_menus_and_actions,
     test_res_config_settings_geometry,
