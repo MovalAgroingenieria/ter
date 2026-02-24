@@ -19,6 +19,7 @@ from . import (
     test_ter_parcel_partnerlink,
     test_ter_parcel_views,
     test_ter_parceltag_m2m,
+    test_ter_parceltag_search,
     test_ter_profile_defaults,
     test_ter_profile_unlink,
     test_ter_profile_views,

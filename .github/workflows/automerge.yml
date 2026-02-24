@@ -15,11 +15,30 @@ on:
     branches: [18.0, main, master]
 
 jobs:
-  # Set repository variable PR_REVIEWER_USERNAME to the GitHub username for informatica@moval.es (Settings → Secrets and variables → Actions → Variables).
+  # Adds "automerge" label and reviewer. Create label "automerge" in repo if it does not exist (Settings → Labels).
   add-reviewer:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
+      - name: Add automerge label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: ['automerge'],
+              });
+            } catch (err) {
+              if (err.status !== 404) throw err;
+              console.log('Label "automerge" not found. Create it in Settings → Labels.');
+            }
+
       - name: Add informatica@moval.es as reviewer
         uses: actions/github-script@v7
         with:
