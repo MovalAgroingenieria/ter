@@ -87,6 +87,17 @@ jobs:
           git clone --depth 1 --branch 18.0 https://github.com/OCA/queue.git oca_queue
           echo "OCA_QUEUE=$PWD/oca_queue" >> $GITHUB_ENV
 
+      - name: Clone OCA server-ux (date_range dependency for base_ter)
+        run: |
+          git clone --depth 1 --branch 18.0 https://github.com/OCA/server-ux.git oca_server_ux
+          echo "OCA_SERVER_UX=$PWD/oca_server_ux" >> $GITHUB_ENV
+
+      - name: Clone extra addons (base_gen, base_gis, base_adi, base_report - optional)
+        if: ${{ secrets.EXTRA_ADDONS_REPO != '' }}
+        run: |
+          git clone --depth 1 --branch "${{ secrets.EXTRA_ADDONS_BRANCH || '18.0' }}" "${{ secrets.EXTRA_ADDONS_REPO }}" extra_addons
+          echo "ADDONS_EXTRA=$GITHUB_WORKSPACE/extra_addons" >> $GITHUB_ENV
+
       - name: Install Odoo Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -104,7 +115,8 @@ jobs:
 
       - name: Create Odoo config
         run: |
-          ADDONS_PATH="$ODOO_SRC/addons,$OCA_QUEUE,$GITHUB_WORKSPACE"
+          ADDONS_PATH="$ODOO_SRC/addons,$OCA_QUEUE,$OCA_SERVER_UX,$GITHUB_WORKSPACE"
+          [ -n "${ADDONS_EXTRA:-}" ] && ADDONS_PATH="$ADDONS_EXTRA,$ADDONS_PATH"
           cat > odoo.conf << EOF
           [options]
           addons_path = $ADDONS_PATH
@@ -126,9 +138,8 @@ jobs:
           PGPASSWORD: odoo
         timeout-minutes: 15
 
-      # Note: base_ter depends on base_gen, base_gis, base_adi, base_report, date_range (other repos).
-      # If not in addons_path, add ADDONS_EXTRA or another path in odoo.conf.
-      - name: Run tests with coverage (addons in workspace)
+      # base_ter also needs base_gen, base_gis, base_adi, base_report (set ADDONS_EXTRA_PATH secret to a path that contains them).
+      - name: Run base_ter tests with coverage
         run: |
           coverage run --source=base_ter,base_ter_analytic,base_ter_general,l10n_es_territory,l10n_es_territory_sigpac,ter_analytic_geofolia \
             $ODOO_SRC/odoo-bin -c odoo.conf -i base_ter --test-enable --stop-after-init --log-level=test
