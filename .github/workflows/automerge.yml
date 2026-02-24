@@ -1,10 +1,13 @@
 name: Automerge
 
-# status: re-runs when CI checks complete, so merge only happens after tests pass
+# status + check_suite: re-run when CI finishes so merge runs after all checks pass.
+# Branch protection: require only status checks (Tests, Coverage). Do NOT require "Pull request reviews" or the bot cannot merge.
 on:
   pull_request:
     types: [opened, synchronize, reopened]
   status: {}
+  check_suite:
+    types: [completed]
 
 jobs:
   # Set repository variable PR_REVIEWER_USERNAME to the GitHub username for informatica@moval.es (Settings → Secrets and variables → Actions → Variables).
@@ -25,11 +28,13 @@ jobs:
               reviewers: [reviewer],
             });
 
-  # Runs after add-reviewer; merges only when branch protection is satisfied (tests + coverage OK).
+  # Merge when mergeable (runs on pull_request and again on status/check_suite when CI finishes). No label required.
+  # Branch protection must NOT require "Pull request reviews" or the bot cannot merge.
   automerge:
     runs-on: ubuntu-latest
-    needs: [add-reviewer]
     steps:
       - uses: pascalgn/automerge-action@v0.15.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MERGE_LABELS: ""
+          MERGE_METHOD: squash
