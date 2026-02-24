@@ -10,6 +10,7 @@ from . import (
     test_res_partner_partner_code,
     test_res_partner_views,
     test_security_groups,
+    test_ter_catalog_models,
     test_ter_gis_parcel_model_compute,
     test_ter_gis_parcel_model_views,
     test_ter_parcel_constraints,
