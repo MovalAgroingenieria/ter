@@ -144,7 +144,23 @@ jobs:
           coverage report -m
           coverage xml -o coverage.xml
 
-      - name: Upload coverage to Codecov (optional)
+      - name: Check coverage did not decrease
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref || github.ref_name }}
+        run: |
+          CURRENT=$(coverage report -m | tail -1 | awk '{gsub(/%/,""); print int($NF)}')
+          BASE=0
+          if git fetch -q origin "$BASE_REF" 2>/dev/null; then
+            BASELINE=$(git show "origin/$BASE_REF:.coverage_baseline" 2>/dev/null || true)
+          fi
+          [ -n "$BASELINE" ] && BASE=$BASELINE
+          echo "Coverage: current=$CURRENT% base=$BASE%"
+          if [ "$CURRENT" -lt "$BASE" ]; then
+            echo "Coverage decreased"
+            exit 1
+          fi
+
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           files: coverage.xml
