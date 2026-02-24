@@ -9,9 +9,7 @@ class TestTerCatalogModels(TransactionCase):
     """Test creation and basic fields for ter.parceltag and ter.propertytag."""
 
     def test_parceltag_create_and_display(self):
-        tag = self.env["ter.parceltag"].create(
-            {"alphanum_code": "TAG-A", "color": 1}
-        )
+        tag = self.env["ter.parceltag"].create({"alphanum_code": "TAG-A", "color": 1})
         self.assertTrue(tag.id)
         self.assertEqual(tag.alphanum_code, "TAG-A")
         self.assertEqual(tag.color, 1)
