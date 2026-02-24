@@ -87,6 +87,21 @@ jobs:
           git clone --depth 1 --branch 18.0 https://github.com/OCA/queue.git oca_queue
           echo "OCA_QUEUE=$PWD/oca_queue" >> $GITHUB_ENV
 
+      - name: Clone OCA server-ux (date_range dependency for base_ter)
+        run: |
+          git clone --depth 1 --branch 18.0 https://github.com/OCA/server-ux.git oca_server_ux
+          echo "OCA_SERVER_UX=$PWD/oca_server_ux" >> $GITHUB_ENV
+
+      - name: Clone extra addons (base_gen, base_gis, base_adi, base_report - optional)
+        env:
+          EXTRA_ADDONS_REPO: ${{ secrets.EXTRA_ADDONS_REPO }}
+          EXTRA_ADDONS_BRANCH: ${{ secrets.EXTRA_ADDONS_BRANCH }}
+        run: |
+          if [ -n "$EXTRA_ADDONS_REPO" ]; then
+            git clone --depth 1 --branch "${EXTRA_ADDONS_BRANCH:-18.0}" "$EXTRA_ADDONS_REPO" extra_addons
+            echo "ADDONS_EXTRA=$GITHUB_WORKSPACE/extra_addons" >> $GITHUB_ENV
+          fi
+
       - name: Install Odoo Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -104,7 +119,8 @@ jobs:
 
       - name: Create Odoo config
         run: |
-          ADDONS_PATH="$ODOO_SRC/addons,$OCA_QUEUE,$GITHUB_WORKSPACE"
+          ADDONS_PATH="$ODOO_SRC/addons,$OCA_QUEUE,$OCA_SERVER_UX,$GITHUB_WORKSPACE"
+          [ -n "${ADDONS_EXTRA:-}" ] && ADDONS_PATH="$ADDONS_EXTRA,$ADDONS_PATH"
           cat > odoo.conf << EOF
           [options]
           addons_path = $ADDONS_PATH
@@ -126,9 +142,8 @@ jobs:
           PGPASSWORD: odoo
         timeout-minutes: 15
 
-      # Note: base_ter depends on base_gen, base_gis, base_adi, base_report, date_range (other repos).
-      # If not in addons_path, add ADDONS_EXTRA or another path in odoo.conf.
-      - name: Run tests with coverage (addons in workspace)
+      # base_ter also needs base_gen, base_gis, base_adi, base_report (set ADDONS_EXTRA_PATH secret to a path that contains them).
+      - name: Run base_ter tests with coverage
         run: |
           coverage run --source=base_ter,base_ter_analytic,base_ter_general,l10n_es_territory,l10n_es_territory_sigpac,ter_analytic_geofolia \
             $ODOO_SRC/odoo-bin -c odoo.conf -i base_ter --test-enable --stop-after-init --log-level=test
@@ -144,10 +159,44 @@ jobs:
           coverage report -m
           coverage xml -o coverage.xml
 
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-artifacts
+          path: |
+            .coverage
+            coverage.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+        continue-on-error: true
+
+  coverage-check:
+    runs-on: ubuntu-22.04
+    name: Coverage did not decrease
+    needs: test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-artifacts
+
       - name: Check coverage did not decrease
         env:
           BASE_REF: ${{ github.event.pull_request.base.ref || github.ref_name }}
         run: |
+          pip install coverage
           CURRENT=$(coverage report -m | tail -1 | awk '{gsub(/%/,""); print int($NF)}')
           BASE=0
           if git fetch -q origin "$BASE_REF" 2>/dev/null; then
@@ -159,13 +208,6 @@ jobs:
             echo "Coverage decreased"
             exit 1
           fi
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          files: coverage.xml
-          fail_ci_if_error: false
-        continue-on-error: true
 
   quality:
     runs-on: ubuntu-22.04
@@ -311,8 +353,8 @@ jobs:
   notify-on-failure:
     name: Notify on failure
     runs-on: ubuntu-latest
-    needs: [pre-commit, test]
-    if: failure() && (needs.pre-commit.result == 'failure' || needs.test.result == 'failure')
+    needs: [pre-commit, test, coverage-check]
+    if: failure() && (needs.pre-commit.result == 'failure' || needs.test.result == 'failure' || needs.coverage-check.result == 'failure')
     steps:
       - name: Send failure email
         uses: dawidd6/action-send-mail@v3
