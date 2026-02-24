@@ -32,10 +32,12 @@ jobs:
   # Branch protection must NOT require "Pull request reviews" or the bot cannot merge.
   automerge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: pascalgn/automerge-action@v0.15.3
         env:
-          # Secret name must be TOKEN (GitHub forbids secrets starting with GITHUB). Action reads env var GITHUB_TOKEN.
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_LABELS: ""
           MERGE_METHOD: squash
