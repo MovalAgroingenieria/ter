@@ -1,0 +1,318 @@
+# Run Odoo 18.0 tests for addons in this repo (ter).
+# Requires: PostgreSQL 15, Python 3.12, OCA/OCB 18.0, OCA queue_job.
+name: Tests
+
+on:
+  push:
+    branches: [18.0, main, master]
+  pull_request:
+    branches: [18.0, main, master]
+  workflow_dispatch:
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-22.04
+    name: pre-commit
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pre-commit and isort (local hook)
+        run: pip install pre-commit isort
+
+      - name: Run pre-commit
+        run: pre-commit run --all-files
+
+  test:
+    runs-on: ubuntu-22.04
+    name: Odoo 18 - addons ter
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PostgreSQL client and build deps for Python packages
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+          sudo apt-get install -y -qq libldap2-dev libsasl2-dev
+
+      - name: Wait for PostgreSQL
+        run: |
+          for i in $(seq 1 30); do
+            if pg_isready -h 127.0.0.1 -p 5432 -U odoo 2>/dev/null; then
+              echo "PostgreSQL is ready"
+              exit 0
+            fi
+            echo "Waiting for PostgreSQL... $i/30"
+            sleep 2
+          done
+          echo "PostgreSQL did not become ready in time"
+          exit 1
+        env:
+          PGPASSWORD: odoo
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Clone OCA/OCB 18.0 (Odoo Community Backports)
+        run: |
+          git clone --depth 1 --branch 18.0 https://github.com/OCA/OCB.git ocb
+          echo "ODOO_SRC=$PWD/ocb" >> $GITHUB_ENV
+
+      - name: Clone OCA queue (queue_job dependency)
+        run: |
+          git clone --depth 1 --branch 18.0 https://github.com/OCA/queue.git oca_queue
+          echo "OCA_QUEUE=$PWD/oca_queue" >> $GITHUB_ENV
+
+      - name: Install Odoo Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r $ODOO_SRC/requirements.txt
+
+      - name: Install addon extra dependencies
+        run: |
+          pip install openpyxl paramiko pycryptodome coverage
+
+      - name: Dependency security audit (pip-audit)
+        run: |
+          pip install pip-audit
+          pip-audit --desc 2>&1 || true
+        continue-on-error: true
+
+      - name: Create Odoo config
+        run: |
+          ADDONS_PATH="$ODOO_SRC/addons,$OCA_QUEUE,$GITHUB_WORKSPACE"
+          cat > odoo.conf << EOF
+          [options]
+          addons_path = $ADDONS_PATH
+          admin_passwd = admin
+          db_host = 127.0.0.1
+          db_port = 5432
+          db_user = odoo
+          db_password = odoo
+          database = odoo_test
+          EOF
+
+      - name: Initialize database (base + queue_job)
+        run: |
+          python $ODOO_SRC/odoo-bin -c odoo.conf -i base,queue_job --stop-after-init --log-level=warn
+        env:
+          PGHOST: 127.0.0.1
+          PGPORT: 5432
+          PGUSER: odoo
+          PGPASSWORD: odoo
+        timeout-minutes: 15
+
+      # Note: base_ter depends on base_gen, base_gis, base_adi, base_report, date_range (other repos).
+      # If not in addons_path, add ADDONS_EXTRA or another path in odoo.conf.
+      - name: Run tests with coverage (addons in workspace)
+        run: |
+          coverage run --source=base_ter,base_ter_analytic,base_ter_general,l10n_es_territory,l10n_es_territory_sigpac,ter_analytic_geofolia \
+            $ODOO_SRC/odoo-bin -c odoo.conf -i base_ter --test-enable --stop-after-init --log-level=test
+        env:
+          PGHOST: 127.0.0.1
+          PGPORT: 5432
+          PGUSER: odoo
+          PGPASSWORD: odoo
+        timeout-minutes: 20
+
+      - name: Coverage report
+        run: |
+          coverage report -m
+          coverage xml -o coverage.xml
+
+      - name: Upload coverage to Codecov (optional)
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+        continue-on-error: true
+
+  quality:
+    runs-on: ubuntu-22.04
+    name: Code quality (pylint)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pylint and pylint-odoo
+        run: pip install pylint pylint-odoo
+
+      - name: Run pylint on addons
+        run: |
+          for addon in base_ter base_ter_analytic base_ter_general l10n_es_territory l10n_es_territory_sigpac ter_analytic_geofolia; do
+            [ -d "$addon" ] && pylint --load-plugins=pylint_odoo --output-format=text --exit-zero \
+              "$addon/" --ignore="${addon}/migrations" 2>&1 | tail -50 || true
+          done
+        continue-on-error: true
+
+  security-bandit:
+    runs-on: ubuntu-22.04
+    name: Security (bandit)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run bandit on addons
+        run: |
+          pip install bandit[toml]
+          for addon in base_ter base_ter_analytic base_ter_general l10n_es_territory l10n_es_territory_sigpac ter_analytic_geofolia; do
+            [ -d "$addon" ] && bandit -r "$addon" -x "${addon}/migrations" -f screen -ll 2>&1 | head -40 || true
+          done
+        continue-on-error: true
+
+  link-check:
+    runs-on: ubuntu-22.04
+    name: Link check
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Lychee link checker
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress ./.github/copilot-instructions.md ./README.rst ./base_ter/README.rst ./base_ter_analytic/README.rst ./base_ter_general/README.rst ./l10n_es_territory/README.rst ./l10n_es_territory_sigpac/README.rst ./ter_analytic_geofolia/README.rst
+          fail: false
+        continue-on-error: true
+
+  codespell:
+    runs-on: ubuntu-22.04
+    name: Spell check (codespell)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run codespell
+        run: |
+          pip install codespell
+          find base_ter base_ter_analytic base_ter_general l10n_es_territory l10n_es_territory_sigpac ter_analytic_geofolia -type f \( -name "*.py" -o -name "*.xml" -o -name "*.rst" -o -name "*.md" \) ! -path "*/migrations/*" -print0 2>/dev/null | xargs -0 codespell 2>&1 | head -60 || true
+        continue-on-error: true
+
+  xml-lint:
+    runs-on: ubuntu-22.04
+    name: XML lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate XML (xmllint)
+        run: |
+          echo "## XML validation" >> $GITHUB_STEP_SUMMARY
+          FAIL=0
+          for addon in base_ter base_ter_analytic base_ter_general l10n_es_territory l10n_es_territory_sigpac ter_analytic_geofolia; do
+            [ -d "$addon" ] || continue
+            while IFS= read -r -d '' f; do
+              if ! xmllint --noout "$f" 2>&1; then FAIL=1; fi
+            done < <(find "$addon" -name "*.xml" -print0)
+          done
+          [ "$FAIL" -eq 0 ] || exit 1
+        continue-on-error: true
+
+  complexity:
+    runs-on: ubuntu-22.04
+    name: Complexity (radon)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run radon (complexity and maintainability)
+        run: |
+          pip install radon
+          echo "## Complexity (radon)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Maintainability (A=best)" >> $GITHUB_STEP_SUMMARY
+          for addon in base_ter base_ter_analytic base_ter_general l10n_es_territory l10n_es_territory_sigpac ter_analytic_geofolia; do
+            [ -d "$addon" ] && radon mi "$addon" -s --exclude "${addon}/migrations/*" 2>&1 | head -20 >> $GITHUB_STEP_SUMMARY || true
+          done
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Cyclomatic complexity (CC)" >> $GITHUB_STEP_SUMMARY
+          for addon in base_ter base_ter_analytic base_ter_general l10n_es_territory l10n_es_territory_sigpac ter_analytic_geofolia; do
+            [ -d "$addon" ] && radon cc "$addon" -s -a --exclude "${addon}/migrations/*" 2>&1 | head -30 >> $GITHUB_STEP_SUMMARY || true
+          done
+        continue-on-error: true
+
+  stats:
+    runs-on: ubuntu-22.04
+    name: Repository stats
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Gather statistics
+        run: |
+          echo "## Repository statistics" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          PY_LINES=$(find base_ter base_ter_analytic base_ter_general l10n_es_territory l10n_es_territory_sigpac ter_analytic_geofolia -name "*.py" -not -path "*/migrations/*" 2>/dev/null | xargs wc -l 2>/dev/null | tail -1 | awk '{print $1}' || echo "0")
+          XML_LINES=$(find base_ter base_ter_analytic base_ter_general l10n_es_territory l10n_es_territory_sigpac ter_analytic_geofolia -name "*.xml" 2>/dev/null | xargs wc -l 2>/dev/null | tail -1 | awk '{print $1}' || echo "0")
+          TEST_COUNT=$(grep -r "def test_" base_ter base_ter_analytic base_ter_general l10n_es_territory l10n_es_territory_sigpac ter_analytic_geofolia --include="*.py" 2>/dev/null | wc -l || echo "0")
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Python lines (excl. migrations) | ${PY_LINES:-0} |" >> $GITHUB_STEP_SUMMARY
+          echo "| XML lines | ${XML_LINES:-0} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test methods | ${TEST_COUNT:-0} |" >> $GITHUB_STEP_SUMMARY
+
+  # Optional: send email when the workflow fails. Requires repo secrets:
+  #   MAIL_SMTP_SERVER, MAIL_USERNAME, MAIL_PASSWORD, MAIL_TO, MAIL_FROM
+  # (If secrets are not set, this job is skipped; set at least one to enable.)
+  notify-on-failure:
+    name: Notify on failure
+    runs-on: ubuntu-latest
+    needs: [pre-commit, test]
+    if: failure() && (needs.pre-commit.result == 'failure' || needs.test.result == 'failure')
+    steps:
+      - name: Send failure email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.MAIL_SMTP_SERVER }}
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "[GitHub] Tests failed - ${{ github.repository }} (${{ github.ref_name }})"
+          to: ${{ secrets.MAIL_TO }}
+          from: ${{ secrets.MAIL_FROM }}
+          body: |
+            Workflow run failed.
+            Repository: ${{ github.repository }}
+            Branch/Ref: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+            Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Triggered by: ${{ github.actor }}
+        continue-on-error: true
