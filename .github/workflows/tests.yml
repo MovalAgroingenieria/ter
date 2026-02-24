@@ -93,10 +93,14 @@ jobs:
           echo "OCA_SERVER_UX=$PWD/oca_server_ux" >> $GITHUB_ENV
 
       - name: Clone extra addons (base_gen, base_gis, base_adi, base_report - optional)
-        if: ${{ secrets.EXTRA_ADDONS_REPO != '' }}
+        env:
+          EXTRA_ADDONS_REPO: ${{ secrets.EXTRA_ADDONS_REPO }}
+          EXTRA_ADDONS_BRANCH: ${{ secrets.EXTRA_ADDONS_BRANCH }}
         run: |
-          git clone --depth 1 --branch "${{ secrets.EXTRA_ADDONS_BRANCH || '18.0' }}" "${{ secrets.EXTRA_ADDONS_REPO }}" extra_addons
-          echo "ADDONS_EXTRA=$GITHUB_WORKSPACE/extra_addons" >> $GITHUB_ENV
+          if [ -n "$EXTRA_ADDONS_REPO" ]; then
+            git clone --depth 1 --branch "${EXTRA_ADDONS_BRANCH:-18.0}" "$EXTRA_ADDONS_REPO" extra_addons
+            echo "ADDONS_EXTRA=$GITHUB_WORKSPACE/extra_addons" >> $GITHUB_ENV
+          fi
 
       - name: Install Odoo Python dependencies
         run: |
