@@ -159,10 +159,44 @@ jobs:
           coverage report -m
           coverage xml -o coverage.xml
 
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-artifacts
+          path: |
+            .coverage
+            coverage.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+        continue-on-error: true
+
+  coverage-check:
+    runs-on: ubuntu-22.04
+    name: Coverage did not decrease
+    needs: test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-artifacts
+
       - name: Check coverage did not decrease
         env:
           BASE_REF: ${{ github.event.pull_request.base.ref || github.ref_name }}
         run: |
+          pip install coverage
           CURRENT=$(coverage report -m | tail -1 | awk '{gsub(/%/,""); print int($NF)}')
           BASE=0
           if git fetch -q origin "$BASE_REF" 2>/dev/null; then
@@ -174,13 +208,6 @@ jobs:
             echo "Coverage decreased"
             exit 1
           fi
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          files: coverage.xml
-          fail_ci_if_error: false
-        continue-on-error: true
 
   quality:
     runs-on: ubuntu-22.04
@@ -326,8 +353,8 @@ jobs:
   notify-on-failure:
     name: Notify on failure
     runs-on: ubuntu-latest
-    needs: [pre-commit, test]
-    if: failure() && (needs.pre-commit.result == 'failure' || needs.test.result == 'failure')
+    needs: [pre-commit, test, coverage-check]
+    if: failure() && (needs.pre-commit.result == 'failure' || needs.test.result == 'failure' || needs.coverage-check.result == 'failure')
     steps:
       - name: Send failure email
         uses: dawidd6/action-send-mail@v3
