@@ -1,8 +1,10 @@
 name: Automerge
 
+# status: re-runs when CI checks complete, so merge only happens after tests pass
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+  status: {}
 
 jobs:
   automerge:
