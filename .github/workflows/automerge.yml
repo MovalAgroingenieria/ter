@@ -1,15 +1,38 @@
 name: Automerge
 
-# status: re-runs when CI checks complete, so merge only happens after tests pass
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
   status: {}
 
 jobs:
   automerge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - uses: pascalgn/automerge-action@v0.15.3
+      - name: automerge
+        uses: pascalgn/automerge-action@v0.16.4
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          MERGE_LABELS: "automerge,!work in progress,!wip"
+          MERGE_METHOD: "merge"
+          MERGE_FORKS: "false"
+          MERGE_RETRIES: "6"
+          MERGE_RETRY_SLEEP: "5000"
+          MERGE_DELETE_BRANCH: "true"
