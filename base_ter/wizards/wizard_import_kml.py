@@ -1,4 +1,4 @@
-# Copyright 2026 Moval Agroingeniería S.L.
+# 2026 Moval Agroingeniería
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
 
 """
