@@ -16,9 +16,8 @@ class AccountMoveLine(models.Model):
 
     def _ter_invoicing_get_parcel_id_from_billable_item(self, vals):
         """Set parcel_id from ter.parcel.partnerlink when billable_item points to it."""
-        if (
-            vals.get("billable_item_model") != "ter.parcel.partnerlink"
-            or not vals.get("billable_item_res_id")
+        if vals.get("billable_item_model") != "ter.parcel.partnerlink" or not vals.get(
+            "billable_item_res_id"
         ):
             return None
         partnerlink = self.env["ter.parcel.partnerlink"].browse(
@@ -29,12 +28,11 @@ class AccountMoveLine(models.Model):
         return None
 
     def _ter_invoicing_invalidate_parcel_totals(self, parcel_ids):
-        """Invalidate total_invoiced for given parcels so they recompute on next read."""
+        """Invalidate total_invoiced for given parcels so they recompute when read."""
         if not parcel_ids:
             return
-        self.env["ter.parcel"].browse(parcel_ids).invalidate_recordset(
-            ["total_invoiced"]
-        )
+        parcels = self.env["ter.parcel"].browse(parcel_ids)
+        parcels.invalidate_recordset(["total_invoiced"])
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -54,8 +52,8 @@ class AccountMoveLine(models.Model):
         # Sync parcel_id when billable item (partnerlink) was changed
         if "billable_item_model" in vals or "billable_item_res_id" in vals:
             to_update = self.filtered(
-                lambda l: l.billable_item_model == "ter.parcel.partnerlink"
-                and l.billable_item_res_id
+                lambda line: line.billable_item_model == "ter.parcel.partnerlink"
+                and line.billable_item_res_id
             )
             by_parcel = {}  # parcel_id -> recordset
             for line in to_update:

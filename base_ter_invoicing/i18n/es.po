@@ -140,19 +140,21 @@ msgstr "Finca"
 #. module: base_ter_invoicing
 #. odoo-python
 #: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-msgid "Review the overhead percentages: the total must be 100%."
-msgstr "Por favor, revise la suma de porcentajes de gastos generales de la parcela: el resultado debe ser el 100%."
+#, python-format
+msgid ""
+"Review the overhead percentages: the total must be 100%% (parcel: "
+"%(parcel)s, current total: %(total)s)."
+msgstr ""
+"Revise los porcentajes de gastos: el total debe ser 100%% (parcela: "
+"%(parcel)s, total actual: %(total)s)."
 
 #. module: base_ter_invoicing
 #. odoo-python
 #: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-#, python-format
-msgid ""
-"Review the overhead percentages: the total must be 100%% "
-"(parcel: %s, current total: %s)."
+msgid "Review the overhead percentages: the total must be 100%."
 msgstr ""
-"Revise los porcentajes de gastos: el total debe ser 100%% "
-"(parcela: %s, total actual: %s)."
+"Por favor, revise la suma de porcentajes de gastos generales de la parcela: "
+"el resultado debe ser el 100%."
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel__total_invoiced

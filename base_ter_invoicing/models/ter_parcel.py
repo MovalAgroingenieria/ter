@@ -53,9 +53,9 @@ class TerParcel(models.Model):
                 raise exceptions.ValidationError(
                     record.env._(
                         "Review the overhead percentages: the total must be 100%% "
-                        "(parcel: %s, current total: %s)."
+                        "(parcel: %(parcel)s, current total: %(total)s)."
                     )
-                    % (record.alphanum_code or record.id, total)
+                    % {"parcel": record.alphanum_code or record.id, "total": total}
                 )
         return result
 
