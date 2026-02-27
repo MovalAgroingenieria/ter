@@ -9,7 +9,9 @@ class TestTerPropertytagSearch(TransactionCase):
     """Test ter.propertytag search by alphanum_code."""
 
     def test_propertytag_search_by_code(self):
-        tag = self.env["ter.propertytag"].create({"alphanum_code": "PROP-Y", "color": 3})
+        tag = self.env["ter.propertytag"].create(
+            {"alphanum_code": "PROP-Y", "color": 3}
+        )
         found = self.env["ter.propertytag"].search([("alphanum_code", "=", "PROP-Y")])
         self.assertEqual(len(found), 1)
         self.assertEqual(found, tag)
