@@ -25,7 +25,6 @@ from . import (
     test_ter_property_views,
     test_ter_property_write_partner_sync,
     test_ter_propertytag_m2m,
-    test_ter_propertytag_search,
     test_ter_propertytag_views,
     test_ter_use_type,
     test_wizard_set_parcel_code,
