@@ -1,19 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 2026 Moval Agroingeniería - License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html) -->
 <odoo>
 
     <data noupdate="1">
+        <!-- Category "Areas" for area-based billing (ter.parcel.partnerlink, quantity = area_overhead) -->
         <record id="product_category_02" model="product.category">
             <field name="name">Areas</field>
-            <field name="billable_item_quantity_field">area_overhead</field>
+            <field name="billable_item_model_id" ref="base_ter.model_ter_parcel_partnerlink"/>
+            <field name="billable_item_quantity_field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__area_overhead"/>
             <field name="billable_item_detail_desc">{% if billable_item.property_name %}Property: {{ billable_item.property_name }}. {% endif %}Parcel: {{ billable_item.parcel_id.alphanum_code }} ({{ billable_item.parcel_id.area_official }} {{ billable_item.parcel_id.area_unit_name }}). {{ billable_item.profile_id.alphanum_code }}, {{ billable_item.percentage_overhead }}% overhead.</field>
             <field name="billable_item_domain">area_overhead &gt; 0</field>
-            <field name="aux_01_char_field">parcel_code</field>
-            <field name="aux_01_int_field">number_of_invoices</field>
-            <field name="aux_01_float_field">parcel_area_official</field>
-            <field name="aux_02_char_field">parcel_official_code</field>
-            <field name="aux_02_float_field">percentage_overhead</field>
-            <field name="aux_03_char_field">property_name</field>
-            <field name="aux_03_bool_field">partner_is_company</field>
+        </record>
+
+        <!-- Auxiliary columns for selectable items list (parcel_code, area, etc.) -->
+        <record id="product_category_02_aux_parcel_code" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">10</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__parcel_code"/>
+        </record>
+        <record id="product_category_02_aux_parcel_area_official" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">20</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__parcel_area_official"/>
+        </record>
+        <record id="product_category_02_aux_parcel_official_code" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">30</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__parcel_official_code"/>
+        </record>
+        <record id="product_category_02_aux_percentage_overhead" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">40</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__percentage_overhead"/>
+        </record>
+        <record id="product_category_02_aux_property_name" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">50</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__property_name"/>
+        </record>
+        <record id="product_category_02_aux_partner_is_company" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">60</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__partner_is_company"/>
         </record>
 
         <record id="base_invoicing.product_category_01" model="product.category">
@@ -24,7 +52,6 @@
     <data>
         <record id="product_category_02" model="product.category">
             <field name="category_code">2</field>
-            <field name="billable_item_model_id" ref="base_ter.model_ter_parcel_partnerlink"/>
             <field name="parent_id" ref="product.product_category_1"/>
         </record>
     </data>

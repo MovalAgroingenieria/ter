@@ -2,6 +2,8 @@
 # This file contains the translation of the following modules:
 # 	* base_ter_invoicing
 #
+# 2026 Moval Agroingeniería
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
