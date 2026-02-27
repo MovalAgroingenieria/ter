@@ -52,8 +52,10 @@ class TerParcel(models.Model):
             if float_compare(total, 100.0, precision_digits=2) != 0:
                 raise exceptions.ValidationError(
                     record.env._(
-                        "Review the overhead percentages: the total must be 100%."
+                        "Review the overhead percentages: the total must be 100%% "
+                        "(parcel: %s, current total: %s)."
                     )
+                    % (record.alphanum_code or record.id, total)
                 )
         return result
 
@@ -66,21 +68,28 @@ class TerParcel(models.Model):
 
     def _add_area_fields(self):
         area_fields = super()._add_area_fields()
-        area_fields.append(("area_ownership", self.env._("🡸 Area")))
-        area_fields.append(("area_overhead", self.env._("🡸 Area")))
+        area_fields.append(("area_ownership", self.env._("🡸 Area (ownership)")))
+        area_fields.append(("area_overhead", self.env._("🡸 Area (overhead)")))
         return area_fields
 
     def action_show_move_lines(self):
         self.ensure_one()
-        list_view = self.env.ref("base_ter_invoicing.account_move_line_view_list")
-        search_view = self.env.ref("base_ter_invoicing.account_move_line_view_search")
+        list_view = self.env.ref(
+            "base_ter_invoicing.account_move_line_view_list",
+            raise_if_not_found=False,
+        )
+        search_view = self.env.ref(
+            "base_ter_invoicing.account_move_line_view_search",
+            raise_if_not_found=False,
+        )
+        views = [(list_view.id, "list")] if list_view else [(False, "list")]
         return {
             "type": "ir.actions.act_window",
             "name": self.env._("Invoice Lines"),
             "res_model": "account.move.line",
             "view_mode": "list",
-            "views": [(list_view.id, "list")],
-            "search_view_id": search_view.id,
+            "views": views,
+            "search_view_id": search_view.id if search_view else False,
             "target": "current",
             "domain": [("parcel_id", "=", self.id)],
         }
