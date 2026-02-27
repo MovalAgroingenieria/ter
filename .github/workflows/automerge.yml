@@ -18,13 +18,40 @@ on:
     types:
       - completed
   status: {}
+  check_suite:
+    types: [completed]
+  workflow_run:
+    workflows: ["Tests"]
+    types: [completed]
+    branches: [18.0, main, master]
 
 jobs:
+  # Set repository variable PR_REVIEWER_USERNAME to the GitHub username for informatica@moval.es (Settings → Secrets and variables → Actions → Variables).
+  add-reviewer:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Add informatica@moval.es as reviewer
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const reviewer = '${{ vars.PR_REVIEWER_USERNAME }}';
+            if (!reviewer) return;
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              reviewers: [reviewer],
+            });
+
+  # Merge when mergeable. When triggered by workflow_run, only run if Tests succeeded.
+  # Do NOT use secrets.TOKEN: use github.token (or secrets.GITHUB_TOKEN). Token is auto-injected by GitHub.
   automerge:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+
     steps:
       - name: automerge
         uses: pascalgn/automerge-action@v0.16.4
