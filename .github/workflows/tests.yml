@@ -1,5 +1,5 @@
 # Run Odoo 18.0 tests for addons in this repo (ter).
-# Requires: PostgreSQL 15, Python 3.12, OCA/OCB 18.0, OCA queue_job.
+# Requires: PostgreSQL 15, Python 3.10, OCA/OCB 18.0, OCA queue_job.
 name: Tests
 
 on:
@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.10"
 
       - name: Install pre-commit and isort (local hook)
         run: pip install pre-commit isort
@@ -72,10 +72,10 @@ jobs:
         env:
           PGPASSWORD: odoo
 
-      - name: Set up Python 3.12
+      - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.10"
 
       - name: Clone OCA/OCB 18.0 (Odoo Community Backports)
         run: |
@@ -104,8 +104,10 @@ jobs:
 
       - name: Install Odoo Python dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r $ODOO_SRC/requirements.txt
+          python -m pip install --upgrade pip setuptools wheel
+          pip install --no-build-isolation cbor2==5.4.2 || pip install cbor2
+          grep -v -E "^(cbor2|gevent|greenlet)==" $ODOO_SRC/requirements.txt | pip install -r /dev/stdin
+          pip install --only-binary=:all: gevent==22.10.2 greenlet==2.0.2
 
       - name: Install addon extra dependencies
         run: |
@@ -186,7 +188,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.10"
 
       - name: Download coverage artifacts
         uses: actions/download-artifact@v4
@@ -223,7 +225,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.10"
 
       - name: Install pylint and pylint-odoo
         run: pip install pylint pylint-odoo
@@ -246,7 +248,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.10"
 
       - name: Run bandit on addons
         run: |
@@ -313,7 +315,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.10"
 
       - name: Run radon (complexity and maintainability)
         run: |
