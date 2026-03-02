@@ -105,6 +105,7 @@ jobs:
       - name: Install Odoo Python dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
+          pip install --no-build-isolation cbor2==5.4.2 || pip install cbor2
           pip install -r $ODOO_SRC/requirements.txt
 
       - name: Install addon extra dependencies
