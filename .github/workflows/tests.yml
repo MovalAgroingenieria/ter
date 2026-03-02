@@ -106,7 +106,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
           pip install --no-build-isolation cbor2==5.4.2 || pip install cbor2
-          pip install -r $ODOO_SRC/requirements.txt
+          grep -v "^cbor2==" $ODOO_SRC/requirements.txt | pip install -r /dev/stdin
 
       - name: Install addon extra dependencies
         run: |
