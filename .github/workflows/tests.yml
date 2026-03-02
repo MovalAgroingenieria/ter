@@ -106,7 +106,8 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools wheel
           pip install --no-build-isolation cbor2==5.4.2 || pip install cbor2
-          grep -v "^cbor2==" $ODOO_SRC/requirements.txt | pip install -r /dev/stdin
+          grep -v -E "^(cbor2|gevent|greenlet)==" $ODOO_SRC/requirements.txt | pip install -r /dev/stdin
+          pip install gevent==21.8.0 greenlet==1.1.2
 
       - name: Install addon extra dependencies
         run: |
