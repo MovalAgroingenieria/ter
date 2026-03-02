@@ -6,7 +6,7 @@ name: Automerge
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-  status: {}
+  status:
   check_suite:
     types: [completed]
   workflow_run:
