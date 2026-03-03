@@ -35,7 +35,11 @@ jobs:
           for commit in $COMMITS; do
             MSG=$(git log --format=%s -n 1 $commit)
             echo "Checking: $MSG"
-
+            # Skip automatic merge commits from GitHub
+            if echo "$MSG" | grep -qE '^Merge [0-9a-f]+ into [0-9a-f]+'; then
+              echo "⏭️  Skipping automatic merge commit" | tee -a $GITHUB_STEP_SUMMARY
+              continue
+            fi
             # Regex: [xxx] module_name: description
             # Must have brackets, space, module name, colon, space, description
             if ! echo "$MSG" | grep -qE '^\[[A-Z]{3}\] [a-z0-9_]+: .+'; then
