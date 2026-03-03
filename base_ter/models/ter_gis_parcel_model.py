@@ -4,18 +4,7 @@
 from odoo import api, fields, models
 from psycopg2 import sql
 
-
-def _view_has_column(env, view_name, column_name):
-    env.cr.execute(
-        """
-        SELECT EXISTS (SELECT 1
-                       FROM information_schema.columns
-                       WHERE table_name = %s
-                         AND column_name = %s)
-        """,
-        (view_name, column_name),
-    )
-    return bool(env.cr.fetchone()[0])
+from .. import hooks as base_ter_hooks
 
 
 class TerGisParcelModel(models.Model):
@@ -25,13 +14,16 @@ class TerGisParcelModel(models.Model):
     _log_access = True
 
     def init(self):
-        if _view_has_column(self.env, "ter_gis_parcel_model", "write_date"):
+        # Table ter_gis_parcel is created in pre_init_hook; view must exist
+        # when Odoo checks. ter_parcel must exist too (depends on load order).
+        if not base_ter_hooks._table_exists(self.env, "public", "ter_gis_parcel"):
+            return
+        if not base_ter_hooks._table_exists(self.env, "public", "ter_parcel"):
             return
         self.env.cr.execute(
             sql.SQL(
                 """
-                CREATE
-                OR REPLACE VIEW {} AS (
+                CREATE OR REPLACE VIEW {} AS (
                     SELECT
                         row_number() OVER (ORDER BY tgp.name) AS id,
                         tgp.name,
@@ -39,7 +31,6 @@ class TerGisParcelModel(models.Model):
                         tp.id AS parcel_id,
                         tp.partner_id AS partner_id,
                         tp.active AS is_active,
-
                         NULL::integer AS create_uid,
                         NOW() AT TIME ZONE 'UTC' AS create_date,
                         NULL::integer AS write_uid,

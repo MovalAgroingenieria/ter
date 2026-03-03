@@ -24,6 +24,7 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
+        "data/ter_profile_data.xml",
         "data/ter_unit_sequence_data.xml",
         "data/base_ter_cron.xml",
         "wizards/wizard_import_catalog_csv_views.xml",
@@ -68,7 +69,6 @@
         "python": ["pycryptodome"],
     },
     "oca_data_manual": {
-        "data/ter_profile_data.xml",
         "data/ter_use_type_data.xml",
         "data/ter_destino_cultivo_data.xml",
         "data/ter_procedencia_material_vegetal_data.xml",
