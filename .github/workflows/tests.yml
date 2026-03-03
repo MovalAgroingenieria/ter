@@ -10,6 +10,56 @@ on:
   workflow_dispatch:
 
 jobs:
+  commit-message-format:
+    runs-on: ubuntu-22.04
+    name: Commit message format
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit message format
+        run: |
+          echo "## Commit Message Format Validation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Expected format: \`[xxx] <module_name>: <description>\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          FAIL=0
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            COMMITS=$(git log --format=%H origin/${{ github.event.pull_request.base.ref }}..HEAD)
+          else
+            COMMITS=$(git log --format=%H -1)
+          fi
+          for commit in $COMMITS; do
+            MSG=$(git log --format=%s -n 1 $commit)
+            echo "Checking: $MSG"
+
+            # Regex: [xxx] module_name: description
+            # Must have brackets, space, module name, colon, space, description
+            if ! echo "$MSG" | grep -qE '^\[[A-Z]{3}\] [a-z0-9_]+: .+'; then
+              echo "❌ Invalid format: $MSG" | tee -a $GITHUB_STEP_SUMMARY
+              echo "   Expected: [XXX] module_name: description" | tee -a $GITHUB_STEP_SUMMARY
+              FAIL=1
+            else
+              echo "✅ Valid format: $MSG" | tee -a $GITHUB_STEP_SUMMARY
+            fi
+          done
+          if [ "$FAIL" -eq 1 ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ Some commit messages don't follow the required format." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Required format:** \`[XXX] module_name: description\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Examples:" >> $GITHUB_STEP_SUMMARY
+            echo "- \`[ADD] base_ter: Add new field for parcel manager\`" >> $GITHUB_STEP_SUMMARY
+            echo "- \`[FIX] base_ter_analytic: Fix compute method dependencies\`" >> $GITHUB_STEP_SUMMARY
+            echo "- \`[IMP] l10n_es_territory: Improve performance in SIGPAC import\`" >> $GITHUB_STEP_SUMMARY
+            echo "- \`[REF] ter_analytic_geofolia: Refactor aerial image cache\`" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
   pre-commit:
     runs-on: ubuntu-22.04
     name: pre-commit
