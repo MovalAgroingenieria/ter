@@ -10,6 +10,85 @@ on:
   workflow_dispatch:
 
 jobs:
+  commit-message-format:
+    runs-on: ubuntu-22.04
+    name: Commit message format
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit message format
+        run: |
+          echo "## Commit Message Format Validation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Expected format: \`[XXX] <module_name>: <description>\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          FAIL=0
+
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # For PRs: validate only commits in the PR branch (exclude GitHub's merge commit)
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+            COMMITS=$(git log --format=%H ${BASE_SHA}..${HEAD_SHA})
+            echo "Validating PR commits from ${BASE_SHA:0:7} to ${HEAD_SHA:0:7}" >> $GITHUB_STEP_SUMMARY
+          else
+            # For push: validate all commits in the push (not just the last one)
+            BEFORE_SHA="${{ github.event.before }}"
+            AFTER_SHA="${{ github.event.after }}"
+
+            # Handle initial push (before=0000000...) or force push
+            if [ "$BEFORE_SHA" == "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BEFORE_SHA" 2>/dev/null; then
+              # New branch or force push: validate last commit only
+              COMMITS=$(git log --format=%H -1 ${AFTER_SHA})
+              echo "Validating new/force-pushed commit: ${AFTER_SHA:0:7}" >> $GITHUB_STEP_SUMMARY
+            else
+              # Normal push: validate all commits in range
+              COMMITS=$(git log --format=%H ${BEFORE_SHA}..${AFTER_SHA})
+              echo "Validating push commits from ${BEFORE_SHA:0:7} to ${AFTER_SHA:0:7}" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          for commit in $COMMITS; do
+            MSG=$(git log --format=%s -n 1 $commit)
+            SHORT_SHA=$(git log --format=%h -n 1 $commit)
+            echo "Checking [$SHORT_SHA]: $MSG"
+
+            # Regex: [XXX] module_name: description
+            # Must have: [3 uppercase letters] space module_name colon space description
+            if ! echo "$MSG" | grep -qE '^\[[A-Z]{3}\] [a-z0-9_]+: .+'; then
+              echo "❌ [$SHORT_SHA] Invalid format: $MSG" | tee -a $GITHUB_STEP_SUMMARY
+              echo "   Expected: [XXX] module_name: description" | tee -a $GITHUB_STEP_SUMMARY
+              FAIL=1
+            else
+              echo "✅ [$SHORT_SHA] Valid format: $MSG" | tee -a $GITHUB_STEP_SUMMARY
+            fi
+          done
+
+          if [ "$FAIL" -eq 1 ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ Some commit messages don't follow the required format." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Required format:** \`[XXX] module_name: description\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "- **[XXX]**: 3 uppercase letters (ADD, FIX, IMP, REF, REM, MOV, etc.)" >> $GITHUB_STEP_SUMMARY
+            echo "- **module_name**: lowercase with underscores (base_ter, l10n_es_territory, etc.)" >> $GITHUB_STEP_SUMMARY
+            echo "- **:** Two points (colon) - REQUIRED" >> $GITHUB_STEP_SUMMARY
+            echo "- **description**: Clear description of the change" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Examples:" >> $GITHUB_STEP_SUMMARY
+            echo "- \`[ADD] base_ter: Add new field for parcel manager\`" >> $GITHUB_STEP_SUMMARY
+            echo "- \`[FIX] base_ter_analytic: Fix compute method dependencies\`" >> $GITHUB_STEP_SUMMARY
+            echo "- \`[IMP] l10n_es_territory: Improve performance in SIGPAC import\`" >> $GITHUB_STEP_SUMMARY
+            echo "- \`[REF] ter_analytic_geofolia: Refactor aerial image cache\`" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
   pre-commit:
     runs-on: ubuntu-22.04
     name: pre-commit
