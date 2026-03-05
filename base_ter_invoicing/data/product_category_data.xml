@@ -4,20 +4,14 @@
     <data noupdate="1">
         <record id="product_category_02" model="product.category">
             <field name="name">Areas</field>
-            <field name="billable_item_quantity_field">area_overhead</field>
+            <field name="supports_mass_billing" eval="True" />
+            <field name="billable_item_model_id" ref="base_ter.model_ter_parcel_partnerlink"/>
             <field name="billable_item_detail_desc">{% if billable_item.property_name %}Property: {{ billable_item.property_name }}. {% endif %}Parcel: {{ billable_item.parcel_id.alphanum_code }} ({{ billable_item.parcel_id.area_official }} {{ billable_item.parcel_id.area_unit_name }}). {{ billable_item.profile_id.alphanum_code }}, {{ billable_item.percentage_overhead }}% overhead.</field>
-            <field name="billable_item_domain">area_overhead &gt; 0</field>
-            <field name="aux_01_char_field">parcel_code</field>
-            <field name="aux_01_int_field">number_of_invoices</field>
-            <field name="aux_01_float_field">parcel_area_official</field>
-            <field name="aux_02_char_field">parcel_official_code</field>
-            <field name="aux_02_float_field">percentage_overhead</field>
-            <field name="aux_03_char_field">property_name</field>
-            <field name="aux_03_bool_field">partner_is_company</field>
+            <field name="billable_item_domain">[('area_overhead', '>', 0)]</field>
         </record>
 
         <record id="base_invoicing.product_category_01" model="product.category">
-            <field name="billable_item_domain">partner_code &gt; 0 and partner_parent_id is null and partner_partner_share and partner_id != 1</field>
+            <field name="billable_item_domain">[('partner_code', '>', 0), ('partner_parent_id', '=', False), ('partner_partner_share', '=', True), ('partner_id', '!=', 1)]</field>
         </record>
     </data>
 
@@ -25,7 +19,60 @@
         <record id="product_category_02" model="product.category">
             <field name="category_code">2</field>
             <field name="billable_item_model_id" ref="base_ter.model_ter_parcel_partnerlink"/>
+            <field name="billable_item_quantity_field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__area_overhead"/>
             <field name="parent_id" ref="product.product_category_1"/>
+            <field name="billable_item_domain">[('area_overhead', '>', 0)]</field>
+        </record>
+        <record id="base_invoicing.product_category_01" model="product.category">
+            <field name="billable_item_domain">[('partner_code', '>', 0), ('partner_parent_id', '=', False), ('partner_partner_share', '=', True), ('partner_id', '!=', 1)]</field>
+        </record>
+
+        <!-- Auxiliary columns for selectable items (Areas category).
+             Equivalent to v16: aux_01_char_field→parcel_code, aux_01_int_field→number_of_invoices,
+             aux_01_float_field→parcel_area_official, aux_02_char_field→parcel_official_code,
+             aux_02_float_field→percentage_overhead, aux_03_char_field→property_name,
+             aux_03_bool_field→partner_is_company. Now stored as One2many aux_field_ids. -->
+        <record id="aux_field_line_areas_01" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">1</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__parcel_code"/>
+            <field name="custom_label">Parcel code</field>
+        </record>
+        <record id="aux_field_line_areas_02" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">2</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__number_of_invoices"/>
+            <field name="custom_label">No. of invoices</field>
+        </record>
+        <record id="aux_field_line_areas_03" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">3</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__parcel_area_official"/>
+            <field name="custom_label">Parcel area</field>
+        </record>
+        <record id="aux_field_line_areas_04" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">4</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__parcel_official_code"/>
+            <field name="custom_label">Official code</field>
+        </record>
+        <record id="aux_field_line_areas_05" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">5</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__percentage_overhead"/>
+            <field name="custom_label">% overhead</field>
+        </record>
+        <record id="aux_field_line_areas_06" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">6</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__property_name"/>
+            <field name="custom_label">Property</field>
+        </record>
+        <record id="aux_field_line_areas_07" model="product.category.aux.field.line">
+            <field name="category_id" ref="product_category_02"/>
+            <field name="sequence">7</field>
+            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__partner_is_company"/>
+            <field name="custom_label">Is company</field>
         </record>
     </data>
 
