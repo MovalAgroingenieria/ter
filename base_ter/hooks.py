@@ -390,6 +390,11 @@ def _set_show_catalog_import_wizard(env: api.Environment) -> None:
         todo.sudo().write({"state": "open"})
 
 
+def _ensure_ter_profile_01(env: api.Environment) -> None:
+    """Ensure default profile ter_profile_01 exists (e.g. noupdate skip or migration)."""
+    env["ter.profile"]._ensure_ter_profile_01()
+
+
 def _load_data_translations_es(env: api.Environment) -> None:
     """Load es_ES translations for all translatable data (use_type, attribute, value, profile)."""
     path = Path(__file__).resolve().parent / "data" / "data_translations_es.json"
@@ -415,6 +420,7 @@ def post_init_hook(env: api.Environment, _registry: Optional[object] = None) -> 
     _ensure_postgis(env)
     _create_gis_structures(env)
     _init_params(env)
+    _ensure_ter_profile_01(env)
     _ensure_ter_unit_sequences(env)
     _migrate_ter_unit_parcel_ids(env)
     _load_catalogs_from_csv(env)
