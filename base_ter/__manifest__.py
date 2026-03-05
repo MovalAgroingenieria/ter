@@ -24,7 +24,6 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
-        "data/ter_profile_data.xml",
         "data/ter_unit_sequence_data.xml",
         "data/base_ter_cron.xml",
         "wizards/wizard_import_catalog_csv_views.xml",
