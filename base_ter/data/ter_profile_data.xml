@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ter_profile_01" model="ter.profile">
+        <field name="alphanum_code">Owner</field>
+        <field name="requires_total" eval="True"/>
+        <field name="is_standard" eval="True"/>
+    </record>
+    <record id="ter_profile_02" model="ter.profile">
+        <field name="alphanum_code">Usufructuary</field>
+        <field name="requires_total" eval="False"/>
+        <field name="is_standard" eval="False"/>
+    </record>
+</odoo>

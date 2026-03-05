@@ -27,6 +27,34 @@ class TerProfile(models.Model):
 
     active = fields.Boolean(default=True)
 
+    @api.model
+    def _ensure_ter_profile_01(self):
+        """Ensure default profile base_ter.ter_profile_01 exists (e.g. after migration
+        or when base_ter was installed without loading ter_profile_data.xml).
+        Returns the record. Used by ter.parcel.partnerlink default and
+        base_ter_invoicing.
+        """
+        profile = self.env.ref("base_ter.ter_profile_01", raise_if_not_found=False)
+        if profile:
+            return profile
+        profile = self.create(
+            {
+                "alphanum_code": "Owner",
+                "requires_total": True,
+                "is_standard": True,
+            }
+        )
+        self.env["ir.model.data"].create(
+            {
+                "name": "ter_profile_01",
+                "module": "base_ter",
+                "model": "ter.profile",
+                "res_id": profile.id,
+                "noupdate": True,
+            }
+        )
+        return profile
+
     @api.ondelete(at_uninstall=False)
     def _unlink_except_standard(self):
         if any(self.mapped("is_standard")):

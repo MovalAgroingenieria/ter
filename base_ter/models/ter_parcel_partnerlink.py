@@ -12,7 +12,10 @@ class TerParcelPartnerlink(models.Model):
     _allow_all_contacts = False
 
     def _default_profile_id(self):
-        return self.env.ref("base_ter.ter_profile_01").id
+        profile = self.env.ref("base_ter.ter_profile_01", raise_if_not_found=False)
+        if profile:
+            return profile.id
+        return self.env["ter.profile"]._ensure_ter_profile_01().id
 
     def _domain_partner_id(self):
         return [] if self._allow_all_contacts else [("is_holder", "=", True)]
