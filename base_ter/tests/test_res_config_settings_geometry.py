@@ -14,8 +14,11 @@ class TestResConfigSettingsGeometry(TransactionCase):
         self.env.company.write({"gis_viewer_epsg": 4326})
 
     def test_set_values_calls_update_geometry_on_epsg_change(self):
-        settings = self.env["res.config.settings"].create({"gis_viewer_epsg": 25830})
-
+        # Company has 4326 (setUp). Create settings without gis_viewer_epsg so company
+        # stays 4326; set gis_viewer_epsg in cache so set_values sees new_epsg=25830.
+        settings = self.env["res.config.settings"].create({})
+        field = type(settings).gis_viewer_epsg
+        self.env.cache.set(settings, field, 25830)
         with patch.object(
             type(settings), "update_geometry", return_value=(True, "")
         ) as mocked:
@@ -23,8 +26,9 @@ class TestResConfigSettingsGeometry(TransactionCase):
             mocked.assert_called_once_with(4326, 25830)
 
     def test_set_values_raises_usererror_on_failed_update(self):
-        settings = self.env["res.config.settings"].create({"gis_viewer_epsg": 25830})
-
+        settings = self.env["res.config.settings"].create({})
+        field = type(settings).gis_viewer_epsg
+        self.env.cache.set(settings, field, 25830)
         with patch.object(
             type(settings), "update_geometry", return_value=(False, "ter_gis_parcel")
         ):
