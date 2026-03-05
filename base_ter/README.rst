@@ -40,7 +40,7 @@ Functionality:
   (format: {type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}).
   Kanban (default), list, form, pivot views. GIS viewer, archive, validate.
 * **Catalog data** (profiles, use types, attributes, attribute values): loaded
-  from **CSV files** in the module's ``catalogos_csv/`` folder (UTF-8, semicolon
+  from **CSV files** in the module's ``catalogs_csv/`` folder (UTF-8, semicolon
   separator). On install/upgrade, data is imported automatically; you can
   re-import or run the import via **Configuration > Import Territory
   Catalogs from CSV** (wizard). After an upgrade, the Territory settings screen

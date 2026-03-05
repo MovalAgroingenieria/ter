@@ -25,7 +25,7 @@ class WizardImportCatalogCsv(models.TransientModel):
                 "<p>Territory catalogs (profiles, use types, attributes and "
                 "values) are imported from <strong>local CSV files</strong> "
                 "included in the <em>Base Territory</em> module.</p>"
-                "<p>Files must be in the module's <code>catalogos_csv</code> "
+                "<p>Files must be in the module's <code>catalogs_csv</code> "
                 "folder, with UTF-8 encoding and semicolon (;) as separator.</p>"
                 "<p>Click <strong>Import now</strong> to load or update data "
                 "from those files.</p>"

@@ -11,6 +11,7 @@ from typing import Optional
 
 from odoo import api
 from odoo.exceptions import ValidationError
+from odoo.modules import get_module_path
 from psycopg2 import sql
 
 from .load_catalog_csv import load_catalogs_from_csv as _load_catalogs_from_csv_impl
@@ -287,22 +288,41 @@ def _migrate_ter_unit_parcel_ids(env: api.Environment) -> None:
 
 
 def _load_catalogs_from_csv(env: api.Environment) -> None:
-    """Load territory catalogs from CSV files in the module (post_install style)."""
+    """Load territory catalogs from CSV files in the module (install and update)."""
+    base_dir = (
+        Path(get_module_path("base_ter", display_warning=False) or "") / "catalogs_csv"
+    )
+    if not base_dir.exists():
+        _logger.info(
+            "base_ter: catalogs_csv folder not found at %s, skipping CSV load",
+            base_dir,
+        )
+        return
     try:
-        _load_catalogs_from_csv_impl(env)
+        counts = _load_catalogs_from_csv_impl(env)
+        _logger.info(
+            "base_ter: loaded catalogs from CSV: %d profiles, %d use types, %d attributes, %d values",
+            counts["profiles"],
+            counts["use_types"],
+            counts["attributes"],
+            counts["values"],
+        )
     except Exception as exc:
         _logger.warning(
-            "Could not load territory catalogs from CSV (dir may be missing): %s",
+            "base_ter: could not load territory catalogs from CSV: %s",
             exc,
         )
 
 
 def _set_show_catalog_import_wizard(env: api.Environment) -> None:
-    """Set flag so the user is prompted to open the import wizard (e.g. after upgrade)."""
+    """Set flag and open config todo so the user is prompted to run the import wizard (e.g. after install/upgrade)."""
     env["ir.config_parameter"].sudo().set_param(
         "base_ter.show_catalog_import_wizard",
         "True",
     )
+    todo = env.ref("base_ter.config_todo_import_catalog_csv", raise_if_not_found=False)
+    if todo:
+        todo.sudo().write({"state": "open"})
 
 
 def _load_data_translations_es(env: api.Environment) -> None:
