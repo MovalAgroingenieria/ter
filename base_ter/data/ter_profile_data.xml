@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Perfil por defecto referenciado por ter.parcel.partnerlink y validación de
-  plantillas (base_invoicing). Debe existir al cargar datos para que
-  env.ref("base_ter.ter_profile_01") no falle al instalar base_ter_invoicing.
-  El CSV catalogs_csv/ter_profile.csv actualiza estos registros en post_init_hook.
--->
 <odoo noupdate="1">
     <record id="ter_profile_01" model="ter.profile">
         <field name="alphanum_code">Owner</field>
