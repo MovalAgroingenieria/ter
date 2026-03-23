@@ -413,6 +413,17 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_res_config_settings__allow_non_holder_as_manager
+msgid "Allow non-holder contacts as parcel managers"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__allow_non_holder_as_manager
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
+msgid "Allow non-holder as manager"
+msgstr ""
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_parcel_code_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_partner_code_view_form
 msgid "Apply"
@@ -937,6 +948,21 @@ msgstr ""
 #: code:addons/base_ter/wizards/wizard_set_partner_code.py:0
 #, python-format
 msgid "If a partner has any parcel, it is not possible to reset the code."
+msgstr ""
+
+#. module: base_ter
+#: model:ir.model.fields,help:base_ter.field_ter_parcel__allow_non_holder_as_manager
+msgid ""
+"If checked, any contact can be assigned as parcel manager for this parcel, "
+"even if they are not a holder (partner code not required)."
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
+msgid ""
+"If checked, any contact can be assigned\n"
+"                                    as a parcel manager, even if they are\n"
+"                                    not a holder (partner code not required)"
 msgstr ""
 
 #. module: base_ter

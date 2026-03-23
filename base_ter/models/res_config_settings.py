@@ -30,6 +30,10 @@ class ResConfigSettings(models.TransientModel):
         string='Force the parcel manager and the property owner to be the same',
         config_parameter='base_ter.same_parcelmanager_propertyowner',)
 
+    allow_non_holder_as_manager = fields.Boolean(
+        string='Allow non-holder contacts as parcel managers',
+        config_parameter='base_ter.allow_non_holder_as_manager',)
+
     aerial_image_wmsbase_url = fields.Char(
         string='WMS of the base image: URL',
         size=255,
