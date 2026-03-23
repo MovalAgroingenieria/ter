@@ -437,6 +437,17 @@ msgstr ""
 "GIS"
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_res_config_settings__allow_non_holder_as_manager
+msgid "Allow non-holder contacts as parcel managers"
+msgstr "Permitir contactos no titulares como gestores de parcela"
+
+#. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__allow_non_holder_as_manager
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
+msgid "Allow non-holder as manager"
+msgstr "Permitir no titular como gestor"
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_parcel_code_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_partner_code_view_form
 msgid "Apply"
@@ -972,6 +983,26 @@ msgid "If a partner has any parcel, it is not possible to reset the code."
 msgstr ""
 "Si un contacto ya tiene a su cargo alguna parcela, no es posible eliminar su"
 " código de gestor."
+
+#. module: base_ter
+#: model:ir.model.fields,help:base_ter.field_ter_parcel__allow_non_holder_as_manager
+msgid ""
+"If checked, any contact can be assigned as parcel manager for this parcel, "
+"even if they are not a holder (partner code not required)."
+msgstr ""
+"Si está marcado, cualquier contacto puede ser asignado como gestor de esta "
+"parcela, aunque no sea titular (no se requiere código de gestor)."
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
+msgid ""
+"If checked, any contact can be assigned\n"
+"                                    as a parcel manager, even if they are\n"
+"                                    not a holder (partner code not required)"
+msgstr ""
+"Si está marcado, cualquier contacto puede ser\n"
+"                                    asignado como gestor de parcela, aunque\n"
+"                                    no sea titular (no se requiere código de gestor)"
 
 #. module: base_ter
 #: model:ir.model.fields,help:base_ter.field_ter_parcel__message_needaction

@@ -96,6 +96,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="div_allow_non_holder_as_manager"
+                            class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="allow_non_holder_as_manager"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="allow_non_holder_as_manager"/>
+                                <div class="text-muted">
+                                    If checked, any contact can be assigned
+                                    as a parcel manager, even if they are
+                                    not a holder (partner code not required)
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <h2>Aerial Images</h2>
                     <div class="row mt16 o_settings_container" name="aerial_settings">
