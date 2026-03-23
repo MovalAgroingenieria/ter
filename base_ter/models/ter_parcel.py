@@ -184,6 +184,13 @@ class TerParcel(models.Model):
     active = fields.Boolean(
         default=True,)
 
+    allow_non_holder_as_manager = fields.Boolean(
+        string='Allow non-holder as manager',
+        default=False,
+        help='If checked, any contact can be assigned as parcel manager '
+             'for this parcel, even if they are not a holder '
+             '(partner code not required).',)
+
     _sql_constraints = [
         ('area_official_ok', 'CHECK (area_official >= 0)',
          'Incorrect value for "Official Area".'),
@@ -390,11 +397,18 @@ class TerParcel(models.Model):
                         _('The parcel manager and the property manager must '
                           'be the same person.'))
 
-    @api.constrains('partner_id', 'partnerlink_ids')
+    @api.constrains('partner_id', 'partnerlink_ids',
+                    'allow_non_holder_as_manager')
     def _check_partner_id(self):
+        config = self.env['ir.config_parameter'].sudo()
+        global_allow_non_holder = config.get_param(
+            'base_ter.allow_non_holder_as_manager', False)
         for record in self:
             if record.partner_id:
-                if not record.partner_id.is_holder:
+                allow_non_holder = (
+                    global_allow_non_holder
+                    or record.allow_non_holder_as_manager)
+                if not allow_non_holder and not record.partner_id.is_holder:
                     raise exceptions.ValidationError(
                         _('The contact chosen as main is not a manager.'))
                 if not record.partnerlink_ids:
@@ -551,6 +565,20 @@ class TerParcel(models.Model):
                         initial_label = _(label_name)
                         final_label = initial_label + ' (' + measure_name + ')'
                         node.set('string', final_label)
+            if view_type == 'form':
+                config = self.env['ir.config_parameter'].sudo()
+                allow_non_holder = config.get_param(
+                    'base_ter.allow_non_holder_as_manager', False)
+                if allow_non_holder:
+                    for node in arch.xpath(
+                            "//field[@name='partner_id']"):
+                        if node.get('domain'):
+                            node.attrib.pop('domain')
+                # Show/hide allow_non_holder_as_manager field
+                for node in arch.xpath(
+                        "//field[@name='allow_non_holder_as_manager']"):
+                    if allow_non_holder:
+                        node.set('invisible', '1')
         return arch, view
 
     def reset_aerial_image(self):
@@ -623,7 +651,15 @@ class TerParcelPartnerlink(models.Model):
     def _set_domain_partner_id(self):
         resp = []
         if not self._allow_all_contacts:
-            resp = [('is_holder', '=', True)]
+            config = self.env['ir.config_parameter'].sudo()
+            allow_non_holder = config.get_param(
+                'base_ter.allow_non_holder_as_manager', False)
+            if not allow_non_holder:
+                # Check per-parcel override
+                if self.parcel_id and self.parcel_id.allow_non_holder_as_manager:
+                    allow_non_holder = True
+            if not allow_non_holder:
+                resp = [('is_holder', '=', True)]
         return resp
 
     parcel_id = fields.Many2one(
