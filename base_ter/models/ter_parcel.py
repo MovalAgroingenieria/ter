@@ -4,6 +4,7 @@
 import base64
 
 from odoo import fields, models, api, exceptions, _
+from odoo.tools import float_compare
 
 
 class TerParcel(models.Model):
@@ -424,7 +425,7 @@ class TerParcel(models.Model):
                                   'contact must be the same person.'))
                         break
 
-    @api.constrains('partner_id', 'partnerlink_ids')
+    @api.constrains('partnerlink_ids')
     def _check_partnerlink_ids(self):
         for record in self:
             if record.partnerlink_ids:
@@ -452,15 +453,14 @@ class TerParcel(models.Model):
                     for profile in profile_ids:
                         if profile.requires_total:
                             partnerlinks_of_profile = \
-                                self.env['ter.parcel.partnerlink'].search(
-                                    [('parcel_id', '=', record.id),
-                                     ('profile_id', '=', profile.id)])
+                                record.partnerlink_ids.filtered(
+                                    lambda pl, p=profile: pl.profile_id == p)
                             if partnerlinks_of_profile:
                                 total_percentage = \
                                     sum(partnerlink_of_profile.percentage
                                         for partnerlink_of_profile in
                                         partnerlinks_of_profile)
-                                if total_percentage != 100:
+                                if float_compare(total_percentage, 100.0, precision_digits=2) != 0:
                                     raise exceptions.ValidationError(
                                         _('Review the profile percentages: '
                                           'there is a percentage profile that '

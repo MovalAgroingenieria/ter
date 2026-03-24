@@ -49,8 +49,6 @@
                                        options="{'no_quick_create':True}"
                                        readonly="context.get('default_partner_id', False)"
                                        context="{'context_default_partner_code': True}"/>
-                                <field name="allow_non_holder_as_manager"
-                                       string="Allow non-holder as manager"/>
                             </div>
                             <field name="allow_non_holder_as_manager"
                                    string="Allow non-holder as manager"/>
