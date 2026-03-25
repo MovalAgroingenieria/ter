@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wizard_import_catalog_csv_user,wizard.import.catalog.csv.user,base_ter_data_import.model_wizard_import_catalog_csv,base_ter.group_ter_user,1,0,0,0
+access_wizard_import_catalog_csv_manager,wizard.import.catalog.csv.manager,base_ter_data_import.model_wizard_import_catalog_csv,base_ter.group_ter_manager,1,1,1,1

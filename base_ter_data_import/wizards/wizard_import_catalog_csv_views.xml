@@ -43,4 +43,11 @@
         <field name="state">done</field>
     </record>
 
+    <menuitem id="menu_import_catalog_csv"
+              name="Import Territory Catalogs from CSV"
+              parent="base_ter.menu_configuration"
+              action="wizard_import_catalog_csv_action"
+              sequence="45"
+              groups="base_ter.group_ter_manager"/>
+
 </odoo>

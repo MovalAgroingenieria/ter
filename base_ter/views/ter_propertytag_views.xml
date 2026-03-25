@@ -11,6 +11,7 @@
                     <group name="master_data">
                         <group name="master_data_left">
                             <field name="alphanum_code" string="Tag Name"/>
+                            <field name="color" widget="color_picker"/>
                         </group>
                         <group name="master_data_right"/>
                     </group>
@@ -28,8 +29,9 @@
         <field name="name">ter.propertytag.view.list</field>
         <field name="model">ter.propertytag</field>
         <field name="arch" type="xml">
-            <list default_order="alphanum_code">
+            <list default_order="alphanum_code" editable="top">
                 <field name="alphanum_code" string="Tag Name"/>
+                <field name="color" widget="color_picker" optional="show"/>
             </list>
         </field>
     </record>
