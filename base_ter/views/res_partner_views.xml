@@ -87,8 +87,7 @@
                                required="1"
                                style="width:100px;margin-top:6px;margin-left:12px"
                                class="align-middle"
-                               default_focus="1"
-                               readonly="id"/>
+                               default_focus="1"/>
                     </h1>
                 </div>
             </xpath>
@@ -104,16 +103,15 @@
                 <field name="partner_code" string="Code"/>
                 <field name="name" string="Name"/>
                 <field name="vat" string="VAT" class="text-center"/>
-                <field name="number_of_properties" string="Properties"/>
-                <field name="number_of_parcels" string="Parcels"/>
-
                 <button name="action_gis_viewer_parcel"
                         title="GIS Viewer"
                         type="object"
-                        class="oe_stat_button"
+                        class="oe_stat_button o_list_button"
                         icon="fa-map-marker"
                         invisible="number_of_parcels == 0"/>
-
+                <field name="phones" class="text-center"/>
+                <field name="number_of_properties" string="Properties"/>
+                <field name="number_of_parcels" string="Parcels"/>
                 <field name="area_official_parcels"/>
             </list>
         </field>

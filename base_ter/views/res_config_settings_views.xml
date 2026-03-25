@@ -12,15 +12,6 @@
 
                     <app name="base_ter" string="Territory" data-string="Territory">
 
-                        <block title="Catalog import" name="base_ter_catalog_import" invisible="not show_catalog_import_wizard">
-                            <setting id="base_ter_catalog_import_wizard_info" string="Import territory catalogs">
-                                <div class="alert alert-info mb0" role="alert">
-                                    <p class="mb8">Territory catalogs are imported from local CSV files in the module. You can run the import now.</p>
-                                    <button name="action_open_import_catalog_csv_wizard" string="Import catalogs from CSV" type="object" class="btn btn-primary"/>
-                                </div>
-                            </setting>
-                        </block>
-
                         <block title="General" name="base_ter_general">
                             <setting id="base_ter_area_unit_is_ha"
                                      string="Area unit is hectare"

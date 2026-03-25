@@ -138,13 +138,13 @@
         <field name="model">ter.parcel.sigpaclink</field>
         <field name="arch" type="xml">
             <list class="o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree" create="false" delete="false">
-                <field name="parcel_id" widget="many2one_unclickable"/>
+                <field name="parcel_id" options="{'no_open': True}" class="text-center"/>
                 <button name="action_gis_viewer" type="object" icon="fa-map-marker" title="GIS Viewer"/>
-                <field name="sigpac_id" widget="many2one_unclickable"/>
+                <field name="sigpac_id" options="{'no_open': True}" class="text-center"/>
                 <button name="action_sigpac_viewer" type="object" icon="fa-map-marker" title="SIGPAC Viewer"/>
                 <field name="area_ha"/>
                 <field name="intersection_percentage"/>
-                <field name="municipality_id" widget="many2one_unclickable"/>
+                <field name="municipality_id" options="{'no_open': True}"/>
                 <field name="pend_media_porc"/>
                 <field name="coef_rega"/>
                 <field name="uso_sigpac"/>
@@ -221,14 +221,14 @@
         <field name="model">ter.parcel.sigpaclink</field>
         <field name="arch" type="xml">
             <list class="o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree" create="false" delete="false">
-                <field name="enclosure_number"/>
-                <field name="sigpac_id"/>
-                <button name="action_sigpac_viewer" type="object" icon="fa-map-marker" title="SIGPAC Viewer"/>
-                <field name="uso_sigpac"/>
-                <field name="coef_rega"/>
-                <field name="parcel_area_ha"/>
-                <field name="area_ha"/>
-                <field name="intersection_percentage"/>
+                <field name="enclosure_number" optional="show"/>
+                <field name="sigpac_id" optional="show"/>
+                <button name="action_sigpac_viewer" type="object" icon="fa-map-marker" title="SIGPAC Viewer" class="o_list_button"/>
+                <field name="uso_sigpac" optional="show"/>
+                <field name="coef_rega" optional="show"/>
+                <field name="parcel_area_ha" optional="show"/>
+                <field name="area_ha" optional="show"/>
+                <field name="intersection_percentage" optional="show"/>
             </list>
         </field>
     </record>

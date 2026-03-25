@@ -14,7 +14,9 @@ def migrate(cr, _version):
     env = api.Environment(cr, odoo.SUPERUSER_ID, {})
     try:
         # pylint: disable=import-outside-toplevel
-        from odoo.addons.base_ter.load_catalog_csv import load_catalogs_from_csv
+        from odoo.addons.base_ter_data_import.load_catalog_csv import (
+            load_catalogs_from_csv,
+        )
 
         counts = load_catalogs_from_csv(env)
         _logger.info(
@@ -28,6 +30,6 @@ def migrate(cr, _version):
     except Exception as e:
         _logger.warning(
             "base_ter: could not load catalogs from CSV "
-            "(run Import wizard if needed): %s",
+            "(install base_ter_data_import or run Import wizard if needed): %s",
             e,
         )

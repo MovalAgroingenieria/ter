@@ -24,7 +24,7 @@ from odoo import api
 from odoo.modules import get_module_path
 
 BOOL_TRUE = ("1", "true", "yes", "sí", "si")
-MODULE_NAME = "base_ter"
+MODULE_NAME = "base_ter_data_import"
 BATCH_SIZE = 500
 
 
