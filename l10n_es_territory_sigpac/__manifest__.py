@@ -25,8 +25,8 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "l10n_es_territory_sigpac/static/src/scss/l10n_es_territory_sigpac.scss",
             "l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css",
+            "l10n_es_territory_sigpac/static/src/scss/l10n_es_territory_sigpac.scss",
         ],
         "web.assets_frontend": [
             "l10n_es_territory_sigpac/static/lib/sigpac_iconset/iconset.css",

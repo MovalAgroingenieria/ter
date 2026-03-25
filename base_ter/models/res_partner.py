@@ -102,8 +102,15 @@ class ResPartner(models.Model):
         compute="_compute_unit_use_count",
     )
 
+    phones = fields.Char(string="Phone(s)", store=True, compute="_compute_phones")
+
     _sql_constraints = [
         ("partner_code_ok", "CHECK (partner_code >= 0)", "Wrong partner code."),
+        (
+            "partner_code_uniq",
+            "UNIQUE(partner_code) WHERE partner_code IS NOT NULL",
+            "Repeated partner code.",
+        ),
     ]
 
     @api.depends("partner_code")
@@ -181,6 +188,16 @@ class ResPartner(models.Model):
             unit_name = self.env._("ha")
         for record in self:
             record.area_unit_name = unit_name
+
+    @api.depends("phone", "mobile")
+    def _compute_phones(self):
+        for record in self:
+            phones = []
+            if record.mobile:
+                phones.append(record.mobile)
+            if record.phone:
+                phones.append(record.phone)
+            record.phones = ", ".join(phones)
 
     @api.constrains("partner_code")
     def _check_partner_code(self):

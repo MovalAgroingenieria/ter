@@ -27,7 +27,6 @@
         "data/ter_profile_data.xml",
         "data/ter_unit_sequence_data.xml",
         "data/base_ter_cron.xml",
-        "wizards/wizard_import_catalog_csv_views.xml",
         "wizards/wizard_import_kml_views.xml",
         "wizards/wizard_set_parcel_code_views.xml",
         "wizards/wizard_set_partner_code_views.xml",

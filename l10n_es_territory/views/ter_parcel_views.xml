@@ -60,18 +60,17 @@
         <field name="model">ter.parcel</field>
         <field name="inherit_id" ref="base_ter.ter_parcel_view_tree"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='official_code']" position="after">
-                <field name="cadastral_subparcel" class="text-center"/>
+            <xpath expr="//button[@name='action_gis_viewer']" position="attributes">
+                <attribute name="class">oe_stat_button o_list_button o_list_button_group_first</attribute>
             </xpath>
-
             <xpath expr="//button[@name='action_gis_viewer']" position="before">
                 <field name="official_code" invisible="1"/>
                 <button
                     name="action_show_cadastral_form"
+                    title="Cadastre"
                     type="object"
-                    icon="fa-info-circle"
-                    string="Cadastre"
-                    class="btn btn-link"
+                    icon="fa-cubes"
+                    class="oe_stat_button o_list_button o_list_button_group_last"
                     invisible="not official_code"
                 />
             </xpath>

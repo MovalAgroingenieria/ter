@@ -5,6 +5,8 @@ from odoo import _, api, fields, models
 
 from ..load_catalog_csv import load_catalogs_from_csv
 
+CATALOG_PARAM = "base_ter_data_import.show_catalog_import_wizard"
+
 
 class WizardImportCatalogCsv(models.TransientModel):
     _name = "wizard.import.catalog.csv"
@@ -24,7 +26,7 @@ class WizardImportCatalogCsv(models.TransientModel):
             wiz.message = _(
                 "<p>Territory catalogs (profiles, use types, attributes and "
                 "values) are imported from <strong>local CSV files</strong> "
-                "included in the <em>Base Territory</em> module.</p>"
+                "included in the <em>Base Territory Catalogs</em> module.</p>"
                 "<p>Files must be in the module's <code>catalogs_csv</code> "
                 "folder, with UTF-8 encoding and semicolon (;) as separator.</p>"
                 "<p>Click <strong>Import now</strong> to load or update data "
@@ -44,10 +46,7 @@ class WizardImportCatalogCsv(models.TransientModel):
             self.state = "done"
             return self._reopen_wizard()
 
-        env["ir.config_parameter"].sudo().set_param(
-            "base_ter.show_catalog_import_wizard",
-            "False",
-        )
+        env["ir.config_parameter"].sudo().set_param(CATALOG_PARAM, "False")
         self.result_message = (
             _(
                 "<p class='text-success'><strong>Import completed.</strong></p>"
