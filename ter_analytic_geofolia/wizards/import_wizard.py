@@ -1,9 +1,9 @@
-# Copyright 2026 Moval Agroingeniería S.L.
+# 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 import logging
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -29,7 +29,7 @@ class GeofoliaImportWizard(models.TransientModel):
     def action_import(self):
         self.ensure_one()
         if not self.file_data:
-            raise UserError(_("No file provided."))
+            raise UserError(self.env._("No file provided."))
 
         try:
             itype = self.import_type
@@ -39,7 +39,7 @@ class GeofoliaImportWizard(models.TransientModel):
             with self.env.cr.savepoint():
                 job = self.env["geofolia.import.job"].create(
                     {
-                        "name": self.file_name or _("Geofolia Import"),
+                        "name": self.file_name or self.env._("Geofolia Import"),
                         "import_type": itype,
                         "file_name": self.file_name,
                         "file_data": self.file_data,
@@ -53,7 +53,7 @@ class GeofoliaImportWizard(models.TransientModel):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("Import error"),
+                    "title": self.env._("Import error"),
                     "message": str(exc),
                     "type": "danger",
                     "sticky": True,
@@ -65,7 +65,7 @@ class GeofoliaImportWizard(models.TransientModel):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("Import failed"),
+                    "title": self.env._("Import failed"),
                     "message": str(exc) or type(exc).__name__,
                     "type": "danger",
                     "sticky": True,
@@ -97,4 +97,4 @@ class GeofoliaImportWizard(models.TransientModel):
             if isinstance(payload.get("Products"), list):
                 return "products"
 
-        raise UserError(_("Cannot autodetect JSON type. Choose it manually."))
+        raise UserError(self.env._("Cannot autodetect JSON type. Choose it manually."))

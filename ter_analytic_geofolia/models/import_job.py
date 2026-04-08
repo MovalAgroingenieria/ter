@@ -1,13 +1,14 @@
-# Copyright 2026 Moval Agroingeniería S.L.
+# 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 import base64
+import binascii
 import json
 import re
 import traceback
 from datetime import datetime, timedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -16,7 +17,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
     _description = "Geofolia Import Job"
     _order = "id desc"
 
-    name = fields.Char(required=True, default=lambda self: _("New"))
+    name = fields.Char(required=True, default=lambda self: self.env._("New"))
     import_type = fields.Selection(
         selection=[
             ("fields", "Fields (Plots)"),
@@ -131,7 +132,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 else:
                     job.apply_state = "done"
                 job.error = False
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
                 job.state = "error"
                 job.apply_state = "error"
                 job.error = job._format_exception(exc)
@@ -183,7 +184,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return False
         return {
             "type": "ir.actions.act_window",
-            "name": _("Created / Updated"),
+            "name": self.env._("Created / Updated"),
             "res_model": "geofolia.import.line",
             "view_mode": "list,form",
             "domain": [
@@ -200,7 +201,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return False
         return {
             "type": "ir.actions.act_window",
-            "name": _("Lines with error"),
+            "name": self.env._("Lines with error"),
             "res_model": "geofolia.import.line",
             "view_mode": "list,form",
             "domain": [("job_id", "=", self.id), ("sync_state", "=", "error")],
@@ -211,7 +212,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         """Open list of job lines (full mode block) filtered by processed/error."""
         self.ensure_one()
         processed_states = ("created", "updated", "no_action", "skipped")
-        name = _("Processed") if created else _("Errors")
+        name = self.env._("Processed") if created else self.env._("Errors")
         domain = [("job_id", "=", self.id)]
         if created:
             domain.append(("sync_state", "in", processed_states))
@@ -328,7 +329,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return False
         return {
             "type": "ir.actions.act_window",
-            "name": _("Timesheet lines"),
+            "name": self.env._("Timesheet lines"),
             "res_model": "account.analytic.line",
             "view_mode": "list,form",
             "domain": [("id", "in", self.timesheet_line_ids.ids)],
@@ -341,7 +342,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return False
         return {
             "type": "ir.actions.act_window",
-            "name": _("FSM Orders (Activities)"),
+            "name": self.env._("FSM Orders (Activities)"),
             "res_model": "fsm.order",
             "view_mode": "list,form",
             "domain": [("id", "in", self.fsm_order_ids.ids)],
@@ -354,7 +355,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return False
         return {
             "type": "ir.actions.act_window",
-            "name": _("Partners"),
+            "name": self.env._("Partners"),
             "res_model": "geofolia.import.partner.line",
             "view_mode": "list,form",
             "domain": [("job_id", "=", self.id)],
@@ -367,7 +368,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return False
         return {
             "type": "ir.actions.act_window",
-            "name": _("Activities"),
+            "name": self.env._("Activities"),
             "res_model": "geofolia.import.activity.line",
             "view_mode": "list,form",
             "domain": [("job_id", "=", self.id)],
@@ -377,30 +378,34 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
     def _load_json_payload(self):
         self.ensure_one()
         if not self.file_data:
-            raise UserError(_("No file provided."))
+            raise UserError(self.env._("No file provided."))
 
         try:
             raw = base64.b64decode(self.file_data)
-        except Exception as exc:  # noqa: BLE001
-            raise UserError(_("Invalid file content: %s") % str(exc)) from exc
+        except (binascii.Error, ValueError) as exc:
+            raise UserError(
+                self.env._("Invalid file content: %(error)s", error=str(exc))
+            ) from exc
 
         last_exc = None
         for encoding in ("utf-8-sig", "utf-8"):
             try:
                 return json.loads(raw.decode(encoding))
-            except Exception as exc:  # noqa: BLE001
+            except (json.JSONDecodeError, UnicodeDecodeError, ValueError) as exc:
                 last_exc = exc
 
-        raise UserError(_("Invalid JSON file: %s") % str(last_exc)) from last_exc
+        raise UserError(
+            self.env._("Invalid JSON file: %(error)s", error=str(last_exc))
+        ) from last_exc
 
     def _parse_payload(self, payload):
         self.ensure_one()
         if not isinstance(payload, dict):
-            raise UserError(_("JSON root must be an object."))
+            raise UserError(self.env._("JSON root must be an object."))
 
         info = payload.get("Information")
         if not isinstance(info, dict):
-            raise UserError(_("Missing or invalid 'Information' object."))
+            raise UserError(self.env._("Missing or invalid 'Information' object."))
         self.info_json = info
 
         self._clear_lines()
@@ -408,14 +413,14 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         if self.import_type == "fields":
             items = payload.get("Fields")
             if not isinstance(items, list):
-                raise UserError(_("Missing or invalid 'Fields' array."))
+                raise UserError(self.env._("Missing or invalid 'Fields' array."))
             self._create_lines_from_fields(items)
             return
 
         if self.import_type == "products":
             items = payload.get("Products")
             if not isinstance(items, list):
-                raise UserError(_("Missing or invalid 'Products' array."))
+                raise UserError(self.env._("Missing or invalid 'Products' array."))
             self._create_lines_from_products(items)
             return
 
@@ -499,7 +504,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
     def _json_text(self, value):
         try:
             return json.dumps(value, ensure_ascii=False)
-        except Exception:  # noqa: BLE001
+        except (TypeError, ValueError, OverflowError):
             return str(value)
 
     def _format_exception(self, exc):
@@ -517,7 +522,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             line.write(
                 {"sync_state": "error", "sync_message": self._format_exception(exc)}
             )
-        except Exception:  # noqa: BLE001
+        except Exception:  # noqa: BLE001  # pylint: disable=W0718
             self.env.cr.rollback()
             raise exc from None
 
@@ -741,8 +746,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             self.env["geofolia.import.equipment.line"].create(vals_list)
 
     def _create_activity_lines(self, items):
-        ActivityLine = self.env["geofolia.import.activity.line"]
-        EmpLine = self.env["geofolia.import.activity.employee.line"]
+        activity_line_obj = self.env["geofolia.import.activity.line"]
+        emp_line_obj = self.env["geofolia.import.activity.employee.line"]
 
         act_vals = []
         emp_vals = []
@@ -774,7 +779,11 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 }
             )
 
-        activities = ActivityLine.create(act_vals) if act_vals else ActivityLine
+        activities = (
+            activity_line_obj.create(act_vals)
+            if act_vals
+            else activity_line_obj
+        )
         by_external = {a.external_id: a for a in activities}
 
         for it in items:
@@ -811,7 +820,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 )
 
         if emp_vals:
-            EmpLine.create(emp_vals)
+            emp_line_obj.create(emp_vals)
 
     @api.depends(
         "line_ids.sync_state",
@@ -1042,11 +1051,11 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         mapped_to_polygon (GIS geometry), so the chosen parcel always
         coincides with a parcel we have in GIS.
         """
-        TerUnit = self.env["ter.use_unit"]
+        ter_unit_obj = self.env["ter.use_unit"]
         geom_ewkt = (line.geography_wkt or "").strip() or False
         parcel = False
         if geom_ewkt:
-            temp_unit = TerUnit.new({})
+            temp_unit = ter_unit_obj.new({})
             parcel = temp_unit._get_parcel_from_geometry(geom_ewkt)
         if not parcel and default_parcel:
             if getattr(default_parcel, "mapped_to_polygon", False):
@@ -1057,7 +1066,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         line.write(
             {
                 "sync_state": "error",
-                "sync_message": _("No parcel found for this GIS."),
+                "sync_message": self.env._("No parcel found for this GIS."),
             }
         )
 
@@ -1065,7 +1074,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         line.write(
             {
                 "sync_state": "error",
-                "sync_message": _(
+                "sync_message": self.env._(
                     "No date range. Set harvest year in data or "
                     "configure Geofolia default date range."
                 ),
@@ -1076,7 +1085,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         self, location, line, ctx
     ):  # pylint: disable=too-many-branches
         """Update or create ter.use_unit for an existing fsm.location."""
-        TerUnit = self.env["ter.use_unit"]
+        ter_unit_obj = self.env["ter.use_unit"]
         loc_name = ctx["loc_name"]
         if not location.ter_use_unit_id.geofolia_external_id and ctx.get("ext_id"):
             location.ter_use_unit_id.sudo().write(
@@ -1107,7 +1116,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     "fsm_location_id": location.id,
                     "ter_use_unit_id": unit.id,
                     "sync_state": "updated",
-                    "sync_message": _("Updated location and use unit."),
+                    "sync_message": self.env._("Updated location and use unit."),
                 }
             )
             return
@@ -1117,7 +1126,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             line.write(
                 {
                     "sync_state": "error",
-                    "sync_message": _(
+                    "sync_message": self.env._(
                         "Existing location but cannot create "
                         "ter.use_unit (parcel/date range missing)."
                     ),
@@ -1125,7 +1134,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             )
             return
         ext_id = ctx.get("ext_id")
-        unit = TerUnit.search([("geofolia_external_id", "=", ext_id)], limit=1)
+        unit = ter_unit_obj.search([("geofolia_external_id", "=", ext_id)], limit=1)
         if not unit:
             unit_vals = {
                 "parcel_id": parcel.id,
@@ -1143,7 +1152,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             }
             if ctx.get("geom_ewkt"):
                 unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
-            unit = TerUnit.create(unit_vals)
+            unit = ter_unit_obj.create(unit_vals)
         else:
             unit_vals = {
                 "fsm_location_id": location.id,
@@ -1171,15 +1180,15 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 "fsm_location_id": location.id,
                 "ter_use_unit_id": unit.id,
                 "sync_state": "created",
-                "sync_message": _("Created use unit and linked to location."),
+                "sync_message": self.env._("Created use unit and linked to location."),
             }
         )
 
     def _field_line_apply_new_location(self, line, ctx):
         """Create ter.use_unit first, then fsm.location (ter_use_unit_id required)."""
-        FsmLocation = self.env["fsm.location"]
-        TerUnit = self.env["ter.use_unit"]
-        Partner = self.env["res.partner"]
+        fsm_loc_obj = self.env["fsm.location"]
+        ter_unit_obj = self.env["ter.use_unit"]
+        partner_obj = self.env["res.partner"]
         loc_name = ctx["loc_name"]
         parcel = ctx.get("parcel")
         date_range = ctx.get("date_range")
@@ -1187,7 +1196,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             line.write(
                 {
                     "sync_state": "error",
-                    "sync_message": _(
+                    "sync_message": self.env._(
                         "Cannot create location: parcel/date range required "
                         "for ter.use_unit."
                     ),
@@ -1195,7 +1204,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             )
             return
         ext_id = ctx["ext_id"]
-        unit = TerUnit.search([("geofolia_external_id", "=", ext_id)], limit=1)
+        unit = ter_unit_obj.search([("geofolia_external_id", "=", ext_id)], limit=1)
         if not unit:
             unit_vals = {
                 "parcel_id": parcel.id,
@@ -1212,7 +1221,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             }
             if ctx.get("geom_ewkt"):
                 unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
-            unit = TerUnit.create(unit_vals)
+            unit = ter_unit_obj.create(unit_vals)
         else:
             unit_vals = {
                 "parcel_id": parcel.id,
@@ -1229,80 +1238,89 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             if ctx.get("geom_ewkt"):
                 unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
             unit.write(unit_vals)
-        partner_vals = {
-            "name": loc_name,
-            "city": line.city or False,
-            "is_company": False,
-        }
-        partner = Partner.create(partner_vals)
-        location_vals = {
-            "partner_id": partner.id,
-            "owner_id": partner.id,
-            "ter_use_unit_id": unit.id,
-        }
-        location = FsmLocation.create(location_vals)
+        partner = partner_obj.create(
+            {"name": loc_name, "city": line.city or False, "is_company": False}
+        )
+        location = fsm_loc_obj.create(
+            {
+                "partner_id": partner.id,
+                "owner_id": partner.id,
+                "ter_use_unit_id": unit.id,
+            }
+        )
         unit.write({"fsm_location_id": location.id})
         line.write(
             {
                 "fsm_location_id": location.id,
                 "ter_use_unit_id": unit.id,
                 "sync_state": "created",
-                "sync_message": _("Created location and use unit (1:1)."),
+                "sync_message": self.env._("Created location and use unit (1:1)."),
             }
         )
+
+    def _build_field_line_ctx(self, line, ext_id):
+        """Build context dict for field line processing."""
+        company = self.env.company
+        default_parcel = company.geofolia_default_parcel_id
+        default_date_range = company.geofolia_default_date_range_id
+        date_range, date_start, date_end = self._field_line_resolve_dates(
+            line, default_date_range
+        )
+        parcel, geom_ewkt = self._field_line_resolve_parcel(line, default_parcel)
+        area_official = float(line.area or 0)
+        loc_name = (
+            line.name
+            or line.code
+            or self.env._("Geofolia Field %(ext_id)s", ext_id=ext_id)
+        )
+        return {
+            "parcel": parcel,
+            "date_range": date_range,
+            "date_start": date_start,
+            "date_end": date_end,
+            "geom_ewkt": geom_ewkt,
+            "area_official": area_official,
+            "loc_name": loc_name,
+            "ext_id": ext_id,
+            "geofolia_code": line.code or False,
+            "geofolia_harvest_year": line.harvest_year or False,
+            "geofolia_crop_name": line.crop_name or False,
+            "geofolia_city": line.city or False,
+        }
 
     def _apply_field_line(self, line):
         """Create or update fsm.location and ter.use_unit (1:1) from Field line."""
         self.ensure_one()
-        FsmLocation = self.env["fsm.location"]
-        TerUnit = self.env["ter.use_unit"]
+        fsm_loc_obj = self.env["fsm.location"]
+        ter_unit_obj = self.env["ter.use_unit"]
         ext_id = (line.external_uuid or "").strip() or False
         if not ext_id:
             line.write(
-                {"sync_state": "skipped", "sync_message": _("Missing Geofolia ID.")}
+                {
+                    "sync_state": "skipped",
+                    "sync_message": self.env._("Missing Geofolia ID."),
+                }
             )
             return
         try:
             with self.env.cr.savepoint():
-                unit = TerUnit.search([("geofolia_external_id", "=", ext_id)], limit=1)
-                location = unit.fsm_location_id if unit else FsmLocation.browse()
-                company = self.env.company
-                default_parcel = company.geofolia_default_parcel_id
-                default_date_range = company.geofolia_default_date_range_id
-                date_range, date_start, date_end = self._field_line_resolve_dates(
-                    line, default_date_range
+                unit = ter_unit_obj.search(
+                    [("geofolia_external_id", "=", ext_id)], limit=1
                 )
-                parcel, geom_ewkt = self._field_line_resolve_parcel(
-                    line, default_parcel
-                )
-                if not parcel and not location:
+                location = unit.fsm_location_id if unit else fsm_loc_obj.browse()
+                ctx = self._build_field_line_ctx(line, ext_id)
+                if not ctx.get("parcel") and not location:
                     self._field_line_write_parcel_error(line)
                     return
-                if not date_range and not location:
+                if not ctx.get("date_range") and not location:
                     self._field_line_write_daterange_error(line)
                     return
-                area_official = float(line.area or 0)
-                loc_name = line.name or line.code or _("Geofolia Field %s") % ext_id
-                ctx = {
-                    "parcel": parcel,
-                    "date_range": date_range,
-                    "date_start": date_start,
-                    "date_end": date_end,
-                    "geom_ewkt": geom_ewkt,
-                    "area_official": area_official,
-                    "loc_name": loc_name,
-                    "ext_id": ext_id,
-                    "geofolia_code": line.code or False,
-                    "geofolia_harvest_year": line.harvest_year or False,
-                    "geofolia_crop_name": line.crop_name or False,
-                    "geofolia_city": line.city or False,
-                }
                 if location:
                     self._field_line_apply_existing_location(location, line, ctx)
                 elif unit:
                     self._field_line_apply_new_location(line, ctx)
                 else:
-                    candidates = FsmLocation.search(
+                    candidates = fsm_loc_obj.search(
                         [
                             ("geofolia_external_id", "=", False),
                             ("partner_id.name", "=", ctx["loc_name"]),
@@ -1314,11 +1332,10 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         candidates.ter_use_unit_id.sudo().write(
                             {"geofolia_external_id": ctx["ext_id"]}
                         )
-                        location = candidates
-                        self._field_line_apply_existing_location(location, line, ctx)
+                        self._field_line_apply_existing_location(candidates, line, ctx)
                     else:
                         self._field_line_apply_new_location(line, ctx)
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 
     def _apply_full_export(self, only_pending=False):
@@ -1361,19 +1378,22 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 activity.sync_state = "no_action"
 
     def _apply_product_line(self, line):
-        Product = self.env["product.product"]
+        product_obj = self.env["product.product"]
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
                     line.write(
-                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                        {
+                            "sync_state": "skipped",
+                            "sync_message": self.env._("Missing id."),
+                        }
                     )
                     return
-                product = Product.search(
+                product = product_obj.search(
                     [("geofolia_external_id", "=", line.external_id)], limit=1
                 )
                 vals = {
-                    "name": line.name or line.code or _("Geofolia product"),
+                    "name": line.name or line.code or self.env._("Geofolia product"),
                     "default_code": line.code,
                     "geofolia_external_id": line.external_id,
                 }
@@ -1388,7 +1408,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                             {
                                 "product_id": product.id,
                                 "sync_state": "updated",
-                                "sync_message": _("Updated product."),
+                                "sync_message": self.env._("Updated product."),
                             }
                         )
                     else:
@@ -1396,36 +1416,39 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                             {
                                 "product_id": product.id,
                                 "sync_state": "no_action",
-                                "sync_message": _("Already up to date."),
+                                "sync_message": self.env._("Already up to date."),
                             }
                         )
                     return
-                product = Product.create(self._sanitize_create_vals(vals))
+                product = product_obj.create(self._sanitize_create_vals(vals))
                 line.write(
                     {
                         "product_id": product.id,
                         "sync_state": "created",
-                        "sync_message": _("Created product."),
+                        "sync_message": self.env._("Created product."),
                     }
                 )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 
     def _apply_partner_line(self, line):
         """Create or update res.partner from partner line."""
-        Partner = self.env["res.partner"]
+        partner_obj = self.env["res.partner"]
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
                     line.write(
-                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                        {
+                            "sync_state": "skipped",
+                            "sync_message": self.env._("Missing id."),
+                        }
                     )
                     return
-                partner = Partner.search(
+                partner = partner_obj.search(
                     [("geofolia_external_id", "=", line.external_id)], limit=1
                 )
                 vals = {
-                    "name": line.name or line.code or _("Geofolia partner"),
+                    "name": line.name or line.code or self.env._("Geofolia partner"),
                     "vat": line.vat or False,
                     "geofolia_external_id": line.external_id,
                 }
@@ -1440,7 +1463,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                             {
                                 "partner_id": partner.id,
                                 "sync_state": "updated",
-                                "sync_message": _("Updated partner."),
+                                "sync_message": self.env._("Updated partner."),
                             }
                         )
                     else:
@@ -1448,37 +1471,45 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                             {
                                 "partner_id": partner.id,
                                 "sync_state": "no_action",
-                                "sync_message": _("Already up to date."),
+                                "sync_message": self.env._("Already up to date."),
                             }
                         )
                     return
-                partner = Partner.create(vals)
+                partner = partner_obj.create(vals)
                 line.write(
                     {
                         "partner_id": partner.id,
                         "sync_state": "created",
-                        "sync_message": _("Created partner."),
+                        "sync_message": self.env._("Created partner."),
                     }
                 )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 
     def _apply_employee_line(self, line):
         """Create or update fsm.person (Field Service worker) from employee line."""
-        FsmPerson = self.env["fsm.person"]
-        Partner = self.env["res.partner"]
+        person_obj = self.env["fsm.person"]
+        partner_obj = self.env["res.partner"]
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
                     line.write(
-                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                        {
+                            "sync_state": "skipped",
+                            "sync_message": self.env._("Missing id."),
+                        }
                     )
                     return
-                person = FsmPerson.search(
+                person = person_obj.search(
                     [("geofolia_external_id", "=", line.external_id)], limit=1
                 )
                 name = (
-                    line.name or line.code or _("Geofolia worker %s") % line.external_id
+                    line.name
+                    or line.code
+                    or self.env._(
+                        "Geofolia worker %(ext_id)s",
+                        ext_id=line.external_id,
+                    )
                 )
                 if person:
                     partner_vals = {"name": name}
@@ -1495,11 +1526,11 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         {
                             "person_id": person.id,
                             "sync_state": "updated",
-                            "sync_message": _("Updated field service person."),
+                            "sync_message": self.env._("Updated field service person."),
                         }
                     )
                     return
-                partner = Partner.create(
+                partner = partner_obj.create(
                     {
                         "name": name,
                         "email": line.email,
@@ -1511,36 +1542,42 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     "partner_id": partner.id,
                     "geofolia_external_id": line.external_id,
                 }
-                person = FsmPerson.create(person_vals)
+                person = person_obj.create(person_vals)
                 if not person.geofolia_external_id:
                     person.sudo().write({"geofolia_external_id": line.external_id})
                 line.write(
                     {
                         "person_id": person.id,
                         "sync_state": "created",
-                        "sync_message": _("Created field service person."),
+                        "sync_message": self.env._("Created field service person."),
                     }
                 )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 
     def _apply_equipment_line(self, line):
         """Create or update fsm.equipment from equipment line (not product.product)."""
-        Equipment = self.env["fsm.equipment"]
+        equipment_obj = self.env["fsm.equipment"]
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
                     line.write(
-                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                        {
+                            "sync_state": "skipped",
+                            "sync_message": self.env._("Missing id."),
+                        }
                     )
                     return
-                equipment = Equipment.search(
+                equipment = equipment_obj.search(
                     [("geofolia_external_id", "=", line.external_id)], limit=1
                 )
                 name = (
                     line.name
                     or line.code
-                    or _("Geofolia Equipment %s") % (line.external_id or "")
+                    or self.env._(
+                        "Geofolia Equipment %(ext_id)s",
+                        ext_id=line.external_id or "",
+                    )
                 )
                 vals = self._sanitize_create_vals(
                     {
@@ -1556,23 +1593,23 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         {
                             "equipment_id": equipment.id,
                             "sync_state": "updated",
-                            "sync_message": _("Updated equipment."),
+                            "sync_message": self.env._("Updated equipment."),
                         }
                     )
                     return
-                equipment = Equipment.create(vals)
+                equipment = equipment_obj.create(vals)
                 line.write(
                     {
                         "equipment_id": equipment.id,
                         "sync_state": "created",
-                        "sync_message": _("Created equipment."),
+                        "sync_message": self.env._("Created equipment."),
                     }
                 )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 
     def _apply_product_like(self, line, label):
-        Product = self.env["product.product"]
+        product_obj = self.env["product.product"]
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
@@ -1581,43 +1618,55 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         product = None
                         msg_src = None
                         if line.code:
-                            product = Product.search(
+                            product = product_obj.search(
                                 [("default_code", "=", line.code)], limit=1
                             )
                             if product:
-                                msg_src = _("matched by internal reference")
+                                msg_src = self.env._("matched by internal reference")
                         if not product and line.name:
-                            product = Product.search(
+                            product = product_obj.search(
                                 [("name", "=", line.name)], limit=1
                             )
                             if product:
-                                msg_src = _("matched by product name")
+                                msg_src = self.env._("matched by product name")
                         if not product:
                             product = company.geofolia_default_harvested_product_id
                             if product:
-                                msg_src = _("default product from Settings")
+                                msg_src = self.env._("default product from Settings")
                         if product:
                             line.write(
                                 {
                                     "product_id": product.id,
                                     "sync_state": "no_action",
-                                    "sync_message": _("No Geofolia id; %s.") % msg_src,
+                                    "sync_message": self.env._(
+                                        "No Geofolia id; %(src)s.",
+                                        src=msg_src,
+                                    ),
                                 }
                             )
                             return
                     line.write(
-                        {"sync_state": "skipped", "sync_message": _("Missing id.")}
+                        {
+                            "sync_state": "skipped",
+                            "sync_message": self.env._("Missing id."),
+                        }
                     )
                     return
-                product = Product.search(
+                product = product_obj.search(
                     [("geofolia_external_id", "=", line.external_id)], limit=1
                 )
-                name_val = line.name or line.code or _("Geofolia (%s)") % label
+                name_val = (
+                    line.name
+                    or line.code
+                    or self.env._("Geofolia (%(label)s)", label=label)
+                )
                 code_val = line.code
                 ext_val = self._safe_scalar_str(line.external_id) or str(
                     line.external_id
                 )
-                name_val = self._safe_scalar_str(name_val) or _("Geofolia (%s)") % label
+                name_val = self._safe_scalar_str(name_val) or self.env._(
+                    "Geofolia (%(label)s)", label=label
+                )
                 code_val = self._safe_scalar_str(code_val)
                 vals = {
                     "name": name_val,
@@ -1630,19 +1679,19 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         {
                             "product_id": product.id,
                             "sync_state": "updated",
-                            "sync_message": _("Updated product."),
+                            "sync_message": self.env._("Updated product."),
                         }
                     )
                     return
-                product = Product.create(self._sanitize_create_vals(vals))
+                product = product_obj.create(self._sanitize_create_vals(vals))
                 line.write(
                     {
                         "product_id": product.id,
                         "sync_state": "created",
-                        "sync_message": _("Created product."),
+                        "sync_message": self.env._("Created product."),
                     }
                 )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 
     def _get_analytic_account_for_activity(self, _activity):
@@ -1688,14 +1737,14 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
     def _get_fsm_location_for_activity(self, activity):
         """Return fsm.location: CropZone PlotId, else company default, else any."""
-        FsmLocation = self.env["fsm.location"]
-        TerUnit = self.env["ter.use_unit"]
+        fsm_loc_obj = self.env["fsm.location"]
+        ter_unit_obj = self.env["ter.use_unit"]
         raw = activity.raw_json or {}
         crop_zones = raw.get("CropZoneIds") or []
         if crop_zones and isinstance(crop_zones[0], dict):
             plot_id = crop_zones[0].get("PlotId")
             if plot_id:
-                unit = TerUnit.search(
+                unit = ter_unit_obj.search(
                     [("geofolia_external_id", "=", str(plot_id))], limit=1
                 )
                 if unit and unit.fsm_location_id:
@@ -1704,7 +1753,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         location = company.geofolia_default_fsm_location_id
         if location:
             return location
-        return FsmLocation.search([], limit=1)
+        return fsm_loc_obj.search([], limit=1)
 
     def _get_or_create_fsm_order_for_activity(self, activity):
         """Return or create fsm.order for this activity.
@@ -1717,7 +1766,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return self.env["fsm.order"]
         order_vals = {
             "location_id": location.id,
-            "name": activity.operation_name or _("Geofolia activity"),
+            "name": activity.operation_name or self.env._("Geofolia activity"),
         }
         start_dt = end_dt = None
         if activity.starting_date:
@@ -1744,7 +1793,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         activity.fsm_order_id = order.id
         self.env["fsm.activity"].create(
             {
-                "name": activity.operation_name or _("Geofolia activity"),
+                "name": activity.operation_name or self.env._("Geofolia activity"),
                 "fsm_order_id": order.id,
             }
         )
@@ -1755,9 +1804,9 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         """Link fsm.person to fsm.location via fsm.location.person."""
         if not location_ids or not person_id:
             return
-        LocationPerson = self.env["fsm.location.person"]
+        loc_person_obj = self.env["fsm.location.person"]
         for loc_id in location_ids:
-            exists = LocationPerson.search(
+            exists = loc_person_obj.search(
                 [
                     ("location_id", "=", loc_id),
                     ("person_id", "=", person_id),
@@ -1765,27 +1814,27 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 limit=1,
             )
             if not exists:
-                LocationPerson.sudo().create(
+                loc_person_obj.sudo().create(
                     {"location_id": loc_id, "person_id": person_id}
                 )
 
     def _find_person_for_activity_employee(self, line):
         """Find fsm.person by employee_id_external or employee_name."""
-        FsmPerson = self.env["fsm.person"]
+        person_obj = self.env["fsm.person"]
         if line.employee_id_external:
-            person = FsmPerson.search(
+            person = person_obj.search(
                 [("geofolia_external_id", "=", line.employee_id_external)],
                 limit=1,
             )
             if person:
                 return person
         if line.employee_name:
-            return FsmPerson.search([("name", "=", line.employee_name)], limit=1)
-        return FsmPerson.browse()
+            return person_obj.search([("name", "=", line.employee_name)], limit=1)
+        return person_obj.browse()
 
     def _build_analytic_vals_for_activity_employee(self, line, person, activity):
         """Build vals dict for account.analytic.line create/update."""
-        Analytic = self.env["account.analytic.line"]
+        analytic_obj = self.env["account.analytic.line"]
         ext_id = ":".join(
             [
                 line.employee_action_id or "",
@@ -1796,13 +1845,13 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         line_date = activity.starting_date or activity.ending_date
         unit_amount = (line.employee_time or 0.0) / 60.0
         vals = {
-            "name": activity.operation_name or _("Geofolia activity"),
+            "name": activity.operation_name or self.env._("Geofolia activity"),
             "date": line_date,
             "unit_amount": unit_amount,
             "amount": 0.0,
             "geofolia_external_id": ext_id,
         }
-        if "employee_id" in Analytic._fields:
+        if "employee_id" in analytic_obj._fields:
             emp = self.env["hr.employee"].search([("name", "=", person.name)], limit=1)
             if emp:
                 vals["employee_id"] = emp.id
@@ -1813,16 +1862,16 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 if getattr(account, "plan_id", None)
                 else "account_id"
             )
-            if col in Analytic._fields:
+            if col in analytic_obj._fields:
                 vals[col] = account.id
-            elif "account_id" in Analytic._fields:
+            elif "account_id" in analytic_obj._fields:
                 vals["account_id"] = account.id
         return vals, account
 
     def _apply_activity_employee_line(self, line):
         """Create/update analytic line and assign fsm.person to fsm.order."""
-        Analytic = self.env["account.analytic.line"]
-        has_fsm_order = "fsm_order_id" in Analytic._fields
+        analytic_obj = self.env["account.analytic.line"]
+        has_fsm_order = "fsm_order_id" in analytic_obj._fields
 
         try:
             with self.env.cr.savepoint():
@@ -1830,7 +1879,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     line.write(
                         {
                             "sync_state": "no_action",
-                            "sync_message": _("Already linked."),
+                            "sync_message": self.env._("Already linked."),
                         }
                     )
                     return
@@ -1839,7 +1888,9 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     line.write(
                         {
                             "sync_state": "skipped",
-                            "sync_message": _("Field service person not found."),
+                            "sync_message": self.env._(
+                                "Field service person not found."
+                            ),
                         }
                     )
                     return
@@ -1849,7 +1900,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     line.write(
                         {
                             "sync_state": "skipped",
-                            "sync_message": _("Activity has no date."),
+                            "sync_message": self.env._("Activity has no date."),
                         }
                     )
                     return
@@ -1857,14 +1908,14 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     line, person, activity
                 )
                 ext_id = vals["geofolia_external_id"]
-                existing = Analytic.search(
+                existing = analytic_obj.search(
                     [("geofolia_external_id", "=", ext_id)], limit=1
                 )
                 if not existing and not account:
                     line.write(
                         {
                             "sync_state": "skipped",
-                            "sync_message": _(
+                            "sync_message": self.env._(
                                 "Set analytic account (parcel or Geofolia settings)."
                             ),
                         }
@@ -1875,9 +1926,15 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     fsm_order.sudo().write({"person_id": person.id})
                     if has_fsm_order:
                         vals["fsm_order_id"] = fsm_order.id
-                        if "project_id" in Analytic._fields and fsm_order.project_id:
+                        if (
+                            "project_id" in analytic_obj._fields
+                            and fsm_order.project_id
+                        ):
                             vals["project_id"] = fsm_order.project_id.id
-                        if "task_id" in Analytic._fields and fsm_order.project_task_id:
+                        if (
+                            "task_id" in analytic_obj._fields
+                            and fsm_order.project_task_id
+                        ):
                             vals["task_id"] = fsm_order.project_task_id.id
                 if existing:
                     existing.write(vals)
@@ -1886,21 +1943,21 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                             "person_id": person.id,
                             "analytic_line_id": existing.id,
                             "sync_state": "updated",
-                            "sync_message": _("Updated analytic line."),
+                            "sync_message": self.env._("Updated analytic line."),
                         }
                     )
                 else:
-                    rec = Analytic.create(vals)
+                    rec = analytic_obj.create(vals)
                     line.write(
                         {
                             "person_id": person.id,
                             "analytic_line_id": rec.id,
                             "sync_state": "created",
-                            "sync_message": _("Created analytic line."),
+                            "sync_message": self.env._("Created analytic line."),
                         }
                     )
                 self._link_person_to_locations_by_farm(line, person)
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 
     def _link_person_to_locations_by_farm(self, activity_employee_line, person):

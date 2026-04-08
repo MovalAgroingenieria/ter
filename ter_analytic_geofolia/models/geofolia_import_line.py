@@ -1,7 +1,7 @@
-# Copyright 2026 Moval Agroingeniería S.L.
+# 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
@@ -66,7 +66,7 @@ class GeofoliaImportLine(models.Model):
     def action_apply_selected(self):
         for line in self:
             if not line.job_id:
-                raise UserError(_("Missing job."))
+                raise UserError(self.env._("Missing job."))
             if line.job_id.import_type != "fields":
                 continue
             line.job_id._apply_field_line(line)

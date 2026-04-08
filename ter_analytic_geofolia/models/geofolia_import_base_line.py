@@ -1,9 +1,9 @@
-# Copyright 2026 Moval Agroingeniería S.L.
+# 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 """Base and all full-export line models in one file so load order is fixed."""
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
@@ -113,7 +113,7 @@ class GeofoliaImportActivityEmployeeLine(models.Model):
     def action_apply_selected(self):
         for line in self:
             if not line.job_id:
-                raise UserError(_("Missing job."))
+                raise UserError(self.env._("Missing job."))
             line.job_id._apply_activity_employee_line(line)
             line.job_id._recompute_apply_state()
 
@@ -143,7 +143,7 @@ class GeofoliaImportEmployeeLine(models.Model):
     def action_apply_selected(self):
         for line in self:
             if not line.job_id:
-                raise UserError(_("Missing job."))
+                raise UserError(self.env._("Missing job."))
             line.job_id._apply_employee_line(line)
             line.job_id._recompute_apply_state()
 
@@ -181,7 +181,7 @@ class GeofoliaImportEquipmentLine(models.Model):
     def action_apply_selected(self):
         for line in self:
             if not line.job_id:
-                raise UserError(_("Missing job."))
+                raise UserError(self.env._("Missing job."))
             line.job_id._apply_equipment_line(line)
             line.job_id._recompute_apply_state()
 
@@ -210,7 +210,7 @@ class GeofoliaImportHarvestedProductLine(models.Model):
     def action_apply_selected(self):
         for line in self:
             if not line.job_id:
-                raise UserError(_("Missing job."))
+                raise UserError(self.env._("Missing job."))
             line.job_id._apply_product_like(line, label="harvested_products")
             line.job_id._recompute_apply_state()
 
@@ -244,7 +244,7 @@ class GeofoliaImportPartnerLine(models.Model):
         jobs = self.mapped("job_id")
         for line in self:
             if not line.job_id:
-                raise UserError(_("Missing job."))
+                raise UserError(self.env._("Missing job."))
             line.job_id._apply_partner_line(line)
         for job in jobs:
             job._recompute_apply_state()
@@ -281,7 +281,7 @@ class GeofoliaImportProductLine(models.Model):
     def action_apply_selected(self):
         for line in self:
             if not line.job_id:
-                raise UserError(_("Missing job."))
+                raise UserError(self.env._("Missing job."))
             if line.job_id.import_type != "full":
                 continue
             line.job_id._apply_product_line(line)
