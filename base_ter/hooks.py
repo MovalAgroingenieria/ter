@@ -4,12 +4,16 @@
 
 from __future__ import annotations
 
+import json
 import logging
+from pathlib import Path
 from typing import Optional
 
 from odoo import api
 from odoo.exceptions import ValidationError
 from psycopg2 import sql
+
+from .load_use_type_csv import load_use_types_from_csv as _load_use_types_from_csv_impl
 
 _logger = logging.getLogger(__name__)
 
@@ -352,11 +356,73 @@ def _ensure_ter_profile_01(env: api.Environment) -> None:
     env["ter.profile"]._ensure_ter_profile_01()
 
 
+def _load_use_types(env: api.Environment) -> None:
+    """Load ter.use_type records from CSV bundled in this module."""
+    try:
+        counts = _load_use_types_from_csv_impl(env)
+        _logger.info(
+            "base_ter: loaded use types from CSV: %d use types",
+            counts["use_types"],
+        )
+    except Exception as exc:
+        _logger.warning(
+            "base_ter: could not load use types from CSV: %s",
+            exc,
+        )
+
+
+def _load_data_translations_es(env: api.Environment) -> None:
+    """Load es_ES translations for ter.use_type records loaded from CSV."""
+    path = Path(__file__).resolve().parent / "data" / "data_translations_es.json"
+    if not path.exists():
+        return
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f)
+    for model_name, block in data.items():
+        field_name = block.get("field", "name")
+        entries = block.get("entries", {})
+        for xmlid, es_value in entries.items():
+            try:
+                record = env.ref(xmlid, raise_if_not_found=False)
+                if record and record._name == model_name:
+                    record.sudo().update_field_translations(
+                        field_name, {"es_ES": es_value}
+                    )
+            except Exception:
+                continue
+
+
+def _recompute_use_type_complete_name_translations(
+    env: api.Environment,
+) -> None:
+
+    use_type_model = env["ter.use_type"]
+    records = use_type_model.search([], order="parent_path, sequence, name")
+    spanish_complete: dict[int, str] = {}
+    for record in records:
+        spanish_name = record.with_context(lang="es_ES").name or record.name
+        parent_id = record.parent_id.id if record.parent_id else False
+        if parent_id and parent_id in spanish_complete:
+            es_complete = f"{spanish_complete[parent_id]} / {spanish_name}"
+        else:
+            es_complete = spanish_name
+        spanish_complete[record.id] = es_complete
+        try:
+            record.sudo().update_field_translations(
+                "complete_name", {"es_ES": es_complete}
+            )
+        except Exception:
+            continue
+
+
 def post_init_hook(env: api.Environment, _registry: Optional[object] = None) -> None:
     _ensure_postgis(env)
     _create_gis_structures(env)
     _init_params(env)
     _ensure_ter_profile_01(env)
+    _load_use_types(env)
+    _load_data_translations_es(env)
+    _recompute_use_type_complete_name_translations(env)
     _ensure_ter_unit_sequences(env)
     _migrate_ter_unit_parcel_ids(env)
     env.ref("base.module_base_ter")._update_translations(overwrite=True)

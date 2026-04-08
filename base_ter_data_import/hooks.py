@@ -22,9 +22,8 @@ def _load_catalogs_from_csv(env: api.Environment) -> None:
         counts = _load_catalogs_from_csv_impl(env)
         _logger.info(
             "base_ter_data_import: loaded catalogs from CSV: "
-            "%d profiles, %d use types, %d attributes, %d values",
+            "%d profiles, %d attributes, %d values",
             counts["profiles"],
-            counts["use_types"],
             counts["attributes"],
             counts["values"],
         )

@@ -204,3 +204,9 @@
 .o_dialog_container .modal-dialog:has(.o_wizard_set_parcel_code) {
   max-width: 300px !important;
 }
+
+.o_base_ter_ter_use_unit [data-name="date_start"],
+.o_base_ter_ter_use_unit [data-name="date_end"] {
+  width: 140px !important;
+  min-width: 140px !important;
+}

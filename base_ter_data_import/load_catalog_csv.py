@@ -2,17 +2,18 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 """
-Load territory catalogs (ter.profile, ter.use_type, ter.use_type.attribute,
+Load territory catalogs (ter.profile, ter.use_type.attribute,
 ter.use_type.attribute.value) from CSV files in the module's catalogs_csv folder.
 CSV format: UTF-8, separator ";", quote "\"".
 - ter_profile.csv: alphanum_code;requires_total;is_standard;external_id (optional)
-- ter_use_type.csv: name;parent_path;sequence;external_id (optional)
 - ter_use_type_attribute.csv: use_type_path;attribute_name;external_id (opt.)
 - ter_use_type_attribute_value.csv: use_type_path;attribute_name;value_name;
   external_id (opt.)
 
+ter.use_type records are loaded by base_ter (not this module).
+
 When external_id is present, ir.model.data is created so
-env.ref("base_ter.<external_id>") works (e.g. data_translations_es.json).
+env.ref("base_ter_data_import.<external_id>") works (e.g. data_translations_es.json).
 """
 
 from __future__ import annotations
@@ -137,68 +138,40 @@ def _load_profiles(env: api.Environment, base_dir: Path) -> int:
     return len(rows)
 
 
-def _use_type_path_depth(row: dict) -> tuple:
-    parent_path = (row.get("parent_path") or "").strip()
-    name = (row.get("name") or "").strip()
-    if not name:
-        return -1, ""
-    full = f"{parent_path}/{name}" if parent_path else name
-    return full.count("/"), full
+def _build_path_to_ut(all_use_types) -> dict:
+    """Build a {full_path: record} dict from existing ter.use_type records."""
+    id_to_rec = {r.id: r for r in all_use_types}
+    path_cache = {}
 
-
-def _load_use_types(env: api.Environment, base_dir: Path) -> tuple[int, dict]:
-    UseType = env["ter.use_type"].sudo()
-    path = base_dir / "ter_use_type.csv"
-    rows = _read_csv(path)
-    path_to_ut = {}
-    filtered = [r for r in rows if (r.get("name") or "").strip()]
-    if not filtered:
-        return 0, path_to_ut
-    all_existing = UseType.search([])
-    existing_by_key = {
-        (r.name, r.parent_id.id if r.parent_id else False): r for r in all_existing
-    }
-    external_ids = []
-    for row in sorted(filtered, key=_use_type_path_depth):
-        name = (row.get("name") or "").strip()
-        parent_path = (row.get("parent_path") or "").strip()
-        try:
-            seq = int((row.get("sequence") or "10").strip())
-        except ValueError:
-            seq = 10
-        full_path = f"{parent_path}/{name}" if parent_path else name
-        parent_id = False
-        if parent_path:
-            parent = path_to_ut.get(parent_path)
-            if parent:
-                parent_id = parent.id
-        key = (name, parent_id)
-        rec = existing_by_key.get(key)
-        if rec:
-            rec.write({"sequence": seq})
+    def get_path(rec):
+        if rec.id in path_cache:
+            return path_cache[rec.id]
+        if not rec.parent_id:
+            path_cache[rec.id] = rec.name
         else:
-            rec = UseType.create(
-                {"name": name, "parent_id": parent_id, "sequence": seq}
-            )
-            existing_by_key[key] = rec
-        path_to_ut[full_path] = rec
-        external_id = (row.get("external_id") or "").strip()
-        if external_id:
-            external_ids.append((rec.id, external_id))
-    _set_external_ids_batch(env, "ter.use_type", external_ids)
-    return len(filtered), path_to_ut
+            parent_path = get_path(id_to_rec[rec.parent_id.id])
+            path_cache[rec.id] = f"{parent_path}/{rec.name}"
+        return path_cache[rec.id]
+
+    result = {}
+    for rec in all_use_types:
+        full_path = get_path(rec)
+        result[full_path] = rec
+    return result
 
 
 def _load_attributes(
     env: api.Environment,
     base_dir: Path,
-    path_to_ut: dict,
-) -> tuple[int, dict]:
+) -> tuple[int, dict, dict]:
     Attribute = env["ter.use_type.attribute"].sudo()
     path = base_dir / "ter_use_type_attribute.csv"
     rows = _read_csv(path)
     if not rows:
-        return 0, {}
+        return 0, {}, {}
+    # Build path_to_ut from existing ter.use_type records in DB
+    all_use_types = env["ter.use_type"].sudo().search([])
+    path_to_ut = _build_path_to_ut(all_use_types)
     use_type_ids = [r.id for r in path_to_ut.values()]
     existing_map = {
         (r.use_type_id.id, r.name): r
@@ -239,7 +212,7 @@ def _load_attributes(
             if ext_id:
                 external_ids.append((rec.id, ext_id))
     _set_external_ids_batch(env, "ter.use_type.attribute", external_ids)
-    return len(rows), attr_cache
+    return len(rows), attr_cache, path_to_ut
 
 
 def _resolve_attr_for_row(attr_cache, path_to_ut, Attribute, ut_path, attr_name):
@@ -321,22 +294,21 @@ def _load_attribute_values(
 
 def load_catalogs_from_csv(env: api.Environment) -> dict:
     """
-    Load all catalog data from CSV files in base_ter/catalogs_csv/.
-    Returns a dict with counts: profiles, use_types, attributes, values.
+    Load all catalog data from CSV files in base_ter_data_import/catalogs_csv/.
+    Returns a dict with counts: profiles, attributes, values.
     Uses preloaded lookups and batch creates for speed.
+    ter.use_type records are loaded by base_ter (see base_ter/load_use_type_csv.py).
     """
     base_dir = _module_csv_dir(env)
     if not base_dir.exists():
-        return {"profiles": 0, "use_types": 0, "attributes": 0, "values": 0}
+        return {"profiles": 0, "attributes": 0, "values": 0}
     env = env(context=dict(env.context, tracking_disable=True))
     profile_count = _load_profiles(env, base_dir)
-    use_type_count, path_to_ut = _load_use_types(env, base_dir)
-    attr_count, attr_cache = _load_attributes(env, base_dir, path_to_ut)
+    attr_count, attr_cache, path_to_ut = _load_attributes(env, base_dir)
     value_count = _load_attribute_values(env, base_dir, path_to_ut, attr_cache)
 
     return {
         "profiles": profile_count,
-        "use_types": use_type_count,
         "attributes": attr_count,
         "values": value_count,
     }

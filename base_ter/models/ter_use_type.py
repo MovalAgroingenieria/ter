@@ -36,6 +36,7 @@ class UseType(models.Model):
         recursive=True,
         index=True,
         readonly=True,
+        translate=True,
     )
 
     color = fields.Integer(string="Color Index")

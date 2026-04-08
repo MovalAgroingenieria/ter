@@ -86,15 +86,15 @@
                 <field name="unit_count" invisible="1"/>
                 <field name="parcel_count" invisible="1"/>
                 <div class="oe_button_box" name="button_box">
-                    <button name="action_show_units" type="object"
-                            class="oe_stat_button" icon="fa-sitemap"
-                            invisible="not is_unit_use_type">
-                        <field name="unit_count" string="Units" widget="statinfo"/>
-                    </button>
                     <button name="action_show_parcels" type="object"
                             class="oe_stat_button" icon="fa-ter-parcel"
                             invisible="not is_unit_use_type">
                         <field name="parcel_count" string="Parcels" widget="statinfo"/>
+                    </button>
+                    <button name="action_show_units" type="object"
+                            class="oe_stat_button" icon="fa-sitemap"
+                            invisible="not is_unit_use_type">
+                        <field name="unit_count" string="Units" widget="statinfo"/>
                     </button>
                     <button name="action_show_use_type" type="object"
                             class="oe_stat_button" icon="fa-leaf"
@@ -175,11 +175,14 @@
     <record id="date_range_action" model="ir.actions.act_window">
         <field name="name">Date Ranges Ter</field>
         <field name="res_model">date.range</field>
-        <field name="view_mode">list,form,kanban</field>
+        <field name="view_mode">list,form,kanban,pivot,graph,calendar</field>
         <field name="view_ids" eval="[(5, 0),
               (0, 0, {'view_mode': 'list', 'view_id': ref('view_date_range_list')}),
               (0, 0, {'view_mode': 'form', 'view_id': ref('view_date_range_form_view')}),
               (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_date_range_kanban')}),
+              (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_date_range_pivot')}),
+              (0, 0, {'view_mode': 'graph', 'view_id': ref('view_date_range_graph')}),
+              (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_date_range_calendar')}),
               ]"/>
         <field name="domain">[('is_unit_use_type', '=', True)]</field>
         <field name="context">{'default_is_unit_use_type': True}</field>

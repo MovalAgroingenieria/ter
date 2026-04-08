@@ -11,7 +11,9 @@ from .. import hooks as base_ter_hooks
 class TerUnit(models.Model):
     _name = "ter.use_unit"
     _description = "Ter Use Unit"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin", "gis.viewer"]
+
+    _param_gis_selection = "idunidad"
 
     _sql_constraints = [
         (
@@ -23,7 +25,7 @@ class TerUnit(models.Model):
 
     name = fields.Char(
         copy=False,
-        help="Auto-generated from company sequence when left empty.",
+        help="Auto-generated as {parcel_code}-{start_YY}/{end_YY}-{seq} when left empty.",
     )
     geom_ewkt = fields.Text(
         string="Geometry (EWKT)",
@@ -51,8 +53,8 @@ class TerUnit(models.Model):
     sequence = fields.Integer(default=10, export_string_translation=False)
     state = fields.Selection(
         selection=[
-            ("draft", "Unlocked"),
-            ("validated", "Locked"),
+            ("draft", "Draft"),
+            ("validated", "Validated"),
         ],
         default="draft",
         required=True,
@@ -135,6 +137,10 @@ class TerUnit(models.Model):
         string="Attributes",
         copy=True,
     )
+    attribute_value_count = fields.Integer(
+        string="Attribute count",
+        compute="_compute_attribute_value_count",
+    )
     parcel_alphanum_code = fields.Char(
         string="Parcel Code",
         related="parcel_id.alphanum_code",
@@ -150,6 +156,11 @@ class TerUnit(models.Model):
     parcel_image_1920 = fields.Image(
         string="Aerial Image (zoom)",
         related="parcel_id.image_1920",
+    )
+    mapped_to_polygon = fields.Boolean(
+        string="Mapped to polygon",
+        compute="_compute_mapped_to_polygon",
+        store=True,
     )
     area_unit_name = fields.Char(
         string="Area unit",
@@ -200,6 +211,57 @@ class TerUnit(models.Model):
             unit_name = self.env._("ha")
         for record in self:
             record.area_unit_name = unit_name
+
+    @api.depends("geom_ewkt")
+    def _compute_mapped_to_polygon(self):
+        qual = sql.SQL("{}.{}").format(
+            sql.Identifier(base_ter_hooks.GIS_SCHEMA),
+            sql.Identifier(base_ter_hooks.UNIT_TABLE),
+        )
+        for record in self:
+            if not record.geom_ewkt or not record.geom_ewkt.strip():
+                record.mapped_to_polygon = False
+                continue
+            self.env.cr.execute(
+                sql.SQL("SELECT 1 FROM {} WHERE unit_id = %s LIMIT 1").format(qual),
+                (record.id,),
+            )
+            record.mapped_to_polygon = bool(self.env.cr.fetchone())
+
+    def _get_bounding_box(self):
+        xmin = ymin = xmax = ymax = 0.0
+        first = True
+        qual = sql.SQL("{}.{}").format(
+            sql.Identifier(base_ter_hooks.GIS_SCHEMA),
+            sql.Identifier(base_ter_hooks.UNIT_TABLE),
+        )
+        for record in self:
+            if not record.mapped_to_polygon:
+                continue
+            try:
+                self.env.cr.execute(
+                    sql.SQL(
+                        "SELECT ST_XMin(ST_Envelope(geom)), ST_YMin(ST_Envelope(geom)),"
+                        " ST_XMax(ST_Envelope(geom)), ST_YMax(ST_Envelope(geom))"
+                        " FROM {} WHERE unit_id = %s"
+                    ).format(qual),
+                    (record.id,),
+                )
+                row = self.env.cr.fetchone()
+                if not row or any(v is None for v in row):
+                    continue
+                bxmin, bymin, bxmax, bymax = [float(v) for v in row]
+                if first:
+                    first = False
+                    xmin, ymin, xmax, ymax = bxmin, bymin, bxmax, bymax
+                else:
+                    xmin = min(xmin, bxmin)
+                    ymin = min(ymin, bymin)
+                    xmax = max(xmax, bxmax)
+                    ymax = max(ymax, bymax)
+            except Exception:  # pylint: disable=broad-except
+                continue
+        return xmin, ymin, xmax, ymax
 
     def _ensure_ewkt_srid(self, wkt, default_srid=25830):
         """Ensure WKT has SRID prefix for PostGIS. Returns EWKT string."""
@@ -274,66 +336,48 @@ class TerUnit(models.Model):
             )
 
     def _build_ter_unit_name(self, params):
-        """Build name as {type_code}-{date_start}-{date_end}-{parcel_code}-{seq}.
-
-        Args:
-            params (dict): Dictionary with keys:
-                - type_code: Type code
-                - date_start: Start date
-                - date_end: End date
-                - parcel_code: Parcel code
-                - seq: Sequence number
-        """
-        type_code = params.get("type_code", "")
+        """Build name as {parcel_code}-{start_YY}/{end_YY}-{seq:02d}."""
+        parcel_code = (params.get("parcel_code") or "?").strip() or "?"
         date_start = params.get("date_start")
         date_end = params.get("date_end")
-        parcel_code = params.get("parcel_code", "")
-        seq = params.get("seq", "")
-        parts = [
-            (type_code or "").strip() or "?",
-            str(date_start) if date_start else "?",
-            str(date_end) if date_end else "?",
-            (parcel_code or "").strip() or "?",
-            str(seq),
-        ]
-        return "-".join(parts)
+        if isinstance(date_start, str):
+            date_start = fields.Date.from_string(date_start)
+        if isinstance(date_end, str):
+            date_end = fields.Date.from_string(date_end)
+        start_yy = str(date_start.year)[-2:] if date_start else "??"
+        end_yy = str(date_end.year)[-2:] if date_end else "??"
+        seq = params.get("seq", 1)
+        return f"{parcel_code}-{start_yy}/{end_yy}-{seq:02d}"
 
     @api.model
     def _get_next_ter_unit_name(self, vals, company=None):
-        """Build name from type_code, dates, parcel_code and sequence."""
-        company = company or self.env.company
-        if not company.ter_unit_sequence_id:
-            company._get_or_create_ter_unit_sequence()  # pylint: disable=protected-access
-        seq = self.env["ir.sequence"].next_by_id(company.ter_unit_sequence_id.id)
-
         parcel_code = ""
-        if vals.get("parcel_id"):
-            parcel = self.env["ter.parcel"].browse(vals["parcel_id"])
+        parcel_id = vals.get("parcel_id")
+        if parcel_id:
+            parcel = self.env["ter.parcel"].browse(parcel_id)
             if parcel.exists():
                 parcel_code = parcel.alphanum_code or ""
 
-        type_code = ""
-        if vals.get("use_type_id"):
-            ut = self.env["ter.use_type"].browse(vals["use_type_id"])
-            if ut.exists():
-                type_code = (
-                    "".join(c for c in (ut.name or "") if c.isalnum())[:10].upper()
-                    or "X"
-                )
-        elif vals.get("date_range_id"):
+        date_start = vals.get("date_start")
+        date_end = vals.get("date_end")
+        if (not date_start or not date_end) and vals.get("date_range_id"):
             dr = self.env["date.range"].browse(vals["date_range_id"])
             if dr.exists():
-                type_code = (
-                    "".join(c for c in (dr.name or "") if c.isalnum())[:10].upper()
-                    or "X"
-                )
+                date_start = date_start or dr.date_start
+                date_end = date_end or dr.date_end
+
+        domain = [("parcel_id", "=", parcel_id)] if parcel_id else []
+        if date_start and date_end:
+            domain += [("date_start", "=", date_start), ("date_end", "=", date_end)]
+        elif vals.get("date_range_id"):
+            domain += [("date_range_id", "=", vals["date_range_id"])]
+        seq = self.search_count(domain) + 1
 
         return self._build_ter_unit_name(  # pylint: disable=protected-access
             {
-                "type_code": type_code or "X",
-                "date_start": vals.get("date_start"),
-                "date_end": vals.get("date_end"),
                 "parcel_code": parcel_code,
+                "date_start": date_start,
+                "date_end": date_end,
                 "seq": seq,
             }
         )
@@ -515,6 +559,12 @@ class TerUnit(models.Model):
             commands.append((0, 0, line_vals))
         self.attribute_value_ids = commands
 
+    @api.onchange("date_range_id")
+    def _onchange_date_range_id(self):
+        if self.date_range_id:
+            self.date_start = self.date_range_id.date_start
+            self.date_end = self.date_range_id.date_end
+
     @api.constrains("attribute_value_ids")
     def _check_required_attributes(self):
         for unit in self:
@@ -573,6 +623,11 @@ class TerUnit(models.Model):
             else:
                 record.is_current = False
 
+    @api.depends("attribute_value_ids")
+    def _compute_attribute_value_count(self):
+        for record in self:
+            record.attribute_value_count = len(record.attribute_value_ids)
+
     @api.depends("area_official")
     def _compute_area_official_m2(self):
         # Official area in ter.use_unit is always in hectares (company area_unit_is_ha).
@@ -581,25 +636,26 @@ class TerUnit(models.Model):
         for record in self:
             record.area_official_m2 = round((record.area_official or 0.0) * factor)
 
+    @api.constrains("state", "parcel_id", "date_start", "date_end")
+    def _check_validated_state_requirements(self):
+        for record in self:
+            if record.state == "validated":
+                if not record.parcel_id:
+                    raise ValidationError(
+                        self.env._("Cannot validate: Main parcel is required.")
+                    )
+                if not record.date_start or not record.date_end:
+                    raise ValidationError(
+                        self.env._("Cannot validate: Date range is required.")
+                    )
+
     def action_validate(self):
         """Validate the unit use."""
-        for record in self:
-            if not record.parcel_id:
-                raise UserError(self.env._("Cannot validate: Main parcel is required."))
-            if not record.date_start or not record.date_end:
-                raise UserError(self.env._("Cannot validate: Date range is required."))
         return self.write({"state": "validated"})
 
     def action_set_to_draft(self):
         """Set the unit use back to draft."""
         return self.write({"state": "draft"})
-
-    def action_gis_viewer(self):
-        """Open GIS viewer for the main parcel (same as ter.parcel)."""
-        self.ensure_one()
-        if not self.parcel_id:
-            return None
-        return self.parcel_id.action_gis_viewer()
 
     def action_gis_preview(self):
         """Open GIS preview wizard for the main parcel."""
@@ -647,4 +703,25 @@ class TerUnit(models.Model):
             "views": [(tree_view.id, "list"), (form_view.id, "form")],
             "search_view_id": search_view.id,
             "domain": [("id", "in", parcel_ids)],
+        }
+
+    def action_show_attribute_values(self):
+        self.ensure_one()
+        list_view = self.env.ref(
+            "base_ter.view_ter_unit_attribute_value_list", raise_if_not_found=False
+        )
+        form_view = self.env.ref(
+            "base_ter.view_ter_unit_attribute_value_form", raise_if_not_found=False
+        )
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Attributes"),
+            "res_model": "ter.unit.attribute.value",
+            "view_mode": "list,form",
+            "views": [
+                (list_view.id if list_view else False, "list"),
+                (form_view.id if form_view else False, "form"),
+            ],
+            "domain": [("unit_id", "=", self.id)],
+            "context": {"default_unit_id": self.id},
         }

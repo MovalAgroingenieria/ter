@@ -9,7 +9,7 @@
                 <field name="geofolia_external_id" string="Geofolia ID"/>
                 <field name="fsm_location_id" options="{'no_create': True}"/>
             </xpath>
-            <xpath expr="//page[@name='territorial_use']" position="after">
+            <xpath expr="//page[@name='notes']" position="before">
                 <page string="Geofolia" name="geofolia">
                     <group string="Geofolia imported data">
                         <group>
@@ -31,7 +31,7 @@
         <field name="inherit_id" ref="base_ter.view_ter_unit_list"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="geofolia_external_id" string="Geofolia ID" optional="show"/>
+                <field name="geofolia_external_id" string="Geofolia ID" optional="hide"/>
             </xpath>
         </field>
     </record>

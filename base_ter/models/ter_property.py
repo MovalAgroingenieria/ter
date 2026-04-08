@@ -108,6 +108,7 @@ class TerProperty(models.Model):
         column1="property_id",
         column2="propertytag_id",
     )
+    active = fields.Boolean(default=True, copy=False, export_string_translation=False)
 
     parcel_ids = fields.One2many(
         string="Parcels of the property",

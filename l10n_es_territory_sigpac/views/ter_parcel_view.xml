@@ -250,7 +250,7 @@
     <menuitem id="parcel_sigpaclink_menu"
               name="SIGPAC enclos. in parcels"
               parent="base_ter.menu_territory"
-              sequence="41"
+              sequence="50"
               action="ter_parcel_sigpaclink_action"
               groups="base_ter.group_ter_user"/>
 

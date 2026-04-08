@@ -8,12 +8,19 @@
         <field name="arch" type="xml">
             <form string="Properties" duplicate="0">
                 <field name="id" invisible="1"/>
+                <field name="active" invisible="1"/>
                 <field name="diff_areas_threshold_exceeded" invisible="1"/>
                 <field name="mapped_to_polygon" invisible="1"/>
 
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <field name="unit_count" invisible="1"/>
+                        <button name="action_show_parcels"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-ter-parcel">
+                            <field name="number_of_parcels" string="Parcels" widget="statinfo"/>
+                        </button>
                         <button name="action_show_units"
                                 type="object"
                                 class="oe_stat_button"
@@ -21,12 +28,6 @@
                             <field string="Units"
                                    name="unit_count"
                                    widget="statinfo"/>
-                        </button>
-                        <button name="action_show_parcels"
-                                type="object"
-                                class="oe_stat_button"
-                                icon="fa-ter-parcel">
-                            <field name="number_of_parcels" string="Parcels" widget="statinfo"/>
                         </button>
 
                         <button name="action_gis_viewer"
@@ -36,7 +37,35 @@
                                 invisible="not mapped_to_polygon">
                             <span>GIS Viewer</span>
                         </button>
+
+                        <button name="reset_aerial_image"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-refresh">
+                            <span>Regenerate Image</span>
+                        </button>
+
+                        <button name="toggle_active"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-archive"
+                                invisible="not active">
+                            <span>Archive</span>
+                        </button>
+
+                        <button name="toggle_active"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-archive"
+                                invisible="active">
+                            <span>Unarchive</span>
+                        </button>
                     </div>
+
+                    <widget name="web_ribbon"
+                            title="Archived"
+                            bg_color="bg-danger"
+                            invisible="active"/>
 
                     <widget name="web_ribbon"
                             title="Check areas!"
@@ -67,14 +96,14 @@
                                    string="Municipality"
                                    options="{'no_quick_create': True, 'no_create_edit': True}"/>
 
-                            <field name="area_official_parcels"/>
-
                             <field name="place_id"
                                    string="Place"
                                    readonly="not municipality_id"
                                    domain="[('municipality_id', '=', municipality_id)]"
                                    context="{'default_municipality_id': municipality_id}"
                                    options="{'no_create_edit': True}"/>
+
+                            <field name="area_official_parcels"/>
 
                             <field name="tag_id"
                                    widget="many2many_tags"
@@ -294,13 +323,12 @@
     <menuitem id="ter_property_menu"
               parent="menu_territory"
               action="ter_property_action"
-              sequence="20"/>
+              sequence="10"/>
 
     <record id="ter_property_reset_aerial_image_serveraction" model="ir.actions.server">
         <field name="name">Refresh aerial image</field>
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="model_ter_property"/>
-        <field name="binding_model_id" ref="model_ter_property"/>
         <field name="groups_id" eval="[(4, ref('base_ter.group_ter_manager'))]"/>
         <field name="state">code</field>
         <field name="code">
@@ -350,17 +378,5 @@
               parent="menu_thecnicalactions_refresh"
               action="ter_property_refresh_properties_layer_serveraction"
               sequence="30"/>
-
-    <record id="ter_property_gis_viewer_serveraction" model="ir.actions.server">
-        <field name="name">See in GIS viewer</field>
-        <field name="type">ir.actions.server</field>
-        <field name="model_id" ref="model_ter_property"/>
-        <field name="binding_model_id" ref="model_ter_property"/>
-        <field name="groups_id" eval="[(4, ref('base_ter.group_ter_user'))]"/>
-        <field name="state">code</field>
-        <field name="code">
-            action = records.action_gis_viewer()
-        </field>
-    </record>
 
 </odoo>

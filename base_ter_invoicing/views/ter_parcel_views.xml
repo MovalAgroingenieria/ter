@@ -6,7 +6,7 @@
         <field name="model">ter.parcel</field>
         <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_gis_viewer']" position="after">
+            <xpath expr="//div[@name='button_box']/button[1]" position="before">
                 <button
                     name="action_show_move_lines"
                     type="object"

@@ -21,8 +21,8 @@
         <field name="model">ter.use_unit</field>
         <field name="inherit_id" ref="base_ter.view_ter_unit_list"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='farm_property_id']" position="after">
-                <field name="account_id" optional="show"/>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="account_id" optional="hide"/>
             </xpath>
         </field>
     </record>

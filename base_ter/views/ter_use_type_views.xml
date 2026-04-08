@@ -79,13 +79,13 @@
                         <field name="unit_count" invisible="1"/>
                         <field name="parcel_count" invisible="1"/>
                         <field name="date_range_count" invisible="1"/>
-                        <button name="action_show_units" type="object"
-                                class="oe_stat_button" icon="fa-sitemap">
-                            <field name="unit_count" string="Units" widget="statinfo"/>
-                        </button>
                         <button name="action_show_parcels" type="object"
                                 class="oe_stat_button" icon="fa-ter-parcel">
                             <field name="parcel_count" string="Parcels" widget="statinfo"/>
+                        </button>
+                        <button name="action_show_units" type="object"
+                                class="oe_stat_button" icon="fa-sitemap">
+                            <field name="unit_count" string="Units" widget="statinfo"/>
                         </button>
                         <button name="action_show_date_ranges" type="object"
                                 class="oe_stat_button" icon="fa-calendar">
@@ -188,7 +188,7 @@
               (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_use_type_kanban')}),
               (0, 0, {'view_mode': 'form', 'view_id': ref('view_use_type_form')})]"/>
         <field name="search_view_id" ref="view_use_type_search"/>
-        <field name="context">{}</field>
+        <field name="context">{'search_default_top_level': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create your first use type

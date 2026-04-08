@@ -19,7 +19,6 @@
         "data/ter_parcel_sigpaclink_cron.xml",
         "views/res_config_settings_view.xml",
         "views/ter_sigpac_view.xml",
-        "views/ter_sigpac_reports.xml",
         "views/ter_parcel_view.xml",
         "reports/ter_parcel_sigpac_report.xml",
     ],

@@ -166,7 +166,7 @@
     <menuitem id="sigpac_menu"
               name="SIGPAC enclosures"
               parent="base_ter.menu_territory"
-              sequence="30"
+              sequence="40"
               action="ter_sigpac_action"
               groups="base_ter.group_ter_user"/>
 
