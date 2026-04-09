@@ -1,5 +1,6 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
+# pylint: disable=too-many-lines,protected-access
 
 import base64
 import binascii
@@ -780,9 +781,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             )
 
         activities = (
-            activity_line_obj.create(act_vals)
-            if act_vals
-            else activity_line_obj
+            activity_line_obj.create(act_vals) if act_vals else activity_line_obj
         )
         by_external = {a.external_id: a for a in activities}
 

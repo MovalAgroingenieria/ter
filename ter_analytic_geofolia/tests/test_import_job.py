@@ -1,5 +1,6 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
+# pylint: disable=protected-access
 
 import base64
 import json
@@ -13,7 +14,9 @@ def _encode(payload):
 
 
 @tagged("post_install", "-at_install")
-class TestGeofoliaImportJob(TransactionCase):  # pylint: disable=too-many-public-methods
+class TestGeofoliaImportJob(
+    TransactionCase
+):  # pylint: disable=too-many-public-methods,W0212
     def _minimal_payload_fields(self):
         return {
             "Information": {"AppName": "Geofolia", "CountryCode": "ES"},
@@ -91,8 +94,8 @@ class TestGeofoliaImportJob(TransactionCase):  # pylint: disable=too-many-public
         }
 
     def test_create_job(self):
-        Job = self.env["geofolia.import.job"]
-        job = Job.create(
+        job_obj = self.env["geofolia.import.job"]
+        job = job_obj.create(
             {
                 "name": "Test Job",
                 "import_type": "full",

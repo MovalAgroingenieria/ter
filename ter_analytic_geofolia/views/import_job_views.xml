@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <menuitem id="menu_geofolia_import"
               name="Geofolia"
-              parent="base_ter.menu_configuration_general"
+              parent="base_ter.menu_census"
+              sequence="950"
               groups="group_geofolia_import"/>
 
     <record id="action_geofolia_import_job" model="ir.actions.act_window">

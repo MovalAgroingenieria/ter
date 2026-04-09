@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 13:55+0000\n"
-"PO-Revision-Date: 2026-02-18 13:55+0000\n"
+"POT-Creation-Date: 2026-04-09 00:58+0000\n"
+"PO-Revision-Date: 2026-04-09 00:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -140,14 +140,20 @@ msgstr "Empleados de actividad (aplicar desde aquí)"
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
+msgid "Activity has no date."
+msgstr "L'activitat no té data."
+
+#. module: ter_analytic_geofolia
+#. odoo-python
+#: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Already linked."
-msgstr "Ya enlazado."
+msgstr "Ja vinculat."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Already up to date."
-msgstr "Ya actualizado."
+msgstr "Ja actualitzat."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.constraint,message:ter_analytic_geofolia.constraint_account_analytic_line_geofolia_analytic_external_id_uniq
@@ -240,16 +246,14 @@ msgstr "Cancel·lar"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/wizards/import_wizard.py:0
 msgid "Cannot autodetect JSON type. Choose it manually."
-msgstr "No se puede autodetectar el tipo JSON. Elíjalo manualmente."
+msgstr "No es pot autodetectar el tipus de JSON. Trieu-lo manualment."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Cannot create location: parcel/date range required for ter.use_unit."
 msgstr ""
-"No se puede crear ubicación: parcela/rango de fechas requerido para "
-"ter.use_unit.No se puede crear ubicación: parcela/rango de fechas requerido "
-"para ter.use_unit."
+"No es pot crear ubicació: parcel·la/període requerits per a ter.use_unit."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_equipment_line__category
@@ -323,7 +327,7 @@ msgstr "Creados / Actualizados"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Created analytic line."
-msgstr "Línea analítica creada."
+msgstr "Línia analítica creada."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__create_uid
@@ -343,19 +347,19 @@ msgstr "Creat per"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Created equipment."
-msgstr "Equipo creado."
+msgstr "Equip creat."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Created field service person."
-msgstr "Persona de campo creada."
+msgstr "Persona de servei de camp creada."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Created location and use unit (1:1)."
-msgstr "Ubicación y unidad de uso creadas (1:1)."
+msgstr "Ubicació i unitat d'ús creades (1:1)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__create_date
@@ -375,19 +379,19 @@ msgstr "Creat el"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Created partner."
-msgstr "Contacto creado."
+msgstr "Contacte creat."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Created product."
-msgstr "Producto creado."
+msgstr "Producte creat."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Created use unit and linked to location."
-msgstr "Unidad de uso creada y enlazada a ubicación."
+msgstr "Unitat d'ús creada i vinculada a ubicació."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__crop_name
@@ -404,6 +408,7 @@ msgstr "Ubicación FSM por defecto (Actividades)"
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_config_settings__geofolia_default_fsm_location_id
 msgid "Default FSM location for fsm.order created from Geofolia activities."
 msgstr ""
+"Ubicació FSM per defecte per a fsm.order creats des d'activitats Geofolia."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
@@ -415,6 +420,7 @@ msgstr "Cuenta analítica por defecto (Actividades / partes de horas)"
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_config_settings__geofolia_default_analytic_account_id
 msgid "Default analytic account for activity timesheets (Odoo 18)."
 msgstr ""
+"Compte analític per defecte per a parts d'hores d'activitats (Odoo 18)."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
@@ -426,23 +432,12 @@ msgstr "Rango de fechas por defecto (Parcelas)"
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_config_settings__geofolia_default_date_range_id
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
 msgid "Default date range for ter.use_unit when importing Geofolia Fields."
-msgstr ""
+msgstr "Període per defecte per a ter.use_unit en importar camps de Geofolia."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
 msgid "Default harvested product (no id)"
 msgstr "Producto cosechado por defecto (sin id)"
-
-#. module: ter_analytic_geofolia
-#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
-msgid ""
-"Default location for fsm.order created from Geofolia Activities when "
-"fieldservice_timesheet is installed."
-msgstr ""
-"Ubicación por defecto para fsm.order creado desde Actividades Geofolia "
-"cuando fieldservice_timesheet está instalado.Ubicación por defecto para "
-"fsm.order creado desde Actividades Geofolia cuando fieldservice_timesheet "
-"está instalado."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
@@ -574,7 +569,7 @@ msgstr "Data fi"
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
 msgid "Equip"
-msgstr ""
+msgstr "Equip"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
@@ -625,7 +620,7 @@ msgstr "Equips"
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_partner_line_search
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_product_line_search
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_line_list
@@ -642,7 +637,7 @@ msgstr "Errores"
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
 msgid "Errors"
-msgstr ""
+msgstr "Errors"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -651,9 +646,8 @@ msgid ""
 "Existing location but cannot create ter.use_unit (parcel/date range "
 "missing)."
 msgstr ""
-"Ubicación existente pero no se puede crear ter.use_unit (falta parcela/rango"
-" de fechas).Ubicación existente pero no se puede crear ter.use_unit (falta "
-"parcela/rango de fechas)."
+"Ubicació existent però no es pot crear ter.use_unit (falta "
+"parcel·la/període)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_line__external_id
@@ -667,8 +661,7 @@ msgstr "Extern"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_person__geofolia_external_id
-msgid ""
-"External ID from Geofolia (Employees) import. Prevents duplicate imports."
+msgid "External ID from Geofolia (Employees) import. Prevents duplicates."
 msgstr ""
 "ID externo de importación Geofolia (Empleados). Evita importaciones "
 "duplicadas.ID externo de importación Geofolia (Empleados). Evita "
@@ -677,12 +670,13 @@ msgstr ""
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_equipment__geofolia_external_id
 msgid "External ID from Geofolia (Equipments) import. Prevents duplicates."
-msgstr ""
+msgstr "ID extern de la importació Geofolia (Equips). Evita duplicats."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_ter_use_unit__geofolia_external_id
 msgid "External ID from Geofolia (Field) import. Prevents duplicate imports."
 msgstr ""
+"ID extern de la importació Geofolia (Camps). Evita importacions duplicades."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_fee__geofolia_external_id
@@ -700,7 +694,7 @@ msgstr ""
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_hr_employee__geofolia_external_id
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_product_product__geofolia_external_id
 msgid "External ID from Geofolia import. Prevents duplicate imports."
-msgstr ""
+msgstr "ID extern de la importació Geofolia. Evita importacions duplicades."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__external_uuid
@@ -732,12 +726,23 @@ msgstr "Ordres FSM"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "FSM Orders (Activities)"
-msgstr "Órdenes FSM (Actividades)"
+msgstr "Ordres FSM (Activitats)"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__fsm_order_ids
 msgid "FSM Orders (from activities)"
 msgstr "Órdenes FSM (de actividades)"
+
+#. module: ter_analytic_geofolia
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
+msgid ""
+"Fallback location for fsm.order when the activity's plot (CropZoneIds) is "
+"not yet imported. If Fields are imported first, the order uses the plot's "
+"fsm.location."
+msgstr ""
+"Ubicació de respatller per a fsm.order quan la parcel·la de l'activitat "
+"(CropZoneIds) encara no s'ha importat. Si els Camps s'importen primer, "
+"l'ordre utilitza la fsm.location de la parcel·la."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_line__farm_identification_code
@@ -750,8 +755,7 @@ msgstr "Código identificación finca"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_line__farm_identification_code
 msgid ""
-"Farm identification from Geofolia (Fields). Used to link workers to "
-"locations."
+"Farm identification from Geofolia (Fields). Links workers to locations."
 msgstr ""
 "Identificación de finca de Geofolia (Parcelas). Se usa para enlazar "
 "trabajadores a ubicaciones.Identificación de finca de Geofolia (Parcelas). "
@@ -770,6 +774,8 @@ msgstr ""
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_product_line__farm_identification_code
 msgid "Farm identification from Geofolia; same SupplyId can appear per farm."
 msgstr ""
+"Identificació d'explotació de Geofolia; el mateix SupplyId pot aparèixer per"
+" explotació."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_fsm_equipment
@@ -795,7 +801,7 @@ msgstr "Trabajador de campo"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Field service person not found."
-msgstr "Persona de campo no encontrada."
+msgstr "Persona de servei de camp no trobada."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields.selection,name:ter_analytic_geofolia.selection__geofolia_import_job__import_type__fields
@@ -843,13 +849,13 @@ msgstr "Complet (tots els blocs)"
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_partner_form_view_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_ter_unit_form_geofolia
 msgid "Geofolia"
-msgstr ""
+msgstr "Geofolia"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
-msgid "Geofolia (%s)"
-msgstr ""
+msgid "Geofolia (%(label)s)"
+msgstr "Geofolia (%(label)s)"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_ter_use_unit__geofolia_city
@@ -863,20 +869,20 @@ msgstr "Código Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_ter_use_unit__geofolia_crop_name
-msgid "Geofolia Crop"
+msgid "Geofolia Crop Name"
 msgstr "Cultivo Geofolia"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
-msgid "Geofolia Equipment %s"
-msgstr "Equipo Geofolia %s"
+msgid "Geofolia Equipment %(ext_id)s"
+msgstr "Equip Geofolia %(ext_id)s"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
-msgid "Geofolia Field %s"
-msgstr "Parcela Geofolia %s"
+msgid "Geofolia Field %(ext_id)s"
+msgstr "Camp Geofolia %(ext_id)s"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_ter_use_unit__geofolia_harvest_year
@@ -927,131 +933,131 @@ msgstr "Importación Geofolia"
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_activity_employee_line
 msgid "Geofolia Import Activity Employee Line"
-msgstr ""
+msgstr "Línia empleat-activitat importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_activity_line
 msgid "Geofolia Import Activity Line"
-msgstr ""
+msgstr "Línia d'activitat importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_base_line
 msgid "Geofolia Import Base Line"
-msgstr ""
+msgstr "Línia base importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_employee_line
 msgid "Geofolia Import Employee Line"
-msgstr ""
+msgstr "Línia d'empleat importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_equipment_line
 msgid "Geofolia Import Equipment Line"
-msgstr ""
+msgstr "Línia d'equip importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_harvested_product_line
 msgid "Geofolia Import Harvested Product Line"
-msgstr ""
+msgstr "Línia de producte collit importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_job
 msgid "Geofolia Import Job"
-msgstr ""
+msgstr "Treball d'importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_line
 msgid "Geofolia Import Line"
-msgstr ""
+msgstr "Línia d'importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_line_search
 msgid "Geofolia Import Lines"
-msgstr ""
+msgstr "Línies d'importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_partner_line
 msgid "Geofolia Import Partner Line"
-msgstr ""
+msgstr "Línia de contacte importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_product_line
 msgid "Geofolia Import Product Line"
-msgstr ""
+msgstr "Línia de producte importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_geofolia_import_wizard
 msgid "Geofolia Import Wizard"
-msgstr ""
+msgstr "Assistent d'importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Geofolia activity"
-msgstr ""
+msgstr "Activitat Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_company__geofolia_default_fsm_location_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_config_settings__geofolia_default_fsm_location_id
 msgid "Geofolia default FSM location (activities)"
-msgstr ""
+msgstr "Ubicació FSM per defecte Geofolia (activitats)"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_company__geofolia_default_analytic_account_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_config_settings__geofolia_default_analytic_account_id
 msgid "Geofolia default analytic account (timesheets)"
-msgstr ""
+msgstr "Compte analític per defecte Geofolia (parts d'hores)"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_company__geofolia_default_date_range_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_config_settings__geofolia_default_date_range_id
 msgid "Geofolia default date range"
-msgstr ""
+msgstr "Període per defecte Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_company__geofolia_default_harvested_product_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_config_settings__geofolia_default_harvested_product_id
 msgid "Geofolia default harvested product"
-msgstr ""
+msgstr "Producte collit per defecte Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_company__geofolia_default_parcel_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_config_settings__geofolia_default_parcel_id
 msgid "Geofolia default parcel"
-msgstr ""
+msgstr "Parcel·la per defecte Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
 msgid "Geofolia import"
-msgstr ""
+msgstr "Importació Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_ter_unit_form_geofolia
 msgid "Geofolia imported data"
-msgstr ""
+msgstr "Dades importades de Geofolia"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Geofolia partner"
-msgstr "Contacto Geofolia"
+msgstr "Contacte Geofolia"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Geofolia product"
-msgstr ""
+msgstr "Producte Geofolia"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
-msgid "Geofolia worker %s"
-msgstr "Trabajador Geofolia %s"
+msgid "Geofolia worker %(ext_id)s"
+msgstr "Treballador Geofolia %(ext_id)s"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__geography_wkt
 msgid "Geography Wkt"
-msgstr ""
+msgstr "Geometria WKT"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_activity_employee_line_search
@@ -1063,39 +1069,39 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_partner_line_search
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_product_line_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupa per"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
 msgid "Harv err"
-msgstr ""
+msgstr "Err. collit"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_line__harvest_year
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__harvest_year
 msgid "Harvest Year"
-msgstr ""
+msgstr "Any de collita"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
 msgid "Harvested"
-msgstr ""
+msgstr "Collit"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__harvested_error_count
 msgid "Harvested Error Count"
-msgstr ""
+msgstr "Nº errors collits"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__harvested_processed_count
 msgid "Harvested Processed Count"
-msgstr ""
+msgstr "Nº collits processats"
 
 #. module: ter_analytic_geofolia
 #: model:ir.actions.act_window,name:ter_analytic_geofolia.action_geofolia_import_harvested_product_line
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_harvested_product_line_search
 msgid "Harvested Product Lines"
-msgstr ""
+msgstr "Línies de productes collits"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__harvested_product_line_ids
@@ -1116,7 +1122,7 @@ msgstr "Productos cosechados"
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_product_line__id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_wizard_form
@@ -1132,12 +1138,12 @@ msgstr "Importar JSON Geofolia"
 #. module: ter_analytic_geofolia
 #: model:ir.actions.act_window,name:ter_analytic_geofolia.action_geofolia_import_job
 msgid "Import Jobs"
-msgstr ""
+msgstr "Treballs d'importació"
 
 #. module: ter_analytic_geofolia
 #: model:ir.actions.act_window,name:ter_analytic_geofolia.action_geofolia_import_line
 msgid "Import Lines"
-msgstr ""
+msgstr "Línies d'importació"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__import_type
@@ -1150,18 +1156,18 @@ msgstr "Tipo importación"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/wizards/import_wizard.py:0
 msgid "Import error"
-msgstr ""
+msgstr "Error d'importació"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/wizards/import_wizard.py:0
 msgid "Import failed"
-msgstr ""
+msgstr "Importació fallida"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__info_json
 msgid "Info Json"
-msgstr ""
+msgstr "JSON d'informació"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
@@ -1171,20 +1177,40 @@ msgstr "Información"
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
-msgid "Invalid JSON file: %s"
-msgstr "Archivo JSON inválido: %s"
+msgid "Invalid JSON file: %(error)s"
+msgstr "Fitxer JSON no vàlid: %(error)s"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
-msgid "Invalid file content: %s"
-msgstr "Contenido de archivo inválido: %s"
+msgid "Invalid file content: %(error)s"
+msgstr "Contingut de fitxer no vàlid: %(error)s"
+
+#. module: ter_analytic_geofolia
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_activity_employee_line_form
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_activity_employee_line_list
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_activity_line_form
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_activity_line_list
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_employee_line_form
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_employee_line_list
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_equipment_line_form
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_equipment_line_list
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_harvested_product_line_form
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_harvested_product_line_list
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_line_form
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_line_list
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_partner_line_form
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_partner_line_list
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_product_line_form
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_product_line_list
+msgid "JSON"
+msgstr "JSON"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "JSON root must be an object."
-msgstr "La raíz JSON debe ser un objeto."
+msgstr "L'arrel del JSON ha de ser un objecte."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__job_id
@@ -1205,17 +1231,17 @@ msgstr "La raíz JSON debe ser un objeto."
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_partner_line_search
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_product_line_search
 msgid "Job"
-msgstr ""
+msgstr "Treball"
 
 #. module: ter_analytic_geofolia
 #: model:ir.ui.menu,name:ter_analytic_geofolia.menu_geofolia_import_jobs
 msgid "Jobs"
-msgstr ""
+msgstr "Treballs"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_line__last_modification_dt
 msgid "Last Modification Dt"
-msgstr ""
+msgstr "Data última modificació"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__write_uid
@@ -1229,7 +1255,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_product_line__write_uid
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualització per"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__write_date
@@ -1243,12 +1269,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_product_line__write_date
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualització el"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__line_count
 msgid "Line count"
-msgstr ""
+msgstr "Nº de línies"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__line_ids
@@ -1261,22 +1287,22 @@ msgstr "Líneas"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Lines with error"
-msgstr "Líneas con error"
+msgstr "Línies amb error"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_ter_use_unit__fsm_location_id
 msgid "Linked Field Service location (1:1 with this use unit)."
-msgstr ""
+msgstr "Ubicació de servei de camp vinculada (1:1 amb aquesta unitat d'ús)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_location__ter_use_unit_id
 msgid "Linked territory use unit (1:1 with this location)."
-msgstr ""
+msgstr "Unitat d'ús territorial vinculada (1:1 amb aquesta ubicació)."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_harvested_product_line_list
 msgid "Message / error"
-msgstr ""
+msgstr "Missatge / error"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -1295,25 +1321,25 @@ msgstr "Falta id."
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_base_line.py:0
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_line.py:0
 msgid "Missing job."
-msgstr ""
+msgstr "Falta treball."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Missing or invalid 'Fields' array."
-msgstr "Falta o es inválido el array 'Fields'."
+msgstr "Array 'Fields' absent o no vàlid."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Missing or invalid 'Information' object."
-msgstr "Falta o es inválido el objeto 'Information'."
+msgstr "Objecte 'Information' absent o no vàlid."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Missing or invalid 'Products' array."
-msgstr "Falta o es inválido el array 'Products'."
+msgstr "Array 'Products' absent o no vàlid."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_employee_line__name
@@ -1337,13 +1363,13 @@ msgstr "Nou"
 #: model:ir.actions.act_window,name:ter_analytic_geofolia.action_geofolia_import_wizard_menu
 #: model:ir.ui.menu,name:ter_analytic_geofolia.menu_geofolia_import_new
 msgid "New Import"
-msgstr ""
+msgstr "Nova importació"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
-msgid "No Geofolia id; %s."
-msgstr "Sin id Geofolia; %s."
+msgid "No Geofolia id; %(src)s."
+msgstr "Sense ID Geofolia; %(src)s."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields.selection,name:ter_analytic_geofolia.selection__geofolia_import_activity_employee_line__sync_state__no_action
@@ -1366,27 +1392,26 @@ msgid ""
 "No date range. Set harvest year in data or configure Geofolia default date "
 "range."
 msgstr ""
-"Sin rango de fechas. Configure año de cosecha en los datos o el rango de "
-"fechas por defecto de Geofolia.Sin rango de fechas. Configure año de cosecha"
-" en los datos o el rango de fechas por defecto de Geofolia."
+"Sense període. Establiu l'any de collita a les dades o configureu el període"
+" per defecte de Geofolia."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 #: code:addons/ter_analytic_geofolia/wizards/import_wizard.py:0
 msgid "No file provided."
-msgstr "No se ha proporcionado archivo."
+msgstr "No s'ha proporcionat fitxer."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "No parcel found for this GIS."
-msgstr "No se encontró parcela para este GIS."
+msgstr "No s'ha trobat parcel·la per a aquest GIS."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_job__line_count
 msgid "Number of lines (Fields or Products mode)."
-msgstr ""
+msgstr "Nombre de línies (mode Camps o Productes)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_line__operation_category
@@ -1417,7 +1442,7 @@ msgstr "Error de análisis"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields.selection,name:ter_analytic_geofolia.selection__geofolia_import_job__state__done
 msgid "Parsed"
-msgstr ""
+msgstr "Processat"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
@@ -1427,29 +1452,29 @@ msgstr "Cont. err"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields.selection,name:ter_analytic_geofolia.selection__geofolia_import_job__apply_state__partial
 msgid "Partial"
-msgstr ""
+msgstr "Parcial"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_partner_line__partner_id
 msgid "Partner"
-msgstr ""
+msgstr "Contacte"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__partner_error_count
 msgid "Partner Error Count"
-msgstr ""
+msgstr "Nº errors contactes"
 
 #. module: ter_analytic_geofolia
 #: model:ir.actions.act_window,name:ter_analytic_geofolia.action_geofolia_import_partner_line
 #: model:ir.ui.menu,name:ter_analytic_geofolia.menu_geofolia_import_partner_lines
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_partner_line_search
 msgid "Partner Lines"
-msgstr ""
+msgstr "Línies de contactes"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__partner_processed_count
 msgid "Partner Processed Count"
-msgstr ""
+msgstr "Nº contactes processats"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -1476,13 +1501,13 @@ msgstr "Pendent"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__pending_count
 msgid "Pending Count"
-msgstr ""
+msgstr "Nº pendents"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__person_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_employee_line__person_id
 msgid "Person"
-msgstr ""
+msgstr "Persona"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_employee_line__phone
@@ -1493,12 +1518,12 @@ msgstr "Telèfon"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Processed"
-msgstr "Procesados"
+msgstr "Processat"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__processed_count
 msgid "Processed Count"
-msgstr ""
+msgstr "Nº processats"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
@@ -1509,30 +1534,30 @@ msgstr "Prod. err"
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_harvested_product_line__product_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_product_line__product_id
 msgid "Product"
-msgstr ""
+msgstr "Producte"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__product_error_count
 msgid "Product Error Count"
-msgstr ""
+msgstr "Nº errors productes"
 
 #. module: ter_analytic_geofolia
 #: model:ir.actions.act_window,name:ter_analytic_geofolia.action_geofolia_import_product_line
 #: model:ir.ui.menu,name:ter_analytic_geofolia.menu_geofolia_import_product_lines
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_product_line_search
 msgid "Product Lines"
-msgstr ""
+msgstr "Línies de productes"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__product_processed_count
 msgid "Product Processed Count"
-msgstr ""
+msgstr "Nº productes processats"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__product_type_enum
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_product_line__product_type_enum
 msgid "Product Type Enum"
-msgstr ""
+msgstr "Tipus de producte (enum)"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_product_product
@@ -1553,6 +1578,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
 msgid "Product to assign when a Harvested product line has no Geofolia id."
 msgstr ""
+"Producte a assignar quan una línia de producte collit no té ID de Geofolia."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__product_line_ids
@@ -1616,17 +1642,19 @@ msgstr "Reprocessar"
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form_geofolia
 msgid "Required to create timesheet lines from Geofolia activities (Odoo 18)."
 msgstr ""
+"Requerit per crear línies de part d'hores des d'activitats Geofolia (Odoo "
+"18)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_location__geofolia_external_id
 msgid "Same as ter.use_unit.geofolia_external_id (1:1 link)."
-msgstr ""
+msgstr "Igual que ter.use_unit.geofolia_external_id (vincle 1:1)."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Set analytic account (parcel or Geofolia settings)."
-msgstr "Configure cuenta analítica (parcela o ajustes Geofolia)."
+msgstr "Compte analític assignat (parcel·la o configuració Geofolia)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields.selection,name:ter_analytic_geofolia.selection__geofolia_import_activity_employee_line__sync_state__skipped
@@ -1665,7 +1693,7 @@ msgstr "Ajustos de configuració"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__supply_id
 msgid "Supply"
-msgstr ""
+msgstr "Subministrament"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__sync_message
@@ -1696,53 +1724,54 @@ msgstr "Estado sincronización"
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_ter_use_unit
 msgid "Ter Use Unit"
-msgstr ""
+msgstr "Unitat d'ús territorial"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_fsm_location__ter_use_unit_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__ter_use_unit_id
 msgid "Territory Use Unit"
-msgstr ""
+msgstr "Unitat d'ús territorial"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.constraint,message:ter_analytic_geofolia.constraint_geofolia_import_activity_employee_line_geofolia_act_emp_uniq
 msgid "This activity employee entry has already been imported."
-msgstr ""
+msgstr "Aquesta entrada empleat-activitat ja ha estat importada."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.constraint,message:ter_analytic_geofolia.constraint_geofolia_import_activity_line_geofolia_activity_job_ext_uniq
 msgid "This activity has already been imported in this job."
-msgstr ""
+msgstr "Aquesta activitat ja ha estat importada en aquest treball."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.constraint,message:ter_analytic_geofolia.constraint_geofolia_import_employee_line_geofolia_employee_job_ext_uniq
 msgid "This employee has already been imported in this job."
-msgstr ""
+msgstr "Aquest empleat ja ha estat importat en aquest treball."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.constraint,message:ter_analytic_geofolia.constraint_geofolia_import_equipment_line_geofolia_equipment_job_ext_farm_uniq
 msgid "This equipment (and farm) has already been imported in this job."
-msgstr ""
+msgstr "Aquest equip (i explotació) ja ha estat importat en aquest treball."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.constraint,message:ter_analytic_geofolia.constraint_geofolia_import_harvested_product_line_geofolia_harvested_job_ext_uniq
 msgid "This harvested product has already been imported in this job."
-msgstr ""
+msgstr "Aquest producte collit ja ha estat importat en aquest treball."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.constraint,message:ter_analytic_geofolia.constraint_geofolia_import_partner_line_geofolia_partner_job_ext_uniq
 msgid "This partner has already been imported in this job."
-msgstr ""
+msgstr "Aquest contacte ja ha estat importat en aquest treball."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.constraint,message:ter_analytic_geofolia.constraint_geofolia_import_product_line_geofolia_product_job_ext_farm_uniq
 msgid "This product (and farm) has already been imported in this job."
 msgstr ""
+"Aquest producte (i explotació) ja ha estat importat en aquest treball."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__timesheet_count
 msgid "Timesheet Count"
-msgstr ""
+msgstr "Nº parts d'hores"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -1769,14 +1798,14 @@ msgstr "Por analizar"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__total_count
 msgid "Total Count"
-msgstr ""
+msgstr "Nº total"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_harvested_product_line__unit_symbol
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__unit_symbol
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_product_line__unit_symbol
 msgid "Unit Symbol"
-msgstr ""
+msgstr "Símbol d'unitat"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields.selection,name:ter_analytic_geofolia.selection__geofolia_import_activity_employee_line__sync_state__updated
@@ -1795,37 +1824,37 @@ msgstr "Actualitzat"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Updated analytic line."
-msgstr "Línea analítica actualizada."
+msgstr "Línia analítica actualitzada."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Updated equipment."
-msgstr "Equipo actualizado."
+msgstr "Equip actualitzat."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Updated field service person."
-msgstr "Persona de campo actualizada."
+msgstr "Persona de servei de camp actualitzada."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Updated location and use unit."
-msgstr ""
+msgstr "Ubicació i unitat d'ús actualitzades."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Updated partner."
-msgstr "Contacto actualizado."
+msgstr "Contacte actualitzat."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Updated product."
-msgstr "Producto actualizado."
+msgstr "Producte actualitzat."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__variety_name
@@ -1840,27 +1869,29 @@ msgstr "NIF/CIF"
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_line_search
 msgid "With error message"
-msgstr ""
+msgstr "Amb missatge d'error"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_activity_line__fsm_order_id
 msgid "With fieldservice_timesheet, employee times link to this order."
 msgstr ""
+"Amb fieldservice_timesheet, les hores de l'empleat es vinculen a aquesta "
+"ordre."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "default product from Settings"
-msgstr ""
+msgstr "producte per defecte de Configuració"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "matched by internal reference"
-msgstr ""
+msgstr "coincidència per referència interna"
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "matched by product name"
-msgstr ""
+msgstr "coincidència per nom de producte"

@@ -22,10 +22,10 @@ class TerUseUnit(models.Model):
         ondelete="set null",
         help="Linked Field Service location (1:1 with this use unit).",
     )
-    geofolia_code = fields.Char(string="Geofolia Code", copy=False)
-    geofolia_harvest_year = fields.Integer(string="Geofolia Harvest Year", copy=False)
-    geofolia_crop_name = fields.Char(string="Geofolia Crop", copy=False)
-    geofolia_city = fields.Char(string="Geofolia City", copy=False)
+    geofolia_code = fields.Char(copy=False)
+    geofolia_harvest_year = fields.Integer(copy=False)
+    geofolia_crop_name = fields.Char(copy=False)
+    geofolia_city = fields.Char(copy=False)
 
     _sql_constraints = [
         (

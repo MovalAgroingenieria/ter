@@ -1,5 +1,6 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
+# pylint: disable=protected-access
 
 """Base and all full-export line models in one file so load order is fixed."""
 
@@ -114,8 +115,8 @@ class GeofoliaImportActivityEmployeeLine(models.Model):
         for line in self:
             if not line.job_id:
                 raise UserError(self.env._("Missing job."))
-            line.job_id._apply_activity_employee_line(line)
-            line.job_id._recompute_apply_state()
+            line.job_id._apply_activity_employee_line(line)  # pylint: disable=W0212
+            line.job_id._recompute_apply_state()  # pylint: disable=W0212
 
 
 class GeofoliaImportEmployeeLine(models.Model):
@@ -144,8 +145,8 @@ class GeofoliaImportEmployeeLine(models.Model):
         for line in self:
             if not line.job_id:
                 raise UserError(self.env._("Missing job."))
-            line.job_id._apply_employee_line(line)
-            line.job_id._recompute_apply_state()
+            line.job_id._apply_employee_line(line)  # pylint: disable=W0212
+            line.job_id._recompute_apply_state()  # pylint: disable=W0212
 
 
 class GeofoliaImportEquipmentLine(models.Model):
@@ -182,8 +183,8 @@ class GeofoliaImportEquipmentLine(models.Model):
         for line in self:
             if not line.job_id:
                 raise UserError(self.env._("Missing job."))
-            line.job_id._apply_equipment_line(line)
-            line.job_id._recompute_apply_state()
+            line.job_id._apply_equipment_line(line)  # pylint: disable=W0212
+            line.job_id._recompute_apply_state()  # pylint: disable=W0212
 
 
 class GeofoliaImportHarvestedProductLine(models.Model):
@@ -211,8 +212,10 @@ class GeofoliaImportHarvestedProductLine(models.Model):
         for line in self:
             if not line.job_id:
                 raise UserError(self.env._("Missing job."))
-            line.job_id._apply_product_like(line, label="harvested_products")
-            line.job_id._recompute_apply_state()
+            line.job_id._apply_product_like(
+                line, label="harvested_products"
+            )  # pylint: disable=W0212
+            line.job_id._recompute_apply_state()  # pylint: disable=W0212
 
 
 class GeofoliaImportPartnerLine(models.Model):
@@ -228,7 +231,6 @@ class GeofoliaImportPartnerLine(models.Model):
 
     partner_id = fields.Many2one(
         "res.partner",
-        string="Partner",
         ondelete="set null",
     )
 
@@ -245,9 +247,9 @@ class GeofoliaImportPartnerLine(models.Model):
         for line in self:
             if not line.job_id:
                 raise UserError(self.env._("Missing job."))
-            line.job_id._apply_partner_line(line)
+            line.job_id._apply_partner_line(line)  # pylint: disable=W0212
         for job in jobs:
-            job._recompute_apply_state()
+            job._recompute_apply_state()  # pylint: disable=W0212
 
 
 class GeofoliaImportProductLine(models.Model):
@@ -284,5 +286,5 @@ class GeofoliaImportProductLine(models.Model):
                 raise UserError(self.env._("Missing job."))
             if line.job_id.import_type != "full":
                 continue
-            line.job_id._apply_product_line(line)
-            line.job_id._recompute_apply_state()
+            line.job_id._apply_product_line(line)  # pylint: disable=W0212
+            line.job_id._recompute_apply_state()  # pylint: disable=W0212

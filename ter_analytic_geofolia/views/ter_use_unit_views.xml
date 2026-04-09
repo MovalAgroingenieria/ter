@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="view_ter_unit_form_geofolia" model="ir.ui.view">
         <field name="name">ter.use_unit.form.geofolia</field>

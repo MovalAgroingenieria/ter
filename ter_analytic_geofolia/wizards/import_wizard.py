@@ -1,5 +1,6 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
+# pylint: disable=protected-access
 
 import logging
 
@@ -59,7 +60,7 @@ class GeofoliaImportWizard(models.TransientModel):
                     "sticky": True,
                 },
             }
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             _logger.exception("Geofolia import failed")
             return {
                 "type": "ir.actions.client",
@@ -84,7 +85,7 @@ class GeofoliaImportWizard(models.TransientModel):
         payload = (
             self.env["geofolia.import.job"]
             .new({"file_data": self.file_data})
-            ._load_json_payload()
+            ._load_json_payload()  # pylint: disable=W0212
         )
 
         if isinstance(payload, dict):
