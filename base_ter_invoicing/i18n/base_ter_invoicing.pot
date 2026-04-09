@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-02 11:25+0000\n"
-"PO-Revision-Date: 2025-08-02 11:25+0000\n"
+"POT-Creation-Date: 2026-04-09 00:52+0000\n"
+"PO-Revision-Date: 2026-04-09 00:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: base_ter_invoicing
-#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__percentage_overhead
-#: model:product.category,aux_02_float_label:base_ter_invoicing.product_category_02
-#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.ter_parcel_partnerlink_view_tree
-#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.ter_parcel_view_form
-msgid "% Overhead"
+#: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_05
+msgid "% overhead"
 msgstr ""
 
 #. module: base_ter_invoicing
@@ -31,17 +28,12 @@ msgstr ""
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__area_overhead
 #: model:product.category,billable_item_quantity_label:base_ter_invoicing.product_category_02
-msgid "Area (overhead)"
+msgid "Area Overhead"
 msgstr ""
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__area_ownership
-msgid "Area (ownership)"
-msgstr ""
-
-#. module: base_ter_invoicing
-#: model:product.category,name:base_ter_invoicing.product_category_02
-msgid "Areas"
+msgid "Area Ownership"
 msgstr ""
 
 #. module: base_ter_invoicing
@@ -50,14 +42,13 @@ msgid "Billing partner reference"
 msgstr ""
 
 #. module: base_ter_invoicing
-#: model:ir.model.fields,help:base_ter_invoicing.field_ter_parcel_partnerlink__partner_is_company
-msgid "Check if the contact is a company, otherwise it is a person"
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__billing_quantity
+msgid "Billing quantity"
 msgstr ""
 
 #. module: base_ter_invoicing
-#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__partner_is_company
-#: model:product.category,aux_03_bool_label:base_ter_invoicing.product_category_02
-msgid "Company (y/n)"
+#: model:ir.model.fields,help:base_ter_invoicing.field_ter_parcel_partnerlink__partner_is_company
+msgid "Check if the contact is a company, otherwise it is a person"
 msgstr ""
 
 #. module: base_ter_invoicing
@@ -67,20 +58,39 @@ msgstr ""
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__billing_groupvalue
-msgid "Grouping Value"
-msgstr ""
-
-#. module: base_ter_invoicing
-#: model:ir.model.constraint,message:base_ter_invoicing.constraint_ter_parcel_partnerlink_overhead_percentage
-msgid "Incorrect value of \"Overhead Percentage\"."
+msgid "Grouping value"
 msgstr ""
 
 #. module: base_ter_invoicing
 #. odoo-python
 #: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__move_line_ids
-#, python-format
+msgid "Incorrect value of overhead percentage. It must be between 0 and 100."
+msgstr ""
+
+#. module: base_ter_invoicing
+#. odoo-python
+#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
 msgid "Invoice Lines"
+msgstr ""
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__move_line_ids
+msgid "Invoice lines"
+msgstr ""
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__is_owner
+msgid "Is Owner"
+msgstr ""
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__partner_is_company
+msgid "Is a Company"
+msgstr ""
+
+#. module: base_ter_invoicing
+#: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_07
+msgid "Is company"
 msgstr ""
 
 #. module: base_ter_invoicing
@@ -90,62 +100,88 @@ msgstr ""
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__number_of_invoices
-#: model:product.category,aux_01_int_label:base_ter_invoicing.product_category_02
+#: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_02
 msgid "No. of invoices"
 msgstr ""
 
 #. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__parcel_area_official
+msgid "Official Area"
+msgstr ""
+
+#. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__parcel_official_code
-#: model:product.category,aux_02_char_label:base_ter_invoicing.product_category_02
 msgid "Official Code"
 msgstr ""
 
 #. module: base_ter_invoicing
-#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__is_owner
-msgid "Owner (y/n)"
+#: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_04
+msgid "Official code"
+msgstr ""
+
+#. module: base_ter_invoicing
+#. odoo-python
+#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
+msgid "Overhead area"
+msgstr ""
+
+#. module: base_ter_invoicing
+#. odoo-python
+#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
+msgid "Ownership area"
 msgstr ""
 
 #. module: base_ter_invoicing
 #: model:ir.model,name:base_ter_invoicing.model_ter_parcel
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_account_move_line__parcel_id
 #: model_terms:ir.ui.view,arch_db:base_ter_invoicing.account_move_line_view_search
-#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.account_move_line_view_tree
 msgid "Parcel"
 msgstr ""
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__parcel_code
-#: model:product.category,aux_01_char_label:base_ter_invoicing.product_category_02
 msgid "Parcel Code"
 msgstr ""
 
 #. module: base_ter_invoicing
 #: model:ir.model,name:base_ter_invoicing.model_ter_parcel_partnerlink
-msgid "Partner of parcel"
+msgid "Parcel Partner Link"
 msgstr ""
 
 #. module: base_ter_invoicing
-#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__property_name
-#: model:product.category,aux_03_char_label:base_ter_invoicing.product_category_02
+#: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_03
+msgid "Parcel area"
+msgstr ""
+
+#. module: base_ter_invoicing
+#: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_01
+msgid "Parcel code"
+msgstr ""
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__percentage_overhead
+msgid "Percentage Overhead"
+msgstr ""
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__product_id
+msgid "Product"
+msgstr ""
+
+#. module: base_ter_invoicing
+#: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_06
 msgid "Property"
 msgstr ""
 
 #. module: base_ter_invoicing
-#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__billing_quantity
-msgid "Quantity field name"
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__property_name
+msgid "Property Name"
 msgstr ""
 
 #. module: base_ter_invoicing
 #. odoo-python
 #: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-#, python-format
 msgid "Review the overhead percentages: the total must be 100%."
-msgstr ""
-
-#. module: base_ter_invoicing
-#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__parcel_area_official
-#: model:product.category,aux_01_float_label:base_ter_invoicing.product_category_02
-msgid "Total Area"
 msgstr ""
 
 #. module: base_ter_invoicing
@@ -156,19 +192,10 @@ msgstr ""
 #. module: base_ter_invoicing
 #: model:product.category,billable_item_detail_desc:base_ter_invoicing.product_category_02
 msgid ""
-"{%if billable_item.property_name%}Property: {{billable_item.property_name}}."
-" {% endif %}Parcel: {{billable_item.parcel_id.alphanum_code}} "
-"({{billable_item.parcel_id.area_official}} "
-"{{billable_item.parcel_id.area_unit_name}}). "
-"{{billable_item.profile_id.alphanum_code}}, "
-"{{billable_item.percentage_overhead}}% overhead."
-msgstr ""
-
-#. module: base_ter_invoicing
-#. odoo-python
-#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.ter_parcel_view_form
-#, python-format
-msgid "🡸 Area"
+"{% if billable_item.property_name %}Property: {{ billable_item.property_name"
+" }}. {% endif %}Parcel: {{ billable_item.parcel_id.alphanum_code }} ({{ "
+"billable_item.parcel_id.area_official }} {{ "
+"billable_item.parcel_id.area_unit_name }}). {{ "
+"billable_item.profile_id.alphanum_code }}, {{ "
+"billable_item.percentage_overhead }}% overhead."
 msgstr ""

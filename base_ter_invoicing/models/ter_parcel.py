@@ -66,8 +66,8 @@ class TerParcel(models.Model):
 
     def _add_area_fields(self):
         area_fields = super()._add_area_fields()
-        area_fields.append(("area_ownership", self.env._("🡸 Area")))
-        area_fields.append(("area_overhead", self.env._("🡸 Area")))
+        area_fields.append(("area_ownership", self.env._("Ownership area")))
+        area_fields.append(("area_overhead", self.env._("Overhead area")))
         return area_fields
 
     def action_show_move_lines(self):
