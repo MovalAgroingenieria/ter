@@ -690,7 +690,7 @@ msgstr "¿Áreas OK?"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__date_range_ids
 msgid "Assigned Date Ranges"
-msgstr "Intervalos de fechas asignados"
+msgstr "Periodos asignados"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__message_attachment_count
@@ -806,7 +806,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_ter/models/ter_use_unit.py:0
 msgid "Cannot validate: Date range is required."
-msgstr "No se puede validar: es obligatorio indicar un intervalo de fechas."
+msgstr "No se puede validar: es obligatorio indicar un periodo."
 
 #. module: base_ter
 #. odoo-python
@@ -1043,17 +1043,17 @@ msgstr "Datos del gestor"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__date_range_id
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
 msgid "Date Range"
-msgstr "Rango de fechas"
+msgstr "Periodo"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_configuration_dates
 msgid "Date Range Periods"
-msgstr "Intervalos de fechas"
+msgstr "Periodos"
 
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_date_range_type
 msgid "Date Range Type"
-msgstr "Tipo de rango de fechas"
+msgstr "Tipo de periodo"
 
 #. module: base_ter
 #. odoo-python
@@ -1066,19 +1066,19 @@ msgstr "Tipo de rango de fechas"
 #: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_kanban
 msgid "Date Ranges"
-msgstr "Rango de fechas"
+msgstr "Periodos"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.date_range_action
 #: model:ir.ui.menu,name:base_ter.menu_date_range_action
 msgid "Date Ranges Ter"
-msgstr "Intervalos de fechas"
+msgstr "Periodos"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.date_range_type_action
 #: model:ir.ui.menu,name:base_ter.menu_date_range_type_action
 msgid "Date Ranges Types Ter"
-msgstr "Tipos de intervalos de fechas"
+msgstr "Tipos de periodo"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
@@ -1214,7 +1214,7 @@ msgstr "Fecha de finalización"
 #: code:addons/base_ter/models/ter_use_unit.py:0
 msgid "End date must be within the date range (%(start)s – %(end)s)."
 msgstr ""
-"La fecha de finalización debe estar comprendida en el intervalo de fechas "
+"La fecha de finalización debe estar comprendida en el periodo "
 "(%(start)s – %(end)s)."
 
 #. module: base_ter
@@ -1615,7 +1615,7 @@ msgid ""
 "If enabled, date ranges of this type can be used to define periods for "
 "territorial unit uses."
 msgstr ""
-"Si está activo, los intervalos de este tipo pueden usarse para definir "
+"Si está activo, los periodos de este tipo pueden usarse para definir "
 "periodos de uso de unidades de uso territorial."
 
 #. module: base_ter
@@ -2896,7 +2896,7 @@ msgstr ""
 #: code:addons/base_ter/models/ter_use_unit.py:0
 msgid "Start date must be within the date range (%(start)s – %(end)s)."
 msgstr ""
-"La fecha de inicio debe estar comprendida en el intervalo de fechas "
+"La fecha de inicio debe estar comprendida en el periodo "
 "(%(start)s – %(end)s)."
 
 #. module: base_ter
