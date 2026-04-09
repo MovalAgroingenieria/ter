@@ -12,7 +12,7 @@ class DateRangeType(models.Model):
     _inherit = "date.range.type"
 
     is_unit_use_type = fields.Boolean(
-        string="Usable for Unit Use",
+        string="For Use Units",
         default=False,
         help="If enabled, date ranges of this type can be used "
         "to define periods for territorial unit uses.",

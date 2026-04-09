@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo noupdate="1">
 
     <record id="ter_parcel_cron_action_reset_all_aerial_images" model="ir.cron">

@@ -21,12 +21,12 @@ class UseType(models.Model):
         comodel_name="ter.use_type",
         index=True,
         ondelete="restrict",
-        domain="[('id', '!=', id), ('id', 'not child_of', id)]",
+        domain="[('id', '!=', id)]",
     )
     child_ids = fields.One2many(
         comodel_name="ter.use_type",
         inverse_name="parent_id",
-        string="Children",
+        string="Descendants",
     )
     parent_path = fields.Char(index=True)
 
@@ -36,7 +36,6 @@ class UseType(models.Model):
         recursive=True,
         index=True,
         readonly=True,
-        translate=True,
     )
 
     color = fields.Integer(string="Color Index")
@@ -77,6 +76,21 @@ class UseType(models.Model):
                 )
             else:
                 record.complete_name = record.name
+
+    @api.depends("name", "parent_id")
+    @api.depends_context("hierarchical_naming")
+    def _compute_display_name(self):
+        if not self.env.context.get("hierarchical_naming", True):
+            for record in self:
+                record.display_name = record.name
+            return
+        for record in self:
+            names = []
+            current = record
+            while current:
+                names.append(current.name or "")
+                current = current.parent_id
+            record.display_name = " / ".join(reversed(names))
 
     @api.depends(
         "unit_ids",

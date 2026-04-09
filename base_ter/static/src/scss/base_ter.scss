@@ -210,3 +210,8 @@
   width: 140px !important;
   min-width: 140px !important;
 }
+
+/* Table helpers (merged from base_ter.css) */
+.table-no-border-header thead tr {
+  border-top: none !important;
+}

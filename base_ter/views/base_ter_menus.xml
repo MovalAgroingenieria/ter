@@ -95,6 +95,12 @@
               sequence="50"
               groups="base_ter.group_ter_import_kml"/>
 
+    <menuitem id="menu_import_use_type"
+              name="Import Use Types"
+              parent="menu_thecnicalactions"
+              action="wizard_import_use_type_action"
+              sequence="25"/>
+
     <menuitem id="menu_thecnicalactions_detailmodels"
               name="Detail Models"
               parent="menu_thecnicalactions"

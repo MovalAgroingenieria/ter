@@ -64,41 +64,47 @@
         <field name="model">ter.use_type</field>
         <field name="arch" type="xml">
             <form string="Use Type">
-                <header>
-                    <button name="action_view_descendants" type="object"
-                            string="Descendants" class="oe_highlight"
-                    />
-                    <button name="action_view_ancestors" type="object"
-                            string="Ancestors"
-                    />
-                    <field name="active" widget="boolean_toggle"/>
-                </header>
-
                 <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
                     <div class="oe_button_box" name="button_box">
-                        <field name="unit_count" invisible="1"/>
-                        <field name="parcel_count" invisible="1"/>
-                        <field name="date_range_count" invisible="1"/>
-                        <button name="action_show_parcels" type="object"
-                                class="oe_stat_button" icon="fa-ter-parcel">
-                            <field name="parcel_count" string="Parcels" widget="statinfo"/>
+                        <button name="action_view_descendants" type="object"
+                                class="oe_stat_button" icon="fa-code-fork"
+                                invisible="not child_ids">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Descendants</span>
+                            </div>
                         </button>
                         <button name="action_show_units" type="object"
                                 class="oe_stat_button" icon="fa-sitemap">
                             <field name="unit_count" string="Units" widget="statinfo"/>
                         </button>
+                        <button name="action_show_parcels" type="object"
+                                class="oe_stat_button" icon="fa-ter-parcel">
+                            <field name="parcel_count" string="Parcels" widget="statinfo"/>
+                        </button>
                         <button name="action_show_date_ranges" type="object"
                                 class="oe_stat_button" icon="fa-calendar">
                             <field name="date_range_count" string="Date Ranges" widget="statinfo"/>
                         </button>
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive"
+                                invisible="not active">
+                            <span>Archive</span>
+                        </button>
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive"
+                                invisible="active">
+                            <span>Unarchive</span>
+                        </button>
                     </div>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" placeholder="e.g. Industrial vehicle"/>
+                            <field name="name" placeholder="e.g. Wheat"/>
                         </h1>
-                        <div class="text-muted">
+                        <h2 invisible="not parent_id">
                             <field name="complete_name" readonly="1"/>
-                        </div>
+                        </h2>
                     </div>
 
                     <group>
@@ -110,7 +116,7 @@
                     </group>
 
                     <notebook>
-                        <page string="Children">
+                        <page string="Descendants">
                             <field name="child_ids" context="{'default_parent_id': id}">
                                 <list editable="bottom">
                                     <field name="sequence" widget="handle"/>

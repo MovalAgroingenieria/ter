@@ -780,11 +780,7 @@ class TerParcel(models.Model):
             ],
             "search_view_id": search_view.id,
             "target": "current",
-            "domain": [
-                "|",
-                ("parcel_id", "=", self.id),
-                ("parcel_ids", "in", [self.id]),
-            ],
+            "domain": [("parcel_id", "=", self.id)],
             "context": {"default_parcel_id": self.id},
         }
 

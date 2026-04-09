@@ -3,6 +3,7 @@
 
 from . import (
     wizard_import_kml,
+    wizard_import_use_type,
     wizard_mixins,
     wizard_set_parcel_code,
     wizard_set_partner_code,

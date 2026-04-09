@@ -28,6 +28,7 @@
         "data/ter_unit_sequence_data.xml",
         "data/base_ter_cron.xml",
         "wizards/wizard_import_kml_views.xml",
+        "wizards/wizard_import_use_type_views.xml",
         "wizards/wizard_set_parcel_code_views.xml",
         "wizards/wizard_set_partner_code_views.xml",
         "wizards/wizard_show_gis_preview_views.xml",
@@ -53,7 +54,6 @@
     "assets": {
         "web.assets_backend": [
             "base_ter/static/src/scss/base_ter.scss",
-            "base_ter/static/src/css/base_ter.css",
             "base_ter/static/lib/ter_iconset/iconset.css",
             "base_ter/static/src/js/base_ter_parcel_kanban_controller.js",
         ],
@@ -67,4 +67,7 @@
     "external_dependencies": {
         "python": ["pycryptodome"],
     },
+    "oca_data_manual": [
+        "data/ter_use_type_data.xml",
+    ],
 }

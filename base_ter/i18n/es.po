@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-08 07:41+0000\n"
-"PO-Revision-Date: 2026-04-08 07:41+0000\n"
+"POT-Creation-Date: 2026-04-09 00:02+0000\n"
+"PO-Revision-Date: 2026-04-09 00:02+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -125,6 +125,34 @@ msgstr ""
 "title=\"titular\"/>"
 
 #. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/wizards/wizard_import_use_type.py:0
+msgid "<p class='text-danger'>Data file not found: <code>%(path)s</code></p>"
+msgstr ""
+"<p class='text-danger'>Archivo de datos no encontrado: "
+"<code>%(path)s</code></p>"
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/wizards/wizard_import_use_type.py:0
+msgid ""
+"<p class='text-info'>All <strong>%(total)d</strong> use types were already "
+"loaded. Translations refreshed.</p>"
+msgstr ""
+"<p class='text-info'>Los <strong>%(total)d</strong> tipos de uso ya estaban "
+"cargados. Traducciones actualizadas.</p>"
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/wizards/wizard_import_use_type.py:0
+msgid ""
+"<p class='text-success'><strong>%(created)d</strong> use types created "
+"(%(total)d total). Translations loaded.</p>"
+msgstr ""
+"<p class='text-success'><strong>%(created)d</strong> tipos de uso creados "
+"(%(total)d en total). Traducciones cargadas.</p>"
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
 msgid ""
@@ -193,6 +221,11 @@ msgstr ""
 "                            <span>Contacto</span>"
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+msgid "<span class=\"o_stat_text\">Descendants</span>"
+msgstr "<span class=\"o_stat_text\">Descendientes</span>"
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_form_view
 msgid ""
 "<span class=\"o_stat_value\"/>\n"
@@ -220,6 +253,7 @@ msgstr "<span class=\"oe_inline\">ja</span>"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
 msgid "<span>Archive</span>"
 msgstr "<span>Archivar</span>"
 
@@ -324,6 +358,7 @@ msgstr "<span>Área total</span>"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
 msgid "<span>Unarchive</span>"
 msgstr "<span>Desarchivar</span>"
 
@@ -582,11 +617,6 @@ msgid "Alternative unit equivalence (ha)"
 msgstr "Equivalencia en unidades alternativas (ha)"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
-msgid "Ancestors"
-msgstr "Antepasados"
-
-#. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_use_type.py:0
 msgid "Ancestors of %(name)s"
@@ -609,6 +639,7 @@ msgstr "Aplicar"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
 msgid "Archived"
 msgstr "Archivado"
@@ -626,7 +657,7 @@ msgstr "Área GIS"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__area_parcels
 msgid "Area Parcels"
-msgstr "Parcelas de la zona"
+msgstr "Sup. oficial parcela"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__area_unit_name
@@ -800,18 +831,13 @@ msgid "Check areas!"
 msgstr "¡Ver áreas!"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_use_type__child_ids
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
-msgid "Children"
-msgstr "Niños"
-
-#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Cipher key"
 msgstr "Clave de cifrado"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_kml_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
 msgid "Close"
 msgstr "Cerrar"
 
@@ -874,14 +900,14 @@ msgid "Complete Name"
 msgstr "Nombre Completo"
 
 #. module: base_ter
-#: model:ir.model,name:base_ter.model_res_config_settings
-msgid "Config Settings"
-msgstr "Ajustes de configuración"
-
-#. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_configuration
 msgid "Configuration"
 msgstr "Configuración"
+
+#. module: base_ter
+#: model:ir.model.fields.selection,name:base_ter.selection__wizard_import_use_type__state__confirm
+msgid "Confirm"
+msgstr "Confirmar"
 
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_res_partner
@@ -974,6 +1000,7 @@ msgstr "Se han creado %(count)s registros: %(names)s"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute_value__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__create_uid
+#: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__create_uid
@@ -994,6 +1021,7 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute_value__create_date
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__create_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__create_date
+#: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__create_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__create_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__create_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__create_date
@@ -1064,6 +1092,7 @@ msgid "Delete aerial image"
 msgstr "Eliminar imagen aérea"
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_type__child_ids
 #: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
 msgid "Descendants"
 msgstr "Descendientes"
@@ -1127,6 +1156,7 @@ msgstr "Usuario director"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute_value__display_name
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__display_name
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__display_name
+#: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__display_name
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__display_name
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__display_name
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__display_name
@@ -1135,6 +1165,7 @@ msgstr "Nombre para mostrar"
 
 #. module: base_ter
 #: model:ir.model.fields.selection,name:base_ter.selection__wizard_import_kml__state__done
+#: model:ir.model.fields.selection,name:base_ter.selection__wizard_import_use_type__state__done
 msgid "Done"
 msgstr "Hecho"
 
@@ -1208,7 +1239,7 @@ msgstr "Errores: %(errors)s"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__farm_property_id
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
 msgid "Farm/Property"
-msgstr "Granja/Finca"
+msgstr "Finca"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_kml_view_form
@@ -1241,6 +1272,12 @@ msgstr "Seguidores (Contactos)"
 #: model:ir.model.fields,help:base_ter.field_ter_use_unit__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
 msgstr "Icono de Font Awesome ej. fa-tasks"
+
+#. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_date_range__is_unit_use_type
+#: model:ir.model.fields,field_description:base_ter.field_date_range_type__is_unit_use_type
+msgid "For Use Units"
+msgstr "Para unidades de uso"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1480,6 +1517,7 @@ msgstr "Titular"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute_value__id
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__id
+#: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__id
@@ -1622,6 +1660,7 @@ msgstr "Imágenes de las unidades de uso del suelo (todas)"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_kml_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
 msgid "Import"
 msgstr "Importar"
 
@@ -1636,6 +1675,14 @@ msgstr "Importar KML"
 #: model:ir.model,name:base_ter.model_wizard_import_kml
 msgid "Import KML file to Parcels or Properties"
 msgstr "Importar un archivo KML a «Parcelas» o «Propiedades»"
+
+#. module: base_ter
+#: model:ir.actions.act_window,name:base_ter.wizard_import_use_type_action
+#: model:ir.model,name:base_ter.model_wizard_import_use_type
+#: model:ir.ui.menu,name:base_ter.menu_import_use_type
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
+msgid "Import Use Types"
+msgstr "Importar tipos de uso"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__target_model
@@ -1810,6 +1857,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute_value__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__write_uid
+#: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__write_uid
@@ -1830,6 +1878,7 @@ msgstr "Actualizado por"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute_value__write_date
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__write_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__write_date
+#: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__write_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__write_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__write_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__write_date
@@ -2021,6 +2070,12 @@ msgid "Name of the technical user."
 msgstr "Nombre del usuario técnico."
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__activity_calendar_event_id
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Siguiente evento de calendario"
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__activity_date_deadline
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__activity_date_deadline
 msgid "Next Activity Deadline"
@@ -2128,9 +2183,6 @@ msgid "Number of properties"
 msgstr "Número de fincas"
 
 #. module: base_ter
-#. odoo-python
-#: code:addons/base_ter/models/ter_parcel.py:0
-#: code:addons/base_ter/models/ter_property.py:0
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__area_official
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__area_official
 msgid "Official Area"
@@ -2201,7 +2253,7 @@ msgstr "Fuera de Rango"
 #. module: base_ter
 #: model:ter.profile,alphanum_code:base_ter.ter_profile_01
 msgid "Owner"
-msgstr "Propietario"
+msgstr ""
 
 #. module: base_ter
 #. odoo-python
@@ -2226,8 +2278,6 @@ msgid "Parcel (GIS)"
 msgstr "Parcela (GIS)"
 
 #. module: base_ter
-#. odoo-python
-#: code:addons/base_ter/models/res_partner.py:0
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_parcels
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__area_official_parcels
@@ -2267,6 +2317,11 @@ msgstr "Gestor"
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__partner_id
 msgid "Parcel Partner"
 msgstr "Contacto vinculado a parcelas"
+
+#. module: base_ter
+#: model:ir.model,name:base_ter.model_ter_parcel_partnerlink
+msgid "Parcel Partner Link"
+msgstr "Contacto de parcela"
 
 #. module: base_ter
 #: model:ir.actions.report,name:base_ter.action_parcel_partner_report
@@ -2352,7 +2407,7 @@ msgstr "Parcelas de la finca"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__parent_id
 #: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
 msgid "Parent"
-msgstr "Superior"
+msgstr "Padre"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__parent_path
@@ -2380,11 +2435,6 @@ msgstr "Código (como cadena)"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 msgid "Partner Profile"
 msgstr "Perfil"
-
-#. module: base_ter
-#: model:ir.model,name:base_ter.model_ter_parcel_partnerlink
-msgid "Partner of parcel"
-msgstr "Contacto de parcela"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.ter_parcel_partnerlink_action
@@ -2542,8 +2592,6 @@ msgid "Property"
 msgstr "Finca"
 
 #. module: base_ter
-#. odoo-python
-#: code:addons/base_ter/models/res_partner.py:0
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_properties
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_properties
 msgid "Property Area"
@@ -2624,6 +2672,14 @@ msgid "Provinces"
 msgstr "Provincias"
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__rating_ids
+#: model:ir.model.fields,field_description:base_ter.field_ter_property__rating_ids
+#: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__rating_ids
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__rating_ids
+msgid "Ratings"
+msgstr "Valoraciones"
+
+#. module: base_ter
 #: model:res.groups,name:base_ter.group_ter_user
 msgid "Reader User"
 msgstr "Usuario lector"
@@ -2685,6 +2741,7 @@ msgstr "Usuario responsable"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__result_message
+#: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__result_message
 msgid "Result Message"
 msgstr "Mensaje de resultado"
 
@@ -2845,6 +2902,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__state
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__state
+#: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__state
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
 msgid "State"
 msgstr "Estado"
@@ -2858,6 +2916,15 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities.\n"
+
+#. module: base_ter
+#: model:ir.model,name:base_ter.model_res_config_settings
+msgid "Street type settings"
+msgstr "Ajustes de Configuración"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
@@ -2913,7 +2980,7 @@ msgstr "Tipo de uso"
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_ter_use_unit
 msgid "Ter Use Unit"
-msgstr "Unidad de uso"
+msgstr "Unidad de Uso Territorial"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -3030,6 +3097,19 @@ msgid "The place is not in the municipality."
 msgstr "La localidad no se encuentra dentro del término municipal."
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
+msgid ""
+"This will import the standard use type catalog\n"
+"                            (farming, livestock, forestry …) from the bundled\n"
+"                            data file. Existing records with the same external\n"
+"                            ID will be kept unchanged."
+msgstr ""
+"Esto importará el catálogo estándar de tipos de uso\n"
+"                            (cultivos, ganadería, forestal…) desde el archivo\n"
+"                            de datos incluido. Los registros existentes con el\n"
+"                            mismo ID externo se mantendrán sin cambios."
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__diff_areas_threshold_exceeded
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__diff_areas_threshold_exceeded
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__diff_areas_threshold_exceeded
@@ -3044,13 +3124,22 @@ msgstr "Umbral superado (diferencia entre las áreas oficial y GIS) -cadena-"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
 msgid "Top level"
-msgstr "Nivel superior"
+msgstr "Sin padre"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
 msgid "Total Area"
 msgstr "Área total"
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
+msgid ""
+"Translations (Spanish and Catalan) are loaded\n"
+"                            automatically from separate data files."
+msgstr ""
+"Las traducciones (español y catalán) se cargan\n"
+"                            automáticamente desde archivos de datos separados."
 
 #. module: base_ter
 #: model:ir.model.fields,help:base_ter.field_ter_use_unit__is_current
@@ -3134,12 +3223,6 @@ msgid "Unnamed"
 msgstr "Sin nombre"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_date_range__is_unit_use_type
-#: model:ir.model.fields,field_description:base_ter.field_date_range_type__is_unit_use_type
-msgid "Usable for Unit Use"
-msgstr "Apto para uso individual"
-
-#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_date_range__use_type_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__use_type_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute__use_type_id
@@ -3188,7 +3271,7 @@ msgstr "Tipo de uso"
 #. module: base_ter
 #: model:ter.profile,alphanum_code:base_ter.ter_profile_02
 msgid "Usufructuary"
-msgstr "Propietario"
+msgstr "Usufructuario"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
@@ -3355,6 +3438,15 @@ msgid "Wrong partner code."
 msgstr "Código de gestor incorrecto."
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
+msgid ""
+"You can safely run this wizard again — it will\n"
+"                            refresh translations without duplicating records."
+msgstr ""
+"Puede ejecutar este asistente de nuevo —\n"
+"                            actualizará las traducciones sin duplicar registros."
+
+#. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_use_type.py:0
 msgid "You cannot create recursive hierarchies (loops)."
@@ -3384,14 +3476,14 @@ msgstr ""
 "significa que no hay zoom; > 1, alejamiento; < 1, acercamiento."
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
-msgid "e.g. Industrial vehicle"
-msgstr "p. ej., vehículo industrial"
-
-#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_kml_view_form
 msgid "e.g. PARCEL- or FINCA-"
 msgstr "p. ej., PARCELA o FINCA-"
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+msgid "e.g. Wheat"
+msgstr ""
 
 #. module: base_ter
 #. odoo-python

@@ -1,0 +1,4655 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-08 22:19+0000\n"
+"PO-Revision-Date: 2026-04-08 22:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_228
+msgid "ACACIA"
+msgstr "ACÀCIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_605
+msgid "ACTINIDIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_608
+msgid "ACTINIDIA CHINENSIS AND ARGUTA HYBRIDS"
+msgstr "HÍBRIDS DE ACTINIDIA CHINENSIS I ARGUTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_992
+msgid "ACTINIDIA CHINENSIS AND DELICIOSA HYBRIDS"
+msgstr "HÍBRIDS DE ACTINIDIA CHINENSIS I DELICIOSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_993
+msgid "ACTINIDIA CHINENSIS AND ERIANTHA HYBRIDS"
+msgstr "HÍBRIDS DE ACTINIDIA CHINENSIS I ERIANTHA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_607
+msgid "ACTINIDIA VALVATA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_676
+msgid "ADENANTHOS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_829
+msgid "AESCULUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_627
+msgid "AFRICAN LARCH"
+msgstr "LÀRIX AFRICÀ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_677
+msgid "AGAPANTHUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_865
+msgid "AGAVE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_883
+msgid "AGERATUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_308
+msgid "AGRIMONY"
+msgstr "AGRIMÒNIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_70
+msgid "AGROSTIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_405
+msgid "AJOWAN"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_367
+msgid "ALDER"
+msgstr "VERN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_636
+msgid "ALEPPO PINE"
+msgstr "PI BLANC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_60
+msgid "ALFALFA"
+msgstr "ALFALS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_104
+msgid "ALMOND TREE"
+msgstr "AMETLLER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_939
+msgid "ALMOND-OLIVE GROVE"
+msgstr "ALMENDRO-OLIVERAR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_678
+msgid "ALOCASIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_679
+msgid "ALOE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_290
+msgid "ALOE VERA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_691
+msgid "ALSTROEMERIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_680
+msgid "ALTERNANTHERA"
+msgstr "ALTHERNANTERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_681
+msgid "ALYOGYNE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_682
+msgid "ALYSSUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_329
+msgid "AMARANTH"
+msgstr "AMARANT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_841
+msgid "AMELANCHIER"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_599
+msgid "AMERICAN COTTON"
+msgstr "COTÓ AMERICÀ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_620
+msgid "AMERICAN OAK"
+msgstr "ROURE AMERICÀ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_974
+msgid "AMERICAN WILD APPLE TREE"
+msgstr "POMERA SILVESTRE AMERICÀ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_583
+msgid "ANGEL HAIR SQUASH"
+msgstr "CARBASSA DE CABELLO DE ÁNGEL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_870
+msgid "ANGELICA"
+msgstr "ANGÉLICA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_683
+msgid "ANIGOZANTHOS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_253
+msgid "ANISE"
+msgstr "ANÍS DOLÇ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_542
+msgid "ANNUAL MEADOW GRASS"
+msgstr "POA ANNUA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_78
+msgid "ANNUAL RYEGRASS"
+msgstr "RAI-GRAS ANUAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_661
+msgid "ANTHURIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_692
+msgid "ANTIRRHINUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_109
+msgid "APPLE TREE"
+msgstr "POMERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_107
+msgid "APRICOT TREE"
+msgstr "ALBERCOQUERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_684
+msgid "AQUILEGIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_685
+msgid "ARAUCARIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_686
+msgid "ARCTOTIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_687
+msgid "ARECA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_918
+msgid "ARGAN"
+msgstr "ARGÁN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_688
+msgid "ARGYRANTHEMUM"
+msgstr "ARGYRANTEMUM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_646
+msgid "ARIZONA CYPRESS"
+msgstr "XIPRER DE ARIZONA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_689
+msgid "ARMERIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_71
+msgid "ARRHENATHERUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_257
+msgid "ARTEMISIA"
+msgstr "ARTEMISA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_164
+msgid "ARTICHOKE"
+msgstr "CARXOFA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_929
+msgid "ARUGULA"
+msgstr "RÚCULA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_376
+msgid "ASH"
+msgstr "FREIXE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_279
+msgid "ASPARAGUS"
+msgstr "ESPÀRREC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_626
+msgid "ASPARAGUS BEAN"
+msgstr "MONGETA ESPÁRRAGO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_690
+msgid "ASPLENIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_662
+msgid "ASTER"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_643
+msgid "ATLAS CEDAR"
+msgstr "CEDRE DEL ATLAS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_343
+msgid "AVOCADO"
+msgstr "ALVOCAT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_436
+msgid "AZAROLE"
+msgstr "ACEROLO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_554
+msgid "BALANSA CLOVER"
+msgstr "TRÈVOL BALANSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_443
+msgid "BAMBOO"
+msgstr "BAMBÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_905
+msgid "BANANA PLANT"
+msgstr "PLATANERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_480
+msgid "BARBAREA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_5
+msgid "BARLEY"
+msgstr "ORDI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_340
+msgid "BARLEY-BITTER VETCH MIX"
+msgstr "BARREJA ORDI-YEROS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_453
+msgid "BARLEY-CORN-VETCH MIX"
+msgstr "BARREJA ORDI-BLAT DE MORO-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_298
+msgid "BARLEY-PEA MIX"
+msgstr "BARREJA ORDI-PÈSOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_246
+msgid "BARLEY-SULLA MIX"
+msgstr "BARREJA ORDI-ZULLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_244
+msgid "BARLEY-VETCH MIX"
+msgstr "BARREJA ORDI-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_450
+msgid "BARLEY-WHEAT MIX"
+msgstr "BARREJA ORDI-BLAT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_264
+msgid "BASIL"
+msgstr "ALFÀBREGA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_830
+msgid "BAY LAUREL"
+msgstr "LLORER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_49
+msgid "BEAN"
+msgstr "ALUBIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_392
+msgid "BEAN-CORN MIX"
+msgstr "BARREJA ALUBIA-BLAT DE MORO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_862
+msgid "BEARBERRY"
+msgstr "BOIXEROLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_698
+msgid "BEAUCARNEA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_294
+msgid "BEECH"
+msgstr "FAIG"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_82
+msgid "BEET"
+msgstr "REMOLATXA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_694
+msgid "BEGONIA"
+msgstr "BEGÒNIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_696
+msgid "BEGONIA SEMPERFLORENS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_697
+msgid "BELLIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_430
+msgid "BERGAMOT"
+msgstr "BERGAMOTO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_489
+msgid "BERMUDA GRASS"
+msgstr "GRAMA COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_278
+msgid "BERRIES"
+msgstr "FRUITS DEL BOSC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_547
+msgid "BERSEEM CLOVER"
+msgstr "TRÈVOL D'ALEXANDRIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_699
+msgid "BIGNONIA"
+msgstr "BIGNÒNIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_334
+msgid "BIODIVERSITY FALLOW (INCLUDES HONEY PLANTS)"
+msgstr "GUARET DE BIODIVERSITAT (INCLOU MEL·LÍFERES)"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_360
+msgid "BIRCH"
+msgstr "BEDOLL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_969
+msgid "BIRD CHERRY"
+msgstr "CIRERER VERN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_673
+msgid "BIRD OF PARADISE"
+msgstr "AU DEL PARADÍS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_937
+msgid "BIRD'S-FOOT TREFOIL"
+msgstr "CUERNECILLO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_488
+msgid "BISERRULA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_317
+msgid "BITTER CHAMOMILE"
+msgstr "CAMAMILLA AMARGA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_471
+msgid "BITTER GOURD"
+msgstr "CARBASSA AMARGA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_356
+msgid "BITTER ORANGE TREE"
+msgstr "TARONGER AMARG"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_53
+msgid "BITTER VETCH"
+msgstr "YEROS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_513
+msgid "BLACK BENT"
+msgstr "AGROSTIS GIGANTEA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_983
+msgid "BLACK LOCUST"
+msgstr "FALSA ACACIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_530
+msgid "BLACK MEDICK"
+msgstr "LUPULINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_580
+msgid "BLACK MUSTARD"
+msgstr "MOSTASSA NEGRA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_579
+msgid "BLACK OAT"
+msgstr "CIVADA NEGRA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_638
+msgid "BLACK PINE"
+msgstr "PINO NEGRAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_116
+msgid "BLACK POPLAR"
+msgstr "POLLANCRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_321
+msgid "BLACK RADISH"
+msgstr "RAVE NEGRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_479
+msgid "BLACK SALSIFY"
+msgstr "ESCORZONERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_149
+msgid "BLACKBERRY"
+msgstr "MORA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_292
+msgid "BLACKCURRANT"
+msgstr "GROSELLA NEGRA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_203
+msgid "BLACKTHORN"
+msgstr "ARANYONER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_429
+msgid "BLADDER CAMPION"
+msgstr "COLLETJA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_560
+msgid "BLADDER CLOVER"
+msgstr "TRÈVOL VESICULOSO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_984
+msgid "BLUE JACARANDA"
+msgstr "JACARANDÁ BLAU"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_482
+msgid "BLUE LUPIN"
+msgstr "TRAMÚS BLAU"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_216
+msgid "BLUEBERRY"
+msgstr "NABIU"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_187
+msgid "BORAGE"
+msgstr "BORRATJA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_701
+msgid "BORONIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_186
+msgid "BOTTLE GOURD"
+msgstr "CARBASSA DEL PEREGRINO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_858
+msgid "BOUGAINVILLEA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_832
+msgid "BRACHYCHITON"
+msgstr "BRAQUIQUITO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_587
+msgid "BRACHYPODIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_988
+msgid "BRACHYPODIUM-CLOVER MIX"
+msgstr "BARREJA BRACHIPODIUM-TRÈVOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_154
+msgid "BROCCOLI"
+msgstr "BRÒQUIL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_498
+msgid "BROCCOLINI"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_383
+msgid "BROOM"
+msgstr "GINESTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_176
+msgid "BRUSSELS SPROUT"
+msgstr "COL DE BRUSELAS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_9
+msgid "BUCKWHEAT"
+msgstr "ALFORFÓN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_913
+msgid "BUDDHA'S HAND"
+msgstr "MANO DE BUDA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_406
+msgid "BUGLOSS"
+msgstr "BUGLOSSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_702
+msgid "BULBINE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_539
+msgid "BULBOUS CANARY GRASS"
+msgstr "ALPISTA BULBOSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_540
+msgid "BULBOUS TIMOTHY"
+msgstr "FLEO BULBOSO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_309
+msgid "BURDOCK"
+msgstr "BARDANA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_527
+msgid "BURRCLOVER"
+msgstr "CARRETÓN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_532
+msgid "BURROWING ALFALFA"
+msgstr "ALFALS DE BURRO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_404
+msgid "BUTTERCUP"
+msgstr "BOTÓ D'OR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_502
+msgid "BUTTERNUT SQUASH"
+msgstr "CARBASSA MOSCADA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_857
+msgid "BUXUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_berries
+msgid "Berries"
+msgstr "Fruits del bosc"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_172
+msgid "CABBAGE"
+msgstr "COL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_703
+msgid "CAESALPINIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_704
+msgid "CALCEOLARIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_705
+msgid "CALIBRACHOA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_487
+msgid "CALIFORNIA BLUEBELL"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_706
+msgid "CALLA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_980
+msgid "CALLERY PEAR TREE"
+msgstr "PERERA DE CALLERY"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_707
+msgid "CALLISTEMON"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_36
+msgid "CAMELINA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_708
+msgid "CAMELLIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_11
+msgid "CANARY GRASS"
+msgstr "ALPISTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_368
+msgid "CANARY MASTIC TREE"
+msgstr "LLENTISCLE DE CANÀRIES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_379
+msgid "CANARY PALM"
+msgstr "PALMERA CANÀRIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_635
+msgid "CANARY PINE"
+msgstr "PI CANARI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_642
+msgid "CANARY STRAWBERRY TREE"
+msgstr "ARBOÇ CANARI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_709
+msgid "CANNA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_960
+msgid "CAPE JASMINE"
+msgstr "GESSAMÍ DEL CABO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_283
+msgid "CAPER"
+msgstr "TÀPERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_415
+msgid "CAPER SPURGE"
+msgstr "TÁRTAGO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_504
+msgid "CARAWAY"
+msgstr "COMÍ DELS PRATS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_184
+msgid "CARDOON"
+msgstr "CARD"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_710
+msgid "CAREX"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_711
+msgid "CARISSA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_659
+msgid "CARNATION"
+msgstr "CLAVELL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_122
+msgid "CAROB TREE"
+msgstr "GARROFER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_178
+msgid "CARROT"
+msgstr "PASTANAGA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_388
+msgid "CASSAVA"
+msgstr "IUCA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_713
+msgid "CASSIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_609
+msgid "CASTANEA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_610
+msgid "CASTANEA CRENATA AND SATIVA HYBRIDS"
+msgstr "HÍBRIDS DE CASTANEA CRENATA I SATIVA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_355
+msgid "CASTOR BEAN"
+msgstr "RICÍ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_663
+msgid "CATTLEYA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_160
+msgid "CAULIFLOWER"
+msgstr "COL-I-FLOR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_714
+msgid "CEANOTHUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_372
+msgid "CEDAR"
+msgstr "CEDRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_644
+msgid "CEDAR OF LEBANON"
+msgstr "CEDRE DEL LÍBANO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_497
+msgid "CELERIAC"
+msgstr "APIO-RAVE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_158
+msgid "CELERY"
+msgstr "API"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_440
+msgid "CENTURY PLANT"
+msgstr "PITA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_715
+msgid "CERATONIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_447
+msgid "CEREAL-RYEGRASS MIX"
+msgstr "BARREJA CEREAL-RAI-GRAS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_990
+msgid "CEREAL-VETCH MIX"
+msgstr "BARREJA CEREAL-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_716
+msgid "CESTRUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_838
+msgid "CHAENOMELES"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_166
+msgid "CHARD"
+msgstr "BLEDA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_869
+msgid "CHAYOTE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_345
+msgid "CHERIMOYA TREE"
+msgstr "XIRIMOIER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_970
+msgid "CHERRY LAUREL"
+msgstr "LLORER CIRERER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_966
+msgid "CHERRY PLUM TREE"
+msgstr "PRUNERA MIROBÁLANO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_110
+msgid "CHERRY TREE"
+msgstr "CIRERER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_354
+msgid "CHERRY-CAROB GROVE"
+msgstr "CIRERER-ALGARROBO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_353
+msgid "CHERRY-OLIVE GROVE"
+msgstr "CIRERER-OLIVERAR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_269
+msgid "CHERVIL"
+msgstr "CERFULL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_117
+msgid "CHESTNUT TREE"
+msgstr "CASTANYER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_374
+msgid "CHIA"
+msgstr "CHÍA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_240
+msgid "CHICKLING PEA"
+msgstr "TITARROS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_50
+msgid "CHICKPEA"
+msgstr "CIGRÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_181
+msgid "CHICORY"
+msgstr "XICOIRA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_182
+msgid "CHILI PEPPER"
+msgstr "GUINDILLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_849
+msgid "CHINABERRY TREE"
+msgstr "CINAMOMO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_424
+msgid "CHINESE ARTICHOKE"
+msgstr "ALCACHOFA XINESA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_464
+msgid "CHINESE BROCCOLI"
+msgstr "BRÓCOLI XINÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_304
+msgid "CHINESE CABBAGE"
+msgstr "COL XINESA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_674
+msgid "CHINESE CARNATION"
+msgstr "CLAVEL XINÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_466
+msgid "CHINESE CHIVE"
+msgstr "CEBOLLINO XINÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_493
+msgid "CHINESE INDIGO"
+msgstr "ANYIL XINÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_762
+msgid "CHINESE JASMINE"
+msgstr "GESSAMÍ XINÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_902
+msgid "CHINESE MUSTARD"
+msgstr "MOSTASSA XINESA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_975
+msgid "CHINESE WILD APPLE TREE"
+msgstr "POMERA SILVESTRE XINÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_401
+msgid "CHIVE"
+msgstr "CIBOULET"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_463
+msgid "CHOY SUM"
+msgstr "CHOISUM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_882
+msgid "CHRYSANTHEMUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_718
+msgid "CINERARIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_864
+msgid "CISSUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_431
+msgid "CITRON TREE"
+msgstr "PONCIRERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_995
+msgid "CITRUS MAXIMA AND RETICULATA HYBRIDS"
+msgstr "HÍBRIDS DE CITRUS MÁXIMA I RETICULATA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_204
+msgid "CLEMENTINE"
+msgstr "CLEMENTINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_948
+msgid "CLEMENTINE-PERSIMMON"
+msgstr "CLEMENTINA-CAQUI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_719
+msgid "CLIVIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_77
+msgid "CLOVER"
+msgstr "TRÈVOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_575
+msgid "CLUSTERED CLOVER"
+msgstr "TRÈVOL GLOMERADO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_529
+msgid "COASTAL ALFALFA"
+msgstr "ALFALS LITORAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_72
+msgid "COCKSFOOT"
+msgstr "DÀCTIL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_720
+msgid "CODIAEUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_291
+msgid "COFFEE"
+msgstr "CAFÈ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_507
+msgid "COFFEE CHICORY"
+msgstr "XICOIRA DE CAFÈ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_481
+msgid "COLA NUT"
+msgstr "NUEZ DE COLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_721
+msgid "COLEUS"
+msgstr "CÓLEO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_175
+msgid "COLLARD GREENS"
+msgstr "BERÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_648
+msgid "COMMON ASH"
+msgstr "FREIXE COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_512
+msgid "COMMON BENT"
+msgstr "AGROSTIS CAPILLARIS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_835
+msgid "COMMON CATALPA"
+msgstr "CATALPA COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_645
+msgid "COMMON CYPRESS"
+msgstr "XIPRER COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_624
+msgid "COMMON ELM"
+msgstr "OM COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_615
+msgid "COMMON EUCALYPTUS"
+msgstr "EUCALIPTUS COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_412
+msgid "COMMON MALLOW"
+msgstr "MALVA COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_633
+msgid "COMMON MAPLE"
+msgstr "AURÓ COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_546
+msgid "COMMON MEADOW GRASS"
+msgstr "POA COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_194
+msgid "COMMON MUSHROOM"
+msgstr "XAMPINYÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_653
+msgid "COMMON PIGWEED"
+msgstr "BLEDO COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_651
+msgid "COMMON SERVICE TREE"
+msgstr "MOIXERA COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_52
+msgid "COMMON VETCH"
+msgstr "VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_722
+msgid "CONVOLVULUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_723
+msgid "COPROSMA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_724
+msgid "CORDYLINE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_252
+msgid "CORIANDER"
+msgstr "CORIANDRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_295
+msgid "CORK OAK"
+msgstr "SURERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_4
+msgid "CORN"
+msgstr "BLAT DE MORO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_457
+msgid "CORN-SORGHUM MIX"
+msgstr "BARREJA BLAT DE MORO-SORGO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_725
+msgid "CORREA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_840
+msgid "COTONEASTER"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_81
+msgid "COTTON"
+msgstr "COTÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_460
+msgid "COWPEA"
+msgstr "MONGETA D'ULL NEGRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_726
+msgid "CRASSULA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_514
+msgid "CREEPING BENT"
+msgstr "AGROSTIS STOLONIFERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_968
+msgid "CREEPING CHERRY TREE"
+msgstr "CIRERER RASTRERO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_658
+msgid "CREEPING JUNIPER"
+msgstr "SAVINA RASTRERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_552
+msgid "CRIMSON CLOVER"
+msgstr "TRÈVOL ENCARNAT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_165
+msgid "CUCUMBER"
+msgstr "COGOMBRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_582
+msgid "CUCUMIS MELO HYBRIDS"
+msgstr "HÍBRIDS DE CUCUMIS MELO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_273
+msgid "CUMIN"
+msgstr "COMÍ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_189
+msgid "CURLY ENDIVE"
+msgstr "ESCAROLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_445
+msgid "CURLY KALE"
+msgstr "COL CRESPA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_717
+msgid "CYCAS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_874
+msgid "CYCLAMEN"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_727
+msgid "CYPERUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_375
+msgid "CYPRESS"
+msgstr "XIPRER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_cereals
+msgid "Cereals"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_citrus
+msgid "Citrus"
+msgstr "Cítrics"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_728
+msgid "DAHLIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_310
+msgid "DANDELION"
+msgstr "DENT DE LLEÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_729
+msgid "DAPHNE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_730
+msgid "DASYLIRION"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_943
+msgid "DATE PALM"
+msgstr "PALMERA DATILERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_731
+msgid "DELOSPERMA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_617
+msgid "DESERT TRUFFLE"
+msgstr "TÒFONA DEL DESERT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_732
+msgid "DIANELLA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_254
+msgid "DILL"
+msgstr "ANET"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_733
+msgid "DIMORPHOTHECA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_734
+msgid "DIOSMA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_735
+msgid "DODONAEA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_361
+msgid "DOUGLAS FIR"
+msgstr "AVET DE DOUGLAS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_619
+msgid "DOWNY OAK"
+msgstr "ROURE PUBESCENTE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_736
+msgid "DRACAENA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_919
+msgid "DRAGON FRUIT"
+msgstr "PITAIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_630
+msgid "DUNKELD LARCH"
+msgstr "LÀRIX DE DUNKLED"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_738
+msgid "DURANTA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_3
+msgid "DURUM WHEAT"
+msgstr "BLAT DUR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_606
+msgid "DWARF KIWI"
+msgstr "KIWI ENANO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_668
+msgid "EASTER LILY"
+msgstr "LIRIO DE PASCUA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_312
+msgid "ECHINACEA"
+msgstr "EQUINÀCIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_739
+msgid "ECHIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_162
+msgid "EGGPLANT"
+msgstr "ALBERGÍNIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_470
+msgid "EGYPTIAN BEAN"
+msgstr "MONGETA DE EGIPTO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_601
+msgid "EGYPTIAN COTTON"
+msgstr "COTÓ EGIPCIO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_784
+msgid "EGYPTIAN PAPYRUS"
+msgstr "PAPIRO EGIPCIO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_474
+msgid "EGYPTIAN TARO"
+msgstr "AROS EGIPCIOS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_394
+msgid "EINKORN WHEAT"
+msgstr "ESPELTA PETITA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_695
+msgid "ELATIOR BEGONIA"
+msgstr "BEGONIA ELIATOR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_438
+msgid "ELDER"
+msgstr "SAÜC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_311
+msgid "ELECAMPANE"
+msgstr "ÈNULA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_961
+msgid "ELEPHANT GARLIC"
+msgstr "ALL PORRO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_780
+msgid "ELEPHANT'S FOOT"
+msgstr "PATA DE ELEFANTE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_378
+msgid "ELM"
+msgstr "OM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_393
+msgid "EMMER WHEAT"
+msgstr "ESPELTA GRAN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_177
+msgid "ENDIVE"
+msgstr "ENDÍVIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_23
+msgid "ENVIRONMENTAL FALLOW"
+msgstr "GUARET MEDIAMBIENTAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_823
+msgid "EPHEDRA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_740
+msgid "EPIPREMNUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_741
+msgid "EREMOPHILA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_861
+msgid "ERICA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_742
+msgid "ERIOSTEMON"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_563
+msgid "ETHIOPIAN EGGPLANT"
+msgstr "ALBERGÍNIA ETÍOP"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_901
+msgid "ETHIOPIAN MUSTARD"
+msgstr "MOSTASSA ETÍOP"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_225
+msgid "EUCALYPTUS"
+msgstr "EUCALIPTUS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_743
+msgid "EUONYMUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_744
+msgid "EUPHORBIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_986
+msgid "EUROPEAN GOLDENROD"
+msgstr "VARA DE OR EUROPEA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_628
+msgid "EUROPEAN LARCH"
+msgstr "LÀRIX EUROPEU"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_843
+msgid "EUROPEAN MEDLAR"
+msgstr "NESPLER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_769
+msgid "FALSE JASMINE"
+msgstr "FALSO GESSAMÍ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_745
+msgid "FARFUGIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_41
+msgid "FAVA BEAN"
+msgstr "FAVA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_449
+msgid "FAVA BEAN-VETCH MIX"
+msgstr "BARREJA FAVA-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_778
+msgid "FEIJOA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_260
+msgid "FENNEL"
+msgstr "FONOLL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_61
+msgid "FENUGREEK"
+msgstr "FENIGREC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_572
+msgid "FERAL TOMATO"
+msgstr "TOMÀQUET CIMARRÓN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_68
+msgid "FESCUE"
+msgstr "FESTUCA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_746
+msgid "FICUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_891
+msgid "FIDDLE-LEAF FIG"
+msgstr "FICUS DE HOJA DE VIOLÍN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_218
+msgid "FIG TREE"
+msgstr "FIGUERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_561
+msgid "FINE FESCUE"
+msgstr "CAÑUELA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_518
+msgid "FINE-LEAVED SHEEP'S FESCUE"
+msgstr "FESTUCA OVINA DE HOJA FINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_auto_caviar_citrico
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_914
+msgid "FINGER LIME"
+msgstr "LLIMA DE DIT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_296
+msgid "FIR"
+msgstr "AVET"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_833
+msgid "FLAME TREE"
+msgstr "ARBRE DE LA FLAMA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_201
+msgid "FLAT NECTARINE TREE"
+msgstr "PLATERINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_202
+msgid "FLAT PEACH TREE"
+msgstr "PRÉSSEC PLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_85
+msgid "FLAX"
+msgstr "LLI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_989
+msgid "FLAX-BRACHYPODIUM MIX"
+msgstr "BARREJA LINO-BRACHYPODIUM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_967
+msgid "FLOWERING ALMOND TREE"
+msgstr "ALMENDRO DE FLOR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_91
+msgid "FLOWERS"
+msgstr "FLORS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_589
+msgid "FODDER BEET"
+msgstr "REMOLATXA FARRATGERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_538
+msgid "FORAGE PHACELIA"
+msgstr "FACELIA FARRATGERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_358
+msgid "FORESTRY MIX"
+msgstr "BARREJA DE FORESTALS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_591
+msgid "FOUNTAIN GRASS"
+msgstr "RABO DE GATO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_409
+msgid "FOXGLOVE"
+msgstr "DIGITAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_515
+msgid "FOXTAIL"
+msgstr "COLA DE ZORRA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_395
+msgid "FOXTAIL MILLET"
+msgstr "PANIZO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_612
+msgid "FRAGARIA IINUMAE AND VESCA HYBRIDS"
+msgstr "HÍBRIDS DE FRAGARIA IINUMAE I VESCA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_664
+msgid "FREESIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_495
+msgid "FRUIT TREE - ORCHARD"
+msgstr "FRUITER - HORTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_749
+msgid "FUCHSIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_414
+msgid "FULLER'S TEASEL"
+msgstr "CARDO DE FULLER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_farming
+msgid "Farming"
+msgstr "Conreu"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_forage
+msgid "Forage and Fodder"
+msgstr "Farratges"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_fruit_trees
+msgid "Fruit trees (non-citrus)"
+msgstr "Fruiters (no cítrics)"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_571
+msgid "GALAPAGOS TOMATO"
+msgstr "TOMÀQUET DE GALÁPAGOS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_751
+msgid "GALVEZIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_419
+msgid "GARDEN CRESS"
+msgstr "BERRO HORTELANO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_752
+msgid "GARDENIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_169
+msgid "GARLIC"
+msgstr "ALL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_753
+msgid "GAURA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_754
+msgid "GAZANIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_258
+msgid "GENTIAN"
+msgstr "GENCIANA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_665
+msgid "GERBERA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_236
+msgid "GIANT REED"
+msgstr "CANYA COMÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_951
+msgid "GINGER"
+msgstr "GINGEBRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_831
+msgid "GINKGO"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_313
+msgid "GINSENG"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_875
+msgid "GLADIOLUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_549
+msgid "GLANDULAR CLOVER"
+msgstr "TRÈVOL GLANDULAR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_485
+msgid "GOJI BERRIES"
+msgstr "BAYAS DE GOJI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_324
+msgid "GOLDENROD"
+msgstr "VARA DE OR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_215
+msgid "GOOSEBERRY"
+msgstr "GROSELLERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_602
+msgid "GOSSYPIUM HIRSUTUM AND BARBADENSE HYBRIDS"
+msgstr "HÍBRIDS DE GOSSYPIUM HIRSUTUM I BARBADENSE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_208
+msgid "GRAPEFRUIT"
+msgstr "POMELO O TORONJA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_239
+msgid "GRASS PEA"
+msgstr "GUIXA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_953
+msgid "GRASSLAND MIX WITH PREDOMINANCE OF NITROGEN-FIXING CROPS"
+msgstr "BARREJA PRATENSES CON PREDOMINANÇA CONREUS FIXADORS NITROGENO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_652
+msgid "GREEN PIGWEED"
+msgstr "BLEDO VERD"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_834
+msgid "GREVILLEA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_923
+msgid "GUAVA TREE"
+msgstr "GUAIAVER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_964
+msgid "GUAYULE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_359
+msgid "GUINEA GRASS"
+msgstr "HIERBA DE GUINEA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_666
+msgid "GYPSOPHILA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_grapevine
+msgid "Grapevine"
+msgstr "Vinya"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_greenhouse
+msgid "Greenhouse"
+msgstr "Hivernacle"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_369
+msgid "HACKBERRY"
+msgstr "LLEDONER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_550
+msgid "HAIRY CLOVER"
+msgstr "TRÈVOL VELLOSO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_573
+msgid "HAIRY TOMATO"
+msgstr "TOMÀQUET PELUDO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_483
+msgid "HAIRY VETCH"
+msgstr "VEÇA VELLOSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_756
+msgid "HALIMIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_522
+msgid "HARD FESCUE"
+msgstr "FESTUCA DURA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_842
+msgid "HAWTHORN"
+msgstr "ARÇ BLANC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_123
+msgid "HAZEL TREE"
+msgstr "AVELLANER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_335
+msgid "HEADLAND AND BORDERS OF PERMANENT CROP"
+msgstr "CAPÇALERA I CONTORNS DE CONREU PERMANENT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_757
+msgid "HEBE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_853
+msgid "HEDERA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_758
+msgid "HEDYCHIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_286
+msgid "HELICHRYSUM"
+msgstr "SEMPREVIVA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_410
+msgid "HEMLOCK"
+msgstr "CICUTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_86
+msgid "HEMP"
+msgstr "CÀNEM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_96
+msgid "HERBACEOUS AROMATIC SPECIES"
+msgstr "ESPÈCIES AROMÀTIQUES HERBÀCIES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_962
+msgid "HERNIARIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_860
+msgid "HIBISCUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_362
+msgid "HOLLY"
+msgstr "GRÈVOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_147
+msgid "HOLM OAK"
+msgstr "ALZINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_231
+msgid "HONEY LOCUST"
+msgstr "ACÀCIA DE TRES ESPINES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_827
+msgid "HOP HORNBEAM"
+msgstr "OSTRIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_84
+msgid "HOPS"
+msgstr "LLÚPOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_371
+msgid "HORNBEAM"
+msgstr "CARPÍ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_427
+msgid "HORSERADISH"
+msgstr "RAVE PICANTE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_224
+msgid "HUAXYACAC"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_486
+msgid "HUNGARIAN VETCH"
+msgstr "ALVERJA HONGARESA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_876
+msgid "HYACINTHUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_351
+msgid "HYBRID CITRUS-PERSIMMON"
+msgstr "CÍTRICOS HÍBRIDS-CAQUI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_551
+msgid "HYBRID CLOVER"
+msgstr "TRÈVOL HÍBRID"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_210
+msgid "HYBRID MANDARIN TREE"
+msgstr "MANDARINER HÍBRID"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_526
+msgid "HYBRID RYEGRASS"
+msgstr "RAI-GRAS HÍBRID"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_759
+msgid "HYDRANGEA"
+msgstr "HORTÈNSIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_259
+msgid "HYSSOP"
+msgstr "HISOP"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_884
+msgid "IMPATIENS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_893
+msgid "INDIAN LAUREL"
+msgstr "LLORER DE INDIAS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_492
+msgid "INDIGO"
+msgstr "PLANTA D'ANYIL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_991
+msgid "INDIGO PLANT"
+msgstr "PLANTA D'ANYIL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_667
+msgid "IRIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_528
+msgid "ITALIAN ALFALFA"
+msgstr "ALFALS ITALIANA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_524
+msgid "ITALIAN RYEGRASS"
+msgstr "RAI-GRAS ITALIÀ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_836
+msgid "ITCHWOOD TREE"
+msgstr "ARBRE PICA-PICA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_industrial
+msgid "Industrial"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_industrial
+msgid "Industrial crops"
+msgstr "Conreus industrials"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_232
+msgid "JACARANDA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_760
+msgid "JACOBINIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_895
+msgid "JAPANESE CAMELLIA"
+msgstr "CAMELIA JAPONESA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_965
+msgid "JAPANESE CHERRY TREE"
+msgstr "CIRERER JAPONÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_611
+msgid "JAPANESE CHESTNUT TREE"
+msgstr "CASTANYER JAPONÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_629
+msgid "JAPANESE LARCH"
+msgstr "LÀRIX DEL JAPÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_825
+msgid "JAPANESE PAGODA TREE"
+msgstr "SÒFORA DEL JAPÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_506
+msgid "JAPANESE PLUM TREE"
+msgstr "PRUNERA JAPONÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_972
+msgid "JAPANESE WILD APPLE TREE"
+msgstr "POMERA SILVESTRE JAPONÈS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_848
+msgid "JASMINUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_235
+msgid "JATROPHA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_581
+msgid "JERSEY CABBAGE"
+msgstr "COL DE JERSEY"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_416
+msgid "JERUSALEM ARTICHOKE"
+msgstr "PATACA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_947
+msgid "JOJOBA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_824
+msgid "JUDAS TREE"
+msgstr "ARBRE DE L'AMOR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_613
+msgid "JUGLANS MAJOR AND REGIA HYBRIDS"
+msgstr "HÍBRIDS DE JUGLANS MAYOR I REGIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_907
+msgid "JUJUBE TREE"
+msgstr "AZUFAIFO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_297
+msgid "JUNIPER"
+msgstr "GINEBRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_142
+msgid "JUTE"
+msgstr "JUT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_763
+msgid "KALANCHOE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_916
+msgid "KALE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_141
+msgid "KENAF"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_764
+msgid "KENTIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_373
+msgid "KERMES OAK"
+msgstr "GARRIC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_325
+msgid "KHORASAN WHEAT"
+msgstr "BLAT KHORASAN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_596
+msgid "KING TRUMPET MUSHROOM"
+msgstr "BOLET DE CARDO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_422
+msgid "KIWANO"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_212
+msgid "KIWI"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_603
+msgid "KIWIBERRY"
+msgstr "KIWIÑO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_159
+msgid "KOHLRABI"
+msgstr "COLRAVE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_911
+msgid "KUMQUAT"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_417
+msgid "LAMB'S LETTUCE"
+msgstr "HERBA DE CANONGE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_765
+msgid "LANTANA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_366
+msgid "LARCH"
+msgstr "LÀRIX"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_938
+msgid "LARGE STRAWBERRY"
+msgstr "MADUIXOT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_282
+msgid "LAVANDIN"
+msgstr "ESPÍGOL HÍBRID"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_281
+msgid "LAVENDER"
+msgstr "ESPÍGOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_151
+msgid "LEEK"
+msgstr "PORRO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_265
+msgid "LEMON BALM"
+msgstr "MELISSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_868
+msgid "LEMON GRASS"
+msgstr "HERBA LLIMONERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_207
+msgid "LEMON TREE"
+msgstr "LLIMONER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_287
+msgid "LEMON VERBENA"
+msgstr "MARIALLUÏSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_467
+msgid "LEMONGRASS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_51
+msgid "LENTIL"
+msgstr "LLENTIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_766
+msgid "LEPTOSPERMUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_425
+msgid "LESSER GALANGAL"
+msgstr "GALANGA MENOR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_155
+msgid "LETTUCE"
+msgstr "ENCIAM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_767
+msgid "LEWISIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_845
+msgid "LIGUSTRUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_846
+msgid "LILAC"
+msgstr "LILÀ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_880
+msgid "LILIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_885
+msgid "LILY OF THE VALLEY"
+msgstr "LIRIO DE LOS VALLES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_428
+msgid "LIMA BEAN"
+msgstr "PHASEOLUS LUNATUS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_915
+msgid "LIME"
+msgstr "LLIMA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_912
+msgid "LIMEQUAT"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_768
+msgid "LIMONIASTRUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_387
+msgid "LINDEN"
+msgstr "TELL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_90
+msgid "LIQUORICE"
+msgstr "REGALÈSSIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_770
+msgid "LOBELIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_771
+msgid "LOBULARIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_888
+msgid "LONG-TAILED FIG"
+msgstr "FICUS RABUDO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_920
+msgid "LONGAN"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_987
+msgid "LOOFAH"
+msgstr "ESPONJA VEGETAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_214
+msgid "LOQUAT TREE"
+msgstr "NESPRER DEL JAPÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_942
+msgid "LOQUAT-PERSIMMON"
+msgstr "NESPRER-CAQUI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_872
+msgid "LOVAGE"
+msgstr "LLEVÍSTIC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_654
+msgid "LOVE-LIES-BLEEDING"
+msgstr "MOCO DE PAVO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_469
+msgid "LUFFA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_598
+msgid "LUNG OYSTER MUSHROOM"
+msgstr "FONG PULMÓN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_413
+msgid "LUNGWORT"
+msgstr "PULMONÀRIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_454
+msgid "LUPIN-OAT MIX"
+msgstr "BARREJA TRAMÚS-CIVADA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_910
+msgid "LYCHEE"
+msgstr "LITXI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_legumes_grain
+msgid "Legumes (grain)"
+msgstr "Lleguminoses (gra)"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_livestock
+msgid "Livestock"
+msgstr "Ramader"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_867
+msgid "MACADAMIA NUT TREE"
+msgstr "MACADÀMIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_772
+msgid "MAGNOLIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_391
+msgid "MAHALEB CHERRY TREE"
+msgstr "CIRERER DE MAHOMA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_468
+msgid "MALABAR SPINACH"
+msgstr "ESPINACA DE MALABAR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_432
+msgid "MANDARIN LEMON"
+msgstr "LIMÓN MANDARINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_209
+msgid "MANDARIN TREE"
+msgstr "MANDARINER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_344
+msgid "MANGO"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_921
+msgid "MANGOSTEEN"
+msgstr "MANGOSTÁN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_140
+msgid "MANILA HEMP"
+msgstr "CÀNEM DE MANILA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_370
+msgid "MAPLE"
+msgstr "AURÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_458
+msgid "MARALFALFA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_272
+msgid "MARIGOLD"
+msgstr "CALÈNDULA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_640
+msgid "MARITIME PINE"
+msgstr "PI MARÍTIM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_271
+msgid "MARJORAM"
+msgstr "MARDUIX"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_316
+msgid "MARSHMALLOW"
+msgstr "MALVÍ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_12
+msgid "MASLIN"
+msgstr "TRANQUILLÓN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_365
+msgid "MASTIC TREE"
+msgstr "LLENTISCLE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_576
+msgid "MEADOW BARLEY"
+msgstr "CEBADILLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_520
+msgid "MEADOW FESCUE"
+msgstr "FESTUCA PRATENSE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_490
+msgid "MEDICAGO"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_536
+msgid "MEDICAGO TRUNCATULA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_434
+msgid "MEDITERRANEAN SWEET LEMON"
+msgstr "LIMÓN DOLÇ DEL MEDITERRÁNEO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_153
+msgid "MELON"
+msgstr "MELÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_821
+msgid "METROSIDEROS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_795
+msgid "MILKWORT"
+msgstr "POLÍGALA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_10
+msgid "MILLET"
+msgstr "MILL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_266
+msgid "MINT"
+msgstr "MENTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_223
+msgid "MISCANTHUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_247
+msgid "MIXED GRASSLAND SPECIES CROPS"
+msgstr "CONREUS MIXTOS DE ESPÈCIES PRATENSES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_859
+msgid "MOCK ORANGE"
+msgstr "XERINGUILLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_637
+msgid "MONTEREY PINE"
+msgstr "PI INSIGNE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_435
+msgid "MOORISH ORANGE TREE"
+msgstr "TARONGER MORUNO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_892
+msgid "MORETON BAY FIG"
+msgstr "FIGUERA DE BAHÍA MORETÓN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_331
+msgid "MORINGA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_625
+msgid "MOUNTAIN ELM"
+msgstr "OM DE MONTAÑA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_639
+msgid "MOUNTAIN PINE"
+msgstr "PI NEGRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_775
+msgid "MUEHLENBECKIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_347
+msgid "MULBERRY TREE"
+msgstr "MORERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_957
+msgid "MUNG BEAN"
+msgstr "MONGETA MUNGO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_776
+msgid "MUSA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_97
+msgid "MUSHROOMS"
+msgstr "BOLETS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_332
+msgid "MUSTARD"
+msgstr "MOSTASSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_773
+msgid "MYRSINE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_897
+msgid "MYRTLE"
+msgstr "MURTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_774
+msgid "MYRTUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_mushrooms
+msgid "Mushrooms"
+msgstr "Bolets"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_578
+msgid "NAKED OAT"
+msgstr "CIVADA DESNUDA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_250
+msgid "NARBONNE VETCH"
+msgstr "ALBERJÓN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_879
+msgid "NARCISSUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_647
+msgid "NARROW-LEAVED ASH"
+msgstr "FREIXE DE HOJA ESTRECHA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_553
+msgid "NARROW-LEAVED CLOVER"
+msgstr "TRÈVOL DE FRUTO ANGOSTO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_909
+msgid "NASHI PEAR"
+msgstr "NASHI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_887
+msgid "NASTURTIUM"
+msgstr "CAPUTXINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_712
+msgid "NATAL CHERRY"
+msgstr "CEREZA DE NATAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_106
+msgid "NECTARINE TREE"
+msgstr "NECTARINO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_777
+msgid "NEPHROLEPIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_779
+msgid "NERIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_632
+msgid "NORWAY MAPLE"
+msgstr "AURÓ REAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_119
+msgid "NURSERY - MVR PRODUCER"
+msgstr "VIVER - PRODUCTOR MVR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_125
+msgid "NUTS"
+msgstr "FRUTOS DE CÁSCARA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_293
+msgid "OAK"
+msgstr "ROURE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_8
+msgid "OAT"
+msgstr "CIVADA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_306
+msgid "OAT-BARLEY MIX"
+msgstr "BARREJA CIVADA-ORDI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_946
+msgid "OAT-BARLEY-VETCH MIX"
+msgstr "BARREJA CIVADA-ORDI-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_339
+msgid "OAT-BITTER VETCH MIX"
+msgstr "BARREJA CIVADA-YEROS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_448
+msgid "OAT-CORN MIX"
+msgstr "BARREJA CIVADA-BLAT DE MORO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_452
+msgid "OAT-CORN-VETCH MIX"
+msgstr "BARREJA CIVADA-BLAT DE MORO-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_945
+msgid "OAT-FAVA BEAN MIX"
+msgstr "BARREJA CIVADA-FAVA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_299
+msgid "OAT-PEA MIX"
+msgstr "BARREJA CIVADA-PÈSOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_455
+msgid "OAT-RYE MIX"
+msgstr "BARREJA CIVADA-SÈGOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_245
+msgid "OAT-SULLA MIX"
+msgstr "BARREJA CIVADA-ZULLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_307
+msgid "OAT-TRITICALE MIX"
+msgstr "BARREJA CIVADA-TRITICALE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_241
+msgid "OAT-VETCH MIX"
+msgstr "BARREJA CIVADA-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_305
+msgid "OAT-WHEAT MIX"
+msgstr "BARREJA CIVADA-BLAT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_508
+msgid "OIL RADISH"
+msgstr "RAVE OLEÍFERO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_927
+msgid "OKRA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_898
+msgid "OLEANDER"
+msgstr "BALADRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_349
+msgid "OLIVE GROVE - FRUIT TREE"
+msgstr "OLIVERAR - FRUITER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_101
+msgid "OLIVE TREE"
+msgstr "OLIVERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_837
+msgid "OMBU"
+msgstr "OMBÚ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_248
+msgid "ONE-FLOWERED VETCH"
+msgstr "GARROFA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_337
+msgid "ONE-FLOWERED VETCH-BARLEY MIX"
+msgstr "BARREJA ALGARROBA-ORDI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_336
+msgid "ONE-FLOWERED VETCH-OAT MIX"
+msgstr "BARREJA ALGARROBA-CIVADA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_157
+msgid "ONION"
+msgstr "CEBA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_781
+msgid "OPERCULINA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_138
+msgid "OPIUM POPPY"
+msgstr "CASCALL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_226
+msgid "OPUNTIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_206
+msgid "ORANGE TREE"
+msgstr "TARONGER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_352
+msgid "ORANGE-AVOCADO"
+msgstr "TARONGER-ALVOCAT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_941
+msgid "ORANGE-MANDARIN"
+msgstr "TARONGER-MANDARINER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_940
+msgid "ORANGE-PERSIMMON"
+msgstr "TARONGER-CAQUI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_193
+msgid "ORCHARD"
+msgstr "HORTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_267
+msgid "OREGANO"
+msgstr "ORENGA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_523
+msgid "ORIENTAL GOAT'S RUE"
+msgstr "GALEGA DE ORIENTE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_976
+msgid "ORNAMENTAL APPLE TREE"
+msgstr "POMERA DE ADORNO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_932
+msgid "ORNAMENTAL PLANTS"
+msgstr "PLANTES ORNAMENTALS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_442
+msgid "OSIER WILLOW"
+msgstr "MIMBRERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_113
+msgid "OTHER FRUIT TREES"
+msgstr "ALTRES FRUITERS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_462
+msgid "OX-EYE DAISY"
+msgstr "ULL DE BOU"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_597
+msgid "OYSTER MUSHROOM"
+msgstr "GÍRGOLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_782
+msgid "OZOTHAMNUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_oilseeds
+msgid "Oilseeds and Industrial"
+msgstr "Oleaginoses i industrials"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_orchards_nuts
+msgid "Orchards and Nuts"
+msgstr "Fruiters de closca"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_ornamentals
+msgid "Ornamentals and Flowers"
+msgstr "Ornamentals i flors"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_other
+msgid "Other"
+msgstr "Altres"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_783
+msgid "PACHIRA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_auto_palm
+msgid "PALM"
+msgstr "PALMERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_346
+msgid "PAPAYA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_748
+msgid "PAPER FLOWER"
+msgstr "FLOR DE PAPEL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_844
+msgid "PARADISE TREE"
+msgstr "ARBRE DEL PARADÍS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_261
+msgid "PARSLEY"
+msgstr "JULIVERT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_171
+msgid "PARSNIP"
+msgstr "XIRIVIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_863
+msgid "PARTHENOCISSUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_785
+msgid "PASSIFLORA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_944
+msgid "PASSION FRUIT"
+msgstr "MARACUYÁ o FRUTO DE LA PASIÓN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_63
+msgid "PASTURES UNDER 5 YEARS"
+msgstr "PASTURES DE MENYS DE 5 ANYS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_200
+msgid "PAULOWNIA"
+msgstr "PAULÒNIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_40
+msgid "PEA"
+msgstr "PÈSOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_105
+msgid "PEACH TREE"
+msgstr "PRESSEGUER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_87
+msgid "PEANUT"
+msgstr "CACAUET"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_108
+msgid "PEAR TREE"
+msgstr "PERERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_501
+msgid "PECAN TREE"
+msgstr "NOGUERA PECANA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_786
+msgid "PELARGONIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_322
+msgid "PELLITORY"
+msgstr "TRENCAPEDRES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_320
+msgid "PENNYROYAL"
+msgstr "POLIOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_152
+msgid "PEPPER"
+msgstr "PEBROT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_856
+msgid "PEPPER TREE"
+msgstr "FALSO PIMENTERO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_69
+msgid "PERENNIAL RYEGRASS"
+msgstr "RAI-GRAS PERENNE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_62
+msgid "PERMANENT PASTURES OF 5 OR MORE YEARS"
+msgstr "PASTURES PERMANENTS DE 5 O MÉS ANYS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_787
+msgid "PEROVSKIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_557
+msgid "PERSIAN CLOVER"
+msgstr "TRÈVOL PERSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_213
+msgid "PERSIMMON"
+msgstr "CAQUI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_788
+msgid "PETUNIA"
+msgstr "PETÚNIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_588
+msgid "PHACELIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_847
+msgid "PHILLYREA"
+msgstr "LABIÉRNAGO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_789
+msgid "PHILODENDRON"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_656
+msgid "PHOENICEAN JUNIPER"
+msgstr "SAVINA NEGRA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_797
+msgid "PHORMIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_928
+msgid "PHYSALIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_790
+msgid "PIERIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_791
+msgid "PIMELEA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_389
+msgid "PINE"
+msgstr "PI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_906
+msgid "PINEAPPLE"
+msgstr "PINYA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_124
+msgid "PISTACHIO"
+msgstr "PISTATXO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_315
+msgid "PLANTAIN"
+msgstr "PLANTATGE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_828
+msgid "PLATANUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_111
+msgid "PLUM TREE"
+msgstr "PRUNERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_793
+msgid "PLUMBAGO"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_794
+msgid "PLUMERIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_74
+msgid "POA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_899
+msgid "POINSETTIA"
+msgstr "FLOR DE PASQUA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_952
+msgid "POINTED CABBAGE"
+msgstr "COL PICUDA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_233
+msgid "POKEWEED"
+msgstr "FITOLACA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_217
+msgid "POMEGRANATE TREE"
+msgstr "MAGRANER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_585
+msgid "POPCORN"
+msgstr "BLAT DE MORO PALOMITERO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_364
+msgid "POPLAR"
+msgstr "POLLANCRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_593
+msgid "POPLAR MUSHROOM"
+msgstr "BOLET DE CHOPO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_509
+msgid "PORTUGUESE CABBAGE"
+msgstr "COL TRONCHUDA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_971
+msgid "PORTUGUESE LAUREL"
+msgstr "LLORER DE PORTUGAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_381
+msgid "PORTUGUESE OAK"
+msgstr "QUEJIGO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_796
+msgid "PORTULACA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_99
+msgid "POTATO"
+msgstr "PATATA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_798
+msgid "PRIMULA"
+msgstr "PRÍMULA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_669
+msgid "PROTEA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_994
+msgid "PUMMELO"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_185
+msgid "PUMPKIN"
+msgstr "CARBASSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_505
+msgid "PUMPKIN ROOTSTOCKS"
+msgstr "PORTAEMPELTS DE CARBASSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_421
+msgid "PURSLANE"
+msgstr "VERDOLAGA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_839
+msgid "PYRACANTHA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_382
+msgid "PYRENEAN OAK"
+msgstr "REBOLLO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_palm_date
+msgid "Palm/Date"
+msgstr "Palmeres/Datileres"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_pastures
+msgid "Pastures and Grasslands"
+msgstr "Prats i pastures"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_211
+msgid "QUINCE TREE"
+msgstr "CODONYER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_222
+msgid "QUINOA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_801
+msgid "QUISQUALIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_190
+msgid "RADISH"
+msgstr "RAVE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_922
+msgid "RAMBUTAN"
+msgstr "RAMBUTÁN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_398
+msgid "RAMIE"
+msgstr "RAMIO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_35
+msgid "RAPESEED"
+msgstr "COLZA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_192
+msgid "RASPBERRY"
+msgstr "GERD"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_655
+msgid "RED AMARANTH"
+msgstr "AMARANTO VERMELL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_973
+msgid "RED APPLE TREE"
+msgstr "POMERA VERMELL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_173
+msgid "RED CABBAGE"
+msgstr "COL VERMELLA O LOMBARDA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_555
+msgid "RED CLOVER"
+msgstr "TRÈVOL VIOLETA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_521
+msgid "RED FESCUE"
+msgstr "FESTUCA VERMELLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_562
+msgid "RED VETCH"
+msgstr "ARVEJA VERMELLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_586
+msgid "REDCURRANT"
+msgstr "GROSELLERO VERMELL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_982
+msgid "REGEL PEAR TREE"
+msgstr "PERERA DE REGEL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_852
+msgid "RHAMNUS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_792
+msgid "RHAPHIOLEPIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_802
+msgid "RHAPIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_693
+msgid "RHODODENDRON"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_420
+msgid "RHUBARB"
+msgstr "RUIBARBRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_139
+msgid "RIBBON GRASS"
+msgstr "HIERBA CINTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_541
+msgid "RIBWORT PLANTAIN"
+msgstr "LLANTÉN MENOR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_80
+msgid "RICE"
+msgstr "ARRÒS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_230
+msgid "ROBINIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_92
+msgid "ROMANESCO"
+msgstr "ROMANESCU"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_660
+msgid "ROSE"
+msgstr "ROSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_288
+msgid "ROSEMARY"
+msgstr "ROMANÍ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_592
+msgid "ROUGH CLOVER"
+msgstr "TRÈVOL ÁSPERO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_533
+msgid "ROUGH MEDICK"
+msgstr "ALFALS RUGOSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_650
+msgid "ROWAN"
+msgstr "MOIXERA DE LOS CAZADORES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_890
+msgid "RUBBER FIG"
+msgstr "FIGUERA CAUCHERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_871
+msgid "RUE"
+msgstr "RUDA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_804
+msgid "RUSSELIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_894
+msgid "RUSTY FIG"
+msgstr "FIGUERA HERRUMBROSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_6
+msgid "RYE"
+msgstr "SÈGOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_456
+msgid "RYE-CORN MIX"
+msgstr "BARREJA SÈGOL-BLAT DE MORO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_451
+msgid "RYE-WHEAT MIX"
+msgstr "BARREJA SÈGOL-BLAT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_959
+msgid "RYEGRASS MIX"
+msgstr "BARREJA RAI-GRAS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_496
+msgid "RYEGRASS-CLOVER MIX"
+msgstr "BARREJA RAI-GRAS-TRÈVOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_338
+msgid "RYEGRASS-VETCH MIX"
+msgstr "BARREJA RAI-GRAS-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_recreational
+msgid "Recreational"
+msgstr "Recreatiu"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_88
+msgid "SAFFLOWER"
+msgstr "CÀRTAM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_262
+msgid "SAFFRON"
+msgstr "SAFRÀ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_268
+msgid "SAGE"
+msgstr "SÀLVIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_67
+msgid "SAINFOIN"
+msgstr "ESPARCETA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_930
+msgid "SALICORNIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_477
+msgid "SALSIFY"
+msgstr "SALSIFÍ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_985
+msgid "SALTBUSH"
+msgstr "HIERBA SALADA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_534
+msgid "SAND ALFALFA"
+msgstr "ALFALS DE ARENA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_805
+msgid "SANSEVIERIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_289
+msgid "SANTOLINA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_924
+msgid "SAPOTE"
+msgstr "ZAPOTE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_806
+msgid "SARCOPOTERIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_205
+msgid "SATSUMA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_949
+msgid "SATSUMA-PERSIMMON"
+msgstr "SATSUMA-CAQUI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_300
+msgid "SAVIN JUNIPER"
+msgstr "SAVINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_251
+msgid "SAVORY"
+msgstr "SAJOLIDA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_174
+msgid "SAVOY CABBAGE"
+msgstr "COL MILÁN O SAVOY"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_397
+msgid "SCARLET RUNNER BEAN"
+msgstr "MONGETA ESCARLATA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_807
+msgid "SCHEFFLERA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_641
+msgid "SCOTS PINE"
+msgstr "PI ROIG"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_439
+msgid "SEA BUCKTHORN"
+msgstr "ESPINO GROC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_672
+msgid "SEA LAVENDER"
+msgstr "SIEMPREVIVA BLAU"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_446
+msgid "SERRADELLA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_384
+msgid "SERVICE TREE"
+msgstr "MOIXERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_399
+msgid "SESAME"
+msgstr "SÈSAM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_618
+msgid "SESSILE OAK"
+msgstr "ROURE ALBAR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_168
+msgid "SHALLOT"
+msgstr "ESCALUNYA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_519
+msgid "SHEEP'S FESCUE"
+msgstr "FESTUCA OVINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_535
+msgid "SHIELD MEDICK"
+msgstr "ALFALS ESCUDETEADA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_594
+msgid "SHIITAKE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_616
+msgid "SHINING GUM"
+msgstr "EUCALIPTUS BRILLANT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_799
+msgid "SIDA FALLAX"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_341
+msgid "SILPHIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_143
+msgid "SISAL"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_516
+msgid "SITKA BROME"
+msgstr "BROMO DE SITKA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_390
+msgid "SMALL FAVA BEAN"
+msgstr "HABONCILLO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_584
+msgid "SMALL RADISH"
+msgstr "RABANITO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_855
+msgid "SMOKE TREE"
+msgstr "ARBRE DE LES PERRUQUES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_545
+msgid "SMOOTH MEADOW GRASS"
+msgstr "POA DE LOS PRADOS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_472
+msgid "SNAKE CUCUMBER"
+msgstr "COGOMBRE CULEBRA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_963
+msgid "SNAKE GOURD"
+msgstr "CARBASSA SERPIENTE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_925
+msgid "SNAKE MELON"
+msgstr "ALFICOZ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_737
+msgid "SNAPDRAGON"
+msgstr "BOCA DE DRAC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_411
+msgid "SOAPWORT"
+msgstr "SAPONÀRIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_1
+msgid "SOFT WHEAT"
+msgstr "BLAT TOU"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_564
+msgid "SOLANUM LYCOPERSICUM AND CHESMANIAE HYBRIDS"
+msgstr "HÍBRIDS DE SOLANUM LYCOPERSICUM I CHESMANIAE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_567
+msgid "SOLANUM LYCOPERSICUM AND HABROCHAITES HYBRIDS"
+msgstr "HÍBRIDS DE SOLANUM LYCOPERSICUM I HABROCHAITES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_565
+msgid "SOLANUM LYCOPERSICUM AND PERUVIANUM HYBRIDS"
+msgstr "HÍBRIDS DE SOLANUM LYCOPERSICUM I PERUVIANUM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_566
+msgid "SOLANUM LYCOPERSICUM AND PIMPINELLIFOLIUM HYBRIDS"
+msgstr "HÍBRIDS DE SOLANUM LYCOPERSICUM I PIMPINELLIFOILUM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_570
+msgid "SOLANUM MELONGENA AND AETHIOPICUM HYBRIDS"
+msgstr "HÍBRIDS DE SOLANUM MELONGENA I AETHIOPICUM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_569
+msgid "SOLANUM MELONGENA AND TORVUM HYBRIDS"
+msgstr "HÍBRIDS DE SOLANUM MELONGENA I TORVUM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_671
+msgid "SOLIDAGO"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_670
+msgid "SOLIDASTER"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_7
+msgid "SORGHUM"
+msgstr "SORGO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_418
+msgid "SORREL"
+msgstr "AGRELLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_437
+msgid "SOUR CHERRY TREE"
+msgstr "CIRERER AGRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_866
+msgid "SOURSOP TREE"
+msgstr "GUANÁBANO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_34
+msgid "SOYBEAN"
+msgstr "SOJA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_301
+msgid "SPANISH FIR"
+msgstr "PINSAPO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_657
+msgid "SPANISH JUNIPER"
+msgstr "SAVINA ALBAR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_808
+msgid "SPATHIPHYLLUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_276
+msgid "SPEARMINT"
+msgstr "HERBASANA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_2
+msgid "SPELT"
+msgstr "ESPELTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_877
+msgid "SPIDER LILY"
+msgstr "LIRIO ARAÑA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_285
+msgid "SPIKE LAVENDER"
+msgstr "ESPLIEGO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_183
+msgid "SPINACH"
+msgstr "ESPINACS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_531
+msgid "SPINY MEDICK"
+msgstr "ALFALS ESPINOSA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_167
+msgid "SPRING ONION"
+msgstr "CEBETA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_249
+msgid "SPRING VETCH"
+msgstr "ALVERJA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_380
+msgid "SPRUCE"
+msgstr "PÍCEA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_558
+msgid "SQUARROSE CLOVER"
+msgstr "TRÈVOL SQUARROSO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_275
+msgid "ST. JOHN'S WORT"
+msgstr "HERBA DE SANT JOAN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_403
+msgid "STAR ANISE"
+msgstr "ANÍS ESTRELLAT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_908
+msgid "STAR FRUIT TREE"
+msgstr "CARAMBOLO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_761
+msgid "STAR JASMINE"
+msgstr "GESSAMÍ ESTRELLADO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_809
+msgid "STEPHANOTIS"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_274
+msgid "STEVIA"
+msgstr "ESTÈVIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_810
+msgid "STIPA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_634
+msgid "STONE PINE"
+msgstr "PI PINYONER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_219
+msgid "STRAWBERRY"
+msgstr "MADUIXA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_548
+msgid "STRAWBERRY CLOVER"
+msgstr "TRÈVOL FRESERO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_377
+msgid "STRAWBERRY TREE"
+msgstr "ARBOÇ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_873
+msgid "STRAWFLOWER"
+msgstr "SEMPREVIVA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_559
+msgid "SUBTERRANEAN CLOVER"
+msgstr "TRÈVOL SUBTERRANEO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_328
+msgid "SUDAN GRASS"
+msgstr "PASTO DEL SUDÁN"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_590
+msgid "SUGAR BEET"
+msgstr "REMOLATXA SUCRERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_220
+msgid "SUGARCANE"
+msgstr "CANYA DE SUCRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_76
+msgid "SULLA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_444
+msgid "SUMAC"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_33
+msgid "SUNFLOWER"
+msgstr "GIRA-SOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_904
+msgid "SUNN HEMP"
+msgstr "CROTALARIA JUNCEA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_544
+msgid "SWAMP MEADOW GRASS"
+msgstr "POA DE LOS PANTANOS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_318
+msgid "SWEET CHAMOMILE"
+msgstr "CAMAMILLA DOLÇ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_326
+msgid "SWEET CORN"
+msgstr "BLAT DE MORO DOLÇ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_433
+msgid "SWEET LIME"
+msgstr "LIMERO DOLÇ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_121
+msgid "SWEET POTATO"
+msgstr "BONIAT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_675
+msgid "SWEET WILLIAM"
+msgstr "CLAVEL DEL POETA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_811
+msgid "SYNGONIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_sugar
+msgid "Sugar crops"
+msgstr "Conreus sucrers"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_327
+msgid "TABLE BEET"
+msgstr "REMOLATXA DE MESA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_936
+msgid "TAGASASTE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_886
+msgid "TAGETES"
+msgstr "CLAVELLS DE MORO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_385
+msgid "TALAYA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_517
+msgid "TALL FESCUE"
+msgstr "FESTUCA ALTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_577
+msgid "TALL OATGRASS"
+msgstr "FROMENTAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_851
+msgid "TAMARIX"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_270
+msgid "TARRAGON"
+msgstr "ESTRAGÓ"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_441
+msgid "TEA"
+msgstr "TE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_459
+msgid "TEDERA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_19
+msgid "TEFF"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_812
+msgid "TEUCRIUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_813
+msgid "THUJA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_263
+msgid "THYME"
+msgstr "FARIGOLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_89
+msgid "TIGER NUT"
+msgstr "XUFA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_73
+msgid "TIMOTHY"
+msgstr "FLEO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_826
+msgid "TIPUANA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_83
+msgid "TOBACCO"
+msgstr "TABAC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_423
+msgid "TOMATILLO"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_197
+msgid "TOMATO"
+msgstr "TOMÀQUET"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_814
+msgid "TRACHELOSPERMUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_20
+msgid "TRADITIONAL FALLOW"
+msgstr "GUARET TRADICIONAL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_755
+msgid "TRAILING GERANIUM"
+msgstr "GITANILLA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_323
+msgid "TRAVALERA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_803
+msgid "TRAVELLER'S PALM"
+msgstr "PALMERA DE VIAJERO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_229
+msgid "TREE OF HEAVEN"
+msgstr "AILANT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_622
+msgid "TREMBLING ASPEN"
+msgstr "TRÈMOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_13
+msgid "TRITICALE"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_958
+msgid "TRITICALE-BARLEY MIX"
+msgstr "BARREJA TRITICALE-ORDI"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_956
+msgid "TRITICALE-PEA MIX"
+msgstr "BARREJA TRITICALE-PÈSOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_242
+msgid "TRITICALE-VETCH MIX"
+msgstr "BARREJA TRITICALE-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_14
+msgid "TRITORDEUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_280
+msgid "TRUFFLE"
+msgstr "TÒFONA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_822
+msgid "TSUGA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_426
+msgid "TUBEROUS PARSLEY"
+msgstr "PEREJIL TUBEROSO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_815
+msgid "TULBAGHIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_878
+msgid "TULIP"
+msgstr "TULIPA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_950
+msgid "TURMERIC"
+msgstr "CÚRCUMA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_179
+msgid "TURNIP"
+msgstr "NAP"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_478
+msgid "TURNIP CABBAGE"
+msgstr "COLRAVE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_484
+msgid "TURNIP TOPS"
+msgstr "GRELOS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_854
+msgid "TURPENTINE TREE"
+msgstr "CORNICABRA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_tubers_roots
+msgid "Tubers and Roots"
+msgstr "Tubercles i arrels"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_896
+msgid "UMBRELLA PLANT"
+msgstr "PLANTA PARAIGUA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_unproductive
+msgid "Unproductive"
+msgstr "Improductiu"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_urban
+msgid "Urban"
+msgstr "Urbà"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_256
+msgid "VALERIAN"
+msgstr "VALERIANA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_511
+msgid "VELVET BENT"
+msgstr "AGROSTIS CANINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_277
+msgid "VERBENA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_996
+msgid "VETCH-BITTER VETCH MIX"
+msgstr "BARREJA DE VEÇA - YEROS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_997
+msgid "VETCH-CHICKLING PEA MIX"
+msgstr "BARREJA DE VEÇA - TITARROS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_954
+msgid "VETCH-PEA-CLOVER MIX"
+msgstr "BARREJA VEÇA-PÈSOL-TRÈVOL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_818
+msgid "VIBURNUM"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_816
+msgid "VINCA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_333
+msgid "VINE ROOTSTOCKS"
+msgstr "PORTAEMPELTS DE VID"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_102
+msgid "VINEYARD"
+msgstr "VINYA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_348
+msgid "VINEYARD - FRUIT TREE"
+msgstr "VIÑA - FRUITER"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_120
+msgid "VINEYARD - OLIVE GROVE"
+msgstr "VIÑA - OLIVERAR"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_494
+msgid "VINEYARD - ORCHARD"
+msgstr "VIÑA - HORTA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_881
+msgid "VIOLA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_817
+msgid "VITEX"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_vegetables
+msgid "Vegetables"
+msgstr "Hortalisses"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_491
+msgid "WALL BARLEY"
+msgstr "ESPIGUILLA DE BURRO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_112
+msgid "WALNUT TREE"
+msgstr "NOGUERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_465
+msgid "WATER SPINACH"
+msgstr "BATATA ACUÁTICA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_191
+msgid "WATERCRESS"
+msgstr "BERRO DE AGUA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_156
+msgid "WATERMELON"
+msgstr "SÍNDRIA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_747
+msgid "WAX FLOWER"
+msgstr "FLOR DE CERA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_473
+msgid "WAX GOURD"
+msgstr "CARBASSA XINESA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_889
+msgid "WEEPING FIG"
+msgstr "FICUS BENJAMINA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_525
+msgid "WESTERNWORLD RYEGRASS"
+msgstr "RAI-GRAS WESTERNWORLD"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_819
+msgid "WESTRINGIA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_243
+msgid "WHEAT-VETCH MIX"
+msgstr "BARREJA BLAT-VEÇA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_556
+msgid "WHITE CLOVER"
+msgstr "TRÈVOL BLANC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_43
+msgid "WHITE LUPIN"
+msgstr "TRAMÚS BLANC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_631
+msgid "WHITE MAPLE"
+msgstr "AURÓ BLANC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_621
+msgid "WHITE POPLAR"
+msgstr "POLLANCRE BLANC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_926
+msgid "WHITE SWEET POTATO"
+msgstr "BONIAT"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_649
+msgid "WHITEBEAM"
+msgstr "MOIXERA BLANC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_977
+msgid "WILD APPLE TREE"
+msgstr "POMERA SILVESTRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_614
+msgid "WILD CHARD"
+msgstr "BLEDA BRAVA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_568
+msgid "WILD EGGPLANT"
+msgstr "ALBERGÍNIA CIMARRONA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_623
+msgid "WILD MUSTARD"
+msgstr "MOSTASSA SILVESTRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_363
+msgid "WILD OLIVE"
+msgstr "ULLASTRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_979
+msgid "WILD PEAR"
+msgstr "PIRUÉTANO"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_978
+msgid "WILD PEAR TREE"
+msgstr "PERERA SILVESTRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_475
+msgid "WILD RADISH"
+msgstr "RAVE SILVESTRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_574
+msgid "WILD TOMATO"
+msgstr "TOMÀQUET SILVESTRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_503
+msgid "WILD TURNIP"
+msgstr "NAP SILVESTRE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_227
+msgid "WILLOW"
+msgstr "SALZE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_981
+msgid "WILLOW-LEAVED PEAR TREE"
+msgstr "PERERA DE HOJAS DE SAUCE"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_595
+msgid "WOOD BLEWIT MUSHROOM"
+msgstr "BOLET DE PEU BLAU"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_543
+msgid "WOOD MEADOW GRASS"
+msgstr "POA DE LOS BOSQUES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_402
+msgid "WOOD SORREL"
+msgstr "AGRELLETA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_118
+msgid "WOODY AROMATIC SPECIES"
+msgstr "ESPÈCIES AROMÀTIQUES LLENYOSES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_284
+msgid "WORMWOOD"
+msgstr "DONZELL"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_water_reservoir
+msgid "Water reservoir"
+msgstr "Embassament"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_familia_woody_others
+msgid "Woody others"
+msgstr "Llenyosos altres"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_933
+msgid "YAM"
+msgstr "NYAM"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_319
+msgid "YARROW"
+msgstr "MIL·FULLES"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_604
+msgid "YELLOW KIWI"
+msgstr "KIWI GROC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_238
+msgid "YELLOW LUPIN"
+msgstr "TRAMÚS GROC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_510
+msgid "YELLOW OATGRASS"
+msgstr "TRISETUM FLAVESCENS"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_537
+msgid "YELLOW SERRADELLA"
+msgstr "SERRADELLA GROGA"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_461
+msgid "YELLOW SWEET CLOVER"
+msgstr "MELILOTO GROC"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_386
+msgid "YEW"
+msgstr "TEIX"
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_820
+msgid "YUCCA"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_955
+msgid "YUZU"
+msgstr ""
+
+#. module: base_ter
+#: model:ter.use_type,name:base_ter.ter_use_type_cultivo_163
+msgid "ZUCCHINI"
+msgstr "CARBASSÓ"
