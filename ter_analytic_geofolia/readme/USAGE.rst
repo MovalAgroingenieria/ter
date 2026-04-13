@@ -1,11 +1,12 @@
 To use this module:
 
-#. Go to **Census > Geofolia > Import Jobs** and click **New Import**.
-#. Upload a Geofolia JSON file (``Field.Json``, ``Action.Json``, or a full
-   export combining both).
+#. Go to **Census > Geofolia > New Import** and upload a Geofolia JSON file
+   (``Field.Json``, ``Action.Json``, or a full export combining both).
 #. The wizard auto-detects the file type. Confirm and click **Import**.
-#. A new import job is created and the JSON is parsed into intermediate lines.
-#. Review the parsed lines in the job form (Fields, Products, Employees, etc.).
+#. A new import record is created and the JSON is parsed into intermediate
+   lines. You can browse all imports from **Census > Geofolia > Imports**.
+#. Review the parsed lines in the import form (Fields, Products, Employees,
+   etc.) or use the **Import Lines** menu for a global view.
 #. Click **Apply All** to create or update the corresponding Odoo records:
 
    * *Fields mode*: Creates ``fsm.location`` + ``ter.use_unit`` per plot.

@@ -9,3 +9,6 @@ access_geofolia_import_harvested_product_line,geofolia.import.harvested.product.
 access_geofolia_import_equipment_line,geofolia.import.equipment.line,model_geofolia_import_equipment_line,base.group_user,1,1,1,1
 access_geofolia_import_activity_line,geofolia.import.activity.line,model_geofolia_import_activity_line,base.group_user,1,1,1,1
 access_geofolia_import_activity_employee_line,geofolia.import.activity.employee.line,model_geofolia_import_activity_employee_line,base.group_user,1,1,1,1
+access_fsm_order_product_usage,fsm.order.product.usage,model_fsm_order_product_usage,base.group_user,1,1,1,1
+access_fsm_order_equipment_usage,fsm.order.equipment.usage,model_fsm_order_equipment_usage,base.group_user,1,1,1,1
+access_fsm_order_person_usage,fsm.order.person.usage,model_fsm_order_person_usage,base.group_user,1,1,1,1

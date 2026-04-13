@@ -12,7 +12,9 @@ class GeofoliaImportBaseLine(models.AbstractModel):
     _name = "geofolia.import.base.line"
     _description = "Geofolia Import Base Line"
 
-    job_id = fields.Many2one("geofolia.import.job", required=True, ondelete="cascade")
+    job_id = fields.Many2one(
+        "geofolia.import.job", string="Import", required=True, ondelete="cascade"
+    )
 
     sync_state = fields.Selection(
         selection=[
@@ -87,6 +89,11 @@ class GeofoliaImportActivityEmployeeLine(models.Model):
         "geofolia.import.activity.line",
         required=True,
         ondelete="cascade",
+    )
+    fsm_order_id = fields.Many2one(
+        related="activity_line_id.fsm_order_id",
+        store=True,
+        readonly=True,
     )
 
     employee_action_id = fields.Char(index=True)

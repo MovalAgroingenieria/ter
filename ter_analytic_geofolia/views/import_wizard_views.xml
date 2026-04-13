@@ -18,7 +18,7 @@
                     <field name="file_data" filename="file_name"/>
                 </group>
                 <footer>
-                    <button name="action_import" type="object" class="btn-primary" string="Import"/>
+                    <button name="action_import" type="object" class="btn-primary" string="Import data"/>
                     <button special="cancel" class="btn-secondary" string="Cancel"/>
                 </footer>
             </form>

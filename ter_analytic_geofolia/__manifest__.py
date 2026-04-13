@@ -3,7 +3,7 @@
 
 {
     "name": "Territory Analytic - Geofolia Import",
-    "version": "18.0.1.0.2",
+    "version": "18.0.1.1.0",
     "category": "Territory Management",
     "summary": "Geofolia JSON import: FSM + Territory (1 location = 1 use unit)",
     "license": "AGPL-3",
@@ -41,5 +41,10 @@
         "views/geofolia_fsm_equipment_views.xml",
         "views/ter_use_unit_views.xml",
         "views/geofolia_external_id_views.xml",
+        "views/fsm_order_product_usage_views.xml",
+        "views/fsm_order_equipment_usage_views.xml",
+        "views/fsm_order_person_usage_views.xml",
+        "views/fsm_order_views.xml",
     ],
+    "post_init_hook": "post_init_hook",
 }

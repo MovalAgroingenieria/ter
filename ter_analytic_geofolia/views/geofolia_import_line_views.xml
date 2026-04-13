@@ -108,7 +108,7 @@
     </record>
 
     <menuitem id="menu_geofolia_import_lines"
-              name="Lines"
+              name="Import Lines"
               parent="ter_analytic_geofolia.menu_geofolia_import"
               action="action_geofolia_import_line"
               groups="group_geofolia_import"

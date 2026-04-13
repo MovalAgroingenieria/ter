@@ -122,14 +122,14 @@ msgstr "Ref. catastral"
 #. module: base_ter_invoicing
 #. odoo-python
 #: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-msgid "Overhead area"
-msgstr "Área (gastos)"
+msgid "Graphic area"
+msgstr "Área Gráfica"
 
 #. module: base_ter_invoicing
 #. odoo-python
 #: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-msgid "Ownership area"
-msgstr "Área (propiedad)"
+msgid "Area in property"
+msgstr "Área en Propiedad"
 
 #. module: base_ter_invoicing
 #: model:ir.model,name:base_ter_invoicing.model_ter_parcel

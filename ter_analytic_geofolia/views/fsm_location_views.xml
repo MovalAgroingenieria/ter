@@ -5,9 +5,17 @@
         <field name="model">fsm.location</field>
         <field name="inherit_id" ref="fieldservice.fsm_location_form_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[@id='main-right']" position="inside">
-                <field name="geofolia_external_id" string="Geofolia ID"/>
-                <field name="ter_use_unit_id" options="{'no_create': True}"/>
+            <xpath expr="//page[@name='others']" position="after">
+                <page string="Geofolia" name="geofolia">
+                    <group>
+                        <group>
+                            <field name="geofolia_external_id" string="Geofolia ID" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="ter_use_unit_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>

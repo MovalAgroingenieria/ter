@@ -31,8 +31,10 @@ Key features:
   ``fsm.order`` on the resolved location, and each activity employee line
   becomes an ``account.analytic.line`` (timesheet) linked to that order.
 
-* **Date range / campaign resolution** — Harvest years from Geofolia are
-  matched to ``date.range`` periods, with company-level defaults as fallback.
+* **Date range / campaign resolution** — ``SowingDate`` and ``HarvestDate``
+  from the JSON are used as ``date_start`` / ``date_end`` when available;
+  otherwise ``HarvestYear`` is used to derive a Jan–Dec range, with
+  company-level ``date.range`` defaults as final fallback.
 
 * **Import wizard** with automatic JSON type detection (Fields, Products, Full)
   and batch processing support.

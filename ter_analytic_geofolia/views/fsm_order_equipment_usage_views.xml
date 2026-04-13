@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Tree view -->
+    <record id="fsm_order_equipment_usage_tree" model="ir.ui.view">
+        <field name="name">fsm.order.equipment.usage.tree</field>
+        <field name="model">fsm.order.equipment.usage</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="equipment_id" optional="show" />
+                <field name="name" />
+                <field name="hours" widget="float_time" />
+                <field name="geofolia_equipment_id" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="fsm_order_equipment_usage_form" model="ir.ui.view">
+        <field name="name">fsm.order.equipment.usage.form</field>
+        <field name="model">fsm.order.equipment.usage</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="fsm_order_id" />
+                            <field name="equipment_id" />
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="hours" widget="float_time" />
+                            <field name="geofolia_equipment_id" />
+                            <field name="geofolia_recognition_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

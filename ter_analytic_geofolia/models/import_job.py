@@ -15,7 +15,7 @@ from odoo.exceptions import UserError
 
 class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
     _name = "geofolia.import.job"
-    _description = "Geofolia Import Job"
+    _description = "Geofolia Import"
     _order = "id desc"
 
     name = fields.Char(required=True, default=lambda self: self.env._("New"))
@@ -527,6 +527,20 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             self.env.cr.rollback()
             raise exc from None
 
+    @staticmethod
+    def _parse_date(val):
+        """Parse an ISO datetime string to a date object.
+
+        Accepts 'YYYY-MM-DDThh:mm:ss' or 'YYYY-MM-DD'. Returns False if
+        val is None or unparseable.
+        """
+        if not val or not isinstance(val, str):
+            return False
+        try:
+            return fields.Date.from_string(val[:10])
+        except (ValueError, IndexError):
+            return False
+
     def _safe_scalar_str(self, val):
         """Coerce value to string for product/partner fields. Avoids tuples/lists
         that cause 'dictionary update sequence element #0 has length 1' errors."""
@@ -588,6 +602,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     "code": it.get("Code"),
                     "name": it.get("Name"),
                     "harvest_year": it.get("HarvestYear"),
+                    "sowing_date": self._parse_date(it.get("SowingDate")),
+                    "harvest_date": self._parse_date(it.get("HarvestDate")),
                     "area": it.get("Area"),
                     "city": it.get("City"),
                     "crop_name": it.get("CropName"),
@@ -1011,11 +1027,17 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         self.apply_state = "ready" if has_pending else "done"
 
     def _field_line_resolve_dates(self, line, default_date_range):
-        """Return (date_range, date_start, date_end) for a field line."""
+        """Return (date_range, date_start, date_end) for a field line.
+
+        Priority: SowingDate/HarvestDate from JSON → HarvestYear fallback
+        → default_date_range fallback.
+        """
+        date_start = line.sowing_date or False
+        date_end = line.harvest_date or False
         harvest_year = line.harvest_year
-        date_start = date_end = False
-        if harvest_year:
+        if not date_start and harvest_year:
             date_start = fields.Date.from_string(f"{harvest_year}-01-01")
+        if not date_end and harvest_year:
             date_end = fields.Date.from_string(f"{harvest_year}-12-31")
         date_range = False
         if date_start and date_end:
@@ -1756,16 +1778,38 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
     def _get_or_create_fsm_order_for_activity(self, activity):
         """Return or create fsm.order for this activity.
+
         Stored on activity.fsm_order_id.
-        Location: from first CropZone PlotId (if Fields imported) or company default."""
+        Location: from first CropZone PlotId (if Fields imported)
+        or company default.  Enriches the order with equipment,
+        description (products / harvests / weather) and sets it
+        to the *Completed* stage.
+        """
         if activity.fsm_order_id:
             return activity.fsm_order_id
         location = self._get_fsm_location_for_activity(activity)
         if not location:
             return self.env["fsm.order"]
+        order_vals = self._build_fsm_order_vals(activity, location)
+        order = self.env["fsm.order"].create(order_vals)
+        activity.fsm_order_id = order.id
+        self.env["fsm.activity"].create(
+            {
+                "name": activity.operation_name or self.env._("Geofolia activity"),
+                "fsm_order_id": order.id,
+            }
+        )
+        order.env.add_to_compute(order._fields["order_activity_ids"], order)
+        self._enrich_fsm_order(order, activity)
+        return order
+
+    def _build_fsm_order_vals(self, activity, location):
+        """Build vals dict for fsm.order creation."""
+        op_name = activity.operation_name or self.env._("Geofolia activity")
+        name = self._build_order_name(op_name, activity, location)
         order_vals = {
             "location_id": location.id,
-            "name": activity.operation_name or self.env._("Geofolia activity"),
+            "name": name,
         }
         start_dt = end_dt = None
         if activity.starting_date:
@@ -1788,16 +1832,301 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             order_vals["scheduled_duration"] = delta.total_seconds() / 3600.0
         elif activity.duration_minutes:
             order_vals["scheduled_duration"] = activity.duration_minutes / 60.0
-        order = self.env["fsm.order"].create(order_vals)
-        activity.fsm_order_id = order.id
-        self.env["fsm.activity"].create(
-            {
-                "name": activity.operation_name or self.env._("Geofolia activity"),
-                "fsm_order_id": order.id,
-            }
+        # Actual execution dates (Geofolia activities are "Realizado")
+        self._set_actual_dates(order_vals, start_dt, end_dt, activity)
+        return order_vals
+
+    @staticmethod
+    def _build_order_name(op_name, activity, location):
+        """Build a descriptive order name: 'OPERATION · Location · DD/MM/YYYY'."""
+        parts = [op_name]
+        loc_name = location.display_name or ""
+        if loc_name:
+            parts.append(loc_name)
+        date_str = ""
+        if activity.starting_date:
+            date_str = activity.starting_date.strftime("%d/%m/%Y")
+        elif activity.ending_date:
+            date_str = activity.ending_date.strftime("%d/%m/%Y")
+        if date_str:
+            parts.append(date_str)
+        return " · ".join(parts)
+
+    @staticmethod
+    def _set_actual_dates(order_vals, start_dt, end_dt, activity):
+        """Set date_start / date_end (actual execution) on *order_vals*."""
+        if start_dt:
+            order_vals["date_start"] = start_dt.strftime("%Y-%m-%d %H:%M:%S")
+        actual_end = None
+        if start_dt and activity.duration_minutes:
+            actual_end = start_dt + timedelta(minutes=activity.duration_minutes)
+        elif end_dt:
+            actual_end = end_dt
+        if actual_end:
+            order_vals["date_end"] = actual_end.strftime("%Y-%m-%d %H:%M:%S")
+
+    # -- fsm.order enrichment helpers --------------------------------
+
+    def _enrich_fsm_order(self, order, activity):
+        """Enrich *order* with structured usage lines and completed stage."""
+        raw = activity.raw_json or {}
+        self._link_equipment_to_order(order, raw)
+        self._create_product_usage_lines(order, raw)
+        self._create_equipment_usage_lines(order, raw)
+        self._create_person_usage_lines(order, raw)
+        worked = self._compute_worked_surface(raw)
+        description = self._build_order_description(activity, raw)
+        write_vals = {}
+        if description:
+            write_vals["description"] = description
+        if worked > 0:
+            write_vals["worked_surface"] = worked
+        if write_vals:
+            order.write(write_vals)
+        order.action_complete()
+
+    def _create_product_usage_lines(self, order, raw):
+        """Create fsm.order.product.usage from ProductIds."""
+        products = raw.get("ProductIds") or []
+        if not products:
+            return
+        product_obj = self.env["product.product"]
+        usage_obj = self.env["fsm.order.product.usage"]
+        vals_list = []
+        for seq, prod in enumerate(products, start=10):
+            if not isinstance(prod, dict):
+                continue
+            supply_id = prod.get("SupplyId") or ""
+            name = prod.get("SupplyName") or self.env._("Unknown")
+            odoo_product = product_obj.browse()
+            if supply_id:
+                odoo_product = product_obj.search(
+                    [
+                        (
+                            "geofolia_external_id",
+                            "=",
+                            str(supply_id),
+                        )
+                    ],
+                    limit=1,
+                )
+            vals_list.append(
+                {
+                    "fsm_order_id": order.id,
+                    "sequence": seq,
+                    "product_id": odoo_product.id or False,
+                    "name": self._safe_scalar_str(name) or str(supply_id),
+                    "quantity": prod.get("Quantity") or 0.0,
+                    "uom_name": prod.get("ReferentialUnitSymbol") or "",
+                    "geofolia_supply_id": str(supply_id) if supply_id else False,
+                    "geofolia_recognition_id": str(prod.get("RecognitionId") or "")
+                    or False,
+                }
+            )
+        if vals_list:
+            usage_obj.create(vals_list)
+
+    def _create_equipment_usage_lines(self, order, raw):
+        """Create fsm.order.equipment.usage from ActionEquipments."""
+        equip_items = raw.get("ActionEquipments") or []
+        if not equip_items:
+            return
+        equipment_obj = self.env["fsm.equipment"]
+        usage_obj = self.env["fsm.order.equipment.usage"]
+        vals_list = []
+        for seq, item in enumerate(equip_items, start=10):
+            if not isinstance(item, dict):
+                continue
+            ext_id = item.get("EquipmentId") or ""
+            name = item.get("EquipmentName") or self.env._("Unknown")
+            minutes = item.get("EquipmentTime") or 0.0
+            odoo_equip = equipment_obj.browse()
+            if ext_id:
+                odoo_equip = equipment_obj.search(
+                    [
+                        (
+                            "geofolia_external_id",
+                            "=",
+                            str(ext_id),
+                        )
+                    ],
+                    limit=1,
+                )
+            vals_list.append(
+                {
+                    "fsm_order_id": order.id,
+                    "sequence": seq,
+                    "equipment_id": odoo_equip.id or False,
+                    "name": self._safe_scalar_str(name) or str(ext_id),
+                    "hours": minutes / 60.0,
+                    "geofolia_equipment_id": str(ext_id) if ext_id else False,
+                    "geofolia_recognition_id": str(
+                        item.get("EquipmentRecognitionId") or ""
+                    )
+                    or False,
+                }
+            )
+        if vals_list:
+            usage_obj.create(vals_list)
+
+    def _create_person_usage_lines(self, order, raw):
+        """Create fsm.order.person.usage from ActionEmployees."""
+        emp_items = raw.get("ActionEmployees") or []
+        if not emp_items:
+            return
+        person_obj = self.env["fsm.person"]
+        usage_obj = self.env["fsm.order.person.usage"]
+        vals_list = []
+        for seq, item in enumerate(emp_items, start=10):
+            if not isinstance(item, dict):
+                continue
+            ext_id = item.get("EmployeeId") or ""
+            first = item.get("EmployeeFirstName") or ""
+            last = item.get("EmployeeName") or ""
+            name = ("%s %s" % (first, last)).strip()
+            if not name:
+                name = self.env._("Unknown")
+            minutes = item.get("EmployeeTime") or 0.0
+            odoo_person = person_obj.browse()
+            if ext_id:
+                odoo_person = person_obj.search(
+                    [("geofolia_external_id", "=", str(ext_id))],
+                    limit=1,
+                )
+            vals_list.append(
+                {
+                    "fsm_order_id": order.id,
+                    "sequence": seq,
+                    "person_id": odoo_person.id or False,
+                    "name": name,
+                    "hours": minutes / 60.0,
+                    "geofolia_employee_id": (str(ext_id) if ext_id else False),
+                    "geofolia_recognition_id": str(
+                        item.get("EmployeeRecognitionId") or ""
+                    )
+                    or False,
+                }
+            )
+        if vals_list:
+            usage_obj.create(vals_list)
+
+    @staticmethod
+    def _compute_worked_surface(raw):
+        """Return total worked surface in m² from CropZoneIds."""
+        zones = raw.get("CropZoneIds") or []
+        return sum((z.get("WorkedSurface") or 0) for z in zones if isinstance(z, dict))
+
+    def _link_equipment_to_order(self, order, raw):
+        """Link fsm.equipment from ActionEquipments to the order."""
+        equipment_obj = self.env["fsm.equipment"]
+        equip_items = raw.get("ActionEquipments") or []
+        seen_ids = set()
+        link_cmds = []
+        for item in equip_items:
+            if not isinstance(item, dict):
+                continue
+            ext_id = item.get("EquipmentId")
+            if not ext_id or ext_id in seen_ids:
+                continue
+            seen_ids.add(ext_id)
+            equip = equipment_obj.search(
+                [("geofolia_external_id", "=", str(ext_id))],
+                limit=1,
+            )
+            if equip:
+                link_cmds.append((4, equip.id))
+        if link_cmds:
+            order.sudo().write({"equipment_ids": link_cmds})
+
+    def _build_order_description(self, activity, raw):
+        """Build HTML description with products, harvests and weather."""
+        parts = []
+        if activity.comment:
+            comment = str(activity.comment).strip()
+            if comment:
+                parts.append("<b>%s</b>: %s" % (self.env._("Geofolia Ref."), comment))
+        cat = activity.operation_category
+        if cat:
+            parts.append("<b>%s</b>: %s" % (self.env._("Category"), cat))
+        self._append_products_description(parts, raw)
+        self._append_harvests_description(parts, raw)
+        self._append_weather_description(parts, raw)
+        self._append_cropzones_description(parts, raw)
+        if not parts:
+            return ""
+        return "<br/>".join(parts)
+
+    def _append_products_description(self, parts, raw):
+        """Append product lines to *parts*."""
+        products = raw.get("ProductIds") or []
+        if not products:
+            return
+        lines = []
+        for prod in products:
+            if not isinstance(prod, dict):
+                continue
+            name = prod.get("SupplyName") or self.env._("Unknown")
+            qty = prod.get("Quantity") or 0
+            unit = prod.get("ReferentialUnitSymbol") or ""
+            lines.append("&nbsp;&nbsp;• %s: %s %s" % (name, qty, unit))
+        if lines:
+            parts.append(
+                "<b>%s</b><br/>%s" % (self.env._("Products"), "<br/>".join(lines))
+            )
+
+    def _append_harvests_description(self, parts, raw):
+        """Append harvest lines to *parts*."""
+        harvests = raw.get("ActionHarvests") or []
+        if not harvests:
+            return
+        lines = []
+        for harv in harvests:
+            if not isinstance(harv, dict):
+                continue
+            name = harv.get("HarvestGoodName") or self.env._("Unknown")
+            qty = harv.get("Quantity") or 0
+            unit = harv.get("HarvestGoodsUnitSymbol") or ""
+            lines.append("&nbsp;&nbsp;• %s: %s %s" % (name, qty, unit))
+        if lines:
+            parts.append(
+                "<b>%s</b><br/>%s" % (self.env._("Harvests"), "<br/>".join(lines))
+            )
+
+    def _append_weather_description(self, parts, raw):
+        """Append weather info to *parts*."""
+        weather_items = []
+        if raw.get("Temperature"):
+            weather_items.append(
+                "%s: %s°C" % (self.env._("Temperature"), raw["Temperature"])
+            )
+        if raw.get("Hygrometry"):
+            weather_items.append(
+                "%s: %s%%" % (self.env._("Humidity"), raw["Hygrometry"])
+            )
+        if raw.get("WindSpeed"):
+            direction = raw.get("WindDirection") or ""
+            weather_items.append(
+                "%s: %s %s" % (self.env._("Wind"), raw["WindSpeed"], direction)
+            )
+        if raw.get("Weather"):
+            weather_items.append(raw["Weather"])
+        if weather_items:
+            parts.append(
+                "<b>%s</b>: %s" % (self.env._("Weather"), ", ".join(weather_items))
+            )
+
+    def _append_cropzones_description(self, parts, raw):
+        """Append worked surface info to *parts*."""
+        zones = raw.get("CropZoneIds") or []
+        if not zones:
+            return
+        total_ha = sum(
+            (z.get("WorkedSurface") or 0) for z in zones if isinstance(z, dict)
         )
-        order.invalidate_recordset(["order_activity_ids"])
-        return order
+        if total_ha > 0:
+            parts.append(
+                "<b>%s</b>: %.2f m²" % (self.env._("Worked surface"), total_ha)
+            )
 
     def _ensure_location_persons(self, location_ids, person_id):
         """Link fsm.person to fsm.location via fsm.location.person."""
@@ -1922,7 +2251,12 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     return
                 fsm_order = self._get_or_create_fsm_order_for_activity(activity)
                 if fsm_order:
-                    fsm_order.sudo().write({"person_id": person.id})
+                    fsm_order.sudo().write(
+                        {
+                            "person_id": person.id,
+                            "person_ids": [(4, person.id)],
+                        }
+                    )
                     if has_fsm_order:
                         vals["fsm_order_id"] = fsm_order.id
                         if (

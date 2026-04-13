@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Extend fsm.order form: add usage pages and worked_surface -->
+    <record
+        id="view_fsm_order_form_inherit_geofolia"
+        model="ir.ui.view"
+    >
+        <field name="name">fsm.order.form.geofolia</field>
+        <field name="model">fsm.order</field>
+        <field
+            name="inherit_id"
+            ref="fieldservice.fsm_order_form"
+        />
+        <field name="arch" type="xml">
+            <!-- Add worked surface after the scheduled_date_end -->
+            <field name="scheduled_date_end" position="after">
+                <field name="worked_surface" />
+            </field>
+
+            <!-- Add product / equipment usage notebook pages -->
+            <xpath
+                expr="//page[@name='customer_signature']"
+                position="before"
+            >
+                <page
+                    string="Products Used"
+                    name="product_usage_page"
+                >
+                    <field
+                        name="product_usage_ids"
+                        context="{'default_fsm_order_id': id}"
+                    />
+                </page>
+                <page
+                    string="Equipment Usage"
+                    name="equipment_usage_page"
+                >
+                    <field
+                        name="equipment_usage_ids"
+                        context="{'default_fsm_order_id': id}"
+                    />
+                </page>
+                <page
+                    string="Workers"
+                    name="person_usage_page"
+                >
+                    <field
+                        name="person_usage_ids"
+                        context="{'default_fsm_order_id': id}"
+                    />
+                </page>
+            </xpath>
+
+            <!-- Add stat buttons for counts -->
+            <div name="button_box" position="inside">
+                <button
+                    name="action_view_product_usage"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-flask"
+                    invisible="product_usage_count == 0"
+                >
+                    <field
+                        name="product_usage_count"
+                        widget="statinfo"
+                        string="Products"
+                    />
+                </button>
+                <button
+                    name="action_view_equipment_usage"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-truck"
+                    invisible="equipment_usage_count == 0"
+                >
+                    <field
+                        name="equipment_usage_count"
+                        widget="statinfo"
+                        string="Equipments"
+                    />
+                </button>
+                <button
+                    name="action_view_person_usage"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-users"
+                    invisible="person_usage_count == 0"
+                >
+                    <field
+                        name="person_usage_count"
+                        widget="statinfo"
+                        string="Workers"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>

@@ -32,7 +32,8 @@
                 <field name="sync_state"/>
                 <field name="sync_message" optional="show"/>
                 <field name="job_id"/>
-                <field name="activity_line_id" column_invisible="1"/>
+                <field name="activity_line_id"/>
+                <field name="fsm_order_id" optional="show"/>
                 <field name="employee_name"/>
                 <field name="employee_id_external"/>
                 <field name="employee_time"/>
@@ -53,6 +54,7 @@
                         <group>
                             <field name="job_id" readonly="1"/>
                             <field name="activity_line_id" readonly="1"/>
+                            <field name="fsm_order_id" readonly="1"/>
                             <field name="sync_state"/>
                             <field name="sync_message"/>
                             <field name="employee_name"/>

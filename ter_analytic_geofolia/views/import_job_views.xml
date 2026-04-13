@@ -7,15 +7,16 @@
               groups="group_geofolia_import"/>
 
     <record id="action_geofolia_import_job" model="ir.actions.act_window">
-        <field name="name">Import Jobs</field>
+        <field name="name">Imports</field>
         <field name="res_model">geofolia.import.job</field>
         <field name="view_mode">kanban,list,form</field>
     </record>
 
     <menuitem id="menu_geofolia_import_jobs"
-              name="Jobs"
+              name="Imports"
               parent="menu_geofolia_import"
               action="action_geofolia_import_job"
+              sequence="10"
               groups="group_geofolia_import"/>
 
     <record id="view_geofolia_import_job_list" model="ir.ui.view">
@@ -343,5 +344,6 @@
               name="New Import"
               parent="menu_geofolia_import"
               action="action_geofolia_import_wizard_menu"
+              sequence="5"
               groups="group_geofolia_import"/>
 </odoo>

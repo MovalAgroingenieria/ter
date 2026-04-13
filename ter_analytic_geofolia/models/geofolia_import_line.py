@@ -27,6 +27,8 @@ class GeofoliaImportLine(models.Model):
     raw_json_text = fields.Text()
 
     harvest_year = fields.Integer()
+    sowing_date = fields.Date(help="SowingDate from Geofolia JSON.")
+    harvest_date = fields.Date(help="HarvestDate from Geofolia JSON.")
     area = fields.Float()
     city = fields.Char()
     crop_name = fields.Char()

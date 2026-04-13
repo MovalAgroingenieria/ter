@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Tree view -->
+    <record id="fsm_order_product_usage_tree" model="ir.ui.view">
+        <field name="name">fsm.order.product.usage.tree</field>
+        <field name="model">fsm.order.product.usage</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="product_id" optional="show" />
+                <field name="name" />
+                <field name="quantity" />
+                <field name="uom_name" />
+                <field name="geofolia_supply_id" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="fsm_order_product_usage_form" model="ir.ui.view">
+        <field name="name">fsm.order.product.usage.form</field>
+        <field name="model">fsm.order.product.usage</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="fsm_order_id" />
+                            <field name="product_id" />
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="quantity" />
+                            <field name="uom_name" />
+                            <field name="geofolia_supply_id" />
+                            <field name="geofolia_recognition_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
