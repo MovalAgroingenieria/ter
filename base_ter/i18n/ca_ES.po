@@ -35,7 +35,7 @@ msgstr "'Parcel·la - %s - %s' % (object.name, object.partner_id.name or '')"
 #. module: base_ter
 #: model:ir.actions.report,print_report_name:base_ter.action_parcel_partner_report
 msgid "'Parcels Report - %s' % (object.name or '')"
-msgstr ""
+msgstr "'Informe de parcel·les - %s' % (object.name or '')"
 
 #. module: base_ter
 #: model:ir.actions.report,print_report_name:base_ter.action_property_partner_report
@@ -1080,7 +1080,7 @@ msgstr "Tipus d'intervalls de dates Ter"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
 msgid "Dates"
-msgstr ""
+msgstr "Dates"
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_parcel_reset_aerial_image_delete
@@ -1229,7 +1229,7 @@ msgstr "Error en obtenir la imatge aèria (és correcta la URL del WMS?)"
 #. odoo-python
 #: code:addons/base_ter/wizards/wizard_import_kml.py:0
 msgid "Errors: %(errors)s"
-msgstr ""
+msgstr "Errors: %(errors)s"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__farm_property_id
@@ -1433,7 +1433,7 @@ msgstr "Visor GIS: nom d'usuari pel mode tècnic"
 #: model:ir.ui.menu,name:base_ter.menu_configuration_general
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__geom_geojson
@@ -2129,7 +2129,7 @@ msgstr "Nota"
 #: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_form_view
 #: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__message_needaction_counter
@@ -3466,7 +3466,7 @@ msgstr "p. ex. PARCEL- o FINCA-"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
 msgid "e.g. Wheat"
-msgstr ""
+msgstr "p. ex. Blat"
 
 #. module: base_ter
 #. odoo-python

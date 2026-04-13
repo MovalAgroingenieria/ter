@@ -122,7 +122,7 @@ msgstr ""
 #. module: base_ter_invoicing
 #. odoo-python
 #: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-msgid "Graphic area"
+msgid "Assigned area"
 msgstr ""
 
 #. module: base_ter_invoicing

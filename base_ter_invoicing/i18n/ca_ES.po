@@ -122,8 +122,8 @@ msgstr "Ref. cadastral"
 #. module: base_ter_invoicing
 #. odoo-python
 #: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-msgid "Graphic area"
-msgstr "Àrea Gràfica"
+msgid "Assigned area"
+msgstr "Àrea assignada"
 
 #. module: base_ter_invoicing
 #. odoo-python

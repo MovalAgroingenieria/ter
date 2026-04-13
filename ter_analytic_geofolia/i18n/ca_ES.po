@@ -681,6 +681,8 @@ msgid ""
 "Existing location but cannot create ter.use_unit (parcel/date range "
 "missing)."
 msgstr ""
+"Ubicació existent però no es pot crear ter.use_unit (falta "
+"parcel·la/període)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_line__external_id
@@ -1488,6 +1490,8 @@ msgid ""
 "No date range. Set harvest year in data or configure Geofolia default date "
 "range."
 msgstr ""
+"Sense període. Establiu l'any de collita a les dades o configureu el "
+"període predeterminat de Geofolia."
 
 #. module: ter_analytic_geofolia
 #. odoo-python

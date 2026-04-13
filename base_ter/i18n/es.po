@@ -1436,7 +1436,7 @@ msgstr "Visor GIS: nombre de usuario para el modo técnico"
 #: model:ir.ui.menu,name:base_ter.menu_configuration_general
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__geom_geojson
@@ -2253,7 +2253,7 @@ msgstr "Fuera de Rango"
 #. module: base_ter
 #: model:ter.profile,alphanum_code:base_ter.ter_profile_01
 msgid "Owner"
-msgstr ""
+msgstr "Propietario"
 
 #. module: base_ter
 #. odoo-python
@@ -3483,7 +3483,7 @@ msgstr "p. ej., PARCELA o FINCA-"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
 msgid "e.g. Wheat"
-msgstr ""
+msgstr "p. ej. Trigo"
 
 #. module: base_ter
 #. odoo-python
