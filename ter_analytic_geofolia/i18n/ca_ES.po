@@ -246,13 +246,17 @@ msgstr "Cancel·lar"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/wizards/import_wizard.py:0
 msgid "Cannot autodetect JSON type. Choose it manually."
-msgstr "No es pot detectar automàticament el tipus de JSON. Seleccioneu-lo manualment."
+msgstr ""
+"No es pot detectar automàticament el tipus de JSON. Seleccioneu-lo "
+"manualment."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Cannot create location: parcel/date range required for ter.use_unit."
-msgstr "No es pot crear ubicació: es requereix parcel·la/rang de dates per a ter.use_unit."
+msgstr ""
+"No es pot crear ubicació: es requereix parcel·la/rang de dates per a "
+"ter.use_unit."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -576,7 +580,7 @@ msgstr "Data fi"
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
 msgid "Equip"
-msgstr "Equip"
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
@@ -655,7 +659,7 @@ msgstr "Equips"
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_partner_line_search
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_product_line_search
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_line_list
@@ -672,7 +676,7 @@ msgstr "Errores"
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_job_form
 msgid "Errors"
-msgstr "Errors"
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -905,13 +909,13 @@ msgstr "Complet (tots els blocs)"
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_partner_form_view_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_ter_unit_form_geofolia
 msgid "Geofolia"
-msgstr "Geofolia"
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/import_job.py:0
 msgid "Geofolia (%(label)s)"
-msgstr "Geofolia (%(label)s)"
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_ter_use_unit__geofolia_city
@@ -1212,7 +1216,7 @@ msgstr "Humitat"
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_product_line__id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_wizard__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__job_id
@@ -1304,7 +1308,7 @@ msgstr "Contingut de fitxer no vàlid: %(error)s"
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_product_line_form
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.view_geofolia_import_product_line_list
 msgid "JSON"
-msgstr "JSON"
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -1490,8 +1494,8 @@ msgid ""
 "No date range. Set harvest year in data or configure Geofolia default date "
 "range."
 msgstr ""
-"Sense període. Establiu l'any de collita a les dades o configureu el "
-"període predeterminat de Geofolia."
+"Sense període. Establiu l'any de collita a les dades o configureu el període"
+" predeterminat de Geofolia."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -1946,7 +1950,8 @@ msgstr "Nº total"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_order__worked_surface
 msgid "Total worked surface in m² (from Geofolia CropZones)."
-msgstr "Superfície total treballada en m² (de les zones de cultiu de Geofolia)."
+msgstr ""
+"Superfície total treballada en m² (de les zones de cultiu de Geofolia)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_fsm_order_product_usage__uom_name

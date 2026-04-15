@@ -37,6 +37,18 @@ msgid "Area Ownership"
 msgstr "Área (propiedad)"
 
 #. module: base_ter_invoicing
+#. odoo-python
+#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
+msgid "Area in property"
+msgstr "Área en Propiedad"
+
+#. module: base_ter_invoicing
+#. odoo-python
+#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
+msgid "Assigned area"
+msgstr "Área asignada"
+
+#. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__billing_partner_id
 msgid "Billing partner reference"
 msgstr "Referencia al partner de facturación"
@@ -49,7 +61,8 @@ msgstr "Nombre del campo cantidad"
 #. module: base_ter_invoicing
 #: model:ir.model.fields,help:base_ter_invoicing.field_ter_parcel_partnerlink__partner_is_company
 msgid "Check if the contact is a company, otherwise it is a person"
-msgstr "Indica si el contacto es una empresa, en caso contrario es una persona"
+msgstr ""
+"Indica si el contacto es una empresa, en caso contrario es una persona"
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel__currency_id
@@ -120,18 +133,6 @@ msgid "Official code"
 msgstr "Ref. catastral"
 
 #. module: base_ter_invoicing
-#. odoo-python
-#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-msgid "Assigned area"
-msgstr "Área asignada"
-
-#. module: base_ter_invoicing
-#. odoo-python
-#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-msgid "Area in property"
-msgstr "Área en Propiedad"
-
-#. module: base_ter_invoicing
 #: model:ir.model,name:base_ter_invoicing.model_ter_parcel
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_account_move_line__parcel_id
 #: model_terms:ir.ui.view,arch_db:base_ter_invoicing.account_move_line_view_search
@@ -199,8 +200,8 @@ msgid ""
 "billable_item.profile_id.alphanum_code }}, {{ "
 "billable_item.percentage_overhead }}% overhead."
 msgstr ""
-"{% if billable_item.property_name %}Finca: {{ billable_item.property_name }}"
-". {% endif %}Parcela: {{ billable_item.parcel_id.alphanum_code }} ({{ "
+"{% if billable_item.property_name %}Finca: {{ billable_item.property_name "
+"}}. {% endif %}Parcela: {{ billable_item.parcel_id.alphanum_code }} ({{ "
 "billable_item.parcel_id.area_official }} {{ "
 "billable_item.parcel_id.area_unit_name }}). {{ "
 "billable_item.profile_id.alphanum_code }}, {{ "
