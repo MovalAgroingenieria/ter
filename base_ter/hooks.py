@@ -127,6 +127,93 @@ def _ensure_postgis(env: api.Environment) -> None:
         )
 
 
+def _column_exists(
+    env: api.Environment, schema: str, table_name: str, column_name: str
+) -> bool:
+    env.cr.execute(
+        """
+        SELECT 1 FROM information_schema.columns
+        WHERE table_schema = %s AND table_name = %s AND column_name = %s
+        """,
+        (schema, table_name, column_name),
+    )
+    return bool(env.cr.fetchone())
+
+
+def _geometry_udt_columns(
+    env: api.Environment, schema: str, table_name: str
+) -> list[str]:
+    env.cr.execute(
+        """
+        SELECT column_name FROM information_schema.columns
+        WHERE table_schema = %s AND table_name = %s AND udt_name = %s
+        ORDER BY ordinal_position
+        """,
+        (schema, table_name, "geometry"),
+    )
+    return [row[0] for row in env.cr.fetchall()]
+
+
+def _ensure_gis_table_geom_column(env: api.Environment, table_name: str) -> None:
+    """Align legacy / restored GIS tables with the expected ``geom`` column.
+
+    Restored databases (e.g. v16) may already have ``ter_gis_parcel`` without
+    ``geom`` (older layout) or with PostGIS defaults like ``the_geom``.
+    ``CREATE TABLE IF NOT EXISTS`` does not add missing columns.
+    """
+    if not _table_exists(env, GIS_SCHEMA, table_name):
+        return
+    if _column_exists(env, GIS_SCHEMA, table_name, "geom"):
+        return
+    geom_cols = _geometry_udt_columns(env, GIS_SCHEMA, table_name)
+    legacy_priority = ("the_geom", "wkb_geometry", "shape")
+    for legacy in legacy_priority:
+        if legacy in geom_cols:
+            env.cr.execute(
+                sql.SQL("ALTER TABLE {}.{} RENAME COLUMN {} TO geom").format(
+                    sql.Identifier(GIS_SCHEMA),
+                    sql.Identifier(table_name),
+                    sql.Identifier(legacy),
+                )
+            )
+            return
+    if len(geom_cols) == 1:
+        only = geom_cols[0]
+        env.cr.execute(
+            sql.SQL("ALTER TABLE {}.{} RENAME COLUMN {} TO geom").format(
+                sql.Identifier(GIS_SCHEMA),
+                sql.Identifier(table_name),
+                sql.Identifier(only),
+            )
+        )
+        return
+    if len(geom_cols) > 1:
+        _logger.warning(
+            "base_ter: table %s.%s has multiple geometry columns %s; "
+            "adding empty geom column (merge geometries manually if needed)",
+            GIS_SCHEMA,
+            table_name,
+            geom_cols,
+        )
+    env.cr.execute(
+        sql.SQL(
+            "ALTER TABLE {}.{} ADD COLUMN IF NOT EXISTS geom geometry(MultiPolygon, 25830)"
+        ).format(sql.Identifier(GIS_SCHEMA), sql.Identifier(table_name))
+    )
+
+
+def _ensure_gis_geom_gist_index(env: api.Environment, table_name: str) -> None:
+    if not _column_exists(env, GIS_SCHEMA, table_name, "geom"):
+        return
+    env.cr.execute(
+        sql.SQL("CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)").format(
+            sql.Identifier(f"{table_name}_geom_gist"),
+            sql.Identifier(GIS_SCHEMA),
+            sql.Identifier(table_name),
+        )
+    )
+
+
 def _create_gis_parcel_and_property_tables(env: api.Environment) -> None:
     """Create ter_gis_parcel and ter_gis_property tables (no FKs to Odoo tables).
     Used in pre_init_hook so the view can be created in model init().
@@ -144,13 +231,8 @@ def _create_gis_parcel_and_property_tables(env: api.Environment) -> None:
             """
         ).format(sql.Identifier(GIS_SCHEMA), sql.Identifier(PARCEL_TABLE))
     )
-    env.cr.execute(
-        sql.SQL("CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)").format(
-            sql.Identifier(f"{PARCEL_TABLE}_geom_gist"),
-            sql.Identifier(GIS_SCHEMA),
-            sql.Identifier(PARCEL_TABLE),
-        )
-    )
+    _ensure_gis_table_geom_column(env, PARCEL_TABLE)
+    _ensure_gis_geom_gist_index(env, PARCEL_TABLE)
     env.cr.execute(
         sql.SQL(
             """
@@ -168,13 +250,8 @@ def _create_gis_parcel_and_property_tables(env: api.Environment) -> None:
             sql.Identifier(f"{PROPERTY_TABLE}_pkey"),
         )
     )
-    env.cr.execute(
-        sql.SQL("CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)").format(
-            sql.Identifier(f"{PROPERTY_TABLE}_geom_gist"),
-            sql.Identifier(GIS_SCHEMA),
-            sql.Identifier(PROPERTY_TABLE),
-        )
-    )
+    _ensure_gis_table_geom_column(env, PROPERTY_TABLE)
+    _ensure_gis_geom_gist_index(env, PROPERTY_TABLE)
 
 
 def _create_gis_structures(env: api.Environment) -> None:
@@ -192,13 +269,8 @@ def _create_gis_structures(env: api.Environment) -> None:
             """
         ).format(sql.Identifier(GIS_SCHEMA), sql.Identifier(PARCEL_TABLE))
     )
-    env.cr.execute(
-        sql.SQL("CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)").format(
-            sql.Identifier(f"{PARCEL_TABLE}_geom_gist"),
-            sql.Identifier(GIS_SCHEMA),
-            sql.Identifier(PARCEL_TABLE),
-        )
-    )
+    _ensure_gis_table_geom_column(env, PARCEL_TABLE)
+    _ensure_gis_geom_gist_index(env, PARCEL_TABLE)
 
     env.cr.execute(
         sql.SQL(
@@ -217,13 +289,8 @@ def _create_gis_structures(env: api.Environment) -> None:
             sql.Identifier(f"{PROPERTY_TABLE}_pkey"),
         )
     )
-    env.cr.execute(
-        sql.SQL("CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)").format(
-            sql.Identifier(f"{PROPERTY_TABLE}_geom_gist"),
-            sql.Identifier(GIS_SCHEMA),
-            sql.Identifier(PROPERTY_TABLE),
-        )
-    )
+    _ensure_gis_table_geom_column(env, PROPERTY_TABLE)
+    _ensure_gis_geom_gist_index(env, PROPERTY_TABLE)
 
     env.cr.execute(
         sql.SQL(
@@ -238,13 +305,8 @@ def _create_gis_structures(env: api.Environment) -> None:
             """
         ).format(sql.Identifier(GIS_SCHEMA), sql.Identifier(UNIT_TABLE))
     )
-    env.cr.execute(
-        sql.SQL("CREATE INDEX IF NOT EXISTS {} ON {}.{} USING gist (geom)").format(
-            sql.Identifier(f"{UNIT_TABLE}_geom_gist"),
-            sql.Identifier(GIS_SCHEMA),
-            sql.Identifier(UNIT_TABLE),
-        )
-    )
+    _ensure_gis_table_geom_column(env, UNIT_TABLE)
+    _ensure_gis_geom_gist_index(env, UNIT_TABLE)
 
     env.cr.execute(
         sql.SQL(

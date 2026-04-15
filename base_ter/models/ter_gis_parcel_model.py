@@ -1,10 +1,14 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
+import logging
+
 from odoo import api, fields, models
 from psycopg2 import sql
 
 from .. import hooks as base_ter_hooks
+
+_logger = logging.getLogger(__name__)
 
 
 class TerGisParcelModel(models.Model):
@@ -19,6 +23,17 @@ class TerGisParcelModel(models.Model):
         if not base_ter_hooks._table_exists(self.env, "public", "ter_gis_parcel"):
             return
         if not base_ter_hooks._table_exists(self.env, "public", "ter_parcel"):
+            return
+        base_ter_hooks._ensure_gis_table_geom_column(
+            self.env, base_ter_hooks.PARCEL_TABLE
+        )
+        if not base_ter_hooks._column_exists(
+            self.env, "public", "ter_gis_parcel", "geom"
+        ):
+            _logger.warning(
+                "base_ter: skip ter_gis_parcel_model view; ter_gis_parcel has no geom "
+                "(restore/migration: fix table or run module update after PostGIS)."
+            )
             return
         self.env.cr.execute(
             sql.SQL(
