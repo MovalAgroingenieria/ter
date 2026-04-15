@@ -37,6 +37,18 @@ msgid "Area Ownership"
 msgstr ""
 
 #. module: base_ter_invoicing
+#. odoo-python
+#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
+msgid "Area in property"
+msgstr ""
+
+#. module: base_ter_invoicing
+#. odoo-python
+#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
+msgid "Assigned area"
+msgstr ""
+
+#. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__billing_partner_id
 msgid "Billing partner reference"
 msgstr ""
@@ -117,18 +129,6 @@ msgstr ""
 #. module: base_ter_invoicing
 #: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_04
 msgid "Official code"
-msgstr ""
-
-#. module: base_ter_invoicing
-#. odoo-python
-#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-msgid "Assigned area"
-msgstr ""
-
-#. module: base_ter_invoicing
-#. odoo-python
-#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
-msgid "Area in property"
 msgstr ""
 
 #. module: base_ter_invoicing

@@ -25,7 +25,10 @@ class TerUnit(models.Model):
 
     name = fields.Char(
         copy=False,
-        help="Auto-generated as {parcel_code}-{start_YY}/{end_YY}-{seq} when left empty.",
+        help=(
+            "Auto-generated as {parcel_code}-{start_YY}/{end_YY}-{seq} "
+            "when left empty."
+        ),
     )
     geom_ewkt = fields.Text(
         string="Geometry (EWKT)",
@@ -350,7 +353,7 @@ class TerUnit(models.Model):
         return f"{parcel_code}-{start_yy}/{end_yy}-{seq:02d}"
 
     @api.model
-    def _get_next_ter_unit_name(self, vals, company=None):
+    def _get_next_ter_unit_name(self, vals, _company=None):
         parcel_code = ""
         parcel_id = vals.get("parcel_id")
         if parcel_id:
