@@ -247,7 +247,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "<span class=\"oe_inline\">ha</span>"
-msgstr "<span class=\"oe_inline\">ja</span>"
+msgstr "<span class=\"oe_inline\">ha</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
@@ -822,7 +822,7 @@ msgstr "Censo"
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.action_set_parcel_code
 msgid "Change parcel code"
-msgstr "Modificar el código del paquete"
+msgstr "Modificar el código de la parcela"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
@@ -1289,7 +1289,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Force parcel manager to be property owner"
-msgstr "Obligar al gestor de paquetería a ser el propietario del inmueble"
+msgstr "Obligar al gestor de la parcela a ser el propietario del inmueble"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_company__same_parcelmanager_propertyowner
@@ -1819,7 +1819,7 @@ msgstr "Es obligatorio indicar el contacto principal del envío (solo uno)."
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 msgid "It is mandatory to enter the parcel manager."
-msgstr "Es obligatorio acceder al gestor de paquetes."
+msgstr "Es obligatorio acceder al gestor de la parcela."
 
 #. module: base_ter
 #. odoo-python
@@ -2985,7 +2985,7 @@ msgstr "Unidad de Uso Territorial"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Ter-unit sequence"
-msgstr "Secuencia de tres unidades"
+msgstr "Secuencia de unidad territorial"
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_use_unit_cron_recompute_validity_state_ir_actions_server
@@ -3070,7 +3070,7 @@ msgstr ""
 #: code:addons/base_ter/models/ter_parcel.py:0
 msgid "The main contact exists, but the contact list of the parcel is empty."
 msgstr ""
-"El contacto principal existe, pero la lista de contactos del paquete está "
+"El contacto principal existe, pero la lista de contactos de la parcela está "
 "vacía."
 
 #. module: base_ter
@@ -3457,7 +3457,7 @@ msgstr "No se pueden crear jerarquías recursivas (bucles)."
 #: code:addons/base_ter/wizards/wizard_set_partner_code.py:0
 msgid "You cannot reset the code because the partner has parcels."
 msgstr ""
-"No puede restablecer el código porque el socio tiene paquetes pendientes."
+"No puede restablecer el código porque el socio tiene parcelas."
 
 #. module: base_ter
 #. odoo-python

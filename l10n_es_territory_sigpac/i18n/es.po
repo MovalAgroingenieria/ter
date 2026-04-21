@@ -293,7 +293,7 @@ msgstr "Compañías"
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
 msgid "Default irrigation model type used in SIGPAC views (company-specific)."
 msgstr ""
-"Tipo de modelo de irrigación predeterminado utilizado en las vistas SIGPAC "
+"Tipo de modelo de riego predeterminado utilizado en las vistas SIGPAC "
 "(específico de la empresa)."
 
 #. module: l10n_es_territory_sigpac
@@ -482,12 +482,12 @@ msgstr "Coef. Irrig. (0-100)"
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_res_config_settings__irrigation_model_type
 #: model:ir.model.fields,field_description:l10n_es_territory_sigpac.field_ter_parcel_sigpaclink__irrigation_model_type
 msgid "Irrigation Model Type"
-msgstr "Tipo de irrigación (parámetro)"
+msgstr "Tipo de riego (parámetro)"
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.res_config_settings_view_form
 msgid "Irrigation model type"
-msgstr "Tipo de modelo de irrigación"
+msgstr "Tipo de modelo de riego"
 
 #. module: l10n_es_territory_sigpac
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory_sigpac.ter_parcel_sigpac_report_document
