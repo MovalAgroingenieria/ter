@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import exceptions
+from odoo.tools import drop_view_if_exists
 
 DEF_INT_PERC = 5.0
 
@@ -12,17 +13,8 @@ def _table_exists(cr, table_name):
     return bool(row and row[0])
 
 
-def pre_init_hook(env):
-
-    if not _table_exists(env.cr, "public.ter_gis_parcel"):
-        raise exceptions.MissingError(
-            env._(
-                "ATTENTION: it is not possible to install this module, because "
-                'the table "ter_gis_parcel" does not exist (the parcels do not '
-                "have GIS links)."
-            )
-        )
-
+def _sql_epsg_for_geom(env):
+    """EPSG for POSTGIS.GEOMETRY(Polygon, srid); read from config when present."""
     epsg = 25830
     env.cr.execute(
         """
@@ -38,8 +30,34 @@ def pre_init_hook(env):
             raw_epsg = raw_epsg[1:]
         if raw_epsg.isdigit():
             epsg = int(raw_epsg)
+    return epsg
 
-    env.cr.execute(
+
+def ensure_l10n_es_territory_sigpac_schema(env):
+    """Build sequence, table, and materialized views. Idempotent: safe to run from
+    pre_init_hook (first install) and from ter.sigpac.init() (install and -u).
+
+    Odoo's pre_init runs only on first install, not on module update; without
+    init(), the backing relations never appear after -u. Using public search_path
+    so drop_view_if_exists / pg matviews and Odoo's check_tables_exist agree.
+    """
+    cr = env.cr
+    if getattr(cr, "_l10n_es_territory_sigpac_schema_ensured", None):
+        return
+    cr.execute("SET LOCAL search_path TO public, pg_temp")
+
+    if not _table_exists(cr, "public.ter_gis_parcel"):
+        raise exceptions.MissingError(
+            env._(
+                "ATTENTION: it is not possible to install this module, because "
+                'the table "ter_gis_parcel" does not exist (the parcels do not '
+                "have GIS links)."
+            )
+        )
+
+    epsg = _sql_epsg_for_geom(env)
+
+    cr.execute(
         """
         CREATE SEQUENCE IF NOT EXISTS public.ter_gis_sigpac_gid_seq
             INCREMENT 1
@@ -50,7 +68,7 @@ def pre_init_hook(env):
         """
     )
 
-    env.cr.execute(
+    cr.execute(
         """
         CREATE TABLE IF NOT EXISTS public.ter_gis_sigpac(
             gid INTEGER NOT NULL DEFAULT NEXTVAL('ter_gis_sigpac_gid_seq'::regclass),
@@ -77,16 +95,20 @@ def pre_init_hook(env):
         (epsg,),
     )
 
-    env.cr.execute(
+    cr.execute(
         """
         CREATE INDEX IF NOT EXISTS ter_gis_sigpac_idx
         ON public.ter_gis_sigpac USING gist (geom)
         """
     )
 
-    env.cr.execute(
+    # Dependent MV first, then base MV (same order as uninstall & deps).
+    drop_view_if_exists(cr, "ter_parcel_sigpaclink")
+    drop_view_if_exists(cr, "ter_sigpac")
+
+    cr.execute(
         """
-        CREATE MATERIALIZED VIEW IF NOT EXISTS ter_sigpac AS
+        CREATE MATERIALIZED VIEW public.ter_sigpac AS
         (
             SELECT row_number() OVER () AS id,
                 TO_CHAR(provincia, 'fm00') || '-' ||
@@ -105,7 +127,7 @@ def pre_init_hook(env):
                 uso_sigpac,
                 COALESCE(incidencia, '') AS incidencia,
                 COALESCE(region, '') AS region
-            FROM ter_gis_sigpac
+            FROM public.ter_gis_sigpac
             WHERE uso_sigpac IN ('AG', 'CA', 'CF', 'CI', 'CS', 'CV', 'ED',
                                 'EP', 'FF', 'FL', 'FO', 'FS', 'FV', 'FY', 'IM',
                                 'IV','MT', 'OC',
@@ -115,22 +137,22 @@ def pre_init_hook(env):
         """
     )
 
-    env.cr.execute(
+    cr.execute(
         """
         CREATE UNIQUE INDEX IF NOT EXISTS ter_sigpac_id_index
-        ON ter_sigpac (id)
+        ON public.ter_sigpac (id)
         """
     )
-    env.cr.execute(
+    cr.execute(
         """
         CREATE INDEX IF NOT EXISTS ter_sigpac_name_index
-        ON ter_sigpac (name)
+        ON public.ter_sigpac (name)
         """
     )
 
-    env.cr.execute(
+    cr.execute(
         """
-        CREATE MATERIALIZED VIEW IF NOT EXISTS ter_parcel_sigpaclink AS(
+        CREATE MATERIALIZED VIEW public.ter_parcel_sigpaclink AS(
             SELECT row_number() OVER () AS id,
                 p.name || '-' || s.name AS name,
                 p.id AS parcel_id,
@@ -151,11 +173,11 @@ def pre_init_hook(env):
                 s.region,
                 postgis.ST_INTERSECTION(gp.geom, gs.geom) AS geom,
                 gs.gid AS sigpac_gid
-            FROM ter_gis_parcel gp
-            INNER JOIN ter_parcel p ON p.name = gp.name
-            INNER JOIN res_municipality c ON p.municipality_id = c.id,
-                ter_gis_sigpac gs
-            INNER JOIN ter_sigpac s ON s.dn_oid = gs.dn_oid
+            FROM public.ter_gis_parcel gp
+            INNER JOIN public.ter_parcel p ON p.name = gp.name
+            INNER JOIN public.res_municipality c ON p.municipality_id = c.id,
+                public.ter_gis_sigpac gs
+            INNER JOIN public.ter_sigpac s ON s.dn_oid = gs.dn_oid
             WHERE p.active = true
             AND postgis.ST_ISVALID(gp.geom)
             AND postgis.ST_ISVALID(gs.geom)
@@ -168,22 +190,27 @@ def pre_init_hook(env):
         (DEF_INT_PERC,),
     )
 
-    env.cr.execute(
+    cr.execute(
         """
         CREATE UNIQUE INDEX IF NOT EXISTS ter_parcel_sigpaclink_id_index
-        ON ter_parcel_sigpaclink (id)
+        ON public.ter_parcel_sigpaclink (id)
         """
     )
-    env.cr.execute(
+    cr.execute(
         """
         CREATE INDEX IF NOT EXISTS ter_parcel_sigpaclink_name_index
-        ON ter_parcel_sigpaclink (name)
+        ON public.ter_parcel_sigpaclink (name)
         """
     )
+
+    cr._l10n_es_territory_sigpac_schema_ensured = True  # type: ignore[attr-defined]
+
+
+def pre_init_hook(env):
+    ensure_l10n_es_territory_sigpac_schema(env)
 
 
 def post_init_hook(env):
-
     default_sigpac_viewer_url = (
         "https://sigpac.mapa.es/fega/visor/#&visible=Inicio-SigPac;"
         "1/2.000.000;1/200.000;Ortofotos;1/25.000;Recinto&provincia="
@@ -205,18 +232,15 @@ def post_init_hook(env):
         if not company.sigpac_viewer_url:
             values["sigpac_viewer_url"] = default_sigpac_viewer_url
         if not company.python_venv_url:
-            values["python_venv_url"] = "/home/odoo16/venv3.10/bin/python"
-
+            values["python_venv_url"] = "python3"
         if values:
             company.write(values)
 
 
 def uninstall_hook(env):
-
-    # Drop SQL objects created by the module.
-    # Use savepoints to avoid leaving the DB in a broken state if something fails.
     with env.cr.savepoint():
-        env.cr.execute("DROP MATERIALIZED VIEW IF EXISTS ter_parcel_sigpaclink CASCADE")
-        env.cr.execute("DROP MATERIALIZED VIEW IF EXISTS ter_sigpac CASCADE")
+        env.cr.execute("SET LOCAL search_path TO public, pg_temp")
+        env.cr.execute("DROP MATERIALIZED VIEW IF EXISTS public.ter_parcel_sigpaclink CASCADE")
+        env.cr.execute("DROP MATERIALIZED VIEW IF EXISTS public.ter_sigpac CASCADE")
         env.cr.execute("DROP TABLE IF EXISTS public.ter_gis_sigpac CASCADE")
-        env.cr.execute("DROP SEQUENCE IF EXISTS public.ter_gis_sigpac_gid_seq")
+        env.cr.execute("DROP SEQUENCE IF EXISTS public.ter_gis_sigpac_gid_seq CASCADE")

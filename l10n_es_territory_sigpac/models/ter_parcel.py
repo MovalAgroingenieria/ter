@@ -5,6 +5,8 @@ import base64
 
 from odoo import api, fields, models
 
+from ..hooks import ensure_l10n_es_territory_sigpac_schema
+
 
 class TerParcel(models.Model):
     _inherit = "ter.parcel"
@@ -239,6 +241,7 @@ class TerParcel(models.Model):
 class TerParcelSigpaclink(models.Model):
     _name = "ter.parcel.sigpaclink"
     _auto = False
+    _table = "ter_parcel_sigpaclink"
     _description = "SIGPAC link of a parcel"
     _order = "name"
 
@@ -316,6 +319,9 @@ class TerParcelSigpaclink(models.Model):
         compute="_compute_irrigation_model_type",
         store=False,
     )
+
+    def init(self):
+        ensure_l10n_es_territory_sigpac_schema(self.env)
 
     def _compute_enclosure_number(self):
         for record in self:

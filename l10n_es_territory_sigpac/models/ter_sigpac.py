@@ -10,12 +10,15 @@ from jinja2 import Template
 from jinja2.exceptions import TemplateError
 from odoo import api, fields, models
 
+from ..hooks import ensure_l10n_es_territory_sigpac_schema
+
 _logger = logging.getLogger(__name__)
 
 
 class TerSigpac(models.Model):
     _name = "ter.sigpac"
     _auto = False
+    _table = "ter_sigpac"
     _description = "SIGPAC Enclosure"
     _order = "name"
 
@@ -105,6 +108,9 @@ class TerSigpac(models.Model):
         compute="_compute_number_of_sigpaclinks",
         store=False,
     )
+
+    def init(self):
+        ensure_l10n_es_territory_sigpac_schema(self.env)
 
     def _compute_sigpac_link(self):
         params = self.env["ir.config_parameter"].sudo()
