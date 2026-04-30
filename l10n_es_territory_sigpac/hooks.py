@@ -13,6 +13,35 @@ def _table_exists(cr, table_name):
     return bool(row and row[0])
 
 
+def _column_exists(cr, schema, table, column):
+    cr.execute(
+        """
+        SELECT 1
+        FROM information_schema.columns
+        WHERE table_schema = %s AND table_name = %s AND column_name = %s
+        """,
+        (schema, table, column),
+    )
+    return bool(cr.fetchone())
+
+
+def _ensure_ter_gis_sigpac_geom_column(cr, epsg):
+    """CREATE TABLE IF NOT EXISTS does not add new columns to an existing table.
+
+    If ter_gis_sigpac was created earlier without geom, the index on geom would
+    fail. Align schema before CREATE INDEX.
+    """
+    if _column_exists(cr, "public", "ter_gis_sigpac", "geom"):
+        return
+    cr.execute(
+        """
+        ALTER TABLE public.ter_gis_sigpac
+        ADD COLUMN geom POSTGIS.GEOMETRY(Polygon, %s)
+        """,
+        (epsg,),
+    )
+
+
 def _sql_epsg_for_geom(env):
     """EPSG for POSTGIS.GEOMETRY(Polygon, srid); read from config when present."""
     epsg = 25830
@@ -94,6 +123,8 @@ def ensure_l10n_es_territory_sigpac_schema(env):
         """,
         (epsg,),
     )
+
+    _ensure_ter_gis_sigpac_geom_column(cr, epsg)
 
     cr.execute(
         """
