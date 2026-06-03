@@ -112,7 +112,7 @@ class ResPartner(models.Model):
                 is_holder = True
             record.is_holder = is_holder
 
-    @api.depends('parcel_ids')
+    @api.depends('parcel_ids', 'parcel_ids.active')
     def _compute_number_of_parcels(self):
         for record in self:
             number_of_parcels = 0
