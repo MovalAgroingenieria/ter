@@ -127,6 +127,10 @@ class ResPartner(models.Model):
         for record in self:
             record.is_holder = bool(record.partner_code and record.partner_code > 0)
 
+    def _refresh_computed_fields(self):
+        self._compute_number_of_parcels()
+        self._compute_area_official_parcels()
+
     @api.depends("parcel_ids")
     def _compute_number_of_parcels(self):
         for record in self:

@@ -10,7 +10,7 @@
                   default_order="name"
                   decoration-danger="diff_areas_threshold_exceeded"
                   decoration-bf="diff_areas_threshold_exceeded">
-                <field name="diff_areas_threshold_exceeded" invisible="1"/>
+                <field name="diff_areas_threshold_exceeded" optional="hide"/>
                 <field name="name" string="Parcel (GIS)" class="text-center"/>
                 <field name="parcel_id" string="Parcel (DB)" class="text-center"/>
                 <field name="partner_id" string="Manager"/>
