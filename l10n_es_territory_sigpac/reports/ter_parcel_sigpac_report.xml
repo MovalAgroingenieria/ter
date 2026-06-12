@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
         <record id="ter_parcel_sigpac_report" model="ir.actions.report">
             <field name="name">Ter parcel SIGPAC report</field>
@@ -22,7 +22,7 @@
 
                         <div style="text-align: right; margin-bottom: 5px;">
                             <span>Printed: </span>
-                            <b><span t-esc="printing_date"/></b>
+                            <b><span t-out="printing_date"/></b>
                         </div>
 
                         <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
@@ -134,7 +134,7 @@
                                                     <td style="text-align:right;">
                                                         <span t-field="o.area_official"/>
                                                         <span t-out="area_unit_name"/>
-                                                        <span t-esc="measurement_unit"/>
+                                                        <span t-out="measurement_unit"/>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -147,7 +147,7 @@
                                                     <td><span>GIS Area:</span></td>
                                                     <td style="text-align:right;">
                                                         <span t-field="o.area_gis"/>
-                                                        <span t-esc="measurement_unit"/>
+                                                        <span t-out="measurement_unit"/>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -218,14 +218,14 @@
                                                 <t t-if="o.aerial_img_sigpac_scale">
                                                     <div style="display: table-row;">
                                                         <div style="display: table-cell; padding: 2%; border-bottom: 2px solid #000;">
-                                                            Scale ~ <strong>1:<span t-esc="o.aerial_img_sigpac_scale"/></strong>
+                                                            Scale ~ <strong>1:<span t-out="o.aerial_img_sigpac_scale"/></strong>
                                                         </div>
                                                     </div>
                                                 </t>
                                                 <div style="display: table-row;">
                                                     <div style="display: table-cell; padding: 2%;">
                                                         Printed: <t t-set="today_img" t-value="datetime.datetime.today().strftime('%d/%m/%Y')"/>
-                                                        <strong><span t-esc="today_img"/></strong>
+                                                        <strong><span t-out="today_img"/></strong>
                                                     </div>
                                                 </div>
                                             </div>

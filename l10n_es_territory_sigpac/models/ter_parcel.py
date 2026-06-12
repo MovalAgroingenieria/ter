@@ -56,7 +56,7 @@ class TerParcel(models.Model):
             )
 
     @api.depends("aerial_img_sigpac", "mapped_to_polygon")
-    def _compute_aerial_img_sigpac_shown(self):
+    def _compute_aerial_img_sigpac_shown(self):  # pylint: disable=too-many-locals
         params = self.env["ir.config_parameter"].sudo()
 
         wmsbase_url = params.get_param("base_ter.aerial_image_wmsbase_url") or False
@@ -97,7 +97,7 @@ class TerParcel(models.Model):
                 record.aerial_img_sigpac_shown = shown or False
                 continue
 
-            shown = record._get_aerial_img_sigpac_from_wms(
+            shown = record._get_aerial_img_sigpac_from_wms(  # pylint: disable=protected-access
                 wmsbase_url=wmsbase_url,
                 wmsbase_layers=wmsbase_layers,
                 wmsvec_url=wmsvec_url,
@@ -117,7 +117,7 @@ class TerParcel(models.Model):
                     record.env._(
                         "Aerial image OK. Parcel: %(name)s", name=record.name or ""
                     ),
-                    source=record._name,
+                    source="ter.parcel",
                     message_type="INFO",
                 )
             else:
@@ -125,13 +125,13 @@ class TerParcel(models.Model):
                     record.env._(
                         "Error getting aerial image (is the WMS url correct?)"
                     ),
-                    source=record._name,
+                    source="ter.parcel",
                     message_type="WARNING",
                 )
 
             record.aerial_img_sigpac_shown = shown or False
 
-    def _get_aerial_img_sigpac_from_wms(  # pylint: disable=too-many-arguments
+    def _get_aerial_img_sigpac_from_wms(  # pylint: disable=too-many-arguments,too-many-locals
         self,
         *,
         wmsbase_url,
@@ -235,7 +235,7 @@ class TerParcel(models.Model):
 
     def action_regenerate_aerial_img_sigpac(self):
         parcels = self.search([("mapped_to_polygon", "=", True)])
-        parcels._compute_aerial_img_sigpac_shown()
+        parcels._compute_aerial_img_sigpac_shown()  # pylint: disable=protected-access
 
 
 class TerParcelSigpaclink(models.Model):
