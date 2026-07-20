@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="fsm_person_form" model="ir.ui.view">
+        <field name="name">fsm.person.form.inherit.geofolia</field>
+        <field name="model">fsm.person</field>
+        <field name="inherit_id" ref="fieldservice.fsm_person_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Geofolia" name="geofolia">
+                    <group>
+                        <field name="geofolia_external_id" string="Geofolia ID" readonly="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="fsm_person_list" model="ir.ui.view">
+        <field name="name">fsm.person.list.inherit.geofolia</field>
+        <field name="model">fsm.person</field>
+        <field name="inherit_id" ref="fieldservice.fsm_person_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="geofolia_external_id" string="Geofolia ID" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="fsm_person_search_view" model="ir.ui.view">
+        <field name="name">fsm.person.search.inherit.geofolia</field>
+        <field name="model">fsm.person</field>
+        <field name="inherit_id" ref="fieldservice.fsm_person_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="geofolia_external_id" string="Geofolia ID"/>
+                <filter name="filter_from_geofolia" string="From Geofolia"
+                        domain="[('geofolia_external_id', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

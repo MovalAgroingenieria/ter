@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="base_ter.group_ter_user" model="res.groups">
+        <field
+            name="implied_ids"
+            eval="[(4, ref('fieldservice.group_fsm_dispatcher'))]"
+        />
+    </record>
+
     <record id="group_geofolia_import" model="res.groups">
         <field name="name">Geofolia Import</field>
         <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="base_ter.group_ter_manager" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_geofolia_import'))]"/>
     </record>
 </odoo>

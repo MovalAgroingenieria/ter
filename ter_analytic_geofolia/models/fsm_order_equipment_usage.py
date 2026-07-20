@@ -57,11 +57,11 @@ class FsmOrderEquipmentUsage(models.Model):
 
     @api.depends("name", "hours")
     def _compute_display_name(self):
-        for rec in self:
-            if rec.hours:
-                rec.display_name = "%s — %.2f h" % (
-                    rec.name or "",
-                    rec.hours,
+        for record in self:
+            if record.hours:
+                record.display_name = "%s — %.2f h" % (
+                    record.name or "",
+                    record.hours,
                 )
             else:
-                rec.display_name = rec.name or ""
+                record.display_name = record.name or ""

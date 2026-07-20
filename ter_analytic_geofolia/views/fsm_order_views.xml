@@ -3,10 +3,10 @@
 
     <!-- Extend fsm.order form: add usage pages and worked_surface -->
     <record
-        id="view_fsm_order_form_inherit_geofolia"
+        id="fsm_order_form"
         model="ir.ui.view"
     >
-        <field name="name">fsm.order.form.geofolia</field>
+        <field name="name">fsm.order.form.inherit.geofolia</field>
         <field name="model">fsm.order</field>
         <field
             name="inherit_id"

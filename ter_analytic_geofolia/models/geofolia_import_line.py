@@ -66,10 +66,10 @@ class GeofoliaImportLine(models.Model):
     )
 
     def action_apply_selected(self):
-        for line in self:
-            if not line.job_id:
+        for record in self:
+            if not record.job_id:
                 raise UserError(self.env._("Missing job."))
-            if line.job_id.import_type != "fields":
+            if record.job_id.import_type != "fields":
                 continue
-            line.job_id._apply_field_line(line)  # pylint: disable=W0212
-            line.job_id._recompute_apply_state_fields()  # pylint: disable=W0212
+            record.job_id._apply_field_line(record)  # pylint: disable=W0212
+            record.job_id._recompute_apply_state_fields()  # pylint: disable=W0212

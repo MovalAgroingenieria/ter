@@ -38,10 +38,10 @@ class FSMOrder(models.Model):
 
     @api.depends("product_usage_ids", "equipment_usage_ids", "person_usage_ids")
     def _compute_usage_counts(self):
-        for rec in self:
-            rec.product_usage_count = len(rec.product_usage_ids)
-            rec.equipment_usage_count = len(rec.equipment_usage_ids)
-            rec.person_usage_count = len(rec.person_usage_ids)
+        for record in self:
+            record.product_usage_count = len(record.product_usage_ids)
+            record.equipment_usage_count = len(record.equipment_usage_ids)
+            record.person_usage_count = len(record.person_usage_ids)
 
     def action_view_product_usage(self):
         """Open product usage tree for this order."""
@@ -82,9 +82,9 @@ class FSMOrder(models.Model):
     @api.depends("template_id")
     def _compute_order_activity_ids(self):
         result = super()._compute_order_activity_ids()
-        for rec in self:
-            if not rec.template_id:
-                rec.order_activity_ids = self.env["fsm.activity"].search(
-                    [("fsm_order_id", "=", rec.id)]
+        for record in self:
+            if not record.template_id:
+                record.order_activity_ids = self.env["fsm.activity"].search(
+                    [("fsm_order_id", "=", record.id)]
                 )
         return result

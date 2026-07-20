@@ -120,63 +120,216 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         help="Number of lines (Fields or Products mode).",
     )
 
+    @api.depends("activity_employee_line_ids.analytic_line_id")
+    def _compute_timesheet_line_ids(self):
+        for record in self:
+            lines = record.activity_employee_line_ids.mapped("analytic_line_id")
+            record.timesheet_line_ids = lines.filtered(lambda r: r)
+            record.timesheet_count = len(record.timesheet_line_ids)
+
+    @api.depends("activity_line_ids.fsm_order_id")
+    def _compute_fsm_order_ids(self):
+        for record in self:
+            orders = record.activity_line_ids.mapped("fsm_order_id")
+            record.fsm_order_ids = orders.filtered(lambda r: r)
+            record.fsm_order_count = len(record.fsm_order_ids)
+
+    @api.depends(
+        "line_ids.sync_state",
+        "product_line_ids.sync_state",
+        "employee_line_ids.sync_state",
+        "partner_line_ids.sync_state",
+        "harvested_product_line_ids.sync_state",
+        "equipment_line_ids.sync_state",
+        "activity_employee_line_ids.sync_state",
+        "import_type",
+    )
+    def _compute_apply_stats(self):
+        processed_states = ("created", "updated", "no_action", "skipped")
+        for record in self:
+            if record.import_type == "full":
+                blocks = record._get_full_lines_by_block()
+                total = pending = processed = errors = 0
+                for lines in blocks.values():
+                    total += len(lines)
+                    pending += len(
+                        lines.filtered(lambda rec: rec.sync_state == "pending")
+                    )
+                    errors += len(lines.filtered(lambda rec: rec.sync_state == "error"))
+                    processed += len(
+                        lines.filtered(lambda rec: rec.sync_state in processed_states)
+                    )
+                record.total_count = total
+                record.pending_count = pending
+                record.processed_count = processed
+                record.error_count = errors
+            elif record.import_type == "fields":
+                lines = record.line_ids
+                record.total_count = len(lines)
+                record.pending_count = len(
+                    lines.filtered(lambda rec: rec.sync_state == "pending")
+                )
+                record.error_count = len(
+                    lines.filtered(lambda rec: rec.sync_state == "error")
+                )
+                record.processed_count = len(
+                    lines.filtered(lambda rec: rec.sync_state in processed_states)
+                )
+            else:
+                record.total_count = 0
+                record.pending_count = 0
+                record.processed_count = 0
+                record.error_count = 0
+
+    @api.depends(
+        "product_line_ids.sync_state",
+        "partner_line_ids.sync_state",
+        "employee_line_ids.sync_state",
+        "harvested_product_line_ids.sync_state",
+        "equipment_line_ids.sync_state",
+        "activity_employee_line_ids.sync_state",
+        "import_type",
+    )
+    def _compute_block_counts(self):
+        processed_states = ("created", "updated", "no_action", "skipped")
+        for record in self:
+            if record.import_type != "full":
+                for attr in (
+                    "product_processed_count",
+                    "product_error_count",
+                    "partner_processed_count",
+                    "partner_error_count",
+                    "employee_processed_count",
+                    "employee_error_count",
+                    "harvested_processed_count",
+                    "harvested_error_count",
+                    "equipment_processed_count",
+                    "equipment_error_count",
+                    "activity_employee_processed_count",
+                    "activity_employee_error_count",
+                ):
+                    setattr(record, attr, 0)
+                continue
+            record.product_processed_count = len(
+                record.product_line_ids.filtered(
+                    lambda rec: rec.sync_state in processed_states
+                )
+            )
+            record.product_error_count = len(
+                record.product_line_ids.filtered(lambda rec: rec.sync_state == "error")
+            )
+            record.partner_processed_count = len(
+                record.partner_line_ids.filtered(
+                    lambda rec: rec.sync_state in processed_states
+                )
+            )
+            record.partner_error_count = len(
+                record.partner_line_ids.filtered(lambda rec: rec.sync_state == "error")
+            )
+            record.employee_processed_count = len(
+                record.employee_line_ids.filtered(
+                    lambda rec: rec.sync_state in processed_states
+                )
+            )
+            record.employee_error_count = len(
+                record.employee_line_ids.filtered(lambda rec: rec.sync_state == "error")
+            )
+            record.harvested_processed_count = len(
+                record.harvested_product_line_ids.filtered(
+                    lambda rec: rec.sync_state in processed_states
+                )
+            )
+            record.harvested_error_count = len(
+                record.harvested_product_line_ids.filtered(
+                    lambda rec: rec.sync_state == "error"
+                )
+            )
+            record.equipment_processed_count = len(
+                record.equipment_line_ids.filtered(
+                    lambda rec: rec.sync_state in processed_states
+                )
+            )
+            record.equipment_error_count = len(
+                record.equipment_line_ids.filtered(
+                    lambda rec: rec.sync_state == "error"
+                )
+            )
+            record.activity_employee_processed_count = len(
+                record.activity_employee_line_ids.filtered(
+                    lambda rec: rec.sync_state in processed_states
+                )
+            )
+            record.activity_employee_error_count = len(
+                record.activity_employee_line_ids.filtered(
+                    lambda rec: rec.sync_state == "error"
+                )
+            )
+
+    @api.depends("line_ids", "import_type")
+    def _compute_line_count(self):
+        for record in self:
+            if record.import_type in ("fields", "products"):
+                record.line_count = len(record.line_ids)
+            else:
+                record.line_count = 0
+
     def action_parse(self):
-        for job in self:
+        for record in self:
             try:
-                payload = job._load_json_payload()
-                job._parse_payload(payload)
-                job.state = "done"
-                if job.import_type == "full":
-                    job.apply_state = "ready"
-                elif job.import_type == "fields":
-                    job.apply_state = "ready"
+                payload = record._load_json_payload()
+                record._parse_payload(payload)
+                record.state = "done"
+                if record.import_type == "full":
+                    record.apply_state = "ready"
+                elif record.import_type == "fields":
+                    record.apply_state = "ready"
                 else:
-                    job.apply_state = "done"
-                job.error = False
+                    record.apply_state = "done"
+                record.error = False
             except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
-                job.state = "error"
-                job.apply_state = "error"
-                job.error = job._format_exception(exc)
+                record.state = "error"
+                record.apply_state = "error"
+                record.error = record._format_exception(exc)
 
     def action_apply(self):
-        for job in self:
-            if job.import_type == "full":
-                job._apply_full_export(only_pending=False)
-                job._recompute_apply_state()
-            elif job.import_type == "fields":
-                job.action_apply_fields()
+        for record in self:
+            if record.import_type == "full":
+                record._apply_full_export(only_pending=False)
+                record._recompute_apply_state()
+            elif record.import_type == "fields":
+                record.action_apply_fields()
 
     def action_apply_pending(self):
-        for job in self:
-            if job.import_type != "full":
+        for record in self:
+            if record.import_type != "full":
                 continue
-            job._apply_full_export(only_pending=True)
-            job._recompute_apply_state()
+            record._apply_full_export(only_pending=True)
+            record._recompute_apply_state()
 
     def action_reprocess(self):
         """Re-run apply on pending, error and skipped lines.
         Existing records are updated, not duplicated."""
-        for job in self:
-            if job.import_type == "full":
-                job._apply_full_export(only_pending=True)
-                job._recompute_apply_state()
-            elif job.import_type == "fields":
-                for line in job.line_ids.filtered(
+        for record in self:
+            if record.import_type == "full":
+                record._apply_full_export(only_pending=True)
+                record._recompute_apply_state()
+            elif record.import_type == "fields":
+                for line in record.line_ids.filtered(
                     lambda rec: rec.sync_state in ("pending", "error")
                 ):
-                    job._apply_field_line(line)
-                job._recompute_apply_state_fields()
+                    record._apply_field_line(line)
+                record._recompute_apply_state_fields()
 
     def action_apply_fields(self):
         """Apply field lines: create/update fsm.location and ter.use_unit (1:1)."""
-        for job in self:
-            if job.import_type != "fields":
+        for record in self:
+            if record.import_type != "fields":
                 continue
-            for line in job.line_ids.filtered(
+            for line in record.line_ids.filtered(
                 lambda rec: rec.sync_state in ("pending", "error")
             ):
-                job._apply_field_line(line)
-            job._recompute_apply_state_fields()
+                record._apply_field_line(line)
+            record._recompute_apply_state_fields()
 
     def action_view_created_lines(self):
         """Open lines with sync_state in (created, updated). Only for fields mode."""
@@ -581,14 +734,6 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 result[k] = v
         return result
 
-    @api.depends("line_ids", "import_type")
-    def _compute_line_count(self):
-        for job in self:
-            if job.import_type in ("fields", "products"):
-                job.line_count = len(job.line_ids)
-            else:
-                job.line_count = 0
-
     def _create_lines_from_fields(self, items):
         vals_list = []
         for it in items:
@@ -836,149 +981,6 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
         if emp_vals:
             emp_line_obj.create(emp_vals)
-
-    @api.depends(
-        "line_ids.sync_state",
-        "product_line_ids.sync_state",
-        "employee_line_ids.sync_state",
-        "partner_line_ids.sync_state",
-        "harvested_product_line_ids.sync_state",
-        "equipment_line_ids.sync_state",
-        "activity_employee_line_ids.sync_state",
-        "import_type",
-    )
-    def _compute_apply_stats(self):
-        processed_states = ("created", "updated", "no_action", "skipped")
-        for job in self:
-            if job.import_type == "full":
-                blocks = job._get_full_lines_by_block()
-                total = pending = processed = errors = 0
-                for lines in blocks.values():
-                    total += len(lines)
-                    pending += len(
-                        lines.filtered(lambda rec: rec.sync_state == "pending")
-                    )
-                    errors += len(lines.filtered(lambda rec: rec.sync_state == "error"))
-                    processed += len(
-                        lines.filtered(lambda rec: rec.sync_state in processed_states)
-                    )
-                job.total_count = total
-                job.pending_count = pending
-                job.processed_count = processed
-                job.error_count = errors
-            elif job.import_type == "fields":
-                lines = job.line_ids
-                job.total_count = len(lines)
-                job.pending_count = len(
-                    lines.filtered(lambda rec: rec.sync_state == "pending")
-                )
-                job.error_count = len(
-                    lines.filtered(lambda rec: rec.sync_state == "error")
-                )
-                job.processed_count = len(
-                    lines.filtered(lambda rec: rec.sync_state in processed_states)
-                )
-            else:
-                job.total_count = 0
-                job.pending_count = 0
-                job.processed_count = 0
-                job.error_count = 0
-
-    @api.depends("activity_employee_line_ids.analytic_line_id")
-    def _compute_timesheet_line_ids(self):
-        for job in self:
-            lines = job.activity_employee_line_ids.mapped("analytic_line_id")
-            job.timesheet_line_ids = lines.filtered(lambda r: r)
-            job.timesheet_count = len(job.timesheet_line_ids)
-
-    @api.depends("activity_line_ids.fsm_order_id")
-    def _compute_fsm_order_ids(self):
-        for job in self:
-            orders = job.activity_line_ids.mapped("fsm_order_id")
-            job.fsm_order_ids = orders.filtered(lambda r: r)
-            job.fsm_order_count = len(job.fsm_order_ids)
-
-    @api.depends(
-        "product_line_ids.sync_state",
-        "partner_line_ids.sync_state",
-        "employee_line_ids.sync_state",
-        "harvested_product_line_ids.sync_state",
-        "equipment_line_ids.sync_state",
-        "activity_employee_line_ids.sync_state",
-        "import_type",
-    )
-    def _compute_block_counts(self):
-        processed_states = ("created", "updated", "no_action", "skipped")
-        for job in self:
-            if job.import_type != "full":
-                for attr in (
-                    "product_processed_count",
-                    "product_error_count",
-                    "partner_processed_count",
-                    "partner_error_count",
-                    "employee_processed_count",
-                    "employee_error_count",
-                    "harvested_processed_count",
-                    "harvested_error_count",
-                    "equipment_processed_count",
-                    "equipment_error_count",
-                    "activity_employee_processed_count",
-                    "activity_employee_error_count",
-                ):
-                    setattr(job, attr, 0)
-                continue
-            job.product_processed_count = len(
-                job.product_line_ids.filtered(
-                    lambda rec: rec.sync_state in processed_states
-                )
-            )
-            job.product_error_count = len(
-                job.product_line_ids.filtered(lambda rec: rec.sync_state == "error")
-            )
-            job.partner_processed_count = len(
-                job.partner_line_ids.filtered(
-                    lambda rec: rec.sync_state in processed_states
-                )
-            )
-            job.partner_error_count = len(
-                job.partner_line_ids.filtered(lambda rec: rec.sync_state == "error")
-            )
-            job.employee_processed_count = len(
-                job.employee_line_ids.filtered(
-                    lambda rec: rec.sync_state in processed_states
-                )
-            )
-            job.employee_error_count = len(
-                job.employee_line_ids.filtered(lambda rec: rec.sync_state == "error")
-            )
-            job.harvested_processed_count = len(
-                job.harvested_product_line_ids.filtered(
-                    lambda rec: rec.sync_state in processed_states
-                )
-            )
-            job.harvested_error_count = len(
-                job.harvested_product_line_ids.filtered(
-                    lambda rec: rec.sync_state == "error"
-                )
-            )
-            job.equipment_processed_count = len(
-                job.equipment_line_ids.filtered(
-                    lambda rec: rec.sync_state in processed_states
-                )
-            )
-            job.equipment_error_count = len(
-                job.equipment_line_ids.filtered(lambda rec: rec.sync_state == "error")
-            )
-            job.activity_employee_processed_count = len(
-                job.activity_employee_line_ids.filtered(
-                    lambda rec: rec.sync_state in processed_states
-                )
-            )
-            job.activity_employee_error_count = len(
-                job.activity_employee_line_ids.filtered(
-                    lambda rec: rec.sync_state == "error"
-                )
-            )
 
     def _get_full_lines_by_block(self):
         self.ensure_one()

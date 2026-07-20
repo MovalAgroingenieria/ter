@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <menuitem id="menu_geofolia_import"
+              name="Geofolia"
+              parent="base_ter.menu_census"
+              sequence="950"
+              groups="group_geofolia_import"/>
+
+</odoo>

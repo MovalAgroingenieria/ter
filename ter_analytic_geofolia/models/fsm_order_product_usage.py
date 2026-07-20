@@ -57,10 +57,10 @@ class FsmOrderProductUsage(models.Model):
 
     @api.depends("name", "quantity", "uom_name")
     def _compute_display_name(self):
-        for rec in self:
-            parts = [rec.name or ""]
-            if rec.quantity:
-                parts.append("%.2f" % rec.quantity)
-            if rec.uom_name:
-                parts.append(rec.uom_name)
-            rec.display_name = " — ".join(parts)
+        for record in self:
+            parts = [record.name or ""]
+            if record.quantity:
+                parts.append("%.2f" % record.quantity)
+            if record.uom_name:
+                parts.append(record.uom_name)
+            record.display_name = " — ".join(parts)

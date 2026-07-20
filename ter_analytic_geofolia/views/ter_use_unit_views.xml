@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="view_ter_unit_form_geofolia" model="ir.ui.view">
-        <field name="name">ter.use_unit.form.geofolia</field>
+    <record id="view_ter_unit_form" model="ir.ui.view">
+        <field name="name">ter.use_unit.form.inherit.geofolia</field>
         <field name="model">ter.use_unit</field>
         <field name="inherit_id" ref="base_ter.view_ter_unit_form"/>
         <field name="arch" type="xml">
@@ -25,8 +25,8 @@
         </field>
     </record>
 
-    <record id="view_ter_unit_list_geofolia" model="ir.ui.view">
-        <field name="name">ter.use_unit.list.geofolia</field>
+    <record id="view_ter_unit_list" model="ir.ui.view">
+        <field name="name">ter.use_unit.list.inherit.geofolia</field>
         <field name="model">ter.use_unit</field>
         <field name="inherit_id" ref="base_ter.view_ter_unit_list"/>
         <field name="arch" type="xml">
@@ -36,8 +36,8 @@
         </field>
     </record>
 
-    <record id="view_ter_unit_filter_geofolia" model="ir.ui.view">
-        <field name="name">ter.use_unit.search.geofolia</field>
+    <record id="view_ter_unit_filter" model="ir.ui.view">
+        <field name="name">ter.use_unit.search.inherit.geofolia</field>
         <field name="model">ter.use_unit</field>
         <field name="inherit_id" ref="base_ter.view_ter_unit_filter"/>
         <field name="arch" type="xml">

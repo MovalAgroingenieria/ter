@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- Tree view -->
-    <record id="fsm_order_person_usage_tree" model="ir.ui.view">
+    <record id="fsm_order_person_usage_view_list" model="ir.ui.view">
         <field name="name">fsm.order.person.usage.tree</field>
         <field name="model">fsm.order.person.usage</field>
         <field name="arch" type="xml">
@@ -17,7 +17,7 @@
     </record>
 
     <!-- Form view -->
-    <record id="fsm_order_person_usage_form" model="ir.ui.view">
+    <record id="fsm_order_person_usage_view_form" model="ir.ui.view">
         <field name="name">fsm.order.person.usage.form</field>
         <field name="model">fsm.order.person.usage</field>
         <field name="arch" type="xml">
