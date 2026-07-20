@@ -247,7 +247,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "<span class=\"oe_inline\">ha</span>"
-msgstr "<span class=\"oe_inline\">ha</span>"
+msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
@@ -3456,8 +3456,7 @@ msgstr "No se pueden crear jerarquías recursivas (bucles)."
 #. odoo-python
 #: code:addons/base_ter/wizards/wizard_set_partner_code.py:0
 msgid "You cannot reset the code because the partner has parcels."
-msgstr ""
-"No puede restablecer el código porque el socio tiene parcelas."
+msgstr "No puede restablecer el código porque el socio tiene parcelas."
 
 #. module: base_ter
 #. odoo-python
