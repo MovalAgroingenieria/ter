@@ -39,7 +39,7 @@ class ResProvince(models.Model):
     def action_show_places(self):
         self.ensure_one()
         tree_view = self.env.ref(
-            "base_adi.res_place_view_tree", raise_if_not_found=False
+            "base_adi.res_place_view_list", raise_if_not_found=False
         )
         form_view = self.env.ref(
             "base_adi.res_place_view_form", raise_if_not_found=False

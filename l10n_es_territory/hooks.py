@@ -5,8 +5,7 @@ def post_init_hook(env):
     company = env.company
     company.write(
         {
-            "base_ter_aerial_image_wmsbase_url": "https://www.ign.es/"
-            "wms-inspire/pnoa-ma",
-            "base_ter_aerial_image_wmsbase_layers": "OI.OrthoimageCoverage",
+            "aerial_image_wmsbase_url": "https://www.ign.es/wms-inspire/pnoa-ma",
+            "aerial_image_wmsbase_layers": "OI.OrthoimageCoverage",
         }
     )

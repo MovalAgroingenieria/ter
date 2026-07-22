@@ -11,6 +11,7 @@ this migration adds it.
 
 import logging
 
+from psycopg2 import Error as PsycopgError
 from psycopg2 import sql
 
 _logger = logging.getLogger(__name__)
@@ -40,7 +41,7 @@ def migrate(cr, version):
             _logger.info(
                 "l10n_es_territory: Added mapped_to_polygon column to %s", table
             )
-        except Exception as e:
+        except PsycopgError as e:
             _logger.warning(
                 "l10n_es_territory: Could not add mapped_to_polygon to %s: %s",
                 table,

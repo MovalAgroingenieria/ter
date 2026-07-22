@@ -3,8 +3,6 @@
 
 from . import (
     res_admregion,
-    res_company,
-    res_config_settings,
     res_municipality,
     res_place,
     res_province,

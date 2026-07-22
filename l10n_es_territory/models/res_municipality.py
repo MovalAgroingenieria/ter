@@ -9,13 +9,14 @@ from odoo.exceptions import ValidationError
 class ResMunicipality(models.Model):
     _inherit = "res.municipality"
 
+    _SIZE_CADASTRALCODE_PROVINCE = 2
+    _SIZE_MUNICIPALITY_NUMBER = 3
+
     image_128 = fields.Image(
         string="Image",
         max_width=128,
         max_height=128,
     )
-    _SIZE_CADASTRALCODE_PROVINCE = 2
-    _SIZE_MUNICIPALITY_NUMBER = 3
 
     municipality_number = fields.Integer(required=True)
 
