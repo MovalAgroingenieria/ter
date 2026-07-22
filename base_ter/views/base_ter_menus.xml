@@ -88,6 +88,12 @@
               parent="menu_thecnicalactions"
               sequence="20"/>
 
+    <menuitem id="menu_thecnicalactions_jobs"
+              name="Background Jobs"
+              parent="menu_thecnicalactions"
+              action="queue_job_batch.action_queue_job_batch"
+              sequence="40"/>
+
     <menuitem id="menu_import_kml"
               name="Import KML"
               parent="menu_configuration"

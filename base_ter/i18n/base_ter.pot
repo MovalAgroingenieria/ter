@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-09 00:02+0000\n"
-"PO-Revision-Date: 2026-04-09 00:02+0000\n"
+"POT-Creation-Date: 2026-07-22 07:20+0000\n"
+"PO-Revision-Date: 2026-07-22 07:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -454,7 +454,7 @@ msgid "Aerial Image"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__parcel_aerial_image_shown_256
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__parcel_aerial_image_medium
 msgid "Aerial Image (GIS preview)"
 msgstr ""
 
@@ -464,20 +464,8 @@ msgid "Aerial Image (medium size)"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__aerial_image_shown_256
-#: model:ir.model.fields,field_description:base_ter.field_ter_property__aerial_image_shown_256
-msgid "Aerial Image (medium size, non-persistent)"
-msgstr ""
-
-#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__aerial_image_medium
 msgid "Aerial Image (medium)"
-msgstr ""
-
-#. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__aerial_image_shown
-#: model:ir.model.fields,field_description:base_ter.field_ter_property__aerial_image_shown
-msgid "Aerial Image (non-persistent)"
 msgstr ""
 
 #. module: base_ter
@@ -492,9 +480,7 @@ msgid "Aerial Image (small)"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__image_1920
-#: model:ir.model.fields,field_description:base_ter.field_ter_property__image_1920
-#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__parcel_image_1920
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__parcel_aerial_image
 msgid "Aerial Image (zoom)"
 msgstr ""
 
@@ -505,9 +491,8 @@ msgid "Aerial Image Key"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__aerial_image_shown_b64
-#: model:ir.model.fields,field_description:base_ter.field_ter_property__aerial_image_shown_b64
-msgid "Aerial Image shown (base64)"
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__aerial_image_last_refresh
+msgid "Aerial Image Last Refresh"
 msgstr ""
 
 #. module: base_ter
@@ -639,6 +624,8 @@ msgid "Area unit is hectare"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_unit_name
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_unit_name
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_unit_name
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_unit_name
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__area_unit_name
@@ -729,6 +716,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "BASIC DATA"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.ui.menu,name:base_ter.menu_thecnicalactions_jobs
+msgid "Background Jobs"
 msgstr ""
 
 #. module: base_ter
@@ -1389,6 +1381,30 @@ msgstr ""
 #: model:ir.ui.menu,name:base_ter.menu_configuration_general
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "General"
+msgstr ""
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/ter_parcel.py:0
+msgid "Generate aerial image: %(code)s"
+msgstr ""
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/ter_parcel.py:0
+msgid "Generate aerial images (parcels), records %(offset)s+"
+msgstr ""
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/ter_property.py:0
+msgid "Generate aerial images (properties), records %(offset)s+"
+msgstr ""
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/ter_use_unit.py:0
+msgid "Generate aerial images (territorial units), records %(offset)s+"
 msgstr ""
 
 #. module: base_ter
@@ -2097,6 +2113,8 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__number_of_parcels
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__number_of_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__number_of_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_users__number_of_parcels
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__number_of_parcels
@@ -2104,6 +2122,8 @@ msgid "Number of parcels"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__number_of_properties
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__number_of_properties
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__number_of_properties
 #: model:ir.model.fields,field_description:base_ter.field_res_users__number_of_properties
 msgid "Number of properties"
@@ -2199,6 +2219,8 @@ msgid "Parcel (GIS)"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_official_parcels
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_official_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_parcels
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__area_official_parcels
@@ -2206,6 +2228,8 @@ msgid "Parcel Area"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_official_parcels_m2
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_official_parcels_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_parcels_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_parcels_m2
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__area_official_parcels_m2
@@ -2221,6 +2245,8 @@ msgid "Parcel Code"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__is_holder
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__is_holder
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__is_holder
 #: model:ir.model.fields,field_description:base_ter.field_res_users__is_holder
 msgid "Parcel Holder"
@@ -2237,11 +2263,6 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__partner_id
 msgid "Parcel Partner"
-msgstr ""
-
-#. module: base_ter
-#: model:ir.model,name:base_ter.model_ter_parcel_partnerlink
-msgid "Parcel Partner Link"
 msgstr ""
 
 #. module: base_ter
@@ -2288,6 +2309,8 @@ msgstr ""
 #: code:addons/base_ter/models/ter_use_unit.py:0
 #: model:ir.actions.act_window,name:base_ter.ter_parcel_action
 #: model:ir.model.fields,field_description:base_ter.field_date_range__parcel_count
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__parcel_ids
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__parcel_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__parcel_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_users__parcel_ids
 #: model:ir.model.fields,field_description:base_ter.field_ter_parceltag__parcel_ids
@@ -2336,6 +2359,8 @@ msgid "Parent Path"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__partner_code
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__partner_code
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__partner_code
 #: model:ir.model.fields,field_description:base_ter.field_res_users__partner_code
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__partner_code
@@ -2346,6 +2371,8 @@ msgid "Partner Code"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__partner_code_asstr
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__partner_code_asstr
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__partner_code_asstr
 #: model:ir.model.fields,field_description:base_ter.field_res_users__partner_code_asstr
 msgid "Partner Code (as string)"
@@ -2355,6 +2382,11 @@ msgstr ""
 #: model:ir.model,name:base_ter.model_ter_profile
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 msgid "Partner Profile"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.model,name:base_ter.model_ter_parcel_partnerlink
+msgid "Partner of parcel"
 msgstr ""
 
 #. module: base_ter
@@ -2387,6 +2419,8 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__phones
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__phones
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__phones
 #: model:ir.model.fields,field_description:base_ter.field_res_users__phones
 msgid "Phone(s)"
@@ -2475,6 +2509,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_ter/models/res_partner.py:0
 #: model:ir.actions.act_window,name:base_ter.ter_property_action
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__property_ids
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__property_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__property_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_users__property_ids
 #: model:ir.model.fields,field_description:base_ter.field_ter_propertytag__property_ids
@@ -2505,12 +2541,16 @@ msgid "Property"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_official_properties
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_official_properties
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_properties
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_properties
 msgid "Property Area"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_official_properties_m2
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_official_properties_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_properties_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_properties_m2
 msgid "Property Area (m²)"
@@ -2888,13 +2928,14 @@ msgid "Ter-unit sequence"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.actions.server,name:base_ter.ter_use_unit_cron_recompute_validity_state_ir_actions_server
-msgid "Territorial Base: Recompute ter.unit validity state"
+#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
+msgid ""
+"Territorial Base: Generate pending aerial images of the parcels (queue_job)"
 msgstr ""
 
 #. module: base_ter
-#: model:ir.actions.server,name:base_ter.ter_parcel_cron_action_reset_all_aerial_images_ir_actions_server
-msgid "Territorial Base: Refresh all aerial images of the parcels"
+#: model:ir.actions.server,name:base_ter.ter_use_unit_cron_recompute_validity_state_ir_actions_server
+msgid "Territorial Base: Recompute ter.unit validity state"
 msgstr ""
 
 #. module: base_ter
@@ -2921,6 +2962,8 @@ msgstr ""
 #: code:addons/base_ter/models/ter_use_type.py:0
 #: model:ir.actions.act_window,name:base_ter.ter_unit_action_entrie
 #: model:ir.model.fields,field_description:base_ter.field_date_range__unit_ids
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__unit_use_ids
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__unit_use_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__unit_use_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_users__unit_use_ids
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__unit_ids
@@ -3080,6 +3123,8 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_date_range__unit_count
+#: model:ir.model.fields,field_description:base_ter.field_fsm_location__unit_use_count
+#: model:ir.model.fields,field_description:base_ter.field_fsm_person__unit_use_count
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__unit_use_count
 #: model:ir.model.fields,field_description:base_ter.field_res_users__unit_use_count
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__unit_count
@@ -3268,8 +3313,30 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/ter_parcel.py:0
+msgid "WMS temporarily unavailable for parcel %(code)s: %(error)s"
+msgstr ""
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Warnings"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__website_message_ids
+#: model:ir.model.fields,field_description:base_ter.field_ter_property__website_message_ids
+#: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__website_message_ids
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.model.fields,help:base_ter.field_ter_parcel__website_message_ids
+#: model:ir.model.fields,help:base_ter.field_ter_property__website_message_ids
+#: model:ir.model.fields,help:base_ter.field_ter_unit_attribute_value__website_message_ids
+#: model:ir.model.fields,help:base_ter.field_ter_use_unit__website_message_ids
+msgid "Website communication history"
 msgstr ""
 
 #. module: base_ter

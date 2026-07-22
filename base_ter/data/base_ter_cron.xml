@@ -2,10 +2,10 @@
 <odoo noupdate="1">
 
     <record id="ter_parcel_cron_action_reset_all_aerial_images" model="ir.cron">
-        <field name="name">Territorial Base: Refresh all aerial images of the parcels</field>
+        <field name="name">Territorial Base: Generate pending aerial images of the parcels (queue_job)</field>
         <field name="model_id" ref="base_ter.model_ter_parcel"/>
         <field name="state">code</field>
-        <field name="code">model.action_reset_all_aerial_images(from_backend=False)</field>
+        <field name="code">model.cron_generate_pending_aerial_images(batch_size=200)</field>
         <field name="user_id" ref="base.user_root"/>
         <field name="interval_number" eval="1"/>
         <field name="interval_type">weeks</field>

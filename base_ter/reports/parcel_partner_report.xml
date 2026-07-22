@@ -179,8 +179,8 @@
                                         </table>
                                     </div>
                                     <div name="parcel_aerial_image" class="text-center">
-                                        <t t-if="parcel.aerial_image_shown_b64">
-                                            <img t-attf-src="data:image/png;base64, #{parcel.aerial_image_shown_b64}"
+                                        <t t-if="parcel.aerial_image">
+                                            <img t-attf-src="data:image/png;base64, #{parcel.aerial_image}"
                                                  style="max-width: 100%; height: 240px; object-fit: contain;"/>
                                         </t>
                                         <t t-else="">

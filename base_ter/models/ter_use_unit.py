@@ -11,7 +11,12 @@ from .. import hooks as base_ter_hooks
 class TerUnit(models.Model):
     _name = "ter.use_unit"
     _description = "Ter Use Unit"
-    _inherit = ["mail.thread", "mail.activity.mixin", "gis.viewer"]
+    _inherit = [
+        "mail.thread",
+        "mail.activity.mixin",
+        "gis.viewer",
+        "common.background.job",
+    ]
 
     _param_gis_selection = "idunidad"
 
@@ -152,13 +157,13 @@ class TerUnit(models.Model):
         string="Code",
         related="parcel_id.alphanum_code",
     )
-    parcel_aerial_image_shown_256 = fields.Image(
+    parcel_aerial_image_medium = fields.Image(
         string="Aerial Image (GIS preview)",
-        related="parcel_id.aerial_image_shown_256",
+        related="parcel_id.aerial_image_medium",
     )
-    parcel_image_1920 = fields.Image(
+    parcel_aerial_image = fields.Image(
         string="Aerial Image (zoom)",
-        related="parcel_id.image_1920",
+        related="parcel_id.aerial_image",
     )
     mapped_to_polygon = fields.Boolean(
         string="Mapped to polygon",
@@ -673,21 +678,46 @@ class TerUnit(models.Model):
         if self.parcel_id:
             self.parcel_id.reset_aerial_image()
 
+    _MASS_AERIAL_IMAGE_BATCH_NAME = (
+        "base_ter.ter_use_unit.action_reset_all_aerial_images"
+    )
+    _MASS_AERIAL_IMAGE_CHUNK_SIZE = 50
+
     @api.model
     def action_reset_all_aerial_images(self, from_backend=False):
-        """Reset aerial images for all parcels linked to territorial units."""
-        batch_size = 100
-        offset = 0
-        while True:
-            batch = self.search([], limit=batch_size, offset=offset)
-            if not batch:
-                break
-            parcels = batch.mapped("parcel_id")
-            parcels.reset_aerial_image()
-            offset += batch_size
-        if from_backend:
-            return {"type": "ir.actions.client", "tag": "reload"}
-        return None
+        """Enqueue a background job batch to regenerate linked parcels' images.
+
+        The work is split into small chunks, each delayed as its own
+        queue_job tagged to a ``queue.job.batch``, so progress can be
+        tracked via the batch's ``completeness`` percentage. If a
+        previous batch is still running, no duplicate is created; the
+        user is notified instead.
+        """
+        launched = not self._is_background_batch_running(
+            self._MASS_AERIAL_IMAGE_BATCH_NAME
+        )
+        if launched:
+            batch = self._new_background_batch(self._MASS_AERIAL_IMAGE_BATCH_NAME)
+            chunk_size = self._MASS_AERIAL_IMAGE_CHUNK_SIZE
+            offset = 0
+            while True:
+                chunk_ids = self.search([], limit=chunk_size, offset=offset).ids
+                if not chunk_ids:
+                    break
+                self.browse(chunk_ids).with_context(job_batch=batch).with_delay(
+                    channel="root.ter_gis_aerial_image",
+                    description=self.env._(
+                        "Generate aerial images (territorial units), "
+                        "records %(offset)s+",
+                        offset=offset,
+                    ),
+                )._job_reset_all_aerial_images_chunk()  # pylint: disable=protected-access
+                offset += chunk_size
+        return self._background_job_notification(launched, from_backend)
+
+    def _job_reset_all_aerial_images_chunk(self):
+        """Queue_job entry point: regenerate this chunk's linked parcels."""
+        self.mapped("parcel_id").reset_aerial_image()
 
     def action_show_parcels(self):
         """Open parcels linked to this unit."""

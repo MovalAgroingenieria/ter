@@ -196,8 +196,8 @@
                     </div>
 
                     <div name="aerial_image" class="text-center" style="border: 1px solid black; padding: 1% 0%;">
-                        <t t-if="o.aerial_image_shown_b64">
-                            <img t-attf-src="data:image/png;base64, #{o.aerial_image_shown_b64}"
+                        <t t-if="o.aerial_image">
+                            <img t-attf-src="data:image/png;base64, #{o.aerial_image}"
                                  style="max-width: 824px; max-height: 824px;"/>
                         </t>
                         <t t-else="">

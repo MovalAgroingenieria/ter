@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 2026 Moval Agroingeniería S.L. -->
+<odoo noupdate="1">
+
+    <!-- These job methods call `env.cr.commit()` internally (via
+         `reset_aerial_image`/`_fetch_and_store_aerial_image`) to persist
+         each record's image progressively and to support retrying on
+         serialization failures. queue_job forbids manual commits inside
+         a job unless the "Allow Commit" option is enabled below, which
+         makes the framework run the job in its own dedicated cursor. -->
+
+    <record id="job_function_ter_parcel_job_reset_all_aerial_images" model="queue.job.function">
+        <field name="model_id" ref="base_ter.model_ter_parcel"/>
+        <field name="method">_job_reset_all_aerial_images_chunk</field>
+        <field name="channel_id" ref="channel_ter_gis_aerial_image"/>
+        <field name="allow_commit" eval="True"/>
+    </record>
+
+    <record id="job_function_ter_parcel_job_generate_aerial_image" model="queue.job.function">
+        <field name="model_id" ref="base_ter.model_ter_parcel"/>
+        <field name="method">_job_generate_aerial_image</field>
+        <field name="channel_id" ref="channel_ter_gis_aerial_image"/>
+        <field name="allow_commit" eval="True"/>
+    </record>
+
+    <record id="job_function_ter_property_job_reset_all_aerial_images" model="queue.job.function">
+        <field name="model_id" ref="base_ter.model_ter_property"/>
+        <field name="method">_job_reset_all_aerial_images_chunk</field>
+        <field name="channel_id" ref="channel_ter_gis_aerial_image"/>
+        <field name="allow_commit" eval="True"/>
+    </record>
+
+    <record id="job_function_ter_use_unit_job_reset_all_aerial_images" model="queue.job.function">
+        <field name="model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="method">_job_reset_all_aerial_images_chunk</field>
+        <field name="channel_id" ref="channel_ter_gis_aerial_image"/>
+        <field name="allow_commit" eval="True"/>
+    </record>
+
+</odoo>

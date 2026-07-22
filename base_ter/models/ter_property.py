@@ -3,15 +3,24 @@
 # pylint: disable=too-many-locals
 
 import base64
+import logging
 
 from odoo import api, exceptions, fields, models
 from odoo.http import request
+
+_logger = logging.getLogger(__name__)
 
 
 class TerProperty(models.Model):
     _name = "ter.property"
     _description = "Property"
-    _inherit = ["simple.model", "polygon.model", "gis.viewer", "mail.thread"]
+    _inherit = [
+        "simple.model",
+        "polygon.model",
+        "gis.viewer",
+        "mail.thread",
+        "common.background.job",
+    ]
     _rec_name = "alphanum_code"
 
     _set_num_code = False
@@ -79,26 +88,6 @@ class TerProperty(models.Model):
         max_height=_aerial_image_size_small,
         store=True,
         related="aerial_image",
-    )
-
-    aerial_image_shown = fields.Image(
-        string="Aerial Image (non-persistent)",
-        max_width=_aerial_image_size_big,
-        max_height=_aerial_image_size_big,
-        compute="_compute_aerial_image_shown",
-    )
-    aerial_image_shown_b64 = fields.Char(
-        string="Aerial Image shown (base64)",
-        compute="_compute_aerial_image_shown",
-    )
-    aerial_image_shown_256 = fields.Image(
-        string="Aerial Image (medium size, non-persistent)",
-        max_width=_aerial_image_size_medium,
-        max_height=_aerial_image_size_medium,
-        related="aerial_image_shown",
-    )
-    image_1920 = fields.Image(
-        string="Aerial Image (zoom)", related="aerial_image_shown"
     )
 
     tag_id = fields.Many2many(
@@ -189,8 +178,14 @@ class TerProperty(models.Model):
             params.get("extra", ""),
         )
 
-    @api.depends("aerial_image", "mapped_to_polygon")
-    def _compute_aerial_image_shown(self):  # pylint: disable=too-many-branches
+    def _fetch_and_store_aerial_image(self):
+        """Fetch the aerial image from the WMS service and persist it.
+
+        This performs the actual network call(s) and must only be
+        triggered by an explicit action: the "Regenerate Image" button
+        (``reset_aerial_image``) or a mass generation action.
+        """
+        self.ensure_one()
         company = self.env.company
         wmsbase_url = company.aerial_image_wmsbase_url or False
         wmsbase_layers = company.aerial_image_wmsbase_layers or False
@@ -207,116 +202,102 @@ class TerProperty(models.Model):
             image_height = self._aerial_image_size_big
         if image_zoom == 0:
             image_zoom = self._aerial_image_zoom
+        if not (ogc_ok and self.mapped_to_polygon):
+            return False
 
         use_vec = bool(ogc_ok and wmsvec_url and wmsvec_layer)
-
-        for record in self:
-            if not (ogc_ok and record.mapped_to_polygon):
-                stored = record.aerial_image or False
-                record.aerial_image_shown = stored
-                record.aerial_image_shown_b64 = (
-                    (stored or b"").decode("ascii", errors="ignore")
-                    if isinstance(stored, (bytes, bytearray))
-                    else (stored or "")
-                )
-                continue
-
-            stored_b64 = None
-            key = None
-            if not use_vec:
-                # pylint: disable=protected-access
-                key = record._aerial_cache_key(
-                    wms=wmsbase_url,
-                    layers=wmsbase_layers,
-                    styles="default",
-                    image_height=image_height,
-                    image_width=0,
-                    zoom=image_zoom,
-                    force_square_shape=self._force_square_shape,
-                    apply_filter=False,
-                    extra="base",
-                )
-                if record.aerial_image and record.aerial_image_key == key:
-                    stored_b64 = record.aerial_image
-                else:
-                    stored_b64 = record.get_aerial_image(
-                        wms=wmsbase_url,
-                        layers=wmsbase_layers,
-                        image_height=image_height,
-                        image_format="png",
-                        zoom=image_zoom,
-                        force_square_shape=self._force_square_shape,
-                    )
+        stored_b64 = None
+        if not use_vec:
+            key = self._aerial_cache_key(  # pylint: disable=protected-access
+                {
+                    "wms": wmsbase_url,
+                    "layers": wmsbase_layers,
+                    "styles": "default",
+                    "image_height": image_height,
+                    "image_width": 0,
+                    "zoom": image_zoom,
+                    "force_square_shape": self._force_square_shape,
+                    "apply_filter": False,
+                    "extra": "base",
+                }
+            )
+            if self.aerial_image and self.aerial_image_key == key:
+                stored_b64 = self.aerial_image
             else:
-                key = record._aerial_cache_key(  # pylint: disable=protected-access
+                stored_b64 = self.get_aerial_image(
                     wms=wmsbase_url,
                     layers=wmsbase_layers,
-                    styles="default",
                     image_height=image_height,
-                    image_width=0,
+                    image_format="png",
                     zoom=image_zoom,
                     force_square_shape=self._force_square_shape,
-                    apply_filter=False,
-                    extra="base+vec:%s:%s:%s"
+                )
+        else:
+            key = self._aerial_cache_key(  # pylint: disable=protected-access
+                {
+                    "wms": wmsbase_url,
+                    "layers": wmsbase_layers,
+                    "styles": "default",
+                    "image_height": image_height,
+                    "image_width": 0,
+                    "zoom": image_zoom,
+                    "force_square_shape": self._force_square_shape,
+                    "apply_filter": False,
+                    "extra": "base+vec:%s:%s:%s"
                     % (wmsvec_url or "", wmsvec_layer or "", int(wmsvec_filter)),
-                )
-                if record.aerial_image and record.aerial_image_key == key:
-                    stored_b64 = record.aerial_image
-                else:
-                    base_raw = record.get_aerial_image(
-                        wms=wmsbase_url,
-                        layers=wmsbase_layers,
-                        image_height=image_height,
-                        image_format="png",
-                        zoom=image_zoom,
-                        get_raw=True,
-                        apply_filter=False,
-                        force_square_shape=self._force_square_shape,
-                    )
-                    vec_raw = record.get_aerial_image(
-                        wms=wmsvec_url,
-                        layers=wmsvec_layer,
-                        image_height=image_height,
-                        image_format="png",
-                        zoom=image_zoom,
-                        get_raw=True,
-                        apply_filter=wmsvec_filter,
-                        force_square_shape=self._force_square_shape,
-                    )
-                    if base_raw and vec_raw:
-                        merged_bytes = self.env["common.image"].merge_img(
-                            base_raw,
-                            vec_raw,
-                            return_base64=False,
-                        )
-                        if merged_bytes:
-                            stored_b64 = base64.b64encode(merged_bytes)
-
-            if stored_b64:
-                record.aerial_image = stored_b64
-                record.aerial_image_key = key
-                record.aerial_image_shown = stored_b64
-                record.aerial_image_shown_b64 = (
-                    stored_b64.decode("ascii", errors="ignore")
-                    if isinstance(stored_b64, (bytes, bytearray))
-                    else (stored_b64 or "")
-                )
-                self.env["common.log"].register_in_log(
-                    self.env._(
-                        "Aerial image OK. Property: %(name)s",
-                        name=record.name,
-                    ),
-                    source=self._name,
-                    message_type="INFO",
-                )
+                }
+            )
+            if self.aerial_image and self.aerial_image_key == key:
+                stored_b64 = self.aerial_image
             else:
-                record.aerial_image_shown = False
-                record.aerial_image_shown_b64 = ""
-                self.env["common.log"].register_in_log(
-                    self.env._("Error getting aerial image (is the WMS url correct?)"),
-                    source=self._name,
-                    message_type="WARNING",
+                base_raw = self.get_aerial_image(
+                    wms=wmsbase_url,
+                    layers=wmsbase_layers,
+                    image_height=image_height,
+                    image_format="png",
+                    zoom=image_zoom,
+                    get_raw=True,
+                    apply_filter=False,
+                    force_square_shape=self._force_square_shape,
                 )
+                vec_raw = self.get_aerial_image(
+                    wms=wmsvec_url,
+                    layers=wmsvec_layer,
+                    image_height=image_height,
+                    image_format="png",
+                    zoom=image_zoom,
+                    get_raw=True,
+                    apply_filter=wmsvec_filter,
+                    force_square_shape=self._force_square_shape,
+                )
+                if base_raw and vec_raw:
+                    merged_bytes = self.env["common.image"].merge_img(
+                        base_raw,
+                        vec_raw,
+                        return_base64=False,
+                    )
+                    if merged_bytes:
+                        stored_b64 = base64.b64encode(merged_bytes)
+
+        if stored_b64:
+            self.aerial_image = stored_b64
+            self.aerial_image_key = key
+            self.env["common.log"].register_in_log(
+                self.env._(
+                    "Aerial image OK. Property: %(name)s",
+                    name=self.name,
+                ),
+                source=self._name,
+                message_type="INFO",
+            )
+            return True
+
+        self.env["common.log"].register_in_log(
+            self.env._("Error getting aerial image (is the WMS url correct?)"),
+            source=self._name,
+            message_type="WARNING",
+        )
+        return False
 
     @api.depends("parcel_ids")
     def _compute_number_of_parcels(self):
@@ -556,37 +537,70 @@ class TerProperty(models.Model):
             record.aerial_image_key = False
             record.aerial_image_medium = False
             record.aerial_image_small = False
-            record.aerial_image_shown = False
-            record.aerial_image_shown_256 = False
-            record.aerial_image_shown_b64 = False
-            record.image_1920 = False
 
     def reset_aerial_image(self):
         if len(self) == 1:
             self.aerial_image = False
             self.aerial_image_key = False
-            self._compute_aerial_image_shown()  # pylint: disable=protected-access
+            self._fetch_and_store_aerial_image()  # pylint: disable=protected-access
             return
 
         progress_msg = request.env._("Getting the aerial images...")
         for record in self.with_progress(progress_msg):
-            record.aerial_image = False
-            record.aerial_image_key = False
-            record._compute_aerial_image_shown()  # pylint: disable=protected-access
+            try:
+                record.aerial_image = False
+                record.aerial_image_key = False
+                record._fetch_and_store_aerial_image()  # pylint: disable=protected-access
+            except Exception as e:  # noqa: BLE001  # pylint: disable=W0718
+                # Never let a single bad record (e.g. a corrupt/degenerate
+                # geometry) abort the rest of the batch.
+                self.env.cr.rollback()
+                self.env.invalidate_all()
+                _logger.exception(
+                    "Unexpected error generating aerial image for property %s: %s",
+                    record.alphanum_code,
+                    e,
+                )
+
+    _MASS_AERIAL_IMAGE_BATCH_NAME = (
+        "base_ter.ter_property.action_reset_all_aerial_images"
+    )
+    _MASS_AERIAL_IMAGE_CHUNK_SIZE = 50
 
     @api.model
     def action_reset_all_aerial_images(self, from_backend=False):
-        batch_size = 100
-        offset = 0
-        while True:
-            batch = self.search([], limit=batch_size, offset=offset)
-            if not batch:
-                break
-            batch.reset_aerial_image()
-            offset += batch_size
-        if from_backend:
-            return {"type": "ir.actions.client", "tag": "reload"}
-        return None
+        """Enqueue a background job batch to regenerate every property's image.
+
+        The work is split into small chunks, each delayed as its own
+        queue_job tagged to a ``queue.job.batch``, so progress can be
+        tracked via the batch's ``completeness`` percentage. If a
+        previous batch is still running, no duplicate is created; the
+        user is notified instead.
+        """
+        launched = not self._is_background_batch_running(
+            self._MASS_AERIAL_IMAGE_BATCH_NAME
+        )
+        if launched:
+            batch = self._new_background_batch(self._MASS_AERIAL_IMAGE_BATCH_NAME)
+            chunk_size = self._MASS_AERIAL_IMAGE_CHUNK_SIZE
+            offset = 0
+            while True:
+                chunk_ids = self.search([], limit=chunk_size, offset=offset).ids
+                if not chunk_ids:
+                    break
+                self.browse(chunk_ids).with_context(job_batch=batch).with_delay(
+                    channel="root.ter_gis_aerial_image",
+                    description=self.env._(
+                        "Generate aerial images (properties), records %(offset)s+",
+                        offset=offset,
+                    ),
+                )._job_reset_all_aerial_images_chunk()  # pylint: disable=protected-access
+                offset += chunk_size
+        return self._background_job_notification(launched, from_backend)
+
+    def _job_reset_all_aerial_images_chunk(self):
+        """Queue_job entry point: regenerate this chunk's aerial images."""
+        self.reset_aerial_image()
 
     def action_gis_preview(self):
         self.ensure_one()

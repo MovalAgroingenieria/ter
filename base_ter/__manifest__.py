@@ -4,7 +4,7 @@
 {
     "name": "Base Territory",
     "summary": "Base module for those modules that manage a territorial census",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.2.0",
     "category": "Territory Management",
     "website": "https://www.moval.es",
     "author": "Moval Agroingeniería S.L.",
@@ -20,6 +20,8 @@
         "base_adi",
         "base_report",
         "date_range",
+        "queue_job",
+        "queue_job_batch",
     ],
     "data": [
         "security/security.xml",
@@ -27,6 +29,8 @@
         "data/ter_profile_data.xml",
         "data/ter_unit_sequence_data.xml",
         "data/base_ter_cron.xml",
+        "data/queue_job_channel_data.xml",
+        "data/queue_job_function_data.xml",
         "wizards/wizard_import_kml_views.xml",
         "wizards/wizard_import_use_type_views.xml",
         "wizards/wizard_set_parcel_code_views.xml",

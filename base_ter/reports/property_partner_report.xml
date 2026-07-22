@@ -184,8 +184,8 @@
                             </div>
 
                             <div name="property_aerial_image" class="text-center">
-                                <t t-if="property.aerial_image_shown_b64">
-                                    <img t-attf-src="data:image/png;base64, #{property.aerial_image_shown_b64}"
+                                <t t-if="property.aerial_image">
+                                    <img t-attf-src="data:image/png;base64, #{property.aerial_image}"
                                          style="max-width: 408px; max-height: 408px;"/>
                                 </t>
                                 <t t-else="">

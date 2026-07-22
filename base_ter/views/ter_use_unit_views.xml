@@ -104,14 +104,14 @@
                 <field name="state"/>
                 <field name="validity_state"/>
                 <field name="area_gis_ha"/>
-                <field name="parcel_aerial_image_shown_256"/>
+                <field name="parcel_aerial_image_medium"/>
                 <field name="attribute_value_ids"/>
                 <templates>
                     <t t-name="card">
                         <div class="oe_kanban_global_click">
                             <div class="o_terunit_kanban_image d-flex justify-content-center">
-                                <t t-if="record.parcel_aerial_image_shown_256 and record.parcel_aerial_image_shown_256.raw_value">
-                                    <img t-att-src="kanban_image('ter.unit', 'parcel_aerial_image_shown_256', record.id.raw_value)"
+                                <t t-if="record.parcel_aerial_image_medium and record.parcel_aerial_image_medium.raw_value">
+                                    <img t-attf-src="/web/image/ter.unit/#{record.id.raw_value}/parcel_aerial_image_medium"
                                          alt="ter_unit_256"
                                          style="border-color:#696969;border-width:1px;border-style:solid"/>
                                 </t>
@@ -245,11 +245,12 @@
                         </group>
                         <group string="Aerial image and GIS">
                             <div class="text-center mb-3">
-                                <field name="parcel_image_1920" widget="image"
-                                       options="{'preview_image': 'parcel_aerial_image_shown_256', 'zoom': true}"/>
+                                <field name="parcel_aerial_image" widget="image"
+                                       options="{'preview_image': 'parcel_aerial_image_medium', 'zoom': true}"/>
                             </div>
                             <field name="geom_ewkt" placeholder="SRID=25830;POLYGON((...))"
-                                   widget="text" readonly="state == 'validated'"/>
+                                   widget="text" readonly="state == 'validated'"
+                                   invisible="1"/>
                         </group>
                     </group>
                     <group string="Areas">

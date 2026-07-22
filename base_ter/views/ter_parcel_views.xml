@@ -130,7 +130,7 @@
 
                             <div name="section_aerial_img_content" colspan="2" class="text-center mb-4">
                                 <div name="div_aerial_image" style="display:inline-block;">
-                                    <field name="image_1920"
+                                    <field name="aerial_image"
                                            widget="image"
                                            options="{'preview_image': 'aerial_image_medium', 'zoom': true, 'zoom_delay': 500}"
                                            style="border-color:#696969;border-width:1px;border-style:solid"/>
@@ -259,7 +259,7 @@
                     class="o_kanban_dashboard"
                     js_class="ter_parcel_view_kanban">
                 <field name="id"/>
-                <field name="aerial_image_shown_256"/>
+                <field name="aerial_image_medium"/>
                 <field name="alphanum_code"/>
                 <field name="partner_id"/>
                 <field name="property_data"/>
@@ -270,8 +270,8 @@
                     <t t-name="card">
                         <div class="oe_kanban_global_click">
                             <div class="o_terparcel_kanban_image">
-                                <t t-if="record.aerial_image_shown_256 and record.aerial_image_shown_256.raw_value">
-                                    <img t-att-src="kanban_image('ter.parcel', 'aerial_image_shown_256', record.id.raw_value)"
+                                <t t-if="record.aerial_image_medium and record.aerial_image_medium.raw_value">
+                                    <img t-attf-src="/web/image/ter.parcel/#{record.id.raw_value}/aerial_image_medium"
                                          alt="ter_parcel_256"
                                          style="border-color:#696969;border-width:1px;border-style:solid"/>
                                 </t>
