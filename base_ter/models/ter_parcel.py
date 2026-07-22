@@ -11,6 +11,7 @@ import requests
 from psycopg2 import sql
 
 from odoo import api, exceptions, fields, models
+from odoo.addons.queue_job.delay import group
 from odoo.addons.queue_job.exception import RetryableJobError
 from odoo.addons.queue_job.job import identity_exact
 
@@ -823,18 +824,33 @@ class TerParcel(models.Model):
             batch = self._new_background_batch(self._MASS_AERIAL_IMAGE_BATCH_NAME)
             chunk_size = self._MASS_AERIAL_IMAGE_CHUNK_SIZE
             offset = 0
+            chunk_delayables = []
             while True:
                 chunk_ids = self.search([], limit=chunk_size, offset=offset).ids
                 if not chunk_ids:
                     break
-                self.browse(chunk_ids).with_context(job_batch=batch).with_delay(
-                    channel="root.ter_gis_aerial_image",
-                    description=self.env._(
-                        "Generate aerial images (parcels), records %(offset)s+",
-                        offset=offset,
-                    ),
-                )._job_reset_all_aerial_images_chunk()  # pylint: disable=protected-access
+                delayable = (
+                    self.browse(chunk_ids)
+                    .with_context(job_batch=batch)
+                    .delayable(
+                        channel="root.ter_gis_aerial_image",
+                        description=self.env._(
+                            "Generate aerial images (parcels), records %(offset)s+",
+                            offset=offset,
+                        ),
+                    )
+                )
+                delayable._job_reset_all_aerial_images_chunk()  # pylint: disable=protected-access
+                chunk_delayables.append(delayable)
                 offset += chunk_size
+
+            if chunk_delayables:
+                finalize_batch = batch.delayable(
+                    channel="root.queue.job.batch",
+                    description=self.env._("Finalize aerial image batch state"),
+                )
+                finalize_batch.check_state()
+                group(*chunk_delayables).on_done(finalize_batch).delay()
         return self._background_job_notification(launched, from_backend)
 
     def _job_reset_all_aerial_images_chunk(self):
