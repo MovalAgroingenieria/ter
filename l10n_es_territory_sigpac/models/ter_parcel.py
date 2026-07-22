@@ -5,8 +5,6 @@ import base64
 
 from odoo import api, fields, models
 
-from ..hooks import ensure_l10n_es_territory_sigpac_schema
-
 
 class TerParcel(models.Model):
     _inherit = "ter.parcel"
@@ -55,8 +53,24 @@ class TerParcel(models.Model):
                 "%(name)s (Sigpac)", name=record.display_name or ""
             )
 
-    @api.depends("aerial_img_sigpac", "mapped_to_polygon")
-    def _compute_aerial_img_sigpac_shown(self):  # pylint: disable=too-many-locals
+    @api.depends("aerial_img_sigpac")
+    def _compute_aerial_img_sigpac_shown(self):
+        """Mirror the stored SIGPAC overlay image, never fetch it.
+
+        Fetching is an explicit, potentially slow, network operation. It
+        must only happen via ``reset_aerial_img_sigpac`` (button/action),
+        never as a side effect of reading/opening a record.
+        """
+        for record in self:
+            record.aerial_img_sigpac_shown = record.aerial_img_sigpac or False
+
+    def _fetch_and_store_aerial_img_sigpac(self):
+        """Fetch the SIGPAC overlay aerial image from the WMS and store it.
+
+        This performs the actual network call(s) and must only be
+        triggered by an explicit action (``reset_aerial_img_sigpac``).
+        """
+        self.ensure_one()
         params = self.env["ir.config_parameter"].sudo()
 
         wmsbase_url = params.get_param("base_ter.aerial_image_wmsbase_url") or False
@@ -91,13 +105,11 @@ class TerParcel(models.Model):
         use_vec = bool(ogc_ok and wmsvec_url and wmsvec_parcel_layer)
         use_sigpac = bool(ogc_ok and wmssigpac_url and wmssigpac_layers)
 
-        for record in self:
-            shown = record.aerial_img_sigpac or False
-            if shown or not (ogc_ok and record.mapped_to_polygon):
-                record.aerial_img_sigpac_shown = shown or False
-                continue
+        if not (ogc_ok and self.mapped_to_polygon):
+            return False
 
-            shown = record._get_aerial_img_sigpac_from_wms(  # pylint: disable=protected-access
+        shown = (
+            self._get_aerial_img_sigpac_from_wms(  # pylint: disable=protected-access
                 wmsbase_url=wmsbase_url,
                 wmsbase_layers=wmsbase_layers,
                 wmsvec_url=wmsvec_url,
@@ -110,26 +122,29 @@ class TerParcel(models.Model):
                 use_vec=use_vec,
                 use_sigpac=use_sigpac,
             )
+        )
 
-            if shown:
-                record.aerial_img_sigpac = shown
-                self.env["common.log"].register_in_log(
-                    record.env._(
-                        "Aerial image OK. Parcel: %(name)s", name=record.name or ""
-                    ),
-                    source="ter.parcel",
-                    message_type="INFO",
-                )
-            else:
-                self.env["common.log"].register_in_log(
-                    record.env._(
-                        "Error getting aerial image (is the WMS url correct?)"
-                    ),
-                    source="ter.parcel",
-                    message_type="WARNING",
-                )
+        if shown:
+            self.aerial_img_sigpac = shown
+            self.env["common.log"].register_in_log(
+                self.env._("Aerial image OK. Parcel: %(name)s", name=self.name or ""),
+                source="ter.parcel",
+                message_type="INFO",
+            )
+            return True
 
-            record.aerial_img_sigpac_shown = shown or False
+        self.env["common.log"].register_in_log(
+            self.env._("Error getting aerial image (is the WMS url correct?)"),
+            source="ter.parcel",
+            message_type="WARNING",
+        )
+        return False
+
+    def reset_aerial_img_sigpac(self):
+        """Explicitly (re)generate the SIGPAC overlay aerial image."""
+        for record in self:
+            record.aerial_img_sigpac = False
+            record._fetch_and_store_aerial_img_sigpac()  # pylint: disable=protected-access
 
     def _get_aerial_img_sigpac_from_wms(  # pylint: disable=too-many-arguments,too-many-locals
         self,
@@ -235,162 +250,4 @@ class TerParcel(models.Model):
 
     def action_regenerate_aerial_img_sigpac(self):
         parcels = self.search([("mapped_to_polygon", "=", True)])
-        parcels._compute_aerial_img_sigpac_shown()  # pylint: disable=protected-access
-
-
-class TerParcelSigpaclink(models.Model):
-    _name = "ter.parcel.sigpaclink"
-    _auto = False
-    _table = "ter_parcel_sigpaclink"
-    _description = "SIGPAC link of a parcel"
-    _order = "name"
-
-    name = fields.Char()
-    parcel_id = fields.Many2one(comodel_name="ter.parcel")
-    sigpac_id = fields.Many2one(comodel_name="ter.sigpac")
-
-    enclosure_number = fields.Integer(compute="_compute_enclosure_number", store=False)
-
-    municipality_id = fields.Many2one(comodel_name="res.municipality")
-
-    parcel_area = fields.Float(digits=(32, 2))
-    sigpac_area = fields.Float(digits=(32, 2))
-    area_ha = fields.Float(digits=(32, 4))
-
-    parcel_area_ha = fields.Float(
-        compute="_compute_parcel_area_ha",
-        digits=(32, 4),
-        store=False,
-    )
-
-    intersection_percentage = fields.Float(digits=(32, 2))
-    pend_media_porc = fields.Float(digits=(32, 2))
-    coef_admis = fields.Integer()
-    coef_rega = fields.Integer()
-
-    uso_sigpac = fields.Selection(
-        selection=[
-            ("AG", "AG - Water streams and surfaces"),
-            ("CA", "CA - Roads"),
-            ("CF", "CF - Citrus-stone fruit association"),
-            ("CI", "CI - Citrus"),
-            ("CS", "CS - Citrus-nut tree association"),
-            ("CV", "CV - Citrus-vineyard association"),
-            ("ED", "ED - Buildings"),
-            ("EP", "EP - Landscape element"),
-            ("FF", "FF - Stone fruit-nut tree association"),
-            ("FL", "FL - Nut trees and olive grove"),
-            ("FO", "FO - Forest"),
-            ("FS", "FS - Nut trees"),
-            ("FV", "FV - Nut trees and vineyard"),
-            ("FY", "FY - Stone fruit"),
-            ("IM", "IM - Unproductive land"),
-            ("IV", "IV - Greenhouses and plastic-covered crops"),
-            ("MT", "MT - Shrubland"),
-            ("OC", "OC - Olive-citrus association"),
-            ("OF", "OF - Olive grove - stone fruit"),
-            ("OV", "OV - Olive grove"),
-            ("PA", "PA - Pasture with trees"),
-            ("PR", "PR - Shrub pasture"),
-            ("PS", "PS - Grassland"),
-            ("TA", "TA - Arable land"),
-            ("TH", "TH - Vegetable garden"),
-            ("VF", "VF - Vineyard - stone fruit"),
-            ("VI", "VI - Vineyard"),
-            ("VO", "VO - Vineyard - olive grove"),
-            ("ZC", "ZC - Concentrated area not included in orthophoto"),
-            ("ZU", "ZU - Urban area"),
-            ("ZV", "ZV - Censored area"),
-        ]
-    )
-
-    incidencia = fields.Char()
-    region = fields.Char()
-
-    gis_link_public = fields.Char(related="parcel_id.gis_link_public")
-    gis_link_minimal = fields.Char(related="parcel_id.gis_link_minimal")
-    gis_link_technical = fields.Char(related="parcel_id.gis_link_technical")
-
-    sigpac_link = fields.Char(related="sigpac_id.sigpac_link")
-
-    number_of_sigpaclinks = fields.Integer(related="parcel_id.number_of_sigpaclinks")
-
-    irrigation_model_type = fields.Integer(
-        compute="_compute_irrigation_model_type",
-        store=False,
-    )
-
-    def init(self):
-        ensure_l10n_es_territory_sigpac_schema(self.env)
-
-    def _compute_enclosure_number(self):
-        for record in self:
-            enclosure_number = 0
-            name = record.name or ""
-            if len(name) > 3:
-                suffix = name[-3:]
-                if suffix.isdigit():
-                    enclosure_number = int(suffix)
-            record.enclosure_number = enclosure_number
-
-    def _compute_parcel_area_ha(self):
-        for record in self:
-            record.parcel_area_ha = (record.parcel_area or 0.0) / 10000.0
-
-    def _compute_irrigation_model_type(self):
-        value = int(self.env.company.irrigation_model_type or 0)
-        for record in self:
-            record.irrigation_model_type = value
-
-    @api.model
-    def read_group(  # pylint: disable=too-many-arguments,too-many-positional-arguments,redefined-outer-name
-        self,
-        domain,
-        fields,
-        groupby,
-        offset=0,
-        limit=None,
-        orderby=False,
-        lazy=True,
-    ):
-        fields_list = fields
-        reduced_fields = [
-            f
-            for f in fields_list
-            if f not in {"intersection_percentage", "pend_media_porc", "coef_rega"}
-        ]
-        return super().read_group(
-            domain,
-            reduced_fields,
-            groupby,
-            offset=offset,
-            limit=limit,
-            orderby=orderby,
-            lazy=lazy,
-        )
-
-    def action_gis_viewer(self):
-        self.ensure_one()
-        if not self.gis_link_public:
-            return False
-        return {
-            "type": "ir.actions.act_url",
-            "url": self.gis_link_public,
-            "target": "new",
-        }
-
-    def action_sigpac_viewer(self):
-        self.ensure_one()
-        if not self.sigpac_link:
-            return False
-        return {
-            "type": "ir.actions.act_url",
-            "url": self.sigpac_link,
-            "target": "new",
-        }
-
-    @api.model
-    def action_refresh_sigpac_intersections(self):
-        self.sudo().env.cr.execute(
-            "REFRESH MATERIALIZED VIEW CONCURRENTLY ter_parcel_sigpaclink"
-        )
+        parcels.reset_aerial_img_sigpac()

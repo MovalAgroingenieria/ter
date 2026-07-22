@@ -160,7 +160,7 @@ class TerSigpac(models.Model):
             return False
 
         list_view = self.env.ref(
-            "l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_parcels_view_tree"
+            "l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_parcels_view_list"
         )
         search_view = self.env.ref(
             "l10n_es_territory_sigpac.ter_parcel_sigpaclink_only_parcels_view_search"

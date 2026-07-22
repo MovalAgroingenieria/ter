@@ -5,7 +5,7 @@
     "name": "Spain - Territory SIGPAC Integration",
     "summary": "In a territorial census, integration of the SIGPAC "
     "enclosures, and creation of a spatial link with the parcels.",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Territory Management",
     "website": "http://www.moval.es",
     "author": "Moval Agroingeniería S.L.",

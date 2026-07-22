@@ -16,13 +16,11 @@ def _table_exists(cr, table_name):
 def _sql_epsg_for_geom(env):
     """EPSG for POSTGIS.GEOMETRY(Polygon, srid); read from config when present."""
     epsg = 25830
-    env.cr.execute(
-        """
+    env.cr.execute("""
         SELECT value
         FROM ir_config_parameter
         WHERE key = 'base_ter.gis_viewer_epsg'
-        """
-    )
+        """)
     row = env.cr.fetchone()
     if row and row[0]:
         raw_epsg = str(row[0]).splitlines()[0]
@@ -57,16 +55,14 @@ def ensure_l10n_es_territory_sigpac_schema(env):
 
     epsg = _sql_epsg_for_geom(env)
 
-    cr.execute(
-        """
+    cr.execute("""
         CREATE SEQUENCE IF NOT EXISTS public.ter_gis_sigpac_gid_seq
             INCREMENT 1
             START 1
             MINVALUE 1
             MAXVALUE 2147483647
             CACHE 1
-        """
-    )
+        """)
 
     cr.execute(
         """
@@ -95,19 +91,16 @@ def ensure_l10n_es_territory_sigpac_schema(env):
         (epsg,),
     )
 
-    cr.execute(
-        """
+    cr.execute("""
         CREATE INDEX IF NOT EXISTS ter_gis_sigpac_idx
         ON public.ter_gis_sigpac USING gist (geom)
-        """
-    )
+        """)
 
     # Dependent MV first, then base MV (same order as uninstall & deps).
     drop_view_if_exists(cr, "ter_parcel_sigpaclink")
     drop_view_if_exists(cr, "ter_sigpac")
 
-    cr.execute(
-        """
+    cr.execute("""
         CREATE MATERIALIZED VIEW public.ter_sigpac AS
         (
             SELECT row_number() OVER () AS id,
@@ -134,21 +127,16 @@ def ensure_l10n_es_territory_sigpac_schema(env):
                                 'OF', 'OV', 'PA', 'PR', 'PS', 'TA', 'TH', 'VF',
                                 'VI', 'VO', 'ZC', 'ZU', 'ZV')
         )
-        """
-    )
+        """)
 
-    cr.execute(
-        """
+    cr.execute("""
         CREATE UNIQUE INDEX IF NOT EXISTS ter_sigpac_id_index
         ON public.ter_sigpac (id)
-        """
-    )
-    cr.execute(
-        """
+        """)
+    cr.execute("""
         CREATE INDEX IF NOT EXISTS ter_sigpac_name_index
         ON public.ter_sigpac (name)
-        """
-    )
+        """)
 
     cr.execute(
         """
@@ -190,18 +178,14 @@ def ensure_l10n_es_territory_sigpac_schema(env):
         (DEF_INT_PERC,),
     )
 
-    cr.execute(
-        """
+    cr.execute("""
         CREATE UNIQUE INDEX IF NOT EXISTS ter_parcel_sigpaclink_id_index
         ON public.ter_parcel_sigpaclink (id)
-        """
-    )
-    cr.execute(
-        """
+        """)
+    cr.execute("""
         CREATE INDEX IF NOT EXISTS ter_parcel_sigpaclink_name_index
         ON public.ter_parcel_sigpaclink (name)
-        """
-    )
+        """)
 
     cr._l10n_es_territory_sigpac_schema_ensured = (  # pylint: disable=protected-access
         True
@@ -222,21 +206,34 @@ def post_init_hook(env):
         "&zona={{ object.zona }}"
     )
 
-    companies = env["res.company"].sudo().search([])
-    for company in companies:
-        values = {}
-        if not company.wms_sigpac_layer:
-            values["wms_sigpac_layer"] = "recinto"
-        if not company.wms_sigpac_url:
-            values["wms_sigpac_url"] = "https://wms.mapa.gob.es/sigpac/wms"
-        if not company.sigpac_minimum_intersection_percentage:
-            values["sigpac_minimum_intersection_percentage"] = DEF_INT_PERC
-        if not company.sigpac_viewer_url:
-            values["sigpac_viewer_url"] = default_sigpac_viewer_url
-        if not company.python_venv_url:
-            values["python_venv_url"] = "python3"
-        if values:
-            company.write(values)
+    company_model = env["res.company"].sudo()
+    batch_size = 500
+    last_id = 0
+    while True:
+        companies = company_model.search(
+            [("id", ">", last_id)],
+            order="id",
+            limit=batch_size,
+        )
+        if not companies:
+            break
+
+        for company in companies:
+            values = {}
+            if not company.wms_sigpac_layer:
+                values["wms_sigpac_layer"] = "recinto"
+            if not company.wms_sigpac_url:
+                values["wms_sigpac_url"] = "https://wms.mapa.gob.es/sigpac/wms"
+            if not company.sigpac_minimum_intersection_percentage:
+                values["sigpac_minimum_intersection_percentage"] = DEF_INT_PERC
+            if not company.sigpac_viewer_url:
+                values["sigpac_viewer_url"] = default_sigpac_viewer_url
+            if not company.python_venv_url:
+                values["python_venv_url"] = "python3"
+            if values:
+                company.write(values)
+
+        last_id = companies[-1].id
 
 
 def uninstall_hook(env):
