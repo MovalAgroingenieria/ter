@@ -1,8 +1,5 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
-
-# 2026 Moval Agroingeniería
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 # isort: skip_file
 # Import order is significant: the abstract "geofolia.import.base.line" must load
 # before the concrete models that inherit it, so do NOT alphabetically sort this file.
@@ -31,6 +28,7 @@ from . import (
     res_company,
     res_config_settings,
     res_partner,
+    ter_parcel,
     ter_use_unit,
     timesheets_analysis_report,
 )

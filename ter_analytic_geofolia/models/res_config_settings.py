@@ -20,6 +20,12 @@ class ResConfigSettings(models.TransientModel):
         domain=[("is_unit_use_type", "=", True)],
         string="Geofolia default date range",
     )
+    geofolia_default_municipality_id = fields.Many2one(
+        comodel_name="res.municipality",
+        related="company_id.geofolia_default_municipality_id",
+        readonly=False,
+        string="Geofolia default municipality",
+    )
     geofolia_default_fsm_location_id = fields.Many2one(
         comodel_name="fsm.location",
         related="company_id.geofolia_default_fsm_location_id",

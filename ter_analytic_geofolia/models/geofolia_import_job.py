@@ -1028,68 +1028,216 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             return
         self.apply_state = "ready" if has_pending else "done"
 
-    def _field_line_resolve_dates(self, line, default_date_range):
-        """Return (date_range, date_start, date_end) for a field line.
+    def _field_line_find_campaign(self, date_start, date_end, harvest_year, default):
+        """Return the date.range (campaign) that best fits the field.
 
-        Priority: SowingDate/HarvestDate from JSON → HarvestYear fallback
-        → default_date_range fallback.
+        Priority: a range that contains the explicit sowing/harvest dates →
+        a range covering the harvest year → the configured default range.
         """
-        date_start = line.sowing_date or False
-        date_end = line.harvest_date or False
-        harvest_year = line.harvest_year
-        if not date_start and harvest_year:
-            date_start = fields.Date.from_string(f"{harvest_year}-01-01")
-        if not date_end and harvest_year:
-            date_end = fields.Date.from_string(f"{harvest_year}-12-31")
-        date_range = False
+        dr_obj = self.env["date.range"]
+        base_domain = [("is_unit_use_type", "=", True)]
         if date_start and date_end:
-            date_range = self.env["date.range"].search(
-                [
-                    ("is_unit_use_type", "=", True),
+            campaign = dr_obj.search(
+                base_domain
+                + [
                     ("date_start", "<=", date_start),
                     ("date_end", ">=", date_end),
                 ],
                 limit=1,
             )
-        if not date_range and default_date_range:
-            date_range = default_date_range
+            if campaign:
+                return campaign
+        if harvest_year:
+            midyear = fields.Date.from_string(f"{harvest_year}-06-30")
+            campaign = dr_obj.search(
+                base_domain
+                + [
+                    ("date_start", "<=", midyear),
+                    ("date_end", ">=", midyear),
+                ],
+                limit=1,
+            )
+            if campaign:
+                return campaign
+        return default or dr_obj.browse()
+
+    def _field_line_resolve_dates(self, line, default_date_range):
+        """Return (date_range, date_start, date_end) for a field line.
+
+        Fills missing SowingDate/HarvestDate from the resolved campaign
+        (start/end), clamps the dates inside the campaign and guarantees
+        date_start <= date_end so ter.use_unit constraints always hold.
+        """
+        date_start = line.sowing_date or False
+        date_end = line.harvest_date or False
+        harvest_year = line.harvest_year
+        campaign = self._field_line_find_campaign(
+            date_start, date_end, harvest_year, default_date_range
+        )
+        if campaign:
             if not date_start:
-                date_start = date_range.date_start
+                date_start = campaign.date_start
             if not date_end:
-                date_end = date_range.date_end
-        if not date_start and date_range:
-            date_start = date_range.date_start
-        if not date_end and date_range:
-            date_end = date_range.date_end
-        return date_range, date_start, date_end
+                date_end = campaign.date_end
+            if campaign.date_start and date_start < campaign.date_start:
+                date_start = campaign.date_start
+            if campaign.date_end and date_end > campaign.date_end:
+                date_end = campaign.date_end
+        else:
+            if not date_start and harvest_year:
+                date_start = fields.Date.from_string(f"{harvest_year}-01-01")
+            if not date_end and harvest_year:
+                date_end = fields.Date.from_string(f"{harvest_year}-12-31")
+        if date_start and date_end and date_start > date_end:
+            if campaign:
+                date_start = campaign.date_start
+                date_end = campaign.date_end
+            else:
+                date_start = date_end
+        return campaign, date_start, date_end
 
-    def _field_line_resolve_parcel(self, line, default_parcel):
-        """Return parcel for field line (from geometry or default).
+    def _geofolia_city_number(self, line):
+        """Return the Geofolia CityNumber (cadastral code) for a field line."""
+        raw = line.raw_json or {}
+        city_number = str(raw.get("CityNumber") or "").strip()
+        if city_number.isdigit() and len(city_number) >= 3:
+            return city_number
+        return ""
 
-        When geometry is present, parcel comes from base_ter's
-        _get_parcel_from_geometry(): the ter.parcel that has maximum overlap
-        (ST_Intersection area) with the Field geometry in the GIS parcel table,
-        so it is always a parcel with GIS geometry/area.
-        When no geometry (or no match), use default_parcel only if it has
-        mapped_to_polygon (GIS geometry), so the chosen parcel always
-        coincides with a parcel we have in GIS.
+    def _create_geofolia_municipality(self, line):
+        """Create a res.municipality from the Geofolia CityNumber.
+
+        CityNumber is the cadastral code: 2-digit province cadastral code
+        plus the 3-digit municipality number. Returns an empty recordset
+        when the province cannot be resolved or the city has no CityNumber.
+        """
+        muni_obj = self.env["res.municipality"]
+        city = (line.city or "").strip()
+        city_number = self._geofolia_city_number(line)
+        if not city or not city_number:
+            return muni_obj.browse()
+        province = self.env["res.province"].search(
+            [("cadastral_code", "=", int(city_number[:2]))], limit=1
+        )
+        municipality_number = int(city_number[2:])
+        if not province or municipality_number <= 0:
+            return muni_obj.browse()
+        return muni_obj.create(
+            {
+                "alphanum_code": city,
+                "province_id": province.id,
+                "municipality_number": municipality_number,
+            }
+        )
+
+    def _resolve_geofolia_municipality(self, line):
+        """Resolve the municipality for a field.
+
+        Priority: existing municipality by CityNumber (cadastral code) →
+        by city name → create it from the CityNumber → configured default.
+        """
+        muni_obj = self.env["res.municipality"]
+        city_number = self._geofolia_city_number(line)
+        if city_number:
+            municipality = muni_obj.search(
+                [("cadastral_code", "=", city_number)], limit=1
+            )
+            if municipality:
+                return municipality
+        city = (line.city or "").strip()
+        if city:
+            municipality = muni_obj.search([("alphanum_code", "=ilike", city)], limit=1)
+            if municipality:
+                return municipality
+        municipality = self._create_geofolia_municipality(line)
+        if municipality:
+            return municipality
+        return self.env.company.geofolia_default_municipality_id
+
+    def _build_geofolia_parcel_code(self, line):
+        """Return a unique parcel code (<=20 chars) for an auto-created parcel."""
+        parcel_obj = self.env["ter.parcel"]
+        year = str(line.harvest_year or "")[-2:] or "00"
+        base = f"GF{year}-"
+        seq = parcel_obj.search_count([("alphanum_code", "=like", f"{base}%")]) + 1
+        code = f"{base}{seq:05d}"
+        while parcel_obj.search_count([("alphanum_code", "=", code)]):
+            seq += 1
+            code = f"{base}{seq:05d}"
+        return code[:20]
+
+    def _create_geofolia_field_parcel(self, line, geom_ewkt):
+        """Create a ter.parcel for a Geofolia field.
+
+        Uses the field geometry when provided (stored in the GIS parcel
+        table). Raises a descriptive UserError when the municipality cannot
+        be resolved.
+        """
+        municipality = self._resolve_geofolia_municipality(line)
+        if not municipality:
+            raise UserError(
+                self.env._(
+                    "Cannot create a parcel for Geofolia field "
+                    "%(field)s: municipality %(city)s (code %(code)s) could "
+                    "not be found or created. Set a default municipality in "
+                    "the Geofolia settings.",
+                    field=line.name or line.code or line.external_uuid or "",
+                    city=line.city or "-",
+                    code=self._geofolia_city_number(line) or "-",
+                )
+            )
+        parcel = self.env["ter.parcel"].create(
+            {
+                "alphanum_code": self._build_geofolia_parcel_code(line),
+                "municipality_id": municipality.id,
+                "area_official": 0,
+                "geofolia_created": True,
+            }
+        )
+        if geom_ewkt:
+            parcel._set_gis_geometry(geom_ewkt)
+        return parcel
+
+    def _field_line_resolve_parcel(self, line, default_parcel, existing_unit=None):
+        """Return (parcel, geom_ewkt) for a field line, creating a parcel if needed.
+
+        Re-import (the Geofolia id already has a use unit): keep the parcel
+        already linked to that unit untouched, and only set its geometry when
+        the parcel has none and the field now brings one.
+
+        First import:
+        - Geometry present and it overlaps an existing GIS parcel → reuse it.
+        - Geometry present but no overlap → create a parcel with that geometry.
+        - No geometry → use the configured default parcel, otherwise create a
+          parcel without geometry so the record is still imported.
         """
         ter_unit_obj = self.env["ter.use_unit"]
         geom_ewkt = (line.geography_wkt or "").strip() or False
-        parcel = False
+        if existing_unit and existing_unit.parcel_id:
+            parcel = existing_unit.parcel_id
+            if geom_ewkt and not parcel.mapped_to_polygon:
+                parcel._set_gis_geometry(geom_ewkt)
+            return parcel, geom_ewkt
         if geom_ewkt:
             temp_unit = ter_unit_obj.new({})
             parcel = temp_unit._get_parcel_from_geometry(geom_ewkt)
-        if not parcel and default_parcel:
-            if getattr(default_parcel, "mapped_to_polygon", False):
-                parcel = default_parcel
-        return parcel, geom_ewkt
+            if parcel:
+                return parcel, geom_ewkt
+            parcel = self._create_geofolia_field_parcel(line, geom_ewkt)
+            return parcel, geom_ewkt
+        if default_parcel:
+            return default_parcel, False
+        parcel = self._create_geofolia_field_parcel(line, False)
+        return parcel, False
 
     def _field_line_write_parcel_error(self, line):
         line.write(
             {
                 "sync_state": "error",
-                "sync_message": self.env._("No parcel found for this GIS."),
+                "sync_message": self.env._(
+                    "Could not determine or create a parcel for this field "
+                    "(no geometry match and no municipality to create one)."
+                ),
             }
         )
 
@@ -1098,8 +1246,9 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             {
                 "sync_state": "error",
                 "sync_message": self.env._(
-                    "No date range. Set harvest year in data or "
-                    "configure Geofolia default date range."
+                    "No campaign (date range) could be resolved. Set the "
+                    "harvest year in the data, create a matching date range, "
+                    "or configure a Geofolia default date range."
                 ),
             }
         )
@@ -1281,7 +1430,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             }
         )
 
-    def _build_field_line_ctx(self, line, ext_id):
+    def _build_field_line_ctx(self, line, ext_id, existing_unit=None):
         """Build context dict for field line processing."""
         company = self.env.company
         default_parcel = company.geofolia_default_parcel_id
@@ -1289,7 +1438,9 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         date_range, date_start, date_end = self._field_line_resolve_dates(
             line, default_date_range
         )
-        parcel, geom_ewkt = self._field_line_resolve_parcel(line, default_parcel)
+        parcel, geom_ewkt = self._field_line_resolve_parcel(
+            line, default_parcel, existing_unit
+        )
         area_official = float(line.area or 0)
         loc_name = (
             line.name
@@ -1331,7 +1482,25 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     [("geofolia_external_id", "=", ext_id)], limit=1
                 )
                 location = unit.fsm_location_id if unit else fsm_loc_obj.browse()
-                ctx = self._build_field_line_ctx(line, ext_id)
+                loc_name = (
+                    line.name
+                    or line.code
+                    or self.env._("Geofolia Field %(ext_id)s", ext_id=ext_id)
+                )
+                if not unit and not location:
+                    candidates = fsm_loc_obj.search(
+                        [
+                            ("geofolia_external_id", "=", False),
+                            ("partner_id.name", "=", loc_name),
+                            ("ter_use_unit_id", "!=", False),
+                        ],
+                        limit=2,
+                    )
+                    if len(candidates) == 1:
+                        location = candidates
+                        unit = candidates.ter_use_unit_id
+                        unit.sudo().write({"geofolia_external_id": ext_id})
+                ctx = self._build_field_line_ctx(line, ext_id, unit)
                 if not ctx.get("parcel") and not location:
                     self._field_line_write_parcel_error(line)
                     return
@@ -1340,24 +1509,10 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     return
                 if location:
                     self._field_line_apply_existing_location(location, line, ctx)
-                elif unit:
-                    self._field_line_apply_new_location(line, ctx)
                 else:
-                    candidates = fsm_loc_obj.search(
-                        [
-                            ("geofolia_external_id", "=", False),
-                            ("partner_id.name", "=", ctx["loc_name"]),
-                            ("ter_use_unit_id", "!=", False),
-                        ],
-                        limit=2,
-                    )
-                    if len(candidates) == 1:
-                        candidates.ter_use_unit_id.sudo().write(
-                            {"geofolia_external_id": ctx["ext_id"]}
-                        )
-                        self._field_line_apply_existing_location(candidates, line, ctx)
-                    else:
-                        self._field_line_apply_new_location(line, ctx)
+                    self._field_line_apply_new_location(line, ctx)
+        except UserError as exc:
+            line.write({"sync_state": "error", "sync_message": str(exc)})
         except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 

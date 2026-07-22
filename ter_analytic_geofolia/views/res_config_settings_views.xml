@@ -17,6 +17,11 @@
                              help="Default date range for ter.use_unit when importing Geofolia Fields.">
                         <field name="geofolia_default_date_range_id" options="{'no_create': True}"/>
                     </setting>
+                    <setting id="geofolia_default_municipality_id"
+                             string="Default municipality (auto-created parcels)"
+                             help="Fallback municipality used to create a parcel when a Geofolia Field's city does not match an existing municipality.">
+                        <field name="geofolia_default_municipality_id" options="{'no_create': True}"/>
+                    </setting>
                     <setting id="geofolia_default_fsm_location_id"
                              string="Default FSM location (Activities)"
                              help="Fallback location for fsm.order when the activity's plot (CropZoneIds) is not yet imported. If Fields are imported first, the order uses the plot's fsm.location.">

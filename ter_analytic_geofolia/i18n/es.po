@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-20 08:47+0000\n"
+"POT-Creation-Date: 2026-07-20 11:30+0000\n"
 "PO-Revision-Date: 2026-07-20 08:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -83,7 +84,7 @@ msgstr "Ya existe una unidad de uso con este ID de Geofolia."
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.geofolia_import_job_view_form
 msgid "Act emp"
-msgstr "Act emp"
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.geofolia_import_job_view_form
@@ -246,17 +247,31 @@ msgstr "Cancelar"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/wizards/import_wizard.py:0
 msgid "Cannot autodetect JSON type. Choose it manually."
-msgstr "No se puede detectar automáticamente el tipo de JSON. Selecciónelo manualmente."
+msgstr ""
 "No se puede detectar automáticamente el tipo de JSON. Selecciónelo "
-"manualmente."
+"manualmente.No se puede detectar automáticamente el tipo de JSON. "
+"Selecciónelo manualmente."
+
+#. module: ter_analytic_geofolia
+#. odoo-python
+#: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
+msgid ""
+"Cannot create a parcel for Geofolia field %(field)s: municipality %(city)s "
+"(code %(code)s) could not be found or created. Set a default municipality in"
+" the Geofolia settings."
+msgstr ""
+"No se puede crear una parcela para el Field de Geofolia %(field)s: el "
+"municipio %(city)s (código %(code)s) no se pudo encontrar ni crear. "
+"Configure un municipio por defecto en los ajustes de Geofolia."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 msgid "Cannot create location: parcel/date range required for ter.use_unit."
-msgstr "No se puede crear ubicación: se requiere parcela/período para ter.use_unit."
-"No se puede crear ubicación: se requiere parcela/rango de fechas para "
-"ter.use_unit."
+msgstr ""
+"No se puede crear ubicación: se requiere parcela/período para "
+"ter.use_unit.No se puede crear ubicación: se requiere parcela/rango de "
+"fechas para ter.use_unit."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -300,6 +315,16 @@ msgstr "Compañías"
 #: model:ir.model,name:ter_analytic_geofolia.model_res_partner
 msgid "Contact"
 msgstr "Contacto"
+
+#. module: ter_analytic_geofolia
+#. odoo-python
+#: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
+msgid ""
+"Could not determine or create a parcel for this field (no geometry match and"
+" no municipality to create one)."
+msgstr ""
+"No se pudo determinar ni crear una parcela para este Field (sin coincidencia"
+" de geometría y sin municipio para crearla)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields.selection,name:ter_analytic_geofolia.selection__geofolia_import_activity_employee_line__sync_state__created
@@ -364,6 +389,12 @@ msgid "Created field service person."
 msgstr "Persona de servicio de campo creada."
 
 #. module: ter_analytic_geofolia
+#: model:ir.model.fields,field_description:ter_analytic_geofolia.field_ter_parcel__geofolia_created
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.ter_parcel_view_search
+msgid "Created from Geofolia"
+msgstr "Creada desde Geofolia"
+
+#. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 msgid "Created location and use unit (1:1)."
@@ -418,8 +449,10 @@ msgstr "Ubicación FSM por defecto (Actividades)"
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_company__geofolia_default_fsm_location_id
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_config_settings__geofolia_default_fsm_location_id
 msgid "Default FSM location for fsm.order created from Geofolia activities."
-msgstr "Ubicación FSM por defecto para fsm.order creados desde actividades de Geofolia."
-"Ubicación FSM por defecto para fsm.order creados desde actividades Geofolia."
+msgstr ""
+"Ubicación FSM por defecto para fsm.order creados desde actividades de "
+"Geofolia.Ubicación FSM por defecto para fsm.order creados desde actividades "
+"Geofolia."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
@@ -430,8 +463,10 @@ msgstr "Cuenta analítica por defecto (Actividades / partes de horas)"
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_company__geofolia_default_analytic_account_id
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_config_settings__geofolia_default_analytic_account_id
 msgid "Default analytic account for activity timesheets (Odoo 18)."
-msgstr "Cuenta analítica por defecto para partes de horas de actividades (Odoo 18)."
-"Cuenta analítica por defecto para partes de horas de actividades (Odoo 18)."
+msgstr ""
+"Cuenta analítica por defecto para partes de horas de actividades (Odoo "
+"18).Cuenta analítica por defecto para partes de horas de actividades (Odoo "
+"18)."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
@@ -452,6 +487,11 @@ msgstr "Producto cosechado por defecto (sin id)"
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
+msgid "Default municipality (auto-created parcels)"
+msgstr "Municipio por defecto (parcelas creadas automáticamente)"
+
+#. module: ter_analytic_geofolia
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
 msgid "Default parcel (Fields without geometry)"
 msgstr "Parcela por defecto (Parcelas sin geometría)"
 
@@ -459,10 +499,11 @@ msgstr "Parcela por defecto (Parcelas sin geometría)"
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_company__geofolia_default_parcel_id
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_config_settings__geofolia_default_parcel_id
 msgid "Default parcel for ter.use_unit when Fields have no geometry."
-msgstr "Parcela por defecto para ter.use_unit cuando las parcelas no tienen geometría."
-"Parcela por defecto para ter.use_unit cuando las Parcelas no tienen "
+msgstr ""
+"Parcela por defecto para ter.use_unit cuando las parcelas no tienen "
 "geometría.Parcela por defecto para ter.use_unit cuando las Parcelas no "
-"tienen geometría."
+"tienen geometría.Parcela por defecto para ter.use_unit cuando las Parcelas "
+"no tienen geometría."
 
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
@@ -701,10 +742,10 @@ msgstr "Externo"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_person__geofolia_external_id
 msgid "External ID from Geofolia (Employees) import. Prevents duplicates."
-msgstr "ID externo de importación Geofolia (Empleados). Evita duplicados."
-"ID externo de importación Geofolia (Empleados). Evita importaciones "
-"duplicadas.ID externo de importación Geofolia (Empleados). Evita "
-"importaciones duplicadas."
+msgstr ""
+"ID externo de importación Geofolia (Empleados). Evita duplicados.ID externo "
+"de importación Geofolia (Empleados). Evita importaciones duplicadas.ID "
+"externo de importación Geofolia (Empleados). Evita importaciones duplicadas."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_equipment__geofolia_external_id
@@ -714,9 +755,10 @@ msgstr "ID externo de la importación Geofolia (Equipos). Evita duplicados."
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_ter_use_unit__geofolia_external_id
 msgid "External ID from Geofolia (Field) import. Prevents duplicate imports."
-msgstr "ID externo de la importación Geofolia (Parcelas). Evita importaciones duplicadas."
-"ID externo de la importación Geofolia (Campos). Evita importaciones "
-"duplicadas."
+msgstr ""
+"ID externo de la importación Geofolia (Parcelas). Evita importaciones "
+"duplicadas.ID externo de la importación Geofolia (Campos). Evita "
+"importaciones duplicadas."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_res_partner__geofolia_external_id
@@ -733,8 +775,9 @@ msgstr ""
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_hr_employee__geofolia_external_id
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_product_product__geofolia_external_id
 msgid "External ID from Geofolia import. Prevents duplicate imports."
-msgstr "ID externo de la importación Geofolia. Evita importaciones duplicadas."
-"ID externo de la importación Geofolia. Evita importaciones duplicadas."
+msgstr ""
+"ID externo de la importación Geofolia. Evita importaciones duplicadas.ID "
+"externo de la importación Geofolia. Evita importaciones duplicadas."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__external_uuid
@@ -798,6 +841,17 @@ msgid ""
 msgstr ""
 
 #. module: ter_analytic_geofolia
+#: model:ir.model.fields,help:ter_analytic_geofolia.field_res_company__geofolia_default_municipality_id
+#: model:ir.model.fields,help:ter_analytic_geofolia.field_res_config_settings__geofolia_default_municipality_id
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
+msgid ""
+"Fallback municipality used to create a parcel when a Geofolia Field's city "
+"does not match an existing municipality."
+msgstr ""
+"Municipio de reserva usado para crear una parcela cuando la localidad del "
+"Field de Geofolia no coincide con ningún municipio existente."
+
+#. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_line__farm_identification_code
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_equipment_line__farm_identification_code
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__farm_identification_code
@@ -826,9 +880,10 @@ msgstr ""
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_product_line__farm_identification_code
 msgid "Farm identification from Geofolia; same SupplyId can appear per farm."
-msgstr "Identificación de explotación de Geofolia; el mismo SupplyId puede aparecer por explotación."
+msgstr ""
 "Identificación de explotación de Geofolia; el mismo SupplyId puede aparecer "
-"por explotación."
+"por explotación.Identificación de explotación de Geofolia; el mismo SupplyId"
+" puede aparecer por explotación."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_fsm_equipment
@@ -1112,6 +1167,12 @@ msgstr "Periodo por defecto Geofolia"
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_config_settings__geofolia_default_harvested_product_id
 msgid "Geofolia default harvested product"
 msgstr "Producto cosechado por defecto Geofolia"
+
+#. module: ter_analytic_geofolia
+#: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_company__geofolia_default_municipality_id
+#: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_config_settings__geofolia_default_municipality_id
+msgid "Geofolia default municipality"
+msgstr "Municipio por defecto de Geofolia"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_company__geofolia_default_parcel_id
@@ -1422,8 +1483,9 @@ msgstr "Líneas con error"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_ter_use_unit__fsm_location_id
 msgid "Linked Field Service location (1:1 with this use unit)."
-msgstr "Ubicación de servicio de campo vinculada (1:1 con esta unidad de uso)."
-"Ubicación de servicio de campo vinculada (1:1 con esta unidad de uso)."
+msgstr ""
+"Ubicación de servicio de campo vinculada (1:1 con esta unidad de "
+"uso).Ubicación de servicio de campo vinculada (1:1 con esta unidad de uso)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_location__ter_use_unit_id
@@ -1535,11 +1597,13 @@ msgstr "Sin acción"
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 msgid ""
-"No date range. Set harvest year in data or configure Geofolia default date "
+"No campaign (date range) could be resolved. Set the harvest year in the "
+"data, create a matching date range, or configure a Geofolia default date "
 "range."
 msgstr ""
-"Sin periodo. Establezca el año de cosecha en los datos o configure el "
-"periodo predeterminado de Geofolia."
+"No se pudo resolver ninguna campaña (periodo). Establezca el año de cosecha "
+"en los datos, cree un periodo que coincida o configure un periodo por "
+"defecto de Geofolia."
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -1547,12 +1611,6 @@ msgstr ""
 #: code:addons/ter_analytic_geofolia/wizards/import_wizard.py:0
 msgid "No file provided."
 msgstr "No se ha proporcionado ningún fichero."
-
-#. module: ter_analytic_geofolia
-#. odoo-python
-#: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
-msgid "No parcel found for this GIS."
-msgstr "No se ha encontrado parcela para este GIS."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_job__line_count
@@ -1575,6 +1633,11 @@ msgstr "Nombre operación"
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_fsm_order_product_usage__partner_id
 msgid "Owner"
 msgstr "Propietario"
+
+#. module: ter_analytic_geofolia
+#: model:ir.model,name:ter_analytic_geofolia.model_ter_parcel
+msgid "Parcel"
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__state
@@ -1742,7 +1805,9 @@ msgstr ""
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
 msgid "Product to assign when a Harvested product line has no Geofolia id."
-msgstr "Producto a asignar cuando una línea de producto cosechado no tenga id de Geofolia."
+msgstr ""
+"Producto a asignar cuando una línea de producto cosechado no tenga id de "
+"Geofolia."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_order_product_usage__name
@@ -1823,7 +1888,9 @@ msgstr "Reprocesar"
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
 msgid "Required to create timesheet lines from Geofolia activities (Odoo 18)."
-msgstr "Requerido para crear líneas de partes de horas desde actividades de Geofolia (Odoo 18)."
+msgstr ""
+"Requerido para crear líneas de partes de horas desde actividades de Geofolia"
+" (Odoo 18)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_location__geofolia_external_id
@@ -1842,6 +1909,13 @@ msgstr "Secuencia"
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 msgid "Set analytic account (parcel or Geofolia settings)."
 msgstr "Asignar cuenta analítica (parcela o configuración Geofolia)."
+
+#. module: ter_analytic_geofolia
+#: model:ir.model.fields,help:ter_analytic_geofolia.field_ter_parcel__geofolia_created
+msgid "Set when the parcel was auto-created during a Geofolia Fields import."
+msgstr ""
+"Marcado cuando la parcela se creó automáticamente durante una importación de"
+" parcelas (Fields) de Geofolia."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields.selection,name:ter_analytic_geofolia.selection__geofolia_import_activity_employee_line__sync_state__skipped
@@ -2010,8 +2084,10 @@ msgstr "Nº total"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_order__worked_surface
 msgid "Total worked surface in m² (from Geofolia CropZones)."
-msgstr "Superficie total trabajada en m² (de las zonas de cultivo de Geofolia)."
-"Superficie total trabajada en m² (de las zonas de cultivo de Geofolia)."
+msgstr ""
+"Superficie total trabajada en m² (de las zonas de cultivo de "
+"Geofolia).Superficie total trabajada en m² (de las zonas de cultivo de "
+"Geofolia)."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_fsm_order_product_usage__uom_name
@@ -2027,8 +2103,8 @@ msgstr "Símbolo de unidad"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_order_product_usage__uom_name
-msgid "Unit symbol from Geofolia (L, Kgâ€¦)."
-msgstr "Sï¿½mbolo de unidad de Geofolia (L, Kgâ€¦)."
+msgid "Unit symbol from Geofolia (L, Kg…)."
+msgstr ""
 
 #. module: ter_analytic_geofolia
 #. odoo-python
@@ -2121,8 +2197,10 @@ msgstr "Con mensaje de error"
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_activity_employee_line__fsm_order_id
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_activity_line__fsm_order_id
 msgid "With fieldservice_timesheet, employee times link to this order."
-msgstr "Con fieldservice_timesheet, las horas del empleado se vinculan a esta orden."
-"Con fieldservice_timesheet, las horas del empleado se vinculan a esta orden."
+msgstr ""
+"Con fieldservice_timesheet, las horas del empleado se vinculan a esta "
+"orden.Con fieldservice_timesheet, las horas del empleado se vinculan a esta "
+"orden."
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_fsm_order_person_usage__hours
@@ -2170,3 +2248,16 @@ msgstr "coincidencia por referencia interna"
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 msgid "matched by product name"
 msgstr "coincidencia por nombre de producto"
+
+#~ msgid ""
+#~ "No date range. Set harvest year in data or configure Geofolia default date "
+#~ "range."
+#~ msgstr ""
+#~ "Sin periodo. Establezca el año de cosecha en los datos o configure el "
+#~ "periodo predeterminado de Geofolia."
+
+#~ msgid "No parcel found for this GIS."
+#~ msgstr "No se ha encontrado parcela para este GIS."
+
+#~ msgid "Unit symbol from Geofolia (L, Kgâ€¦)."
+#~ msgstr "Sï¿½mbolo de unidad de Geofolia (L, Kgâ€¦)."

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-20 08:46+0000\n"
-"PO-Revision-Date: 2026-07-20 08:46+0000\n"
+"POT-Creation-Date: 2026-07-20 11:30+0000\n"
+"PO-Revision-Date: 2026-07-20 11:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -251,6 +251,15 @@ msgstr ""
 #. module: ter_analytic_geofolia
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
+msgid ""
+"Cannot create a parcel for Geofolia field %(field)s: municipality %(city)s "
+"(code %(code)s) could not be found or created. Set a default municipality in"
+" the Geofolia settings."
+msgstr ""
+
+#. module: ter_analytic_geofolia
+#. odoo-python
+#: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 msgid "Cannot create location: parcel/date range required for ter.use_unit."
 msgstr ""
 
@@ -295,6 +304,14 @@ msgstr ""
 #. module: ter_analytic_geofolia
 #: model:ir.model,name:ter_analytic_geofolia.model_res_partner
 msgid "Contact"
+msgstr ""
+
+#. module: ter_analytic_geofolia
+#. odoo-python
+#: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
+msgid ""
+"Could not determine or create a parcel for this field (no geometry match and"
+" no municipality to create one)."
 msgstr ""
 
 #. module: ter_analytic_geofolia
@@ -357,6 +374,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 msgid "Created field service person."
+msgstr ""
+
+#. module: ter_analytic_geofolia
+#: model:ir.model.fields,field_description:ter_analytic_geofolia.field_ter_parcel__geofolia_created
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.ter_parcel_view_search
+msgid "Created from Geofolia"
 msgstr ""
 
 #. module: ter_analytic_geofolia
@@ -442,6 +465,11 @@ msgstr ""
 #. module: ter_analytic_geofolia
 #: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
 msgid "Default harvested product (no id)"
+msgstr ""
+
+#. module: ter_analytic_geofolia
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
+msgid "Default municipality (auto-created parcels)"
 msgstr ""
 
 #. module: ter_analytic_geofolia
@@ -778,6 +806,15 @@ msgid ""
 msgstr ""
 
 #. module: ter_analytic_geofolia
+#: model:ir.model.fields,help:ter_analytic_geofolia.field_res_company__geofolia_default_municipality_id
+#: model:ir.model.fields,help:ter_analytic_geofolia.field_res_config_settings__geofolia_default_municipality_id
+#: model_terms:ir.ui.view,arch_db:ter_analytic_geofolia.res_config_settings_view_form
+msgid ""
+"Fallback municipality used to create a parcel when a Geofolia Field's city "
+"does not match an existing municipality."
+msgstr ""
+
+#. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_activity_line__farm_identification_code
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_equipment_line__farm_identification_code
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__farm_identification_code
@@ -1083,6 +1120,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_company__geofolia_default_harvested_product_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_config_settings__geofolia_default_harvested_product_id
 msgid "Geofolia default harvested product"
+msgstr ""
+
+#. module: ter_analytic_geofolia
+#: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_company__geofolia_default_municipality_id
+#: model:ir.model.fields,field_description:ter_analytic_geofolia.field_res_config_settings__geofolia_default_municipality_id
+msgid "Geofolia default municipality"
 msgstr ""
 
 #. module: ter_analytic_geofolia
@@ -1506,7 +1549,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 msgid ""
-"No date range. Set harvest year in data or configure Geofolia default date "
+"No campaign (date range) could be resolved. Set the harvest year in the "
+"data, create a matching date range, or configure a Geofolia default date "
 "range."
 msgstr ""
 
@@ -1515,12 +1559,6 @@ msgstr ""
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 #: code:addons/ter_analytic_geofolia/wizards/import_wizard.py:0
 msgid "No file provided."
-msgstr ""
-
-#. module: ter_analytic_geofolia
-#. odoo-python
-#: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
-msgid "No parcel found for this GIS."
 msgstr ""
 
 #. module: ter_analytic_geofolia
@@ -1543,6 +1581,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_fsm_order_person_usage__partner_id
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_fsm_order_product_usage__partner_id
 msgid "Owner"
+msgstr ""
+
+#. module: ter_analytic_geofolia
+#: model:ir.model,name:ter_analytic_geofolia.model_ter_parcel
+msgid "Parcel"
 msgstr ""
 
 #. module: ter_analytic_geofolia
@@ -1807,6 +1850,11 @@ msgstr ""
 #. odoo-python
 #: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
 msgid "Set analytic account (parcel or Geofolia settings)."
+msgstr ""
+
+#. module: ter_analytic_geofolia
+#: model:ir.model.fields,help:ter_analytic_geofolia.field_ter_parcel__geofolia_created
+msgid "Set when the parcel was auto-created during a Geofolia Fields import."
 msgstr ""
 
 #. module: ter_analytic_geofolia

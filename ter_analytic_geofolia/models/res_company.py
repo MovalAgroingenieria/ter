@@ -18,6 +18,12 @@ class ResCompany(models.Model):
         domain=[("is_unit_use_type", "=", True)],
         help="Default date range for ter.use_unit when importing Geofolia Fields.",
     )
+    geofolia_default_municipality_id = fields.Many2one(
+        comodel_name="res.municipality",
+        string="Geofolia default municipality",
+        help="Fallback municipality used to create a parcel when a Geofolia "
+        "Field's city does not match an existing municipality.",
+    )
     geofolia_default_fsm_location_id = fields.Many2one(
         comodel_name="fsm.location",
         string="Geofolia default FSM location (activities)",
