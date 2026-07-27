@@ -8,6 +8,7 @@ class GisViewerTestModel(models.Model):
     _name = "gis.viewer.test.model"
     _description = "GIS Viewer test model"
     _inherit = "gis.viewer"
+    _gis_mapped_field = "mapped_to_polygon"
 
     name = fields.Char(required=True)
     mapped_to_polygon = fields.Boolean(default=True)

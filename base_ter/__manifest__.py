@@ -17,6 +17,7 @@
         "contacts",
         "base_gen",
         "base_gis",
+        "base_gis_viewer",
         "base_adi",
         "base_report",
         "date_range",
@@ -67,9 +68,6 @@
         "web.report_assets_common": [
             "base_ter/static/lib/ter_iconset/iconset.css",
         ],
-    },
-    "external_dependencies": {
-        "python": ["pycryptodome"],
     },
     "oca_data_manual": [
         "data/ter_use_type_data.xml",

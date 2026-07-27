@@ -3,229 +3,130 @@
 <odoo>
 
     <record id="res_config_settings_view_form" model="ir.ui.view">
-            <field name="name">res.config.settings.view.form.inherit.base_ter</field>
-            <field name="model">res.config.settings</field>
-            <field name="priority" eval="10"/>
-            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//form" position="inside">
+        <field name="name">res.config.settings.view.form.inherit.base_ter</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app name="base_ter" string="Territory" data-string="Territory">
 
-                    <app name="base_ter" string="Territory" data-string="Territory">
+                    <block title="General" name="base_ter_general">
+                        <setting id="base_ter_area_unit_is_ha"
+                                 string="Area unit is hectare"
+                                 help="If checked, the area unit will be the ha; otherwise you can choose another unit of area.">
+                            <field name="area_unit_is_ha"/>
+                        </setting>
 
-                        <block title="General" name="base_ter_general">
-                            <setting id="base_ter_area_unit_is_ha"
-                                     string="Area unit is hectare"
-                                     help="If checked, the area unit will be the ha; otherwise you can choose another unit of area.">
-                                <field name="area_unit_is_ha"/>
-                            </setting>
-
-                            <setting id="base_ter_area_unit_name"
-                                     string="Alternative area unit name"
-                                     help="If the area unit is not the ha, name of the alternative area unit."
-                                     invisible="area_unit_is_ha">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="area_unit_name" style="width: 90px;"/>
-                                    </div>
+                        <setting id="base_ter_area_unit_name"
+                                 string="Alternative area unit name"
+                                 help="If the area unit is not the ha, name of the alternative area unit."
+                                 invisible="area_unit_is_ha">
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="area_unit_name" style="width: 90px;"/>
                                 </div>
-                            </setting>
+                            </div>
+                        </setting>
 
-                            <setting id="base_ter_area_unit_value_in_ha"
-                                     string="Alternative unit equivalence (ha)"
-                                     help="Equivalence, in ha, of the chosen area unit."
-                                     invisible="area_unit_is_ha">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="area_unit_value_in_ha" style="width: 90px;"/>
-                                        <span class="oe_inline">ha</span>
-                                    </div>
+                        <setting id="base_ter_area_unit_value_in_ha"
+                                 string="Alternative unit equivalence (ha)"
+                                 help="Equivalence, in ha, of the chosen area unit."
+                                 invisible="area_unit_is_ha">
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="area_unit_value_in_ha" style="width: 90px;"/>
+                                    <span class="oe_inline">ha</span>
                                 </div>
-                            </setting>
-                            <setting id="base_ter_ter_unit_sequence_id_args"
-                                     string="Ter-unit sequence"
-                            >
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="ter_unit_sequence_id" style="width: 100%;"/>
-                                    </div>
+                            </div>
+                        </setting>
+
+                        <setting id="base_ter_ter_unit_sequence_id_args" string="Ter-unit sequence">
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="ter_unit_sequence_id" style="width: 100%;"/>
                                 </div>
-                            </setting>
-                        </block>
+                            </div>
+                        </setting>
+                    </block>
 
-                        <block title="Warnings" name="base_ter_warnings">
-                            <setting id="base_ter_warning_diff_areas"
-                                     string="Maximum GIS area difference (%)"
-                                     help="Percentage (of the official area of a parcel) designated as the maximum allowable threshold for the difference between this official area and the GIS area (if zero, no warning will be displayed).">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="warning_diff_areas" style="width: 90px;"/>
-                                        <span class="oe_inline">%</span>
-                                    </div>
+                    <block title="Warnings" name="base_ter_warnings">
+                        <setting id="base_ter_warning_diff_areas"
+                                 string="Maximum GIS area difference (%)"
+                                 help="Percentage (of the official area of a parcel) designated as the maximum allowable threshold for the difference between this official area and the GIS area (if zero, no warning will be displayed).">
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="warning_diff_areas" style="width: 90px;"/>
+                                    <span class="oe_inline">%</span>
                                 </div>
-                            </setting>
+                            </div>
+                        </setting>
 
-                            <setting id="base_ter_same_parcelmanager_propertyowner"
-                                     string="Force parcel manager to be property owner"
-                                     help="If enabled, any parcel associated with a property that has an owner must have that owner as its manager.">
-                                <field name="same_parcelmanager_propertyowner"/>
-                            </setting>
-                        </block>
+                        <setting id="base_ter_same_parcelmanager_propertyowner"
+                                 string="Force parcel manager to be property owner"
+                                 help="If enabled, any parcel associated with a property that has an owner must have that owner as its manager.">
+                            <field name="same_parcelmanager_propertyowner"/>
+                        </setting>
+                    </block>
 
-                        <block title="Aerial Images" name="base_ter_aerial_images">
-                            <setting id="base_ter_aerial_image_wmsbase_url"
-                                     string="Base WMS URL"
-                                     help="URL of the WMS service used to obtain the base image of the parcels and other GIS elements.">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="aerial_image_wmsbase_url" style="width: 100%;"/>
-                                    </div>
-                                </div>
-                            </setting>
+                </app>
+            </xpath>
+        </field>
+    </record>
 
-                            <setting id="base_ter_aerial_image_wmsbase_layers"
-                                     string="Base WMS layers"
-                                     help="WMS service layers used to obtain the base image of the parcels and other GIS elements.">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="aerial_image_wmsbase_layers" style="width: 100%;"/>
-                                    </div>
-                                </div>
-                            </setting>
+    <record id="res_config_settings_gis_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.base_ter.gis</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="base_gis_viewer.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='base_gis_viewer']" position="inside">
+                <block title="Territory Vector Layers" name="base_ter_vector_layers">
+                    <setting id="base_ter_aerial_image_wmsvec_url"
+                             string="Vector WMS URL"
+                             help="URL of the WMS service used to obtain the vectorial image of the parcels.">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="aerial_image_wmsvec_url" style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </setting>
 
-                            <setting id="base_ter_aerial_image_wmsvec_url"
-                                     string="Vector WMS URL"
-                                     help="URL of the WMS service used to obtain the vectorial image of the parcels.">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="aerial_image_wmsvec_url" style="width: 100%;"/>
-                                    </div>
-                                </div>
-                            </setting>
+                    <setting id="base_ter_aerial_image_wmsvec_parcel_name"
+                             string="Parcel vector layer"
+                             help="WMS service layer used to obtain the images of the parcels (vectorial elements).">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="aerial_image_wmsvec_parcel_name" style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </setting>
 
-                            <setting id="base_ter_aerial_image_wmsvec_parcel_name"
-                                     string="Parcel vector layer"
-                                     help="WMS service layer used to obtain the images of the parcels (vectorial elements).">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="aerial_image_wmsvec_parcel_name" style="width: 100%;"/>
-                                    </div>
-                                </div>
-                            </setting>
+                    <setting id="base_ter_aerial_image_wmsvec_parcel_filter"
+                             string="Only central parcel"
+                             help="If checked, only the central parcel will be displayed; otherwise, all parcels will be displayed.">
+                        <field name="aerial_image_wmsvec_parcel_filter"/>
+                    </setting>
 
-                            <setting id="base_ter_aerial_image_wmsvec_parcel_filter"
-                                     string="Only central parcel"
-                                     help="If checked, only the central parcel will be displayed; otherwise, all parcels will be displayed.">
-                                <field name="aerial_image_wmsvec_parcel_filter"/>
-                            </setting>
+                    <setting id="base_ter_aerial_image_wmsvec_property_name"
+                             string="Property vector layer"
+                             help="WMS service layer used to obtain the images of the properties (vectorial elements).">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="aerial_image_wmsvec_property_name" style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </setting>
 
-                            <setting id="base_ter_aerial_image_wmsvec_property_name"
-                                     string="Property vector layer"
-                                     help="WMS service layer used to obtain the images of the properties (vectorial elements).">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="aerial_image_wmsvec_property_name" style="width: 100%;"/>
-                                    </div>
-                                </div>
-                            </setting>
-
-                            <setting id="base_ter_aerial_image_wmsvec_property_filter"
-                                     string="Only central property"
-                                     help="If checked, only the central property will be displayed; otherwise, all properties will be displayed.">
-                                <field name="aerial_image_wmsvec_property_filter"/>
-                            </setting>
-
-                            <setting id="base_ter_aerial_image_height"
-                                     string="Image height (px)"
-                                     help="Height, in pixels, of images captured from WMS services (the width will be calculated automatically to preserve the original proportions).">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="aerial_image_height" style="width: 90px;"/>
-                                    </div>
-                                </div>
-                            </setting>
-
-                            <setting id="base_ter_aerial_image_zoom"
-                                     string="Image zoom"
-                                     help="Zoom applied to images obtained from WMS services: 1 means no zoom; &gt; 1 zoom-out; &lt; 1 zoom-in.">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="aerial_image_zoom" style="width: 90px;"/>
-                                    </div>
-                                </div>
-                            </setting>
-
-                        </block>
-
-                        <block title="GIS Viewer" name="base_ter_gis_viewer">
-                            <setting id="base_ter_gis_viewer_url"
-                                     string="Viewer URL"
-                                     help="URL of the integrated GIS viewer.">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="gis_viewer_url" style="width: 100%;"/>
-                                    </div>
-                                </div>
-                            </setting>
-
-                            <setting id="base_ter_gis_viewer_username"
-                                     string="Technical user"
-                                     help="Name of the technical user.">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="gis_viewer_username" style="width: 90px;"/>
-                                    </div>
-                                </div>
-                            </setting>
-
-                            <setting id="base_ter_gis_viewer_password"
-                                     string="Technical password"
-                                     help="Password of the technical user.">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="gis_viewer_password" style="width: 90px;"/>
-                                    </div>
-                                </div>
-                            </setting>
-
-                            <setting id="base_ter_gis_viewer_cipher_key"
-                                     string="Cipher key"
-                                     help="AES key for encrypting technical credentials (16, 24 or 32 bytes).">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="gis_viewer_cipher_key" password="True" style="width: 90px;"/>
-                                    </div>
-                                </div>
-                            </setting>
-
-                            <setting id="base_ter_gis_viewer_epsg"
-                                     string="EPSG"
-                                     help="Spatial reference of the layers stored in the database (if changed, layers will be automatically reprojected).">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <span class="oe_inline">EPSG:</span>
-                                        <field name="gis_viewer_epsg" style="width: 90px;"/>
-                                    </div>
-                                </div>
-                            </setting>
-
-                            <setting id="base_ter_gis_viewer_previs_additional_args"
-                                     string="Preview URL arguments"
-                                     help="For the integrated preview, arguments to add to the GIS viewer URL.">
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="gis_viewer_previs_additional_args" style="width: 100%;"/>
-                                    </div>
-                                </div>
-                            </setting>
-
-
-                        </block>
-
-                    </app>
-
-                </xpath>
-            </field>
-        </record>
+                    <setting id="base_ter_aerial_image_wmsvec_property_filter"
+                             string="Only central property"
+                             help="If checked, only the central property will be displayed; otherwise, all properties will be displayed.">
+                        <field name="aerial_image_wmsvec_property_filter"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
 
     <record id="res_config_settings_action" model="ir.actions.act_window">
         <field name="name">Settings</field>

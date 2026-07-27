@@ -1,0 +1,797 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_point
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-27 10:00+0000\n"
+"PO-Revision-Date: 2026-07-27 10:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__active
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__active
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__active
+#: model:ir.model.fields,field_description:base_point.field_point_profile__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__address_data
+msgid "Address Data"
+msgstr "Dirección"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__aerial_image
+#: model:ir.model.fields,field_description:base_point.field_point_point__aerial_image_medium
+#: model:ir.model.fields,field_description:base_point.field_point_point__aerial_image_small
+msgid "Aerial Image"
+msgstr "Imagen aérea"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__aerial_image_key
+msgid "Aerial Image Key"
+msgstr "Leyenda de la imagen aérea"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__aerial_image_shown
+#: model:ir.model.fields,field_description:base_point.field_point_point__image_1920
+msgid "Aerial Image Shown"
+msgstr "Imagen aérea mostrada"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__aerial_image_shown_b64
+msgid "Aerial Image Shown B64"
+msgstr "Imagen aérea mostrada B64"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+msgid "Aerial Image and GIS"
+msgstr "Imagen aérea y GIS"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+msgid "Agrupar por"
+msgstr "Agrupar por"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__altitude
+msgid "Altitude (m)"
+msgstr "Altitud (m)"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.wizard_set_point_code_view_form
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+msgid "Archivado"
+msgstr "Archivado"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+msgid "Archived"
+msgstr "Archivado"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__message_attachment_count
+msgid "Attachment Count"
+msgstr "Número de adjuntos"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+msgid "Basic Data"
+msgstr "Datos básicos"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+msgid "CC.AA."
+msgstr "CC.AA."
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.wizard_set_point_code_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+msgid "Change Code"
+msgstr "Cambiar código"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__name
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__name
+#: model:ir.model.fields,field_description:base_point.field_point_profile__name
+msgid "Code (name)"
+msgstr "Código (nombre)"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__num_code
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__num_code
+#: model:ir.model.fields,field_description:base_point.field_point_profile__num_code
+msgid "Code (numeric)"
+msgstr "Código (numérico)"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__color
+msgid "Color"
+msgstr "Índice de Color"
+
+#. module: base_point
+#: model:ir.model,name:base_point.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+msgid "Con gestor"
+msgstr "Con gestor"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+msgid "Con vinculo GIS"
+msgstr "Con vínculo GIS"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_configuration
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: base_point
+#: model:ir.model,name:base_point.model_res_partner
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__partner_id
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__partnerlink_ids
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+msgid "Contacts"
+msgstr "Contactos"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__coord_str
+msgid "Coordinates formatted"
+msgstr "Coordenadas formateadas"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__create_uid
+#: model:ir.model.fields,field_description:base_point.field_point_point__create_uid
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__create_uid
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__create_uid
+#: model:ir.model.fields,field_description:base_point.field_point_profile__create_uid
+#: model:ir.model.fields,field_description:base_point.field_wizard_set_point_code__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__create_date
+#: model:ir.model.fields,field_description:base_point.field_point_point__create_date
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__create_date
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__create_date
+#: model:ir.model.fields,field_description:base_point.field_point_profile__create_date
+#: model:ir.model.fields,field_description:base_point.field_wizard_set_point_code__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__description
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__description
+#: model:ir.model.fields,field_description:base_point.field_point_profile__description
+msgid "Description"
+msgstr "Descripción"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_technical_detail
+msgid "Detail Models"
+msgstr "Modelos detallados"
+
+#. module: base_point
+#: model:ir.model,name:base_point.model_wizard_set_point_code
+msgid "Dialog box to set a point code"
+msgstr "Cuadro de diálogo para establecer un código de punto"
+
+#. module: base_point
+#: model:res.groups,name:base_point.group_point_director
+msgid "Director"
+msgstr "Usuario director"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__display_name
+#: model:ir.model.fields,field_description:base_point.field_point_point__display_name
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__display_name
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__display_name
+#: model:ir.model.fields,field_description:base_point.field_point_profile__display_name
+#: model:ir.model.fields,field_description:base_point.field_wizard_set_point_code__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__geom_ewkt
+msgid "EWKT Geometry"
+msgstr "Geometría (EWKT)"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (partícipes)"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__gis_code
+msgid "GIS Code"
+msgstr "Código GIS"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__gis_link_minimal
+msgid "GIS Link (minimal version)"
+msgstr "Enlace GIS (modo mínimo)"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__gis_link_public
+msgid "GIS Link (public)"
+msgstr "Enlace GIS (público)"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__gis_link_technical
+msgid "GIS Link (technical)"
+msgstr "Enlace GIS (técnico)"
+
+#. module: base_point
+#: model:ir.model,name:base_point.model_point_gis_point_model
+msgid "GIS Point"
+msgstr "Punto GIS"
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/models/point_point.py:0
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+msgid "GIS Preview"
+msgstr "Previsualización GIS"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+msgid "GIS Viewer"
+msgstr "Visor GIS"
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/models/point_point.py:0
+msgid "GIS preview wizard is not available in this database."
+msgstr ""
+"El asistente de vista previa GIS no está disponible en esta base de datos."
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_configuration_general
+msgid "General"
+msgstr "General"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__geom_geojson
+msgid "GeoJSON Geometry"
+msgstr "Geometría GeoJSON"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__geom_geojson
+msgid "Geom Geojson"
+msgstr "Geom Geojson"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+msgid "Gestor"
+msgstr "Gestor"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__gis_data
+msgid "Gis Data"
+msgstr "Datos GIS"
+
+#. module: base_point
+#: model:ir.actions.server,name:base_point.point_gisviewer_global_serveraction
+msgid "Global Viewer"
+msgstr "Mapa completo"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__has_message
+msgid "Has Message"
+msgstr "Tiene mensaje"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__id
+#: model:ir.model.fields,field_description:base_point.field_point_point__id
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__id
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__id
+#: model:ir.model.fields,field_description:base_point.field_point_profile__id
+#: model:ir.model.fields,field_description:base_point.field_wizard_set_point_code__id
+msgid "ID"
+msgstr "I"
+
+#. module: base_point
+#: model:ir.model.fields,help:base_point.field_point_point__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, hay mensajes nuevos que requieren su atención."
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.res_config_settings_view_form
+msgid ""
+"If checked, only the central point will be displayed; otherwise, all points "
+"will be displayed."
+msgstr ""
+"Si se marca, solo se mostrará el punto central; en caso contrario, se "
+"mostrarán todos los puntos."
+
+#. module: base_point
+#: model:ir.model.fields,help:base_point.field_point_point__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__notes
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__notes
+#: model:ir.model.fields,field_description:base_point.field_point_profile__notes
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+msgid "Internal Notes"
+msgstr "Notas Internas"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__is_active
+msgid "Is Active"
+msgstr "Está activo"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__is_main
+msgid "Is Main"
+msgstr "Es representante"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_profile__is_standard
+msgid "Is Standard"
+msgstr "Es estándar"
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/models/point_profile.py:0
+msgid "It is not possible to remove a 'STANDARD' partner profile."
+msgstr "No es posible eliminar un perfil de socio «STANDARD»."
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__write_uid
+#: model:ir.model.fields,field_description:base_point.field_point_point__write_uid
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__write_uid
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__write_uid
+#: model:ir.model.fields,field_description:base_point.field_point_profile__write_uid
+#: model:ir.model.fields,field_description:base_point.field_wizard_set_point_code__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__write_date
+#: model:ir.model.fields,field_description:base_point.field_point_point__write_date
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__write_date
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__write_date
+#: model:ir.model.fields,field_description:base_point.field_point_profile__write_date
+#: model:ir.model.fields,field_description:base_point.field_wizard_set_point_code__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+msgid "Localidad"
+msgstr "Localidad"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_configuration_localization
+msgid "Localization"
+msgstr "Localización"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_locations
+msgid "Locations"
+msgstr "Ubicaciones"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__mapped_to_point
+msgid "Mapped to point"
+msgstr "Vinculado a punto"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de entrega del mensaje"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_res_municipality
+msgid "Municipalities"
+msgstr "Municipios"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__municipality_id
+msgid "Municipality"
+msgstr "Municipio"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+msgid "Municipio"
+msgstr "Código Municipio"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__name
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: base_point
+#: model:ir.model.fields,help:base_point.field_point_point__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren acción"
+
+#. module: base_point
+#: model:ir.model.fields,help:base_point.field_point_point__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_fsm_location__number_of_points
+#: model:ir.model.fields,field_description:base_point.field_fsm_person__number_of_points
+#: model:ir.model.fields,field_description:base_point.field_res_partner__number_of_points
+#: model:ir.model.fields,field_description:base_point.field_res_users__number_of_points
+msgid "Number of points"
+msgstr "Número de puntos"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.res_config_settings_view_form
+msgid "Only central point"
+msgstr "Solo punto central"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__partner_id
+msgid "Partner"
+msgstr "Cantidad"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__percentage
+msgid "Percentage"
+msgstr "Porcentaje"
+
+#. module: base_point
+#: model:ir.model.constraint,message:base_point.constraint_point_point_partnerlink_point_partnerlink_percentage_ok
+msgid "Percentage must be between 0 and 100."
+msgstr "El porcentaje debe estar entre 0 y 100."
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__place_id
+msgid "Place"
+msgstr "Paraje"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_res_place
+msgid "Places"
+msgstr "Parajes"
+
+#. module: base_point
+#: model:ir.model,name:base_point.model_point_point
+#: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__point_id
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__point_id
+msgid "Point"
+msgstr "Punto"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__alphanum_code
+#: model:ir.model.fields,field_description:base_point.field_wizard_set_point_code__point_code
+msgid "Point Code"
+msgstr "Código de punto"
+
+#. module: base_point
+#: model:ir.model,name:base_point.model_point_point_partnerlink
+msgid "Point Contact Link"
+msgstr "Enlace de contacto del punto"
+
+#. module: base_point
+#: model:ir.actions.act_window,name:base_point.action_point_gis_point_model
+#: model:ir.ui.menu,name:base_point.menu_point_technical_detail_gis
+msgid "Point GIS Detail Model"
+msgstr "Modelo de detalle GIS de punto"
+
+#. module: base_point
+#: model:ir.module.category,name:base_point.module_category_point_management
+msgid "Point Management"
+msgstr "Gestión de puntos"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__partner_id
+msgid "Point Manager"
+msgstr "Gestor del punto"
+
+#. module: base_point
+#: model:ir.model,name:base_point.model_point_profile
+msgid "Point Partner Profile"
+msgstr "Perfil de contacto del punto"
+
+#. module: base_point
+#: model:ir.model,name:base_point.model_point_pointtag
+msgid "Point Tag"
+msgstr "Etiqueta de punto"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.res_config_settings_view_form
+msgid "Point Vector Layer"
+msgstr "Capa vectorial de puntos"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.res_config_settings_view_form
+msgid "Point Vector WMS URL"
+msgstr "URL WMS vectorial de puntos"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_partner_form_inherit_base_point
+msgid "Point Viewer"
+msgstr "Visor de puntos"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.res_config_settings_view_form
+msgid "Point vector layer"
+msgstr "Capa vectorial de puntos"
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/models/res_partner.py:0
+#: model:ir.actions.act_window,name:base_point.action_point_point
+#: model:ir.model.fields,field_description:base_point.field_fsm_location__point_ids
+#: model:ir.model.fields,field_description:base_point.field_fsm_person__point_ids
+#: model:ir.model.fields,field_description:base_point.field_res_partner__point_ids
+#: model:ir.model.fields,field_description:base_point.field_res_users__point_ids
+#: model:ir.ui.menu,name:base_point.menu_point_points
+#: model:ir.ui.menu,name:base_point.menu_point_root
+#: model_terms:ir.ui.view,arch_db:base_point.view_partner_form_inherit_base_point
+msgid "Points"
+msgstr "Puntos"
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/hooks.py:0
+msgid ""
+"PostGIS could not be enabled in this database. Install PostGIS on PostgreSQL"
+" and ensure the DB user can run CREATE EXTENSION."
+msgstr ""
+"No se ha podido habilitar PostGIS en esta base de datos. Instale PostGIS en "
+"PostgreSQL y asegúrese de que el usuario de la base de datos pueda ejecutar "
+"CREATE EXTENSION."
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/hooks.py:0
+msgid ""
+"PostGIS is not available in this database. Install/enable PostGIS and retry."
+msgstr ""
+"PostGIS no está disponible en esta base de datos. Instale o active PostGIS y"
+" vuelva a intentarlo."
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point_partnerlink__profile_id
+#: model:ir.model.fields,field_description:base_point.field_point_profile__alphanum_code
+msgid "Profile"
+msgstr "Perfil"
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/models/point_partnerlink.py:0
+msgid ""
+"Profile '%(profile)s' requires total percentage 100, but current total is "
+"%(total)s."
+msgstr ""
+"El perfil '%(profile)s' requiere un porcentaje total de 100, pero el total "
+"actual es %(total)s."
+
+#. module: base_point
+#: model:ir.actions.act_window,name:base_point.action_point_profile
+#: model:ir.ui.menu,name:base_point.menu_point_profiles
+msgid "Profiles"
+msgstr "Perfiles"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__province_id
+msgid "Province"
+msgstr "Provincia"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_res_province
+msgid "Provinces"
+msgstr "Provincias"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+msgid "Provincia"
+msgstr "Código Provincia"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__rating_ids
+msgid "Ratings"
+msgstr "Valoraciones"
+
+#. module: base_point
+#: model:res.groups,name:base_point.group_point_user
+msgid "Reader User"
+msgstr "Usuario lector"
+
+#. module: base_point
+#: model:ir.actions.server,name:base_point.point_refresh_gis_serveraction
+#: model:ir.ui.menu,name:base_point.menu_point_technical_refresh
+msgid "Refresh GIS"
+msgstr "Refrescar GIS"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__region_id
+msgid "Region"
+msgstr "Comunidad Autónoma"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_res_admregion
+msgid "Regions"
+msgstr "CC.AA."
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_profile__requires_total
+msgid "Required 100%"
+msgstr "100% requerido"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__srid
+msgid "SRID"
+msgstr "SRID"
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/models/point_point.py:0
+#: model:ir.actions.act_window,name:base_point.wizard_set_point_code_action
+#: model_terms:ir.ui.view,arch_db:base_point.wizard_set_point_code_view_form
+msgid "Set Point Code"
+msgstr "Establecer código de punto"
+
+#. module: base_point
+#: model:ir.actions.act_window,name:base_point.res_config_settings_action
+#: model:ir.ui.menu,name:base_point.menu_point_settings
+msgid "Settings"
+msgstr "Configuraciones"
+
+#. module: base_point
+#: model:ir.model,name:base_point.model_res_config_settings
+msgid "Street type settings"
+msgstr "Ajustes de Configuración"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__tag_id
+#: model:ir.model.fields,field_description:base_point.field_point_pointtag__alphanum_code
+msgid "Tag"
+msgstr "Etiqueta"
+
+#. module: base_point
+#: model:ir.actions.act_window,name:base_point.action_point_pointtag
+#: model:ir.ui.menu,name:base_point.menu_point_tags
+msgid "Tags"
+msgstr "Etiquetas"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_technical
+msgid "Technical Actions"
+msgstr "Acciones técnicas"
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/models/point_point.py:0
+msgid "The manager must appear as a main contact in the partner links."
+msgstr ""
+"El gestor debe aparecer como contacto principal en los enlaces de contacto."
+
+#. module: base_point
+#. odoo-python
+#: code:addons/base_point/models/point_point.py:0
+msgid ""
+"The place '%(place)s' does not belong to municipality '%(municipality)s'."
+msgstr "El lugar '%(place)s' no pertenece al municipio '%(municipality)s'."
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.res_config_settings_view_form
+msgid ""
+"URL of the WMS service used to obtain the vectorial image of the points."
+msgstr ""
+"URL del servicio WMS utilizado para obtener la imagen vectorial de los "
+"puntos."
+
+#. module: base_point
+#: model:point.profile,alphanum_code:base_point.point_profile_01
+msgid "User"
+msgstr "Usuario"
+
+#. module: base_point
+#: model:ir.ui.menu,name:base_point.menu_point_viewer
+msgid "Viewer"
+msgstr "Visor"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_res_company__aerial_image_wmsvec_point_url
+#: model:ir.model.fields,field_description:base_point.field_res_config_settings__aerial_image_wmsvec_point_url
+msgid "WMS of the vectorial image (points): URL"
+msgstr "WMS de la imagen vectorial (puntos): URL"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_res_company__aerial_image_wmsvec_point_filter
+#: model:ir.model.fields,field_description:base_point.field_res_config_settings__aerial_image_wmsvec_point_filter
+msgid "WMS of the vectorial image: Filtered points (y/n)"
+msgstr "WMS de la imagen vectorial: puntos filtrados (s/n)"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_res_company__aerial_image_wmsvec_point_layer
+#: model:ir.model.fields,field_description:base_point.field_res_config_settings__aerial_image_wmsvec_point_layer
+msgid "WMS of the vectorial image: Name of the points layer"
+msgstr "WMS de la imagen vectorial: nombre de la capa de puntos"
+
+#. module: base_point
+#: model_terms:ir.ui.view,arch_db:base_point.res_config_settings_view_form
+msgid ""
+"WMS service layer used to obtain the images of the points (vectorial "
+"elements)."
+msgstr ""
+"Capa del servicio WMS utilizada para obtener las imágenes de los puntos "
+"(elementos vectoriales)."
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: base_point
+#: model:ir.model.fields,help:base_point.field_point_point__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
+
+#. module: base_point
+#: model:res.groups,name:base_point.group_point_manager
+msgid "Writer User"
+msgstr "Usuario editor"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__coord_x
+msgid "X Coordinate"
+msgstr "Coordenada X"
+
+#. module: base_point
+#: model:ir.model.fields,field_description:base_point.field_point_point__coord_y
+msgid "Y Coordinate"
+msgstr "Coordenada Y"

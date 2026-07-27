@@ -28,21 +28,11 @@ PARAM_DEFAULTS = {
     f"{PARAM_PREFIX}area_unit_value_in_ha": 1,
     f"{PARAM_PREFIX}warning_diff_areas": 10,
     f"{PARAM_PREFIX}same_parcelmanager_propertyowner": False,
-    f"{PARAM_PREFIX}aerial_image_wmsbase_url": "https://www.ign.es/wms-inspire/pnoa-ma",
-    f"{PARAM_PREFIX}aerial_image_wmsbase_layers": "OI.OrthoimageCoverage",
     f"{PARAM_PREFIX}aerial_image_wmsvec_url": "https://gis.moval.es/wms/my_client",
     f"{PARAM_PREFIX}aerial_image_wmsvec_parcel_name": "parcel_perimeter",
     f"{PARAM_PREFIX}aerial_image_wmsvec_parcel_filter": True,
     f"{PARAM_PREFIX}aerial_image_wmsvec_property_name": "property_perimeter",
     f"{PARAM_PREFIX}aerial_image_wmsvec_property_filter": True,
-    f"{PARAM_PREFIX}aerial_image_height": 512,
-    f"{PARAM_PREFIX}aerial_image_zoom": 1.2,
-    # Change these defaults in production (Settings > Territory)
-    f"{PARAM_PREFIX}gis_viewer_url": "https://gis.moval.es/my_client/visor",
-    f"{PARAM_PREFIX}gis_viewer_username": "tecnico",
-    f"{PARAM_PREFIX}gis_viewer_password": "my_password",
-    f"{PARAM_PREFIX}gis_viewer_epsg": 25830,
-    f"{PARAM_PREFIX}gis_viewer_previs_additional_args": "mode=min",
 }
 
 

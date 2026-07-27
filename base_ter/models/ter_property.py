@@ -38,6 +38,7 @@ class TerProperty(models.Model):
     _link_field = "name"
 
     _param_gis_selection = "idfinca"
+    _gis_mapped_field = "mapped_to_polygon"
 
     _aerial_image_size_big = 512
     _aerial_image_size_medium = 256

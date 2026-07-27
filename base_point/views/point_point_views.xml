@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_point_point_tree" model="ir.ui.view">
+        <field name="name">point.point.tree</field>
+        <field name="model">point.point</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="mapped_to_point" column_invisible="True"/>
+                <field name="alphanum_code"/>
+                <field name="partner_id"/>
+                <field name="municipality_id"/>
+                <field name="place_id"/>
+                <button name="action_gis_viewer" type="object" icon="fa-map-marker"
+                    title="GIS Viewer"
+                    invisible="not mapped_to_point"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_point_point_form" model="ir.ui.view">
+        <field name="name">point.point.form</field>
+        <field name="model">point.point</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="action_set_point_code" type="object"
+                            string="Change Code" class="oe_stat_button"/>
+                        <button name="action_gis_viewer" type="object"
+                            string="GIS Viewer" class="oe_stat_button"
+                            invisible="not mapped_to_point"/>
+                    </div>
+
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                        invisible="active"/>
+
+                    <h1>
+                        <field name="alphanum_code" readonly="id"/>
+                    </h1>
+
+                    <group>
+                        <field name="partner_id"/>
+                    </group>
+
+                    <group>
+                        <group string="Basic Data">
+                            <field name="municipality_id"/>
+                            <field name="place_id"/>
+                            <field name="tag_id" widget="many2many_tags"/>
+                        </group>
+                        <group string="Aerial Image and GIS">
+                            <field name="aerial_image_shown" widget="image"/>
+                            <button name="action_gis_preview" type="object"
+                                string="GIS Preview" class="btn btn-secondary"/>
+                            <field name="coord_str" readonly="1"/>
+                            <field name="srid" readonly="1"/>
+                            <field name="altitude"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Contacts">
+                            <field name="partnerlink_ids"/>
+                        </page>
+                        <page string="Internal Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+
+                    <field name="active" invisible="1"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_point_point_search" model="ir.ui.view">
+        <field name="name">point.point.search</field>
+        <field name="model">point.point</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="alphanum_code"/>
+                <field name="partner_id"/>
+
+                <filter name="with_manager" string="Con gestor"
+                    domain="[('partner_id', '!=', False)]"/>
+                <filter name="with_gis" string="Con vinculo GIS"
+                    domain="[('mapped_to_point', '=', True)]"/>
+                <filter name="archived" string="Archivado"
+                    domain="[('active', '=', False)]"/>
+
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_partner" string="Gestor"
+                        context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_region" string="CC.AA."
+                        context="{'group_by': 'region_id'}"/>
+                    <filter name="group_province" string="Provincia"
+                        context="{'group_by': 'province_id'}"/>
+                    <filter name="group_municipality" string="Municipio"
+                        context="{'group_by': 'municipality_id'}"/>
+                    <filter name="group_place" string="Localidad"
+                        context="{'group_by': 'place_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_point_point_kanban" model="ir.ui.view">
+        <field name="name">point.point.kanban</field>
+        <field name="model">point.point</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="aerial_image_shown"/>
+                <field name="alphanum_code"/>
+                <field name="partner_id"/>
+                <field name="address_data"/>
+                <field name="coord_str"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="o_kanban_record">
+                            <div class="o_kanban_image">
+                                <field name="aerial_image_shown" widget="image"/>
+                            </div>
+                            <div class="o_kanban_details">
+                                <strong><field name="alphanum_code"/></strong>
+                                <div><field name="partner_id"/></div>
+                                <div><field name="address_data"/></div>
+                                <div><field name="coord_str"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

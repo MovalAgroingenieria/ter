@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="point_gisviewer_global_serveraction" model="ir.actions.server">
+        <field name="name">Global Viewer</field>
+        <field name="model_id" ref="base_point.model_point_point"/>
+        <field name="groups_id" eval="[(4, ref('base_point.group_point_user'))]"/>
+        <field name="state">code</field>
+        <field name="code">action = env["point.point"].action_gis_viewer_global()</field>
+    </record>
+
+    <record id="action_point_point" model="ir.actions.act_window">
+        <field name="name">Points</field>
+        <field name="res_model">point.point</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+    <record id="point_refresh_gis_serveraction" model="ir.actions.server">
+        <field name="name">Refresh GIS</field>
+        <field name="model_id" ref="base_point.model_point_point"/>
+        <field name="groups_id" eval="[(4, ref('base_point.group_point_director'))]"/>
+        <field name="state">code</field>
+        <field name="code">action = env["point.point"].search([]).action_reset_all_aerial_images()</field>
+    </record>
+
+    <record id="action_point_profile" model="ir.actions.act_window">
+        <field name="name">Profiles</field>
+        <field name="res_model">point.profile</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_point_pointtag" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">point.pointtag</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_point_gis_point_model" model="ir.actions.act_window">
+        <field name="name">Point GIS Detail Model</field>
+        <field name="res_model">point.gis.point.model</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="res_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'base_point'}</field>
+    </record>
+
+    <menuitem id="menu_point_root" name="Points" sequence="-90"
+        groups="base_point.group_point_user"/>
+
+    <menuitem id="menu_point_locations" name="Locations" parent="menu_point_root"
+        groups="base_point.group_point_user"/>
+    <menuitem id="menu_point_points" name="Points" parent="menu_point_locations"
+        action="action_point_point" groups="base_point.group_point_user"/>
+
+    <menuitem id="menu_point_viewer" name="Viewer" parent="menu_point_root"
+        action="point_gisviewer_global_serveraction" groups="base_point.group_point_user"/>
+
+    <menuitem id="menu_point_configuration" name="Configuration" parent="menu_point_root"
+        groups="base_point.group_point_director" sequence="900"/>
+
+    <menuitem id="menu_point_configuration_localization" name="Localization"
+        parent="menu_point_configuration" groups="base_point.group_point_director" sequence="10"/>
+
+    <menuitem id="menu_point_res_admregion" parent="menu_point_configuration_localization"
+        action="base_adi.res_admregion_action" groups="base_point.group_point_director" sequence="10"/>
+    <menuitem id="menu_point_res_province" parent="menu_point_configuration_localization"
+        action="base_adi.res_province_action" groups="base_point.group_point_director" sequence="20"/>
+    <menuitem id="menu_point_res_municipality" parent="menu_point_configuration_localization"
+        action="base_adi.res_municipality_action" groups="base_point.group_point_director" sequence="30"/>
+    <menuitem id="menu_point_res_place" parent="menu_point_configuration_localization"
+        action="base_adi.res_place_action" groups="base_point.group_point_director" sequence="40"/>
+
+    <menuitem id="menu_point_configuration_general" name="General"
+        parent="menu_point_configuration" groups="base_point.group_point_director" sequence="20"/>
+    <menuitem id="menu_point_profiles" name="Profiles" parent="menu_point_configuration_general"
+        action="action_point_profile" groups="base_point.group_point_director" sequence="10"/>
+    <menuitem id="menu_point_tags" name="Tags" parent="menu_point_configuration_general"
+        action="action_point_pointtag" groups="base_point.group_point_director" sequence="20"/>
+    <menuitem id="menu_point_settings" name="Settings" parent="menu_point_configuration_general"
+        action="res_config_settings_action" groups="base_point.group_point_director" sequence="30"/>
+
+    <menuitem id="menu_point_technical" name="Technical Actions" parent="menu_point_root"
+        groups="base_point.group_point_director" sequence="1000"/>
+    <menuitem id="menu_point_technical_refresh" name="Refresh GIS"
+        parent="menu_point_technical" action="point_refresh_gis_serveraction"
+        groups="base_point.group_point_director" sequence="5"/>
+    <menuitem id="menu_point_technical_detail" name="Detail Models" parent="menu_point_technical"
+        groups="base_point.group_point_director" sequence="10"/>
+    <menuitem id="menu_point_technical_detail_gis" name="Point GIS Detail Model"
+        parent="menu_point_technical_detail" action="action_point_gis_point_model"
+        groups="base_point.group_point_director" sequence="10"/>
+</odoo>

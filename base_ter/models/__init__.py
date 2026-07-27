@@ -4,7 +4,6 @@
 from . import (
     date_range,
     date_range_type,
-    gis_viewer,
     ir_cron,
     res_company,
     res_config_settings,

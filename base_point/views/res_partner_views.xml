@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_form_inherit_base_point" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.base.point</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_show_points" type="object" class="oe_stat_button"
+                    icon="fa-map-marker" invisible="number_of_points == 0">
+                    <field name="number_of_points" widget="statinfo" string="Points"/>
+                </button>
+                <button name="action_gis_viewer_point" type="object" class="oe_stat_button"
+                    icon="fa-map-o" string="Point Viewer"
+                    invisible="number_of_points == 0"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

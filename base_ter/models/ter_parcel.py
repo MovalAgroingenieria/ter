@@ -47,6 +47,7 @@ class TerParcel(models.Model):
     _geom_field = "geom"
     _link_field = "name"
     _param_gis_selection = "idparcela"
+    _gis_mapped_field = "mapped_to_polygon"
 
     _aerial_image_size_big = 512
     _aerial_image_size_medium = 256

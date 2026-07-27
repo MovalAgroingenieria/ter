@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+point_point_rule_user,point.point.user,model_point_point,base_point.group_point_user,1,0,0,0
+point_point_rule_manager,point.point.manager,model_point_point,base_point.group_point_manager,1,1,1,1
+point_profile_rule_user,point.profile.user,model_point_profile,base_point.group_point_user,1,0,0,0
+point_profile_rule_director,point.profile.director,model_point_profile,base_point.group_point_director,1,1,1,1
+point_partnerlink_rule_user,point.partnerlink.user,model_point_point_partnerlink,base_point.group_point_user,1,0,0,0
+point_partnerlink_rule_manager,point.partnerlink.manager,model_point_point_partnerlink,base_point.group_point_manager,1,1,1,1
+point_pointtag_rule_user,point.pointtag.user,model_point_pointtag,base_point.group_point_user,1,0,0,0
+point_pointtag_rule_manager,point.pointtag.manager,model_point_pointtag,base_point.group_point_manager,1,1,1,1
+point_gis_model_rule_user,point.gis.model.user,model_point_gis_point_model,base_point.group_point_user,1,0,0,0
+wizard_set_point_code_user,wizard.set.point.code.user,model_wizard_set_point_code,base_point.group_point_user,1,0,0,0
+wizard_set_point_code_manager,wizard.set.point.code.manager,model_wizard_set_point_code,base_point.group_point_manager,1,1,1,1

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.base_point</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_gis_viewer.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='base_gis_viewer']" position="inside">
+                <block title="Point Vector Layer" name="base_point_vector_layer">
+                    <setting id="base_point_wmsvec_point_url" string="Point Vector WMS URL"
+                        help="URL of the WMS service used to obtain the vectorial image of the points.">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="aerial_image_wmsvec_point_url" style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </setting>
+
+                    <setting id="base_point_wmsvec_point_layer" string="Point vector layer"
+                        help="WMS service layer used to obtain the images of the points (vectorial elements).">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="aerial_image_wmsvec_point_layer" style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </setting>
+
+                    <setting id="base_point_wmsvec_point_filter" string="Only central point"
+                        help="If checked, only the central point will be displayed; otherwise, all points will be displayed.">
+                        <field name="aerial_image_wmsvec_point_filter"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
