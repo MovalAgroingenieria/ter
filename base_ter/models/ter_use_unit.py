@@ -369,15 +369,15 @@ class TerUnit(models.Model):
             sql.Identifier(base_ter_hooks.GIS_SCHEMA),
             sql.Identifier(base_ter_hooks.UNIT_TABLE),
         )
-        for unit in self:
-            if not unit.geom_ewkt or not unit.geom_ewkt.strip():
+        for record in self:
+            if not record.geom_ewkt or not record.geom_ewkt.strip():
                 self.env.cr.execute(
                     sql.SQL("DELETE FROM {} WHERE unit_id = %s").format(qual),
-                    (unit.id,),
+                    (record.id,),
                 )
                 continue
-            ewkt = unit._ensure_ewkt_srid(  # pylint: disable=protected-access
-                unit.geom_ewkt
+            ewkt = record._ensure_ewkt_srid(  # pylint: disable=protected-access
+                record.geom_ewkt
             )
             self.env.cr.execute(
                 sql.SQL(
@@ -388,7 +388,7 @@ class TerUnit(models.Model):
                     "ON CONFLICT (unit_id) DO UPDATE "
                     "SET name = EXCLUDED.name, geom = EXCLUDED.geom"
                 ).format(qual),
-                (unit.id, unit.name, ewkt),
+                (record.id, record.name, ewkt),
             )
 
     def _sync_name_to_gis_unit(self):
@@ -397,10 +397,10 @@ class TerUnit(models.Model):
             sql.Identifier(base_ter_hooks.GIS_SCHEMA),
             sql.Identifier(base_ter_hooks.UNIT_TABLE),
         )
-        for unit in self:
+        for record in self:
             self.env.cr.execute(
                 sql.SQL("UPDATE {} SET name = %s WHERE unit_id = %s").format(qual),
-                (unit.name, unit.id),
+                (record.name, record.id),
             )
 
     def _build_ter_unit_name(self, params):
@@ -507,23 +507,23 @@ class TerUnit(models.Model):
         return no_val[:1].id if no_val else False
 
     def _sync_attribute_lines(self):
-        for unit in self:
-            if not unit.use_type_id:
+        for record in self:
+            if not record.use_type_id:
                 continue
 
-            required_attrs = unit.use_type_id.all_attribute_ids
-            existing_attrs = unit.attribute_value_ids.mapped("attribute_id")
+            required_attrs = record.use_type_id.all_attribute_ids
+            existing_attrs = record.attribute_value_ids.mapped("attribute_id")
             missing_attrs = required_attrs - existing_attrs
 
             if missing_attrs:
                 cmds = []
                 for attr in missing_attrs:
                     line_vals = {"attribute_id": attr.id}
-                    value_id = unit._get_cultivable_default_value_id(attr)
+                    value_id = record._get_cultivable_default_value_id(attr)
                     if value_id:
                         line_vals["value_id"] = value_id
                     cmds.append((0, 0, line_vals))
-                unit.write({"attribute_value_ids": cmds})
+                record.write({"attribute_value_ids": cmds})
 
     def write(self, vals):
         if vals.get("geom_ewkt"):
@@ -553,8 +553,8 @@ class TerUnit(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _unlink_check_geometry(self):
-        for unit in self:
-            if unit.geom_ewkt and unit.geom_ewkt.strip():
+        for record in self:
+            if record.geom_ewkt and record.geom_ewkt.strip():
                 raise UserError(
                     self.env._(
                         "Cannot delete a unit with GIS geometry. "
@@ -642,8 +642,8 @@ class TerUnit(models.Model):
 
     @api.constrains("attribute_value_ids")
     def _check_required_attributes(self):
-        for unit in self:
-            for line in unit.attribute_value_ids:
+        for record in self:
+            for line in record.attribute_value_ids:
                 if line.required and not line.value_id:
                     raise ValidationError(
                         self.env._(
@@ -1059,10 +1059,10 @@ class TerUnit(models.Model):
     def action_show_attribute_values(self):
         self.ensure_one()
         list_view = self.env.ref(
-            "base_ter.view_ter_unit_attribute_value_list", raise_if_not_found=False
+            "base_ter.ter_unit_attribute_value_view_list", raise_if_not_found=False
         )
         form_view = self.env.ref(
-            "base_ter.view_ter_unit_attribute_value_form", raise_if_not_found=False
+            "base_ter.ter_unit_attribute_value_view_form", raise_if_not_found=False
         )
         return {
             "type": "ir.actions.act_window",

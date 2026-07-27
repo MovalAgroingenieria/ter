@@ -449,8 +449,8 @@ class TerProperty(models.Model):
         if not (same_owner and old_partner and vals.get("partner_id")):
             return res
         new_partner = self.env["res.partner"].browse(vals["partner_id"])
-        for prop in self:
-            for parcel in prop.parcel_ids:
+        for record in self:
+            for parcel in record.parcel_ids:
                 links = parcel.partnerlink_ids.filtered(
                     lambda link: link.partner_id == old_partner
                 )
@@ -614,9 +614,9 @@ class TerProperty(models.Model):
 
     def action_show_units(self):
         self.ensure_one()
-        list_view = self.env.ref("base_ter.view_ter_unit_list")
-        form_view = self.env.ref("base_ter.view_ter_unit_form")
-        search_view = self.env.ref("base_ter.view_ter_unit_filter")
+        list_view = self.env.ref("base_ter.ter_use_unit_view_list")
+        form_view = self.env.ref("base_ter.ter_use_unit_view_form")
+        search_view = self.env.ref("base_ter.ter_use_unit_view_search")
         default_parcel = self.parcel_ids[:1].id if self.parcel_ids else False
         return {
             "type": "ir.actions.act_window",

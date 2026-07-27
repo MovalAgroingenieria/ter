@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
     <record id="view_date_range_list" model="ir.ui.view">
         <field name="name">date.range.list.ext</field>
@@ -31,7 +30,7 @@
         </field>
     </record>
 
-    <record id="view_date_range_kanban" model="ir.ui.view">
+    <record id="date_range_view_kanban" model="ir.ui.view">
         <field name="name">date.range.kanban.ter</field>
         <field name="model">date.range</field>
         <field name="arch" type="xml">
@@ -139,36 +138,38 @@
     </record>
 
 
-    <record id="view_date_range_type_list" model="ir.ui.view">
-        <field name="name">date.range.type.list.ext</field>
-        <field name="model">date.range.type</field>
-        <field name="inherit_id" ref="date_range.view_date_range_type_list"/>
+    <record id="date_range_view_pivot" model="ir.ui.view">
+        <field name="name">date.range.view.pivot</field>
+        <field name="model">date.range</field>
         <field name="arch" type="xml">
-            <field name="active" position="after">
-                <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
-            </field>
+            <pivot string="Date Ranges" display_quantity="true">
+                <field name="use_type_id" type="row"/>
+                <field name="type_id" type="col"/>
+            </pivot>
         </field>
     </record>
 
-    <record id="view_date_range_type_form_view" model="ir.ui.view">
-        <field name="name">date.range.type.form.ext</field>
-        <field name="model">date.range.type</field>
-        <field name="inherit_id" ref="date_range.view_date_range_type_form_view"/>
+    <record id="date_range_view_graph" model="ir.ui.view">
+        <field name="name">date.range.view.graph</field>
+        <field name="model">date.range</field>
         <field name="arch" type="xml">
-            <field name="active" position="after">
-                <field name="is_unit_use_type" invisible="'default_is_unit_use_type' in context"/>
-            </field>
+            <graph string="Date Ranges" type="bar">
+                <field name="use_type_id"/>
+                <field name="type_id"/>
+            </graph>
         </field>
     </record>
 
-    <record id="view_date_range_type_search" model="ir.ui.view">
-        <field name="name">date.range.type.search.ext</field>
-        <field name="model">date.range.type</field>
-        <field name="inherit_id" ref="date_range.view_date_range_type_search"/>
+    <record id="date_range_view_calendar" model="ir.ui.view">
+        <field name="name">date.range.report.calendar</field>
+        <field name="model">date.range</field>
         <field name="arch" type="xml">
-            <field name="name" position="after">
-                <field name="is_unit_use_type"/>
-            </field>
+            <calendar string="Date Ranges" date_start="date_start" date_stop="date_end"
+                      color="use_type_id" mode="month">
+                <field name="name"/>
+                <field name="use_type_id"/>
+                <field name="type_id"/>
+            </calendar>
         </field>
     </record>
 
@@ -179,31 +180,17 @@
         <field name="view_ids" eval="[(5, 0),
               (0, 0, {'view_mode': 'list', 'view_id': ref('view_date_range_list')}),
               (0, 0, {'view_mode': 'form', 'view_id': ref('view_date_range_form_view')}),
-              (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_date_range_kanban')}),
-              (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_date_range_pivot')}),
-              (0, 0, {'view_mode': 'graph', 'view_id': ref('view_date_range_graph')}),
-              (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_date_range_calendar')}),
+              (0, 0, {'view_mode': 'kanban', 'view_id': ref('date_range_view_kanban')}),
+              (0, 0, {'view_mode': 'pivot', 'view_id': ref('date_range_view_pivot')}),
+              (0, 0, {'view_mode': 'graph', 'view_id': ref('date_range_view_graph')}),
+              (0, 0, {'view_mode': 'calendar', 'view_id': ref('date_range_view_calendar')}),
               ]"/>
         <field name="domain">[('is_unit_use_type', '=', True)]</field>
         <field name="context">{'default_is_unit_use_type': True}</field>
     </record>
-    <record id="date_range_type_action" model="ir.actions.act_window">
-        <field name="name">Date Ranges Types Ter</field>
-        <field name="res_model">date.range.type</field>
-        <field name="view_mode">list,form</field>
-        <field name="view_id" ref="view_date_range_type_list" />
-        <field name="domain">[('is_unit_use_type', '=', True)]</field>
-        <field name="context">{'default_is_unit_use_type': True}</field>
-    </record>
-
     <menuitem id="menu_date_range_action"
             action="date_range_action"
             parent="base_ter.menu_configuration_dates"
             sequence="10"
-    />
-    <menuitem id="menu_date_range_type_action"
-            action="date_range_type_action"
-            parent="base_ter.menu_configuration_dates"
-            sequence="20"
     />
 </odoo>

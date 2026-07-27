@@ -53,9 +53,9 @@ class DateRange(models.Model):
 
     def action_show_units(self):
         self.ensure_one()
-        list_view = self.env.ref("base_ter.view_ter_unit_list")
-        form_view = self.env.ref("base_ter.view_ter_unit_form")
-        search_view = self.env.ref("base_ter.view_ter_unit_filter")
+        list_view = self.env.ref("base_ter.ter_use_unit_view_list")
+        form_view = self.env.ref("base_ter.ter_use_unit_view_form")
+        search_view = self.env.ref("base_ter.ter_use_unit_view_search")
         return {
             "type": "ir.actions.act_window",
             "name": self.env._("Territorial Units"),

@@ -7,6 +7,20 @@ from odoo import api, fields, models
 class ResCompany(models.Model):
     _inherit = "res.company"
 
+    _sql_constraints = [
+        (
+            "area_unit_value_in_ha_ok",
+            "CHECK (area_unit_value_in_ha > 0)",
+            'Incorrect value of "Standard area unit: Equivalence in ha".',
+        ),
+        (
+            "warning_diff_areas_ok",
+            "CHECK (warning_diff_areas >= 0 AND warning_diff_areas <= 100)",
+            'Incorrect value of "Alert threshold due to the difference between the '
+            'official area and the GIS area".',
+        ),
+    ]
+
     area_unit_is_ha = fields.Boolean(string="Standard area unit: ha (y/n)")
     area_unit_name = fields.Char(string="Standard area unit: Name", size=255)
     area_unit_value_in_ha = fields.Float(
@@ -60,24 +74,24 @@ class ResCompany(models.Model):
 
     def _get_or_create_ter_unit_sequence(self):
         """Create default ter.use_unit sequence for company if missing."""
-        for company in self:
-            if company.ter_unit_sequence_id:
+        for record in self:
+            if record.ter_unit_sequence_id:
                 continue
             seq = self.env["ir.sequence"].create(
                 {
                     "name": self.env._(
-                        "%(company_name)s – Ter Unit", company_name=company.name
+                        "%(company_name)s – Ter Unit", company_name=record.name
                     ),
-                    "code": "ter.use_unit.%s" % company.id,
+                    "code": "ter.use_unit.%s" % record.id,
                     "prefix": "",
                     "padding": 6,
                     "implementation": "no_gap",
                     "number_increment": 1,
                     "number_next": 1,
-                    "company_id": company.id,
+                    "company_id": record.id,
                 }
             )
-            company.ter_unit_sequence_id = seq
+            record.ter_unit_sequence_id = seq
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -121,21 +135,10 @@ class ResCompany(models.Model):
             "area_unit_name",
         ]
         area_fields_unit = ["area_official_m2", "area_unit_name"]
+        # oca-review: unbounded search is intentional; changing the area unit
+        # must invalidate the cached computed area fields on every affected
+        # record so they recompute with the new unit.
         self.env["ter.parcel"].search([]).invalidate_recordset(area_fields_parcel)
         self.env["ter.property"].search([]).invalidate_recordset(area_fields_property)
         self.env["res.partner"].search([]).invalidate_recordset(area_fields_partner)
         self.env["ter.use_unit"].search([]).invalidate_recordset(area_fields_unit)
-
-    _sql_constraints = [
-        (
-            "area_unit_value_in_ha_ok",
-            "CHECK (area_unit_value_in_ha > 0)",
-            'Incorrect value of "Standard area unit: Equivalence in ha".',
-        ),
-        (
-            "warning_diff_areas_ok",
-            "CHECK (warning_diff_areas >= 0 AND warning_diff_areas <= 100)",
-            'Incorrect value of "Alert threshold due to the difference between the '
-            'official area and the GIS area".',
-        ),
-    ]

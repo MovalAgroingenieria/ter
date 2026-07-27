@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
 
-    <record id="view_use_type_attribute_form" model="ir.ui.view">
+    <record id="ter_use_type_attribute_view_form" model="ir.ui.view">
         <field name="name">ter.use_type.attribute.form</field>
         <field name="model">ter.use_type.attribute</field>
         <field name="arch" type="xml">

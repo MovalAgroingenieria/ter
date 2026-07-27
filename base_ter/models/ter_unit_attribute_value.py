@@ -12,6 +12,14 @@ class TerUnitAttributeValue(models.Model):
     _rec_name = "attribute_id"
     _order = "attribute_id, id"
 
+    _sql_constraints = [
+        (
+            "unit_attribute_unique",
+            "unique(unit_id, attribute_id)",
+            "Each attribute can only appear once per unit.",
+        ),
+    ]
+
     unit_id = fields.Many2one(
         comodel_name="ter.use_unit",
         required=True,
@@ -47,33 +55,25 @@ class TerUnitAttributeValue(models.Model):
 
     @api.depends("attribute_id", "value_id")
     def _compute_display_name(self):
-        for rec in self:
+        for record in self:
             parts = []
-            if rec.attribute_id:
-                parts.append(rec.attribute_id.name)
-            if rec.value_id:
-                parts.append(rec.value_id.name)
-            rec.display_name = ": ".join(parts) if parts else str(rec.id)
-
-    _sql_constraints = [
-        (
-            "unit_attribute_unique",
-            "unique(unit_id, attribute_id)",
-            "Each attribute can only appear once per unit.",
-        ),
-    ]
+            if record.attribute_id:
+                parts.append(record.attribute_id.name)
+            if record.value_id:
+                parts.append(record.value_id.name)
+            record.display_name = ": ".join(parts) if parts else str(record.id)
 
     @api.constrains("attribute_id", "unit_id")
     def _check_attribute_belongs_to_use_type(self):
-        for line in self:
-            if not line.unit_id.use_type_id or not line.attribute_id:
+        for record in self:
+            if not record.unit_id.use_type_id or not record.attribute_id:
                 continue
-            allowed = line.unit_id.use_type_id.all_attribute_ids
-            if line.attribute_id not in allowed:
+            allowed = record.unit_id.use_type_id.all_attribute_ids
+            if record.attribute_id not in allowed:
                 raise ValidationError(
                     self.env._(
                         "Attribute '%(attr)s' is not allowed for use type '%(use)s'.",
-                        attr=line.attribute_id.display_name,
-                        use=line.unit_id.use_type_id.display_name,
+                        attr=record.attribute_id.display_name,
+                        use=record.unit_id.use_type_id.display_name,
                     )
                 )

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-27 09:56+0000\n"
-"PO-Revision-Date: 2026-07-27 09:56+0000\n"
+"POT-Creation-Date: 2026-07-27 14:41+0000\n"
+"PO-Revision-Date: 2026-07-27 14:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -193,7 +193,7 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
 msgid "<span class=\"o_stat_text\">Descendants</span>"
 msgstr ""
 
@@ -217,8 +217,8 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "<span>Archive</span>"
 msgstr ""
 
@@ -241,6 +241,11 @@ msgid "<span>Change code</span>"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
+msgid "<span>Delete Geometry</span>"
+msgstr ""
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
 msgid "<span>GIS Area</span>"
@@ -255,7 +260,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "<span>GIS Viewer</span>"
 msgstr ""
 
@@ -304,7 +309,7 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "<span>Regenerate Image</span>"
 msgstr ""
 
@@ -322,8 +327,8 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "<span>Unarchive</span>"
 msgstr ""
 
@@ -403,7 +408,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__active
 #: model:ir.model.fields,field_description:base_ter.field_ter_profile__active
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__active
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
 msgid "Active"
 msgstr ""
 
@@ -440,6 +445,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__aerial_image
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__aerial_image
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__aerial_image
 msgid "Aerial Image"
 msgstr ""
 
@@ -450,6 +456,7 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__aerial_image_medium
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__aerial_image_medium
 msgid "Aerial Image (medium size)"
 msgstr ""
 
@@ -461,6 +468,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__aerial_image_small
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__aerial_image_small
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__aerial_image_small
 msgid "Aerial Image (small size)"
 msgstr ""
 
@@ -477,11 +485,13 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__aerial_image_key
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__aerial_image_key
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__aerial_image_key
 msgid "Aerial Image Key"
 msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__aerial_image_last_refresh
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__aerial_image_last_refresh
 msgid "Aerial Image Last Refresh"
 msgstr ""
 
@@ -498,7 +508,13 @@ msgid "Aerial image OK. Property: %(name)s"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#. odoo-python
+#: code:addons/base_ter/models/ter_use_unit.py:0
+msgid "Aerial image OK. Territorial unit: %(name)s"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Aerial image and GIS"
 msgstr ""
 
@@ -540,8 +556,8 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute__value_ids
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_attribute_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_attribute_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
 msgid "Allowed Values"
 msgstr ""
 
@@ -576,10 +592,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Archived"
 msgstr ""
 
@@ -619,7 +635,7 @@ msgid "Area unit name"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Areas"
 msgstr ""
 
@@ -644,7 +660,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__attribute_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute_value__attribute_id
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
 msgid "Attribute"
 msgstr ""
 
@@ -661,12 +677,12 @@ msgid "Attribute '%(attr)s' is required."
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_attribute_value_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_unit_attribute_value_view_form
 msgid "Attribute Value"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_attribute_value_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_unit_attribute_value_view_list
 msgid "Attribute Values"
 msgstr ""
 
@@ -680,8 +696,8 @@ msgstr ""
 #: code:addons/base_ter/models/ter_use_unit.py:0
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__attribute_ids
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__attribute_value_ids
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Attributes"
 msgstr ""
 
@@ -711,6 +727,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__bounding_box_str
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__bounding_box_str
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__bounding_box_str
 msgid "Bounding box as string"
 msgstr ""
 
@@ -768,7 +785,7 @@ msgid "Close"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.wizard_show_gis_preview_views
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_show_gis_preview_view_form
 msgid "Close preview"
 msgstr ""
 
@@ -963,7 +980,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model,name:base_ter.model_date_range
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__date_range_id
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Date Range"
 msgstr ""
 
@@ -981,12 +998,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_ter/models/ter_use_type.py:0
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__date_range_count
-#: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_calendar
-#: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_graph
+#: model_terms:ir.ui.view,arch_db:base_ter.date_range_view_calendar
+#: model_terms:ir.ui.view,arch_db:base_ter.date_range_view_graph
+#: model_terms:ir.ui.view,arch_db:base_ter.date_range_view_pivot
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_kanban
 #: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_list
-#: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_pivot
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_kanban
 msgid "Date Ranges"
 msgstr ""
 
@@ -1003,19 +1020,20 @@ msgid "Date Ranges Types Ter"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Dates"
 msgstr ""
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_parcel_reset_aerial_image_delete
 #: model:ir.actions.server,name:base_ter.ter_property_reset_aerial_image_delete
+#: model:ir.actions.server,name:base_ter.ter_unit_delete_aerial_image_serveraction
 msgid "Delete aerial image"
 msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__child_ids
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
 msgid "Descendants"
 msgstr ""
 
@@ -1092,13 +1110,14 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields.selection,name:base_ter.selection__ter_use_unit__state__draft
 #: model:ir.model.fields.selection,name:base_ter.selection__wizard_import_kml__state__draft
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Draft"
 msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__centroid_ewkt
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__centroid_ewkt
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__centroid_ewkt
 msgid "EWKT Centroid"
 msgstr ""
 
@@ -1111,6 +1130,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__oriented_envelope_ewkt
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__oriented_envelope_ewkt
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__oriented_envelope_ewkt
 msgid "EWKT Geometry for oriented envelope"
 msgstr ""
 
@@ -1139,6 +1159,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 #: code:addons/base_ter/models/ter_property.py:0
+#: code:addons/base_ter/models/ter_use_unit.py:0
 msgid "Error getting aerial image (is the WMS url correct?)"
 msgstr ""
 
@@ -1150,7 +1171,7 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__farm_property_id
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Farm/Property"
 msgstr ""
 
@@ -1230,6 +1251,7 @@ msgstr ""
 #: code:addons/base_ter/models/ter_gis_parcel_model.py:0
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__area_gis
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__area_gis
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__area_gis
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "GIS Area (m²)"
@@ -1285,6 +1307,7 @@ msgstr ""
 #: code:addons/base_ter/models/ter_gis_parcel_model.py:0
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__perimeter_gis
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__perimeter_gis
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__perimeter_gis
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 msgid "GIS Perimeter (m)"
@@ -1316,6 +1339,12 @@ msgstr ""
 
 #. module: base_ter
 #. odoo-python
+#: code:addons/base_ter/models/ter_use_unit.py:0
+msgid "Generate aerial image: %(name)s"
+msgstr ""
+
+#. module: base_ter
+#. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 msgid "Generate aerial images (parcels), records %(offset)s+"
 msgstr ""
@@ -1336,6 +1365,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__geom_geojson
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__geom_geojson
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__geom_geojson
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__geom_geojson
 msgid "GeoJSON Geometry"
 msgstr ""
 
@@ -1352,21 +1382,14 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
-#. odoo-python
-#: code:addons/base_ter/models/ter_parcel.py:0
-#: code:addons/base_ter/models/ter_property.py:0
-msgid "Getting the aerial images..."
-msgstr ""
-
-#. module: base_ter
 #: model:ir.actions.server,name:base_ter.gisviewer_global_serveraction
 #: model:ir.ui.menu,name:base_ter.menu_viewer
 msgid "Global Viewer"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Group By"
 msgstr ""
 
@@ -1382,7 +1405,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__partner_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Holder"
 msgstr ""
 
@@ -1420,7 +1443,7 @@ msgid "Icon to indicate an exception activity."
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Identification"
 msgstr ""
 
@@ -1446,17 +1469,24 @@ msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid ""
 "If checked, only the central parcel will be displayed; otherwise, all "
 "parcels will be displayed."
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid ""
 "If checked, only the central property will be displayed; otherwise, all "
 "properties will be displayed."
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
+msgid ""
+"If checked, only the central unit will be displayed; otherwise, all units "
+"will be displayed."
 msgstr ""
 
 #. module: base_ter
@@ -1551,7 +1581,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__is_current
 #: model:ir.model.fields.selection,name:base_ter.selection__ter_use_unit__validity_state__in_range
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "In Range"
 msgstr ""
 
@@ -1597,8 +1627,8 @@ msgid "Internal Notes"
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_form_view
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
 msgid "Internal notes..."
 msgstr ""
 
@@ -1613,6 +1643,7 @@ msgstr ""
 #: code:addons/base_ter/controllers/ter_gis_helpers.py:0
 #: code:addons/base_ter/controllers/ter_gis_parcel_controller.py:0
 #: code:addons/base_ter/controllers/ter_gis_property_controller.py:0
+#: code:addons/base_ter/controllers/ter_gis_unit_use_controller.py:0
 msgid "Invalid operator. Use \"=\" or \"ilike\"."
 msgstr ""
 
@@ -1737,13 +1768,13 @@ msgid "Localization"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Location"
 msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__parcel_id
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Main Parcel"
 msgstr ""
 
@@ -1844,7 +1875,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Municipality"
 msgstr ""
 
@@ -1880,7 +1911,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
 msgid "Name"
 msgstr ""
 
@@ -1894,6 +1925,7 @@ msgstr ""
 #: code:addons/base_ter/controllers/ter_gis_helpers.py:0
 #: code:addons/base_ter/controllers/ter_gis_parcel_controller.py:0
 #: code:addons/base_ter/controllers/ter_gis_property_controller.py:0
+#: code:addons/base_ter/controllers/ter_gis_unit_use_controller.py:0
 msgid "Name field is mandatory."
 msgstr ""
 
@@ -1942,7 +1974,7 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields.selection,name:base_ter.selection__ter_use_unit__validity_state__not_started
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Not Started"
 msgstr ""
 
@@ -1958,8 +1990,8 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_date_range__note
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_form_view
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
 msgid "Notes"
 msgstr ""
 
@@ -2044,13 +2076,18 @@ msgid "Official area of the territorial use unit, always in hectares (ha)."
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Only central parcel"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Only central property"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
+msgid "Only central unit"
 msgstr ""
 
 #. module: base_ter
@@ -2070,7 +2107,7 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields.selection,name:base_ter.selection__ter_use_unit__validity_state__out_of_range
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Out of Range"
 msgstr ""
 
@@ -2087,7 +2124,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__parcel_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_list
 msgid "Parcel"
 msgstr ""
 
@@ -2179,7 +2216,7 @@ msgid "Parcel on the map"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Parcel vector layer"
 msgstr ""
 
@@ -2200,6 +2237,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__parcel_count
 #: model:ir.model.fields.selection,name:base_ter.selection__wizard_import_kml__target_model__ter_parcel
 #: model:ir.ui.menu,name:base_ter.ter_parcel_menu
+#: model_terms:ir.ui.view,arch_db:base_ter.date_range_view_kanban
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_calendar
@@ -2207,11 +2245,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_graph
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_kanban
 #: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_form_view
-#: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_kanban
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_kanban
 msgid "Parcels"
 msgstr ""
 
@@ -2232,7 +2269,7 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__parent_id
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
 msgid "Parent"
 msgstr ""
 
@@ -2279,7 +2316,7 @@ msgid "Partner-Links"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
 msgid "Path"
 msgstr ""
 
@@ -2347,7 +2384,7 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.wizard_show_gis_preview_views
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_show_gis_preview_view_form
 msgid "Preview"
 msgstr ""
 
@@ -2475,7 +2512,7 @@ msgid "Property on the map"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Property vector layer"
 msgstr ""
 
@@ -2523,6 +2560,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_parcel_reset_aerial_image_serveraction
 #: model:ir.actions.server,name:base_ter.ter_property_reset_aerial_image_serveraction
+#: model:ir.actions.server,name:base_ter.ter_unit_reset_aerial_image_serveraction
 msgid "Refresh aerial image"
 msgstr ""
 
@@ -2580,7 +2618,7 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "SRID=25830;POLYGON((...))"
 msgstr ""
 
@@ -2592,12 +2630,12 @@ msgid "Scheduled Actions"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Search Territorial Units"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
 msgid "Search Use Types"
 msgstr ""
 
@@ -2713,7 +2751,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__state
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__state
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__state
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "State"
 msgstr ""
 
@@ -2790,6 +2828,13 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
+#: model:ir.actions.server,name:base_ter.ter_use_unit_cron_action_reset_all_aerial_images_ir_actions_server
+msgid ""
+"Territorial Base: Generate pending aerial images of the territorial units "
+"(queue_job)"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_use_unit_cron_recompute_validity_state_ir_actions_server
 msgid "Territorial Base: Recompute ter.unit validity state"
 msgstr ""
@@ -2805,7 +2850,7 @@ msgid "Territorial Base: Refresh layer of properties"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Territorial Unit"
 msgstr ""
 
@@ -2825,16 +2870,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__unit_ids
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__unit_ids
 #: model:ir.ui.menu,name:base_ter.ter_unit_action_entrie_menu
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_calendar
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_graph
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_list
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_pivot
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_report_pivot
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_report_view_pivot
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_calendar
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_graph
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_pivot
 msgid "Territorial Units"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Territorial Use"
 msgstr ""
 
@@ -2850,7 +2895,7 @@ msgid "Territory"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Territory Vector Layers"
 msgstr ""
 
@@ -2901,6 +2946,12 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
+msgid ""
+"This will permanently delete the GIS geometry of this parcel. Continue?"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__diff_areas_threshold_exceeded
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__diff_areas_threshold_exceeded
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__diff_areas_threshold_exceeded
@@ -2913,7 +2964,7 @@ msgid "Threshold exceeded (difference between official and GIS areas) -str-"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
 msgid "Top level"
 msgstr ""
 
@@ -2936,7 +2987,7 @@ msgid "True if today is within date_start and date_end."
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Type"
 msgstr ""
 
@@ -2947,7 +2998,7 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid ""
 "URL of the WMS service used to obtain the vectorial image of the parcels."
 msgstr ""
@@ -2962,12 +3013,18 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_ter/controllers/ter_gis_parcel_controller.py:0
 #: code:addons/base_ter/controllers/ter_gis_property_controller.py:0
+#: code:addons/base_ter/controllers/ter_gis_unit_use_controller.py:0
 msgid "Unexpected error while processing the request."
 msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__unit_id
 msgid "Unit"
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
+msgid "Unit vector layer"
 msgstr ""
 
 #. module: base_ter
@@ -2979,13 +3036,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__unit_count
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__unit_count
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type__unit_count
+#: model_terms:ir.ui.view,arch_db:base_ter.date_range_view_kanban
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_kanban
 #: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_form_view
-#: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_kanban
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_kanban
 msgid "Units"
 msgstr ""
 
@@ -3000,7 +3057,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__use_type_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute__use_type_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__use_type_id
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
 msgid "Use Type"
 msgstr ""
 
@@ -3017,7 +3074,7 @@ msgstr ""
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.action_use_type
 #: model:ir.ui.menu,name:base_ter.menu_use_type
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_list
 msgid "Use Types"
 msgstr ""
 
@@ -3029,8 +3086,8 @@ msgid ""
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_list
 msgid "Use type"
 msgstr ""
 
@@ -3051,13 +3108,13 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields.selection,name:base_ter.selection__ter_use_unit__state__validated
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Validated"
 msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__validity_state
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_filter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Validity State"
 msgstr ""
 
@@ -3067,12 +3124,12 @@ msgid "Value"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Vector WMS URL"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "View Attributes"
 msgstr ""
 
@@ -3089,6 +3146,12 @@ msgid "WMS of the vectorial image: Filtered properties (y/n)"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_res_company__aerial_image_wmsvec_unit_filter
+#: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsvec_unit_filter
+msgid "WMS of the vectorial image: Filtered units (y/n)"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_company__aerial_image_wmsvec_parcel_name
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsvec_parcel_name
 msgid "WMS of the vectorial image: Name of the parcels layer"
@@ -3101,22 +3164,35 @@ msgid "WMS of the vectorial image: Name of the properties layer"
 msgstr ""
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_res_company__aerial_image_wmsvec_unit_name
+#: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsvec_unit_name
+msgid "WMS of the vectorial image: Name of the units layer"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_company__aerial_image_wmsvec_url
 #: model:ir.model.fields,field_description:base_ter.field_res_config_settings__aerial_image_wmsvec_url
 msgid "WMS of the vectorial image: URL"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid ""
 "WMS service layer used to obtain the images of the parcels (vectorial "
 "elements)."
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_gis_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid ""
 "WMS service layer used to obtain the images of the properties (vectorial "
+"elements)."
+msgstr ""
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
+msgid ""
+"WMS service layer used to obtain the images of the units (vectorial "
 "elements)."
 msgstr ""
 
@@ -3124,6 +3200,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 msgid "WMS temporarily unavailable for parcel %(code)s: %(error)s"
+msgstr ""
+
+#. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/ter_use_unit.py:0
+msgid "WMS temporarily unavailable for unit %(name)s: %(error)s"
 msgstr ""
 
 #. module: base_ter
@@ -3214,7 +3296,7 @@ msgid "e.g. PARCEL- or FINCA-"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_use_type_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
 msgid "e.g. Wheat"
 msgstr ""
 
@@ -3224,7 +3306,7 @@ msgstr ""
 #: code:addons/base_ter/models/ter_parcel.py:0
 #: code:addons/base_ter/models/ter_property.py:0
 #: code:addons/base_ter/models/ter_use_unit.py:0
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_kanban
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_kanban
 msgid "ha"
 msgstr ""
 
@@ -3272,11 +3354,11 @@ msgid "ter_property_avatar"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_kanban
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_kanban
 msgid "ter_unit_256"
 msgstr ""
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.view_ter_unit_kanban
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_kanban
 msgid "ter_unit_avatar"
 msgstr ""

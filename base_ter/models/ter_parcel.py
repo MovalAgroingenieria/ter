@@ -725,6 +725,8 @@ class TerParcel(models.Model):
         if len(self) == 1:
             try:
                 self._reset_single_aerial_image()  # pylint: disable=protected-access
+                # Progressive commit is intentional for long-running background
+                # refreshes so successful records are not lost after later failures.
                 self.env.cr.commit()  # pylint: disable=invalid-commit
                 self.env.invalidate_all()
             except wms_errors as e:
@@ -747,6 +749,8 @@ class TerParcel(models.Model):
             for attempt in range(max_serialization_retries + 1):
                 try:
                     record._reset_single_aerial_image()  # pylint: disable=protected-access
+                    # Progressive commit is intentional for long-running background
+                    # refreshes so successful records are not lost after later failures.
                     self.env.cr.commit()  # pylint: disable=invalid-commit
                     self.env.invalidate_all()
                     break
@@ -778,14 +782,20 @@ class TerParcel(models.Model):
                     failed.append(record.alphanum_code)
                     break
         if failed:
-            raise exceptions.UserError(
-                self.env._(
-                    "Could not fetch aerial images for %(count)s parcel(s) "
-                    "(timeout or connection error to WMS). Try again later: %(codes)s",
-                    count=len(failed),
-                    codes=", ".join(failed[:10]),
-                )
+            _logger.warning(
+                "Aerial image refresh failed for %s parcel(s): %s",
+                len(failed),
+                ", ".join(failed[:10]),
             )
+            if len(failed) == len(self):
+                raise exceptions.UserError(
+                    self.env._(
+                        "Could not fetch aerial images for %(count)s parcel(s) "
+                        "(timeout or connection error to WMS). Try again later: %(codes)s",
+                        count=len(failed),
+                        codes=", ".join(failed[:10]),
+                    )
+                )
 
     _MASS_AERIAL_IMAGE_BATCH_NAME = "base_ter.ter_parcel.action_reset_all_aerial_images"
     _MASS_AERIAL_IMAGE_CHUNK_SIZE = 50
@@ -866,9 +876,9 @@ class TerParcel(models.Model):
 
     def action_show_units(self):
         self.ensure_one()
-        list_view = self.env.ref("base_ter.view_ter_unit_list")
-        form_view = self.env.ref("base_ter.view_ter_unit_form")
-        search_view = self.env.ref("base_ter.view_ter_unit_filter")
+        list_view = self.env.ref("base_ter.ter_use_unit_view_list")
+        form_view = self.env.ref("base_ter.ter_use_unit_view_form")
+        search_view = self.env.ref("base_ter.ter_use_unit_view_search")
         return {
             "type": "ir.actions.act_window",
             "name": self.env._("Territorial Units"),

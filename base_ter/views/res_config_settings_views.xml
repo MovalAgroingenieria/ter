@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
 
     <record id="res_config_settings_view_form" model="ir.ui.view">
         <field name="name">res.config.settings.view.form.inherit.base_ter</field>
         <field name="model">res.config.settings</field>
         <field name="priority" eval="10"/>
-        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="inherit_id" ref="base_gis_viewer.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
                 <app name="base_ter" string="Territory" data-string="Territory">
@@ -71,15 +70,6 @@
 
                 </app>
             </xpath>
-        </field>
-    </record>
-
-    <record id="res_config_settings_gis_view_form" model="ir.ui.view">
-        <field name="name">res.config.settings.view.form.inherit.base_ter.gis</field>
-        <field name="model">res.config.settings</field>
-        <field name="priority" eval="10"/>
-        <field name="inherit_id" ref="base_gis_viewer.res_config_settings_view_form"/>
-        <field name="arch" type="xml">
             <xpath expr="//app[@name='base_gis_viewer']" position="inside">
                 <block title="Territory Vector Layers" name="base_ter_vector_layers">
                     <setting id="base_ter_aerial_image_wmsvec_url"

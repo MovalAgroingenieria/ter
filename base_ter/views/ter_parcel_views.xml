@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
 
     <record id="ter_parcel_view_form" model="ir.ui.view">
@@ -341,6 +340,31 @@
                 <field name="partner_id" type="row"/>
                 <field name="area_official" type="measure"/>
             </pivot>
+        </field>
+    </record>
+
+    <record id="ter_parcel_view_graph" model="ir.ui.view">
+        <field name="name">ter.parcel.view.graph</field>
+        <field name="model">ter.parcel</field>
+        <field name="arch" type="xml">
+            <graph string="Parcels" type="bar">
+                <field name="partner_id"/>
+                <field name="municipality_id"/>
+                <field name="area_official" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="ter_parcel_view_calendar" model="ir.ui.view">
+        <field name="name">ter.parcel.report.calendar</field>
+        <field name="model">ter.parcel</field>
+        <field name="arch" type="xml">
+            <calendar string="Parcels" date_start="create_date" date_stop="create_date"
+                      color="partner_id" mode="month">
+                <field name="alphanum_code"/>
+                <field name="partner_id"/>
+                <field name="municipality_id"/>
+            </calendar>
         </field>
     </record>
 

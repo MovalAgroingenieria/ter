@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
-    <record id="view_ter_unit_attribute_value_list" model="ir.ui.view">
+    <record id="ter_unit_attribute_value_view_list" model="ir.ui.view">
         <field name="name">ter.unit.attribute.value.list</field>
         <field name="model">ter.unit.attribute.value</field>
         <field name="arch" type="xml">
@@ -14,7 +13,7 @@
         </field>
     </record>
 
-    <record id="view_ter_unit_attribute_value_form" model="ir.ui.view">
+    <record id="ter_unit_attribute_value_view_form" model="ir.ui.view">
         <field name="name">ter.unit.attribute.value.form</field>
         <field name="model">ter.unit.attribute.value</field>
         <field name="arch" type="xml">
@@ -36,7 +35,7 @@
         </field>
     </record>
 
-    <record id="view_ter_unit_filter" model="ir.ui.view">
+    <record id="ter_use_unit_view_search" model="ir.ui.view">
         <field name="name">ter.unit.search</field>
         <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
@@ -70,7 +69,7 @@
         </field>
     </record>
 
-    <record id="view_ter_unit_list" model="ir.ui.view">
+    <record id="ter_use_unit_view_list" model="ir.ui.view">
         <field name="name">ter.unit.list</field>
         <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
@@ -91,7 +90,7 @@
         </field>
     </record>
 
-    <record id="view_ter_unit_kanban" model="ir.ui.view">
+    <record id="ter_use_unit_view_kanban" model="ir.ui.view">
         <field name="name">ter.unit.kanban</field>
         <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
@@ -147,7 +146,7 @@
         </field>
     </record>
 
-    <record id="view_ter_unit_pivot" model="ir.ui.view">
+    <record id="ter_use_unit_view_pivot" model="ir.ui.view">
         <field name="name">ter.unit.pivot</field>
         <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
@@ -165,7 +164,7 @@
         </field>
     </record>
 
-    <record id="view_ter_unit_form" model="ir.ui.view">
+    <record id="ter_use_unit_view_form" model="ir.ui.view">
         <field name="name">ter.unit.form</field>
         <field name="model">ter.use_unit</field>
         <field name="priority" eval="1" />
@@ -274,18 +273,61 @@
         </field>
     </record>
 
+    <!-- Report-specific pivot: only stored numeric fields (area_official) to avoid aggregate error -->
+    <record id="ter_use_unit_report_view_pivot" model="ir.ui.view">
+        <field name="name">ter.unit.report.pivot</field>
+        <field name="model">ter.use_unit</field>
+        <field name="arch" type="xml">
+            <pivot string="Territorial Units" display_quantity="true">
+                <field name="use_type_id" type="row"/>
+                <field name="partner_id" type="row"/>
+                <field name="municipality_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="validity_state" type="col"/>
+                <field name="date_range_id" type="col"/>
+                <field name="area_official" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="ter_use_unit_view_graph" model="ir.ui.view">
+        <field name="name">ter.unit.view.graph</field>
+        <field name="model">ter.use_unit</field>
+        <field name="arch" type="xml">
+            <graph string="Territorial Units" type="bar">
+                <field name="use_type_id"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+                <field name="area_official" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="ter_use_unit_view_calendar" model="ir.ui.view">
+        <field name="name">ter.unit.report.calendar</field>
+        <field name="model">ter.use_unit</field>
+        <field name="arch" type="xml">
+            <calendar string="Territorial Units" date_start="date_start" date_stop="date_end"
+                      color="use_type_id" mode="month">
+                <field name="alphanum_code"/>
+                <field name="use_type_id"/>
+                <field name="partner_id"/>
+            </calendar>
+        </field>
+    </record>
+
     <record id="ter_unit_action_entrie" model="ir.actions.act_window">
         <field name="name">Territorial Units</field>
         <field name="res_model">ter.use_unit</field>
         <field name="view_mode">list,form,kanban,pivot,graph,calendar</field>
         <field name="view_ids" eval="[(5, 0),
-              (0, 0, {'view_mode': 'list', 'view_id': ref('view_ter_unit_list')}),
-              (0, 0, {'view_mode': 'form', 'view_id': ref('view_ter_unit_form')}),
-              (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_ter_unit_kanban')}),
-              (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_ter_unit_pivot')}),
-              (0, 0, {'view_mode': 'graph', 'view_id': ref('view_ter_unit_graph')}),
-              (0, 0, {'view_mode': 'calendar', 'view_id': ref('view_ter_unit_calendar')})]"/>
-        <field name="search_view_id" ref="view_ter_unit_filter"/>
+              (0, 0, {'view_mode': 'list', 'view_id': ref('ter_use_unit_view_list')}),
+              (0, 0, {'view_mode': 'form', 'view_id': ref('ter_use_unit_view_form')}),
+              (0, 0, {'view_mode': 'kanban', 'view_id': ref('ter_use_unit_view_kanban')}),
+              (0, 0, {'view_mode': 'pivot', 'view_id': ref('ter_use_unit_view_pivot')}),
+              (0, 0, {'view_mode': 'graph', 'view_id': ref('ter_use_unit_view_graph')}),
+              (0, 0, {'view_mode': 'calendar', 'view_id': ref('ter_use_unit_view_calendar')})]"/>
+        <field name="search_view_id" ref="ter_use_unit_view_search"/>
         <field name="context">{'search_default_filter_validated': 1, 'search_default_filter_validity_in_range': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_empty_folder">

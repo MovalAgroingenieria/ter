@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2026 Moval Agroingeniería S.L. -->
 <odoo>
-    <record id="wizard_show_gis_preview_views" model="ir.ui.view">
+    <record id="wizard_show_gis_preview_view_form" model="ir.ui.view">
         <field name="name">Wizard to GIS preview</field>
         <field name="model">wizard.show.gis.preview</field>
         <field name="arch" type="xml">
