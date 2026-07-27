@@ -2,8 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
 from odoo import fields, models
-
-from .geofolia_protection import check_geofolia_protected
+from odoo.exceptions import UserError
 
 
 class FsmOrderUsageMixin(models.AbstractModel):
@@ -49,7 +48,15 @@ class FsmOrderUsageMixin(models.AbstractModel):
     )
 
     def write(self, vals):
-        check_geofolia_protected(
-            self, vals, self._geofolia_protected_fields, self._geofolia_lock_field
-        )
+        protected = [name for name in self._geofolia_protected_fields if name in vals]
+        if protected and not self.env.context.get("geofolia_sync"):
+            locked = self.sudo().filtered(self._geofolia_lock_field)
+            if locked:
+                raise UserError(
+                    self.env._(
+                        "These fields come from Geofolia and can only be "
+                        "updated by re-importing from Geofolia: %(fields)s",
+                        fields=", ".join(sorted(protected)),
+                    )
+                )
         return super().write(vals)

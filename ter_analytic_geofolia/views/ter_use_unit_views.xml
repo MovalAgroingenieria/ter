@@ -3,7 +3,7 @@
     <record id="view_ter_unit_form" model="ir.ui.view">
         <field name="name">ter.use_unit.form.inherit.geofolia</field>
         <field name="model">ter.use_unit</field>
-        <field name="inherit_id" ref="base_ter.view_ter_unit_form"/>
+        <field name="inherit_id" ref="base_ter.ter_use_unit_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button name="action_view_fsm_orders" type="object"
@@ -36,7 +36,7 @@
     <record id="view_ter_unit_list" model="ir.ui.view">
         <field name="name">ter.use_unit.list.inherit.geofolia</field>
         <field name="model">ter.use_unit</field>
-        <field name="inherit_id" ref="base_ter.view_ter_unit_list"/>
+        <field name="inherit_id" ref="base_ter.ter_use_unit_view_list"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
                 <field name="geofolia_external_id" string="Geofolia ID" optional="hide"/>
@@ -47,7 +47,7 @@
     <record id="view_ter_unit_filter" model="ir.ui.view">
         <field name="name">ter.use_unit.search.inherit.geofolia</field>
         <field name="model">ter.use_unit</field>
-        <field name="inherit_id" ref="base_ter.view_ter_unit_filter"/>
+        <field name="inherit_id" ref="base_ter.ter_use_unit_view_search"/>
         <field name="arch" type="xml">
             <xpath expr="//search" position="inside">
                 <field name="geofolia_external_id" string="Geofolia ID"/>
