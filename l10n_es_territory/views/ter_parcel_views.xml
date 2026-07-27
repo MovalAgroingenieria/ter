@@ -94,6 +94,16 @@
         <field name="code">action = records.action_get_gis_data_from_cadastre()</field>
     </record>
 
+    <record id="ter_parcel_delete_gis_geometry_serveraction" model="ir.actions.server">
+        <field name="name">Delete GIS geometry</field>
+        <field name="model_id" ref="base_ter.model_ter_parcel"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_parcel"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="groups_id" eval="[(4, ref('base_ter.group_ter_manager'))]"/>
+        <field name="state">code</field>
+        <field name="code">action = records.action_delete_gis_geometry()</field>
+    </record>
+
     <record id="ter_parcel_view_search" model="ir.ui.view">
         <field name="name">ter.parcel.view.search.l10n_es_territory</field>
         <field name="model">ter.parcel</field>

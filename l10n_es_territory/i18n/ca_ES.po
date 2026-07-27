@@ -6,14 +6,52 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-04 05:21+0000\n"
-"PO-Revision-Date: 2026-02-04 05:21+0000\n"
+"POT-Creation-Date: 2026-07-27 14:52+0000\n"
+"PO-Revision-Date: 2026-07-27 14:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_gis_parcel_model.py:0
+msgid ""
+"\n"
+"⸰ %(label)s: %(value)s"
+msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "%(parcel)s: %(error)s"
+msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "- Already had geometry: %(count)s"
+msgstr "- Ja tenien geometria: %(count)s"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "- Created geometries: %(count)s"
+msgstr "- Geometries creades: %(count)s"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "- Errors: %(count)s"
+msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "- Without cadastral reference: %(count)s"
+msgstr "- Sense referència cadastral: %(count)s"
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
@@ -26,9 +64,26 @@ msgid "<span>Cadastre</span>"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+msgid "<span>Import GIS</span>"
+msgstr "<span>Importar GIS</span>"
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_15
 msgid "A Coruña"
 msgstr "A Corunya"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/res_province.py:0
+msgid "A valid cadastral code of province is required."
+msgstr "Cal un codi cadastral de província vàlid."
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/res_municipality.py:0
+msgid "A valid municipality number is required."
+msgstr "Cal un número de municipi vàlid."
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_02
@@ -41,9 +96,22 @@ msgid "Alicante/Alacant"
 msgstr "Alacant"
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,help:l10n_es_territory.field_res_company__cadastre_gis_import_enabled
+#: model:ir.model.fields,help:l10n_es_territory.field_res_config_settings__cadastre_gis_import_enabled
+msgid "Allow importing parcel geometries from the Cadastre WFS service."
+msgstr ""
+"Permet importar geometries de parcel·les des del servei WFS del Cadastre."
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_04
 msgid "Almería"
 msgstr "Almeria"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Already with geometry names: %(names)s"
+msgstr "Noms que ja tenien geometria: %(names)s"
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_01
@@ -53,7 +121,7 @@ msgstr "Andalusia"
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_01
 msgid "Araba/Álava"
-msgstr "Alaba"
+msgstr "Araba/Àlaba"
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_02
@@ -81,18 +149,6 @@ msgid "Barcelona"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model:ir.model.fields,field_description:l10n_es_territory.field_res_company__base_ter_aerial_image_wmsbase_layers
-#: model:ir.model.fields,field_description:l10n_es_territory.field_res_config_settings__base_ter_aerial_image_wmsbase_layers
-msgid "Base Ter Aerial Image Wmsbase Layers"
-msgstr "Capes WMS d'imatge aèria Base Ter"
-
-#. module: l10n_es_territory
-#: model:ir.model.fields,field_description:l10n_es_territory.field_res_company__base_ter_aerial_image_wmsbase_url
-#: model:ir.model.fields,field_description:l10n_es_territory.field_res_config_settings__base_ter_aerial_image_wmsbase_url
-msgid "Base Ter Aerial Image Wmsbase Url"
-msgstr "URL WMS d'imatge aèria Base Ter"
-
-#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_48
 msgid "Bizkaia"
 msgstr "Biscaia"
@@ -105,6 +161,12 @@ msgstr ""
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastral_area
 msgid "Cadastral Area"
+msgstr "Àrea cadastral (m²)"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_gis_parcel_model.py:0
+msgid "Cadastral Area (m²)"
 msgstr "Àrea cadastral (m²)"
 
 #. module: l10n_es_territory
@@ -134,9 +196,31 @@ msgid "Cadastral Subparcel"
 msgstr "Subparcel·la cadastral"
 
 #. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_list
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_config_settings_view_form_inherit_l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
 msgid "Cadastre"
 msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Cadastre GIS import"
+msgstr "Importació GIS del Cadastre"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid ""
+"Cadastre GIS import is disabled in Territory settings. Enable it to import "
+"parcel geometries."
+msgstr ""
+"La importació GIS del Cadastre està deshabilitada als ajustos de Territori. "
+"Habiliteu-la per importar geometries de parcel·les."
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastre_gis_import_enabled
+msgid "Cadastre Gis Import Enabled"
+msgstr "Importació GIS del Cadastre habilitada"
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_06
@@ -196,6 +280,12 @@ msgid "Comunitad Valenciana"
 msgstr "Comunitat Valenciana"
 
 #. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Created geometry names: %(names)s"
+msgstr "Noms de geometries creades: %(names)s"
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_16
 msgid "Cuenca"
 msgstr "Conca"
@@ -216,6 +306,22 @@ msgid "Córdoba"
 msgstr "Còrdova"
 
 #. module: l10n_es_territory
+#: model:ir.actions.server,name:l10n_es_territory.ter_parcel_delete_gis_geometry_serveraction
+msgid "Delete GIS geometry"
+msgstr "Suprimir geometria GIS"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_company__cadastre_gis_import_enabled
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_config_settings__cadastre_gis_import_enabled
+msgid "Enable Cadastre GIS import"
+msgstr "Habilitar la importació GIS del Cadastre"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_config_settings_view_form_inherit_l10n_es_territory
+msgid "Enable parcel geometry import from Cadastre"
+msgstr "Habilitar la importació de geometria de parcel·les des del Cadastre"
+
+#. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_11
 msgid "Extremadura"
 msgstr ""
@@ -229,6 +335,12 @@ msgstr "Parcel·la GIS"
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_12
 msgid "Galicia"
 msgstr "Galícia"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Geometry could not be stored."
+msgstr "No s'ha pogut desar la geometria."
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_17
@@ -261,6 +373,15 @@ msgid "Huesca"
 msgstr "Osca"
 
 #. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_config_settings_view_form_inherit_l10n_es_territory
+msgid ""
+"If enabled, parcels can import GIS geometry from the official Cadastre WFS "
+"service."
+msgstr ""
+"Si està habilitat, les parcel·les poden importar geometria GIS des del "
+"servei WFS oficial del Cadastre."
+
+#. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_04
 msgid "Illes Balears"
 msgstr ""
@@ -271,6 +392,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_province__image_128
 msgid "Image"
 msgstr "Imatge"
+
+#. module: l10n_es_territory
+#: model:ir.actions.server,name:l10n_es_territory.ter_parcel_import_gis_from_cadastre_serveraction
+msgid "Import GIS from Cadastre"
+msgstr "Importar GIS des del Cadastre"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Incorrect value for \"Cadastral Area (m²)\"."
+msgstr "Valor incorrecte per a \"Àrea cadastral (m²)\"."
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_05
@@ -314,13 +446,21 @@ msgid "Madrid"
 msgstr ""
 
 #. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Malformed XML received from Cadastre service."
+msgstr "S'ha rebut XML mal format del servei del Cadastre."
+
+#. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_19
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_52
 msgid "Melilla"
 msgstr ""
 
 #. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_admregion_view_form_inherit_l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/res_admregion.py:0
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_admregion_view_form
 msgid "Municipalities"
 msgstr "Municipis"
 
@@ -332,7 +472,7 @@ msgstr "Municipi"
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_municipality__municipality_number
 msgid "Municipality Number"
-msgstr "Número de municipi"
+msgstr "Nombre de municipi"
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_30
@@ -348,6 +488,12 @@ msgstr "Màlaga"
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_31
 msgid "Navarra"
 msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "No valid geometry found in Cadastre response."
+msgstr "No s'ha trobat cap geometria vàlida a la resposta del Cadastre."
 
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_admregion__number_of_municipalities
@@ -417,7 +563,10 @@ msgid "Place"
 msgstr "Localitat"
 
 #. module: l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_admregion_view_form_inherit_l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/res_admregion.py:0
+#: code:addons/l10n_es_territory/models/res_province.py:0
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_admregion_view_form
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_province_view_form
 msgid "Places"
 msgstr "Localitats"
@@ -446,6 +595,26 @@ msgstr "Regió"
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_14
 msgid "Región de Murcia"
 msgstr "Regió de Múrcia"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Repeated cadastral reference (with subparcel). Check archived parcels."
+msgstr ""
+"Referència cadastral repetida (amb subparcel·la). Reviseu les parcel·les "
+"arxivades."
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/res_municipality.py:0
+msgid "Repeated municipality code."
+msgstr "Codi de municipi repetit."
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/res_province.py:0
+msgid "Repeated province code."
+msgstr "Codi de província repetit."
 
 #. module: l10n_es_territory
 #: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__parcel_type__01_r
@@ -488,6 +657,12 @@ msgid "Street type settings"
 msgstr "Ajustos de configuració"
 
 #. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Summary:"
+msgstr "Resum:"
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_43
 msgid "Tarragona"
 msgstr ""
@@ -496,6 +671,12 @@ msgstr ""
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_44
 msgid "Teruel"
 msgstr "Terol"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "The length of the cadastral reference is not correct."
+msgstr "La longitud de la referència cadastral no és correcta."
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_45
@@ -516,6 +697,12 @@ msgstr "València"
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_47
 msgid "Valladolid"
 msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Without cadastral reference names: %(names)s"
+msgstr "Noms sense referència cadastral: %(names)s"
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_49

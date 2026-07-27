@@ -341,10 +341,30 @@ class TerParcel(models.Model):
             if geom is None:
                 continue
             geom_gml = ElementTree.tostring(geom, encoding="unicode")
+            geom_gml = self._sanitize_cadastre_geometry_gml(geom_gml)
             if "posList" in geom_gml:
                 return geom_gml
 
         raise ValueError(self.env._("No valid geometry found in Cadastre response."))
+
+    def _sanitize_cadastre_geometry_gml(self, geometry_gml):
+        """Remove embedded srsName values that PostGIS cannot resolve."""
+        if not geometry_gml:
+            return geometry_gml
+        try:
+            root = ElementTree.fromstring(geometry_gml)
+        except ElementTree.ParseError:
+            return geometry_gml
+
+        for element in root.iter():
+            attrs_to_remove = []
+            for attr_name in element.attrib:
+                if attr_name.rsplit("}", 1)[-1] == "srsName":
+                    attrs_to_remove.append(attr_name)
+            for attr_name in attrs_to_remove:
+                del element.attrib[attr_name]
+
+        return ElementTree.tostring(root, encoding="unicode")
 
     def _fetch_cadastre_geometry_gml(self, official_code):
         params = {
@@ -481,9 +501,8 @@ class TerParcel(models.Model):
             errors,
         )
         message_type = self._get_notification_type(bool(errors), bool(created))
-        return self._build_display_notification(
+        return self._build_result_message_action(
             self.env._("Cadastre GIS import"),
             lines,
             message_type,
-            sticky=bool(errors),
         )
