@@ -8,7 +8,8 @@ are linked to a ter.use_unit carrying a Geofolia external id.
 
 
 def migrate(cr, version):
-    cr.execute("""
+    cr.execute(
+        """
         UPDATE ter_parcel tp
         SET geofolia_created = true
         WHERE tp.geofolia_created IS NOT TRUE
@@ -18,4 +19,5 @@ def migrate(cr, version):
               WHERE u.parcel_id = tp.id
                 AND u.geofolia_external_id IS NOT NULL
           )
-        """)
+        """
+    )

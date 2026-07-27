@@ -6,7 +6,6 @@ import base64
 import logging
 
 from odoo import api, exceptions, fields, models
-from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 
@@ -415,13 +414,11 @@ class TerProperty(models.Model):
         arch, view = super()._get_view(view_id, view_type, **options)
         if view_type not in ("form", "list"):
             return arch, view
-
         area_fields = self._add_area_fields() or []
         if not area_fields:
             return arch, view
-
         area_map = dict(area_fields)
-
+        field_labels = self.fields_get(list(area_map.keys()))
         company = self.env.company
         is_ha, area_unit_name, value_in_ha = company._get_area_unit_params()
         measure_name = self.env._(self._ha_name)
@@ -433,25 +430,24 @@ class TerProperty(models.Model):
             and area_unit_name != measure_name
         ):
             measure_name = area_unit_name
-
         for field_name, label in area_map.items():
+            translated_label = field_labels.get(field_name, {}).get(
+                "string"
+            ) or self.env._(label)
             for node in arch.xpath(f"//field[@name='{field_name}']"):
                 node.set(
                     "string",
-                    "%s (%s)" % (self.env._(label), measure_name),
+                    "%s (%s)" % (translated_label, measure_name),
                 )
-
         return arch, view
 
     def write(self, vals):
         old_partner = self.partner_id if len(self) == 1 else self.env["res.partner"]
         res = super().write(vals)
-
         company = self.env.company
         same_owner = bool(company.same_parcelmanager_propertyowner)
         if not (same_owner and old_partner and vals.get("partner_id")):
             return res
-
         new_partner = self.env["res.partner"].browse(vals["partner_id"])
         for prop in self:
             for parcel in prop.parcel_ids:
@@ -460,18 +456,15 @@ class TerProperty(models.Model):
                 )
                 links.write({"partner_id": new_partner.id})
                 parcel.partner_id = new_partner
-
         return res
 
     @api.model
     def action_refresh_properties_layer(self, from_backend=False):
         company = self.env.company
         epsg = int(company.gis_viewer_epsg or 0) or 25830
-
         message_type = "INFO"
         message = self.env._("ter_gis_property layer recreated.")
         module = model = method = ""
-
         try:
             self.env.cr.execute("DROP TABLE IF EXISTS ter_gis_property")
             self.env.cr.execute(
@@ -545,9 +538,7 @@ class TerProperty(models.Model):
             self.aerial_image_key = False
             self._fetch_and_store_aerial_image()  # pylint: disable=protected-access
             return
-
-        progress_msg = request.env._("Getting the aerial images...")
-        for record in self.with_progress(progress_msg):
+        for record in self:
             try:
                 record.aerial_image = False
                 record.aerial_image_key = False

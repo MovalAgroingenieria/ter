@@ -5,7 +5,7 @@ from xml.etree import ElementTree
 
 import requests
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class TerParcel(models.Model):
@@ -18,6 +18,7 @@ class TerParcel(models.Model):
     SIZE_RC2 = 7
 
     REQUEST_TIMEOUT = 5
+    REQUEST_TIMEOUT_CADASTRE_WFS = 60
 
     _SIZE_MUNICIPALITY_CADASTRAL_CODE = 5
     _SIZE_CADASTRAL_SECTOR = 1
@@ -33,6 +34,9 @@ class TerParcel(models.Model):
         "https://www1.sedecatastro.gob.es/"
         "CYCBienInmueble/OVCListaBienes.aspx?del=&muni=&rc1=rc1val&rc2=rc2val"
     )
+    _URL_CADASTRE_WFS = "https://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx"
+    _CADASTRE_WFS_SOURCE_SRID = 25830
+    _CADASTRE_WFS_VERIFY_SSL = False
 
     _AUTOMATIC_UPDATE_CADASTRAL_DATA = True
 
@@ -68,6 +72,16 @@ class TerParcel(models.Model):
         compute="_compute_official_code_with_subparcel",
         readonly=True,
     )
+
+    cadastre_gis_import_enabled = fields.Boolean(
+        compute="_compute_cadastre_gis_import_enabled"
+    )
+
+    @api.depends_context("uid")
+    def _compute_cadastre_gis_import_enabled(self):
+        enabled = bool(self.env.company.cadastre_gis_import_enabled)
+        for record in self:
+            record.cadastre_gis_import_enabled = enabled
 
     @api.depends("official_code", "cadastral_subparcel")
     def _compute_official_code_with_subparcel(self):
@@ -305,3 +319,171 @@ class TerParcel(models.Model):
             "url": cadastral_link,
             "target": "new",
         }
+
+    def _is_cadastre_gis_import_enabled(self):
+        return bool(self.env.company.cadastre_gis_import_enabled)
+
+    def _extract_cadastre_multisurface_gml(self, xml_content):
+        try:
+            root = ElementTree.fromstring(xml_content)
+        except ElementTree.ParseError as exc:
+            raise ValueError(
+                self.env._("Malformed XML received from Cadastre service.")
+            ) from exc
+
+        namespaces = {
+            "gml": "http://www.opengis.net/gml/3.2",
+            "cp": "http://inspire.ec.europa.eu/schemas/cp/4.0",
+        }
+
+        for parcel in root.findall(".//cp:CadastralParcel", namespaces):
+            geom = parcel.find(".//gml:MultiSurface", namespaces)
+            if geom is None:
+                continue
+            geom_gml = ElementTree.tostring(geom, encoding="unicode")
+            if "posList" in geom_gml:
+                return geom_gml
+
+        raise ValueError(self.env._("No valid geometry found in Cadastre response."))
+
+    def _fetch_cadastre_geometry_gml(self, official_code):
+        params = {
+            "service": "WFS",
+            "version": "2.0.0",
+            "request": "GetFeature",
+            "STOREDQUERIE_ID": "GetParcel",
+            "refcat": official_code,
+            "srsname": "EPSG:%s" % self._CADASTRE_WFS_SOURCE_SRID,
+        }
+        response = requests.get(
+            self._URL_CADASTRE_WFS,
+            params=params,
+            timeout=self.REQUEST_TIMEOUT_CADASTRE_WFS,
+            verify=self._CADASTRE_WFS_VERIFY_SSL,
+        )
+        response.raise_for_status()
+        return self._extract_cadastre_multisurface_gml(response.content)
+
+    def _split_cadastre_import_candidates(self):
+        candidates = self.browse()
+        already_with_geometry = []
+        without_official_code = []
+
+        for record in self:
+            if not record.official_code:
+                without_official_code.append(record.display_name)
+                continue
+            if record.geom_ewkt:
+                already_with_geometry.append(record.display_name)
+                continue
+            candidates |= record
+
+        return candidates, already_with_geometry, without_official_code
+
+    def _import_cadastre_geometry_candidates(self, candidates):
+        created = []
+        errors = []
+
+        for record in candidates:
+            try:
+                geometry_gml = record._fetch_cadastre_geometry_gml(record.official_code)
+                created_ok = record._set_gis_geometry_from_gml(  # pylint: disable=protected-access
+                    geometry_gml,
+                    source_srid=self._CADASTRE_WFS_SOURCE_SRID,
+                    target_srid=25830,
+                )
+                if created_ok:
+                    created.append(record.display_name)
+                else:
+                    errors.append(
+                        self.env._(
+                            "%(parcel)s: %(error)s",
+                            parcel=record.display_name,
+                            error=self.env._("Geometry could not be stored."),
+                        )
+                    )
+            except (requests.RequestException, ValueError) as exc:
+                errors.append(
+                    self.env._(
+                        "%(parcel)s: %(error)s",
+                        parcel=record.display_name,
+                        error=str(exc),
+                    )
+                )
+
+        return created, errors
+
+    def _build_cadastre_import_lines(
+        self,
+        created,
+        already_with_geometry,
+        without_official_code,
+        errors,
+    ):
+        lines = [self.env._("Summary:")]
+        lines.append(self.env._("- Created geometries: %(count)s", count=len(created)))
+        lines.append(
+            self.env._(
+                "- Already had geometry: %(count)s",
+                count=len(already_with_geometry),
+            )
+        )
+        lines.append(
+            self.env._(
+                "- Without cadastral reference: %(count)s",
+                count=len(without_official_code),
+            )
+        )
+        lines.append(self.env._("- Errors: %(count)s", count=len(errors)))
+
+        if created:
+            lines.append(
+                self.env._(
+                    "Created geometry names: %(names)s",
+                    names=self._format_summary_names(created),
+                )
+            )
+        if already_with_geometry:
+            lines.append(
+                self.env._(
+                    "Already with geometry names: %(names)s",
+                    names=self._format_summary_names(already_with_geometry),
+                )
+            )
+        if without_official_code:
+            lines.append(
+                self.env._(
+                    "Without cadastral reference names: %(names)s",
+                    names=self._format_summary_names(without_official_code),
+                )
+            )
+        self._append_error_names_line(lines, errors)  # pylint: disable=protected-access
+        return lines
+
+    def action_get_gis_data_from_cadastre(self):
+        if not self._is_cadastre_gis_import_enabled():
+            raise UserError(
+                self.env._(
+                    "Cadastre GIS import is disabled in Territory settings. "
+                    "Enable it to import parcel geometries."
+                )
+            )
+        (
+            candidates,
+            already_with_geometry,
+            without_official_code,
+        ) = self._split_cadastre_import_candidates()
+        created, errors = self._import_cadastre_geometry_candidates(candidates)
+        lines = self._build_cadastre_import_lines(
+            created,
+            already_with_geometry,
+            without_official_code,
+            errors,
+        )
+        message_type = self._get_notification_type(bool(errors), bool(created))
+        return self._build_display_notification(
+            self.env._("Cadastre GIS import"),
+            lines,
+            message_type,
+            sticky=bool(errors),
+        )

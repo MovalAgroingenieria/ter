@@ -71,5 +71,7 @@ class GeofoliaImportLine(models.Model):
                 raise UserError(self.env._("Missing job."))
             if record.job_id.import_type != "fields":
                 continue
-            record.job_id._apply_field_line(record)  # pylint: disable=W0212
+            record.job_id.with_context(geofolia_sync=True)._apply_field_line(
+                record
+            )  # pylint: disable=W0212
             record.job_id._recompute_apply_state_fields()  # pylint: disable=W0212

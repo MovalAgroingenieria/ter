@@ -30,7 +30,7 @@ class GeofoliaImportHarvestedProductLine(models.Model):
         for record in self:
             if not record.job_id:
                 raise UserError(self.env._("Missing job."))
-            record.job_id._apply_product_like(
+            record.job_id.with_context(geofolia_sync=True)._apply_product_like(
                 record, label="harvested_products"
             )  # pylint: disable=W0212
             record.job_id._recompute_apply_state()  # pylint: disable=W0212

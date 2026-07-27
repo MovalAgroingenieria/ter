@@ -14,15 +14,16 @@ class FsmOrderProductUsage(models.Model):
 
     _name = "fsm.order.product.usage"
     _description = "FSM Order Product Usage"
-    _order = "sequence, id"
+    _inherit = "fsm.order.usage.mixin"
 
-    fsm_order_id = fields.Many2one(
-        comodel_name="fsm.order",
-        required=True,
-        ondelete="cascade",
-        index=True,
+    _geofolia_protected_fields = (
+        "name",
+        "quantity",
+        "uom_name",
+        "geofolia_supply_id",
+        "geofolia_recognition_id",
     )
-    sequence = fields.Integer(default=10)
+
     product_id = fields.Many2one(
         comodel_name="product.product",
         ondelete="set null",
@@ -40,19 +41,6 @@ class FsmOrderProductUsage(models.Model):
     geofolia_supply_id = fields.Char(
         string="Geofolia Supply ID",
         index=True,
-    )
-    geofolia_recognition_id = fields.Char(
-        string="Geofolia Recognition ID",
-    )
-
-    location_id = fields.Many2one(
-        related="fsm_order_id.location_id",
-        store=True,
-    )
-    partner_id = fields.Many2one(
-        related="fsm_order_id.location_id.owner_id",
-        store=True,
-        string="Owner",
     )
 
     @api.depends("name", "quantity", "uom_name")

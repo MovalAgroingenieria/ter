@@ -7,6 +7,17 @@
         <field name="inherit_id" ref="base_ter.ter_parcel_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_gis_viewer']" position="before">
+                <field name="cadastre_gis_import_enabled" invisible="1"/>
+                <field name="geom_ewkt" invisible="1"/>
+                <button
+                    name="action_get_gis_data_from_cadastre"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-globe"
+                    invisible="not cadastre_gis_import_enabled or not official_code or geom_ewkt"
+                >
+                    <span>Import GIS</span>
+                </button>
                 <button
                     name="action_show_cadastral_form"
                     type="object"
@@ -72,6 +83,15 @@
                 />
             </xpath>
         </field>
+    </record>
+
+    <record id="ter_parcel_import_gis_from_cadastre_serveraction" model="ir.actions.server">
+        <field name="name">Import GIS from Cadastre</field>
+        <field name="model_id" ref="base_ter.model_ter_parcel"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_parcel"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_get_gis_data_from_cadastre()</field>
     </record>
 
     <record id="ter_parcel_view_search" model="ir.ui.view">

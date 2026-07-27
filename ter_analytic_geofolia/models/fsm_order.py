@@ -3,9 +3,14 @@
 
 from odoo import api, fields, models
 
+from .geofolia_protection import check_geofolia_protected
+
 
 class FSMOrder(models.Model):
     _inherit = "fsm.order"
+
+    _geofolia_lock_field = "from_geofolia"
+    _geofolia_protected_fields = ("worked_surface",)
 
     product_usage_ids = fields.One2many(
         comodel_name="fsm.order.product.usage",
@@ -26,6 +31,18 @@ class FSMOrder(models.Model):
         digits=(16, 2),
         help="Total worked surface in m² (from Geofolia CropZones).",
     )
+    from_geofolia = fields.Boolean(
+        default=False,
+        copy=False,
+        help="Set when the order was created by the Geofolia import.",
+    )
+    geofolia_activity_id = fields.Char(
+        string="Geofolia Activity ID",
+        index=True,
+        copy=False,
+        help="External ID of the Geofolia activity that created this order. "
+        "Used to re-sync the order on re-import instead of duplicating it.",
+    )
     product_usage_count = fields.Integer(
         compute="_compute_usage_counts",
     )
@@ -35,6 +52,12 @@ class FSMOrder(models.Model):
     person_usage_count = fields.Integer(
         compute="_compute_usage_counts",
     )
+
+    def write(self, vals):
+        check_geofolia_protected(
+            self, vals, self._geofolia_protected_fields, self._geofolia_lock_field
+        )
+        return super().write(vals)
 
     @api.depends("product_usage_ids", "equipment_usage_ids", "person_usage_ids")
     def _compute_usage_counts(self):

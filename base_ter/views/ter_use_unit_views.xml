@@ -104,14 +104,14 @@
                 <field name="state"/>
                 <field name="validity_state"/>
                 <field name="area_gis_ha"/>
-                <field name="parcel_aerial_image_medium"/>
+                <field name="aerial_image_medium"/>
                 <field name="attribute_value_ids"/>
                 <templates>
                     <t t-name="card">
                         <div class="oe_kanban_global_click">
                             <div class="o_terunit_kanban_image d-flex justify-content-center">
-                                <t t-if="record.parcel_aerial_image_medium and record.parcel_aerial_image_medium.raw_value">
-                                    <img t-attf-src="/web/image/ter.unit/#{record.id.raw_value}/parcel_aerial_image_medium"
+                                <t t-if="record.aerial_image_medium and record.aerial_image_medium.raw_value">
+                                    <img t-attf-src="/web/image/ter.use_unit/#{record.id.raw_value}/aerial_image_medium"
                                          alt="ter_unit_256"
                                          style="border-color:#696969;border-width:1px;border-style:solid"/>
                                 </t>
@@ -245,8 +245,8 @@
                         </group>
                         <group string="Aerial image and GIS">
                             <div class="text-center mb-3">
-                                <field name="parcel_aerial_image" widget="image"
-                                       options="{'preview_image': 'parcel_aerial_image_medium', 'zoom': true}"/>
+                                <field name="aerial_image" widget="image"
+                                       options="{'preview_image': 'aerial_image_medium', 'zoom': true}"/>
                             </div>
                             <field name="geom_ewkt" placeholder="SRID=25830;POLYGON((...))"
                                    widget="text" readonly="state == 'validated'"
@@ -325,8 +325,28 @@
         <field name="state">code</field>
         <field name="groups_id" eval="[(4, ref('base_ter.group_ter_director'))]"/>
         <field name="code">
-            action = env["ter.unit"].action_reset_all_aerial_images(from_backend=True)
+            action = env["ter.use_unit"].action_reset_all_aerial_images(from_backend=True)
         </field>
+    </record>
+
+    <record id="ter_unit_reset_aerial_image_serveraction" model="ir.actions.server">
+        <field name="name">Refresh aerial image</field>
+        <field name="model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="groups_id" eval="[(4, ref('base_ter.group_ter_manager'))]"/>
+        <field name="state">code</field>
+        <field name="code">records.reset_aerial_image()</field>
+    </record>
+
+    <record id="ter_unit_delete_aerial_image_serveraction" model="ir.actions.server">
+        <field name="name">Delete aerial image</field>
+        <field name="model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="groups_id" eval="[(4, ref('base_ter.group_ter_manager'))]"/>
+        <field name="state">code</field>
+        <field name="code">records.delete_aerial_image()</field>
     </record>
 
     <menuitem id="menu_thecnicalactions_refresh_units"

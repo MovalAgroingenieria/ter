@@ -8,14 +8,10 @@ import time
 
 import psycopg2
 import requests
-from psycopg2 import sql
-
 from odoo import api, exceptions, fields, models
 from odoo.addons.queue_job.delay import group
 from odoo.addons.queue_job.exception import RetryableJobError
 from odoo.addons.queue_job.job import identity_exact
-
-from .. import hooks as base_ter_hooks
 
 _logger = logging.getLogger(__name__)
 
@@ -662,28 +658,10 @@ class TerParcel(models.Model):
         self.ensure_one()
         if not self.name:
             return
-        ewkt = (geom_ewkt or "").strip()
-        if not ewkt:
-            return
-        if not ewkt.upper().startswith("SRID="):
-            ewkt = "SRID=25830;%s" % ewkt
-        qual = sql.SQL("{}.{}").format(
-            sql.Identifier(base_ter_hooks.GIS_SCHEMA),
-            sql.Identifier(base_ter_hooks.PARCEL_TABLE),
+        self._set_gis_geometry_from_ewkt(  # pylint: disable=protected-access
+            geom_ewkt,
+            default_srid=25830,
         )
-        self.env.cr.execute(
-            sql.SQL(
-                "INSERT INTO {} (name, geom) "
-                "VALUES (%s, ST_Multi("
-                "ST_GeomFromEWKT(%s)::geometry"
-                ")::geometry(MultiPolygon, 25830)) "
-                "ON CONFLICT (name) DO UPDATE "
-                "SET geom = EXCLUDED.geom"
-            ).format(qual),
-            (self.name, ewkt),
-        )
-        self.invalidate_recordset(["mapped_to_polygon", "geom_ewkt"])
-        self._compute_mapped_to_polygon()
 
     def _get_measure_name_for_view(self):
         """Get area measure name from current company for view."""
@@ -709,13 +687,17 @@ class TerParcel(models.Model):
         if not area_fields:
             return arch, view
         area_map = dict(area_fields)
+        field_labels = self.fields_get(list(area_map.keys()))
         measure_name = (
             self._get_measure_name_for_view()
         )  # pylint: disable=protected-access
 
         for field_name, label in area_map.items():
+            translated_label = field_labels.get(field_name, {}).get(
+                "string"
+            ) or self.env._(label)
             for node in arch.xpath(f"//field[@name='{field_name}']"):
-                node.set("string", "%s (%s)" % (self.env._(label), measure_name))
+                node.set("string", "%s (%s)" % (translated_label, measure_name))
 
         return arch, view
 
@@ -761,7 +743,7 @@ class TerParcel(models.Model):
 
         failed = []
         max_serialization_retries = 3
-        for record in self.with_progress(self.env._("Getting the aerial images...")):
+        for record in self:
             for attempt in range(max_serialization_retries + 1):
                 try:
                     record._reset_single_aerial_image()  # pylint: disable=protected-access

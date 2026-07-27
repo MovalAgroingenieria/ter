@@ -107,7 +107,6 @@
                              help="If checked, only the central parcel will be displayed; otherwise, all parcels will be displayed.">
                         <field name="aerial_image_wmsvec_parcel_filter"/>
                     </setting>
-
                     <setting id="base_ter_aerial_image_wmsvec_property_name"
                              string="Property vector layer"
                              help="WMS service layer used to obtain the images of the properties (vectorial elements).">
@@ -117,7 +116,6 @@
                             </div>
                         </div>
                     </setting>
-
                     <setting id="base_ter_aerial_image_wmsvec_property_filter"
                              string="Only central property"
                              help="If checked, only the central property will be displayed; otherwise, all properties will be displayed.">

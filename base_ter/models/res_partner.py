@@ -243,14 +243,18 @@ class ResPartner(models.Model):
         seen = {}
         for field_name, label in area_fields:
             seen[field_name] = label
+        field_labels = self.fields_get(list(seen.keys()))
 
         measure_name = (
             self._get_measure_name_for_view()
         )  # pylint: disable=protected-access
 
         for field_name, label in seen.items():
+            translated_label = field_labels.get(field_name, {}).get(
+                "string"
+            ) or self.env._(label)
             for node in arch.xpath(f"//field[@name='{field_name}']"):
-                node.set("string", "%s (%s)" % (self.env._(label), measure_name))
+                node.set("string", "%s (%s)" % (translated_label, measure_name))
 
         return arch, view
 

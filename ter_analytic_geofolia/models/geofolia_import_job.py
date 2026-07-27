@@ -292,7 +292,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 record.error = record._format_exception(exc)
 
     def action_apply(self):
-        for record in self:
+        for record in self.with_context(geofolia_sync=True):
             if record.import_type == "full":
                 record._apply_full_export(only_pending=False)
                 record._recompute_apply_state()
@@ -300,7 +300,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 record.action_apply_fields()
 
     def action_apply_pending(self):
-        for record in self:
+        for record in self.with_context(geofolia_sync=True):
             if record.import_type != "full":
                 continue
             record._apply_full_export(only_pending=True)
@@ -309,7 +309,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
     def action_reprocess(self):
         """Re-run apply on pending, error and skipped lines.
         Existing records are updated, not duplicated."""
-        for record in self:
+        for record in self.with_context(geofolia_sync=True):
             if record.import_type == "full":
                 record._apply_full_export(only_pending=True)
                 record._recompute_apply_state()
@@ -322,7 +322,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
     def action_apply_fields(self):
         """Apply field lines: create/update fsm.location and ter.use_unit (1:1)."""
-        for record in self:
+        for record in self.with_context(geofolia_sync=True):
             if record.import_type != "fields":
                 continue
             for line in record.line_ids.filtered(
@@ -1465,6 +1465,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
     def _apply_field_line(self, line):
         """Create or update fsm.location and ter.use_unit (1:1) from Field line."""
         self.ensure_one()
+        # pylint: disable=self-cls-assignment
+        self = self.with_context(geofolia_sync=True)
         fsm_loc_obj = self.env["fsm.location"]
         ter_unit_obj = self.env["ter.use_unit"]
         ext_id = (line.external_uuid or "").strip() or False
@@ -1518,6 +1520,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
     def _apply_full_export(self, only_pending=False):
         self.ensure_one()
+        # pylint: disable=self-cls-assignment
+        self = self.with_context(geofolia_sync=True)
 
         def _todo(rs):
             if only_pending:
@@ -1556,6 +1560,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 activity.sync_state = "no_action"
 
     def _apply_product_line(self, line):
+        # pylint: disable=self-cls-assignment
+        self = self.with_context(geofolia_sync=True)
         product_obj = self.env["product.product"]
         try:
             with self.env.cr.savepoint():
@@ -1611,6 +1617,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
     def _apply_partner_line(self, line):
         """Create or update res.partner from partner line."""
+        # pylint: disable=self-cls-assignment
+        self = self.with_context(geofolia_sync=True)
         partner_obj = self.env["res.partner"]
         try:
             with self.env.cr.savepoint():
@@ -1666,6 +1674,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
     def _apply_employee_line(self, line):
         """Create or update fsm.person (Field Service worker) from employee line."""
+        # pylint: disable=self-cls-assignment
+        self = self.with_context(geofolia_sync=True)
         person_obj = self.env["fsm.person"]
         partner_obj = self.env["res.partner"]
         try:
@@ -1735,6 +1745,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
     def _apply_equipment_line(self, line):
         """Create or update fsm.equipment from equipment line (not product.product)."""
+        # pylint: disable=self-cls-assignment
+        self = self.with_context(geofolia_sync=True)
         equipment_obj = self.env["fsm.equipment"]
         try:
             with self.env.cr.savepoint():
@@ -1787,6 +1799,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             self._write_line_error_state(line, exc)
 
     def _apply_product_like(self, line, label):
+        # pylint: disable=self-cls-assignment
+        self = self.with_context(geofolia_sync=True)
         product_obj = self.env["product.product"]
         try:
             with self.env.cr.savepoint():
@@ -1934,19 +1948,29 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         return fsm_loc_obj.search([], limit=1)
 
     def _get_or_create_fsm_order_for_activity(self, activity):
-        """Return or create fsm.order for this activity.
+        """Return, re-sync or create the fsm.order for this activity.
 
-        Stored on activity.fsm_order_id.
-        Location: from first CropZone PlotId (if Fields imported)
-        or company default.  Enriches the order with equipment,
-        description (products / harvests / weather) and sets it
-        to the *Completed* stage.
+        Resolution is idempotent across imports: the order is matched by the
+        durable ``geofolia_activity_id`` (the Geofolia activity external id),
+        not just the transient ``activity.fsm_order_id`` link (which is lost
+        when import lines are re-parsed).  This prevents duplicate orders and
+        lets a re-import refresh the order's Geofolia-owned data while keeping
+        any manually added lines.
         """
         if activity.fsm_order_id:
             return activity.fsm_order_id
         location = self._get_fsm_location_for_activity(activity)
         if not location:
             return self.env["fsm.order"]
+        existing = self.env["fsm.order"]
+        if activity.external_id:
+            existing = self.env["fsm.order"].search(
+                [("geofolia_activity_id", "=", activity.external_id)], limit=1
+            )
+        if existing:
+            activity.fsm_order_id = existing.id
+            self._resync_fsm_order(existing, activity)
+            return existing
         order_vals = self._build_fsm_order_vals(activity, location)
         order = self.env["fsm.order"].create(order_vals)
         activity.fsm_order_id = order.id
@@ -1967,6 +1991,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         order_vals = {
             "location_id": location.id,
             "name": name,
+            "from_geofolia": True,
+            "geofolia_activity_id": activity.external_id or False,
         }
         start_dt = end_dt = None
         if activity.starting_date:
@@ -2025,22 +2051,47 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
     # -- fsm.order enrichment helpers --------------------------------
 
     def _enrich_fsm_order(self, order, activity):
-        """Enrich *order* with structured usage lines and completed stage."""
+        """Enrich a newly created *order* with usage lines and completed stage."""
         raw = activity.raw_json or {}
         self._link_equipment_to_order(order, raw)
-        self._create_product_usage_lines(order, raw)
-        self._create_equipment_usage_lines(order, raw)
-        self._create_person_usage_lines(order, raw)
-        worked = self._compute_worked_surface(raw)
-        description = self._build_order_description(activity, raw)
+        self._sync_usage_lines(order, raw)
         write_vals = {}
+        description = self._build_order_description(activity, raw)
         if description:
             write_vals["description"] = description
+        worked = self._compute_worked_surface(raw)
         if worked > 0:
             write_vals["worked_surface"] = worked
         if write_vals:
             order.write(write_vals)
         order.action_complete()
+
+    def _resync_fsm_order(self, order, activity):
+        """Refresh Geofolia-owned data on an existing *order* (re-import).
+
+        Regenerates the Geofolia usage lines (preserving any manually added
+        line, i.e. ``from_geofolia = False``) and updates the worked surface.
+        Leaves the stage, name, dates, description and manual lines untouched
+        so user work is never lost.
+        """
+        raw = activity.raw_json or {}
+        self._link_equipment_to_order(order, raw)
+        self._sync_usage_lines(order, raw)
+        worked = self._compute_worked_surface(raw)
+        if worked > 0 and order.worked_surface != worked:
+            order.write({"worked_surface": worked})
+
+    def _sync_usage_lines(self, order, raw):
+        """Drop existing Geofolia usage lines and rebuild them from *raw*.
+
+        Manually added lines (``from_geofolia = False``) are kept.
+        """
+        order.product_usage_ids.filtered("from_geofolia").unlink()
+        order.equipment_usage_ids.filtered("from_geofolia").unlink()
+        order.person_usage_ids.filtered("from_geofolia").unlink()
+        self._create_product_usage_lines(order, raw)
+        self._create_equipment_usage_lines(order, raw)
+        self._create_person_usage_lines(order, raw)
 
     def _create_product_usage_lines(self, order, raw):
         """Create fsm.order.product.usage from ProductIds."""
@@ -2078,6 +2129,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     "geofolia_supply_id": str(supply_id) if supply_id else False,
                     "geofolia_recognition_id": str(prod.get("RecognitionId") or "")
                     or False,
+                    "from_geofolia": True,
                 }
             )
         if vals_list:
@@ -2121,6 +2173,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         item.get("EquipmentRecognitionId") or ""
                     )
                     or False,
+                    "from_geofolia": True,
                 }
             )
         if vals_list:
@@ -2162,6 +2215,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                         item.get("EmployeeRecognitionId") or ""
                     )
                     or False,
+                    "from_geofolia": True,
                 }
             )
         if vals_list:
@@ -2355,6 +2409,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
     def _apply_activity_employee_line(self, line):
         """Create/update analytic line and assign fsm.person to fsm.order."""
+        # pylint: disable=self-cls-assignment
+        self = self.with_context(geofolia_sync=True)
         analytic_obj = self.env["account.analytic.line"]
         has_fsm_order = "fsm_order_id" in analytic_obj._fields
 

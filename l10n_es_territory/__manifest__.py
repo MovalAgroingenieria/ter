@@ -22,6 +22,7 @@
         "views/res_municipality_views.xml",
         "views/res_place_views.xml",
         "views/res_adi_actions.xml",
+        "views/res_config_settings_views.xml",
         "views/ter_parcel_views.xml",
     ],
     "assets": {

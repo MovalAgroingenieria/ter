@@ -31,5 +31,7 @@ class GeofoliaImportEmployeeLine(models.Model):
         for record in self:
             if not record.job_id:
                 raise UserError(self.env._("Missing job."))
-            record.job_id._apply_employee_line(record)  # pylint: disable=W0212
+            record.job_id.with_context(geofolia_sync=True)._apply_employee_line(
+                record
+            )  # pylint: disable=W0212
             record.job_id._recompute_apply_state()  # pylint: disable=W0212

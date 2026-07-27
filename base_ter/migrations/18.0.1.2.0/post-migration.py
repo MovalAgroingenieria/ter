@@ -66,13 +66,15 @@ def _backfill_aerial_image_last_refresh(cr):
     # `aerial_image` is an attachment-stored Image field (no DB column);
     # `aerial_image_key` is only ever set alongside a successfully stored
     # image, so it is used here as the "already has an image" proxy.
-    cr.execute("""
+    cr.execute(
+        """
         UPDATE ter_parcel
         SET aerial_image_last_refresh = COALESCE(write_date, create_date, now())
         WHERE aerial_image_key IS NOT NULL
           AND aerial_image_key != ''
           AND aerial_image_last_refresh IS NULL
-        """)
+        """
+    )
     _logger.info(
         "base_ter 18.0.1.2.0 migration: backfilled aerial_image_last_refresh "
         "for %s parcel(s)",

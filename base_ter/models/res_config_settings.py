@@ -44,6 +44,39 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.aerial_image_wmsvec_property_filter",
         readonly=False,
     )
+    aerial_image_wmsvec_unit_name = fields.Char(
+        related="company_id.aerial_image_wmsvec_unit_name",
+        readonly=False,
+    )
+    aerial_image_wmsvec_unit_filter = fields.Boolean(
+        related="company_id.aerial_image_wmsvec_unit_filter",
+        readonly=False,
+    )
+    aerial_image_height = fields.Integer(
+        related="company_id.aerial_image_height", readonly=False
+    )
+    aerial_image_zoom = fields.Float(
+        related="company_id.aerial_image_zoom",
+        readonly=False,
+        digits=(32, 4),
+    )
+    gis_viewer_url = fields.Char(related="company_id.gis_viewer_url", readonly=False)
+    gis_viewer_username = fields.Char(
+        related="company_id.gis_viewer_username", readonly=False
+    )
+    gis_viewer_password = fields.Char(
+        related="company_id.gis_viewer_password", readonly=False
+    )
+    gis_viewer_cipher_key = fields.Char(
+        related="company_id.gis_viewer_cipher_key", readonly=False
+    )
+    gis_viewer_epsg = fields.Integer(
+        related="company_id.gis_viewer_epsg", readonly=False
+    )
+    gis_viewer_previs_additional_args = fields.Char(
+        related="company_id.gis_viewer_previs_additional_args",
+        readonly=False,
+    )
     ter_unit_sequence_id = fields.Many2one(
         related="company_id.ter_unit_sequence_id", readonly=False
     )
@@ -83,8 +116,7 @@ class ResConfigSettings(models.TransientModel):
                 ).format(table=sql.Identifier(layer)),
                 (new_epsg, old_epsg, new_epsg),
             )
-            cr.execute(
-                """
+            cr.execute("""
                 CREATE VIEW ter_gis_parcel_model AS
                 (
                 SELECT ROW_NUMBER()                      OVER() AS id, tgp.name,
@@ -97,8 +129,7 @@ class ResConfigSettings(models.TransientModel):
                 WHERE tp.partner_id IS NOT NULL
                    OR tp.partner_id IS NULL
                 ORDER BY tgp.name)
-                """
-            )
+                """)
         except PsycopgError as err:
             return False, f"{layer}\n\nERROR:\n\n{err}"
         return True, ""

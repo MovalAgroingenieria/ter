@@ -37,4 +37,11 @@
         <field name="allow_commit" eval="True"/>
     </record>
 
+    <record id="job_function_ter_use_unit_job_generate_aerial_image" model="queue.job.function">
+        <field name="model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="method">_job_generate_aerial_image</field>
+        <field name="channel_id" ref="channel_ter_gis_aerial_image"/>
+        <field name="allow_commit" eval="True"/>
+    </record>
+
 </odoo>

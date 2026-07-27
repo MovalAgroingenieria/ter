@@ -7,11 +7,12 @@
         <field name="model">fsm.order.person.usage</field>
         <field name="arch" type="xml">
             <list editable="bottom">
+                <field name="from_geofolia" column_invisible="1" />
                 <field name="sequence" widget="handle" />
                 <field name="person_id" optional="show" />
-                <field name="name" />
-                <field name="hours" widget="float_time" />
-                <field name="geofolia_employee_id" optional="hide" />
+                <field name="name" readonly="from_geofolia" />
+                <field name="hours" widget="float_time" readonly="from_geofolia" />
+                <field name="geofolia_employee_id" optional="hide" readonly="1" />
             </list>
         </field>
     </record>
@@ -25,14 +26,15 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="from_geofolia" invisible="1" />
                             <field name="fsm_order_id" />
                             <field name="person_id" />
-                            <field name="name" />
+                            <field name="name" readonly="from_geofolia" />
                         </group>
                         <group>
-                            <field name="hours" widget="float_time" />
-                            <field name="geofolia_employee_id" />
-                            <field name="geofolia_recognition_id" />
+                            <field name="hours" widget="float_time" readonly="from_geofolia" />
+                            <field name="geofolia_employee_id" readonly="1" />
+                            <field name="geofolia_recognition_id" readonly="1" />
                         </group>
                     </group>
                 </sheet>

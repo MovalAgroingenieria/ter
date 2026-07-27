@@ -15,15 +15,15 @@ class FsmOrderEquipmentUsage(models.Model):
 
     _name = "fsm.order.equipment.usage"
     _description = "FSM Order Equipment Usage"
-    _order = "sequence, id"
+    _inherit = "fsm.order.usage.mixin"
 
-    fsm_order_id = fields.Many2one(
-        comodel_name="fsm.order",
-        required=True,
-        ondelete="cascade",
-        index=True,
+    _geofolia_protected_fields = (
+        "name",
+        "hours",
+        "geofolia_equipment_id",
+        "geofolia_recognition_id",
     )
-    sequence = fields.Integer(default=10)
+
     equipment_id = fields.Many2one(
         comodel_name="fsm.equipment",
         ondelete="set null",
@@ -40,19 +40,6 @@ class FsmOrderEquipmentUsage(models.Model):
     geofolia_equipment_id = fields.Char(
         string="Geofolia Equipment ID",
         index=True,
-    )
-    geofolia_recognition_id = fields.Char(
-        string="Geofolia Recognition ID",
-    )
-
-    location_id = fields.Many2one(
-        related="fsm_order_id.location_id",
-        store=True,
-    )
-    partner_id = fields.Many2one(
-        related="fsm_order_id.location_id.owner_id",
-        store=True,
-        string="Owner",
     )
 
     @api.depends("name", "hours")

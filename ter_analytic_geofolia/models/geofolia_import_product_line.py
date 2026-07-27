@@ -39,5 +39,7 @@ class GeofoliaImportProductLine(models.Model):
                 raise UserError(self.env._("Missing job."))
             if record.job_id.import_type != "full":
                 continue
-            record.job_id._apply_product_line(record)  # pylint: disable=W0212
+            record.job_id.with_context(geofolia_sync=True)._apply_product_line(
+                record
+            )  # pylint: disable=W0212
             record.job_id._recompute_apply_state()  # pylint: disable=W0212

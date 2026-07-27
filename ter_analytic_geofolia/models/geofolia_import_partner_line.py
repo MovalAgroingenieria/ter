@@ -34,6 +34,8 @@ class GeofoliaImportPartnerLine(models.Model):
         for record in self:
             if not record.job_id:
                 raise UserError(self.env._("Missing job."))
-            record.job_id._apply_partner_line(record)  # pylint: disable=W0212
+            record.job_id.with_context(geofolia_sync=True)._apply_partner_line(
+                record
+            )  # pylint: disable=W0212
         for job in jobs:
             job._recompute_apply_state()  # pylint: disable=W0212

@@ -1,10 +1,13 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 # isort: skip_file
-# Import order is significant: the abstract "geofolia.import.base.line" must load
-# before the concrete models that inherit it, so do NOT alphabetically sort this file.
+# Import order is significant: abstract models must load before the concrete
+# models that inherit them, so do NOT alphabetically sort this file.
+#  - "geofolia.import.base.line" before the import line models.
+#  - "fsm.order.usage.mixin" before the three usage models.
 
 from . import geofolia_import_base_line
+from . import fsm_order_usage_mixin
 from . import (
     account_analytic_line,
     fsm_equipment,

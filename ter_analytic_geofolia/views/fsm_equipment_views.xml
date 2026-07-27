@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="fieldservice.fsm_equipment_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="geofolia_external_id" string="Geofolia ID"/>
+                <field name="geofolia_external_id" string="Geofolia ID" readonly="1"/>
             </xpath>
         </field>
     </record>

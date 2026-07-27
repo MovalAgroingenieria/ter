@@ -13,13 +13,15 @@ def migrate(cr, version):
     if not version:
         return
 
-    cr.execute("""
+    cr.execute(
+        """
         SELECT res_id
         FROM ir_model_data
         WHERE module = 'l10n_es_territory'
           AND name = 'res_config_settings_view_form_inherit_l10n_es_territory'
           AND model = 'ir.ui.view'
-        """)
+        """
+    )
     view_ids = [row[0] for row in cr.fetchall()]
 
     if view_ids:
@@ -31,16 +33,20 @@ def migrate(cr, version):
             (view_ids,),
         )
     else:
-        cr.execute("""
+        cr.execute(
+            """
             DELETE FROM ir_ui_view
             WHERE name = 'res.config.settings.view.form.inherit.l10n_es_territory'
               AND model = 'res.config.settings'
               AND arch_db::text ILIKE '%base_ter_aerial_image_wmsbase_url%'
-            """)
+            """
+        )
 
-    cr.execute("""
+    cr.execute(
+        """
         DELETE FROM ir_model_data
         WHERE module = 'l10n_es_territory'
           AND name = 'res_config_settings_view_form_inherit_l10n_es_territory'
           AND model = 'ir.ui.view'
-        """)
+        """
+    )
