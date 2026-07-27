@@ -16,7 +16,6 @@
         "mail",
         "contacts",
         "base_gen",
-        "base_gis",
         "base_gis_viewer",
         "base_adi",
         "base_report",

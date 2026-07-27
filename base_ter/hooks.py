@@ -35,14 +35,6 @@ PARAM_DEFAULTS = {
     f"{PARAM_PREFIX}aerial_image_wmsvec_property_filter": True,
     f"{PARAM_PREFIX}aerial_image_wmsvec_unit_name": "unit_perimeter",
     f"{PARAM_PREFIX}aerial_image_wmsvec_unit_filter": True,
-    f"{PARAM_PREFIX}aerial_image_height": 512,
-    f"{PARAM_PREFIX}aerial_image_zoom": 1.2,
-    # Change these defaults in production (Settings > Territory)
-    f"{PARAM_PREFIX}gis_viewer_url": "https://gis.moval.es/my_client/visor",
-    f"{PARAM_PREFIX}gis_viewer_username": "tecnico",
-    f"{PARAM_PREFIX}gis_viewer_password": "my_password",
-    f"{PARAM_PREFIX}gis_viewer_epsg": 25830,
-    f"{PARAM_PREFIX}gis_viewer_previs_additional_args": "mode=min",
 }
 
 

@@ -121,6 +121,20 @@
                              help="If checked, only the central property will be displayed; otherwise, all properties will be displayed.">
                         <field name="aerial_image_wmsvec_property_filter"/>
                     </setting>
+                    <setting id="base_ter_aerial_image_wmsvec_unit_name"
+                             string="Unit vector layer"
+                             help="WMS service layer used to obtain the images of the units (vectorial elements).">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="aerial_image_wmsvec_unit_name" style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting id="base_ter_aerial_image_wmsvec_unit_filter"
+                             string="Only central unit"
+                             help="If checked, only the central unit will be displayed; otherwise, all units will be displayed.">
+                        <field name="aerial_image_wmsvec_unit_filter"/>
+                    </setting>
                 </block>
             </xpath>
         </field>

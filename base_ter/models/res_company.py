@@ -41,22 +41,6 @@ class ResCompany(models.Model):
     aerial_image_wmsvec_unit_filter = fields.Boolean(
         string="WMS of the vectorial image: Filtered units (y/n)",
     )
-    aerial_image_height = fields.Integer(string="WMS Services: Height of the images")
-    aerial_image_zoom = fields.Float(string="WMS Services: Zoom", digits=(32, 4))
-    gis_viewer_url = fields.Char(string="GIS Viewer: URL", size=255)
-    gis_viewer_username = fields.Char(
-        string="GIS Viewer: User name for the technical mode", size=255
-    )
-    gis_viewer_password = fields.Char(
-        string="GIS Viewer: Password for the technical mode", size=255
-    )
-    gis_viewer_cipher_key = fields.Char(
-        string="GIS Viewer: Cipher key for technical mode", size=255
-    )
-    gis_viewer_epsg = fields.Integer(string="GIS Viewer: Spatial Reference")
-    gis_viewer_previs_additional_args = fields.Char(
-        string="GIS Preview: Additional URL arguments", size=255
-    )
     ter_unit_sequence_id = fields.Many2one(
         "ir.sequence",
         help="Sequence used to generate ter.use_unit names. "

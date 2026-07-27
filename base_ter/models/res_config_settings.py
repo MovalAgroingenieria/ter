@@ -52,38 +52,13 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.aerial_image_wmsvec_unit_filter",
         readonly=False,
     )
-    aerial_image_height = fields.Integer(
-        related="company_id.aerial_image_height", readonly=False
-    )
-    aerial_image_zoom = fields.Float(
-        related="company_id.aerial_image_zoom",
-        readonly=False,
-        digits=(32, 4),
-    )
-    gis_viewer_url = fields.Char(related="company_id.gis_viewer_url", readonly=False)
-    gis_viewer_username = fields.Char(
-        related="company_id.gis_viewer_username", readonly=False
-    )
-    gis_viewer_password = fields.Char(
-        related="company_id.gis_viewer_password", readonly=False
-    )
-    gis_viewer_cipher_key = fields.Char(
-        related="company_id.gis_viewer_cipher_key", readonly=False
-    )
-    gis_viewer_epsg = fields.Integer(
-        related="company_id.gis_viewer_epsg", readonly=False
-    )
-    gis_viewer_previs_additional_args = fields.Char(
-        related="company_id.gis_viewer_previs_additional_args",
-        readonly=False,
-    )
     ter_unit_sequence_id = fields.Many2one(
         related="company_id.ter_unit_sequence_id", readonly=False
     )
 
     def _on_gis_epsg_changed(self, old_epsg, new_epsg):
         """Reproject territory PostGIS layers."""
-        super()._on_gis_epsg_changed(old_epsg, new_epsg)
+        res = super()._on_gis_epsg_changed(old_epsg, new_epsg)
         ok, details = self.update_geometry(old_epsg, new_epsg)
         if not ok:
             raise exceptions.UserError(
@@ -92,7 +67,7 @@ class ResConfigSettings(models.TransientModel):
                     details=details,
                 )
             )
-        return None
+        return res
 
     @api.model
     def update_geometry(self, old_epsg, new_epsg):
