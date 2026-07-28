@@ -27,6 +27,16 @@
                 >
                     <span>Cadastre</span>
                 </button>
+                <field name="mapped_to_polygon" invisible="1"/>
+                <button
+                    name="action_open_cadastre_compare"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-map-o"
+                    invisible="not cadastre_gis_import_enabled or not mapped_to_polygon"
+                >
+                    <span>Compare Cadastre</span>
+                </button>
             </xpath>
 
             <xpath expr="//field[@name='place_id']" position="after">
@@ -104,6 +114,16 @@
         <field name="code">action = records.action_delete_gis_geometry()</field>
     </record>
 
+    <record id="ter_parcel_cadastre_match_suggest_serveraction" model="ir.actions.server">
+        <field name="name">Scan Cadastre (background)</field>
+        <field name="model_id" ref="base_ter.model_ter_parcel"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_parcel"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="groups_id" eval="[(4, ref('base_ter.group_ter_manager'))]"/>
+        <field name="state">code</field>
+        <field name="code">action = records.action_cadastre_match_suggest()</field>
+    </record>
+
     <record id="ter_parcel_view_search" model="ir.ui.view">
         <field name="name">ter.parcel.view.search.l10n_es_territory</field>
         <field name="model">ter.parcel</field>
@@ -128,6 +148,30 @@
                     name="grouped_by_parcel_type"
                     string="Parcel Type"
                     context="{'group_by': 'parcel_type'}"
+                />
+                <filter
+                    name="grouped_by_cadastre_match_state"
+                    string="Cadastre Match"
+                    context="{'group_by': 'cadastre_match_state'}"
+                />
+            </xpath>
+
+            <xpath expr="//filter[@name='parcel_type_02_u']" position="after">
+                <separator/>
+                <filter
+                    name="cadastre_match_suggested"
+                    string="Cadastre: Suggestion available"
+                    domain="[('cadastre_match_state', '=', 'suggested')]"
+                />
+                <filter
+                    name="cadastre_match_no_match"
+                    string="Cadastre: No match"
+                    domain="[('cadastre_match_state', '=', 'no_match')]"
+                />
+                <filter
+                    name="cadastre_match_applied"
+                    string="Cadastre: Applied"
+                    domain="[('cadastre_match_state', '=', 'applied')]"
                 />
             </xpath>
         </field>

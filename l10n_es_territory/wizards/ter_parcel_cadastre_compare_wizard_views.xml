@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="ter_parcel_cadastre_compare_wizard_form" model="ir.ui.view">
+        <field name="name">ter.parcel.cadastre.compare.wizard.form</field>
+        <field name="model">ter.parcel.cadastre.compare.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="parcel_id" invisible="1"/>
+                <field name="map_data" invisible="1"/>
+                <group>
+                    <field name="official_code"/>
+                    <field name="selected_refcat" readonly="1"/>
+                    <field name="fill_code"/>
+                </group>
+                <field name="selected_refcat" nolabel="1" widget="cadastre_compare_map"/>
+                <field name="candidate_summary" nolabel="1" readonly="1"/>
+                <footer>
+                    <button name="action_apply_geometry"
+                            type="object"
+                            string="Overwrite geometry"
+                            class="btn-primary"
+                            data-hotkey="q"/>
+                    <button name="action_fill_code_only"
+                            type="object"
+                            string="Fill cadastral reference only"
+                            class="btn-secondary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"
+                            data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

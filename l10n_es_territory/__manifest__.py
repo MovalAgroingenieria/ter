@@ -5,7 +5,7 @@
     "name": "Spain - Territory",
     "summary": "Customization of the territorial base (base_ter module) "
     "to the administrative scope of Spain.",
-    "version": "18.0.1.0.3",
+    "version": "18.0.1.1.0",
     "author": "Moval Agroingeniería S.L.",
     "license": "AGPL-3",
     "website": "https://moval.es",
@@ -13,8 +13,10 @@
     "depends": [
         "base_adi",
         "base_ter",
+        "web_leaflet_lib",
     ],
     "data": [
+        "security/ir.model.access.csv",
         "data/res_admregion_data.xml",
         "data/res_province_data.xml",
         "views/res_admregion_views.xml",
@@ -24,10 +26,13 @@
         "views/res_adi_actions.xml",
         "views/res_config_settings_views.xml",
         "views/ter_parcel_views.xml",
+        "wizards/ter_parcel_cadastre_compare_wizard_views.xml",
     ],
     "assets": {
         "web.assets_backend": [
             "l10n_es_territory/static/src/scss/l10n_es_territory.scss",
+            "l10n_es_territory/static/src/js/cadastre_compare_map/*.esm.js",
+            "l10n_es_territory/static/src/js/cadastre_compare_map/*.xml",
         ]
     },
     "post_init_hook": "post_init_hook",

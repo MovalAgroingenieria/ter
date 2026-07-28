@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-27 14:52+0000\n"
+"POT-Creation-Date: 2026-07-28 10:51+0000\n"
 "PO-Revision-Date: 2026-07-27 14:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -27,6 +28,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/l10n_es_territory/models/ter_parcel.py:0
 msgid "%(parcel)s: %(error)s"
+msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/wizards/ter_parcel_cadastre_compare_wizard.py:0
+msgid "- %(refcat)s: %(pct)s%%"
 msgstr ""
 
 #. module: l10n_es_territory
@@ -62,6 +69,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
 msgid "<span>Cadastre</span>"
 msgstr "<span>Catastro</span>"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
+msgid "<span>Compare Cadastre</span>"
+msgstr "<span>Comparar Catastro</span>"
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
@@ -114,9 +126,19 @@ msgid "Already with geometry names: %(names)s"
 msgstr "Nombres ya con geometría: %(names)s"
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__fill_code
+msgid "Also fill cadastral reference (if empty)"
+msgstr "Rellenar también la referencia catastral (si está vacía)"
+
+#. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_01
 msgid "Andalucía"
 msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__cadastre_match_state__applied
+msgid "Applied"
+msgstr "Aplicada"
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_01
@@ -196,6 +218,17 @@ msgid "Cadastral Subparcel"
 msgstr "Subparcela catastral"
 
 #. module: l10n_es_territory
+#. odoo-javascript
+#: code:addons/l10n_es_territory/static/src/js/cadastre_compare_map/cadastre_compare_map.esm.js:0
+msgid "Cadastral parcels"
+msgstr "Parcelas catastrales"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,help:l10n_es_territory.field_ter_parcel__cadastre_match_refcat
+msgid "Cadastral reference of the best overlapping cadastral parcel."
+msgstr "Referencia catastral de la parcela catastral con mayor solape."
+
+#. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_config_settings_view_form_inherit_l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
 msgid "Cadastre"
@@ -211,6 +244,16 @@ msgstr "Importación GIS de Catastro"
 #. odoo-python
 #: code:addons/l10n_es_territory/models/ter_parcel.py:0
 msgid ""
+"Cadastre GIS import is disabled in Territory settings. Enable it to compare "
+"parcels against the Cadastre."
+msgstr ""
+"La importación GIS de Catastro está desactivada en los ajustes de "
+"Territorio. Actívala para comparar parcelas con el Catastro."
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid ""
 "Cadastre GIS import is disabled in Territory settings. Enable it to import "
 "parcel geometries."
 msgstr ""
@@ -218,9 +261,88 @@ msgstr ""
 "Territorio. Habilítala para importar geometrías de parcelas."
 
 #. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid ""
+"Cadastre GIS import is disabled in Territory settings. Enable it to scan "
+"parcels against the Cadastre."
+msgstr ""
+"La importación GIS de Catastro está desactivada en los ajustes de "
+"Territorio. Actívala para escanear parcelas contra el Catastro."
+
+#. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastre_gis_import_enabled
 msgid "Cadastre Gis Import Enabled"
 msgstr "Importación GIS de Catastro habilitada"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_search
+msgid "Cadastre Match"
+msgstr "Coincidencia con Catastro"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastre_match_date
+msgid "Cadastre Match Date"
+msgstr "Fecha de coincidencia con Catastro"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastre_match_intersection
+msgid "Cadastre Match Intersection"
+msgstr "Solape de coincidencia con Catastro"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastre_match_refcat
+msgid "Cadastre Match Refcat"
+msgstr "Referencia catastral coincidente"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__cadastre_match_state
+msgid "Cadastre Match State"
+msgstr "Estado de coincidencia con Catastro"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_company__cadastre_match_min_intersection
+#: model:ir.model.fields,field_description:l10n_es_territory.field_res_config_settings__cadastre_match_min_intersection
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_config_settings_view_form_inherit_l10n_es_territory
+msgid "Cadastre match minimum overlap (%)"
+msgstr "Solape mínimo de coincidencia con Catastro (%)"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Cadastre scan"
+msgstr "Escaneo de Catastro"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Cadastre scan: %(parcel)s"
+msgstr "Escaneo de Catastro: %(parcel)s"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_search
+msgid "Cadastre: Applied"
+msgstr "Catastro: Aplicada"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_search
+msgid "Cadastre: No match"
+msgstr "Catastro: Sin coincidencia"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_search
+msgid "Cadastre: Suggestion available"
+msgstr "Catastro: Sugerencia disponible"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_cadastre_compare_wizard_form
+msgid "Cancel"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__candidate_summary
+msgid "Candidate Summary"
+msgstr "Resumen de candidatas"
 
 #. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_06
@@ -265,6 +387,17 @@ msgid "Companies"
 msgstr "Compañías"
 
 #. module: l10n_es_territory
+#: model:ir.model,name:l10n_es_territory.model_ter_parcel_cadastre_compare_wizard
+msgid "Compare parcel geometry with Cadastre"
+msgstr "Comparar la geometría de la parcela con el Catastro"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Compare with Cadastre"
+msgstr "Comparar con Catastro"
+
+#. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_15
 msgid "Comunidad Foral de Navarra"
 msgstr ""
@@ -280,10 +413,20 @@ msgid "Comunitad Valenciana"
 msgstr "Comunitat Valenciana"
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_es_territory
 #. odoo-python
 #: code:addons/l10n_es_territory/models/ter_parcel.py:0
 msgid "Created geometry names: %(names)s"
 msgstr "Nombres de geometrías creadas: %(names)s"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__create_date
+msgid "Created on"
+msgstr ""
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_16
@@ -311,6 +454,11 @@ msgid "Delete GIS geometry"
 msgstr "Eliminar geometría GIS"
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_company__cadastre_gis_import_enabled
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_config_settings__cadastre_gis_import_enabled
 msgid "Enable Cadastre GIS import"
@@ -325,6 +473,11 @@ msgstr "Habilitar importación de geometría de parcelas desde Catastro"
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_11
 msgid "Extremadura"
 msgstr ""
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_cadastre_compare_wizard_form
+msgid "Fill cadastral reference only"
+msgstr "Rellenar solo la referencia catastral"
 
 #. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_ter_gis_parcel_model
@@ -373,6 +526,11 @@ msgid "Huesca"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_config_settings_view_form_inherit_l10n_es_territory
 msgid ""
 "If enabled, parcels can import GIS geometry from the official Cadastre WFS "
@@ -405,6 +563,12 @@ msgid "Incorrect value for \"Cadastral Area (m²)\"."
 msgstr "Valor incorrecto para \"Área catastral (m²)\"."
 
 #. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Invalid cadastral geometry received from Cadastre."
+msgstr "Geometría catastral no válida recibida del Catastro."
+
+#. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_05
 msgid "Islas Canarias"
 msgstr ""
@@ -423,6 +587,16 @@ msgstr ""
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_35
 msgid "Las Palmas"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__write_date
+msgid "Last Updated on"
 msgstr ""
 
 #. module: l10n_es_territory
@@ -452,10 +626,26 @@ msgid "Malformed XML received from Cadastre service."
 msgstr "XML malformado recibido desde el servicio del Catastro."
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__map_data
+msgid "Map Data"
+msgstr "Datos del mapa"
+
+#. module: l10n_es_territory
 #: model:res.admregion,alphanum_code:l10n_es_territory.res_region_19
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_52
 msgid "Melilla"
 msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,help:l10n_es_territory.field_res_company__cadastre_match_min_intersection
+#: model:ir.model.fields,help:l10n_es_territory.field_res_config_settings__cadastre_match_min_intersection
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_config_settings_view_form_inherit_l10n_es_territory
+msgid ""
+"Minimum intersection percentage for a cadastral parcel to be proposed as a "
+"suggested match during the background cadastre scan."
+msgstr ""
+"Porcentaje mínimo de intersección para que una parcela catastral se proponga"
+" como coincidencia sugerida durante el escaneo de Catastro en segundo plano."
 
 #. module: l10n_es_territory
 #. odoo-python
@@ -490,10 +680,27 @@ msgid "Navarra"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__cadastre_match_state__no_match
+msgid "No cadastral match"
+msgstr "Sin coincidencia catastral"
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/wizards/ter_parcel_cadastre_compare_wizard.py:0
+msgid "No overlapping cadastral parcels were found for this geometry."
+msgstr ""
+"No se encontraron parcelas catastrales que solapen con esta geometría."
+
+#. module: l10n_es_territory
 #. odoo-python
 #: code:addons/l10n_es_territory/models/ter_parcel.py:0
 msgid "No valid geometry found in Cadastre response."
 msgstr "No se encontró una geometría válida en la respuesta del Catastro."
+
+#. module: l10n_es_territory
+#: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__cadastre_match_state__none
+msgid "Not scanned"
+msgstr "Sin escanear"
 
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_res_admregion__number_of_municipalities
@@ -508,6 +715,7 @@ msgstr "Número de localidades"
 
 #. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel__official_code
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__official_code
 msgid "Official Code"
 msgstr "Referencia catastral"
 
@@ -522,9 +730,31 @@ msgid "Official Code With Subparcel"
 msgstr "Referencia catastral con subparcela"
 
 #. module: l10n_es_territory
+#. odoo-javascript
+#: code:addons/l10n_es_territory/static/src/js/cadastre_compare_map/cadastre_compare_map.esm.js:0
+msgid "Original geometry"
+msgstr "Geometría original"
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_32
 msgid "Ourense"
 msgstr ""
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,help:l10n_es_territory.field_ter_parcel__cadastre_match_intersection
+msgid "Overlap percentage of the best overlapping cadastral parcel."
+msgstr "Porcentaje de solape de la parcela catastral con mayor solape."
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/wizards/ter_parcel_cadastre_compare_wizard.py:0
+msgid "Overlapping cadastral parcels (by overlap):"
+msgstr "Parcelas catastrales que solapan (por solape):"
+
+#. module: l10n_es_territory
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_cadastre_compare_wizard_form
+msgid "Overwrite geometry"
+msgstr "Sobrescribir geometría"
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_34
@@ -533,6 +763,7 @@ msgstr ""
 
 #. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_ter_parcel
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__parcel_id
 msgid "Parcel"
 msgstr "Parcela"
 
@@ -587,6 +818,13 @@ msgid "Province"
 msgstr "Provincia"
 
 #. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Queued background cadastre scan for %(count)s parcel(s)."
+msgstr ""
+"Escaneo de Catastro en segundo plano encolado para %(count)s parcela(s)."
+
+#. module: l10n_es_territory
 #: model:ir.model,name:l10n_es_territory.model_res_admregion
 msgid "Region"
 msgstr "Región"
@@ -616,6 +854,12 @@ msgid "Repeated province code."
 msgstr "Código de provincia repetido."
 
 #. module: l10n_es_territory
+#: model:ir.model.fields,help:l10n_es_territory.field_ter_parcel__cadastre_match_state
+msgid "Result of the last background scan against the Cadastre WFS."
+msgstr ""
+"Resultado del último escaneo en segundo plano contra el WFS del Catastro."
+
+#. module: l10n_es_territory
 #: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__parcel_type__01_r
 msgid "Rustic"
 msgstr "Rústica"
@@ -631,6 +875,11 @@ msgid "Santa Cruz de Tenerife"
 msgstr ""
 
 #. module: l10n_es_territory
+#: model:ir.actions.server,name:l10n_es_territory.ter_parcel_cadastre_match_suggest_serveraction
+msgid "Scan Cadastre (background)"
+msgstr "Escanear Catastro (segundo plano)"
+
+#. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_form
 msgid "Sec / Pol / Par"
 msgstr ""
@@ -641,9 +890,26 @@ msgid "Segovia"
 msgstr ""
 
 #. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/wizards/ter_parcel_cadastre_compare_wizard.py:0
+msgid "Select a cadastral parcel on the map first."
+msgstr "Selecciona primero una parcela catastral en el mapa."
+
+#. module: l10n_es_territory
+#: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__selected_refcat
+msgid "Selected cadastral reference"
+msgstr "Referencia catastral seleccionada"
+
+#. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_41
 msgid "Sevilla"
 msgstr ""
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "Skipped %(count)s parcel(s) without geometry."
+msgstr "Omitidas %(count)s parcela(s) sin geometría."
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_42
@@ -654,6 +920,11 @@ msgstr ""
 #: model:ir.model,name:l10n_es_territory.model_res_config_settings
 msgid "Street type settings"
 msgstr "Opciones de configuración"
+
+#. module: l10n_es_territory
+#: model:ir.model.fields.selection,name:l10n_es_territory.selection__ter_parcel__cadastre_match_state__suggested
+msgid "Suggestion available"
+msgstr "Sugerencia disponible"
 
 #. module: l10n_es_territory
 #. odoo-python
@@ -673,9 +944,25 @@ msgstr ""
 
 #. module: l10n_es_territory
 #. odoo-python
+#: code:addons/l10n_es_territory/wizards/ter_parcel_cadastre_compare_wizard.py:0
+msgid ""
+"The cadastral reference could not be filled (the parcel already has one or "
+"the reference does not match the municipality)."
+msgstr ""
+"No se pudo rellenar la referencia catastral (la parcela ya tiene una o la "
+"referencia no coincide con el municipio)."
+
+#. module: l10n_es_territory
+#. odoo-python
 #: code:addons/l10n_es_territory/models/ter_parcel.py:0
 msgid "The length of the cadastral reference is not correct."
 msgstr "La longitud de la referencia catastral no es correcta."
+
+#. module: l10n_es_territory
+#. odoo-python
+#: code:addons/l10n_es_territory/models/ter_parcel.py:0
+msgid "This parcel has no geometry to compare with the Cadastre."
+msgstr "Esta parcela no tiene geometría para comparar con el Catastro."
 
 #. module: l10n_es_territory
 #: model:res.province,alphanum_code:l10n_es_territory.res_province_45

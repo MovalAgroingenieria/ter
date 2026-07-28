@@ -11,3 +11,7 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.cadastre_gis_import_enabled",
         readonly=False,
     )
+    cadastre_match_min_intersection = fields.Float(
+        related="company_id.cadastre_match_min_intersection",
+        readonly=False,
+    )

@@ -12,3 +12,9 @@ class ResCompany(models.Model):
         default=True,
         help="Allow importing parcel geometries from the Cadastre WFS service.",
     )
+    cadastre_match_min_intersection = fields.Float(
+        string="Cadastre match minimum overlap (%)",
+        default=50.0,
+        help="Minimum intersection percentage for a cadastral parcel to be "
+        "proposed as a suggested match during the background cadastre scan.",
+    )

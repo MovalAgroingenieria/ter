@@ -35,3 +35,20 @@
     width: 70px;
     min-width: 70px;
 }
+
+.o_field_cadastre_compare_map {
+    display: block;
+    width: 100%;
+}
+
+.o_cadastre_compare_map {
+    width: 100%;
+    height: 480px;
+    min-height: 400px;
+    position: relative;
+    // Establish a local stacking context so Leaflet's internal panes and
+    // controls (which use high z-index values) stay contained inside the
+    // widget and never sit above Odoo dialogs, dropdowns or the navbar.
+    // Leaflet's own pane ordering is preserved (do not override it here).
+    z-index: 0;
+}

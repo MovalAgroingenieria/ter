@@ -1,11 +1,21 @@
 # Copyright 2024-2026 Moval Agroingeniería
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
+import logging
 from xml.etree import ElementTree
 
 import requests
+from psycopg2 import Error as PsycopgError
+
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
+
+_logger = logging.getLogger(__name__)
+
+CADASTRE_WFS_NS = {
+    "gml": "http://www.opengis.net/gml/3.2",
+    "cp": "http://inspire.ec.europa.eu/schemas/cp/4.0",
+}
 
 
 class TerParcel(models.Model):
@@ -37,6 +47,10 @@ class TerParcel(models.Model):
     _URL_CADASTRE_WFS = "https://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx"
     _CADASTRE_WFS_SOURCE_SRID = 25830
     _CADASTRE_WFS_VERIFY_SSL = False
+
+    _CADASTRE_WFS_USER_AGENT = "MovalAgro-Odoo-WFS/1.0"
+    _CADASTRE_MATCH_TARGET_SRID = 25830
+    _CADASTRE_REFCAT_LENGTH = 14
 
     _AUTOMATIC_UPDATE_CADASTRAL_DATA = True
 
@@ -76,6 +90,29 @@ class TerParcel(models.Model):
     cadastre_gis_import_enabled = fields.Boolean(
         compute="_compute_cadastre_gis_import_enabled"
     )
+
+    cadastre_match_state = fields.Selection(
+        selection=[
+            ("none", "Not scanned"),
+            ("suggested", "Suggestion available"),
+            ("no_match", "No cadastral match"),
+            ("applied", "Applied"),
+        ],
+        default="none",
+        copy=False,
+        index=True,
+        help="Result of the last background scan against the Cadastre WFS.",
+    )
+    cadastre_match_refcat = fields.Char(
+        copy=False,
+        help="Cadastral reference of the best overlapping cadastral parcel.",
+    )
+    cadastre_match_intersection = fields.Float(
+        digits=(5, 2),
+        copy=False,
+        help="Overlap percentage of the best overlapping cadastral parcel.",
+    )
+    cadastre_match_date = fields.Datetime(copy=False)
 
     @api.depends_context("uid")
     def _compute_cadastre_gis_import_enabled(self):
@@ -506,3 +543,264 @@ class TerParcel(models.Model):
             lines,
             message_type,
         )
+
+    def _cadastre_match_bbox(self):
+        """Return the parcel geometry envelope in the WFS source SRID."""
+        self.ensure_one()
+        self.env.cr.execute(
+            "SELECT ST_XMin(e), ST_YMin(e), ST_XMax(e), ST_YMax(e) FROM ("
+            "SELECT ST_Envelope(geom) AS e FROM ter_gis_parcel "
+            "WHERE name = %s AND geom IS NOT NULL) sub",
+            (self.name,),
+        )
+        row = self.env.cr.fetchone()
+        if not row or row[0] is None:
+            return None
+        return row
+
+    def _cadastre_match_wfs_request(self, bbox):
+        """Query the Cadastre WFS for cadastral parcels within ``bbox``."""
+        srid = self._CADASTRE_WFS_SOURCE_SRID
+        params = {
+            "service": "wfs",
+            "version": "2.0.0",
+            "request": "getfeature",
+            "typenames": "cp.cadastralparcel",
+            "srsname": "EPSG::%s" % srid,
+            "bbox": "%f,%f,%f,%f" % (bbox[0], bbox[1], bbox[2], bbox[3]),
+        }
+        response = requests.get(
+            self._URL_CADASTRE_WFS,
+            params=params,
+            headers={"User-Agent": self._CADASTRE_WFS_USER_AGENT},
+            timeout=self.REQUEST_TIMEOUT_CADASTRE_WFS,
+            verify=self._CADASTRE_WFS_VERIFY_SSL,
+        )
+        response.raise_for_status()
+        return response.content
+
+    def _cadastre_match_parse_features(self, xml_content):
+        """Return ``[{refcat, geom_gml}]`` from a WFS FeatureCollection."""
+        try:
+            root = ElementTree.fromstring(xml_content)
+        except ElementTree.ParseError as exc:
+            raise ValueError(
+                self.env._("Malformed XML received from Cadastre service.")
+            ) from exc
+        features = []
+        for parcel in root.findall(".//cp:CadastralParcel", CADASTRE_WFS_NS):
+            ref_el = parcel.find(".//cp:nationalCadastralReference", CADASTRE_WFS_NS)
+            refcat = (ref_el.text or "").strip() if ref_el is not None else ""
+            geom = parcel.find(".//gml:MultiSurface", CADASTRE_WFS_NS)
+            if not refcat or geom is None:
+                continue
+            geom_gml = self._sanitize_cadastre_geometry_gml(
+                ElementTree.tostring(geom, encoding="unicode")
+            )
+            features.append({"refcat": refcat, "geom_gml": geom_gml})
+        return features
+
+    def _cadastre_match_geom_metrics(self, geom_gml):
+        """Return ``(geojson_4326, intersection_pct)`` for a candidate GML."""
+        self.ensure_one()
+        try:
+            self.env.cr.execute(
+                "WITH cand AS ("
+                "  SELECT ST_MakeValid(ST_SetSRID(ST_GeomFromGML(%s), %s)) AS g"
+                "), par AS ("
+                "  SELECT ST_MakeValid(geom) AS g FROM ter_gis_parcel WHERE name = %s"
+                ") "
+                "SELECT ST_AsGeoJSON(ST_Transform(cand.g, 4326)), "
+                "CASE WHEN ST_Area(par.g) > 0 THEN "
+                "100.0 * ST_Area(ST_Intersection(cand.g, par.g)) / ST_Area(par.g) "
+                "ELSE 0 END "
+                "FROM cand, par",
+                (geom_gml, self._CADASTRE_WFS_SOURCE_SRID, self.name),
+            )
+            row = self.env.cr.fetchone()
+        except PsycopgError as exc:
+            raise ValueError(
+                self.env._("Invalid cadastral geometry received from Cadastre.")
+            ) from exc
+        if not row:
+            return "", 0.0
+        return row[0] or "", float(row[1] or 0.0)
+
+    def _cadastre_match_candidates(self):
+        """Return overlapping candidates sorted by descending overlap.
+
+        Each item is ``{refcat, intersection, geojson}`` where ``geojson`` is
+        the candidate geometry projected to WGS84 for the comparison map.
+        """
+        self.ensure_one()
+        bbox = self._cadastre_match_bbox()
+        if not bbox:
+            return []
+        content = self._cadastre_match_wfs_request(bbox)
+        candidates = []
+        for feature in self._cadastre_match_parse_features(content):
+            geojson, pct = self._cadastre_match_geom_metrics(feature["geom_gml"])
+            if pct <= 0:
+                continue
+            candidates.append(
+                {
+                    "refcat": feature["refcat"],
+                    "intersection": round(pct, 2),
+                    "geojson": geojson,
+                }
+            )
+        candidates.sort(key=lambda cand: cand["intersection"], reverse=True)
+        return candidates
+
+    def _cadastre_match_parcel_geojson(self):
+        """Return the parcel geometry as WGS84 GeoJSON for the map."""
+        self.ensure_one()
+        self.env.cr.execute(
+            "SELECT ST_AsGeoJSON(ST_Transform(geom, 4326)) FROM ter_gis_parcel "
+            "WHERE name = %s AND geom IS NOT NULL",
+            (self.name,),
+        )
+        row = self.env.cr.fetchone()
+        return (row[0] if row else "") or ""
+
+    def _cadastre_match_build_map_data(self):
+        """Build the comparison payload consumed by the map widget."""
+        self.ensure_one()
+        return {
+            "parcel": self._cadastre_match_parcel_geojson(),
+            "candidates": self._cadastre_match_candidates(),
+        }
+
+    def _cadastre_match_suggest_one(self, threshold):
+        """Scan one parcel and store the suggested match (never raises)."""
+        self.ensure_one()
+        vals = {"cadastre_match_date": fields.Datetime.now()}
+        try:
+            candidates = self._cadastre_match_candidates()
+        except (requests.RequestException, ValueError) as exc:
+            _logger.warning("Cadastre match failed for %s: %s", self.display_name, exc)
+            vals.update(
+                cadastre_match_state="no_match",
+                cadastre_match_refcat=False,
+                cadastre_match_intersection=0.0,
+            )
+            self.write(vals)
+            return
+        best = candidates[0] if candidates else {}
+        intersection = best.get("intersection", 0.0)
+        refcat = best.get("refcat") or False
+        state = "suggested" if best and intersection >= threshold else "no_match"
+        vals.update(
+            cadastre_match_state=state,
+            cadastre_match_refcat=refcat,
+            cadastre_match_intersection=intersection,
+        )
+        self.write(vals)
+
+    def cadastre_match_suggest(self):
+        """Background-safe scan storing a suggested match per parcel.
+
+        Meant to be enqueued as a queue job. Failures are logged and stored
+        as ``no_match`` so the import/scan never crashes.
+        """
+        threshold = self.env.company.cadastre_match_min_intersection or 0.0
+        for record in self:
+            record._cadastre_match_suggest_one(threshold)
+        return True
+
+    def action_cadastre_match_suggest(self):
+        """Enqueue a background cadastre scan for the parcels with geometry."""
+        if not self._is_cadastre_gis_import_enabled():
+            raise UserError(
+                self.env._(
+                    "Cadastre GIS import is disabled in Territory settings. "
+                    "Enable it to scan parcels against the Cadastre."
+                )
+            )
+        todo = self.filtered("mapped_to_polygon")
+        for record in todo:
+            record.with_delay(
+                description=self.env._(
+                    "Cadastre scan: %(parcel)s", parcel=record.display_name
+                )
+            ).cadastre_match_suggest()
+        lines = [
+            self.env._(
+                "Queued background cadastre scan for %(count)s parcel(s).",
+                count=len(todo),
+            )
+        ]
+        skipped = len(self) - len(todo)
+        if skipped:
+            lines.append(
+                self.env._(
+                    "Skipped %(count)s parcel(s) without geometry.", count=skipped
+                )
+            )
+        return self._build_display_notification(  # pylint: disable=protected-access
+            self.env._("Cadastre scan"),
+            lines,
+            "success",
+        )
+
+    def cadastre_match_apply_geometry(self, refcat):
+        """Overwrite the parcel geometry with the cadastral one for ``refcat``."""
+        self.ensure_one()
+        geometry_gml = self._fetch_cadastre_geometry_gml(refcat)
+        applied = self._set_gis_geometry_from_gml(  # pylint: disable=protected-access
+            geometry_gml,
+            source_srid=self._CADASTRE_WFS_SOURCE_SRID,
+            target_srid=self._CADASTRE_MATCH_TARGET_SRID,
+        )
+        if applied:
+            self.cadastre_match_state = "applied"
+        return applied
+
+    def cadastre_match_fill_code(self, refcat):
+        """Fill the cadastral reference components from ``refcat`` if empty.
+
+        Only rustic references (14 characters) whose municipality cadastral
+        code matches the parcel municipality are applied, so the computed
+        ``official_code`` stays consistent.
+        """
+        self.ensure_one()
+        if self.official_code:
+            return False
+        code = (refcat or "").strip().upper()
+        if len(code) != self._CADASTRE_REFCAT_LENGTH:
+            return False
+        municipality_code = self.municipality_id.cadastral_code or ""
+        if municipality_code and municipality_code != code[:5]:
+            return False
+        self.write(
+            {
+                "parcel_type": "01_R",
+                "cadastral_sector": code[5],
+                "cadastral_polygon": code[6:9],
+                "cadastral_parcel": code[9:14],
+            }
+        )
+        return True
+
+    def action_open_cadastre_compare(self):
+        """Open the wizard comparing this parcel with the Cadastre."""
+        self.ensure_one()
+        if not self._is_cadastre_gis_import_enabled():
+            raise UserError(
+                self.env._(
+                    "Cadastre GIS import is disabled in Territory settings. "
+                    "Enable it to compare parcels against the Cadastre."
+                )
+            )
+        if not self.mapped_to_polygon:
+            raise UserError(
+                self.env._("This parcel has no geometry to compare with the Cadastre.")
+            )
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Compare with Cadastre"),
+            "res_model": "ter.parcel.cadastre.compare.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {"active_id": self.id, "active_model": "ter.parcel"},
+        }

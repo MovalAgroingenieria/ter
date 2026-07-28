@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ter_parcel_cadastre_compare_wizard_user,ter.parcel.cadastre.compare.wizard user,model_ter_parcel_cadastre_compare_wizard,base_ter.group_ter_user,1,1,1,1

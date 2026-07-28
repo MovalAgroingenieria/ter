@@ -13,6 +13,11 @@
                              help="If enabled, parcels can import GIS geometry from the official Cadastre WFS service.">
                         <field name="cadastre_gis_import_enabled"/>
                     </setting>
+                    <setting id="l10n_es_territory_cadastre_match_min_intersection"
+                             string="Cadastre match minimum overlap (%)"
+                             help="Minimum intersection percentage for a cadastral parcel to be proposed as a suggested match during the background cadastre scan.">
+                        <field name="cadastre_match_min_intersection"/>
+                    </setting>
                 </block>
             </xpath>
         </field>
