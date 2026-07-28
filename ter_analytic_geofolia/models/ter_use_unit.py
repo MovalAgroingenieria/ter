@@ -1,6 +1,8 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
+import unicodedata
+
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
@@ -84,3 +86,68 @@ class TerUseUnit(models.Model):
             "domain": [("location_id", "=", self.fsm_location_id.id)],
             "context": {"default_location_id": self.fsm_location_id.id},
         }
+
+    @api.model
+    def _geofolia_crop_code(self, crop_name):
+        """Return a 3-letter uppercase ASCII code from the crop name."""
+        raw = (crop_name or "").strip()
+        if not raw:
+            return "XXX"
+        normalized = unicodedata.normalize("NFKD", raw)
+        ascii_only = "".join(ch for ch in normalized if not unicodedata.combining(ch))
+        letters = "".join(ch for ch in ascii_only if ch.isalnum())
+        return letters[:3].upper() or "XXX"
+
+    def _ter_unit_name_extra_code(self, vals):
+        """Insert the Geofolia crop code in the auto-generated unit name."""
+        crop_name = vals.get("geofolia_crop_name")
+        if crop_name:
+            return self._geofolia_crop_code(crop_name)
+        return super()._ter_unit_name_extra_code(vals)
+
+    def recompute_geofolia_names(self):
+        """Rewrite the name of the Geofolia use units in ``self``.
+
+        Units are grouped by (parcel, date_start, date_end) and ordered by
+        crop then Geofolia id so the sequence (NN) is deterministic and
+        idempotent on re-import. The name is built with the shared
+        ``_build_ter_unit_name`` helper (parcel + YYMM period + crop code +
+        sequence). The linked FSM location partner name is kept in sync so
+        the location is recognizable too.
+        """
+        units = self.filtered("geofolia_external_id")
+        groups = {}
+        for unit in units:
+            key = (
+                unit.parcel_id.id,
+                unit._ter_unit_period_code(unit.date_start),
+                unit._ter_unit_period_code(unit.date_end),
+            )
+            groups.setdefault(key, self.browse())
+            groups[key] |= unit
+        synced = self.with_context(geofolia_sync=True)
+        for group in groups.values():
+            ordered = group.sorted(
+                key=lambda u: (
+                    u._geofolia_crop_code(u.geofolia_crop_name),
+                    u.geofolia_external_id or "",
+                    u.id,
+                )
+            )
+            for seq, unit in enumerate(ordered):
+                parcel = unit.parcel_id
+                name = self._build_ter_unit_name(
+                    {
+                        "parcel_code": (parcel.name or parcel.alphanum_code or ""),
+                        "date_start": unit.date_start,
+                        "date_end": unit.date_end,
+                        "extra_code": unit._geofolia_crop_code(unit.geofolia_crop_name),
+                        "seq": seq,
+                    }
+                )
+                if unit.name != name:
+                    synced.browse(unit.id).name = name
+                location = unit.fsm_location_id
+                if location and location.partner_id.name != name:
+                    location.partner_id.name = name
+        return True

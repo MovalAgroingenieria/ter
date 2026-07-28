@@ -318,6 +318,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     lambda rec: rec.sync_state in ("pending", "error")
                 ):
                     record._apply_field_line(line)
+                record._recompute_geofolia_unit_names()
                 record._recompute_apply_state_fields()
 
     def action_apply_fields(self):
@@ -329,6 +330,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 lambda rec: rec.sync_state in ("pending", "error")
             ):
                 record._apply_field_line(line)
+            record._recompute_geofolia_unit_names()
             record._recompute_apply_state_fields()
 
     def action_view_created_lines(self):
@@ -1027,6 +1029,27 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             self.apply_state = "partial" if has_pending else "error"
             return
         self.apply_state = "ready" if has_pending else "done"
+
+    def _recompute_geofolia_unit_names(self):
+        """Rewrite the coded name of the use units created by this job.
+
+        The recompute is extended to every Geofolia use unit sharing a parcel
+        with this job's units, so the per-(parcel, period) sequence stays
+        unique and deterministic across successive imports, not only within
+        a single job.
+        """
+        self.ensure_one()
+        units = self.line_ids.mapped("ter_use_unit_id")
+        if not units:
+            return
+        parcels = units.mapped("parcel_id")
+        related_units = self.env["ter.use_unit"].search(
+            [
+                ("geofolia_external_id", "!=", False),
+                ("parcel_id", "in", parcels.ids),
+            ]
+        )
+        (related_units | units).recompute_geofolia_names()
 
     def _field_line_find_campaign(self, date_start, date_end, harvest_year, default):
         """Return the date.range (campaign) that best fits the field.

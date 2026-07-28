@@ -1466,7 +1466,7 @@ msgstr "Ãšltima actualizaciï¿½n en"
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__line_count
 msgid "Line count"
-msgstr "NÂº de lï¿½neas"
+msgstr "Nº de líneas"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_job__line_ids
