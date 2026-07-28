@@ -9,6 +9,7 @@
     "website": "https://www.moval.es",
     "author": "Moval Agroingenieria S.L.",
     "license": "AGPL-3",
+    "installable": True,
     "post_init_hook": "post_init_hook",
     "depends": [
         "mail",
@@ -30,5 +31,15 @@
         "views/point_profile_views.xml",
         "views/res_partner_views.xml",
     ],
-    "installable": True,
+    "assets": {
+        "web.assets_backend": [
+            "base_point/static/lib/point_iconset/iconset.css",
+        ],
+        "web.assets_frontend": [
+            "base_point/static/lib/point_iconset/iconset.css",
+        ],
+        "web.report_assets_common": [
+            "base_point/static/lib/point_iconset/iconset.css",
+        ],
+    },
 }

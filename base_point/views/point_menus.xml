@@ -49,7 +49,8 @@
     </record>
 
     <menuitem id="menu_point_root" name="Points" sequence="-90"
-        groups="base_point.group_point_user"/>
+        groups="base_point.group_point_user"
+        web_icon="base_point,static/description/icon.png"/>
 
     <menuitem id="menu_point_locations" name="Locations" parent="menu_point_root"
         groups="base_point.group_point_user"/>
