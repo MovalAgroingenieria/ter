@@ -35,7 +35,7 @@ if num_args in (9, 10):
     condition = ""
     if num_args == 10:
         condition = args[8]
-    pg_conn = "PG:host='{}' port={} dbname='{}' user='{}' password='{}'".format(
+    pg_conn = '"PG:host={} port={} dbname={} user={} password={}"'.format(
         host, port, dbname, user, password
     )
     list_of_args = [
