@@ -51,7 +51,7 @@ class TerUnit(models.Model):
     name = fields.Char(
         copy=False,
         help=(
-            "Auto-generated as {parcel_code}-{start_YY}/{end_YY}-{seq} "
+            "Auto-generated as {parcel_code}-{start_YYMM}-{end_YYMM}-{seq} "
             "when left empty."
         ),
     )
@@ -177,7 +177,7 @@ class TerUnit(models.Model):
         related="parcel_id.alphanum_code",
     )
     alphanum_code = fields.Char(
-        string="Code",
+        string="Parcel Code",
         related="parcel_id.alphanum_code",
     )
     parcel_aerial_image_medium = fields.Image(
@@ -404,18 +404,40 @@ class TerUnit(models.Model):
             )
 
     def _build_ter_unit_name(self, params):
-        """Build name as {parcel_code}-{start_YY}/{end_YY}-{seq:02d}."""
+        """Build the use unit name.
+
+        Format: ``{parcel_code}-{start_YYMM}-{end_YYMM}-{seq:02d}``. When an
+        ``extra_code`` param is given (e.g. a crop code) it is inserted right
+        before the sequence: ``{parcel}-{YYMM}-{YYMM}-{EXTRA}-{seq:02d}``.
+        Year-month is used (not just the year) so units planted in different
+        months of the same year stay distinct.
+        """
         parcel_code = (params.get("parcel_code") or "?").strip() or "?"
-        date_start = params.get("date_start")
-        date_end = params.get("date_end")
-        if isinstance(date_start, str):
-            date_start = fields.Date.from_string(date_start)
-        if isinstance(date_end, str):
-            date_end = fields.Date.from_string(date_end)
-        start_yy = str(date_start.year)[-2:] if date_start else "??"
-        end_yy = str(date_end.year)[-2:] if date_end else "??"
-        seq = params.get("seq", 1)
-        return f"{parcel_code}-{start_yy}/{end_yy}-{seq:02d}"
+        start_code = self._ter_unit_period_code(params.get("date_start"))
+        end_code = self._ter_unit_period_code(params.get("date_end"))
+        seq = params.get("seq", 0)
+        parts = [parcel_code, start_code, end_code]
+        extra_code = (params.get("extra_code") or "").strip()
+        if extra_code:
+            parts.append(extra_code)
+        parts.append("%02d" % seq)
+        return "-".join(parts)
+
+    def _ter_unit_period_code(self, date_value):
+        """Return the YYMM code of a date (e.g. 2511), ``0000`` if empty."""
+        if isinstance(date_value, str):
+            date_value = fields.Date.from_string(date_value)
+        if not date_value:
+            return "0000"
+        return date_value.strftime("%y%m")
+
+    def _ter_unit_name_extra_code(self, _vals):
+        """Return an optional code inserted before the sequence in the name.
+
+        Empty in the base model; sub-modules (e.g. Geofolia) override it to
+        add a crop code.
+        """
+        return ""
 
     @api.model
     def _get_next_ter_unit_name(self, vals, _company=None):
@@ -439,13 +461,14 @@ class TerUnit(models.Model):
             domain += [("date_start", "=", date_start), ("date_end", "=", date_end)]
         elif vals.get("date_range_id"):
             domain += [("date_range_id", "=", vals["date_range_id"])]
-        seq = self.search_count(domain) + 1
+        seq = self.search_count(domain)
 
         return self._build_ter_unit_name(  # pylint: disable=protected-access
             {
                 "parcel_code": parcel_code,
                 "date_start": date_start,
                 "date_end": date_end,
+                "extra_code": self._ter_unit_name_extra_code(vals),
                 "seq": seq,
             }
         )

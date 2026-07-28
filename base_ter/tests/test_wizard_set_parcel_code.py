@@ -8,26 +8,25 @@ from odoo.tests.common import TransactionCase, tagged
 class TestWizardSetParcelCode(TransactionCase):
     def setUp(self):
         super().setUp()
+        region = self.env["res.admregion"].create({"name": "Test Region"})
+        province_vals = {"name": "Test Province", "region_id": region.id}
+        # Modules installed on top of base_ter (e.g. l10n_es_territory) may add
+        # required fields to these administrative models; populate them only
+        # when present so this test works with or without those modules.
+        if "cadastral_code" in self.env["res.province"]._fields:
+            province_vals["cadastral_code"] = 99
+        province = self.env["res.province"].create(province_vals)
+        municipality_vals = {
+            "name": "Test Municipality",
+            "province_id": province.id,
+        }
+        if "municipality_number" in self.env["res.municipality"]._fields:
+            municipality_vals["municipality_number"] = 999
+        municipality = self.env["res.municipality"].create(municipality_vals)
         self.parcel = self.env["ter.parcel"].create(
             {
                 "alphanum_code": "PARCEL-01",
-                "municipality_id": self.env["res.municipality"]
-                .create(
-                    {
-                        "name": "Test Municipality",
-                        "province_id": self.env["res.province"]
-                        .create(
-                            {
-                                "name": "Test Province",
-                                "region_id": self.env["res.admregion"]
-                                .create({"name": "Test Region"})
-                                .id,
-                            }
-                        )
-                        .id,
-                    }
-                )
-                .id,
+                "municipality_id": municipality.id,
                 "area_official": 1.0,
             }
         )

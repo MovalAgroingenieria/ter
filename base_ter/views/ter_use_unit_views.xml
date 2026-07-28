@@ -203,7 +203,6 @@
                                    options="{'no_open': True, 'no_create': True}"
                                    readonly="state == 'validated'"/>
                             <field name="name" readonly="state == 'validated'"/>
-                            <field name="alphanum_code"/>
                             <field name="date_range_use_type_id" invisible="1"/>
                         </group>
                         <group string="Location">

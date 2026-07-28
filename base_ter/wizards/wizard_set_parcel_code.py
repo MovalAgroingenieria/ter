@@ -10,6 +10,12 @@ class WizardSetParcelCode(models.TransientModel):
     _description = "Dialog box to set a parcel code"
 
     parcel_code = fields.Char()
+    rename_gis = fields.Boolean(
+        string="Rename linked GIS geometry",
+        default=True,
+        help="Also rename the linked GIS geometry record (ter_gis_parcel) so "
+        "the parcel keeps its map geometry after changing the code.",
+    )
 
     @api.model
     def default_get(self, fields_list):
@@ -26,4 +32,9 @@ class WizardSetParcelCode(models.TransientModel):
             return
 
         parcel_code = (self.parcel_code or "").strip().upper() or False
+        old_name = parcel.name
         parcel.write({"alphanum_code": parcel_code})
+        if self.rename_gis and parcel.name != old_name:
+            parcel._rename_gis_link(  # pylint: disable=protected-access
+                old_name, parcel.name
+            )

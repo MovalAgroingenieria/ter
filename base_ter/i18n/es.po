@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-27 14:42+0000\n"
+"POT-Creation-Date: 2026-07-28 11:07+0000\n"
 "PO-Revision-Date: 2026-07-27 14:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -593,6 +594,15 @@ msgid "Allowed Values"
 msgstr "Valores permitidos"
 
 #. module: base_ter
+#: model:ir.model.fields,help:base_ter.field_wizard_set_parcel_code__rename_gis
+msgid ""
+"Also rename the linked GIS geometry record (ter_gis_parcel) so the parcel "
+"keeps its map geometry after changing the code."
+msgstr ""
+"Renombra también el registro de geometría GIS vinculado (ter_gis_parcel) "
+"para que la parcela conserve su geometría en el mapa tras cambiar el código."
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Alternative area unit name"
 msgstr "Nombre alternativo de la unidad de superficie"
@@ -736,10 +746,9 @@ msgstr "Atributos"
 #. module: base_ter
 #: model:ir.model.fields,help:base_ter.field_ter_use_unit__name
 msgid ""
-"Auto-generated as {parcel_code}-{start_YY}/{end_YY}-{seq} when left empty."
+"Auto-generated as {parcel_code}-{start_YYMM}-{end_YYMM}-{seq} when left "
+"empty."
 msgstr ""
-"Se genera automáticamente a partir de la secuencia de la empresa si se deja "
-"en blanco."
 
 #. module: base_ter
 #. odoo-python
@@ -2662,6 +2671,11 @@ msgid "Regions"
 msgstr "CC. AA."
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__rename_gis
+msgid "Rename linked GIS geometry"
+msgstr "Renombrar la geometría GIS vinculada"
+
+#. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/res_partner.py:0
 #: model:ir.model.constraint,message:base_ter.constraint_res_partner_partner_code_uniq
@@ -3484,3 +3498,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_kanban
 msgid "ter_unit_avatar"
 msgstr ""
+
+#~ msgid ""
+#~ "Auto-generated as {parcel_code}-{start_YY}/{end_YY}-{seq} when left empty."
+#~ msgstr ""
+#~ "Se genera automáticamente a partir de la secuencia de la empresa si se deja "
+#~ "en blanco."
