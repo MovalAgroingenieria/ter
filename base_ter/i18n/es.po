@@ -130,8 +130,8 @@ msgstr ""
 #: code:addons/base_ter/wizards/wizard_import_use_type.py:0
 msgid "<p class='text-danger'>Data file not found: <code>%(path)s</code></p>"
 msgstr ""
-"<p class='text-danger'>Archivo de datos no encontrado: "
-"<code>%(path)s</code></p>"
+"<p class='text-danger'>Archivo de datos no encontrado: <code>%(path)s</"
+"code></p>"
 
 #. module: base_ter
 #. odoo-python
@@ -927,8 +927,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 msgid ""
-"Could not fetch aerial images for %(count)s parcel(s) (timeout or connection"
-" error to WMS). Try again later: %(codes)s"
+"Could not fetch aerial images for %(count)s parcel(s) (timeout or "
+"connection error to WMS). Try again later: %(codes)s"
 msgstr ""
 "No se pudieron obtener las imágenes aéreas de %(count)s parcela(s) (timeout "
 "o error de conexión con WMS). Inténtelo más tarde: %(codes)s"
@@ -1072,6 +1072,11 @@ msgstr "Tipos de periodo"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Dates"
 msgstr "Fechas"
+
+#. module: base_ter
+#: model:ir.actions.server,name:base_ter.ter_parcel_delete_gis_geometry_serveraction
+msgid "Delete GIS geometry"
+msgstr "Eliminar geometría GIS"
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_parcel_reset_aerial_image_delete
@@ -1435,8 +1440,8 @@ msgid ""
 "Geometry in EWKT format (e.g. SRID=25830;POLYGON(...)). If set, parcel is "
 "auto-assigned as the parcel with maximum overlap."
 msgstr ""
-"Geometría en formato EWKT (p. ej. SRID=25830;POLYGON(...)). Si se define, la"
-" parcela se asigna automáticamente como la de mayor solapamiento."
+"Geometría en formato EWKT (p. ej. SRID=25830;POLYGON(...)). Si se define, "
+"la parcela se asigna automáticamente como la de mayor solapamiento."
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.gisviewer_global_serveraction
@@ -1542,8 +1547,8 @@ msgid ""
 "If checked, only the central property will be displayed; otherwise, all "
 "properties will be displayed."
 msgstr ""
-"Si está marcado, solo se mostrará la finca central; en caso contrario, todas"
-" las fincas."
+"Si está marcado, solo se mostrará la finca central; en caso contrario, "
+"todas las fincas."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1568,8 +1573,8 @@ msgid ""
 "If checked, the area unit will be the ha; otherwise you can choose another "
 "unit of area."
 msgstr ""
-"Si está marcado, la unidad de superficie será la ha; en caso contrario puede"
-" elegir otra."
+"Si está marcado, la unidad de superficie será la ha; en caso contrario "
+"puede elegir otra."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -1669,8 +1674,8 @@ msgid ""
 "Incorrect value of \"Alert threshold due to the difference between the "
 "official area and the GIS area\"."
 msgstr ""
-"Valor incorrecto de «Umbral de aviso por diferencia entre superficie oficial"
-" y SIG»."
+"Valor incorrecto de «Umbral de aviso por diferencia entre superficie "
+"oficial y SIG»."
 
 #. module: base_ter
 #: model:ir.model.constraint,message:base_ter.constraint_ter_parcel_partnerlink_owner_percentage
@@ -2175,8 +2180,8 @@ msgstr "Solo la unidad central"
 #: model:ir.model.fields,help:base_ter.field_wizard_import_kml__name_prefix
 msgid "Optional prefix for record names (e.g. 'PARCEL-' or 'FINCA-')."
 msgstr ""
-"Prefijo opcional para los nombres de los registros (por ejemplo, «PARCEL-» o"
-" «FINCA-»)."
+"Prefijo opcional para los nombres de los registros (por ejemplo, «PARCEL-» "
+"o «FINCA-»)."
 
 #. module: base_ter
 #: model:ir.model.fields,help:base_ter.field_wizard_import_kml__partner_id
@@ -2460,8 +2465,8 @@ msgstr "Por favor, introduzca el nuevo código de parcela"
 #. odoo-python
 #: code:addons/base_ter/hooks.py:0
 msgid ""
-"PostGIS could not be enabled in this database. Install PostGIS on PostgreSQL"
-" and ensure the DB user can run CREATE EXTENSION."
+"PostGIS could not be enabled in this database. Install PostGIS on "
+"PostgreSQL and ensure the DB user can run CREATE EXTENSION."
 msgstr ""
 "No se ha podido habilitar PostGIS en esta base de datos. Instale PostGIS en "
 "PostgreSQL y asegúrese de que el usuario de la base de datos pueda ejecutar "
@@ -2473,8 +2478,8 @@ msgstr ""
 msgid ""
 "PostGIS is not available in this database. Install/enable PostGIS and retry."
 msgstr ""
-"PostGIS no está disponible en esta base de datos. Instale o active PostGIS y"
-" vuelva a intentarlo."
+"PostGIS no está disponible en esta base de datos. Instale o active PostGIS "
+"y vuelva a intentarlo."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_show_gis_preview_view_form
@@ -2792,8 +2797,8 @@ msgstr "Secuencia"
 #: model:ir.model.fields,help:base_ter.field_res_company__ter_unit_sequence_id
 #: model:ir.model.fields,help:base_ter.field_res_config_settings__ter_unit_sequence_id
 msgid ""
-"Sequence used to generate ter.use_unit names. Name format: "
-"{type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}."
+"Sequence used to generate ter.use_unit names. Name format: {type_code}-"
+"{date_start}-{date_end}-{parcel_code}-{sequence}."
 msgstr ""
 "Secuencia utilizada para generar los nombres de ter.use_unit. Formato del "
 "nombre: {type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}."
@@ -3056,13 +3061,17 @@ msgstr "La localidad no se encuentra dentro del término municipal."
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
 msgid ""
 "This will import the standard use type catalog\n"
-"                            (farming, livestock, forestry …) from the bundled\n"
-"                            data file. Existing records with the same external\n"
+"                            (farming, livestock, forestry …) from the "
+"bundled\n"
+"                            data file. Existing records with the same "
+"external\n"
 "                            ID will be kept unchanged."
 msgstr ""
 "Esto importará el catálogo estándar de tipos de uso\n"
-"                            (cultivos, ganadería, forestal…) desde el archivo\n"
-"                            de datos incluido. Los registros existentes con el\n"
+"                            (cultivos, ganadería, forestal…) desde el "
+"archivo\n"
+"                            de datos incluido. Los registros existentes con "
+"el\n"
 "                            mismo ID externo se mantendrán sin cambios."
 
 #. module: base_ter
@@ -3102,7 +3111,8 @@ msgid ""
 "                            automatically from separate data files."
 msgstr ""
 "Las traducciones (español y catalán) se cargan\n"
-"                            automáticamente desde archivos de datos separados."
+"                            automáticamente desde archivos de datos "
+"separados."
 
 #. module: base_ter
 #: model:ir.model.fields,help:base_ter.field_ter_use_unit__is_current
@@ -3319,8 +3329,8 @@ msgid ""
 "WMS service layer used to obtain the images of the properties (vectorial "
 "elements)."
 msgstr ""
-"Capa de servicios del Sistema de Información Geográfica (GIS) utilizada para"
-" obtener las imágenes de las propiedades (elementos vectoriales)."
+"Capa de servicios del Sistema de Información Geográfica (GIS) utilizada "
+"para obtener las imágenes de las propiedades (elementos vectoriales)."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -3402,10 +3412,12 @@ msgstr "Código de gestor incorrecto."
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
 msgid ""
 "You can safely run this wizard again — it will\n"
-"                            refresh translations without duplicating records."
+"                            refresh translations without duplicating "
+"records."
 msgstr ""
 "Puede ejecutar este asistente de nuevo —\n"
-"                            actualizará las traducciones sin duplicar registros."
+"                            actualizará las traducciones sin duplicar "
+"registros."
 
 #. module: base_ter
 #. odoo-python
@@ -3500,7 +3512,8 @@ msgid "ter_unit_avatar"
 msgstr ""
 
 #~ msgid ""
-#~ "Auto-generated as {parcel_code}-{start_YY}/{end_YY}-{seq} when left empty."
+#~ "Auto-generated as {parcel_code}-{start_YY}/{end_YY}-{seq} when left "
+#~ "empty."
 #~ msgstr ""
-#~ "Se genera automáticamente a partir de la secuencia de la empresa si se deja "
-#~ "en blanco."
+#~ "Se genera automáticamente a partir de la secuencia de la empresa si se "
+#~ "deja en blanco."

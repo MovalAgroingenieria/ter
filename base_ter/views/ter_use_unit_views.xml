@@ -86,6 +86,13 @@
                 <field name="state" column_invisible="1"/>
                 <field name="area_gis_ha"/>
                 <field name="area_official"/>
+                <button
+                        name="action_gis_viewer"
+                        title="GIS Viewer"
+                        type="object"
+                        icon="fa-map-marker"
+                        class="oe_stat_button o_list_button"
+                        invisible="not mapped_to_polygon"/>
             </list>
         </field>
     </record>

@@ -888,8 +888,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 msgid ""
-"Could not fetch aerial images for %(count)s parcel(s) (timeout or connection"
-" error to WMS). Try again later: %(codes)s"
+"Could not fetch aerial images for %(count)s parcel(s) (timeout or "
+"connection error to WMS). Try again later: %(codes)s"
 msgstr ""
 
 #. module: base_ter
@@ -1030,6 +1030,11 @@ msgstr ""
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Dates"
+msgstr ""
+
+#. module: base_ter
+#: model:ir.actions.server,name:base_ter.ter_parcel_delete_gis_geometry_serveraction
+msgid "Delete GIS geometry"
 msgstr ""
 
 #. module: base_ter
@@ -2380,8 +2385,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/base_ter/hooks.py:0
 msgid ""
-"PostGIS could not be enabled in this database. Install PostGIS on PostgreSQL"
-" and ensure the DB user can run CREATE EXTENSION."
+"PostGIS could not be enabled in this database. Install PostGIS on "
+"PostgreSQL and ensure the DB user can run CREATE EXTENSION."
 msgstr ""
 
 #. module: base_ter
@@ -2705,8 +2710,8 @@ msgstr ""
 #: model:ir.model.fields,help:base_ter.field_res_company__ter_unit_sequence_id
 #: model:ir.model.fields,help:base_ter.field_res_config_settings__ter_unit_sequence_id
 msgid ""
-"Sequence used to generate ter.use_unit names. Name format: "
-"{type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}."
+"Sequence used to generate ter.use_unit names. Name format: {type_code}-"
+"{date_start}-{date_end}-{parcel_code}-{sequence}."
 msgstr ""
 
 #. module: base_ter
@@ -2953,8 +2958,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
 msgid ""
 "This will import the standard use type catalog\n"
-"                            (farming, livestock, forestry …) from the bundled\n"
-"                            data file. Existing records with the same external\n"
+"                            (farming, livestock, forestry …) from the "
+"bundled\n"
+"                            data file. Existing records with the same "
+"external\n"
 "                            ID will be kept unchanged."
 msgstr ""
 
@@ -3282,7 +3289,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
 msgid ""
 "You can safely run this wizard again — it will\n"
-"                            refresh translations without duplicating records."
+"                            refresh translations without duplicating "
+"records."
 msgstr ""
 
 #. module: base_ter
