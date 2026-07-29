@@ -228,7 +228,7 @@ msgstr ""
 
 #. module: l10n_es_territory
 #: model_terms:ir.ui.view,arch_db:l10n_es_territory.res_config_settings_view_form_inherit_l10n_es_territory
-#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_tree
+#: model_terms:ir.ui.view,arch_db:l10n_es_territory.ter_parcel_view_list
 msgid "Cadastre"
 msgstr ""
 
