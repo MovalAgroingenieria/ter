@@ -52,8 +52,8 @@ class PointPartnerLink(models.Model):
             profile = record.profile_id
             if not (profile and profile.requires_total):
                 continue
-            links = point.partnerlink_ids.filtered(
-                lambda link: link.profile_id == profile and link.active
+            links = point.partnerlink_ids.filtered_domain(
+                [("profile_id", "=", profile.id), ("active", "=", True)]
             )
             total = sum(links.mapped("percentage"))
             if abs(total - 100.0) > 1e-6:

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="view_point_pointtag_tree" model="ir.ui.view">
+    <record id="point_pointtag_view_list" model="ir.ui.view">
         <field name="name">point.pointtag.tree</field>
         <field name="model">point.pointtag</field>
         <field name="arch" type="xml">
@@ -12,7 +12,7 @@
         </field>
     </record>
 
-    <record id="view_point_pointtag_form" model="ir.ui.view">
+    <record id="point_pointtag_view_form" model="ir.ui.view">
         <field name="name">point.pointtag.form</field>
         <field name="model">point.pointtag</field>
         <field name="arch" type="xml">

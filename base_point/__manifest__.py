@@ -4,12 +4,11 @@
 {
     "name": "Base Point",
     "summary": "Management of geolocated point-based entity censuses",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Point Management",
     "website": "https://www.moval.es",
     "author": "Moval Agroingenieria S.L.",
     "license": "AGPL-3",
-    "installable": True,
     "post_init_hook": "post_init_hook",
     "depends": [
         "mail",
@@ -20,7 +19,7 @@
         "base_adi",
     ],
     "data": [
-        "security/point_security.xml",
+        "security/base_point_groups.xml",
         "security/ir.model.access.csv",
         "data/point_profile_data.xml",
         "wizards/wizard_set_point_code_views.xml",

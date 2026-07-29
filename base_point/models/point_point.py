@@ -76,7 +76,9 @@ class PointPoint(models.Model):
         compute="_compute_aerial_image_shown", max_width=512, max_height=512
     )
     aerial_image_shown_b64 = fields.Char(compute="_compute_aerial_image_shown_b64")
-    image_1920 = fields.Image(string="Aerial Image (Large)", related="aerial_image_shown")
+    image_1920 = fields.Image(
+        string="Aerial Image (Large)", related="aerial_image_shown"
+    )
     active = fields.Boolean(default=True)
 
     @api.constrains("municipality_id", "place_id")
@@ -99,10 +101,13 @@ class PointPoint(models.Model):
             if not record.partner_id:
                 continue
             main_links = record.partnerlink_ids.filtered("is_main")
-            if not main_links or record.partner_id not in main_links.mapped("partner_id"):
+            if not main_links or (
+                record.partner_id not in main_links.mapped("partner_id")
+            ):
                 raise exceptions.ValidationError(
                     record.env._(
-                        "The manager must appear as a main contact in the partner links."
+                        "The manager must appear as a main contact in the "
+                        "partner links."
                     )
                 )
 
@@ -175,8 +180,10 @@ class PointPoint(models.Model):
 
     def action_gis_preview(self):
         self.ensure_one()
-        if not self.env["ir.model"].sudo().search(
-            [("model", "=", "wizard.show.gis.preview")], limit=1
+        if (
+            not self.env["ir.model"]
+            .sudo()
+            .search([("model", "=", "wizard.show.gis.preview")], limit=1)
         ):
             raise exceptions.UserError(
                 self.env._("GIS preview wizard is not available in this database.")
@@ -207,4 +214,3 @@ class PointPoint(models.Model):
                 break
             batch.reset_aerial_image()
             offset += batch_size
-        return None

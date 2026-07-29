@@ -1,9 +1,9 @@
 # 2026 Moval Agroingenieria
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
-from psycopg2 import sql
-
 import json
+
+from psycopg2 import sql
 
 from odoo import api, fields, models
 
@@ -39,9 +39,7 @@ class PointGisPointModel(models.Model):
         has_point_table = bool(self.env.cr.fetchone()[0])
 
         if not has_point_table:
-            self.env.cr.execute(
-                sql.SQL(
-                    """
+            self.env.cr.execute(sql.SQL("""
                     CREATE OR REPLACE VIEW {} AS (
                         SELECT
                             row_number() OVER (ORDER BY pp.name) AS id,
@@ -56,14 +54,11 @@ class PointGisPointModel(models.Model):
                             NOW() AT TIME ZONE 'UTC' AS write_date
                         FROM point_point pp
                     )
-                    """
-                ).format(sql.Identifier("point_gis_point_model"))
-            )
+                    """).format(sql.Identifier("point_gis_point_model")))
             return
 
         self.env.cr.execute(
-            sql.SQL(
-                """
+            sql.SQL("""
                 CREATE OR REPLACE VIEW {} AS (
                     SELECT
                         row_number() OVER (ORDER BY pgp.name) AS id,
@@ -79,8 +74,7 @@ class PointGisPointModel(models.Model):
                     FROM {}.{} pgp
                     LEFT JOIN point_point pp ON pgp.name = pp.name
                 )
-                """
-            ).format(
+                """).format(
                 sql.Identifier("point_gis_point_model"),
                 sql.Identifier("public"),
                 sql.Identifier("point_gis_point"),

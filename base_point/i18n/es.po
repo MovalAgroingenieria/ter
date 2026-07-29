@@ -57,14 +57,14 @@ msgid "Aerial Image Shown B64"
 msgstr "Imagen aérea mostrada B64"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_form
 msgid "Aerial Image and GIS"
 msgstr "Imagen aérea y GIS"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_search
 msgid "Agrupar por"
-msgstr "Agrupar por"
+msgstr ""
 
 #. module: base_point
 #: model:ir.model.fields,field_description:base_point.field_point_point__altitude
@@ -77,12 +77,12 @@ msgid "Apply"
 msgstr "Aplicar"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_search
 msgid "Archivado"
-msgstr "Archivado"
+msgstr ""
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_form
 msgid "Archived"
 msgstr "Archivado"
 
@@ -92,14 +92,14 @@ msgid "Attachment Count"
 msgstr "Número de adjuntos"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_form
 msgid "Basic Data"
 msgstr "Datos básicos"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_search
 msgid "CC.AA."
-msgstr "CC.AA."
+msgstr ""
 
 #. module: base_point
 #: model_terms:ir.ui.view,arch_db:base_point.wizard_set_point_code_view_form
@@ -107,7 +107,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_form
 msgid "Change Code"
 msgstr "Cambiar código"
 
@@ -136,12 +136,12 @@ msgid "Companies"
 msgstr "Compañías"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_search
 msgid "Con gestor"
-msgstr "Con gestor"
+msgstr ""
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_search
 msgid "Con vinculo GIS"
 msgstr "Con vínculo GIS"
 
@@ -158,7 +158,7 @@ msgstr "Contacto"
 
 #. module: base_point
 #: model:ir.model.fields,field_description:base_point.field_point_point__partnerlink_ids
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_form
 msgid "Contacts"
 msgstr "Contactos"
 
@@ -262,12 +262,12 @@ msgstr "Punto GIS"
 #. module: base_point
 #. odoo-python
 #: code:addons/base_point/models/point_point.py:0
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_form
 msgid "GIS Preview"
 msgstr "Previsualización GIS"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_form
 msgid "GIS Viewer"
 msgstr "Visor GIS"
 
@@ -281,7 +281,7 @@ msgstr ""
 #. module: base_point
 #: model:ir.ui.menu,name:base_point.menu_point_configuration_general
 msgid "General"
-msgstr "General"
+msgstr ""
 
 #. module: base_point
 #: model:ir.model.fields,field_description:base_point.field_point_point__geom_geojson
@@ -291,12 +291,12 @@ msgstr "Geometría GeoJSON"
 #. module: base_point
 #: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__geom_geojson
 msgid "Geom Geojson"
-msgstr "Geom Geojson"
+msgstr ""
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_search
 msgid "Gestor"
-msgstr "Gestor"
+msgstr ""
 
 #. module: base_point
 #: model:ir.model.fields,field_description:base_point.field_point_gis_point_model__gis_data
@@ -346,7 +346,7 @@ msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
 #: model:ir.model.fields,field_description:base_point.field_point_point__notes
 #: model:ir.model.fields,field_description:base_point.field_point_pointtag__notes
 #: model:ir.model.fields,field_description:base_point.field_point_profile__notes
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_form
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_form
 msgid "Internal Notes"
 msgstr "Notas Internas"
 
@@ -397,9 +397,9 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_search
 msgid "Localidad"
-msgstr "Localidad"
+msgstr ""
 
 #. module: base_point
 #: model:ir.ui.menu,name:base_point.menu_point_configuration_localization
@@ -437,7 +437,7 @@ msgid "Municipality"
 msgstr "Municipio"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_search
 msgid "Municipio"
 msgstr "Código Municipio"
 
@@ -560,7 +560,7 @@ msgid "Point Vector WMS URL"
 msgstr "URL WMS vectorial de puntos"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_partner_form_inherit_base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_partner_form
 msgid "Point Viewer"
 msgstr "Visor de puntos"
 
@@ -579,7 +579,7 @@ msgstr "Capa vectorial de puntos"
 #: model:ir.model.fields,field_description:base_point.field_res_users__point_ids
 #: model:ir.ui.menu,name:base_point.menu_point_points
 #: model:ir.ui.menu,name:base_point.menu_point_root
-#: model_terms:ir.ui.view,arch_db:base_point.view_partner_form_inherit_base_point
+#: model_terms:ir.ui.view,arch_db:base_point.view_partner_form
 msgid "Points"
 msgstr "Puntos"
 
@@ -636,7 +636,7 @@ msgid "Provinces"
 msgstr "Provincias"
 
 #. module: base_point
-#: model_terms:ir.ui.view,arch_db:base_point.view_point_point_search
+#: model_terms:ir.ui.view,arch_db:base_point.point_point_view_search
 msgid "Provincia"
 msgstr "Código Provincia"
 
@@ -674,7 +674,7 @@ msgstr "100% requerido"
 #. module: base_point
 #: model:ir.model.fields,field_description:base_point.field_point_point__srid
 msgid "SRID"
-msgstr "SRID"
+msgstr ""
 
 #. module: base_point
 #. odoo-python

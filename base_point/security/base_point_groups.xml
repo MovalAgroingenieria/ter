@@ -2,7 +2,7 @@
 <odoo>
     <record id="module_category_point_management" model="ir.module.category">
         <field name="name">Point Management</field>
-        <field name="sequence">200</field>
+        <field name="sequence" eval="200"/>
     </record>
 
     <record id="group_point_user" model="res.groups">
