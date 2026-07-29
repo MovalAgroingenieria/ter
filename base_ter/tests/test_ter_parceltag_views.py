@@ -6,7 +6,7 @@ class TestTerParceltagViews(TransactionCase):
     def test_parceltag_action_view_ids_has_no_trailing_comma(self):
         action = self.env.ref("base_ter.ter_parceltag_action")
         self.assertIn(
-            "ter_parceltag_view_tree",
+            "ter_parceltag_view_list",
             action.view_ids.mapped("view_id").mapped("xml_id"),
         )
         self.assertIn(

@@ -10,7 +10,7 @@ class TestTerParcelViews(TransactionCase):
         self.assertIn("('partner_id', '=', False)", view.arch_db)
 
     def test_partnerlink_tree_view_disables_create_delete(self):
-        view = self.env.ref("base_ter.ter_parcel_partnerlink_view_tree")
+        view = self.env.ref("base_ter.ter_parcel_partnerlink_view_list")
         self.assertIn('create="false"', view.arch_db)
         self.assertIn('delete="false"', view.arch_db)
         self.assertNotIn('edit="false"', view.arch_db)

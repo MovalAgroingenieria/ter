@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
-    <record id="ter_gis_parcel_model_view_tree" model="ir.ui.view">
+    <record id="ter_gis_parcel_model_view_list" model="ir.ui.view">
         <field name="name">ter.gis.parcel.model.view.list</field>
         <field name="model">ter.gis.parcel.model</field>
         <field name="arch" type="xml">
@@ -68,7 +68,7 @@
         <field name="view_ids"
                eval="[(5, 0),
                       (0, 0, {'view_mode': 'list',
-                              'view_id': ref('ter_gis_parcel_model_view_tree')})]"/>
+                              'view_id': ref('ter_gis_parcel_model_view_list')})]"/>
         <field name="search_view_id" ref="ter_gis_parcel_model_view_search"/>
         <field name="context">{'show_archived_in_parcel_code': True}</field>
     </record>

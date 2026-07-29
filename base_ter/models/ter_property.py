@@ -635,7 +635,7 @@ class TerProperty(models.Model):
 
     def action_show_parcels(self):
         self.ensure_one()
-        tree_view = self.env.ref("base_ter.ter_parcel_view_tree")
+        tree_view = self.env.ref("base_ter.ter_parcel_view_list")
         form_view = self.env.ref("base_ter.ter_parcel_view_form")
         kanban_view = self.env.ref("base_ter.ter_parcel_view_kanban")
         search_view = self.env.ref("base_ter.ter_parcel_view_search")

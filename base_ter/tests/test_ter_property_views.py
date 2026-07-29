@@ -8,7 +8,7 @@ from odoo.tests.common import TransactionCase, tagged
 class TestTerPropertyViews(TransactionCase):
     def test_property_action_views_exist(self):
         action = self.env.ref("base_ter.ter_property_action")
-        tree_view = self.env.ref("base_ter.ter_property_view_tree")
+        tree_view = self.env.ref("base_ter.ter_property_view_list")
         form_view = self.env.ref("base_ter.ter_property_view_form")
         kanban_view = self.env.ref("base_ter.ter_property_view_kanban")
         pivot_view = self.env.ref("base_ter.ter_property_view_pivot")

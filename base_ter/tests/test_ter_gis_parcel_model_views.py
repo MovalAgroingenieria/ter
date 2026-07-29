@@ -13,7 +13,7 @@ class TestTerGisParcelModelViews(TransactionCase):
         self.assertIn("('parcel_id', '!=', False)", view.arch_db)
 
     def test_tree_view_decorations_are_clean(self):
-        view = self.env.ref("base_ter.ter_gis_parcel_model_view_tree")
+        view = self.env.ref("base_ter.ter_gis_parcel_model_view_list")
         self.assertNotIn("== True", view.arch_db)
         self.assertIn('decoration-danger="diff_areas_threshold_exceeded"', view.arch_db)
         self.assertIn('decoration-bf="diff_areas_threshold_exceeded"', view.arch_db)

@@ -155,7 +155,7 @@
         </field>
     </record>
 
-    <record id="ter_property_view_tree" model="ir.ui.view">
+    <record id="ter_property_view_list" model="ir.ui.view">
         <field name="name">ter.property.view.list</field>
         <field name="model">ter.property</field>
         <field name="arch" type="xml">
@@ -304,7 +304,7 @@
         <field name="view_mode">list,form,kanban,pivot</field>
         <field name="view_ids"
                eval="[(5, 0),
-                      (0, 0, {'view_mode': 'list', 'view_id': ref('ter_property_view_tree')}),
+                      (0, 0, {'view_mode': 'list', 'view_id': ref('ter_property_view_list')}),
                       (0, 0, {'view_mode': 'form', 'view_id': ref('ter_property_view_form')}),
                       (0, 0, {'view_mode': 'kanban', 'view_id': ref('ter_property_view_kanban')}),
                       (0, 0, {'view_mode': 'pivot', 'view_id': ref('ter_property_view_pivot')})]"/>

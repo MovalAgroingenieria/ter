@@ -205,7 +205,7 @@ class UseType(models.Model):
         unit_model = self.env["ter.use_unit"]
         units = unit_model.search([("use_type_id", "child_of", self.id)])
         parcel_ids = units.mapped("parcel_id").ids
-        tree_view = self.env.ref("base_ter.ter_parcel_view_tree")
+        tree_view = self.env.ref("base_ter.ter_parcel_view_list")
         form_view = self.env.ref("base_ter.ter_parcel_view_form")
         search_view = self.env.ref("base_ter.ter_parcel_view_search")
         return {

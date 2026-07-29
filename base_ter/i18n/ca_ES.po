@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "% Participation"
 msgstr "% Participació"
@@ -681,7 +681,7 @@ msgid "Areas"
 msgstr "Àrees"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_list
 msgid "Areas OK?"
 msgstr "Àrees OK?"
 
@@ -836,9 +836,9 @@ msgstr "Tancar previsualització"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__alphanum_code
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
-#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 msgid "Code"
 msgstr "Codi"
@@ -1320,7 +1320,7 @@ msgstr "Codi GIS"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__gis_data
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_list
 msgid "GIS Data"
 msgstr "Dades GIS"
 
@@ -1375,7 +1375,7 @@ msgid "GIS Preview"
 msgstr "Previsualització GIS"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_list
 msgid "GIS Viewer"
 msgstr "Visor GIS"
 
@@ -1461,7 +1461,7 @@ msgstr "Té un missatge"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__partner_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Holder"
 msgstr "Titular"
@@ -1595,7 +1595,7 @@ msgid "If the area unit is not the ha, name of the alternative area unit."
 msgstr "Si la unitat d'àrea no és l'ha, nom de la unitat d'àrea alternativa."
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_list
 msgid "Image"
 msgstr "Imatge"
 
@@ -1733,7 +1733,7 @@ msgid "Is Main"
 msgstr "És gestor"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Is manager"
 msgstr "Contacte gestor"
@@ -1887,8 +1887,8 @@ msgid "Management"
 msgstr "Gestió"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_list
 msgid "Manager"
 msgstr "Gestor"
 
@@ -1944,10 +1944,10 @@ msgstr "Municipis"
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Municipality"
 msgstr "Municipi"
@@ -1980,9 +1980,9 @@ msgstr "Data límit de la meva activitat"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute__name
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute_value__name
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__name
-#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
 msgid "Name"
@@ -2201,18 +2201,18 @@ msgstr "Propietari"
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__parcel_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__parcel_id
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_list
 msgid "Parcel"
 msgstr "Parcel·la"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_list
 msgid "Parcel (DB)"
 msgstr "Parcel·la (BD)"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_list
 msgid "Parcel (GIS)"
 msgstr "Parcel·la (GIS)"
 
@@ -2317,12 +2317,12 @@ msgstr "Capa de vector de paquets"
 #: model:ir.ui.menu,name:base_ter.ter_parcel_menu
 #: model_terms:ir.ui.view,arch_db:base_ter.date_range_view_kanban
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
-#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_calendar
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_graph
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_kanban
 #: model_terms:ir.ui.view,arch_db:base_ter.view_date_range_form_view
@@ -2483,10 +2483,10 @@ msgstr "Data d'impressió"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__profile_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_profile__alphanum_code
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_search
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_list
 msgid "Profile"
 msgstr "Perfil"
 
@@ -2512,7 +2512,7 @@ msgstr "Perfils"
 #: model:ir.model.fields,field_description:base_ter.field_ter_propertytag__property_ids
 #: model:ir.model.fields.selection,name:base_ter.selection__wizard_import_kml__target_model__ter_property
 #: model:ir.ui.menu,name:base_ter.ter_property_menu
-#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
 msgid "Properties"
@@ -2530,9 +2530,9 @@ msgstr "Informe fincas"
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_list
 msgid "Property"
 msgstr "Finca"
 
@@ -2684,7 +2684,7 @@ msgstr "Requerit"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_profile__requires_total
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_list
 msgid "Required 100%"
 msgstr "100% requerit"
 
@@ -2872,9 +2872,9 @@ msgstr "Ajustos de configuració"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_propertytag_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_propertytag_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_propertytag_view_list
 msgid "Tag Name"
 msgstr "Nom de l'etiqueta"
 
@@ -3084,8 +3084,8 @@ msgid "Top level"
 msgstr "Sense pare"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_tree
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_list
 msgid "Total Area"
 msgstr "Àrea total"
 
@@ -3218,7 +3218,7 @@ msgid "Usufructuary"
 msgstr "Usufructuari"
 
 #. module: base_ter
-#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_list
 msgid "VAT"
 msgstr "DNI/NIF"
 

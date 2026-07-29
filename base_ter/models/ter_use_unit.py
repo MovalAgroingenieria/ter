@@ -124,10 +124,14 @@ class TerUnit(models.Model):
         string="Area GIS",
         digits=(32, 4),
         compute="_compute_area_gis_ha",
+        store=True,
+        group_operator="sum",
     )
     area_parcels = fields.Float(
         digits=(32, 4),
         compute="_compute_area_parcels",
+        store=True,
+        group_operator="sum",
     )
     note = fields.Html()
     date_start = fields.Date(string="Start date", required=True, index=True)
@@ -1066,7 +1070,7 @@ class TerUnit(models.Model):
         parcel_ids = self.parcel_id
         if not parcel_ids:
             return None
-        tree_view = self.env.ref("base_ter.ter_parcel_view_tree")
+        tree_view = self.env.ref("base_ter.ter_parcel_view_list")
         form_view = self.env.ref("base_ter.ter_parcel_view_form")
         search_view = self.env.ref("base_ter.ter_parcel_view_search")
         return {

@@ -8,7 +8,7 @@ from odoo.tests.common import TransactionCase, tagged
 class TestTerProfileViews(TransactionCase):
     def test_profile_action_views_exist(self):
         action = self.env.ref("base_ter.ter_profile_action")
-        tree_view = self.env.ref("base_ter.ter_profile_view_tree")
+        tree_view = self.env.ref("base_ter.ter_profile_view_list")
         form_view = self.env.ref("base_ter.ter_profile_view_form")
 
         view_ids = action.view_ids.mapped("view_id").ids

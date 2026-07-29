@@ -4,7 +4,7 @@
 {
     "name": "Base Territory",
     "summary": "Base module for those modules that manage a territorial census",
-    "version": "18.0.1.4.1",
+    "version": "18.0.1.5.0",
     "category": "Territory Management",
     "website": "https://www.moval.es",
     "author": "Moval Agroingeniería S.L.",
@@ -69,6 +69,8 @@
             "base_ter/static/lib/ter_iconset/iconset.css",
         ],
     },
+    # oca-review: this catalog is intentionally managed manually and imported
+    # through explicit business workflows, not during module install/upgrade.
     "oca_data_manual": [
         "data/ter_use_type_data.xml",
     ],

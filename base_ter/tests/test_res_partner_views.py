@@ -19,5 +19,5 @@ class TestResPartnerViews(TransactionCase):
         self.assertIn("is_holder", view.arch_db)
 
     def test_partner_tree_view_button_invisible_modifier(self):
-        view = self.env.ref("base_ter.res_partner_view_tree")
+        view = self.env.ref("base_ter.res_partner_view_list")
         self.assertIn('invisible="number_of_parcels == 0"', view.arch_db)
