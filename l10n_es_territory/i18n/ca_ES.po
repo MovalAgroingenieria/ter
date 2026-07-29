@@ -449,11 +449,6 @@ msgid "Córdoba"
 msgstr "Còrdova"
 
 #. module: l10n_es_territory
-#: model:ir.actions.server,name:l10n_es_territory.ter_parcel_delete_gis_geometry_serveraction
-msgid "Delete GIS geometry"
-msgstr "Suprimir geometria GIS"
-
-#. module: l10n_es_territory
 #: model:ir.model.fields,field_description:l10n_es_territory.field_ter_parcel_cadastre_compare_wizard__display_name
 msgid "Display Name"
 msgstr ""
