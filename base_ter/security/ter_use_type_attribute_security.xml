@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="rule_no_delete_used_attribute" model="ir.rule">
+        <field name="name">No delete used attributes</field>
+        <field name="model_id" ref="model_ter_use_type_attribute"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+</odoo>

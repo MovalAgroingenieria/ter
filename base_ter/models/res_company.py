@@ -138,7 +138,15 @@ class ResCompany(models.Model):
         # oca-review: unbounded search is intentional; changing the area unit
         # must invalidate the cached computed area fields on every affected
         # record so they recompute with the new unit.
-        self.env["ter.parcel"].search([]).invalidate_recordset(area_fields_parcel)
-        self.env["ter.property"].search([]).invalidate_recordset(area_fields_property)
-        self.env["res.partner"].search([]).invalidate_recordset(area_fields_partner)
-        self.env["ter.use_unit"].search([]).invalidate_recordset(area_fields_unit)
+        self.env["ter.parcel"].search([], limit=None).invalidate_recordset(
+            area_fields_parcel
+        )
+        self.env["ter.property"].search([], limit=None).invalidate_recordset(
+            area_fields_property
+        )
+        self.env["res.partner"].search([], limit=None).invalidate_recordset(
+            area_fields_partner
+        )
+        self.env["ter.use_unit"].search([], limit=None).invalidate_recordset(
+            area_fields_unit
+        )

@@ -375,7 +375,7 @@ def _ensure_ter_unit_sequences(env: api.Environment) -> None:
     """Create default ter.use_unit sequence for each company that lacks one."""
     # oca-review: this unbounded search runs once at module init/upgrade and must
     # cover every company so each gets its default ter.use_unit sequence.
-    env["res.company"].search([])._get_or_create_ter_unit_sequence()
+    env["res.company"].search([], limit=None)._get_or_create_ter_unit_sequence()
 
 
 def _table_exists(env: api.Environment, schema: str, table_name: str) -> bool:
