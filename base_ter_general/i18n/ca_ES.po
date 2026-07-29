@@ -141,7 +141,7 @@ msgid "Last update timestamp received from the base entity."
 msgstr "Data de la darrera actualització des de la instància general."
 
 #. module: base_ter_general
-#: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter_general.view_partner_form
 msgid "Map Base"
 msgstr "Mapeig base"
@@ -152,7 +152,7 @@ msgid "Map Base Entities"
 msgstr "Mapeig entitats base"
 
 #. module: base_ter_general
-#: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter_general.res_partner_view_list
 msgid "Mapped"
 msgstr "Mapat"
 

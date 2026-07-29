@@ -55,10 +55,10 @@
         </field>
     </record>
 
-    <record id="res_partner_view_tree" model="ir.ui.view">
-        <field name="name">base_ter_general.res_partner_view_tree</field>
+    <record id="res_partner_view_list" model="ir.ui.view">
+        <field name="name">base_ter_general.res_partner_view_list</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base_ter.res_partner_view_tree"/>
+        <field name="inherit_id" ref="base_ter.res_partner_view_list"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_code']" position="before">
                 <header>
