@@ -1276,182 +1276,61 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             }
         )
 
-    def _field_line_apply_existing_location(
-        self, location, line, ctx
-    ):  # pylint: disable=too-many-branches
-        """Update or create ter.use_unit for an existing fsm.location."""
+    def _field_line_upsert_unit(self, line, ctx, unit):
+        """Create or update the ter.use_unit for a Field line.
+
+        Locations are no longer created per parcel: the Field import only
+        maintains the territorial use unit. Work orders use the company's
+        single default Geofolia location instead.
+        """
         ter_unit_obj = self.env["ter.use_unit"]
-        loc_name = ctx["loc_name"]
-        if not location.ter_use_unit_id.geofolia_external_id and ctx.get("ext_id"):
-            location.ter_use_unit_id.sudo().write(
-                {"geofolia_external_id": ctx["ext_id"]}
-            )
-        location.partner_id.write({"name": loc_name, "city": line.city or False})
-        unit = location.ter_use_unit_id
+        vals = {
+            "area_official": ctx["area_official"],
+            "name": ctx["loc_name"],
+            "geofolia_code": ctx.get("geofolia_code"),
+            "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
+            "geofolia_crop_name": ctx.get("geofolia_crop_name"),
+            "geofolia_city": ctx.get("geofolia_city"),
+        }
+        if ctx.get("geom_ewkt"):
+            vals["geom_ewkt"] = ctx["geom_ewkt"]
+        if ctx.get("date_start"):
+            vals["date_start"] = ctx["date_start"]
+        if ctx.get("date_end"):
+            vals["date_end"] = ctx["date_end"]
+        if ctx.get("date_range"):
+            vals["date_range_id"] = ctx["date_range"].id
+        if ctx.get("parcel"):
+            vals["parcel_id"] = ctx["parcel"].id
         if unit:
-            unit_vals = {
-                "area_official": ctx["area_official"],
-                "name": loc_name,
-                "geofolia_code": ctx.get("geofolia_code"),
-                "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
-                "geofolia_crop_name": ctx.get("geofolia_crop_name"),
-                "geofolia_city": ctx.get("geofolia_city"),
-            }
-            if ctx.get("geom_ewkt"):
-                unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
-            if ctx.get("date_start"):
-                unit_vals["date_start"] = ctx["date_start"]
-            if ctx.get("date_end"):
-                unit_vals["date_end"] = ctx["date_end"]
-            if ctx.get("date_range"):
-                unit_vals["date_range_id"] = ctx["date_range"].id
-            unit.write(unit_vals)
-            line.write(
-                {
-                    "fsm_location_id": location.id,
-                    "ter_use_unit_id": unit.id,
-                    "sync_state": "updated",
-                    "sync_message": self.env._("Updated location and use unit."),
-                }
-            )
-            return
-        parcel = ctx.get("parcel")
-        date_range = ctx.get("date_range")
-        if not parcel or not date_range:
-            line.write(
-                {
-                    "sync_state": "error",
-                    "sync_message": self.env._(
-                        "Existing location but cannot create "
-                        "ter.use_unit (parcel/date range missing)."
-                    ),
-                }
-            )
-            return
-        ext_id = ctx.get("ext_id")
-        unit = ter_unit_obj.search([("geofolia_external_id", "=", ext_id)], limit=1)
-        if not unit:
-            unit_vals = {
-                "parcel_id": parcel.id,
-                "date_range_id": date_range.id,
-                "date_start": ctx["date_start"],
-                "date_end": ctx["date_end"],
-                "area_official": ctx["area_official"],
-                "name": loc_name,
-                "geofolia_external_id": ext_id,
-                "fsm_location_id": location.id,
-                "geofolia_code": ctx.get("geofolia_code"),
-                "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
-                "geofolia_crop_name": ctx.get("geofolia_crop_name"),
-                "geofolia_city": ctx.get("geofolia_city"),
-            }
-            if ctx.get("geom_ewkt"):
-                unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
-            unit = ter_unit_obj.create(unit_vals)
+            unit.write(vals)
+            state, message = "updated", self.env._("Updated use unit.")
         else:
-            unit_vals = {
-                "fsm_location_id": location.id,
-                "area_official": ctx["area_official"],
-                "name": loc_name,
-                "geofolia_code": ctx.get("geofolia_code"),
-                "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
-                "geofolia_crop_name": ctx.get("geofolia_crop_name"),
-                "geofolia_city": ctx.get("geofolia_city"),
-            }
-            if ctx.get("geom_ewkt"):
-                unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
-            if ctx.get("date_start"):
-                unit_vals["date_start"] = ctx["date_start"]
-            if ctx.get("date_end"):
-                unit_vals["date_end"] = ctx["date_end"]
-            if date_range:
-                unit_vals["date_range_id"] = date_range.id
-            if parcel:
-                unit_vals["parcel_id"] = parcel.id
-            unit.write(unit_vals)
-        location.ter_use_unit_id = unit.id
+            vals["geofolia_external_id"] = ctx["ext_id"]
+            unit = ter_unit_obj.create(vals)
+            state, message = "created", self.env._("Created use unit.")
         line.write(
             {
-                "fsm_location_id": location.id,
                 "ter_use_unit_id": unit.id,
-                "sync_state": "created",
-                "sync_message": self.env._("Created use unit and linked to location."),
+                "sync_state": state,
+                "sync_message": message,
             }
         )
 
-    def _field_line_apply_new_location(self, line, ctx):
-        """Create ter.use_unit first, then fsm.location (ter_use_unit_id required)."""
-        fsm_loc_obj = self.env["fsm.location"]
-        ter_unit_obj = self.env["ter.use_unit"]
-        partner_obj = self.env["res.partner"]
-        loc_name = ctx["loc_name"]
-        parcel = ctx.get("parcel")
-        date_range = ctx.get("date_range")
-        if not parcel or not date_range:
-            line.write(
-                {
-                    "sync_state": "error",
-                    "sync_message": self.env._(
-                        "Cannot create location: parcel/date range required "
-                        "for ter.use_unit."
-                    ),
-                }
-            )
-            return
-        ext_id = ctx["ext_id"]
-        unit = ter_unit_obj.search([("geofolia_external_id", "=", ext_id)], limit=1)
-        if not unit:
-            unit_vals = {
-                "parcel_id": parcel.id,
-                "date_range_id": date_range.id,
-                "date_start": ctx["date_start"],
-                "date_end": ctx["date_end"],
-                "area_official": ctx["area_official"],
-                "name": loc_name,
-                "geofolia_external_id": ext_id,
-                "geofolia_code": ctx.get("geofolia_code"),
-                "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
-                "geofolia_crop_name": ctx.get("geofolia_crop_name"),
-                "geofolia_city": ctx.get("geofolia_city"),
-            }
-            if ctx.get("geom_ewkt"):
-                unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
-            unit = ter_unit_obj.create(unit_vals)
-        else:
-            unit_vals = {
-                "parcel_id": parcel.id,
-                "date_range_id": date_range.id,
-                "date_start": ctx["date_start"],
-                "date_end": ctx["date_end"],
-                "area_official": ctx["area_official"],
-                "name": loc_name,
-                "geofolia_code": ctx.get("geofolia_code"),
-                "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
-                "geofolia_crop_name": ctx.get("geofolia_crop_name"),
-                "geofolia_city": ctx.get("geofolia_city"),
-            }
-            if ctx.get("geom_ewkt"):
-                unit_vals["geom_ewkt"] = ctx["geom_ewkt"]
-            unit.write(unit_vals)
-        partner = partner_obj.create(
-            {"name": loc_name, "city": line.city or False, "is_company": False}
-        )
-        location = fsm_loc_obj.create(
-            {
-                "partner_id": partner.id,
-                "owner_id": partner.id,
-                "ter_use_unit_id": unit.id,
-            }
-        )
-        unit.write({"fsm_location_id": location.id})
-        line.write(
-            {
-                "fsm_location_id": location.id,
-                "ter_use_unit_id": unit.id,
-                "sync_state": "created",
-                "sync_message": self.env._("Created location and use unit (1:1)."),
-            }
-        )
+    def _geofolia_area_to_official(self, area_m2):
+        """Convert a Geofolia surface (m²) to ter.use_unit.area_official.
+
+        ``ter.use_unit.area_official`` is stored in the company's configured
+        area unit (hectares for Agritecnia, where 1 ha = 10000 m²), while
+        Geofolia sends the surface in m². Divide by the m²-per-unit factor so
+        the official area matches the instance's unit.
+        """
+        company = self.env.company
+        is_ha, _unit_name, value_in_ha = company._get_area_unit_params()
+        factor = 10000.0
+        if not is_ha and value_in_ha and value_in_ha != 1:
+            factor = value_in_ha * 10000.0
+        return float(area_m2 or 0.0) / factor if factor else 0.0
 
     def _build_field_line_ctx(self, line, ext_id, existing_unit=None):
         """Build context dict for field line processing."""
@@ -1464,7 +1343,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         parcel, geom_ewkt = self._field_line_resolve_parcel(
             line, default_parcel, existing_unit
         )
-        area_official = float(line.area or 0)
+        area_official = self._geofolia_area_to_official(line.area)
         loc_name = (
             line.name
             or line.code
@@ -1486,11 +1365,10 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         }
 
     def _apply_field_line(self, line):
-        """Create or update fsm.location and ter.use_unit (1:1) from Field line."""
+        """Create or update ter.use_unit from a Field line (no fsm.location)."""
         self.ensure_one()
         # pylint: disable=self-cls-assignment
         self = self.with_context(geofolia_sync=True)
-        fsm_loc_obj = self.env["fsm.location"]
         ter_unit_obj = self.env["ter.use_unit"]
         ext_id = (line.external_uuid or "").strip() or False
         if not ext_id:
@@ -1506,36 +1384,14 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 unit = ter_unit_obj.search(
                     [("geofolia_external_id", "=", ext_id)], limit=1
                 )
-                location = unit.fsm_location_id if unit else fsm_loc_obj.browse()
-                loc_name = (
-                    line.name
-                    or line.code
-                    or self.env._("Geofolia Field %(ext_id)s", ext_id=ext_id)
-                )
-                if not unit and not location:
-                    candidates = fsm_loc_obj.search(
-                        [
-                            ("geofolia_external_id", "=", False),
-                            ("partner_id.name", "=", loc_name),
-                            ("ter_use_unit_id", "!=", False),
-                        ],
-                        limit=2,
-                    )
-                    if len(candidates) == 1:
-                        location = candidates
-                        unit = candidates.ter_use_unit_id
-                        unit.sudo().write({"geofolia_external_id": ext_id})
                 ctx = self._build_field_line_ctx(line, ext_id, unit)
-                if not ctx.get("parcel") and not location:
+                if not unit and not ctx.get("parcel"):
                     self._field_line_write_parcel_error(line)
                     return
-                if not ctx.get("date_range") and not location:
+                if not unit and not ctx.get("date_range"):
                     self._field_line_write_daterange_error(line)
                     return
-                if location:
-                    self._field_line_apply_existing_location(location, line, ctx)
-                else:
-                    self._field_line_apply_new_location(line, ctx)
+                self._field_line_upsert_unit(line, ctx, unit)
         except UserError as exc:
             line.write({"sync_state": "error", "sync_message": str(exc)})
         except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
@@ -1950,25 +1806,50 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             )
         return account
 
-    def _get_fsm_location_for_activity(self, activity):
-        """Return fsm.location: CropZone PlotId, else company default, else any."""
-        fsm_loc_obj = self.env["fsm.location"]
-        ter_unit_obj = self.env["ter.use_unit"]
-        raw = activity.raw_json or {}
-        crop_zones = raw.get("CropZoneIds") or []
-        if crop_zones and isinstance(crop_zones[0], dict):
-            plot_id = crop_zones[0].get("PlotId")
-            if plot_id:
-                unit = ter_unit_obj.search(
-                    [("geofolia_external_id", "=", str(plot_id))], limit=1
-                )
-                if unit and unit.fsm_location_id:
-                    return unit.fsm_location_id
+    def _get_default_fsm_location(self):
+        """Return (creating if needed) the generic Geofolia work-order location.
+
+        The Geofolia import does not use per-parcel locations: every imported
+        work order is created on the company's single default location.
+        """
         company = getattr(self, "company_id", None) or self.env.company
         location = company.geofolia_default_fsm_location_id
         if location:
             return location
-        return fsm_loc_obj.search([], limit=1)
+        loc_obj = self.env["fsm.location"].sudo()
+        location = loc_obj.search(
+            [
+                ("geofolia_default", "=", True),
+                ("company_id", "in", (company.id, False)),
+            ],
+            limit=1,
+        )
+        if not location:
+            partner = (
+                self.env["res.partner"]
+                .sudo()
+                .create(
+                    {
+                        "name": self.env._("Geofolia"),
+                        "is_company": False,
+                        "company_id": company.id,
+                    }
+                )
+            )
+            location = loc_obj.create(
+                {
+                    "partner_id": partner.id,
+                    "owner_id": partner.id,
+                    "company_id": company.id,
+                    "geofolia_default": True,
+                }
+            )
+        company.sudo().geofolia_default_fsm_location_id = location.id
+        return location
+
+    def _get_fsm_location_for_activity(self, _activity):
+        """Return the generic default Geofolia location for all work orders."""
+        return self._get_default_fsm_location()
 
     def _get_or_create_fsm_order_for_activity(self, activity):
         """Return, re-sync or create the fsm.order for this activity.
@@ -1997,13 +1878,6 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         order_vals = self._build_fsm_order_vals(activity, location)
         order = self.env["fsm.order"].create(order_vals)
         activity.fsm_order_id = order.id
-        self.env["fsm.activity"].create(
-            {
-                "name": activity.operation_name or self.env._("Geofolia activity"),
-                "fsm_order_id": order.id,
-            }
-        )
-        order.env.add_to_compute(order._fields["order_activity_ids"], order)
         self._enrich_fsm_order(order, activity)
         return order
 
@@ -2011,12 +1885,17 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         """Build vals dict for fsm.order creation."""
         op_name = activity.operation_name or self.env._("Geofolia activity")
         name = self._build_order_name(op_name, activity, location)
+        stage = self._get_or_create_shared_order_stage()
         order_vals = {
             "location_id": location.id,
             "name": name,
+            "stage_id": stage.id,
             "from_geofolia": True,
             "geofolia_activity_id": activity.external_id or False,
         }
+        order_type = self._get_or_create_order_type(activity.operation_category)
+        if order_type:
+            order_vals["type"] = order_type.id
         start_dt = end_dt = None
         if activity.starting_date:
             start_dt = datetime.combine(activity.starting_date, datetime.min.time())
@@ -2041,6 +1920,55 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         # Actual execution dates (Geofolia activities are "Realizado")
         self._set_actual_dates(order_vals, start_dt, end_dt, activity)
         return order_vals
+
+    def _get_or_create_order_type(self, category):
+        """Return an fsm.order.type matching the Geofolia OperationCategory.
+
+        The Geofolia *OperationCategory* (Cosecha, Tratamiento, Siembra…) maps
+        to the order ``Type`` field, so the client can read the operation kind
+        at the top of the Parte. Types are created on demand and shared.
+        """
+        name = self._safe_scalar_str(category)
+        if not name:
+            return self.env["fsm.order.type"].browse()
+        type_obj = self.env["fsm.order.type"].sudo()
+        order_type = type_obj.search([("name", "=", name)], limit=1)
+        if not order_type:
+            order_type = type_obj.create({"name": name})
+        return order_type
+
+    def _get_or_create_shared_order_stage(self):
+        """Return an ``fsm.stage`` for orders that is shared by all companies."""
+        stage_obj = self.env["fsm.stage"].sudo()
+        stage = stage_obj.search(
+            [
+                ("stage_type", "=", "order"),
+                ("company_id", "=", False),
+                ("is_default", "=", True),
+            ],
+            order="sequence asc",
+            limit=1,
+        )
+        if stage:
+            return stage
+        stage = stage_obj.search(
+            [("stage_type", "=", "order"), ("company_id", "=", False)],
+            order="sequence asc",
+            limit=1,
+        )
+        if stage:
+            if not stage.is_default:
+                stage.write({"is_default": True})
+            return stage
+        return stage_obj.create(
+            {
+                "name": self.env._("New"),
+                "sequence": 10,
+                "is_default": True,
+                "stage_type": "order",
+                "company_id": False,
+            }
+        )
 
     @staticmethod
     def _build_order_name(op_name, activity, location):
@@ -2112,33 +2040,71 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         order.product_usage_ids.filtered("from_geofolia").unlink()
         order.equipment_usage_ids.filtered("from_geofolia").unlink()
         order.person_usage_ids.filtered("from_geofolia").unlink()
+        order.harvest_usage_ids.filtered("from_geofolia").unlink()
+        order.worked_unit_ids.filtered("from_geofolia").unlink()
         self._create_product_usage_lines(order, raw)
         self._create_equipment_usage_lines(order, raw)
         self._create_person_usage_lines(order, raw)
+        self._create_harvest_usage_lines(order, raw)
+        self._create_worked_unit_lines(order, raw)
+
+    @staticmethod
+    def _aggregate_usage_items(items, id_key, amount_key, name_getter):
+        """Collapse per-crop-zone repeated items into one entry per unique id.
+
+        Geofolia repeats each product/machine/worker once per crop zone.
+        Returns an ordered list of dicts (ext_id, name, amount, raw) where
+        *amount* is the sum of *amount_key* across all zones and *raw* is the
+        first raw item (used for extra fields such as the unit symbol).
+        """
+        aggregated = {}
+        order_keys = []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            ext_id = item.get(id_key) or ""
+            name = name_getter(item)
+            key = str(ext_id) if ext_id else "name:%s" % name
+            entry = aggregated.get(key)
+            if entry is None:
+                entry = {"ext_id": ext_id, "name": name, "amount": 0.0, "raw": item}
+                aggregated[key] = entry
+                order_keys.append(key)
+            entry["amount"] += item.get(amount_key) or 0.0
+        return [aggregated[key] for key in order_keys]
+
+    def _employee_display_name(self, item):
+        """Build 'First Last' from a Geofolia ActionEmployees item."""
+        first = item.get("EmployeeFirstName") or ""
+        last = item.get("EmployeeName") or ""
+        return ("%s %s" % (first, last)).strip() or self.env._("Unknown")
 
     def _create_product_usage_lines(self, order, raw):
-        """Create fsm.order.product.usage from ProductIds."""
+        """Create fsm.order.product.usage from ProductIds.
+
+        Geofolia repeats each product once per crop zone (RecognitionId).
+        Lines are aggregated by SupplyId so the order shows one line per
+        product with the total quantity applied across every zone.
+        """
         products = raw.get("ProductIds") or []
         if not products:
             return
         product_obj = self.env["product.product"]
         usage_obj = self.env["fsm.order.product.usage"]
+        entries = self._aggregate_usage_items(
+            products,
+            "SupplyId",
+            "Quantity",
+            lambda it: self._safe_scalar_str(it.get("SupplyName"))
+            or self.env._("Unknown"),
+        )
         vals_list = []
-        for seq, prod in enumerate(products, start=10):
-            if not isinstance(prod, dict):
-                continue
-            supply_id = prod.get("SupplyId") or ""
-            name = prod.get("SupplyName") or self.env._("Unknown")
+        for seq, entry in enumerate(entries, start=10):
+            supply_id = entry["ext_id"]
             odoo_product = product_obj.browse()
             if supply_id:
                 odoo_product = product_obj.search(
-                    [
-                        (
-                            "geofolia_external_id",
-                            "=",
-                            str(supply_id),
-                        )
-                    ],
+                    [("geofolia_external_id", "=", str(supply_id))],
                     limit=1,
                 )
             vals_list.append(
@@ -2146,12 +2112,10 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     "fsm_order_id": order.id,
                     "sequence": seq,
                     "product_id": odoo_product.id or False,
-                    "name": self._safe_scalar_str(name) or str(supply_id),
-                    "quantity": prod.get("Quantity") or 0.0,
-                    "uom_name": prod.get("ReferentialUnitSymbol") or "",
+                    "name": entry["name"] or str(supply_id),
+                    "quantity": entry["amount"],
+                    "uom_name": entry["raw"].get("ReferentialUnitSymbol") or "",
                     "geofolia_supply_id": str(supply_id) if supply_id else False,
-                    "geofolia_recognition_id": str(prod.get("RecognitionId") or "")
-                    or False,
                     "from_geofolia": True,
                 }
             )
@@ -2159,29 +2123,30 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             usage_obj.create(vals_list)
 
     def _create_equipment_usage_lines(self, order, raw):
-        """Create fsm.order.equipment.usage from ActionEquipments."""
+        """Create fsm.order.equipment.usage from ActionEquipments.
+
+        Geofolia repeats each machine once per crop zone; lines are
+        aggregated by EquipmentId, summing the worked time across zones.
+        """
         equip_items = raw.get("ActionEquipments") or []
         if not equip_items:
             return
         equipment_obj = self.env["fsm.equipment"]
         usage_obj = self.env["fsm.order.equipment.usage"]
+        entries = self._aggregate_usage_items(
+            equip_items,
+            "EquipmentId",
+            "EquipmentTime",
+            lambda it: self._safe_scalar_str(it.get("EquipmentName"))
+            or self.env._("Unknown"),
+        )
         vals_list = []
-        for seq, item in enumerate(equip_items, start=10):
-            if not isinstance(item, dict):
-                continue
-            ext_id = item.get("EquipmentId") or ""
-            name = item.get("EquipmentName") or self.env._("Unknown")
-            minutes = item.get("EquipmentTime") or 0.0
+        for seq, entry in enumerate(entries, start=10):
+            ext_id = entry["ext_id"]
             odoo_equip = equipment_obj.browse()
             if ext_id:
                 odoo_equip = equipment_obj.search(
-                    [
-                        (
-                            "geofolia_external_id",
-                            "=",
-                            str(ext_id),
-                        )
-                    ],
+                    [("geofolia_external_id", "=", str(ext_id))],
                     limit=1,
                 )
             vals_list.append(
@@ -2189,13 +2154,9 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     "fsm_order_id": order.id,
                     "sequence": seq,
                     "equipment_id": odoo_equip.id or False,
-                    "name": self._safe_scalar_str(name) or str(ext_id),
-                    "hours": minutes / 60.0,
+                    "name": entry["name"] or str(ext_id),
+                    "hours": entry["amount"] / 60.0,
                     "geofolia_equipment_id": str(ext_id) if ext_id else False,
-                    "geofolia_recognition_id": str(
-                        item.get("EquipmentRecognitionId") or ""
-                    )
-                    or False,
                     "from_geofolia": True,
                 }
             )
@@ -2203,23 +2164,25 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             usage_obj.create(vals_list)
 
     def _create_person_usage_lines(self, order, raw):
-        """Create fsm.order.person.usage from ActionEmployees."""
+        """Create fsm.order.person.usage from ActionEmployees.
+
+        Geofolia repeats each worker once per crop zone; lines are
+        aggregated by EmployeeId, summing the worked time across zones.
+        """
         emp_items = raw.get("ActionEmployees") or []
         if not emp_items:
             return
         person_obj = self.env["fsm.person"]
         usage_obj = self.env["fsm.order.person.usage"]
+        entries = self._aggregate_usage_items(
+            emp_items,
+            "EmployeeId",
+            "EmployeeTime",
+            self._employee_display_name,
+        )
         vals_list = []
-        for seq, item in enumerate(emp_items, start=10):
-            if not isinstance(item, dict):
-                continue
-            ext_id = item.get("EmployeeId") or ""
-            first = item.get("EmployeeFirstName") or ""
-            last = item.get("EmployeeName") or ""
-            name = ("%s %s" % (first, last)).strip()
-            if not name:
-                name = self.env._("Unknown")
-            minutes = item.get("EmployeeTime") or 0.0
+        for seq, entry in enumerate(entries, start=10):
+            ext_id = entry["ext_id"]
             odoo_person = person_obj.browse()
             if ext_id:
                 odoo_person = person_obj.search(
@@ -2231,18 +2194,98 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                     "fsm_order_id": order.id,
                     "sequence": seq,
                     "person_id": odoo_person.id or False,
-                    "name": name,
-                    "hours": minutes / 60.0,
+                    "name": entry["name"],
+                    "hours": entry["amount"] / 60.0,
                     "geofolia_employee_id": (str(ext_id) if ext_id else False),
-                    "geofolia_recognition_id": str(
-                        item.get("EmployeeRecognitionId") or ""
-                    )
-                    or False,
                     "from_geofolia": True,
                 }
             )
         if vals_list:
             usage_obj.create(vals_list)
+
+    def _create_harvest_usage_lines(self, order, raw):
+        """Create fsm.order.harvest.usage from ActionHarvests.
+
+        Geofolia repeats each harvested good once per crop zone; lines are
+        aggregated by HarvestId, summing the harvested quantity across zones.
+        """
+        harvests = raw.get("ActionHarvests") or []
+        if not harvests:
+            return
+        product_obj = self.env["product.product"]
+        usage_obj = self.env["fsm.order.harvest.usage"]
+        entries = self._aggregate_usage_items(
+            harvests,
+            "HarvestId",
+            "Quantity",
+            lambda it: self._safe_scalar_str(it.get("HarvestGoodName"))
+            or self.env._("Unknown"),
+        )
+        vals_list = []
+        for seq, entry in enumerate(entries, start=10):
+            harvest_id = entry["ext_id"]
+            odoo_product = product_obj.browse()
+            if harvest_id:
+                odoo_product = product_obj.search(
+                    [("geofolia_external_id", "=", str(harvest_id))],
+                    limit=1,
+                )
+            vals_list.append(
+                {
+                    "fsm_order_id": order.id,
+                    "sequence": seq,
+                    "product_id": odoo_product.id or False,
+                    "name": entry["name"] or str(harvest_id),
+                    "quantity": entry["amount"],
+                    "uom_name": entry["raw"].get("HarvestGoodsUnitSymbol") or "",
+                    "geofolia_harvest_id": str(harvest_id) if harvest_id else False,
+                    "from_geofolia": True,
+                }
+            )
+        if vals_list:
+            usage_obj.create(vals_list)
+
+    def _create_worked_unit_lines(self, order, raw):
+        """Create fsm.order.worked.unit from CropZoneIds.
+
+        One activity can span several crop units; one line is created per
+        unique PlotId, summing the surface worked across duplicated entries.
+        """
+        zones = raw.get("CropZoneIds") or []
+        if not zones:
+            return
+        unit_obj = self.env["ter.use_unit"]
+        worked_obj = self.env["fsm.order.worked.unit"]
+        entries = self._aggregate_usage_items(
+            zones,
+            "PlotId",
+            "WorkedSurface",
+            lambda it: self._safe_scalar_str(it.get("PlotCode")) or "",
+        )
+        vals_list = []
+        for seq, entry in enumerate(entries, start=10):
+            plot_id = entry["ext_id"]
+            unit = unit_obj.browse()
+            if plot_id:
+                unit = unit_obj.search(
+                    [("geofolia_external_id", "=", str(plot_id))],
+                    limit=1,
+                )
+            name = unit.display_name or entry["name"] or str(plot_id)
+            vals_list.append(
+                {
+                    "fsm_order_id": order.id,
+                    "sequence": seq,
+                    "use_unit_id": unit.id or False,
+                    "name": name,
+                    "plot_code": entry["name"] or False,
+                    "worked_surface": entry["amount"],
+                    "geofolia_plot_id": str(plot_id) if plot_id else False,
+                    "from_geofolia": True,
+                }
+            )
+        if vals_list:
+            worked_obj.create(vals_list)
 
     @staticmethod
     def _compute_worked_surface(raw):
@@ -2291,36 +2334,58 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         return "<br/>".join(parts)
 
     def _append_products_description(self, parts, raw):
-        """Append product lines to *parts*."""
+        """Append product lines to *parts* (aggregated per product)."""
         products = raw.get("ProductIds") or []
         if not products:
             return
-        lines = []
+        aggregated = {}
+        order_keys = []
         for prod in products:
             if not isinstance(prod, dict):
                 continue
             name = prod.get("SupplyName") or self.env._("Unknown")
-            qty = prod.get("Quantity") or 0
             unit = prod.get("ReferentialUnitSymbol") or ""
-            lines.append("&nbsp;&nbsp;• %s: %s %s" % (name, qty, unit))
+            key = (name, unit)
+            entry = aggregated.get(key)
+            if entry is None:
+                entry = {"name": name, "unit": unit, "qty": 0.0}
+                aggregated[key] = entry
+                order_keys.append(key)
+            entry["qty"] += prod.get("Quantity") or 0
+        lines = [
+            "&nbsp;&nbsp;• %s: %s %s"
+            % (aggregated[key]["name"], aggregated[key]["qty"], aggregated[key]["unit"])
+            for key in order_keys
+        ]
         if lines:
             parts.append(
                 "<b>%s</b><br/>%s" % (self.env._("Products"), "<br/>".join(lines))
             )
 
     def _append_harvests_description(self, parts, raw):
-        """Append harvest lines to *parts*."""
+        """Append harvest lines to *parts* (aggregated per harvested good)."""
         harvests = raw.get("ActionHarvests") or []
         if not harvests:
             return
-        lines = []
+        aggregated = {}
+        order_keys = []
         for harv in harvests:
             if not isinstance(harv, dict):
                 continue
             name = harv.get("HarvestGoodName") or self.env._("Unknown")
-            qty = harv.get("Quantity") or 0
             unit = harv.get("HarvestGoodsUnitSymbol") or ""
-            lines.append("&nbsp;&nbsp;• %s: %s %s" % (name, qty, unit))
+            key = (name, unit)
+            entry = aggregated.get(key)
+            if entry is None:
+                entry = {"name": name, "unit": unit, "qty": 0.0}
+                aggregated[key] = entry
+                order_keys.append(key)
+            entry["qty"] += harv.get("Quantity") or 0
+        lines = [
+            "&nbsp;&nbsp;• %s: %s %s"
+            % (aggregated[key]["name"], aggregated[key]["qty"], aggregated[key]["unit"])
+            for key in order_keys
+        ]
         if lines:
             parts.append(
                 "<b>%s</b><br/>%s" % (self.env._("Harvests"), "<br/>".join(lines))

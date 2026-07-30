@@ -26,6 +26,16 @@ class FSMOrder(models.Model):
         inverse_name="fsm_order_id",
         string="Workers",
     )
+    harvest_usage_ids = fields.One2many(
+        comodel_name="fsm.order.harvest.usage",
+        inverse_name="fsm_order_id",
+        string="Harvested Goods",
+    )
+    worked_unit_ids = fields.One2many(
+        comodel_name="fsm.order.worked.unit",
+        inverse_name="fsm_order_id",
+        string="Worked Crop Units",
+    )
     worked_surface = fields.Float(
         digits=(16, 2),
         help="Total worked surface in m² (from Geofolia CropZones).",
@@ -51,6 +61,12 @@ class FSMOrder(models.Model):
     person_usage_count = fields.Integer(
         compute="_compute_usage_counts",
     )
+    harvest_usage_count = fields.Integer(
+        compute="_compute_usage_counts",
+    )
+    worked_unit_count = fields.Integer(
+        compute="_compute_usage_counts",
+    )
 
     def write(self, vals):
         protected = [name for name in self._geofolia_protected_fields if name in vals]
@@ -66,12 +82,55 @@ class FSMOrder(models.Model):
                 )
         return super().write(vals)
 
-    @api.depends("product_usage_ids", "equipment_usage_ids", "person_usage_ids")
+    def unlink(self):
+        """Explain why a work order cannot be deleted.
+
+        Field Service only allows deleting orders in the default stage.
+        Orders imported from Geofolia are marked as executed (completed),
+        so we replace the generic core error with an actionable message.
+        The base ``fsm.order.unlink`` raises before ``super()`` runs, so an
+        ``@api.ondelete`` hook would never fire; overriding ``unlink`` is the
+        only way to surface a clearer message.
+        """
+        blocked = self.filtered(lambda order: not order.can_unlink())
+        if blocked:
+            default_stage = self._default_stage_id()
+            details = "\n".join(
+                self.env._(
+                    "- %(name)s (current stage: %(stage)s)",
+                    name=order.name or "",
+                    stage=order.stage_id.name or "",
+                )
+                for order in blocked
+            )
+            raise UserError(  # pylint: disable=no-raise-unlink
+                self.env._(
+                    "A work order can only be deleted while it is in the "
+                    '"%(stage)s" stage. The following orders are in another '
+                    "stage:\n%(details)s\n\n"
+                    "Work orders imported from Geofolia are created as already "
+                    "executed (completed). To delete one, move it back to the "
+                    '"%(stage)s" stage first.',
+                    stage=default_stage.name or "",
+                    details=details,
+                )
+            )
+        return super().unlink()
+
+    @api.depends(
+        "product_usage_ids",
+        "equipment_usage_ids",
+        "person_usage_ids",
+        "harvest_usage_ids",
+        "worked_unit_ids",
+    )
     def _compute_usage_counts(self):
         for record in self:
             record.product_usage_count = len(record.product_usage_ids)
             record.equipment_usage_count = len(record.equipment_usage_ids)
             record.person_usage_count = len(record.person_usage_ids)
+            record.harvest_usage_count = len(record.harvest_usage_ids)
+            record.worked_unit_count = len(record.worked_unit_ids)
 
     def action_view_product_usage(self):
         """Open product usage tree for this order."""
@@ -109,12 +168,26 @@ class FSMOrder(models.Model):
             "context": {"default_fsm_order_id": self.id},
         }
 
-    @api.depends("template_id")
-    def _compute_order_activity_ids(self):
-        result = super()._compute_order_activity_ids()
-        for record in self:
-            if not record.template_id:
-                record.order_activity_ids = self.env["fsm.activity"].search(
-                    [("fsm_order_id", "=", record.id)]
-                )
-        return result
+    def action_view_harvest_usage(self):
+        """Open harvest usage tree for this order."""
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Harvested Goods"),
+            "res_model": "fsm.order.harvest.usage",
+            "view_mode": "list,form",
+            "domain": [("fsm_order_id", "=", self.id)],
+            "context": {"default_fsm_order_id": self.id},
+        }
+
+    def action_view_worked_units(self):
+        """Open worked crop-unit tree for this order."""
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Worked Crop Units"),
+            "res_model": "fsm.order.worked.unit",
+            "view_mode": "list,form",
+            "domain": [("fsm_order_id", "=", self.id)],
+            "context": {"default_fsm_order_id": self.id},
+        }

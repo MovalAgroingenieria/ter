@@ -12,22 +12,92 @@
             name="inherit_id"
             ref="fieldservice.fsm_order_form"
         />
+        <!-- High priority: applied after project / vehicle inherited views so
+             their fields already exist when we hide them. -->
+        <field name="priority" eval="99" />
         <field name="arch" type="xml">
-            <!-- Add worked surface after the scheduled_date_end -->
-            <field name="scheduled_date_end" position="after">
+            <!-- Type + worked surface at the top of the order -->
+            <field name="type" position="after">
                 <field name="from_geofolia" invisible="1" />
                 <field name="worked_surface" readonly="from_geofolia" />
-                <field name="geofolia_activity_id" readonly="1"
-                       invisible="not geofolia_activity_id" />
+                <field
+                    name="geofolia_activity_id"
+                    readonly="1"
+                    invisible="not geofolia_activity_id"
+                />
             </field>
 
-            <!-- Add product / equipment usage notebook pages -->
+            <!-- Fields hidden for the Geofolia Parte -->
+            <field name="priority" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="location_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="project_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="project_task_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="vehicle_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+
+            <!-- Hide the Resolution block and the Instructions page -->
+            <group name="resolution_grp" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </group>
+            <page name="instructions_page" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+
+            <!-- Hide the Planning page (incl. Request Workers) and the
+                 Execution page; the actual start/end dates are moved up. -->
+            <page name="planning_page" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+            <page name="execution_page" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+            <!-- Base "Equipments" page is redundant with our "Machinery" page. -->
+            <page name="equipements_page" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+            <!-- The Activities page (fieldservice_activity) is not used. -->
+            <xpath
+                expr="//field[@name='order_activity_ids']/.."
+                position="attributes"
+            >
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='worked_surface']" position="after">
+                <xpath
+                    expr="//page[@name='execution_page']//field[@name='date_start']"
+                    position="move"
+                />
+                <xpath
+                    expr="//page[@name='execution_page']//field[@name='date_end']"
+                    position="move"
+                />
+            </xpath>
+
+            <!-- Add crop-unit / usage notebook pages -->
             <xpath
                 expr="//page[@name='customer_signature']"
                 position="before"
             >
                 <page
-                    string="Products Used"
+                    string="Crop Units"
+                    name="worked_unit_page"
+                >
+                    <field
+                        name="worked_unit_ids"
+                        context="{'default_fsm_order_id': id}"
+                    />
+                </page>
+                <page
+                    string="Raw Materials"
                     name="product_usage_page"
                 >
                     <field
@@ -36,7 +106,16 @@
                     />
                 </page>
                 <page
-                    string="Equipment Usage"
+                    string="Labour"
+                    name="person_usage_page"
+                >
+                    <field
+                        name="person_usage_ids"
+                        context="{'default_fsm_order_id': id}"
+                    />
+                </page>
+                <page
+                    string="Machinery"
                     name="equipment_usage_page"
                 >
                     <field
@@ -45,11 +124,11 @@
                     />
                 </page>
                 <page
-                    string="Workers"
-                    name="person_usage_page"
+                    string="Harvest"
+                    name="harvest_usage_page"
                 >
                     <field
-                        name="person_usage_ids"
+                        name="harvest_usage_ids"
                         context="{'default_fsm_order_id': id}"
                     />
                 </page>
@@ -57,6 +136,19 @@
 
             <!-- Add stat buttons for counts -->
             <div name="button_box" position="inside">
+                <button
+                    name="action_view_worked_units"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-map-marker"
+                    invisible="worked_unit_count == 0"
+                >
+                    <field
+                        name="worked_unit_count"
+                        widget="statinfo"
+                        string="Crop Units"
+                    />
+                </button>
                 <button
                     name="action_view_product_usage"
                     type="object"
@@ -67,7 +159,7 @@
                     <field
                         name="product_usage_count"
                         widget="statinfo"
-                        string="Products"
+                        string="Raw Materials"
                     />
                 </button>
                 <button
@@ -80,7 +172,7 @@
                     <field
                         name="equipment_usage_count"
                         widget="statinfo"
-                        string="Equipments"
+                        string="Machinery"
                     />
                 </button>
                 <button
@@ -93,10 +185,35 @@
                     <field
                         name="person_usage_count"
                         widget="statinfo"
-                        string="Workers"
+                        string="Labour"
+                    />
+                </button>
+                <button
+                    name="action_view_harvest_usage"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-leaf"
+                    invisible="harvest_usage_count == 0"
+                >
+                    <field
+                        name="harvest_usage_count"
+                        widget="statinfo"
+                        string="Harvest"
                     />
                 </button>
             </div>
+        </field>
+    </record>
+
+    <!-- Hide the Location column in the Partes list (internal FSM field). -->
+    <record id="fsm_order_list_geofolia" model="ir.ui.view">
+        <field name="name">fsm.order.list.inherit.geofolia</field>
+        <field name="model">fsm.order</field>
+        <field name="inherit_id" ref="fieldservice.fsm_order_list_view" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
         </field>
     </record>
 

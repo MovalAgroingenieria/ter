@@ -38,6 +38,11 @@ class TerUseUnit(models.Model):
     geofolia_crop_name = fields.Char(copy=False)
     geofolia_city = fields.Char(copy=False)
 
+    worked_unit_ids = fields.One2many(
+        comodel_name="fsm.order.worked.unit",
+        inverse_name="use_unit_id",
+        string="Worked in work orders",
+    )
     fsm_order_count = fields.Integer(
         compute="_compute_fsm_order_count",
     )
@@ -64,27 +69,21 @@ class TerUseUnit(models.Model):
                 )
         return super().write(vals)
 
-    @api.depends("fsm_location_id")
+    @api.depends("worked_unit_ids.fsm_order_id")
     def _compute_fsm_order_count(self):
-        order_obj = self.env["fsm.order"]
         for record in self:
-            if record.fsm_location_id:
-                record.fsm_order_count = order_obj.search_count(
-                    [("location_id", "=", record.fsm_location_id.id)]
-                )
-            else:
-                record.fsm_order_count = 0
+            record.fsm_order_count = len(record.worked_unit_ids.mapped("fsm_order_id"))
 
     def action_view_fsm_orders(self):
-        """Open the work orders (fsm.order) linked to this use unit."""
+        """Open the work orders (Partes) that worked on this use unit."""
         self.ensure_one()
+        orders = self.worked_unit_ids.mapped("fsm_order_id")
         return {
             "type": "ir.actions.act_window",
             "name": self.env._("Work Orders"),
             "res_model": "fsm.order",
             "view_mode": "list,form,kanban",
-            "domain": [("location_id", "=", self.fsm_location_id.id)],
-            "context": {"default_location_id": self.fsm_location_id.id},
+            "domain": [("id", "in", orders.ids)],
         }
 
     @api.model

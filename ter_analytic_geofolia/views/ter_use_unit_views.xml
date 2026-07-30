@@ -8,13 +8,10 @@
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button name="action_view_fsm_orders" type="object"
                         class="oe_stat_button" icon="fa-wrench"
-                        invisible="not fsm_location_id">
+                        invisible="fsm_order_count == 0">
                     <field name="fsm_order_count" widget="statinfo"
                            string="Work Orders"/>
                 </button>
-            </xpath>
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="fsm_location_id" options="{'no_create': True}"/>
             </xpath>
             <xpath expr="//page[@name='notes']" position="before">
                 <page string="Geofolia" name="geofolia"

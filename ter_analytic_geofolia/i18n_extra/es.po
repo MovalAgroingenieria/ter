@@ -22,7 +22,7 @@ msgstr "Agregue un vehículo de servicio de campo aquí."
 #. module: fieldservice
 #: model:ir.ui.menu,name:fieldservice.menu_fsm_operation_order
 msgid "All Orders"
-msgstr "Todos los partes"
+msgstr "Partes"
 
 #. module: fieldservice_vehicle
 #: model:ir.model.fields,field_description:fieldservice_vehicle.field_fsm_person__vehicle_id

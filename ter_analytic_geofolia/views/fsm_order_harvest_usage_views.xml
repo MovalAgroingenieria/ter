@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- List view -->
+    <record id="fsm_order_harvest_usage_view_list" model="ir.ui.view">
+        <field name="name">fsm.order.harvest.usage.list</field>
+        <field name="model">fsm.order.harvest.usage</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="from_geofolia" column_invisible="1" />
+                <field name="sequence" widget="handle" />
+                <field name="product_id" optional="show" />
+                <field name="name" readonly="from_geofolia" />
+                <field name="quantity" readonly="from_geofolia" />
+                <field name="uom_name" readonly="from_geofolia" />
+                <field name="geofolia_harvest_id" optional="hide" readonly="1" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="fsm_order_harvest_usage_view_form" model="ir.ui.view">
+        <field name="name">fsm.order.harvest.usage.form</field>
+        <field name="model">fsm.order.harvest.usage</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="from_geofolia" invisible="1" />
+                            <field name="fsm_order_id" />
+                            <field name="product_id" />
+                            <field name="name" readonly="from_geofolia" />
+                        </group>
+                        <group>
+                            <field name="quantity" readonly="from_geofolia" />
+                            <field name="uom_name" readonly="from_geofolia" />
+                            <field name="geofolia_harvest_id" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

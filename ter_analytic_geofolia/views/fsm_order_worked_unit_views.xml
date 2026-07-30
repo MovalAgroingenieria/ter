@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- List view -->
+    <record id="fsm_order_worked_unit_view_list" model="ir.ui.view">
+        <field name="name">fsm.order.worked.unit.list</field>
+        <field name="model">fsm.order.worked.unit</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="from_geofolia" column_invisible="1" />
+                <field name="sequence" widget="handle" />
+                <field name="use_unit_id" />
+                <field name="worked_surface" readonly="from_geofolia" sum="Total" />
+                <field name="name" readonly="from_geofolia" optional="hide" />
+                <field name="plot_code" readonly="from_geofolia" optional="hide" />
+                <field name="geofolia_plot_id" optional="hide" readonly="1" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="fsm_order_worked_unit_view_form" model="ir.ui.view">
+        <field name="name">fsm.order.worked.unit.form</field>
+        <field name="model">fsm.order.worked.unit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="from_geofolia" invisible="1" />
+                            <field name="fsm_order_id" />
+                            <field name="use_unit_id" />
+                            <field name="worked_surface" readonly="from_geofolia" />
+                        </group>
+                        <group>
+                            <field
+                                name="name"
+                                readonly="from_geofolia"
+                                invisible="use_unit_id and not name"
+                            />
+                            <field name="geofolia_plot_id" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

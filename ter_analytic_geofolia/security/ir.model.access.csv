@@ -12,3 +12,5 @@ access_geofolia_import_activity_employee_line,geofolia.import.activity.employee.
 access_fsm_order_product_usage,fsm.order.product.usage,model_fsm_order_product_usage,base.group_user,1,1,1,1
 access_fsm_order_equipment_usage,fsm.order.equipment.usage,model_fsm_order_equipment_usage,base.group_user,1,1,1,1
 access_fsm_order_person_usage,fsm.order.person.usage,model_fsm_order_person_usage,base.group_user,1,1,1,1
+access_fsm_order_harvest_usage,fsm.order.harvest.usage,model_fsm_order_harvest_usage,base.group_user,1,1,1,1
+access_fsm_order_worked_unit,fsm.order.worked.unit,model_fsm_order_worked_unit,base.group_user,1,1,1,1

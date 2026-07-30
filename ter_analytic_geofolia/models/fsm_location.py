@@ -1,7 +1,8 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
-from odoo import fields, models
+from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class FSMLocation(models.Model):
@@ -16,10 +17,15 @@ class FSMLocation(models.Model):
     ter_use_unit_id = fields.Many2one(
         comodel_name="ter.use_unit",
         string="Territory Use Unit",
-        required=True,
         index=True,
         ondelete="restrict",
         help="Linked territory use unit (1:1 with this location).",
+    )
+    geofolia_default = fields.Boolean(
+        string="Geofolia default location",
+        copy=False,
+        help="Generic location used for all Geofolia work orders. It cannot "
+        "be deleted while a company points to it.",
     )
 
     _sql_constraints = [
@@ -29,3 +35,13 @@ class FSMLocation(models.Model):
             "A location with this territory use unit already exists.",
         ),
     ]
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_geofolia_default(self):
+        if any(self.mapped("geofolia_default")):
+            raise UserError(
+                self.env._(
+                    "The default Geofolia location cannot be deleted; it is "
+                    "used to create the imported work orders."
+                )
+            )

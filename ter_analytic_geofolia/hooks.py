@@ -46,8 +46,14 @@ def _ensure_fsm_order_stages(env):
                 },
             ]
         )
-    elif not order_stages.filtered("is_default"):
-        order_stages.write({"is_default": True})
+    else:
+        # Keep order stages shared in multi-company environments so users can
+        # always read the stage linked to imported FSM orders.
+        company_scoped_stages = order_stages.filtered("company_id")
+        if company_scoped_stages:
+            company_scoped_stages.write({"company_id": False})
+        if not order_stages.filtered("is_default"):
+            order_stages.write({"is_default": True})
 
 
 def _ensure_fsm_teams(env):
@@ -73,10 +79,52 @@ def _ensure_fsm_teams(env):
         team_obj.create({"name": name, "company_id": company.id})
 
 
+def _ensure_geofolia_default_location(env):
+    """Ensure every company has a non-deletable default Geofolia location.
+
+    Field Service requires every order to have a location, but the Geofolia
+    import does not use per-parcel locations: all imported work orders are
+    created on this single generic location, stored in
+    ``company.geofolia_default_fsm_location_id``.
+    """
+    company_obj = env["res.company"].sudo()
+    location_obj = env["fsm.location"].sudo()
+    partner_obj = env["res.partner"].sudo()
+    for company in company_obj.search([]):
+        if company.geofolia_default_fsm_location_id:
+            company.geofolia_default_fsm_location_id.geofolia_default = True
+            continue
+        location = location_obj.search(
+            [
+                ("geofolia_default", "=", True),
+                ("company_id", "in", (company.id, False)),
+            ],
+            limit=1,
+        )
+        if not location:
+            partner = partner_obj.create(
+                {
+                    "name": env._("Geofolia"),
+                    "is_company": False,
+                    "company_id": company.id,
+                }
+            )
+            location = location_obj.create(
+                {
+                    "partner_id": partner.id,
+                    "owner_id": partner.id,
+                    "company_id": company.id,
+                    "geofolia_default": True,
+                }
+            )
+        company.geofolia_default_fsm_location_id = location.id
+
+
 def _ensure_fsm_prerequisites(env):
     """Guarantee that FSM order creation never fails for lack of setup."""
     _ensure_fsm_order_stages(env)
     _ensure_fsm_teams(env)
+    _ensure_geofolia_default_location(env)
 
 
 def post_init_hook(env):
