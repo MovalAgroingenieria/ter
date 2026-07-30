@@ -82,13 +82,13 @@
         <field name="inherit_id" ref="base_ter.ter_parcel_view_list"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='area_official']" position="after">
-                <field name="official_code" invisible="1"/>
+                <field name="official_code" optional="show"/>
                 <button
                     name="action_show_cadastral_form"
                     title="Cadastre"
                     type="object"
                     icon="fa-cubes"
-                    class="oe_stat_button o_list_button"
+                    class="oe_stat_button o_list_button o_list_button_group_first"
                     invisible="not official_code"
                 />
             </xpath>
