@@ -199,7 +199,7 @@
                         title="GIS Viewer"
                         type="object"
                         icon="fa-map-marker"
-                        class="oe_stat_button o_list_button"
+                    class="oe_stat_button o_list_button o_list_button_group_last"
                         invisible="not mapped_to_polygon"/>
                 <field name="municipality_id" string="Municipality"/>
                 <field name="property_id" string="Property"/>

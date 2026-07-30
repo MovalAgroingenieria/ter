@@ -188,6 +188,13 @@
                                 invisible="not mapped_to_polygon">
                             <span>GIS Viewer</span>
                         </button>
+                        <button name="action_delete_gis_geometry" type="object"
+                                class="oe_stat_button" icon="fa-trash"
+                                confirm="This will permanently delete the GIS geometry of this unit. Continue?"
+                                invisible="not geom_ewkt"
+                                groups="base_ter.group_ter_manager">
+                            <span>Delete Geometry</span>
+                        </button>
                         <button name="action_regenerate_image" type="object"
                                 class="oe_stat_button" icon="fa-refresh"
                                 invisible="not parcel_id">
@@ -395,6 +402,16 @@
         <field name="groups_id" eval="[(4, ref('base_ter.group_ter_manager'))]"/>
         <field name="state">code</field>
         <field name="code">records.delete_aerial_image()</field>
+    </record>
+
+    <record id="ter_unit_delete_gis_geometry_serveraction" model="ir.actions.server">
+        <field name="name">Delete GIS geometry</field>
+        <field name="model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="binding_model_id" ref="base_ter.model_ter_use_unit"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="groups_id" eval="[(4, ref('base_ter.group_ter_manager'))]"/>
+        <field name="state">code</field>
+        <field name="code">action = records.action_delete_gis_geometry()</field>
     </record>
 
     <menuitem id="menu_thecnicalactions_refresh_units"

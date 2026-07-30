@@ -791,7 +791,8 @@ class TerParcel(models.Model):
                 raise exceptions.UserError(
                     self.env._(
                         "Could not fetch aerial images for %(count)s parcel(s) "
-                        "(timeout or connection error to WMS). Try again later: %(codes)s",
+                        "(timeout or connection error to WMS). Try again later: "
+                        "%(codes)s",
                         count=len(failed),
                         codes=", ".join(failed[:10]),
                     )

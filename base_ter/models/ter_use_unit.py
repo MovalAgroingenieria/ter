@@ -578,10 +578,22 @@ class TerUnit(models.Model):
         Override in inherited modules. Called before critical operations if needed.
         """
 
+    def action_delete_gis_geometry(self):
+        """Delete GIS geometry and clear stored EWKT to allow unlink.
+
+        ``gis.base.model.action_delete_gis_geometry`` removes rows from the GIS
+        table, but ``ter.use_unit`` also stores geometry in ``geom_ewkt`` and
+        unlink protection checks that field.
+        """
+        action = super().action_delete_gis_geometry()
+        self.filtered(lambda record: record.geom_ewkt).write({"geom_ewkt": False})
+        return action
+
     @api.ondelete(at_uninstall=False)
     def _unlink_check_geometry(self):
         for record in self:
-            if record.geom_ewkt and record.geom_ewkt.strip():
+            # Use real GIS linkage as source of truth, like ter.parcel.
+            if record.mapped_to_polygon:
                 raise UserError(
                     self.env._(
                         "Cannot delete a unit with GIS geometry. "
