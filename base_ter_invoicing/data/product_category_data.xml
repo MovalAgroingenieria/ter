@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
     <data noupdate="1">
@@ -17,7 +17,7 @@
 
     <data>
         <record id="product_category_02" model="product.category">
-            <field name="category_code">2</field>
+            <field name="category_code" eval="2"/>
             <field name="billable_item_model_id" ref="base_ter.model_ter_parcel_partnerlink"/>
             <field name="billable_item_quantity_field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__area_overhead"/>
             <field name="parent_id" ref="product.product_category_1"/>
@@ -29,48 +29,48 @@
 
         <!-- Auxiliary columns for selectable items (Areas category).
              Equivalent to v16: aux_01_char_field→parcel_code, aux_01_int_field→number_of_invoices,
-             aux_01_float_field→parcel_area_official, aux_02_char_field→parcel_official_code,
+             aux_01_float_field→area_official, aux_02_char_field→parcel_official_code,
              aux_02_float_field→percentage_overhead, aux_03_char_field→property_name,
              aux_03_bool_field→partner_is_company. Now stored as One2many aux_field_ids. -->
         <record id="aux_field_line_areas_01" model="product.category.aux.field.line">
             <field name="category_id" ref="product_category_02"/>
-            <field name="sequence">1</field>
+            <field name="sequence" eval="1"/>
             <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__parcel_code"/>
             <field name="custom_label">Parcel code</field>
         </record>
         <record id="aux_field_line_areas_02" model="product.category.aux.field.line">
             <field name="category_id" ref="product_category_02"/>
-            <field name="sequence">2</field>
+            <field name="sequence" eval="2"/>
             <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__number_of_invoices"/>
             <field name="custom_label">No. of invoices</field>
         </record>
         <record id="aux_field_line_areas_03" model="product.category.aux.field.line">
             <field name="category_id" ref="product_category_02"/>
-            <field name="sequence">3</field>
-            <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__parcel_area_official"/>
+            <field name="sequence" eval="3"/>
+            <field name="field_id" ref="base_ter.field_ter_parcel_partnerlink__area_official"/>
             <field name="custom_label">Parcel area</field>
         </record>
         <record id="aux_field_line_areas_04" model="product.category.aux.field.line">
             <field name="category_id" ref="product_category_02"/>
-            <field name="sequence">4</field>
+            <field name="sequence" eval="4"/>
             <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__parcel_official_code"/>
             <field name="custom_label">Official code</field>
         </record>
         <record id="aux_field_line_areas_05" model="product.category.aux.field.line">
             <field name="category_id" ref="product_category_02"/>
-            <field name="sequence">5</field>
+            <field name="sequence" eval="5"/>
             <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__percentage_overhead"/>
             <field name="custom_label">% overhead</field>
         </record>
         <record id="aux_field_line_areas_06" model="product.category.aux.field.line">
             <field name="category_id" ref="product_category_02"/>
-            <field name="sequence">6</field>
+            <field name="sequence" eval="6"/>
             <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__property_name"/>
             <field name="custom_label">Property</field>
         </record>
         <record id="aux_field_line_areas_07" model="product.category.aux.field.line">
             <field name="category_id" ref="product_category_02"/>
-            <field name="sequence">7</field>
+            <field name="sequence" eval="7"/>
             <field name="field_id" ref="base_ter_invoicing.field_ter_parcel_partnerlink__partner_is_company"/>
             <field name="custom_label">Is company</field>
         </record>

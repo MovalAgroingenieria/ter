@@ -9,7 +9,6 @@ class AccountMoveLine(models.Model):
 
     parcel_id = fields.Many2one(
         comodel_name="ter.parcel",
-        string="Parcel",
         readonly=True,
         index=True,
     )

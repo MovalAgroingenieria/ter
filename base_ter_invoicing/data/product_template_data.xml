@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+
+    <!-- Example product for area-based billing. Duplicate and adapt it
+         (name, price, income account) to invoice the "Areas" category. -->
+    <record id="product_template_area_example" model="product.template">
+        <field name="name">Area billing (example)</field>
+        <field name="type">service</field>
+        <field name="categ_id" ref="product_category_02"/>
+    </record>
+
+</odoo>

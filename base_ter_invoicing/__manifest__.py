@@ -20,8 +20,11 @@
     ],
     "data": [
         "data/product_category_data.xml",
+        "data/product_template_data.xml",
         "views/ter_parcel_views.xml",
+        "views/ter_parcel_partnerlink_views.xml",
         "views/account_move_line_views.xml",
+        "reports/parcel_profile_report.xml",
     ],
     "assets": {
         "web.assets_backend": [

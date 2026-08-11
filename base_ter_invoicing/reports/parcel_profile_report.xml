@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="parcel_profile_report_document_overhead"
+              inherit_id="base_ter.parcel_profile_report_document">
+
+        <!-- Detail table: overhead columns -->
+        <xpath expr="//th[@name='th_area_proportional']" position="after">
+            <th name="th_percentage_overhead" class="text-end">% Overhead</th>
+            <th name="th_area_overhead" class="text-end">Area (overhead)</th>
+        </xpath>
+
+        <xpath expr="//tbody/t[@t-set='total_area_proportional']" position="after">
+            <t t-set="total_area_overhead" t-value="0"/>
+        </xpath>
+
+        <xpath expr="//tbody/t[@t-foreach='links']/t[@t-set='total_area_proportional']"
+               position="after">
+            <t t-set="total_area_overhead"
+               t-value="total_area_overhead + link.area_overhead"/>
+        </xpath>
+
+        <xpath expr="//td[@name='td_area_proportional']" position="after">
+            <td name="td_percentage_overhead" class="text-end">
+                <span t-field="link.percentage_overhead"/>
+            </td>
+            <td name="td_area_overhead" class="text-end">
+                <span t-field="link.area_overhead"/>
+                <span> </span>
+                <span t-out="area_unit_name"/>
+            </td>
+        </xpath>
+
+        <xpath expr="//td[@name='td_tfoot_total']" position="after">
+            <td/>
+            <td class="text-end">
+                <span t-out="total_area_overhead"
+                      t-options='{"widget": "float", "precision": 4}'/>
+                <span> </span>
+                <span t-out="area_unit_name"/>
+            </td>
+        </xpath>
+
+        <!-- Summary table: overhead totals per profile and grand total -->
+        <xpath expr="//section[@name='profiles_summary']//tbody/t[@t-foreach='profiles']"
+               position="before">
+            <t t-set="summary_total_area_overhead" t-value="0"/>
+        </xpath>
+
+        <xpath expr="//th[@name='th_profile_total_area']" position="after">
+            <th class="text-end">Area (overhead)</th>
+        </xpath>
+
+        <xpath expr="//section[@name='profiles_summary']//t[@t-if='links']/t[@t-set='profile_total_area_proportional']"
+               position="after">
+            <t t-set="profile_total_area_overhead" t-value="0"/>
+        </xpath>
+
+        <xpath expr="//section[@name='profiles_summary']//t[@t-foreach='links']/t[@t-set='profile_total_area_proportional']"
+               position="after">
+            <t t-set="profile_total_area_overhead"
+               t-value="profile_total_area_overhead + link.area_overhead"/>
+        </xpath>
+
+        <xpath expr="//td[@name='td_profile_total_area']" position="after">
+            <td class="text-end">
+                <span t-out="profile_total_area_overhead"
+                      t-options='{"widget": "float", "precision": 4}'/>
+                <span> </span>
+                <span t-out="area_unit_name"/>
+            </td>
+        </xpath>
+
+        <xpath expr="//section[@name='profiles_summary']//t[@t-if='links']/tr"
+               position="after">
+            <t t-set="summary_total_area_overhead"
+               t-value="summary_total_area_overhead + profile_total_area_overhead"/>
+        </xpath>
+
+        <xpath expr="//section[@name='profiles_summary']//table" position="inside">
+            <tfoot>
+                <tr style="border-top: 1px solid lightgrey; font-weight: bold;">
+                    <td class="text-end" colspan="2">
+                        <span>Total overhead</span>
+                    </td>
+                    <td class="text-end">
+                        <span t-out="summary_total_area_overhead"
+                              t-options='{"widget": "float", "precision": 4}'/>
+                        <span> </span>
+                        <span t-out="area_unit_name"/>
+                    </td>
+                </tr>
+            </tfoot>
+        </xpath>
+
+    </template>
+
+</odoo>

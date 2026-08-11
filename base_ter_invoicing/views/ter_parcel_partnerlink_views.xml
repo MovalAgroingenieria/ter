@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="ter_parcel_partnerlink_view_list" model="ir.ui.view">
+        <field name="name">ter.parcel.partnerlink.view.list.inherit.base_ter_invoicing</field>
+        <field name="model">ter.parcel.partnerlink</field>
+        <field name="inherit_id" ref="base_ter.ter_parcel_partnerlink_view_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='percentage']" position="after">
+                <field name="percentage_overhead"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ter_parcel_partnerlink_view_tree_by_partner"
+            model="ir.ui.view">
+        <field name="name">
+            ter.parcel.partnerlink.view.tree.by.partner.inherit.base_ter_invoicing
+        </field>
+        <field name="model">ter.parcel.partnerlink</field>
+        <field name="inherit_id"
+               ref="base_ter.ter_parcel_partnerlink_view_tree_by_partner"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='area_proportional']" position="after">
+                <field name="percentage_overhead"/>
+                <field name="area_overhead"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

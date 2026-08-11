@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-09 00:53+0000\n"
-"PO-Revision-Date: 2026-04-09 00:53+0000\n"
+"POT-Creation-Date: 2026-08-11 12:25+0000\n"
+"PO-Revision-Date: 2026-08-11 12:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: base_ter_invoicing
+#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.parcel_profile_report_document_overhead
+msgid "% Overhead"
+msgstr "% Gastos"
 
 #. module: base_ter_invoicing
 #: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_05
@@ -26,6 +31,16 @@ msgid "<span class=\"o_stat_text\">Invoiced</span>"
 msgstr "<span class=\"o_stat_text\">Facturado</span>"
 
 #. module: base_ter_invoicing
+#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.parcel_profile_report_document_overhead
+msgid "<span>Total overhead</span>"
+msgstr "<span>Total gastos</span>"
+
+#. module: base_ter_invoicing
+#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.parcel_profile_report_document_overhead
+msgid "Area (overhead)"
+msgstr "Área (gastos)"
+
+#. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__area_overhead
 #: model:product.category,billable_item_quantity_label:base_ter_invoicing.product_category_02
 msgid "Area Overhead"
@@ -35,6 +50,11 @@ msgstr "Área (gastos)"
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__area_ownership
 msgid "Area Ownership"
 msgstr "Área (propiedad)"
+
+#. module: base_ter_invoicing
+#: model:product.template,name:base_ter_invoicing.product_template_area_example
+msgid "Area billing (example)"
+msgstr "Facturación por áreas (ejemplo)"
 
 #. module: base_ter_invoicing
 #. odoo-python
@@ -76,7 +96,7 @@ msgstr "Valor de agrupamiento"
 
 #. module: base_ter_invoicing
 #. odoo-python
-#: code:addons/base_ter_invoicing/models/ter_parcel.py:0
+#: code:addons/base_ter_invoicing/models/ter_parcel_partnerlink.py:0
 msgid "Incorrect value of overhead percentage. It must be between 0 and 100."
 msgstr "Valor incorrecto del porcentaje de gastos. Debe estar entre 0 y 100."
 
@@ -90,6 +110,28 @@ msgstr "Líneas de factura"
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__move_line_ids
 msgid "Invoice lines"
 msgstr "Líneas de factura"
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__is_invoiced
+msgid "Invoiced"
+msgstr "Facturado"
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__invoice_ids
+msgid "Invoices"
+msgstr "Facturas"
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,help:base_ter_invoicing.field_ter_parcel_partnerlink__invoice_ids
+msgid ""
+"Invoices this item was billed in. Stored so consolidated lines (several "
+"items merged into one invoice line) keep the link to every source item, not "
+"just the first one."
+msgstr ""
+"Facturas en las que se facturó este elemento. Se almacena para que las "
+"líneas consolidadas (varios elementos fusionados en una sola línea de "
+"factura) mantengan el vínculo con cada elemento de origen, no solo con el "
+"primero."
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__is_owner
@@ -112,15 +154,11 @@ msgid "Journal Item"
 msgstr "Apunte contable"
 
 #. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__invoice_count
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__number_of_invoices
 #: model:product.category.aux.field.line,custom_label:base_ter_invoicing.aux_field_line_areas_02
 msgid "No. of invoices"
 msgstr "Nº facturas"
-
-#. module: base_ter_invoicing
-#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__parcel_area_official
-msgid "Official Area"
-msgstr "Área total"
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__parcel_official_code
@@ -180,10 +218,32 @@ msgid "Property Name"
 msgstr "Finca"
 
 #. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__invoiced_purchase
+msgid "Purchase invoiced"
+msgstr "Compras facturadas"
+
+#. module: base_ter_invoicing
 #. odoo-python
 #: code:addons/base_ter_invoicing/models/ter_parcel.py:0
 msgid "Review the overhead percentages: the total must be 100%."
 msgstr "Revise los porcentajes de gastos: el total debe ser 100%."
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__invoiced_sale
+msgid "Sale invoiced"
+msgstr "Ventas facturadas"
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,help:base_ter_invoicing.field_ter_parcel_partnerlink__invoiced_sale
+msgid "The item has a non-cancelled customer invoice or refund."
+msgstr ""
+"El elemento tiene una factura o rectificativa de cliente no cancelada."
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,help:base_ter_invoicing.field_ter_parcel_partnerlink__invoiced_purchase
+msgid "The item has a non-cancelled vendor bill or refund."
+msgstr ""
+"El elemento tiene una factura o rectificativa de proveedor no cancelada."
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel__total_invoiced
