@@ -40,4 +40,18 @@
         </field>
     </record>
 
+    <record id="ter_parcel_partnerlink_view_tree_by_partner" model="ir.ui.view">
+        <field name="name">ter.parcel.partnerlink.view.tree.by.partner.base_ter_invoicing</field>
+        <field name="model">ter.parcel.partnerlink</field>
+        <field name="inherit_id" ref="base_ter.ter_parcel_partnerlink_view_tree_by_partner"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='percentage']" position="after">
+                <field name="percentage_overhead" string="% Overhead"/>
+            </xpath>
+            <xpath expr="//field[@name='area_proportional']" position="after">
+                <field name="area_overhead" string="Area (overhead)"/>
+            </xpath>
+        </field>
+    </record>
+
 </odoo>

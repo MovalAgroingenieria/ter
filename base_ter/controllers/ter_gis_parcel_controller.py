@@ -78,7 +78,7 @@ class TerGisParcelController(http.Controller):
                     'geom_geojson': result['geom_geojson'],
                     'gid': result['gid'],
                 })
-        except Exception as e:
+        except Exception:
             http.request._cr.rollback()
         return gis_parcels
 
@@ -134,5 +134,5 @@ class TerGisParcelController(http.Controller):
         except Exception as e:
             return {
                 'status': 'error',
-                'error': _(f'Unexpected error: {str(e)}'),
+                'error': _('Unexpected error: %s') % str(e),
             }

@@ -365,6 +365,24 @@
         </field>
     </record>
 
+    <record id="ter_parcel_partnerlink_view_tree_by_partner" model="ir.ui.view">
+        <field name="name">ter.parcel.partnerlink.view.tree.by.partner</field>
+        <field name="model">ter.parcel.partnerlink</field>
+        <field name="arch" type="xml">
+            <tree edit="false" delete="false"
+                  class="o_base_ter_ter_parcel_partnerlink_technical">
+                <field name="parcel_id" string="Parcel"/>
+                <field name="is_main" string="Is manager"
+                       class="text-center"/>
+                <field name="profile_id" string="Profile"
+                       class="text-center"/>
+                <field name="percentage" string="% Participation"/>
+                <field name="area_official" string="Official Area"/>
+                <field name="area_proportional" string="Proportional Area"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="ter_parcel_partnerlink_view_search" model="ir.ui.view">
         <field name="name">ter.parcel.partnerlink.view.search</field>
         <field name="model">ter.parcel.partnerlink</field>

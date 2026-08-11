@@ -65,7 +65,7 @@ class TerGisPropertyController(http.Controller):
                     'geom_geojson': result['geom_geojson'],
                     'gid': result['gid'],
                 })
-        except Exception as e:
+        except Exception:
             http.request._cr.rollback()
         return gis_properties
 
@@ -123,5 +123,5 @@ class TerGisPropertyController(http.Controller):
         except Exception as e:
             return {
                 'status': 'error',
-                'error': _(f'Unexpected error: {e}'),
+                'error': _('Unexpected error: %s') % e,
             }

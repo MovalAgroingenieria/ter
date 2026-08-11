@@ -20,6 +20,7 @@
     ],
     'data': [
         'data/product_category_data.xml',
+        'reports/parcel_profile_report.xml',
         'views/ter_parcel_views.xml',
         'views/account_move_line_views.xml',
     ],

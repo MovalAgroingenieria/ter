@@ -700,6 +700,20 @@ class TerParcelPartnerlink(models.Model):
         default=0,
         required=True,)
 
+    area_official = fields.Float(
+        string='Official Area',
+        digits=(32, 4),
+        related='parcel_id.area_official',)
+
+    area_proportional = fields.Float(
+        string='Proportional Area',
+        digits=(32, 4),
+        compute='_compute_area_proportional',)
+
+    area_unit_name = fields.Char(
+        string='Area unit name',
+        related='parcel_id.area_unit_name',)
+
     active = fields.Boolean(
         store=True,
         related='parcel_id.active',)
@@ -709,6 +723,12 @@ class TerParcelPartnerlink(models.Model):
          'CHECK (percentage >= 0 and percentage <= 100)',
          'Incorrect value of "Percentage".'),
         ]
+
+    @api.depends('parcel_id.area_official', 'percentage')
+    def _compute_area_proportional(self):
+        for record in self:
+            record.area_proportional = \
+                record.parcel_id.area_official * record.percentage / 100
 
     @api.depends('parcel_id', 'parcel_id.alphanum_code',
                  'partner_id', 'partner_id.partner_code')

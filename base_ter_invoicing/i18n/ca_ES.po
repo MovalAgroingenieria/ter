@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-02 11:25+0000\n"
-"PO-Revision-Date: 2025-08-02 11:25+0000\n"
+"POT-Creation-Date: 2026-08-11 06:35+0000\n"
+"PO-Revision-Date: 2026-08-11 06:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,9 @@ msgstr ""
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__percentage_overhead
 #: model:product.category,aux_02_float_label:base_ter_invoicing.product_category_02
+#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.parcel_profile_report_document_inherit_overhead
 #: model_terms:ir.ui.view,arch_db:base_ter_invoicing.ter_parcel_partnerlink_view_tree
+#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.ter_parcel_partnerlink_view_tree_by_partner
 #: model_terms:ir.ui.view,arch_db:base_ter_invoicing.ter_parcel_view_form
 msgid "% Overhead"
 msgstr "% Despeses"
@@ -29,8 +31,15 @@ msgid "<span class=\"o_stat_text\">Invoiced</span>"
 msgstr "<span class=\"o_stat_text\">Facturat</span>"
 
 #. module: base_ter_invoicing
+#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.parcel_profile_report_document_inherit_overhead
+msgid "<span>Total overhead</span>"
+msgstr "<span>Despeses totals</span>"
+
+#. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__area_overhead
 #: model:product.category,billable_item_quantity_label:base_ter_invoicing.product_category_02
+#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.parcel_profile_report_document_inherit_overhead
+#: model_terms:ir.ui.view,arch_db:base_ter_invoicing.ter_parcel_partnerlink_view_tree_by_partner
 msgid "Area (overhead)"
 msgstr "Àrea (despeses)"
 
@@ -123,6 +132,11 @@ msgstr "Codi parcel·la"
 #: model:ir.model,name:base_ter_invoicing.model_ter_parcel_partnerlink
 msgid "Partner of parcel"
 msgstr "Contacte de parcel·la"
+
+#. module: base_ter_invoicing
+#: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__product_id
+msgid "Product"
+msgstr "Producte"
 
 #. module: base_ter_invoicing
 #: model:ir.model.fields,field_description:base_ter_invoicing.field_ter_parcel_partnerlink__property_name

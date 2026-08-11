@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="parcel_profile_report_document_inherit_overhead" inherit_id="base_ter.parcel_profile_report_document">
+        <xpath expr="//div[hasclass('page')]/t[@t-foreach='profiles']" position="before">
+            <t t-set="summary_total_area_overhead" t-value="0"/>
+        </xpath>
+
+        <xpath expr="//th[@name='th_area_proportional']" position="after">
+            <th name="th_percentage_overhead" class="text-end">% Overhead</th>
+            <th name="th_area_overhead" class="text-end">Area (overhead)</th>
+        </xpath>
+
+        <xpath expr="//tbody/t[@t-set='total_area_proportional']" position="after">
+            <t t-set="total_area_overhead" t-value="0"/>
+        </xpath>
+
+        <xpath expr="//tbody/t[@t-foreach='links']/t[@t-set='total_area_proportional']" position="after">
+            <t t-set="total_area_overhead" t-value="total_area_overhead + link.area_overhead"/>
+        </xpath>
+
+        <xpath expr="//td[@name='td_area_proportional']" position="after">
+            <td name="td_percentage_overhead" class="text-end"><span t-field="link.percentage_overhead"/></td>
+            <td name="td_area_overhead" class="text-end"><span t-field="link.area_overhead"/><span> </span><span t-out="area_unit_name"/></td>
+        </xpath>
+
+        <xpath expr="//tfoot//span[@t-esc='total_area_proportional']/ancestor::tr[1]" position="inside">
+            <td/>
+            <td class="text-end">
+                <span t-esc="total_area_overhead" t-options='{"widget": "float", "precision": 4}'/>
+                <span t-out="area_unit_name"/>
+            </td>
+        </xpath>
+
+        <xpath expr="//div[@id='informations']/table" position="after">
+            <t t-set="summary_total_area_overhead" t-value="summary_total_area_overhead + total_area_overhead"/>
+        </xpath>
+
+        <xpath expr="//section[@id='summary']//thead/tr/th[2]" position="after">
+            <th class="text-end">Area (overhead)</th>
+        </xpath>
+
+        <xpath expr="//section[@id='summary']//t[@t-if='links']/t[@t-set='profile_total_area_proportional']" position="after">
+            <t t-set="profile_total_area_overhead" t-value="0"/>
+        </xpath>
+
+        <xpath expr="//section[@id='summary']//t[@t-if='links']/t[@t-foreach='links']/t[@t-set='profile_total_area_proportional']" position="after">
+            <t t-set="profile_total_area_overhead" t-value="profile_total_area_overhead + link.area_overhead"/>
+        </xpath>
+
+        <xpath expr="//section[@id='summary']//span[@t-esc='profile_total_area_proportional']/ancestor::tr[1]" position="inside">
+            <td class="text-end">
+                <span t-esc="profile_total_area_overhead" t-options='{"widget": "float", "precision": 4}'/>
+                <span> </span><span t-out="area_unit_name"/>
+            </td>
+        </xpath>
+
+        <xpath expr="//section[@id='summary']//table" position="inside">
+            <tfoot>
+                <tr style="border-top: 1px solid lightgrey; font-weight: bold;">
+                    <td class="text-end" colspan="2"><span>Total overhead</span></td>
+                    <td class="text-end">
+                        <span t-esc="summary_total_area_overhead" t-options='{"widget": "float", "precision": 4}'/>
+                        <span> </span><span t-out="area_unit_name"/>
+                    </td>
+                </tr>
+            </tfoot>
+        </xpath>
+    </template>
+
+</odoo>

@@ -47,6 +47,17 @@ class ResPartner(models.Model):
         comodel_name='ter.parcel',
         inverse_name='partner_id',)
 
+    partnerlink_ids = fields.One2many(
+        string='Parcel Links',
+        comodel_name='ter.parcel.partnerlink',
+        inverse_name='partner_id',)
+
+    number_of_partnerlinks = fields.Integer(
+        string='Number of parcel links',
+        store=True,
+        index=True,
+        compute='_compute_number_of_partnerlinks',)
+
     number_of_parcels = fields.Integer(
         string='Number of parcels',
         store=True,
@@ -119,6 +130,14 @@ class ResPartner(models.Model):
             if record.parcel_ids:
                 number_of_parcels = len(record.parcel_ids)
             record.number_of_parcels = number_of_parcels
+
+    @api.depends('partnerlink_ids', 'partnerlink_ids.active')
+    def _compute_number_of_partnerlinks(self):
+        for record in self:
+            number_of_partnerlinks = 0
+            if record.partnerlink_ids:
+                number_of_partnerlinks = len(record.partnerlink_ids)
+            record.number_of_partnerlinks = number_of_partnerlinks
 
     @api.depends('parcel_ids', 'parcel_ids.area_official')
     def _compute_area_official_parcels(self):
@@ -262,9 +281,10 @@ class ResPartner(models.Model):
     def action_gis_viewer_parcel(self):
         parcel_ids = []
         for record in self:
-            parcel_ids.extend(record.parcel_ids.ids)
+            # GIS parcel viewer should include all parcels linked to the partner.
+            parcel_ids.extend(record.partnerlink_ids.mapped('parcel_id').ids)
         if parcel_ids:
-            return self.env['ter.parcel'].browse(parcel_ids).action_gis_viewer()
+            return self.env['ter.parcel'].browse(list(set(parcel_ids))).action_gis_viewer()
 
     def action_gis_viewer_property(self):
         property_ids = []
@@ -297,11 +317,31 @@ class ResPartner(models.Model):
             'base_ter.ter_parcel_view_search')
         act_window = {
             'type': 'ir.actions.act_window',
-            'name': _('Parcels'),
+            'name': _('Parcels (Manager)'),
             'res_model': 'ter.parcel',
             'view_mode': 'tree,form,kanban',
             'views': [(id_tree_view, 'tree'), (id_form_view, 'form'),
                       (id_kanban_view, 'kanban')],
+            'search_view_id': (search_view.id, search_view.name),
+            'target': 'current',
+            'domain': [('partner_id', '=', current_partner.id)],
+            'context': {'default_partner_id': current_partner.id, }
+            }
+        return act_window
+
+    def action_show_partnerlinks(self):
+        self.ensure_one()
+        current_partner = self
+        tree_view = self.sudo().env.ref(
+            'base_ter.ter_parcel_partnerlink_view_tree_by_partner')
+        search_view = self.sudo().env.ref(
+            'base_ter.ter_parcel_partnerlink_view_search')
+        act_window = {
+            'type': 'ir.actions.act_window',
+            'name': _('Parcels'),
+            'res_model': 'ter.parcel.partnerlink',
+            'view_mode': 'tree',
+            'views': [(tree_view.id, 'tree')],
             'search_view_id': (search_view.id, search_view.name),
             'target': 'current',
             'domain': [('partner_id', '=', current_partner.id)],
