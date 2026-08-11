@@ -15,8 +15,7 @@
     <template id="parcel_profile_template">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
-                <t t-call="base_ter.parcel_profile_report_document"
-                   t-lang="o.lang or o.env.lang"/>
+                <t t-call="base_ter.parcel_profile_report_document" t-lang="o.lang or o.env.lang"/>
             </t>
         </t>
     </template>
@@ -25,22 +24,18 @@
         <t t-set="o" t-value="o.with_context(lang=o.lang or o.env.lang)"/>
         <t t-call="web.external_layout">
 
+            <!-- Vars -->
             <t t-set="company" t-value="o.env.company"/>
             <t t-set="area_unit_name"
                t-value="o.env._('ha') if company.area_unit_is_ha else (company.area_unit_name or 'ha')"/>
-
             <t t-set="printing_date"
                t-value="o.env['common.format'].transform_date_to_locale(datetime.datetime.now(), lang=o.lang or o.env.lang)"/>
 
-            <t t-set="selected_links"
-               t-value="o.partnerlink_ids.filtered(lambda l: l.profile_id.id in profiles.ids)"/>
-            <t t-set="report_parcels" t-value="selected_links.mapped('parcel_id')"/>
-
+            <!-- Page -->
             <div class="page">
                 <h2 name="title" class="text-center">Parcels by Profile</h2>
 
-                <section name="partner_data"
-                         style="margin-bottom: 20px; page-break-inside: avoid;">
+                <section name="partner_data" style="margin-bottom: 20px; page-break-inside: avoid;">
                     <div name="title_partner">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-user"/>
@@ -48,7 +43,6 @@
                             <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
-
                     <strong>
                         <span t-field="o.display_name"/>
                     </strong>
@@ -59,7 +53,6 @@
                         )
                     </t>
                     <br/>
-
                     <div class="row" style="margin-top: 4px;">
                         <div class="col-12" style="display: table;">
                             <div style="width: 50%; display: table-cell; border-right: 1px solid lightgrey;">
@@ -67,19 +60,9 @@
                                      t-options='{"widget": "contact", "no_marker": True,
                                                  "fields": ["address", "phone", "mobile", "email"]}'/>
                             </div>
-
                             <div style="padding-left: 32px;">
-                                <table style="width: 100%;"
-                                       class="table-condensed table-borderless">
+                                <table style="width: 100%;" class="table-condensed table-borderless">
                                     <tbody>
-                                        <tr name="tr_profiles">
-                                            <td>
-                                                <span>Profiles</span>
-                                            </td>
-                                            <td class="text-end">
-                                                <span t-out="', '.join(profiles.mapped('alphanum_code'))"/>
-                                            </td>
-                                        </tr>
                                         <tr name="tr_printing_date">
                                             <td>
                                                 <span>Printing date</span>
@@ -95,46 +78,180 @@
                     </div>
                 </section>
 
-                <section name="parcels_data"
-                         style="margin-bottom: 20px; page-break-inside: avoid;">
-                    <div name="title_parcels">
+                <!-- Parcels by Profile -->
+                <t t-foreach="profiles" t-as="profile">
+                    <t t-set="links" t-value="o.partnerlink_ids.filtered(lambda l: l.profile_id.id == profile.id)"/>
+                    <t t-if="links">
+                        <div name="profile_data" style="margin-bottom: 20px;">
+                            <div name="title_profile">
+                                <h2 style="font-size: 1.4em;">
+                                    <span class="fa fa-ter-parcel"/>
+                                    <span t-field="profile.alphanum_code"/>
+                                    <div style="border-top: 2px solid;"/>
+                                </h2>
+                            </div>
+                            <table class="table table-condensed table-borderless" style="width:100%;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid lightgrey">
+                                        <th name="th_official_code" class="text-start">Code</th>
+                                        <th name="th_property_id" class="text-start">Property</th>
+                                        <th name="th_place_id" class="text-start">Place</th>
+                                        <th name="th_area_official" class="text-end">Area</th>
+                                        <th name="th_percentage" class="text-end">%</th>
+                                        <th name="th_area_proportional" class="text-end">
+                                            <span>Area </span><span t-field="profile.alphanum_code"/>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="total_area_proportional" t-value="0"/>
+                                    <t t-foreach="links" t-as="link">
+                                        <t t-set="total_area_proportional"
+                                           t-value="total_area_proportional + link.area_proportional"/>
+                                        <tr>
+                                            <td name="td_official_code">
+                                                <span t-field="link.parcel_id.official_code"/>
+                                            </td>
+                                            <td name="td_property_id">
+                                                <span t-field="link.parcel_id.property_id.name"/>
+                                            </td>
+                                            <td name="td_place_id">
+                                                <span t-field="link.parcel_id.place_id.name"/>
+                                            </td>
+                                            <td name="td_area_official" class="text-end">
+                                                <span t-field="link.area_official"/>
+                                                <span> </span>
+                                                <span t-out="area_unit_name"/>
+                                            </td>
+                                            <td name="td_percentage" class="text-end">
+                                                <span t-field="link.percentage"/>
+                                            </td>
+                                            <td name="td_area_proportional" class="text-end">
+                                                <span t-field="link.area_proportional"/>
+                                                <span> </span>
+                                                <span t-out="area_unit_name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr style="border-top: 1px solid lightgrey; font-weight: bold;">
+                                        <td name="td_tfoot_label" colspan="5" class="text-end">
+                                            <span>Total</span>
+                                        </td>
+                                        <td name="td_tfoot_total" class="text-end">
+                                            <span t-out="total_area_proportional" t-options='{"widget": "float", "precision": 4}'/>
+                                            <span t-out="area_unit_name"/>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+
+                <section name="profiles_summary" style="margin-top: 20px; page-break-inside: avoid;">
+                    <div name="title_summary">
                         <h2 style="font-size: 1.4em;">
-                            <span class="fa fa-ter-parcel"/>
-                            <span>Parcels</span>
+                            <span class="fa fa-list"/>
+                            <span>Summary</span>
                             <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
-
-                    <table class="table table-condensed table-borderless"
-                           style="width:100%;">
+                    <table class="table table-condensed table-borderless" style="width:100%;">
                         <thead>
                             <tr style="border-bottom: 1px solid lightgrey">
-                                <th name="th_official_code" class="text-start">Code</th>
-                                <th name="th_property_id" class="text-start">Property</th>
-                                <th name="th_place_id" class="text-start">Place</th>
-                                <th name="th_area_official" class="text-end">Area</th>
+                                <th name="th_profile_name" class="text-start">Profile</th>
+                                <th name="th_profile_total_area" class="text-end">Total Area</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-foreach="report_parcels" t-as="parcel">
-                                <tr>
-                                    <td name="td_official_code">
-                                        <span t-field="parcel.official_code"/>
-                                    </td>
-                                    <td name="td_property_id">
-                                        <span t-field="parcel.property_id.name"/>
-                                    </td>
-                                    <td name="td_place_id">
-                                        <span t-field="parcel.place_id.name"/>
-                                    </td>
-                                    <td name="td_area_official" class="text-end">
-                                        <span t-field="parcel.area_official"/>
-                                        <span t-out="area_unit_name"/>
-                                    </td>
-                                </tr>
+                            <t t-foreach="profiles" t-as="profile">
+                                <t t-set="links" t-value="o.partnerlink_ids.filtered(lambda l: l.profile_id.id == profile.id)"/>
+                                <t t-if="links">
+                                    <t t-set="profile_total_area_proportional" t-value="0"/>
+                                    <t t-foreach="links" t-as="link">
+                                        <t t-set="profile_total_area_proportional"
+                                           t-value="profile_total_area_proportional + link.area_proportional"/>
+                                    </t>
+                                    <tr>
+                                        <td name="td_profile_name" class="text-start">
+                                            <span t-field="profile.alphanum_code"/>
+                                        </td>
+                                        <td name="td_profile_total_area" class="text-end">
+                                            <span t-out="profile_total_area_proportional" t-options='{"widget": "float", "precision": 4}'/>
+                                            <span> </span>
+                                            <span t-out="area_unit_name"/>
+                                        </td>
+                                    </tr>
+                                </t>
                             </t>
                         </tbody>
                     </table>
+                </section>
+
+                <!-- Force new page -->
+                <p style="page-break-after:always;"/>
+
+                <section name="aerial_images" style="margin-bottom: 20px; page-break-inside: avoid;">
+                    <div name="title_aerial_images">
+                        <h2 style="font-size: 1.4em;">
+                            <span class="fa fa-picture-o"/>
+                            <span>Aerial Images</span>
+                            <div style="border-top: 2px solid;"/>
+                        </h2>
+                    </div>
+                    <t t-set="selected_links"
+                       t-value="o.partnerlink_ids.filtered(lambda l: l.profile_id.id in profiles.ids)"/>
+                    <t t-set="report_parcels" t-value="selected_links.mapped('parcel_id')"/>
+                    <t t-foreach="report_parcels" t-as="parcel">
+                        <div style="width: 48%; float: left; display: table; border: 1px solid black; margin: 1.5% 0.5%; page-break-inside: avoid;">
+                            <div name="parcel_data" style="border-bottom: 1px solid black; padding: 2%;">
+                                <table style="width: 100%;" class="table-condensed table-borderless">
+                                    <tbody>
+                                        <tr name="row_parcel">
+                                            <td>
+                                                <strong>Parcel</strong>
+                                            </td>
+                                            <td class="text-end">
+                                                <span t-field="parcel.official_code"/>
+                                            </td>
+                                        </tr>
+                                        <tr name="row_property_id">
+                                            <td>
+                                                <strong>Property</strong>
+                                            </td>
+                                            <td class="text-end">
+                                                <span t-field="parcel.property_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr name="row_parcel_area">
+                                            <td>
+                                                <strong>Area</strong>
+                                            </td>
+                                            <td class="text-end">
+                                                <span t-field="parcel.area_official"/>
+                                                <span t-out="area_unit_name"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div name="parcel_aerial_image" class="text-center">
+                                <t t-if="parcel.aerial_image">
+                                    <img t-attf-src="data:image/png;base64, #{parcel.aerial_image}"
+                                        style="width: 408px; height: 408px;"/>
+                                </t>
+                                <t t-else="">
+                                    <div class="text-center text-muted" style="width: 408px; height: 408px; padding-top: 40%;">
+                                        <div class="fa fa-file-image-o" style="font-size: 4em;"/>
+                                        <br/>
+                                        <div>Aerial image not found</div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
                 </section>
 
             </div>

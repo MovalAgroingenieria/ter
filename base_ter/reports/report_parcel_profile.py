@@ -19,11 +19,9 @@ class ReportParcelProfile(models.AbstractModel):
             profiles = self.env["ter.profile"].browse(profile_ids)
         else:
             profiles = partners.mapped("partnerlink_ids.profile_id")
-        has_overhead = "area_overhead" in self.env["ter.parcel.partnerlink"]._fields
         return {
             "doc_ids": partners.ids,
             "doc_model": "res.partner",
             "docs": partners,
             "profiles": profiles,
-            "has_overhead": has_overhead,
         }
