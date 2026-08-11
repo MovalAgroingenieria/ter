@@ -166,7 +166,10 @@
                             <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
-                    <t t-foreach="o.parcel_ids" t-as="parcel">
+                    <t t-set="selected_links"
+                       t-value="o.partnerlink_ids.filtered(lambda l: l.profile_id.id in profiles.ids)"/>
+                    <t t-set="report_parcels" t-value="selected_links.mapped('parcel_id')"/>
+                    <t t-foreach="report_parcels" t-as="parcel">
                         <div style="width: 48%; float: left; display: table; border: 1px solid black; margin: 1.5% 0.5%; page-break-inside: avoid;">
                             <div name="parcel_data" style="border-bottom: 1px solid black; padding: 2%;">
                                 <table style="width: 100%;" class="table-condensed table-borderless">
