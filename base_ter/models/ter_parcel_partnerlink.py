@@ -52,6 +52,18 @@ class TerParcelPartnerlink(models.Model):
     is_main = fields.Boolean(default=False)
     percentage = fields.Float(digits=(32, 2), default=0, required=True)
     active = fields.Boolean(store=True, related="parcel_id.active")
+    area_official = fields.Float(
+        related="parcel_id.area_official",
+        digits=(32, 4),
+        store=True,
+    )
+    area_proportional = fields.Float(
+        digits=(32, 4),
+        compute="_compute_area_proportional",
+    )
+    area_unit_name = fields.Char(
+        related="parcel_id.area_unit_name",
+    )
 
     _sql_constraints = [
         (
@@ -73,6 +85,13 @@ class TerParcelPartnerlink(models.Model):
             if record.partner_id and record.partner_id.partner_code:
                 code_asstr = record.partner_id.partner_code_asstr
             record.name = "%s-%s" % (record.parcel_id.alphanum_code, code_asstr)
+
+    @api.depends("parcel_id.area_official", "percentage")
+    def _compute_area_proportional(self):
+        for record in self:
+            record.area_proportional = (
+                (record.parcel_id.area_official or 0.0) * record.percentage / 100.0
+            )
 
     @api.model_create_multi
     def create(self, vals_list):

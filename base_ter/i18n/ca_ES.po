@@ -6,11 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-28 11:07+0000\n"
-"PO-Revision-Date: 2026-07-27 14:42+0000\n"
+"POT-Creation-Date: 2026-08-11 09:31+0000\n"
+"PO-Revision-Date: 2026-08-11 09:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -18,6 +17,7 @@ msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree_by_partner
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "% Participation"
 msgstr "% Participació"
@@ -39,6 +39,11 @@ msgid "'Parcels Report - %s' % (object.name or '')"
 msgstr "'Informe de parcel·les - %s' % (object.name or '')"
 
 #. module: base_ter
+#: model:ir.actions.report,print_report_name:base_ter.action_parcel_profile_report
+msgid "'Parcels by Profile - %s' % (object.name or '')"
+msgstr ""
+
+#. module: base_ter
 #: model:ir.actions.report,print_report_name:base_ter.action_property_partner_report
 msgid "'Properties Report - %s' % (object.name or '')"
 msgstr "'Informe de propietats - %s' % (object.name o '')"
@@ -50,6 +55,7 @@ msgstr "'Finca - %s - %s' % (object.name, object.partner_id.name or '')"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
@@ -183,6 +189,7 @@ msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
 msgid ""
 "<span class=\"fa fa-ter-parcel\"/>\n"
 "                            <span>Parcels</span>"
@@ -210,6 +217,7 @@ msgstr ""
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
@@ -272,6 +280,7 @@ msgstr "<span>Canviar codi</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "<span>Delete Geometry</span>"
 msgstr "<span>Eliminar geometria</span>"
 
@@ -325,11 +334,17 @@ msgstr "<span>Localitat</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
 msgid "<span>Printing date</span>"
 msgstr "<span>Data d'impressió</span>"
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
+msgid "<span>Profiles</span>"
+msgstr "<span>Perfils</span>"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
@@ -599,8 +614,8 @@ msgid ""
 "keeps its map geometry after changing the code."
 msgstr ""
 "Reanomena també el registre de geometria GIS vinculat (ter_gis_parcel) "
-"perquè la parcel·la conservi la seva geometria al mapa després de canviar "
-"el codi."
+"perquè la parcel·la conservi la seva geometria al mapa després de canviar el"
+" codi."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
@@ -642,6 +657,7 @@ msgstr "Arxivat"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
 msgid "Area"
 msgstr "Àrea"
 
@@ -656,6 +672,11 @@ msgid "Area Parcels"
 msgstr "Sup. oficial parcel·la"
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__area_proportional
+msgid "Area Proportional"
+msgstr "Àrea proporcional"
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__area_unit_name
 msgid "Area unit"
 msgstr "Unitat d'àrea"
@@ -666,11 +687,10 @@ msgid "Area unit is hectare"
 msgstr "L'unitat d'àrea és l'hectàrea."
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_unit_name
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_unit_name
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_unit_name
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_unit_name
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__area_unit_name
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__area_unit_name
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__area_unit_name
 msgid "Area unit name"
 msgstr "Unitat d'àrea"
@@ -748,6 +768,8 @@ msgid ""
 "Auto-generated as {parcel_code}-{start_YYMM}-{end_YYMM}-{seq} when left "
 "empty."
 msgstr ""
+"Es genera automàticament com {parcel_code}-{start_YYMM}-{end_YYMM}-{seq} si "
+"es deixa buit."
 
 #. module: base_ter
 #. odoo-python
@@ -779,6 +801,7 @@ msgid "Campaign Type"
 msgstr "Tipus de campanya"
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_parcel_profile_report_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_parcel_code_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_set_partner_code_view_form
 msgid "Cancel"
@@ -791,8 +814,8 @@ msgid ""
 "Cannot delete a unit with GIS geometry. Clear the geometry first or archive "
 "the record."
 msgstr ""
-"No es pot suprimir una unitat amb geometria GIS. Primer netegeu la "
-"geometria o arxiveu l' registre."
+"No es pot suprimir una unitat amb geometria GIS. Primer netegeu la geometria"
+" o arxiveu l' registre."
 
 #. module: base_ter
 #. odoo-python
@@ -834,8 +857,8 @@ msgid "Close preview"
 msgstr "Tancar previsualització"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__alphanum_code
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_list
@@ -887,6 +910,11 @@ msgid "Complete Name"
 msgstr "Nom complet"
 
 #. module: base_ter
+#: model:ir.model,name:base_ter.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paràmetres de configuració"
+
+#. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_configuration
 msgid "Configuration"
 msgstr "Configuració"
@@ -920,15 +948,15 @@ msgid ""
 "again later or check network/IGN service. Parcel: %(code)s"
 msgstr ""
 "No s'ha pogut obtenir la imatge aèria del WMS (temps d'espera esgotat o "
-"error de connexió). Torna-ho a provar més tard o comprova la xarxa/el "
-"servei de l'IGN. Parcel·la: %(code)s"
+"error de connexió). Torna-ho a provar més tard o comprova la xarxa/el servei"
+" de l'IGN. Parcel·la: %(code)s"
 
 #. module: base_ter
 #. odoo-python
 #: code:addons/base_ter/models/ter_parcel.py:0
 msgid ""
-"Could not fetch aerial images for %(count)s parcel(s) (timeout or "
-"connection error to WMS). Try again later: %(codes)s"
+"Could not fetch aerial images for %(count)s parcel(s) (timeout or connection"
+" error to WMS). Try again later: %(codes)s"
 msgstr ""
 "No s'han pogut obtenir imatges aèries per a %(count)s parcel·les (temps "
 "d'espera o error de connexió amb el WMS). Torna a provar més tard: %(codes)s"
@@ -989,6 +1017,7 @@ msgstr "Creat %(count)s registres: %(names)s"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__create_uid
+#: model:ir.model.fields,field_description:base_ter.field_wizard_parcel_profile_report__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__create_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__create_uid
@@ -1010,6 +1039,7 @@ msgstr "Creat per"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__create_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__create_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__create_date
+#: model:ir.model.fields,field_description:base_ter.field_wizard_parcel_profile_report__create_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__create_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__create_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__create_date
@@ -1075,6 +1105,7 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.actions.server,name:base_ter.ter_parcel_delete_gis_geometry_serveraction
+#: model:ir.actions.server,name:base_ter.ter_unit_delete_gis_geometry_serveraction
 msgid "Delete GIS geometry"
 msgstr "Suprimir geometria GIS"
 
@@ -1150,11 +1181,12 @@ msgstr "Usuari director"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__display_name
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__display_name
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__display_name
+#: model:ir.model.fields,field_description:base_ter.field_wizard_parcel_profile_report__display_name
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__display_name
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__display_name
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__display_name
 msgid "Display Name"
-msgstr "Nombre a mostrar"
+msgstr "Nom mostrat"
 
 #. module: base_ter
 #: model:ir.model.fields.selection,name:base_ter.selection__wizard_import_kml__state__done
@@ -1381,6 +1413,8 @@ msgstr "Previsualització GIS"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_list
 msgid "GIS Viewer"
 msgstr "Visor GIS"
 
@@ -1465,8 +1499,8 @@ msgstr "Té un missatge"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__partner_id
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Holder"
 msgstr "Titular"
@@ -1486,6 +1520,7 @@ msgstr "Titular"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__id
+#: model:ir.model.fields,field_description:base_ter.field_wizard_parcel_profile_report__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__id
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__id
@@ -1521,8 +1556,8 @@ msgid ""
 "If a manager is assigned to the parcel, it is mandatory to configure the "
 "contact list."
 msgstr ""
-"Si s'assigna un gestor a la parcel·la, és obligatori configurar la llista "
-"de contactes."
+"Si s'assigna un gestor a la parcel·la, és obligatori configurar la llista de"
+" contactes."
 
 #. module: base_ter
 #: model:ir.model.fields,help:base_ter.field_ter_parcel__message_needaction
@@ -1739,6 +1774,7 @@ msgstr "És gestor"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree_by_partner
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 msgid "Is manager"
 msgstr "Contacte gestor"
@@ -1807,6 +1843,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__write_uid
+#: model:ir.model.fields,field_description:base_ter.field_wizard_parcel_profile_report__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__write_uid
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__write_uid
@@ -1828,6 +1865,7 @@ msgstr "Darrera actualització per"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__write_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__write_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_use_type__write_date
+#: model:ir.model.fields,field_description:base_ter.field_wizard_parcel_profile_report__write_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__write_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_partner_code__write_date
 #: model:ir.model.fields,field_description:base_ter.field_wizard_show_gis_preview__write_date
@@ -1885,6 +1923,11 @@ msgstr "Gestionar finques."
 #: model_terms:ir.actions.act_window,help:base_ter.ter_propertytag_action
 msgid "Manage property tags."
 msgstr "Gestionar etiquetes de parcel·la."
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.view_partner_form
+msgid "Managed"
+msgstr "Gestionades"
 
 #. module: base_ter
 #: model:ir.ui.menu,name:base_ter.menu_management
@@ -1948,11 +1991,11 @@ msgstr "Municipis"
 #: model:ir.model.fields,field_description:base_ter.field_wizard_import_kml__municipality_id
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Municipality"
 msgstr "Municipi"
@@ -1986,8 +2029,8 @@ msgstr "Data límit de la meva activitat"
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_type_attribute_value__name
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__name
 #: model_terms:ir.ui.view,arch_db:base_ter.res_partner_view_list
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
 msgid "Name"
@@ -2006,12 +2049,6 @@ msgstr "Prefix de nom"
 #: code:addons/base_ter/controllers/ter_gis_unit_use_controller.py:0
 msgid "Name field is mandatory."
 msgstr "El camp de nom és obligatori."
-
-#. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__activity_calendar_event_id
-#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
-msgstr "Proper esdeveniment de calendari"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__activity_date_deadline
@@ -2108,8 +2145,6 @@ msgid "Number of messages with delivery error"
 msgstr "Nombre de missatges amb error d'entrega"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__number_of_parcels
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__number_of_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__number_of_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_users__number_of_parcels
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__number_of_parcels
@@ -2117,8 +2152,12 @@ msgid "Number of parcels"
 msgstr "Nombre de parcel·les"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__number_of_properties
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__number_of_properties
+#: model:ir.model.fields,field_description:base_ter.field_res_partner__number_of_partnerlinks
+#: model:ir.model.fields,field_description:base_ter.field_res_users__number_of_partnerlinks
+msgid "Number of partner-links"
+msgstr "Nombre d'enllaços parcel·la-contacte"
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__number_of_properties
 #: model:ir.model.fields,field_description:base_ter.field_res_users__number_of_properties
 msgid "Number of properties"
@@ -2126,6 +2165,7 @@ msgstr "Nombre de finques"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__area_official
+#: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__area_official
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__area_official
 msgid "Official Area"
 msgstr "Àrea oficial"
@@ -2205,8 +2245,9 @@ msgstr "Propietari"
 #: model:ir.model,name:base_ter.model_ter_parcel
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__parcel_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__parcel_id
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_search
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree_by_partner
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_list
 msgid "Parcel"
 msgstr "Parcel·la"
@@ -2222,8 +2263,6 @@ msgid "Parcel (GIS)"
 msgstr "Parcel·la (GIS)"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_official_parcels
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_official_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_parcels
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_parcels
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__area_official_parcels
@@ -2231,8 +2270,6 @@ msgid "Parcel Area"
 msgstr "Àrea parcel·les"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_official_parcels_m2
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_official_parcels_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_parcels_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_parcels_m2
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__area_official_parcels_m2
@@ -2242,14 +2279,13 @@ msgstr "Àrea parcel·les (m²)"
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__name
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__alphanum_code
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__alphanum_code
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__parcel_alphanum_code
 #: model:ir.model.fields,field_description:base_ter.field_wizard_set_parcel_code__parcel_code
 msgid "Parcel Code"
 msgstr "Codi de parcel·la"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__is_holder
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__is_holder
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__is_holder
 #: model:ir.model.fields,field_description:base_ter.field_res_users__is_holder
 msgid "Parcel Holder"
@@ -2272,6 +2308,12 @@ msgstr "Contacte vinculat a parcel·les"
 #: model:ir.actions.report,name:base_ter.action_parcel_partner_report
 msgid "Parcel Partner Report"
 msgstr "Informe de parcel·les per soci"
+
+#. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_res_partner__partnerlink_ids
+#: model:ir.model.fields,field_description:base_ter.field_res_users__partnerlink_ids
+msgid "Parcel Partner-Links"
+msgstr "Enllaços parcel·la-contacte"
 
 #. module: base_ter
 #: model:ir.actions.report,name:base_ter.action_parcel_report
@@ -2312,8 +2354,6 @@ msgstr "Capa de vector de paquets"
 #: code:addons/base_ter/models/ter_use_unit.py:0
 #: model:ir.actions.act_window,name:base_ter.ter_parcel_action
 #: model:ir.model.fields,field_description:base_ter.field_date_range__parcel_count
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__parcel_ids
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__parcel_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__parcel_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_users__parcel_ids
 #: model:ir.model.fields,field_description:base_ter.field_ter_parceltag__parcel_ids
@@ -2336,6 +2376,12 @@ msgid "Parcels"
 msgstr "Parcel·les"
 
 #. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/models/res_partner.py:0
+msgid "Parcels (Manager)"
+msgstr "Parcel·les (Gestor)"
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 msgid "Parcels Area"
 msgstr "Àrea de parcel·les"
@@ -2344,6 +2390,24 @@ msgstr "Àrea de parcel·les"
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
 msgid "Parcels Report"
 msgstr "Informe de parcel·les"
+
+#. module: base_ter
+#: model:ir.actions.act_window,name:base_ter.action_wizard_parcel_profile_report
+#: model:ir.actions.report,name:base_ter.action_parcel_profile_report
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_parcel_profile_report_view_form
+msgid "Parcels by Profile"
+msgstr "Parcel·les per perfil"
+
+#. module: base_ter
+#: model:ir.model,name:base_ter.model_report_base_ter_parcel_profile_template
+msgid "Parcels by Profile Report"
+msgstr "Informe de parcel·les per perfil"
+
+#. module: base_ter
+#: model:ir.model,name:base_ter.model_wizard_parcel_profile_report
+msgid "Parcels by Profile Report Wizard"
+msgstr "Auxiliar d'informe de parcel·les per perfil"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__parcel_ids
@@ -2362,8 +2426,6 @@ msgid "Parent Path"
 msgstr "Ruta del progenitor"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__partner_code
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__partner_code
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__partner_code
 #: model:ir.model.fields,field_description:base_ter.field_res_users__partner_code
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__partner_code
@@ -2374,8 +2436,6 @@ msgid "Partner Code"
 msgstr "Codi"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__partner_code_asstr
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__partner_code_asstr
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__partner_code_asstr
 #: model:ir.model.fields,field_description:base_ter.field_res_users__partner_code_asstr
 msgid "Partner Code (as string)"
@@ -2420,8 +2480,6 @@ msgstr ""
 "la superfície del GIS (si és zero, no es mostrarà cap advertiment)."
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__phones
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__phones
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__phones
 #: model:ir.model.fields,field_description:base_ter.field_res_users__phones
 msgid "Phone(s)"
@@ -2431,6 +2489,7 @@ msgstr "Telèfon(s)"
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__place_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__place_id
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
@@ -2458,11 +2517,11 @@ msgstr "Si us plau, introduïu el nou codi de parcel·la"
 #. odoo-python
 #: code:addons/base_ter/hooks.py:0
 msgid ""
-"PostGIS could not be enabled in this database. Install PostGIS on "
-"PostgreSQL and ensure the DB user can run CREATE EXTENSION."
+"PostGIS could not be enabled in this database. Install PostGIS on PostgreSQL"
+" and ensure the DB user can run CREATE EXTENSION."
 msgstr ""
-"No s'ha pogut habilitar PostGIS en aquesta base de dades. Instal·leu "
-"PostGIS a PostgreSQL i assegureu-vos que l'usuari de la base de dades pugui "
+"No s'ha pogut habilitar PostGIS en aquesta base de dades. Instal·leu PostGIS"
+" a PostgreSQL i assegureu-vos que l'usuari de la base de dades pugui "
 "executar CREATE EXTENSION."
 
 #. module: base_ter
@@ -2480,6 +2539,11 @@ msgid "Preview"
 msgstr "Previsualització"
 
 #. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.wizard_parcel_profile_report_view_form
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_report_document
 msgid "Printing date"
@@ -2489,9 +2553,10 @@ msgstr "Data d'impressió"
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel_partnerlink__profile_id
 #: model:ir.model.fields,field_description:base_ter.field_ter_profile__alphanum_code
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_partnerlink_view_tree_by_partner
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_profile_view_search
 msgid "Profile"
 msgstr "Perfil"
 
@@ -2502,6 +2567,7 @@ msgstr "Perfil:"
 
 #. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.ter_profile_action
+#: model:ir.model.fields,field_description:base_ter.field_wizard_parcel_profile_report__profile_ids
 #: model:ir.ui.menu,name:base_ter.ter_profile_menu
 msgid "Profiles"
 msgstr "Perfils"
@@ -2510,8 +2576,6 @@ msgstr "Perfils"
 #. odoo-python
 #: code:addons/base_ter/models/res_partner.py:0
 #: model:ir.actions.act_window,name:base_ter.ter_property_action
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__property_ids
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__property_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__property_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_users__property_ids
 #: model:ir.model.fields,field_description:base_ter.field_ter_propertytag__property_ids
@@ -2532,26 +2596,23 @@ msgstr "Informe fincas"
 #: model:ir.model,name:base_ter.model_ter_property
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__property_id
 #: model_terms:ir.ui.view,arch_db:base_ter.parcel_partner_report_document
+#: model_terms:ir.ui.view,arch_db:base_ter.parcel_profile_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.property_partner_report_document
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_form
-#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_list
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_parcel_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_form
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_property_view_list
 msgid "Property"
 msgstr "Finca"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_official_properties
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_official_properties
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_properties
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_properties
 msgid "Property Area"
 msgstr "Àrea finques"
 
 #. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__area_official_properties_m2
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__area_official_properties_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__area_official_properties_m2
 #: model:ir.model.fields,field_description:base_ter.field_res_users__area_official_properties_m2
 msgid "Property Area (m²)"
@@ -2624,14 +2685,6 @@ msgstr "Província"
 #: model:ir.ui.menu,name:base_ter.res_province_menu
 msgid "Provinces"
 msgstr "Províncies"
-
-#. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__rating_ids
-#: model:ir.model.fields,field_description:base_ter.field_ter_property__rating_ids
-#: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__rating_ids
-#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__rating_ids
-msgid "Ratings"
-msgstr "Valoracions"
 
 #. module: base_ter
 #: model:res.groups,name:base_ter.group_ter_user
@@ -2790,8 +2843,8 @@ msgstr "Seqüència"
 #: model:ir.model.fields,help:base_ter.field_res_company__ter_unit_sequence_id
 #: model:ir.model.fields,help:base_ter.field_res_config_settings__ter_unit_sequence_id
 msgid ""
-"Sequence used to generate ter.use_unit names. Name format: {type_code}-"
-"{date_start}-{date_end}-{parcel_code}-{sequence}."
+"Sequence used to generate ter.use_unit names. Name format: "
+"{type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}."
 msgstr ""
 "Seqüència utilitzada per generar els noms de ter.use_unit. Format del nom: "
 "{type_code}-{date_start}-{date_end}-{parcel_code}-{sequence}."
@@ -2865,15 +2918,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
-"Status based on activities\n"
-"Overdue: Due date is already passed\n"
-"Today: Activity date is today\n"
-"Planned: Future activities.\n"
-
-#. module: base_ter
-#: model:ir.model,name:base_ter.model_res_config_settings
-msgid "Street type settings"
-msgstr "Ajustos de configuració"
+"Estat basat en activitats\n"
+"Vençut: La data de venciment ja ha passat\n"
+"Avui: La data de l'activitat és avui\n"
+"Planificat: Activitats futures."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_parceltag_view_form
@@ -2970,8 +3018,6 @@ msgstr "Unitat Territorial"
 #: code:addons/base_ter/models/ter_use_type.py:0
 #: model:ir.actions.act_window,name:base_ter.ter_unit_action_entrie
 #: model:ir.model.fields,field_description:base_ter.field_date_range__unit_ids
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__unit_use_ids
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__unit_use_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__unit_use_ids
 #: model:ir.model.fields,field_description:base_ter.field_res_users__unit_use_ids
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__unit_ids
@@ -3051,19 +3097,22 @@ msgid "The place is not in the municipality."
 msgstr "El lloc no és al municipi."
 
 #. module: base_ter
+#. odoo-python
+#: code:addons/base_ter/wizards/wizard_parcel_profile_report.py:0
+msgid "There are no selected partners to print."
+msgstr "No hi ha contactes seleccionats per imprimir."
+
+#. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
 msgid ""
 "This will import the standard use type catalog\n"
-"                            (farming, livestock, forestry …) from the "
-"bundled\n"
-"                            data file. Existing records with the same "
-"external\n"
+"                            (farming, livestock, forestry …) from the bundled\n"
+"                            data file. Existing records with the same external\n"
 "                            ID will be kept unchanged."
 msgstr ""
 "Això importarà el catàleg estàndard de tipus d'ús\n"
 "                            (conreus, ramaderia, forestal…) des del fitxer\n"
-"                            de dades inclòs. Els registres existents amb "
-"el\n"
+"                            de dades inclòs. Els registres existents amb el\n"
 "                            mateix ID extern es mantindran sense canvis."
 
 #. module: base_ter
@@ -3073,6 +3122,13 @@ msgid ""
 msgstr ""
 "Això eliminarà permanentment la geometria GIS d'aquesta parcel·la. "
 "Continuar?"
+
+#. module: base_ter
+#: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
+msgid "This will permanently delete the GIS geometry of this unit. Continue?"
+msgstr ""
+"Això eliminarà permanentment la geometria GIS d'aquesta unitat. Voleu "
+"continuar?"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_gis_parcel_model__diff_areas_threshold_exceeded
@@ -3156,8 +3212,6 @@ msgstr ""
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_date_range__unit_count
-#: model:ir.model.fields,field_description:base_ter.field_fsm_location__unit_use_count
-#: model:ir.model.fields,field_description:base_ter.field_fsm_person__unit_use_count
 #: model:ir.model.fields,field_description:base_ter.field_res_partner__unit_use_count
 #: model:ir.model.fields,field_description:base_ter.field_res_users__unit_use_count
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__unit_count
@@ -3211,8 +3265,8 @@ msgid ""
 "Use Types can be nested in a list. You can search by full path and browse "
 "children easily."
 msgstr ""
-"Els tipus d'ús es poden anidar en una llista. Pots cercar pel camí complet "
-"i navegar fàcilment pels subdirectoris."
+"Els tipus d'ús es poden anidar en una llista. Pots cercar pel camí complet i"
+" navegar fàcilment pels subdirectoris."
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
@@ -3328,6 +3382,8 @@ msgid ""
 "WMS service layer used to obtain the images of the units (vectorial "
 "elements)."
 msgstr ""
+"Capa de serveis WMS utilitzada per obtenir les imatges de les unitats "
+"(elements vectorials)."
 
 #. module: base_ter
 #. odoo-python
@@ -3345,22 +3401,6 @@ msgstr "WMS temporalment no disponible per a la unitat %(name)s: %(error)s"
 #: model_terms:ir.ui.view,arch_db:base_ter.res_config_settings_view_form
 msgid "Warnings"
 msgstr "Avisos"
-
-#. module: base_ter
-#: model:ir.model.fields,field_description:base_ter.field_ter_parcel__website_message_ids
-#: model:ir.model.fields,field_description:base_ter.field_ter_property__website_message_ids
-#: model:ir.model.fields,field_description:base_ter.field_ter_unit_attribute_value__website_message_ids
-#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__website_message_ids
-msgid "Website Messages"
-msgstr "Missatges del lloc web"
-
-#. module: base_ter
-#: model:ir.model.fields,help:base_ter.field_ter_parcel__website_message_ids
-#: model:ir.model.fields,help:base_ter.field_ter_property__website_message_ids
-#: model:ir.model.fields,help:base_ter.field_ter_unit_attribute_value__website_message_ids
-#: model:ir.model.fields,help:base_ter.field_ter_use_unit__website_message_ids
-msgid "Website communication history"
-msgstr "Historial de comunicació del lloc web"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_gis_parcel_model_view_search
@@ -3402,12 +3442,10 @@ msgstr "Codi de gestor incorrecte."
 #: model_terms:ir.ui.view,arch_db:base_ter.wizard_import_use_type_view_form
 msgid ""
 "You can safely run this wizard again — it will\n"
-"                            refresh translations without duplicating "
-"records."
+"                            refresh translations without duplicating records."
 msgstr ""
 "Podeu executar aquest assistent de nou —\n"
-"                            actualitzarà les traduccions sense duplicar "
-"registres."
+"                            actualitzarà les traduccions sense duplicar registres."
 
 #. module: base_ter
 #. odoo-python
@@ -3499,10 +3537,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_kanban
 msgid "ter_unit_avatar"
 msgstr ""
-
-#~ msgid ""
-#~ "Auto-generated as {parcel_code}-{start_YY}/{end_YY}-{seq} when left "
-#~ "empty."
-#~ msgstr ""
-#~ "Generat automàticament a partir de la seqüència de l'empresa quan es "
-#~ "deixa en blanc."

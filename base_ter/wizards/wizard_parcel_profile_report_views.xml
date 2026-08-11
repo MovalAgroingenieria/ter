@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="wizard_parcel_profile_report_view_form" model="ir.ui.view">
+        <field name="name">wizard.parcel.profile.report.view.form</field>
+        <field name="model">wizard.parcel.profile.report</field>
+        <field name="arch" type="xml">
+            <form string="Parcels by Profile">
+                <group>
+                    <field name="profile_ids"
+                           widget="many2many_checkboxes"
+                           nolabel="1"/>
+                </group>
+                <footer>
+                    <button name="action_print"
+                            type="object"
+                            string="Print"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_parcel_profile_report" model="ir.actions.act_window">
+        <field name="name">Parcels by Profile</field>
+        <field name="res_model">wizard.parcel.profile.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_type">action</field>
+        <field name="groups_id" eval="[(4, ref('base_ter.group_ter_user'))]"/>
+    </record>
+
+</odoo>

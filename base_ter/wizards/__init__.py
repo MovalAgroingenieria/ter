@@ -4,6 +4,7 @@
 from . import (
     wizard_import_kml,
     wizard_import_use_type,
+    wizard_parcel_profile_report,
     wizard_set_parcel_code,
     wizard_set_partner_code,
     wizard_show_gis_preview,

@@ -21,12 +21,24 @@
                            widget="statinfo"/>
                 </button>
 
+                <button name="action_show_partnerlinks"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-users"
+                        title="Parcels"
+                        invisible="context.get('context_no_ter', False) or (id and partner_code == 0)">
+                    <field string="Parcels"
+                           name="number_of_partnerlinks"
+                           widget="statinfo"/>
+                </button>
+
                 <button name="action_show_parcels"
                         type="object"
                         class="oe_stat_button"
                         icon="fa-ter-parcel"
+                        title="Managed"
                         invisible="context.get('context_no_ter', False) or (id and partner_code == 0)">
-                    <field string="Parcels"
+                    <field string="Managed"
                            name="number_of_parcels"
                            widget="statinfo"/>
                 </button>
