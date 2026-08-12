@@ -22,7 +22,7 @@
                 </button>
             </xpath>
             <xpath expr="//field[@name='percentage']" position="after">
-                <field name="area_ownership" string="🡸 Area"/>
+                <field name="area_proportional" string="🡸 Area"/>
                 <field name="percentage_overhead" string="% Overhead"/>
                 <field name="area_overhead" string="🡸 Area"/>
             </xpath>
