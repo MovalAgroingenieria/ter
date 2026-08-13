@@ -125,13 +125,13 @@ class TerUnit(models.Model):
         digits=(32, 4),
         compute="_compute_area_gis_ha",
         store=True,
-        group_operator="sum",
+        aggregator="sum",
     )
     area_parcels = fields.Float(
         digits=(32, 4),
         compute="_compute_area_parcels",
         store=True,
-        group_operator="sum",
+        aggregator="sum",
     )
     note = fields.Html()
     date_start = fields.Date(string="Start date", required=True, index=True)
