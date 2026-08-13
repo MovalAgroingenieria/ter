@@ -43,6 +43,7 @@
         'views/ter_profile_views.xml',
         'views/ter_propertytag_views.xml',
         'views/ter_gis_parcel_model_views.xml',
+        'reports/report_paperformat.xml',
         'reports/property_partner_report.xml',
         'reports/parcel_partner_report.xml',
         'reports/parcel_profile_report.xml',
