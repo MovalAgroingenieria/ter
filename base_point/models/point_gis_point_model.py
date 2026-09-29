@@ -38,9 +38,31 @@ class PointGisPointModel(models.Model):
         self.env.cr.execute("SELECT to_regclass('public.point_gis_point')")
         has_point_table = bool(self.env.cr.fetchone()[0])
 
+        self.env.cr.execute("SELECT to_regclass('public.point_point')")
+        has_point_model_table = bool(self.env.cr.fetchone()[0])
+
+        if not has_point_model_table:
+            self.env.cr.execute(sql.SQL("""
+                    CREATE VIEW {} AS (
+                        SELECT
+                            row_number() OVER () AS id,
+                            NULL::text AS name,
+                            NULL::text AS geom_geojson,
+                            NULL::integer AS point_id,
+                            NULL::integer AS partner_id,
+                            NULL::boolean AS is_active,
+                            NULL::integer AS create_uid,
+                            NOW() AT TIME ZONE 'UTC' AS create_date,
+                            NULL::integer AS write_uid,
+                            NOW() AT TIME ZONE 'UTC' AS write_date
+                        WHERE false
+                    )
+                    """).format(sql.Identifier("point_gis_point_model")))
+            return
+
         if not has_point_table:
             self.env.cr.execute(sql.SQL("""
-                    CREATE OR REPLACE VIEW {} AS (
+                    CREATE VIEW {} AS (
                         SELECT
                             row_number() OVER (ORDER BY pp.name) AS id,
                             pp.name,
@@ -57,9 +79,10 @@ class PointGisPointModel(models.Model):
                     """).format(sql.Identifier("point_gis_point_model")))
             return
 
+        # Create view with GIS data (PostGIS table exists)
         self.env.cr.execute(
             sql.SQL("""
-                CREATE OR REPLACE VIEW {} AS (
+                CREATE VIEW {} AS (
                     SELECT
                         row_number() OVER (ORDER BY pgp.name) AS id,
                         pgp.name,

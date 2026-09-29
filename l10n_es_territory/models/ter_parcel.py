@@ -550,7 +550,8 @@ class TerParcel(models.Model):
         self.env.cr.execute(
             "SELECT ST_XMin(e), ST_YMin(e), ST_XMax(e), ST_YMax(e) FROM ("
             "SELECT ST_Envelope(geom) AS e FROM ter_gis_parcel "
-            "WHERE name = %s AND geom IS NOT NULL) sub",
+            "WHERE name = %s AND geom IS NOT NULL "
+            "ORDER BY gid DESC LIMIT 1) sub",
             (self.name,),
         )
         row = self.env.cr.fetchone()
@@ -608,7 +609,9 @@ class TerParcel(models.Model):
                 "WITH cand AS ("
                 "  SELECT ST_MakeValid(ST_SetSRID(ST_GeomFromGML(%s), %s)) AS g"
                 "), par AS ("
-                "  SELECT ST_MakeValid(geom) AS g FROM ter_gis_parcel WHERE name = %s"
+                "  SELECT ST_MakeValid(geom) AS g FROM ter_gis_parcel "
+                "  WHERE name = %s AND geom IS NOT NULL "
+                "  ORDER BY gid DESC LIMIT 1"
                 ") "
                 "SELECT ST_AsGeoJSON(ST_Transform(cand.g, 4326)), "
                 "CASE WHEN ST_Area(par.g) > 0 THEN "
@@ -657,7 +660,8 @@ class TerParcel(models.Model):
         self.ensure_one()
         self.env.cr.execute(
             "SELECT ST_AsGeoJSON(ST_Transform(geom, 4326)) FROM ter_gis_parcel "
-            "WHERE name = %s AND geom IS NOT NULL",
+            "WHERE name = %s AND geom IS NOT NULL "
+            "ORDER BY gid DESC LIMIT 1",
             (self.name,),
         )
         row = self.env.cr.fetchone()

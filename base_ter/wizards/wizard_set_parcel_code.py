@@ -34,7 +34,9 @@ class WizardSetParcelCode(models.TransientModel):
         parcel_code = (self.parcel_code or "").strip().upper() or False
         old_name = parcel.name
         parcel.write({"alphanum_code": parcel_code})
-        if self.rename_gis and parcel.name != old_name:
-            parcel._rename_gis_link(  # pylint: disable=protected-access
-                old_name, parcel.name
-            )
+        if parcel.name != old_name:
+            parcel._refresh_gis_mapped_field()  # pylint: disable=protected-access
+            if self.rename_gis:
+                parcel._rename_gis_link(  # pylint: disable=protected-access
+                    old_name, parcel.name
+                )

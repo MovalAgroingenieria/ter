@@ -106,9 +106,10 @@ class TerGisParcelController(http.Controller):
             params = list(name_values)
 
         query = f"""
-            SELECT name, ST_AsGeoJSON(geom) AS geom_geojson, gid
+            SELECT DISTINCT ON (name) name, ST_AsGeoJSON(geom) AS geom_geojson, gid
             FROM ter_gis_parcel
             WHERE {where_clause}
+            ORDER BY name, geom IS NULL, gid DESC
         """
 
         try:
