@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-11 11:03+0000\n"
-"PO-Revision-Date: 2026-08-11 11:03+0000\n"
+"POT-Creation-Date: 2026-10-15 13:25+0000\n"
+"PO-Revision-Date: 2026-10-15 13:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: ca_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -809,6 +810,11 @@ msgid "Background Jobs"
 msgstr "Treballs en segon pla"
 
 #. module: base_ter
+#: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__billing_partner_id
+msgid "Billing Holder"
+msgstr "Titular de facturació"
+
+#. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__bounding_box_str
 #: model:ir.model.fields,field_description:base_ter.field_ter_property__bounding_box_str
 #: model:ir.model.fields,field_description:base_ter.field_ter_use_unit__bounding_box_str
@@ -1502,7 +1508,7 @@ msgstr "Mapa complet"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_type_view_search
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_search
 msgid "Group By"
-msgstr "Agrupa per"
+msgstr "Agrupar per"
 
 #. module: base_ter
 #: model:ir.model.fields,field_description:base_ter.field_ter_parcel__has_message
@@ -2494,6 +2500,17 @@ msgid "Partner of parcel"
 msgstr "Contacte de parcel·la"
 
 #. module: base_ter
+#: model:ir.model.fields,help:base_ter.field_ter_use_unit__billing_partner_id
+msgid ""
+"Partner to invoice for this unit. It is the unit holder when there is one; "
+"otherwise it stays empty until set manually or by an import. It can be "
+"edited."
+msgstr ""
+"Contacte al qual facturar aquesta unitat. Per defecte s'utilitza el titular "
+"de la unitat; si no existeix, queda buit fins que s'assigni manualment o "
+"mitjançant una importació. És editable."
+
+#. module: base_ter
 #: model:ir.actions.act_window,name:base_ter.ter_parcel_partnerlink_action
 #: model:ir.ui.menu,name:base_ter.ter_parcel_partnerlink_menu
 msgid "Partner-Links"
@@ -3070,7 +3087,7 @@ msgstr "Base territorial: Refrescar capa de finques"
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form
 msgid "Territorial Unit"
-msgstr "Unitat Territorial"
+msgstr "UNITAT TERRITORIAL"
 
 #. module: base_ter
 #. odoo-python
@@ -3094,7 +3111,7 @@ msgstr "Unitat Territorial"
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_list
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_pivot
 msgid "Territorial Units"
-msgstr "Unitats Territorials"
+msgstr "Unitats territorials"
 
 #. module: base_ter
 #: model_terms:ir.ui.view,arch_db:base_ter.ter_use_unit_view_form

@@ -43,6 +43,7 @@
                 <field name="alphanum_code"/>
                 <field name="name"/>
                 <field name="partner_id"/>
+                <field name="billing_partner_id"/>
                 <field name="date_range_id"/>
                 <field name="date_start"/>
                 <field name="date_end"/>
@@ -80,6 +81,7 @@
                 <field name="name"/>
                 <field name="use_type_id" string="Use type"/>
                 <field name="partner_id"/>
+                <field name="billing_partner_id" optional="hide"/>
                 <field name="date_range_id"/>
                 <field name="date_start" optional="hide"/>
                 <field name="date_end" optional="hide"/>
@@ -222,6 +224,7 @@
                         <group string="Location">
                             <field name="farm_property_id" readonly="1"/>
                             <field name="partner_id" readonly="1"/>
+                            <field name="billing_partner_id"/>
                             <field name="municipality_id" readonly="1"/>
                         </group>
                     </group>

@@ -73,6 +73,17 @@ class TerUnit(models.Model):
         index=True,
         tracking=True,
     )
+    billing_partner_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Billing Holder",
+        compute="_compute_billing_partner_id",
+        store=True,
+        readonly=False,
+        index=True,
+        help="Partner to invoice for this unit. It is the unit holder when "
+        "there is one; otherwise it stays empty until set manually or by an "
+        "import. It can be edited.",
+    )
     partner_code = fields.Integer(
         related="partner_id.partner_code",
     )
@@ -607,6 +618,12 @@ class TerUnit(models.Model):
         for record in self:
             if record.parcel_id and record.parcel_id.partner_id:
                 record.partner_id = record.parcel_id.partner_id
+
+    @api.depends("partner_id")
+    def _compute_billing_partner_id(self):
+        """Default to the holder without replacing an existing billing partner."""
+        for record in self:
+            record.billing_partner_id = record.billing_partner_id or record.partner_id
 
     @api.constrains("partner_id", "parcel_id")
     def _check_holder_is_parcel_manager(self):
