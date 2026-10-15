@@ -78,8 +78,8 @@
 
     <menuitem id="menu_geofolia_import_harvested_product_lines"
               name="Harvested Products"
-              parent="ter_analytic_geofolia.menu_geofolia_import"
+              parent="ter_analytic_geofolia.menu_geofolia_import_other_entries"
               action="action_geofolia_import_harvested_product_line"
               groups="group_geofolia_import"
-              sequence="19"/>
+              sequence="40"/>
 </odoo>

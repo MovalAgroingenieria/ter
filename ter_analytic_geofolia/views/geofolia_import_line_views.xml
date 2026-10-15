@@ -59,8 +59,6 @@
                 <field name="harvest_year"/>
                 <field name="fsm_location_id" optional="hide"/>
                 <field name="ter_use_unit_id" optional="hide"/>
-                <field name="unit_symbol" optional="hide"/>
-                <field name="category_enum" optional="hide"/>
                 <field name="raw_json_text" optional="hide" string="JSON"/>
             </list>
         </field>
@@ -109,8 +107,8 @@
 
     <menuitem id="menu_geofolia_import_lines"
               name="Import Lines"
-              parent="ter_analytic_geofolia.menu_geofolia_import"
+              parent="ter_analytic_geofolia.menu_geofolia_import_territorial_unit"
               action="action_geofolia_import_line"
               groups="group_geofolia_import"
-              sequence="15"/>
+              sequence="10"/>
 </odoo>

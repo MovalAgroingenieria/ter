@@ -7,4 +7,22 @@
               sequence="950"
               groups="group_geofolia_import"/>
 
+    <menuitem id="menu_geofolia_import_territorial_unit"
+              name="Territorial Unit"
+              parent="menu_geofolia_import"
+              sequence="15"
+              groups="group_geofolia_import"/>
+
+    <menuitem id="menu_geofolia_import_activity_detail"
+              name="Activity Detail"
+              parent="menu_geofolia_import"
+              sequence="20"
+              groups="group_geofolia_import"/>
+
+    <menuitem id="menu_geofolia_import_other_entries"
+              name="Other Entries"
+              parent="menu_geofolia_import"
+              sequence="25"
+              groups="group_geofolia_import"/>
+
 </odoo>

@@ -29,6 +29,14 @@ class FsmOrderWorkedUnit(models.Model):
         ondelete="set null",
         index=True,
     )
+    billing_partner_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Billing Holder",
+        related="use_unit_id.billing_partner_id",
+        store=True,
+        index=True,
+        help="Billing holder of the crop unit.",
+    )
     name = fields.Char(
         help="Internal fallback label (Geofolia plot code) used when the "
         "crop unit could not be matched. Not shown by default.",

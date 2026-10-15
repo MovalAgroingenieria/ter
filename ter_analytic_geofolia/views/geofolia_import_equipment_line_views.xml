@@ -80,8 +80,8 @@
 
     <menuitem id="menu_geofolia_import_equipment_lines"
               name="Equipment Lines"
-              parent="ter_analytic_geofolia.menu_geofolia_import"
+              parent="ter_analytic_geofolia.menu_geofolia_import_other_entries"
               action="action_geofolia_import_equipment_line"
               groups="group_geofolia_import"
-              sequence="20"/>
+              sequence="50"/>
 </odoo>

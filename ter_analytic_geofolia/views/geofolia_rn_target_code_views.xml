@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="geofolia_rn_target_code_view_list" model="ir.ui.view">
+        <field name="name">geofolia.rn.target.code.list</field>
+        <field name="model">geofolia.rn.target.code</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="code"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="geofolia_rn_target_code_view_form" model="ir.ui.view">
+        <field name="name">geofolia.rn.target.code.form</field>
+        <field name="model">geofolia.rn.target.code</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_geofolia_rn_target_code" model="ir.actions.act_window">
+        <field name="name">Target/Effects (RN Target Codes)</field>
+        <field name="res_model">geofolia.rn.target.code</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_geofolia_rn_target_code"
+              name="Target/Effects"
+              action="action_geofolia_rn_target_code"
+              parent="fieldservice.menu_fsm_config_order"
+              sequence="40"
+              groups="fieldservice.group_fsm_manager"/>
+
+</odoo>

@@ -8,6 +8,12 @@
             <xpath expr="//field[@name='name']" position="after">
                 <field name="geofolia_external_id" string="Geofolia ID" readonly="1"/>
             </xpath>
+            <xpath expr="//field[@name='child_ids']/.." position="attributes">
+                <attribute name="string">Child Equipment</attribute>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']" position="attributes">
+                <attribute name="string">Child Equipment</attribute>
+            </xpath>
         </field>
     </record>
 

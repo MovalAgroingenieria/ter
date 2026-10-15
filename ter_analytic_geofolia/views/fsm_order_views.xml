@@ -25,6 +25,17 @@
                     readonly="1"
                     invisible="not geofolia_activity_id"
                 />
+                <field
+                    name="geofolia_duration_minutes"
+                    readonly="1"
+                    invisible="not from_geofolia"
+                />
+                <field
+                    name="geofolia_duration"
+                    widget="float_time"
+                    readonly="1"
+                    invisible="not from_geofolia"
+                />
             </field>
 
             <!-- Fields hidden for the Geofolia Parte -->

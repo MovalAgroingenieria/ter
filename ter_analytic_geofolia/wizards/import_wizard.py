@@ -20,7 +20,6 @@ class GeofoliaImportWizard(models.TransientModel):
         selection=[
             ("auto", "Autodetect"),
             ("fields", "Fields (Plots)"),
-            ("products", "Products (Supplies)"),
             ("full", "Full (All blocks)"),
         ],
         default="auto",
@@ -91,11 +90,7 @@ class GeofoliaImportWizard(models.TransientModel):
         if isinstance(payload, dict):
             if isinstance(payload.get("Fields"), list):
                 return "fields"
-            if isinstance(payload.get("Products"), list) and isinstance(
-                payload.get("Employees"), list
-            ):
-                return "full"
             if isinstance(payload.get("Products"), list):
-                return "products"
+                return "full"
 
         raise UserError(self.env._("Cannot autodetect JSON type. Choose it manually."))

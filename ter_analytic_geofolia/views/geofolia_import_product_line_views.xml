@@ -78,8 +78,8 @@
 
     <menuitem id="menu_geofolia_import_product_lines"
               name="Product Lines"
-              parent="ter_analytic_geofolia.menu_geofolia_import"
+              parent="ter_analytic_geofolia.menu_geofolia_import_other_entries"
               action="action_geofolia_import_product_line"
               groups="group_geofolia_import"
-              sequence="16"/>
+              sequence="10"/>
 </odoo>

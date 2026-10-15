@@ -52,6 +52,16 @@ class FSMOrder(models.Model):
         help="External ID of the Geofolia activity that created this order. "
         "Used to re-sync the order on re-import instead of duplicating it.",
     )
+    geofolia_duration_minutes = fields.Integer(
+        string="Geofolia Duration (min)",
+        readonly=True,
+        copy=False,
+        help="Duration in minutes of the Geofolia activity (JSON Duration).",
+    )
+    geofolia_duration = fields.Float(
+        compute="_compute_geofolia_duration",
+        help="Duration of the Geofolia activity in hours (read-only).",
+    )
     product_usage_count = fields.Integer(
         compute="_compute_usage_counts",
     )
@@ -117,6 +127,11 @@ class FSMOrder(models.Model):
             )
         return super().unlink()
 
+    @api.depends("geofolia_duration_minutes")
+    def _compute_geofolia_duration(self):
+        for record in self:
+            record.geofolia_duration = (record.geofolia_duration_minutes or 0) / 60.0
+
     @api.depends(
         "product_usage_ids",
         "equipment_usage_ids",
@@ -139,7 +154,7 @@ class FSMOrder(models.Model):
             "type": "ir.actions.act_window",
             "name": self.env._("Products Used"),
             "res_model": "fsm.order.product.usage",
-            "view_mode": "list,form",
+            "view_mode": "list,pivot,form",
             "domain": [("fsm_order_id", "=", self.id)],
             "context": {"default_fsm_order_id": self.id},
         }
@@ -151,7 +166,7 @@ class FSMOrder(models.Model):
             "type": "ir.actions.act_window",
             "name": self.env._("Equipment Used"),
             "res_model": "fsm.order.equipment.usage",
-            "view_mode": "list,form",
+            "view_mode": "list,pivot,form",
             "domain": [("fsm_order_id", "=", self.id)],
             "context": {"default_fsm_order_id": self.id},
         }
@@ -175,7 +190,7 @@ class FSMOrder(models.Model):
             "type": "ir.actions.act_window",
             "name": self.env._("Harvested Goods"),
             "res_model": "fsm.order.harvest.usage",
-            "view_mode": "list,form",
+            "view_mode": "list,pivot,form",
             "domain": [("fsm_order_id", "=", self.id)],
             "context": {"default_fsm_order_id": self.id},
         }
@@ -187,7 +202,7 @@ class FSMOrder(models.Model):
             "type": "ir.actions.act_window",
             "name": self.env._("Worked Crop Units"),
             "res_model": "fsm.order.worked.unit",
-            "view_mode": "list,form",
+            "view_mode": "list,pivot,form",
             "domain": [("fsm_order_id", "=", self.id)],
             "context": {"default_fsm_order_id": self.id},
         }

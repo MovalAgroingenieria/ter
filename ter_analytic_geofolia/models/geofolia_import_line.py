@@ -34,13 +34,6 @@ class GeofoliaImportLine(models.Model):
     crop_name = fields.Char()
     geography_wkt = fields.Text()
 
-    supply_id = fields.Char()
-    category_enum = fields.Integer()
-    product_type_enum = fields.Integer()
-    unit_symbol = fields.Char()
-    botanical_species = fields.Char()
-    variety_name = fields.Char()
-
     sync_state = fields.Selection(
         selection=[
             ("pending", "Pending"),

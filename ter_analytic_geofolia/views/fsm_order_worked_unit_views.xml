@@ -10,6 +10,7 @@
                 <field name="from_geofolia" column_invisible="1" />
                 <field name="sequence" widget="handle" />
                 <field name="use_unit_id" />
+                <field name="billing_partner_id" />
                 <field name="worked_surface" readonly="from_geofolia" sum="Total" />
                 <field name="name" readonly="from_geofolia" optional="hide" />
                 <field name="plot_code" readonly="from_geofolia" optional="hide" />
@@ -30,6 +31,7 @@
                             <field name="from_geofolia" invisible="1" />
                             <field name="fsm_order_id" />
                             <field name="use_unit_id" />
+                            <field name="billing_partner_id" />
                             <field name="worked_surface" readonly="from_geofolia" />
                         </group>
                         <group>

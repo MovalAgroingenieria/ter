@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+
+    <record id="product_category_geofolia" model="product.category">
+        <field name="name">Geofolia</field>
+    </record>
+
+    <record id="product_category_geofolia_products" model="product.category">
+        <field name="name">Productos</field>
+        <field name="parent_id" ref="product_category_geofolia"/>
+    </record>
+
+    <record id="product_category_geofolia_raw_materials" model="product.category">
+        <field name="name">Materias primas</field>
+        <field name="parent_id" ref="product_category_geofolia"/>
+    </record>
+
+    <record id="product_category_geofolia_kind_1" model="product.category">
+        <field name="name">Acaricidas</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">1</field>
+    </record>
+    <record id="product_category_geofolia_kind_2" model="product.category">
+        <field name="name">Adyuvantes</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">2</field>
+    </record>
+    <record id="product_category_geofolia_kind_3" model="product.category">
+        <field name="name">Enmiendas minerales</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">3</field>
+    </record>
+    <record id="product_category_geofolia_kind_4" model="product.category">
+        <field name="name">Enmiendas y abonos orgánicos</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">4</field>
+    </record>
+    <record id="product_category_geofolia_kind_5" model="product.category">
+        <field name="name">Otros aportes orgánicos</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">5</field>
+    </record>
+    <record id="product_category_geofolia_kind_6" model="product.category">
+        <field name="name">Varios</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">6</field>
+    </record>
+    <record id="product_category_geofolia_kind_7" model="product.category">
+        <field name="name">Abonos anuales</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">7</field>
+    </record>
+    <record id="product_category_geofolia_kind_8" model="product.category">
+        <field name="name">Otros fitos</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">8</field>
+    </record>
+    <record id="product_category_geofolia_kind_10" model="product.category">
+        <field name="name">Carburantes/Lubricantes</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">10</field>
+    </record>
+    <record id="product_category_geofolia_kind_12" model="product.category">
+        <field name="name">Agua de riego</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">12</field>
+    </record>
+    <record id="product_category_geofolia_kind_13" model="product.category">
+        <field name="name">Efluentes agropecuarios</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">13</field>
+    </record>
+    <record id="product_category_geofolia_kind_14" model="product.category">
+        <field name="name">Embalajes</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">14</field>
+    </record>
+    <record id="product_category_geofolia_kind_15" model="product.category">
+        <field name="name">Otros abonos minerales</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">15</field>
+    </record>
+    <record id="product_category_geofolia_kind_16" model="product.category">
+        <field name="name">Abonos foliares</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">16</field>
+    </record>
+    <record id="product_category_geofolia_kind_17" model="product.category">
+        <field name="name">Fungicidas</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">17</field>
+    </record>
+    <record id="product_category_geofolia_kind_19" model="product.category">
+        <field name="name">Herbicidas</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">19</field>
+    </record>
+    <record id="product_category_geofolia_kind_20" model="product.category">
+        <field name="name">Insecticidas</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">20</field>
+    </record>
+    <record id="product_category_geofolia_kind_22" model="product.category">
+        <field name="name">Molusquicidas/Helicidas</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">22</field>
+    </record>
+    <record id="product_category_geofolia_kind_23" model="product.category">
+        <field name="name">Lucha biológica</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">23</field>
+    </record>
+    <record id="product_category_geofolia_kind_24" model="product.category">
+        <field name="name">Nematicidas</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">24</field>
+    </record>
+    <record id="product_category_geofolia_kind_25" model="product.category">
+        <field name="name">Plantas</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">25</field>
+    </record>
+    <record id="product_category_geofolia_kind_26" model="product.category">
+        <field name="name">Reguladores</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">26</field>
+    </record>
+    <record id="product_category_geofolia_kind_29" model="product.category">
+        <field name="name">Semillas</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">29</field>
+    </record>
+    <record id="product_category_geofolia_kind_30" model="product.category">
+        <field name="name">Sustancias de crecimiento</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">30</field>
+    </record>
+    <record id="product_category_geofolia_kind_32" model="product.category">
+        <field name="name">Abonos de fondo</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">32</field>
+    </record>
+    <record id="product_category_geofolia_kind_33" model="product.category">
+        <field name="name">Mantenimiento de la maquinaria</field>
+        <field name="parent_id" ref="product_category_geofolia_raw_materials"/>
+        <field name="geofolia_external_id">33</field>
+    </record>
+
+</odoo>

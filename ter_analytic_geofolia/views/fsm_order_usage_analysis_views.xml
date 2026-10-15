@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_usage_analysis_list" model="ir.ui.view">
+        <field name="name">fsm.order.product.usage.analysis.list</field>
+        <field name="model">fsm.order.product.usage</field>
+        <field name="inherit_id" ref="fsm_order_product_usage_view_list"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="editable"/>
+                <attribute name="create">0</attribute>
+                <attribute name="delete">0</attribute>
+            </list>
+            <field name="sequence" position="after">
+                <field name="fsm_order_id"/>
+                <field name="partner_id" optional="hide"/>
+            </field>
+        </field>
+    </record>
+    <record id="product_usage_analysis_search" model="ir.ui.view">
+        <field name="name">fsm.order.product.usage.analysis.search</field>
+        <field name="model">fsm.order.product.usage</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="fsm_order_id"/>
+                <field name="product_id"/>
+                <field name="name"/>
+                <field name="batch_number"/>
+                <field name="partner_id"/>
+                <group string="Group By">
+                    <filter name="by_order" string="Work Order" context="{'group_by': 'fsm_order_id'}"/>
+                    <filter name="by_product" string="Product" context="{'group_by': 'product_id'}"/>
+                    <filter name="by_unit" string="Unit" context="{'group_by': 'uom_name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="product_usage_pivot" model="ir.ui.view">
+        <field name="name">fsm.order.product.usage.pivot</field>
+        <field name="model">fsm.order.product.usage</field>
+        <field name="arch" type="xml">
+            <pivot string="Raw Materials">
+                <field name="product_id" type="row"/>
+                <field name="name" type="row"/>
+                <field name="uom_name" type="row"/>
+                <field name="fsm_order_id" type="col"/>
+                <field name="quantity" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="action_product_usage_analysis" model="ir.actions.act_window">
+        <field name="name">Raw Materials</field>
+        <field name="res_model">fsm.order.product.usage</field>
+        <field name="view_mode">list,pivot,form</field>
+        <field name="view_id" ref="product_usage_analysis_list"/>
+        <field name="search_view_id" ref="product_usage_analysis_search"/>
+    </record>
+
+    <record id="harvest_usage_analysis_list" model="ir.ui.view">
+        <field name="name">fsm.order.harvest.usage.analysis.list</field>
+        <field name="model">fsm.order.harvest.usage</field>
+        <field name="inherit_id" ref="fsm_order_harvest_usage_view_list"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="editable"/>
+                <attribute name="create">0</attribute>
+                <attribute name="delete">0</attribute>
+            </list>
+            <field name="sequence" position="after">
+                <field name="fsm_order_id"/>
+                <field name="partner_id" optional="hide"/>
+            </field>
+        </field>
+    </record>
+    <record id="harvest_usage_analysis_search" model="ir.ui.view">
+        <field name="name">fsm.order.harvest.usage.analysis.search</field>
+        <field name="model">fsm.order.harvest.usage</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="fsm_order_id"/>
+                <field name="product_id"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <group string="Group By">
+                    <filter name="by_order" string="Work Order" context="{'group_by': 'fsm_order_id'}"/>
+                    <filter name="by_product" string="Product" context="{'group_by': 'product_id'}"/>
+                    <filter name="by_unit" string="Unit" context="{'group_by': 'uom_name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="harvest_usage_pivot" model="ir.ui.view">
+        <field name="name">fsm.order.harvest.usage.pivot</field>
+        <field name="model">fsm.order.harvest.usage</field>
+        <field name="arch" type="xml">
+            <pivot string="Harvest">
+                <field name="product_id" type="row"/>
+                <field name="name" type="row"/>
+                <field name="uom_name" type="row"/>
+                <field name="fsm_order_id" type="col"/>
+                <field name="quantity" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="action_harvest_usage_analysis" model="ir.actions.act_window">
+        <field name="name">Harvest</field>
+        <field name="res_model">fsm.order.harvest.usage</field>
+        <field name="view_mode">list,pivot,form</field>
+        <field name="view_id" ref="harvest_usage_analysis_list"/>
+        <field name="search_view_id" ref="harvest_usage_analysis_search"/>
+    </record>
+
+    <record id="worked_unit_analysis_list" model="ir.ui.view">
+        <field name="name">fsm.order.worked.unit.analysis.list</field>
+        <field name="model">fsm.order.worked.unit</field>
+        <field name="inherit_id" ref="fsm_order_worked_unit_view_list"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="editable"/>
+                <attribute name="create">0</attribute>
+                <attribute name="delete">0</attribute>
+            </list>
+            <field name="sequence" position="after">
+                <field name="fsm_order_id"/>
+            </field>
+        </field>
+    </record>
+    <record id="worked_unit_analysis_search" model="ir.ui.view">
+        <field name="name">fsm.order.worked.unit.analysis.search</field>
+        <field name="model">fsm.order.worked.unit</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="fsm_order_id"/>
+                <field name="use_unit_id"/>
+                <field name="plot_code"/>
+                <field name="billing_partner_id"/>
+                <group string="Group By">
+                    <filter name="by_order" string="Work Order" context="{'group_by': 'fsm_order_id'}"/>
+                    <filter name="by_crop_unit" string="Crop Unit" context="{'group_by': 'use_unit_id'}"/>
+                    <filter name="by_billing_holder" string="Billing Holder" context="{'group_by': 'billing_partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="worked_unit_pivot" model="ir.ui.view">
+        <field name="name">fsm.order.worked.unit.pivot</field>
+        <field name="model">fsm.order.worked.unit</field>
+        <field name="arch" type="xml">
+            <pivot string="Crop Units">
+                <field name="billing_partner_id" type="row"/>
+                <field name="use_unit_id" type="row"/>
+                <field name="fsm_order_id" type="col"/>
+                <field name="worked_surface" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="action_worked_unit_analysis" model="ir.actions.act_window">
+        <field name="name">Crop Units</field>
+        <field name="res_model">fsm.order.worked.unit</field>
+        <field name="view_mode">list,pivot,form</field>
+        <field name="view_id" ref="worked_unit_analysis_list"/>
+        <field name="search_view_id" ref="worked_unit_analysis_search"/>
+    </record>
+
+    <record id="equipment_usage_analysis_list" model="ir.ui.view">
+        <field name="name">fsm.order.equipment.usage.analysis.list</field>
+        <field name="model">fsm.order.equipment.usage</field>
+        <field name="inherit_id" ref="fsm_order_equipment_usage_view_list"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="editable"/>
+                <attribute name="create">0</attribute>
+                <attribute name="delete">0</attribute>
+            </list>
+            <field name="sequence" position="after">
+                <field name="fsm_order_id"/>
+                <field name="partner_id" optional="hide"/>
+            </field>
+        </field>
+    </record>
+    <record id="equipment_usage_analysis_search" model="ir.ui.view">
+        <field name="name">fsm.order.equipment.usage.analysis.search</field>
+        <field name="model">fsm.order.equipment.usage</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="fsm_order_id"/>
+                <field name="equipment_id"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <group string="Group By">
+                    <filter name="by_order" string="Work Order" context="{'group_by': 'fsm_order_id'}"/>
+                    <filter name="by_equipment" string="Equipment" context="{'group_by': 'equipment_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="equipment_usage_pivot" model="ir.ui.view">
+        <field name="name">fsm.order.equipment.usage.pivot</field>
+        <field name="model">fsm.order.equipment.usage</field>
+        <field name="arch" type="xml">
+            <pivot string="Machinery">
+                <field name="equipment_id" type="row"/>
+                <field name="name" type="row"/>
+                <field name="fsm_order_id" type="col"/>
+                <field name="hours" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="action_equipment_usage_analysis" model="ir.actions.act_window">
+        <field name="name">Machinery</field>
+        <field name="res_model">fsm.order.equipment.usage</field>
+        <field name="view_mode">list,pivot,form</field>
+        <field name="view_id" ref="equipment_usage_analysis_list"/>
+        <field name="search_view_id" ref="equipment_usage_analysis_search"/>
+    </record>
+
+    <menuitem id="menu_usage_analysis" name="Work Order Details"
+              parent="fieldservice.reporting" sequence="70"
+              groups="fieldservice.group_fsm_user"/>
+    <menuitem id="menu_product_usage_analysis" name="Raw Materials"
+              parent="menu_usage_analysis" action="action_product_usage_analysis" sequence="10"/>
+    <menuitem id="menu_harvest_usage_analysis" name="Harvest"
+              parent="menu_usage_analysis" action="action_harvest_usage_analysis" sequence="20"/>
+    <menuitem id="menu_worked_unit_analysis" name="Crop Units"
+              parent="menu_usage_analysis" action="action_worked_unit_analysis" sequence="30"/>
+    <menuitem id="menu_equipment_usage_analysis" name="Machinery"
+              parent="menu_usage_analysis" action="action_equipment_usage_analysis" sequence="40"/>
+</odoo>

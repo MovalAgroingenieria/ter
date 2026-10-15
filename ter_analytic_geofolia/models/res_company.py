@@ -39,3 +39,15 @@ class ResCompany(models.Model):
         string="Geofolia default analytic account (timesheets)",
         help="Default analytic account for activity timesheets (Odoo 18).",
     )
+    geofolia_default_company_id = fields.Many2one(
+        comodel_name="res.company",
+        string="Geofolia default company (work orders)",
+        help="Company set on fsm.order when created by a Geofolia import. "
+        "If empty, the current user's company is used (default behaviour).",
+    )
+    geofolia_default_use_type_id = fields.Many2one(
+        comodel_name="ter.use_type",
+        string="Geofolia default crop",
+        help="Crop assigned to new territorial units imported from Geofolia "
+        "when they have no crop.",
+    )

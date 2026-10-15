@@ -22,6 +22,8 @@ class FsmOrderProductUsage(models.Model):
         "uom_name",
         "geofolia_supply_id",
         "geofolia_recognition_id",
+        "batch_number",
+        "rn_target_code_id",
     )
 
     product_id = fields.Many2one(
@@ -32,6 +34,15 @@ class FsmOrderProductUsage(models.Model):
     name = fields.Char(
         required=True,
         help="Product/supply name from Geofolia.",
+    )
+    batch_number = fields.Char(
+        help="Lot/batch number(s) from Geofolia (BatchNumbers).",
+    )
+    rn_target_code_id = fields.Many2one(
+        comodel_name="geofolia.rn.target.code",
+        string="Target/Effects",
+        ondelete="set null",
+        help="Target/effect of the product application (RNTargetCode from Geofolia).",
     )
     quantity = fields.Float(digits=(16, 4))
     uom_name = fields.Char(

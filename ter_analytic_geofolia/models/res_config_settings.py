@@ -44,3 +44,15 @@ class ResConfigSettings(models.TransientModel):
         readonly=False,
         string="Geofolia default analytic account (timesheets)",
     )
+    geofolia_default_company_id = fields.Many2one(
+        comodel_name="res.company",
+        related="company_id.geofolia_default_company_id",
+        readonly=False,
+        string="Geofolia default company (work orders)",
+    )
+    geofolia_default_use_type_id = fields.Many2one(
+        comodel_name="ter.use_type",
+        related="company_id.geofolia_default_use_type_id",
+        readonly=False,
+        string="Geofolia default crop",
+    )

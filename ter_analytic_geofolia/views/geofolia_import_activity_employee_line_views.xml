@@ -81,8 +81,8 @@
 
     <menuitem id="menu_geofolia_import_activity_employee_lines"
               name="Activity Employees"
-              parent="ter_analytic_geofolia.menu_geofolia_import"
+              parent="ter_analytic_geofolia.menu_geofolia_import_activity_detail"
               action="action_geofolia_import_activity_employee_line"
               groups="group_geofolia_import"
-              sequence="22"/>
+              sequence="20"/>
 </odoo>

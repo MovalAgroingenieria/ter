@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_fsm_order_document" inherit_id="fieldservice.report_fsm_order_document">
+        <xpath expr="//div[hasclass('page')]/h2" position="after">
+            <div t-if="doc.from_geofolia" class="mb-3" name="geofolia_order_summary">
+                <table class="table table-borderless table-sm" style="width: 100%">
+                    <tbody><tr>
+                <td style="width: 50%; vertical-align: top">
+                    <strong>Geofolia Activity ID:</strong>
+                    <span t-field="doc.geofolia_activity_id"/>
+                    <br/>
+                    <strong>Operation Type:</strong>
+                    <span t-field="doc.type"/>
+                    <br/>
+                    <strong>Stage:</strong>
+                    <span t-field="doc.stage_id"/>
+                    <br/>
+                    <strong>Start Date:</strong>
+                    <span t-field="doc.date_start"/>
+                </td>
+                <td style="width: 50%; vertical-align: top">
+                    <strong>Duration (min):</strong>
+                    <span t-field="doc.geofolia_duration_minutes"/>
+                    <br/>
+                    <strong>Duration (hours):</strong>
+                    <span t-field="doc.geofolia_duration" t-options="{'widget': 'float', 'precision': 2}"/>
+                    <br/>
+                    <strong>Worked Surface (m²):</strong>
+                    <span t-field="doc.worked_surface" t-options="{'widget': 'float', 'precision': 2}"/>
+                    <br/>
+                    <strong>End Date:</strong>
+                    <span t-field="doc.date_end"/>
+                </td>
+                    </tr></tbody>
+                </table>
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='resolution']" position="after">
+            <div t-if="doc.worked_unit_ids" name="geofolia_crop_units">
+                <h3>Crop Units</h3>
+                <table class="table table-sm">
+                    <thead style="display: table-header-group">
+                        <tr>
+                            <th>Crop Unit</th>
+                            <th>Plot Code</th>
+                            <th>Billing Holder</th>
+                            <th class="text-end">Worked Surface (m²)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.worked_unit_ids" t-as="line" style="page-break-inside: avoid">
+                            <td>
+                                <span t-if="line.use_unit_id" t-field="line.use_unit_id"/>
+                                <span t-else="" t-out="line.name or line.plot_code or line.geofolia_plot_id or ''"/>
+                            </td>
+                            <td><span t-field="line.plot_code"/></td>
+                            <td><span t-field="line.billing_partner_id"/></td>
+                            <td class="text-end"><span t-field="line.worked_surface" t-options="{'widget': 'float', 'precision': 2}"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div t-if="doc.product_usage_ids" name="geofolia_raw_materials">
+                <h3>Raw Materials</h3>
+                <table class="table table-sm">
+                    <thead style="display: table-header-group">
+                        <tr>
+                            <th>Name</th>
+                            <th>Batch Number</th>
+                            <th>Product</th>
+                            <th>Target/Effects</th>
+                            <th class="text-end">Quantity</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.product_usage_ids" t-as="line" style="page-break-inside: avoid">
+                            <td><span t-field="line.name"/></td>
+                            <td><span t-field="line.batch_number"/></td>
+                            <td><span t-field="line.product_id"/></td>
+                            <td><span t-field="line.rn_target_code_id"/></td>
+                            <td class="text-end"><span t-field="line.quantity" t-options="{'widget': 'float', 'precision': 4}"/></td>
+                            <td><span t-field="line.uom_name"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div t-if="doc.person_usage_ids" name="geofolia_labour">
+                <h3>Labour</h3>
+                <table class="table table-sm">
+                    <thead style="display: table-header-group">
+                        <tr><th>Worker</th><th class="text-end">Hours</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.person_usage_ids" t-as="line" style="page-break-inside: avoid">
+                            <td>
+                                <span t-if="line.person_id" t-field="line.person_id"/>
+                                <span t-else="" t-field="line.name"/>
+                            </td>
+                            <td class="text-end"><span t-field="line.hours" t-options="{'widget': 'float', 'precision': 2}"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div t-if="doc.equipment_usage_ids" name="geofolia_machinery">
+                <h3>Machinery</h3>
+                <table class="table table-sm">
+                    <thead style="display: table-header-group">
+                        <tr><th>Equipment</th><th class="text-end">Hours</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.equipment_usage_ids" t-as="line" style="page-break-inside: avoid">
+                            <td>
+                                <span t-if="line.equipment_id" t-field="line.equipment_id"/>
+                                <span t-else="" t-field="line.name"/>
+                            </td>
+                            <td class="text-end"><span t-field="line.hours" t-options="{'widget': 'float', 'precision': 2}"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div t-if="doc.harvest_usage_ids" name="geofolia_harvest">
+                <h3>Harvest</h3>
+                <table class="table table-sm">
+                    <thead style="display: table-header-group">
+                        <tr><th>Harvested Product</th><th class="text-end">Quantity</th><th>Unit</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.harvest_usage_ids" t-as="line" style="page-break-inside: avoid">
+                            <td>
+                                <span t-if="line.product_id" t-field="line.product_id"/>
+                                <span t-else="" t-field="line.name"/>
+                            </td>
+                            <td class="text-end"><span t-field="line.quantity" t-options="{'widget': 'float', 'precision': 4}"/></td>
+                            <td><span t-field="line.uom_name"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </xpath>
+    </template>
+</odoo>

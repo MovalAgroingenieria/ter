@@ -14,3 +14,5 @@ access_fsm_order_equipment_usage,fsm.order.equipment.usage,model_fsm_order_equip
 access_fsm_order_person_usage,fsm.order.person.usage,model_fsm_order_person_usage,base.group_user,1,1,1,1
 access_fsm_order_harvest_usage,fsm.order.harvest.usage,model_fsm_order_harvest_usage,base.group_user,1,1,1,1
 access_fsm_order_worked_unit,fsm.order.worked.unit,model_fsm_order_worked_unit,base.group_user,1,1,1,1
+access_geofolia_rn_target_code,geofolia.rn.target.code,model_geofolia_rn_target_code,base.group_user,1,0,0,0
+access_geofolia_rn_target_code_manager,geofolia.rn.target.code,model_geofolia_rn_target_code,fieldservice.group_fsm_manager,1,1,1,1

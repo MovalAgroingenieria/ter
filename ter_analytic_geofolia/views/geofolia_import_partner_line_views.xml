@@ -78,8 +78,8 @@
 
     <menuitem id="menu_geofolia_import_partner_lines"
               name="Partner Lines"
-              parent="ter_analytic_geofolia.menu_geofolia_import"
+              parent="ter_analytic_geofolia.menu_geofolia_import_other_entries"
               action="action_geofolia_import_partner_line"
               groups="group_geofolia_import"
-              sequence="18"/>
+              sequence="30"/>
 </odoo>
