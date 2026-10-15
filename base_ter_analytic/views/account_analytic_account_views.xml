@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Form: flag + smart button to the linked territorial units -->
+    <record id="view_account_analytic_account_form_ter" model="ir.ui.view">
+        <field name="name">account.analytic.account.form.ter</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_ter_use_units" type="object"
+                        class="oe_stat_button" icon="fa-map-marker"
+                        groups="base_ter.group_ter_user"
+                        invisible="ter_use_unit_count == 0">
+                    <field name="ter_use_unit_count" widget="statinfo"
+                           string="Territorial Units"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="ter_linkable"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- List: optional flag column -->
+    <record id="view_account_analytic_account_list_ter" model="ir.ui.view">
+        <field name="name">account.analytic.account.list.ter</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='plan_id']" position="after">
+                <field name="ter_linkable" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search: filter by the flag -->
+    <record id="view_account_analytic_account_search_ter" model="ir.ui.view">
+        <field name="name">account.analytic.account.search.ter</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/field[@name='partner_id']" position="after">
+                <field name="ter_use_unit_ids" groups="base_ter.group_ter_user"/>
+            </xpath>
+            <xpath expr="//filter[@name='inactive']" position="before">
+                <filter name="filter_has_ter_units" string="With Territorial Units"
+                        domain="[('ter_use_unit_ids', '!=', False)]"
+                        groups="base_ter.group_ter_user"/>
+                <filter name="filter_no_ter_units" string="Without Territorial Units"
+                        domain="[('ter_use_unit_ids', '=', False)]"
+                        groups="base_ter.group_ter_user"/>
+                <separator/>
+                <filter name="filter_ter_linkable" string="Linkable to Territory"
+                        domain="[('ter_linkable', '=', True)]"/>
+                <filter name="filter_not_ter_linkable" string="Not Linkable to Territory"
+                        domain="[('ter_linkable', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -6,17 +6,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-18 11:19+0000\n"
-"PO-Revision-Date: 2026-02-18 11:19+0000\n"
+"POT-Creation-Date: 2026-10-15 13:25+0000\n"
+"PO-Revision-Date: 2026-10-15 13:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ca_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: base_ter_analytic
+#: model:ir.model,name:base_ter_analytic.model_account_analytic_account
 #: model:ir.model.fields,field_description:base_ter_analytic.field_ter_use_unit__account_id
 #: model_terms:ir.ui.view,arch_db:base_ter_analytic.view_ter_unit_filter_analytic
 msgid "Analytic Account"
@@ -30,6 +31,49 @@ msgstr ""
 "territorial."
 
 #. module: base_ter_analytic
+#: model:ir.model.fields,field_description:base_ter_analytic.field_account_analytic_account__ter_linkable
+#: model_terms:ir.ui.view,arch_db:base_ter_analytic.view_account_analytic_account_search_ter
+msgid "Linkable to Territory"
+msgstr "Vinculable amb territori"
+
+#. module: base_ter_analytic
+#: model_terms:ir.ui.view,arch_db:base_ter_analytic.view_account_analytic_account_search_ter
+msgid "Not Linkable to Territory"
+msgstr "No vinculable amb territori"
+
+#. module: base_ter_analytic
+#: model:ir.model.fields,help:base_ter_analytic.field_account_analytic_account__ter_linkable
+msgid ""
+"Only analytic accounts with this flag can be selected on a territorial use "
+"unit."
+msgstr ""
+"Només es poden seleccionar en una unitat territorial els comptes analítics "
+"amb aquesta opció marcada."
+
+#. module: base_ter_analytic
 #: model:ir.model,name:base_ter_analytic.model_ter_use_unit
 msgid "Ter Use Unit"
 msgstr "Unitat d'ús territorial"
+
+#. module: base_ter_analytic
+#: model:ir.model.fields,field_description:base_ter_analytic.field_account_analytic_account__ter_use_unit_count
+msgid "Ter Use Unit Count"
+msgstr "Nombre d’unitats territorials"
+
+#. module: base_ter_analytic
+#. odoo-python
+#: code:addons/base_ter_analytic/models/account_analytic_account.py:0
+#: model:ir.model.fields,field_description:base_ter_analytic.field_account_analytic_account__ter_use_unit_ids
+#: model_terms:ir.ui.view,arch_db:base_ter_analytic.view_account_analytic_account_form_ter
+msgid "Territorial Units"
+msgstr "Unitats territorials"
+
+#. module: base_ter_analytic
+#: model_terms:ir.ui.view,arch_db:base_ter_analytic.view_account_analytic_account_search_ter
+msgid "With Territorial Units"
+msgstr "Amb unitats territorials"
+
+#. module: base_ter_analytic
+#: model_terms:ir.ui.view,arch_db:base_ter_analytic.view_account_analytic_account_search_ter
+msgid "Without Territorial Units"
+msgstr "Sense unitats territorials"

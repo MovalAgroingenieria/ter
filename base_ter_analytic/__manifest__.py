@@ -4,7 +4,7 @@
 {
     "name": "Base Territory - Analytic",
     "summary": "Add analytic account to territorial use units",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "category": "Territory Management",
     "website": "https://www.moval.es",
     "author": "Moval Agroingeniería S.L.",
@@ -14,6 +14,7 @@
         "analytic",
     ],
     "data": [
+        "views/account_analytic_account_views.xml",
         "views/ter_use_unit_views.xml",
     ],
 }

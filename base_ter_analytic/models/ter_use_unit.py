@@ -12,6 +12,7 @@ class TerUseUnit(models.Model):
     account_id = fields.Many2one(
         "account.analytic.account",
         string="Analytic Account",
+        domain=[("ter_linkable", "=", True)],
         ondelete="set null",
         help="Analytic account for cost/revenue tracking of this territorial unit.",
     )
