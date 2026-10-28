@@ -1956,6 +1956,16 @@ msgid "No file provided."
 msgstr "No s'ha proporcionat cap fitxer."
 
 #. module: ter_analytic_geofolia
+#. odoo-python
+#: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
+msgid ""
+"No work order created. Check activity employees and their processing "
+"messages."
+msgstr ""
+"No s'ha creat el part. Reviseu els treballadors de l'activitat i els seus "
+"missatges de processament."
+
+#. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_job__line_count
 msgid "Number of lines (Fields mode)."
 msgstr "Nombre de línies de la importació de parcel·les."

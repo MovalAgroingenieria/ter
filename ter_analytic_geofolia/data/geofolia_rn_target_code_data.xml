@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-  <!-- Source: Geofolia_Listes_es-ES_2025v4.001, L_RNTarget. -->
-  <!-- Code 1683: Cicatrización heridas de injerto, selected per Jesús (2026-10-15). -->
-  <function model="geofolia.rn.target.code" name="_register_catalogue_xmlids"/>
+<odoo noupdate="1">
   <record id="rn_target_001" model="geofolia.rn.target.code">
     <field name="code">001</field>
     <field name="name">Abigarrado</field>

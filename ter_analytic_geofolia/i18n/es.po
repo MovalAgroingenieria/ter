@@ -1956,6 +1956,16 @@ msgid "No file provided."
 msgstr "No se ha proporcionado ningún fichero."
 
 #. module: ter_analytic_geofolia
+#. odoo-python
+#: code:addons/ter_analytic_geofolia/models/geofolia_import_job.py:0
+msgid ""
+"No work order created. Check activity employees and their processing "
+"messages."
+msgstr ""
+"No se ha creado el parte. Revise los trabajadores de la actividad y sus "
+"mensajes de procesamiento."
+
+#. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_job__line_count
 msgid "Number of lines (Fields mode)."
 msgstr "Número de líneas de la importación de parcelas."

@@ -141,6 +141,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         "harvested_product_line_ids.sync_state",
         "equipment_line_ids.sync_state",
         "activity_employee_line_ids.sync_state",
+        "activity_line_ids.sync_state",
         "import_type",
     )
     def _compute_apply_stats(self):
@@ -989,6 +990,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             "harvested_products": self.harvested_product_line_ids,
             "equipments": self.equipment_line_ids,
             "activity_employees": self.activity_employee_line_ids,
+            "activities": self.activity_line_ids,
         }
 
     def _recompute_apply_state(self):
@@ -1009,7 +1011,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         if has_error:
             self.apply_state = "partial" if has_pending else "error"
             return
-        self.apply_state = "ready" if has_pending else "done"
+        self.apply_state = "partial" if has_pending else "done"
 
     def _recompute_apply_state_fields(self):
         self.ensure_one()
@@ -1272,6 +1274,36 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             }
         )
 
+    def _find_partner_by_farm_code(self, farm_code):
+        """Return the partner whose VAT matches a Geofolia farm identification code.
+
+        The code is the holder's national id (DNI/NIF). The VAT may be stored
+        with or without the ``ES`` prefix, so both forms are searched.
+        """
+        partner_obj = self.env["res.partner"]
+        code = re.sub(r"[^A-Za-z0-9]", "", self._safe_scalar_str(farm_code) or "")
+        if not code:
+            return partner_obj.browse()
+        code = code.upper()
+        if code.startswith("ES"):
+            code = code[2:]
+        return partner_obj.search(
+            ["|", ("vat", "=ilike", code), ("vat", "=ilike", "ES" + code)],
+            order="id",
+            limit=1,
+        )
+
+    def _assign_billing_partner(self, unit, farm_code):
+        """Set the unit billing holder from the farm code if it has no holder.
+
+        Never overrides a holder or a billing holder that is already set.
+        """
+        if unit.partner_id or unit.billing_partner_id:
+            return
+        partner = self._find_partner_by_farm_code(farm_code)
+        if partner:
+            unit.billing_partner_id = partner
+
     def _field_line_upsert_unit(self, line, ctx, unit):
         """Create or update the ter.use_unit for a Field line.
 
@@ -1316,36 +1348,6 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 "sync_message": message,
             }
         )
-
-    def _find_partner_by_farm_code(self, farm_code):
-        """Return the partner whose VAT matches a Geofolia farm identification code.
-
-        The code is the holder's national id (DNI/NIF). The VAT may be stored
-        with or without the ``ES`` prefix, so both forms are searched.
-        """
-        partner_obj = self.env["res.partner"]
-        code = re.sub(r"[^A-Za-z0-9]", "", self._safe_scalar_str(farm_code) or "")
-        if not code:
-            return partner_obj.browse()
-        code = code.upper()
-        if code.startswith("ES"):
-            code = code[2:]
-        return partner_obj.search(
-            ["|", ("vat", "=ilike", code), ("vat", "=ilike", "ES" + code)],
-            order="id",
-            limit=1,
-        )
-
-    def _assign_billing_partner(self, unit, farm_code):
-        """Set the unit billing holder from the farm code if it has no holder.
-
-        Never overrides a holder or a billing holder that is already set.
-        """
-        if unit.partner_id or unit.billing_partner_id:
-            return
-        partner = self._find_partner_by_farm_code(farm_code)
-        if partner:
-            unit.billing_partner_id = partner
 
     def _geofolia_area_to_official(self, area_m2):
         """Convert a Geofolia surface (m²) to ter.use_unit.area_official.
@@ -1427,6 +1429,27 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 
+    def _relink_imported_crop_units(self):
+        """Resolve missing crop-unit links without rebuilding existing usage lines."""
+        lines = self.activity_line_ids.fsm_order_id.worked_unit_ids.filtered(
+            lambda line: line.from_geofolia
+            and not line.use_unit_id
+            and line.geofolia_plot_id
+        )
+        units = (
+            self.env["ter.use_unit"].search(
+                [("geofolia_external_id", "in", lines.mapped("geofolia_plot_id"))],
+                limit=None,
+            )
+            if lines
+            else self.env["ter.use_unit"]
+        )
+        by_external = {unit.geofolia_external_id: unit for unit in units}
+        for line in lines:
+            unit = by_external.get(line.geofolia_plot_id)
+            if unit:
+                line.use_unit_id = unit
+
     def _apply_full_export(self, only_pending=False):
         self.ensure_one()
         # pylint: disable=self-cls-assignment
@@ -1459,27 +1482,36 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             )
             for line in confirmed_lines:
                 self._apply_activity_employee_line(line)
+            self._relink_imported_crop_units()
         self._recompute_activity_line_sync_state()
 
     def _recompute_activity_line_sync_state(self):
         """Update activity line sync_state from its activity employee lines."""
         for activity in self.activity_line_ids:
             children = activity.employee_line_ids
-            if not children:
-                continue
-            if any(c.sync_state == "error" for c in children):
+            if activity.status_code == "ZK1":
+                activity.write({"sync_state": "no_action", "sync_message": False})
+            elif any(c.sync_state == "error" for c in children):
                 activity.sync_state = "error"
-            elif any(c.sync_state == "pending" for c in children):
+            elif any(c.sync_state in ("pending", "skipped") for c in children):
                 activity.sync_state = "pending"
-            elif all(c.sync_state == "skipped" for c in children):
-                activity.sync_state = "skipped"
+            elif not activity.fsm_order_id:
+                activity.write(
+                    {
+                        "sync_state": "pending",
+                        "sync_message": self.env._(
+                            "No work order created. Check activity employees "
+                            "and their processing messages."
+                        ),
+                    }
+                )
             else:
-                activity.sync_state = "no_action"
+                activity.write({"sync_state": "no_action", "sync_message": False})
 
     def _apply_product_line(self, line):
         # pylint: disable=self-cls-assignment
         self = self.with_context(geofolia_sync=True)
-        product_obj = self.env["product.product"]
+        product_obj = self.env["product.product"].with_context(active_test=False)
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
@@ -1721,7 +1753,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
     def _apply_product_like(self, line, label):
         # pylint: disable=self-cls-assignment
         self = self.with_context(geofolia_sync=True)
-        product_obj = self.env["product.product"]
+        product_obj = self.env["product.product"].with_context(active_test=False)
         try:
             with self.env.cr.savepoint():
                 if not line.external_id:
@@ -2185,7 +2217,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         products = raw.get("ProductIds") or []
         if not products:
             return
-        product_obj = self.env["product.product"]
+        product_obj = self.env["product.product"].with_context(active_test=False)
         usage_obj = self.env["fsm.order.product.usage"]
         target_code_obj = self.env["geofolia.rn.target.code"]
         entries = self._aggregate_usage_items(
@@ -2318,7 +2350,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         harvests = raw.get("ActionHarvests") or []
         if not harvests:
             return
-        product_obj = self.env["product.product"]
+        product_obj = self.env["product.product"].with_context(active_test=False)
         usage_obj = self.env["fsm.order.harvest.usage"]
         entries = self._aggregate_usage_items(
             harvests,
