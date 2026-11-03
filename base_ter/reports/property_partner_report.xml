@@ -109,7 +109,7 @@
                 <!-- Force new page -->
                 <p style="page-break-after:always;"/>
 
-                <section id="informations" name="aerial_images" style="margin-bottom: 20px; page-break-inside: avoid;">
+                <section id="informations" name="aerial_images" style="margin-bottom: 20px;">
                     <div id="section_title" name="title_aerial_images">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-picture-o"/>
@@ -117,42 +117,53 @@
                             <div style="border-top: 2px solid;"/>
                         </h2>
                     </div>
-                    <t t-foreach="o.property_ids" t-as="property">
-                        <div style="width: 48%; float: left; display: table; border: 1px solid black; margin: 0.5% 0.5%; page-break-inside: avoid;">
-                            <div name="propierty_data" style="border-bottom: 1px solid black; padding: 2%;">
-                                <table style="width: 100%;" class="table-condensed table-borderless">
-                                    <tbody>
-                                        <tr id="row_property_id">
-                                            <td><strong>Property</strong></td>
-                                            <td class="text-end"><span t-field="property.name"/></td>
-                                        </tr>
-                                        <tr id="row_municipality">
-                                            <td><strong>Municipality</strong></td>
-                                            <td class="text-end"><span t-field="property.municipality_id.name"/></td>
-                                        </tr>
-                                        <tr id="row_propierty_area">
-                                            <td><strong>Total Parcel Area</strong></td>
-                                            <td class="text-end">
-                                                <span t-field="property.area_official_parcels"/>
-                                                <span t-out="area_unit_name"/>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div name="property_aerial_image" class="text-center">
-                                <t t-if="property.aerial_image_shown">
-                                    <img t-attf-src="data:image/png;base64, #{property.aerial_image_shown}" style="max-width: 100%; height: 408px;"/>
+                    <t t-foreach="range(0, len(o.property_ids), 2)" t-as="row_index">
+                        <table class="ter-report-image-grid">
+                            <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+                            <tr>
+                                <t t-foreach="o.property_ids[row_index:row_index + 2]" t-as="property">
+                                    <td class="ter-report-image-cell">
+                                        <div class="ter-report-image-card">
+                                            <div name="propierty_data" style="border-bottom: 1px solid black; padding: 2%;">
+                                                <table style="width: 100%;" class="table-condensed table-borderless">
+                                                    <tbody>
+                                                        <tr id="row_property_id">
+                                                            <td><strong>Property</strong></td>
+                                                            <td class="text-end"><span t-field="property.name"/></td>
+                                                        </tr>
+                                                        <tr id="row_municipality">
+                                                            <td><strong>Municipality</strong></td>
+                                                            <td class="text-end"><span t-field="property.municipality_id.name"/></td>
+                                                        </tr>
+                                                        <tr id="row_propierty_area">
+                                                            <td><strong>Total Parcel Area</strong></td>
+                                                            <td class="text-end">
+                                                                <span t-field="property.area_official_parcels"/>
+                                                                <span t-out="area_unit_name"/>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div name="property_aerial_image" class="ter-report-image-box">
+                                                <div class="ter-report-image-content">
+                                                    <t t-if="property.aerial_image_shown">
+                                                        <img t-attf-src="data:image/png;base64, #{property.aerial_image_shown}"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <div class="ter-report-image-placeholder text-muted">
+                                                            <div class="fa fa-file-image-o" style="font-size: 4em;"/>
+                                                            <br/>
+                                                            <div>Aerial image not found</div>
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </t>
-                                <t t-else="">
-                                    <div class="text-center text-muted" style="max-width: 100%; height: 408px; padding-top: 40%;">
-                                        <div class="fa fa-file-image-o" style="font-size: 4em;"/>
-                                        <br/>
-                                        <div>Aerial image not found</div>
-                                    </div>
-                                </t>
-                            </div>
-                        </div>
+                            </tr>
+                        </table>
                     </t>
                 </section>
 

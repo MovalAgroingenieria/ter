@@ -62,6 +62,7 @@
         ],
         'web.report_assets_common': [
             'base_ter/static/lib/ter_iconset/iconset.css',
+            'base_ter/static/src/css/report_images.css',
         ],
     },
     'external_dependencies': {

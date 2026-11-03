@@ -160,7 +160,7 @@
                         </h2>
                     </div>
                     <div name="aerial_image" class="text-center" style="border: 1px solid black; padding: 1% 0%;">
-                        <img t-attf-src="data:image/png;base64, #{o.aerial_image_shown}" style="max-width: 824px; max-height: 824px;"/>
+                        <img t-attf-src="data:image/png;base64, #{o.aerial_image_shown}" class="ter-report-single-image"/>
                     </div>
                     <div style="display: table; border: 1px solid black; border-top:0px; width:100%;">
                         <div class="text-center" style="padding: 1%; border-right: 1px solid black; width: 20%; display: table-cell;">
