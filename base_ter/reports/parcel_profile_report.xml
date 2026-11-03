@@ -7,7 +7,7 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">base_ter.parcel_profile_template</field>
         <field name="report_file">base_ter.parcel_profile_template</field>
-        <field name="paperformat_id" ref="base_report.paperformat_euro_reports"/>
+        <field name="paperformat_id" ref="base_ter.paperformat_euro_ter_reports"/>
         <field name="print_report_name">'Parcels by Profile - %s' % (object.name or '')</field>
         <field name="groups_id" eval="[(4, ref('base_ter.group_ter_user'))]"/>
     </record>
@@ -193,7 +193,7 @@
                 <!-- Force new page -->
                 <p style="page-break-after:always;"/>
 
-                <section name="aerial_images" style="margin-bottom: 20px; page-break-inside: avoid;">
+                <section name="aerial_images" style="margin-bottom: 20px;">
                     <div name="title_aerial_images">
                         <h2 style="font-size: 1.4em;">
                             <span class="fa fa-picture-o"/>
@@ -204,53 +204,63 @@
                     <t t-set="selected_links"
                        t-value="o.partnerlink_ids.filtered(lambda l: l.profile_id.id in profiles.ids)"/>
                     <t t-set="report_parcels" t-value="selected_links.mapped('parcel_id')"/>
-                    <t t-foreach="report_parcels" t-as="parcel">
-                        <div style="width: 48%; float: left; display: table; border: 1px solid black; margin: 1.5% 0.5%; page-break-inside: avoid;">
-                            <div name="parcel_data" style="border-bottom: 1px solid black; padding: 2%;">
-                                <table style="width: 100%;" class="table-condensed table-borderless">
-                                    <tbody>
-                                        <tr name="row_parcel">
-                                            <td>
-                                                <strong>Parcel</strong>
-                                            </td>
-                                            <td class="text-end">
-                                                <span t-field="parcel.official_code"/>
-                                            </td>
-                                        </tr>
-                                        <tr name="row_property_id">
-                                            <td>
-                                                <strong>Property</strong>
-                                            </td>
-                                            <td class="text-end">
-                                                <span t-field="parcel.property_id.name"/>
-                                            </td>
-                                        </tr>
-                                        <tr name="row_parcel_area">
-                                            <td>
-                                                <strong>Area</strong>
-                                            </td>
-                                            <td class="text-end">
-                                                <span t-field="parcel.area_official"/>
-                                                <span t-out="area_unit_name"/>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div name="parcel_aerial_image" class="text-center">
-                                <t t-if="parcel.aerial_image">
-                                    <img t-attf-src="data:image/png;base64, #{parcel.aerial_image}"
-                                        style="width: 408px; height: 408px;"/>
+                    <t t-foreach="range(0, len(report_parcels), 2)" t-as="row_index">
+                        <table class="ter-report-image-grid">
+                            <colgroup><col style="width: 50%;"/><col style="width: 50%;"/></colgroup>
+                            <tr>
+                                <t t-foreach="report_parcels[row_index:row_index + 2]" t-as="parcel">
+                                    <td class="ter-report-image-cell">
+                                        <div class="ter-report-image-card">
+                                            <div name="parcel_data" style="border-bottom: 1px solid black; padding: 2%;">
+                                                <table style="width: 100%;" class="table-condensed table-borderless">
+                                                    <tbody>
+                                                        <tr name="row_parcel">
+                                                            <td>
+                                                                <strong>Parcel</strong>
+                                                            </td>
+                                                            <td class="text-end">
+                                                                <span t-field="parcel.official_code"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr name="row_property_id">
+                                                            <td>
+                                                                <strong>Property</strong>
+                                                            </td>
+                                                            <td class="text-end">
+                                                                <span t-field="parcel.property_id.name"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr name="row_parcel_area">
+                                                            <td>
+                                                                <strong>Area</strong>
+                                                            </td>
+                                                            <td class="text-end">
+                                                                <span t-field="parcel.area_official"/>
+                                                                <span t-out="area_unit_name"/>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div name="parcel_aerial_image" class="ter-report-image-box">
+                                                <div class="ter-report-image-content">
+                                                    <t t-if="parcel.aerial_image">
+                                                        <img t-attf-src="data:image/png;base64, #{parcel.aerial_image}"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <div class="ter-report-image-placeholder text-muted">
+                                                            <div class="fa fa-file-image-o" style="font-size: 4em;"/>
+                                                            <br/>
+                                                            <div>Aerial image not found</div>
+                                                        </div>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </t>
-                                <t t-else="">
-                                    <div class="text-center text-muted" style="width: 408px; height: 408px; padding-top: 40%;">
-                                        <div class="fa fa-file-image-o" style="font-size: 4em;"/>
-                                        <br/>
-                                        <div>Aerial image not found</div>
-                                    </div>
-                                </t>
-                            </div>
-                        </div>
+                            </tr>
+                        </table>
                     </t>
                 </section>
 

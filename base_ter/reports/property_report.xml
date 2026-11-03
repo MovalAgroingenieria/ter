@@ -7,7 +7,7 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">base_ter.property_template</field>
         <field name="report_file">base_ter.property_template</field>
-        <field name="paperformat_id" ref="base_report.paperformat_euro_reports"/>
+        <field name="paperformat_id" ref="base_ter.paperformat_euro_ter_reports"/>
         <field name="print_report_name">'Property - %s - %s' % (object.name, object.partner_id.name or '')</field>
         <field name="binding_model_id" ref="model_ter_property"/>
         <field name="binding_type">report</field>
@@ -197,7 +197,7 @@
                     <div name="aerial_image" class="text-center" style="border: 1px solid black; padding: 1% 0%;">
                         <t t-if="o.aerial_image">
                             <img t-attf-src="data:image/png;base64, #{o.aerial_image}"
-                                 style="max-width: 824px; max-height: 824px;"/>
+                                 class="ter-report-single-image"/>
                         </t>
                         <t t-else="">
                             <div class="text-center text-muted" style="padding: 6% 0%;">

@@ -51,6 +51,7 @@
         "views/ter_profile_views.xml",
         "views/ter_propertytag_views.xml",
         "views/ter_gis_parcel_model_views.xml",
+        "reports/report_paperformat.xml",
         "reports/property_partner_report.xml",
         "reports/parcel_partner_report.xml",
         "reports/parcel_report.xml",
@@ -73,6 +74,7 @@
         ],
         "web.report_assets_common": [
             "base_ter/static/lib/ter_iconset/iconset.css",
+            "base_ter/static/src/css/report_images.css",
         ],
     },
     # oca-review: this catalog is intentionally managed manually and imported
