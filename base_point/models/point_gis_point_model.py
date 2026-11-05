@@ -5,7 +5,7 @@ import json
 
 from psycopg2 import sql
 
-from odoo import api, fields, models
+from odoo import api, fields, models, tools
 
 
 class PointGisPointModel(models.Model):
@@ -35,6 +35,7 @@ class PointGisPointModel(models.Model):
             record.gis_data = json.dumps(values)
 
     def init(self):
+        tools.drop_view_if_exists(self.env.cr, self._table)
         self.env.cr.execute("SELECT to_regclass('public.point_gis_point')")
         has_point_table = bool(self.env.cr.fetchone()[0])
 
@@ -43,7 +44,7 @@ class PointGisPointModel(models.Model):
 
         if not has_point_model_table:
             self.env.cr.execute(sql.SQL("""
-                    CREATE VIEW {} AS (
+                    CREATE OR REPLACE VIEW {} AS (
                         SELECT
                             row_number() OVER () AS id,
                             NULL::text AS name,
@@ -62,7 +63,7 @@ class PointGisPointModel(models.Model):
 
         if not has_point_table:
             self.env.cr.execute(sql.SQL("""
-                    CREATE VIEW {} AS (
+                    CREATE OR REPLACE VIEW {} AS (
                         SELECT
                             row_number() OVER (ORDER BY pp.name) AS id,
                             pp.name,
@@ -82,7 +83,7 @@ class PointGisPointModel(models.Model):
         # Create view with GIS data (PostGIS table exists)
         self.env.cr.execute(
             sql.SQL("""
-                CREATE VIEW {} AS (
+                CREATE OR REPLACE VIEW {} AS (
                     SELECT
                         row_number() OVER (ORDER BY pgp.name) AS id,
                         pgp.name,
