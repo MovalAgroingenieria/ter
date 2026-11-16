@@ -1,7 +1,7 @@
 # 2026 Moval Agroingeniería
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -33,6 +33,56 @@ class GeofoliaImportLine(models.Model):
     city = fields.Char()
     crop_name = fields.Char()
     geography_wkt = fields.Text()
+    crop_mapping_id = fields.Many2one("geofolia.crop.mapping", readonly=True)
+    applied_date_start = fields.Date(readonly=True)
+    applied_date_end = fields.Date(readonly=True)
+    dates_adjusted = fields.Boolean(compute="_compute_review", store=True)
+    review_required = fields.Boolean(compute="_compute_review", store=True)
+    review_message = fields.Text(compute="_compute_review", store=True)
+
+    @api.depends(
+        "sowing_date",
+        "harvest_date",
+        "applied_date_start",
+        "applied_date_end",
+        "crop_mapping_id.state",
+        "crop_name",
+    )
+    def _compute_review(self):
+        for record in self:
+            messages = []
+            adjusted = bool(
+                (
+                    record.sowing_date
+                    and record.applied_date_start
+                    and record.sowing_date != record.applied_date_start
+                )
+                or (
+                    record.harvest_date
+                    and record.applied_date_end
+                    and record.harvest_date != record.applied_date_end
+                )
+            )
+            if adjusted:
+                messages.append(
+                    self.env._(
+                        "Geofolia dates: %(start)s / %(end)s. Territorial dates: %(applied_start)s / %(applied_end)s.",
+                        start=record.sowing_date or "-",
+                        end=record.harvest_date or "-",
+                        applied_start=record.applied_date_start or "-",
+                        applied_end=record.applied_date_end or "-",
+                    )
+                )
+            if not record.crop_mapping_id or record.crop_mapping_id.state == "review":
+                messages.append(
+                    self.env._(
+                        "Crop mapping pending review: %(crop)s.",
+                        crop=record.crop_name or "-",
+                    )
+                )
+            record.dates_adjusted = adjusted
+            record.review_required = bool(messages)
+            record.review_message = "\n".join(messages) or False
 
     sync_state = fields.Selection(
         selection=[

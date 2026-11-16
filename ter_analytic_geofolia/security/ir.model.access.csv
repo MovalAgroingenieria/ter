@@ -16,3 +16,7 @@ access_fsm_order_harvest_usage,fsm.order.harvest.usage,model_fsm_order_harvest_u
 access_fsm_order_worked_unit,fsm.order.worked.unit,model_fsm_order_worked_unit,base.group_user,1,1,1,1
 access_geofolia_rn_target_code,geofolia.rn.target.code,model_geofolia_rn_target_code,base.group_user,1,0,0,0
 access_geofolia_rn_target_code_manager,geofolia.rn.target.code,model_geofolia_rn_target_code,fieldservice.group_fsm_manager,1,1,1,1
+access_geofolia_crop_mapping_read,geofolia.crop.mapping.read,model_geofolia_crop_mapping,base.group_user,1,0,0,0
+access_geofolia_crop_mapping_import,geofolia.crop.mapping.import,model_geofolia_crop_mapping,group_geofolia_import,1,1,1,1
+access_fsm_order_source_usage_read,fsm.order.source.usage.read,model_fsm_order_source_usage,base.group_user,1,0,0,0
+access_fsm_order_source_usage_import,fsm.order.source.usage.import,model_fsm_order_source_usage,group_geofolia_import,1,1,1,1

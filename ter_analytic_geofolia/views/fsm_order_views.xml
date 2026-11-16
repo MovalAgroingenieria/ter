@@ -143,6 +143,10 @@
                         context="{'default_fsm_order_id': id}"
                     />
                 </page>
+                <page string="Original Consumptions" name="source_usage_page" invisible="not from_geofolia">
+                    <field name="source_usage_ids" readonly="1"/>
+                    <field name="geofolia_source_payload" invisible="1"/>
+                </page>
             </xpath>
 
             <!-- Add stat buttons for counts -->

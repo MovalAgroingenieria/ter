@@ -36,6 +36,13 @@ class FSMOrder(models.Model):
         inverse_name="fsm_order_id",
         string="Worked Crop Units",
     )
+    geofolia_source_payload = fields.Json(readonly=True, copy=False)
+    source_usage_ids = fields.One2many(
+        "fsm.order.source.usage",
+        "fsm_order_id",
+        string="Original Consumptions",
+        readonly=True,
+    )
     worked_surface = fields.Float(
         digits=(16, 2),
         help="Total worked surface in m² (from Geofolia CropZones).",

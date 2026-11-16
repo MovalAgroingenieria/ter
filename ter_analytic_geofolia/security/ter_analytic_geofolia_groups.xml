@@ -19,4 +19,14 @@
     <record id="base_ter.group_ter_manager" model="res.groups">
         <field name="implied_ids" eval="[(4, ref('group_geofolia_import'))]"/>
     </record>
+    <record id="geofolia_crop_mapping_company_rule" model="ir.rule">
+        <field name="name">Geofolia crop mappings by company</field>
+        <field name="model_id" ref="model_geofolia_crop_mapping"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="fsm_order_source_usage_company_rule" model="ir.rule">
+        <field name="name">Geofolia original consumptions by company</field>
+        <field name="model_id" ref="model_fsm_order_source_usage"/>
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
 </odoo>

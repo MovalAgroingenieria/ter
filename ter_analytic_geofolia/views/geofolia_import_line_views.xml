@@ -11,6 +11,7 @@
                 <field name="external_uuid"/>
                 <field name="job_id"/>
                 <field name="sync_message"/>
+                <field name="review_message"/>
                 <separator/>
                 <filter name="filter_pending" string="Pending"
                         domain="[('sync_state', '=', 'pending')]"/>
@@ -25,6 +26,8 @@
                 <separator/>
                 <filter name="filter_has_error_message" string="With error message"
                         domain="[('sync_message', '!=', False)]"/>
+                <filter name="filter_review" string="Pending Review" domain="[('review_required', '=', True)]"/>
+                <filter name="filter_dates_adjusted" string="Adjusted Geofolia Dates" domain="[('dates_adjusted', '=', True)]"/>
                 <group expand="0" string="Group By">
                     <filter name="group_by_job" string="Job"
                             context="{'group_by': 'job_id'}"/>
@@ -55,6 +58,13 @@
                 <field name="name"/>
                 <field name="city"/>
                 <field name="crop_name"/>
+                <field name="crop_mapping_id" optional="hide"/>
+                <field name="review_required" optional="show"/>
+                <field name="review_message" optional="show"/>
+                <field name="sowing_date" optional="hide"/>
+                <field name="harvest_date" optional="hide"/>
+                <field name="applied_date_start" optional="hide"/>
+                <field name="applied_date_end" optional="hide"/>
                 <field name="area"/>
                 <field name="harvest_year"/>
                 <field name="fsm_location_id" optional="hide"/>
@@ -89,6 +99,16 @@
                             <field name="fsm_location_id"/>
                             <field name="ter_use_unit_id"/>
                         </group>
+                    </group>
+                    <group string="Import Review">
+                        <field name="crop_mapping_id"/>
+                        <field name="sowing_date" string="Original Sowing Date" readonly="1"/>
+                        <field name="harvest_date" string="Original Harvest Date" readonly="1"/>
+                        <field name="applied_date_start"/>
+                        <field name="applied_date_end"/>
+                        <field name="dates_adjusted"/>
+                        <field name="review_required"/>
+                        <field name="review_message"/>
                     </group>
                     <group string="JSON" colspan="2">
                         <field name="raw_json_text" nolabel="1" readonly="1"/>

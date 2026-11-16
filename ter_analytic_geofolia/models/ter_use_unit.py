@@ -37,6 +37,33 @@ class TerUseUnit(models.Model):
     geofolia_harvest_year = fields.Integer(copy=False)
     geofolia_crop_name = fields.Char(copy=False)
     geofolia_city = fields.Char(copy=False)
+    geofolia_crop_mapping_id = fields.Many2one(
+        "geofolia.crop.mapping", readonly=True, copy=False
+    )
+    geofolia_crop_state = fields.Selection(
+        related="geofolia_crop_mapping_id.state", store=True
+    )
+    geofolia_sowing_date = fields.Date(readonly=True, copy=False)
+    geofolia_harvest_date = fields.Date(readonly=True, copy=False)
+    geofolia_dates_adjusted = fields.Boolean(
+        compute="_compute_geofolia_dates_adjusted", store=True
+    )
+
+    @api.depends(
+        "geofolia_sowing_date", "geofolia_harvest_date", "date_start", "date_end"
+    )
+    def _compute_geofolia_dates_adjusted(self):
+        for record in self:
+            record.geofolia_dates_adjusted = bool(
+                (
+                    record.geofolia_sowing_date
+                    and record.geofolia_sowing_date != record.date_start
+                )
+                or (
+                    record.geofolia_harvest_date
+                    and record.geofolia_harvest_date != record.date_end
+                )
+            )
 
     worked_unit_ids = fields.One2many(
         comodel_name="fsm.order.worked.unit",

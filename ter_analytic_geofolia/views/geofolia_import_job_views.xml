@@ -137,6 +137,9 @@
                             class="btn-secondary"
                             title="Re-apply pending and error lines. Existing records are updated, not duplicated."
                             invisible="state != 'done'"/>
+                            <button name="action_refresh_source_audit" type="object"
+                                string="Refresh Source Audit" invisible="state != 'done'"
+                                confirm="Refresh original dates, crop review and consumption details from the stored JSON without changing campaign limits or aggregated consumptions?"/>
 
                     <label for="state" string="Parse (file → lines)"/>
                     <field name="state" widget="statusbar"

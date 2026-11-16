@@ -1319,7 +1319,13 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             "geofolia_harvest_year": ctx.get("geofolia_harvest_year"),
             "geofolia_crop_name": ctx.get("geofolia_crop_name"),
             "geofolia_city": ctx.get("geofolia_city"),
+            "geofolia_sowing_date": line.sowing_date,
+            "geofolia_harvest_date": line.harvest_date,
         }
+        mapping = self.env["geofolia.crop.mapping"]._resolve(line.crop_name)
+        vals["geofolia_crop_mapping_id"] = mapping.id or False
+        if mapping.state == "mapped" and (not unit or not unit.use_type_id):
+            vals["use_type_id"] = mapping.use_type_id.id
         if ctx.get("geom_ewkt"):
             vals["geom_ewkt"] = ctx["geom_ewkt"]
         if ctx.get("date_start"):
@@ -1337,8 +1343,6 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             vals["geofolia_external_id"] = ctx["ext_id"]
             vals["state"] = "validated"
             unit = ter_unit_obj.create(vals)
-            if not unit.use_type_id and self.env.company.geofolia_default_use_type_id:
-                unit.use_type_id = self.env.company.geofolia_default_use_type_id
             state, message = "created", self.env._("Created use unit.")
         self._assign_billing_partner(unit, line.farm_identification_code)
         line.write(
@@ -1346,6 +1350,9 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 "ter_use_unit_id": unit.id,
                 "sync_state": state,
                 "sync_message": message,
+                "crop_mapping_id": mapping.id or False,
+                "applied_date_start": unit.date_start,
+                "applied_date_end": unit.date_end,
             }
         )
 
@@ -1472,6 +1479,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             self._apply_product_like(line, label="harvested_products")
         for line in _todo(self.equipment_line_ids):
             self._apply_equipment_line(line)
+        for line in _todo(self.activity_line_ids):
+            self._apply_activity_order_line(line)
         for line in _todo(self.activity_employee_line_ids):
             self._apply_activity_employee_line(line)
         if only_pending:
@@ -1485,6 +1494,18 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
             self._relink_imported_crop_units()
         self._recompute_activity_line_sync_state()
 
+    def _apply_activity_order_line(self, activity):
+        if activity.status_code != "ZK2":
+            return
+        try:
+            with self.env.cr.savepoint():
+                if activity.fsm_order_id:
+                    self._resync_fsm_order(activity.fsm_order_id, activity)
+                else:
+                    self._get_or_create_fsm_order_for_activity(activity)
+        except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
+            self._write_line_error_state(activity, exc)
+
     def _recompute_activity_line_sync_state(self):
         """Update activity line sync_state from its activity employee lines."""
         for activity in self.activity_line_ids:
@@ -1495,6 +1516,8 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 activity.sync_state = "error"
             elif any(c.sync_state in ("pending", "skipped") for c in children):
                 activity.sync_state = "pending"
+            elif activity.sync_state == "error" and not activity.fsm_order_id:
+                continue
             elif not activity.fsm_order_id:
                 activity.write(
                     {
@@ -1855,45 +1878,17 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         except Exception as exc:  # noqa: BLE001  # pylint: disable=W0718
             self._write_line_error_state(line, exc)
 
-    def _get_analytic_account_for_activity(self, _activity):
-        """Return analytic account: from parcel use_unit or company default."""
+    def _get_analytic_account_for_activity(self, activity):
+        """Use the configured account or an unambiguous account of this order."""
         company = getattr(self, "company_id", None) or self.env.company
-        account = None
-        location = company.geofolia_default_fsm_location_id
-        if (
-            location
-            and getattr(location, "ter_use_unit_id", None)
-            and location.ter_use_unit_id
-        ):
-            unit = location.ter_use_unit_id
-            if getattr(unit, "account_id", None) and unit.account_id:
-                account = unit.account_id
-        if not account and company.geofolia_default_parcel_id:
-            parcel = company.geofolia_default_parcel_id
-            unit = self.env["ter.use_unit"].search(
-                [("parcel_id", "=", parcel.id)],
-                limit=1,
-                order="id",
-            )
-            if unit and getattr(unit, "account_id", None) and unit.account_id:
-                account = unit.account_id
-        if not account:
-            account = company.geofolia_default_analytic_account_id
-        if not account:
-            account = self.env["account.analytic.account"].search(
-                [
-                    ("company_id", "in", (company.id, False)),
-                    ("plan_id", "!=", False),
-                ],
-                limit=1,
-                order="id",
-            )
-        if not account:
-            account = self.env["account.analytic.account"].search(
-                [("company_id", "in", (company.id, False))],
-                limit=1,
-                order="id",
-            )
+        account = company.geofolia_default_analytic_account_id
+        if account:
+            return account
+        accounts = activity.fsm_order_id.worked_unit_ids.mapped(
+            "use_unit_id.account_id"
+        )
+        if len(accounts) == 1:
+            return accounts
         return account
 
     def _get_default_fsm_location(self):
@@ -1956,10 +1951,10 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         comes back confirmed (e.g. ``status_code == "ZK2"``), following the
         usual flow.
         """
+        if activity.status_code != "ZK2":
+            return self.env["fsm.order"]
         if activity.fsm_order_id:
             return activity.fsm_order_id
-        if activity.status_code == "ZK1":
-            return self.env["fsm.order"]
         location = self._get_fsm_location_for_activity(activity)
         if not location:
             return self.env["fsm.order"]
@@ -2154,6 +2149,151 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         self._create_person_usage_lines(order, raw)
         self._create_harvest_usage_lines(order, raw)
         self._create_worked_unit_lines(order, raw)
+        self._sync_source_usage(order, raw)
+
+    def _sync_source_usage(self, order, raw):
+        order.geofolia_source_payload = raw
+        zones = {}
+        for zone in raw.get("CropZoneIds") or []:
+            if not isinstance(zone, dict):
+                continue
+            recognition = self._safe_scalar_str(zone.get("RecognitionId"))
+            plot = self._safe_scalar_str(zone.get("PlotId"))
+            if recognition and plot:
+                zones.setdefault(recognition, set()).add(plot)
+        specifications = [
+            (
+                "product",
+                "ProductIds",
+                "SupplyId",
+                "SupplyName",
+                "RecognitionId",
+                "Quantity",
+                "ReferentialUnitSymbol",
+            ),
+            (
+                "person",
+                "ActionEmployees",
+                "EmployeeId",
+                False,
+                "EmployeeRecognitionId",
+                "EmployeeTime",
+                False,
+            ),
+            (
+                "equipment",
+                "ActionEquipments",
+                "EquipmentId",
+                "EquipmentName",
+                "EquipmentRecognitionId",
+                "EquipmentTime",
+                False,
+            ),
+            (
+                "harvest",
+                "ActionHarvests",
+                "HarvestId",
+                "HarvestGoodName",
+                "RecognitionId",
+                "Quantity",
+                "HarvestGoodsUnitSymbol",
+            ),
+        ]
+        values = []
+        for (
+            kind,
+            array,
+            id_key,
+            name_key,
+            recognition_key,
+            amount_key,
+            uom_key,
+        ) in specifications:
+            for index, item in enumerate(raw.get(array) or []):
+                if not isinstance(item, dict):
+                    continue
+                recognition = self._safe_scalar_str(item.get(recognition_key))
+                plots = zones.get(recognition, set())
+                plot_id = self._safe_scalar_str(item.get("PlotId"))
+                if not plot_id and len(plots) == 1:
+                    plot_id = next(iter(plots))
+                quantity = float(item.get(amount_key) or 0.0)
+                values.append(
+                    {
+                        "fsm_order_id": order.id,
+                        "source_key": f"{kind}:{index}",
+                        "source_index": index,
+                        "kind": kind,
+                        "name": (
+                            self._employee_display_name(item)
+                            if kind == "person"
+                            else self._safe_scalar_str(item.get(name_key))
+                        ),
+                        "external_id": self._safe_scalar_str(item.get(id_key)),
+                        "recognition_id": recognition,
+                        "plot_id": plot_id or False,
+                        "quantity": quantity,
+                        "uom_name": (
+                            "min"
+                            if kind in ("person", "equipment")
+                            else self._safe_scalar_str(item.get(uom_key))
+                        ),
+                        "hours": (
+                            quantity / 60.0 if kind in ("person", "equipment") else 0.0
+                        ),
+                        "batch_number": self._get_usage_batch_numbers([item]),
+                        "rn_target_code": self._safe_scalar_str(
+                            item.get("RNTargetCode")
+                        ),
+                        "raw_json": item,
+                    }
+                )
+        plot_ids = {value["plot_id"] for value in values if value["plot_id"]}
+        units = self.env["ter.use_unit"].search(
+            [("geofolia_external_id", "in", list(plot_ids))]
+        )
+        by_plot = {unit.geofolia_external_id: unit.id for unit in units}
+        existing = {line.source_key: line for line in order.source_usage_ids}
+        source_obj = self.env["fsm.order.source.usage"]
+        for value in values:
+            unit_id = by_plot.get(value["plot_id"])
+            value["use_unit_id"] = unit_id or False
+            value["link_state"] = (
+                "linked"
+                if unit_id
+                else "missing_unit" if value["plot_id"] else "unresolved"
+            )
+            previous = existing.pop(value["source_key"], False)
+            if previous:
+                previous.write(value)
+            else:
+                source_obj.create(value)
+        for obsolete in existing.values():
+            obsolete.unlink()
+
+    def action_refresh_source_audit(self):
+        for job in self.with_context(geofolia_sync=True):
+            for line in job.line_ids.filtered("ter_use_unit_id"):
+                mapping = self.env["geofolia.crop.mapping"]._resolve(line.crop_name)
+                unit = line.ter_use_unit_id
+                unit.write(
+                    {
+                        "geofolia_sowing_date": line.sowing_date,
+                        "geofolia_harvest_date": line.harvest_date,
+                        "geofolia_crop_mapping_id": mapping.id or False,
+                    }
+                )
+                line.write(
+                    {
+                        "crop_mapping_id": mapping.id or False,
+                        "applied_date_start": unit.date_start,
+                        "applied_date_end": unit.date_end,
+                    }
+                )
+            for activity in job.activity_line_ids:
+                if activity.fsm_order_id and activity.raw_json:
+                    job._sync_source_usage(activity.fsm_order_id, activity.raw_json)
+        return True
 
     @staticmethod
     def _aggregate_usage_items(items, id_key, amount_key, name_getter):
@@ -2670,7 +2810,7 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
                 existing = line.analytic_line_id or analytic_obj.search(
                     [("geofolia_external_id", "=", ext_id)], limit=1
                 )
-                if not existing and not account:
+                if not account:
                     line.write(
                         {
                             "sync_state": "skipped",

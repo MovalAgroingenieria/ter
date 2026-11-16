@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="geofolia_crop_mapping_view_list" model="ir.ui.view">
+        <field name="name">geofolia.crop.mapping.list</field>
+        <field name="model">geofolia.crop.mapping</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" decoration-warning="state == 'review'">
+                <field name="name"/>
+                <field name="use_type_id" invisible="is_non_crop"/>
+                <field name="is_non_crop"/>
+                <field name="state"/>
+                <field name="note" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+    <record id="geofolia_crop_mapping_view_search" model="ir.ui.view">
+        <field name="name">geofolia.crop.mapping.search</field>
+        <field name="model">geofolia.crop.mapping</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="use_type_id"/>
+                <filter name="review" string="Pending Review" domain="[('state', '=', 'review')]"/>
+                <filter name="not_crop" string="Not a Crop" domain="[('is_non_crop', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_geofolia_crop_mapping" model="ir.actions.act_window">
+        <field name="name">Crop Mappings</field>
+        <field name="res_model">geofolia.crop.mapping</field>
+        <field name="view_mode">list</field>
+    </record>
+    <menuitem id="menu_geofolia_crop_mapping" name="Crop Mappings"
+              parent="menu_geofolia_import" action="action_geofolia_crop_mapping"
+              groups="group_geofolia_import" sequence="30"/>
+    <record id="fsm_order_source_usage_view_list" model="ir.ui.view">
+        <field name="name">fsm.order.source.usage.list</field>
+        <field name="model">fsm.order.source.usage</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" delete="0" decoration-warning="link_state != 'linked'">
+                <field name="fsm_order_id" optional="hide"/>
+                <field name="kind"/>
+                <field name="name"/>
+                <field name="use_unit_id"/>
+                <field name="parcel_id" optional="show"/>
+                <field name="quantity"/>
+                <field name="uom_name"/>
+                <field name="hours" optional="hide"/>
+                <field name="batch_number" optional="hide"/>
+                <field name="rn_target_code" optional="hide"/>
+                <field name="recognition_id" optional="hide"/>
+                <field name="plot_id" optional="hide"/>
+                <field name="link_state"/>
+            </list>
+        </field>
+    </record>
+    <record id="fsm_order_source_usage_view_form" model="ir.ui.view">
+        <field name="name">fsm.order.source.usage.form</field>
+        <field name="model">fsm.order.source.usage</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0" delete="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="fsm_order_id"/>
+                            <field name="kind"/>
+                            <field name="name"/>
+                            <field name="external_id"/>
+                            <field name="source_key"/>
+                        </group>
+                        <group>
+                            <field name="use_unit_id"/>
+                            <field name="parcel_id"/>
+                            <field name="recognition_id"/>
+                            <field name="plot_id"/>
+                            <field name="link_state"/>
+                            <field name="quantity"/>
+                            <field name="uom_name"/>
+                            <field name="hours"/>
+                            <field name="batch_number"/>
+                            <field name="rn_target_code"/>
+                        </group>
+                    </group>
+                    <group string="Original JSON">
+                        <field name="raw_json_text" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="fsm_order_source_usage_view_search" model="ir.ui.view">
+        <field name="name">fsm.order.source.usage.search</field>
+        <field name="model">fsm.order.source.usage</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="fsm_order_id"/>
+                <field name="use_unit_id"/>
+                <field name="parcel_id"/>
+                <field name="name"/>
+                <filter name="unresolved" string="Pending Review" domain="[('link_state', '!=', 'linked')]"/>
+                <group string="Group By">
+                    <filter name="by_unit" string="Crop Unit" context="{'group_by': 'use_unit_id'}"/>
+                    <filter name="by_kind" string="Consumption Type" context="{'group_by': 'kind'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_fsm_order_source_usage" model="ir.actions.act_window">
+        <field name="name">Original Consumptions</field>
+        <field name="res_model">fsm.order.source.usage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_fsm_order_source_usage" name="Original Consumptions"
+              parent="menu_geofolia_import_activity_detail" action="action_fsm_order_source_usage"
+              groups="group_geofolia_import" sequence="90"/>
+</odoo>

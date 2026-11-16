@@ -23,6 +23,15 @@
                             <field name="geofolia_harvest_year" readonly="1"/>
                             <field name="geofolia_crop_name" readonly="1"/>
                             <field name="geofolia_city" readonly="1"/>
+                            <field name="geofolia_crop_mapping_id"/>
+                            <field name="geofolia_crop_state"/>
+                        </group>
+                        <group string="Original and Territorial Dates">
+                            <field name="geofolia_sowing_date" string="Original Sowing Date"/>
+                            <field name="geofolia_harvest_date" string="Original Harvest Date"/>
+                            <field name="date_start" string="Territorial Start Date" readonly="1"/>
+                            <field name="date_end" string="Territorial End Date" readonly="1"/>
+                            <field name="geofolia_dates_adjusted"/>
                         </group>
                     </group>
                 </page>
@@ -50,6 +59,10 @@
                 <field name="geofolia_external_id" string="Geofolia ID"/>
                 <filter name="filter_from_geofolia" string="From Geofolia"
                         domain="[('geofolia_external_id', '!=', False)]"/>
+                <filter name="filter_adjusted_geofolia_dates" string="Adjusted Geofolia Dates"
+                    domain="[('geofolia_dates_adjusted', '=', True)]"/>
+                <filter name="filter_review_geofolia_crop" string="Crop Mapping Pending Review"
+                    domain="[('geofolia_external_id', '!=', False), '|', ('geofolia_crop_mapping_id', '=', False), ('geofolia_crop_state', '=', 'review')]"/>
             </xpath>
         </field>
     </record>
