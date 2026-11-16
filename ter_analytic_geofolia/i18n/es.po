@@ -1125,7 +1125,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_line__farm_identification_code
 #: model:ir.model.fields,field_description:ter_analytic_geofolia.field_geofolia_import_product_line__farm_identification_code
 msgid "Farm Identification Code"
-msgstr "Código identificación finca"
+msgstr "NIF de Explotación"
 
 #. module: ter_analytic_geofolia
 #: model:ir.model.fields,help:ter_analytic_geofolia.field_geofolia_import_line__farm_identification_code
