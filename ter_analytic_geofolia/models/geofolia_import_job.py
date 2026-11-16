@@ -87,13 +87,13 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         compute="_compute_timesheet_line_ids",
         string="Timesheet lines",
     )
-    timesheet_count = fields.Integer(compute="_compute_timesheet_line_ids")
+    timesheet_count = fields.Integer(compute="_compute_linked_record_counts")
     fsm_order_ids = fields.Many2many(
         "fsm.order",
         compute="_compute_fsm_order_ids",
         string="FSM Orders (from activities)",
     )
-    fsm_order_count = fields.Integer(compute="_compute_fsm_order_ids")
+    fsm_order_count = fields.Integer(compute="_compute_linked_record_counts")
 
     total_count = fields.Integer(compute="_compute_apply_stats")
     pending_count = fields.Integer(compute="_compute_apply_stats")
@@ -124,14 +124,71 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
         for record in self:
             lines = record.activity_employee_line_ids.mapped("analytic_line_id")
             record.timesheet_line_ids = lines.filtered(lambda r: r)
-            record.timesheet_count = len(record.timesheet_line_ids)
 
     @api.depends("activity_line_ids.fsm_order_id")
     def _compute_fsm_order_ids(self):
         for record in self:
             orders = record.activity_line_ids.mapped("fsm_order_id")
             record.fsm_order_ids = orders.filtered(lambda r: r)
-            record.fsm_order_count = len(record.fsm_order_ids)
+
+    @api.depends(
+        "activity_employee_line_ids.analytic_line_id", "activity_line_ids.fsm_order_id"
+    )
+    def _compute_linked_record_counts(self):
+        persisted = self.filtered(lambda record: isinstance(record.id, int))
+        counts = {record.id: [0, 0] for record in persisted}
+        for model_name, field_name, index in (
+            ("geofolia.import.activity.employee.line", "analytic_line_id", 0),
+            ("geofolia.import.activity.line", "fsm_order_id", 1),
+        ):
+            if not persisted:
+                break
+            groups = self.env[model_name]._read_group(
+                [("job_id", "in", persisted.ids), (field_name, "!=", False)],
+                ["job_id"],
+                [f"{field_name}:count_distinct"],
+            )
+            for job, count in groups:
+                counts[job.id][index] = count
+        for record in self:
+            if record.id in counts:
+                record.timesheet_count, record.fsm_order_count = counts[record.id]
+            else:
+                record.timesheet_count = len(record.timesheet_line_ids)
+                record.fsm_order_count = len(record.fsm_order_ids)
+
+    def _get_grouped_apply_stats(self):
+        processed_states = ("created", "updated", "no_action", "skipped")
+        stats = {record.id: [0, 0, 0, 0] for record in self}
+        models_by_type = {
+            "fields": ("geofolia.import.line",),
+            "full": (
+                "geofolia.import.product.line",
+                "geofolia.import.employee.line",
+                "geofolia.import.partner.line",
+                "geofolia.import.harvested.product.line",
+                "geofolia.import.equipment.line",
+                "geofolia.import.activity.employee.line",
+                "geofolia.import.activity.line",
+            ),
+        }
+        for import_type, model_names in models_by_type.items():
+            jobs = self.filtered_domain([("import_type", "=", import_type)])
+            if not jobs:
+                continue
+            for model_name in model_names:
+                groups = self.env[model_name]._read_group(
+                    [("job_id", "in", jobs.ids)],
+                    ["job_id", "sync_state"],
+                    ["__count"],
+                )
+                for job, state, count in groups:
+                    totals = stats[job.id]
+                    totals[0] += count
+                    totals[1] += count if state == "pending" else 0
+                    totals[2] += count if state in processed_states else 0
+                    totals[3] += count if state == "error" else 0
+        return stats
 
     @api.depends(
         "line_ids.sync_state",
@@ -146,8 +203,17 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
     )
     def _compute_apply_stats(self):
         processed_states = ("created", "updated", "no_action", "skipped")
+        persisted = self.filtered(lambda record: isinstance(record.id, int))
+        stats = persisted._get_grouped_apply_stats()
         for record in self:
-            if record.import_type == "full":
+            if record.id in stats:
+                (
+                    record.total_count,
+                    record.pending_count,
+                    record.processed_count,
+                    record.error_count,
+                ) = stats[record.id]
+            elif record.import_type == "full":
                 blocks = record._get_full_lines_by_block()
                 total = pending = processed = errors = 0
                 for lines in blocks.values():
@@ -267,9 +333,24 @@ class GeofoliaImportJob(models.Model):  # pylint: disable=R0904
 
     @api.depends("line_ids", "import_type")
     def _compute_line_count(self):
+        persisted = self.filtered(
+            lambda record: isinstance(record.id, int) and record.import_type == "fields"
+        )
+        counts = {}
+        if persisted:
+            counts = {
+                job.id: count
+                for job, count in self.env["geofolia.import.line"]._read_group(
+                    [("job_id", "in", persisted.ids)], ["job_id"], ["__count"]
+                )
+            }
         for record in self:
             if record.import_type == "fields":
-                record.line_count = len(record.line_ids)
+                record.line_count = (
+                    counts.get(record.id, 0)
+                    if isinstance(record.id, int)
+                    else len(record.line_ids)
+                )
             else:
                 record.line_count = 0
 
