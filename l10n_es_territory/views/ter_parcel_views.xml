@@ -54,11 +54,11 @@
                     style="display: flex; gap: 10px;"
                     invisible="parcel_type != '01_R'"
                 >
-                    <field name="cadastral_sector" style="min-width:17px; max-width:17px"/>
+                    <field name="cadastral_sector" style="min-width:3rem; max-width:3rem"/>
                     <span>/</span>
-                    <field name="cadastral_polygon" style="min-width:20px; max-width:20px"/>
+                    <field name="cadastral_polygon" style="min-width:4rem; max-width:4rem"/>
                     <span>/</span>
-                    <field name="cadastral_parcel" style="min-width:27px; max-width:27px"/>
+                    <field name="cadastral_parcel" style="min-width:5rem; max-width:5rem"/>
                 </div>
             </xpath>
 
