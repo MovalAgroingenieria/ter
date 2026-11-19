@@ -22,13 +22,20 @@
   min-width: 200px !important;
 }
 
-.o_list_button {
+.o_base_ter_ter_parcel .o_list_button,
+.o_base_ter_res_partner .o_list_button,
+.o_base_ter_ter_use_unit .o_list_button {
   text-align: center !important;
   width: 30px !important;
 }
 
 .o_base_ter_ter_parcel .o_list_button {
   padding-right: 0 !important;
+}
+
+.o_base_ter_ter_parcel th.o_list_button,
+.o_base_ter_ter_parcel td.o_list_button {
+  width: 88px !important;
 }
 
 .o_base_ter_ter_parcel .o_list_button > div {
@@ -41,7 +48,7 @@
 }
 
 .o_base_ter_ter_parcel .o_list_button_group_first {
-  margin-right: 15px !important;
+  margin-right: 0 !important;
 }
 
 .o_terparcel_kanban_image,

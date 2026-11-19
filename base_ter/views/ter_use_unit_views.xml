@@ -74,7 +74,7 @@
         <field name="name">ter.unit.list</field>
         <field name="model">ter.use_unit</field>
         <field name="arch" type="xml">
-            <list string="Territorial Units" default_order="name"
+            <list string="Territorial Units" class="o_base_ter_ter_use_unit" default_order="name"
                   decoration-warning="state == 'draft'">
                 <field name="farm_property_id"/>
                 <field name="alphanum_code" string="Parcel"/>

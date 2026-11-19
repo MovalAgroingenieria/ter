@@ -9,7 +9,10 @@
     }
 }
 
-.o_list_button {
+.o_l10n_es_territory_sigpac_sigpac_view_tree .o_list_button,
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_view_tree .o_list_button,
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_parcels_view_tree .o_list_button,
+.o_l10n_es_territory_sigpac_parcel_sigpaclink_only_enclosures_view_tree .o_list_button {
   text-align: center !important;
   width: 30px !important;
 }
